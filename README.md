@@ -1,5 +1,5 @@
-# project-group-2
-project-group-2 created by GitHub Classroom
+# project-group-02
+project-group-02 created by GitHub Classroom
 # نام و نام خانوادگی
 محمد شایان شعبانی
 # شماره دانشجویی
