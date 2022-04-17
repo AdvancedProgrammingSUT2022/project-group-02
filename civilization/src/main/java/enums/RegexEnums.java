@@ -1,0 +1,56 @@
+package enums;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public enum RegexEnums {
+    //regex for user login
+    LOGIN1("^\\s*user\\s+login\\s+--username\\s+(?<username>[\\s\\S]+)\\s+--password\\s+(?<password>[\\s\\S]+)\\s*$"),
+    LOGIN2("^\\s*user\\s+login\\s+-u\\s+(?<username>[\\s\\S]+)\\s+-p\\s+(?<password>[\\s\\S]+)\\s*$"),
+    //handle abbreviation input and different order of input
+    LOGIN3("^\\s*user\\s+login\\s+--password\\s+(?<password>[\\s\\S]+)\\s+--username\\s+(?<username>[\\s\\S]+)\\s*$"),
+    LOGIN4("^\\s*user\\s+login\\s+-p\\s+(?<password>[\\s\\S]+)\\s+-u\\s+(?<username>[\\s\\S]+)\\s*$"),
+    //menu navigation
+    CHANGE_MENU("^\\s*menu\\s+enter\\s+(?<menu>[\\s\\S]+)\\s*$"),
+    //regex for user register + handling abbreviation input + different order of input
+    REGISTER1("^\\s*user\\s+create\\s+--username\\s+(?<username>[\\s\\S]+)\\s+--nickname\\s+(?<nickname>[\\s\\S]+)\\s+--password\\s+(?<password>[\\s\\S]+)\\s*$"),
+    REGISTER2("^\\s*user\\s+create\\s+-u\\s+(?<username>[\\s\\S]+)\\s+-n\\s+(?<nickname>[\\s\\S]+)\\s+-p\\s+(?<password>[\\s\\S]+)\\s*$"),
+
+    REGISTER3("^\\s*user\\s+create\\s+--username\\s+(?<username>[\\s\\S]+)\\s+--password\\s+(?<password>[\\s\\S]+)\\s+--nickname\\s+(?<nickname>[\\s\\S]+)\\s*$"),
+    REGISTER4("^\\s*user\\s+create\\s+-u\\s+(?<username>[\\s\\S]+)\\s+-p\\s+(?<password>[\\s\\S]+)\\s+-n\\s+(?<nickname>[\\s\\S]+)\\s*$"),
+
+    REGISTER5("^\\s*user\\s+create\\s+--password\\s+(?<password>[\\s\\S]+)\\s+--nickname\\s+(?<nickname>[\\s\\S]+)\\s+--username\\s+(?<username>[\\s\\S]+)\\s*$"),
+    REGISTER6("^\\s*user\\s+create\\s+-p\\s+(?<password>[\\s\\S]+)\\s+-n\\s+(?<nickname>[\\s\\S]+)\\s+-u\\s+(?<username>[\\s\\S]+)\\s*$"),
+
+    REGISTER7("^\\s*user\\s+create\\s+--password\\s+(?<password>[\\s\\S]+)\\s+--username\\s+(?<username>[\\s\\S]+)\\s+--nickname\\s+(?<nickname>[\\s\\S]+)\\s*$"),
+    REGISTER8("^\\s*user\\s+create\\s+-p\\s+(?<password>[\\s\\S]+)\\s+-u\\s+(?<username>[\\s\\S]+)\\s+-n\\s+(?<nickname>[\\s\\S]+)\\s*$"),
+
+    REGISTER9("^\\s*user\\s+create\\s+--nickname\\s+(?<nickname>[\\s\\S]+)\\s+--username\\s+(?<username>[\\s\\S]+)\\s+--password\\s+(?<password>[\\s\\S]+)\\s*$"),
+    REGISTER10("^\\s*user\\s+create\\s+-n\\s+(?<nickname>[\\s\\S]+)\\s+-u\\s+(?<username>[\\s\\S]+)\\s+-p\\s+(?<password>[\\s\\S]+)\\s*$"),
+
+    REGISTER11("^\\s*user\\s+create\\s+--nickname\\s+(?<nickname>[\\s\\S]+)\\s+--password\\s+(?<password>[\\s\\S]+)\\s+--username\\s+(?<username>[\\s\\S]+)\\s*$"),
+    REGISTER12("^\\s*user\\s+create\\s+-n\\s+(?<nickname>[\\s\\S]+)\\s+-p\\s+(?<password>[\\s\\S]+)\\s+-u\\s+(?<username>[\\s\\S]+)\\s*$"),
+    //change nickname + abbreviation
+    CHANGE_NICKNAME1("^\\s*profile\\s+change\\s+--nickname\\s+(?<nickname>[\\s\\S]+)\\s*$"),
+    CHANGE_NICKNAME2("^\\s*profile\\s+change\\s+-n\\s+(?<nickname>[\\s\\S]+)\\s*$"),
+    //change password + abbreviation
+    CHANGE_PASSWORD1("^\\s*profile\\s+change\\s+--password\\s+--current\\s+(?<currentPassword>[\\s\\S]+)\\s+--new\\s+(?<newPassword>[\\s\\S]+)\\s*$"),
+    CHANGE_PASSWORD2("^\\s*profile\\s+change\\s+-p\\s+-c\\s+(?<currentPassword>[\\s\\S]+)\\s+-n\\s+(?<newPassword>[\\s\\S]+)\\s*$");
+
+
+
+
+
+    private String regex;
+
+    RegexEnums(String regex) {
+        this.regex = regex;
+    }
+    //input matches the regex or not?
+    public static Matcher getMatcher(String input, RegexEnums regexEnums) {
+        Matcher matcher = Pattern.compile(regexEnums.regex).matcher(input);
+        if (matcher.matches())
+            return matcher;
+        return null;
+    }
+}
