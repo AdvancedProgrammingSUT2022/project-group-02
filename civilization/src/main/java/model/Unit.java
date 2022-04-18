@@ -1,6 +1,7 @@
 package model;
 
 public class Unit {
+
     private String name;
     private Tile tile;
     private int HP;
@@ -11,6 +12,7 @@ public class Unit {
     private int XP;
     private int combatStrength;
     private int rangeCombatStrength;
+
     public Unit(String name, Tile tile, int HP, int price, int level, int MP, int combatStrength, int rangeCombatStrength) {
         this.name = name;
         this.tile = tile;
