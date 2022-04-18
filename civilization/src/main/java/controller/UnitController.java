@@ -15,8 +15,9 @@ public class UnitController {
     }
     public boolean moving (Unit unit, User user, int x, int y) {
         for (int i = 0; i < map.getTileBoard().length; i++) {
-            if ()
+            //if ()
         }
+        return false;
     }
     public void createUnit (Unit unit, User user) {
         units.add(unit);
