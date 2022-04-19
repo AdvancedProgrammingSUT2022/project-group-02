@@ -10,11 +10,16 @@ public class RegisterMenu {
     public void run(Scanner scanner, Users users) {
         String input;
         Matcher matcher;
+        ArrayList<User> usersFromJson = users.readFromJson();
+        if (usersFromJson != null)
+            users.setUsers(usersFromJson);
         while (true) {
             input = scanner.nextLine();
             //exit the game
-            if (Pattern.matches("\\s*menu\\s+exit\\s*", input))
+            if (Pattern.matches("\\s*menu\\s+exit\\s*", input)) {
+                users.writeToJson();
                 return;
+            }
                 //show current menu
             else if (Pattern.matches("\\s*menu\\s+show-current\\s*", input))
                 System.out.println("Login Menu");
