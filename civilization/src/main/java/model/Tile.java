@@ -3,7 +3,8 @@ package model;
 import java.util.ArrayList;
 
 public class Tile {
-    private ArrayList<Unit> unitsOnTheTile = new ArrayList<>();
+    private Unit militaryUnit;
+    private Unit civilianUnit;
     private final int x;
     private final int y;
     private ArrayList<PhysicalObject> physicalObjects;
@@ -12,6 +13,8 @@ public class Tile {
     private int fogOfWarLevel;
     private boolean militaryUnitExists;
     private boolean civilianUnitExists;
+    private boolean selectedOne;
+    private boolean selectedTwo;
     private String color;
     private boolean inProgress;
     public Tile (int x, int y, User owner, Land land, int fogOfWarLevel, String color) {
@@ -25,6 +28,24 @@ public class Tile {
         this.civilianUnitExists = false;
         this.inProgress = false;
         physicalObjects = new ArrayList<>();
+        selectedOne = false;
+        selectedTwo = false;
+    }
+
+    public boolean isSelectedOne() {
+        return selectedOne;
+    }
+
+    public boolean isSelectedTwo() {
+        return selectedTwo;
+    }
+
+    public void setSelectedOne(boolean selectedOne) {
+        this.selectedOne = selectedOne;
+    }
+
+    public void setSelectedTwo(boolean selectedTwo) {
+        this.selectedTwo = selectedTwo;
     }
 
     public ArrayList<PhysicalObject> getPhysicalObjects() {
@@ -99,11 +120,19 @@ public class Tile {
         this.physicalObjects = physicalObjects;
     }
 
-    public ArrayList<Unit> getUnitsOnTheTile() {
-        return unitsOnTheTile;
+    public Unit getCivilianUnit() {
+        return civilianUnit;
     }
 
-    public void setUnitsOnTheTile(ArrayList<Unit> unitsOnTheTile) {
-        this.unitsOnTheTile = unitsOnTheTile;
+    public Unit getMilitaryUnit() {
+        return militaryUnit;
+    }
+
+    public void setCivilianUnit(Unit civilianUnit) {
+        this.civilianUnit = civilianUnit;
+    }
+
+    public void setMilitaryUnit(Unit militaryUnit) {
+        this.militaryUnit = militaryUnit;
     }
 }

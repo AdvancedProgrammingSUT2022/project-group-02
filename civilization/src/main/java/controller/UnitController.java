@@ -7,16 +7,13 @@ import model.User;
 import java.util.ArrayList;
 
 public class UnitController {
-    private Maps map;
+
     private ArrayList<Unit> units;
     public UnitController() {
-        map = new Maps();
         units = new ArrayList<>();
     }
-    public boolean moving (Unit unit, User user, int x, int y) {
-        for (int i = 0; i < map.getTileBoard().length; i++) {
-            //if ()
-        }
+    public boolean moving (Unit unit, User user, int x, int y, Maps map) {
+
         return false;
     }
     public void createUnit (Unit unit, User user) {

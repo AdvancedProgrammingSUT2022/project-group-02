@@ -1,10 +1,17 @@
 package model;
 
 public class Maps {
-    private Tile[] tileBoard = new Tile[20];
-
+    private final int mapSize;
+    private Tile[] tileBoard;
+    public Maps(int mapSize) {
+        this.mapSize = mapSize;
+        tileBoard = new Tile[mapSize];
+    }
     public Tile[] getTileBoard() {
         return tileBoard;
+    }
+    public Tile getSpecificTile(int index) {
+        return tileBoard[index];
     }
 
     public void setTileBoard(Tile[] tileBoard) {

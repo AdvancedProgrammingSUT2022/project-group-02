@@ -41,7 +41,9 @@ public enum RegexEnums {
     INCREASE_TURN2("^\\s*increase\\s+-t\\s+(?<amount>\\-?\\d+)\\s*$"),
     //increase gold + abbreviation
     INCREASE_GOLD1("^\\s*increase\\s+--gold\\s+(?<amount>\\-?\\d+)\\s*$"),
-    INCREASE_GOLD2("^\\s*increase\\s+-g\\s+(?<amount>\\-?\\d+)\\s*$");
+    INCREASE_GOLD2("^\\s*increase\\s+-g\\s+(?<amount>\\-?\\d+)\\s*$"),
+    SELECT_TILE("^\\s*select\\s+tile\\s+-x\\s+(?<x>\\-?\\d+)\\s+-y\\s+(?<y>\\-?\\d+)\\s*$"),
+    MOVE("^\\s*move\\s+unit\\s+to\\s+-x\\s+(?<destinationX>\\-?\\d+)\\s+-y\\s+(?<destinationY>\\-?\\d+)\\s*$");
 
 
     private String regex;
