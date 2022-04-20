@@ -1,7 +1,14 @@
 package controller;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import model.User;
 
+import java.io.FileWriter;
+import java.util.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Users {
@@ -11,6 +18,15 @@ public class Users {
     public Users() {
         users = new ArrayList<>();
     }
+
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(ArrayList<User> users) {
+        this.users = users;
+    }
+
     //add user
     public void addUser(User user) {
         users.add(user);
@@ -38,5 +54,27 @@ public class Users {
                 return user;
         }
         return null;
+    }
+    public ArrayList<User> readFromJson() {
+        try {
+            String usersJson = new String(Files.readAllBytes(Paths.get("usersInformation.json")));
+            ArrayList<User> usersFromJson = new Gson().fromJson(usersJson, new TypeToken<List<User>>(){}.getType());
+            if (usersFromJson != null)
+                return usersFromJson;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void writeToJson() {
+        try {
+            FileWriter WriterToJson = new FileWriter("usersInformation.json");
+            if (users.size() > 0)
+                WriterToJson.write(new Gson().toJson(users));
+            WriterToJson.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
