@@ -49,7 +49,7 @@ public class PlayGame {
                 else
                     System.out.println("invalid command");
             }
-
+            // selecting tile
             else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.SELECT_TILE)) != null) {
                 int xOrigin = Integer.parseInt(matcher.group("x"));
                 int yOrigin = Integer.parseInt(matcher.group("y"));
@@ -70,34 +70,83 @@ public class PlayGame {
                 System.out.println("invalid command");
         }
     }
+
     public void selectedTile(Scanner scanner, Tile origin, int xOrigin, int yOrigin) {
-        boolean focusOnTile = true;
+        origin.setSelectedOne(false);
+        origin.setSelectedTwo(false);
+        if (origin.isMilitaryUnitExists())
+            origin.setSelectedOne(true);
+        else if (origin.isCivilianUnitExists())
+            origin.setSelectedTwo(true);
+
         String tileInput;
-        while (focusOnTile) {
+        while (true) {
             tileInput = scanner.nextLine();
             if (tileInput.equals("tile exit"))
-                focusOnTile = false;
-            else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.MOVE)) != null) {
-                // move the unit to the destination
-                int xDestination = Integer.parseInt(matcher.group("x"));
-                int yDestination = Integer.parseInt(matcher.group("y"));
-                if (xDestination >= 0 && yDestination >= 0) {
-                    Tile destination = gameController.findTile(xDestination, yDestination);
-                    if (destination != null) {
-                        // call the function to move the unit
-                        moveUnit(scanner, origin, destination, xOrigin, yOrigin, xDestination, yDestination);
+                return;
+            else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.SELECT_TILE)) != null) {
+                int anotherXOrigin = Integer.parseInt(matcher.group("x"));
+                int anotherYOrigin = Integer.parseInt(matcher.group("y"));
+                if (anotherXOrigin >= 0 && anotherYOrigin >= 0) {
+                    if (anotherXOrigin == xOrigin && anotherYOrigin == yOrigin) {
+                        // if the user press again on the tile , change the unit if two exists
+                        if (origin.isMilitaryUnitExists() && origin.isSelectedOne() && origin.isCivilianUnitExists()) {
+                            origin.setSelectedOne(false);
+                            origin.setSelectedTwo(true);
+                        }
+                        else if (origin.isCivilianUnitExists() && origin.isSelectedTwo() && origin.isMilitaryUnitExists()) {
+                            origin.setSelectedOne(true);
+                            origin.setSelectedTwo(false);
+                        }
                     }
-                    else
-                        System.out.println("invalid tile");
+                    else {
+                        Tile destination = gameController.findTile(anotherXOrigin, anotherYOrigin);
+                        if (destination != null) {
+                            selectedTile(scanner, destination, anotherXOrigin, anotherYOrigin);
+                            origin.setSelectedOne(false);
+                            origin.setSelectedTwo(false);
+                            return;
+                        }
+                        else
+                            System.out.println("invalid tile");
+                    }
                 }
                 else
                     System.out.println("invalid coordinates");
             }
+            else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.MOVE)) != null) {
+                if (origin.isCivilianUnitExists() || origin.isMilitaryUnitExists()) {
+                    int xDestination = Integer.parseInt("x");
+                    int yDestination = Integer.parseInt("y");
+                    if (xDestination >= 0 && yDestination >= 0) {
+                        Tile destination = gameController.findTile(xDestination, yDestination);
+                        if (destination != null) {
+                            if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
+                                // TODO move the military unit to the destination
+                                moveUnit(scanner, origin, destination, xOrigin, yOrigin, xDestination, yDestination, origin.getMilitaryUnit());
+                            }
+                            else if (origin.isCivilianUnitExists() && origin.isSelectedTwo()) {
+                                // TODO move the civilian unit to the destination
+                                moveUnit(scanner, origin, destination, xOrigin, yOrigin, xDestination, yDestination, origin.getCivilianUnit());
+                            }
+                            else
+                                System.out.println("there is no unit in this tile!");
+                        }
+                        else
+                            System.out.println("invalid destination");
+                    }
+                    else
+                        System.out.println("invalid coordinates");
+                }
+                else
+                    System.out.println("there is no unit in this tile!");
+            }
         }
     }
-    public void moveUnit(Scanner scanner, Tile origin, Tile destination, int xOrigin, int yOrigin, int xDestination, int yDestination) {
+
+    public void moveUnit(Scanner scanner, Tile origin, Tile destination, int xOrigin, int yOrigin, int xDestination, int yDestination, Unit unit) {
         // TODO first check all the possibilities and move the unit
         double distance = Math.sqrt(Math.pow((xDestination - xOrigin), 2) + Math.pow((yDestination - yOrigin), 2));
-        
+
     }
 }
