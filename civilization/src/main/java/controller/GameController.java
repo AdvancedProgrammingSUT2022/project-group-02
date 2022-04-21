@@ -1,6 +1,7 @@
 package controller;
 
 import model.Maps;
+import model.Tile;
 import model.User;
 
 import java.util.ArrayList;
@@ -18,18 +19,22 @@ public class GameController {
             player.setGold(0);
         }
     }
+    // cheat code for increasing the turn of user
     public void increaseTurn(int extraTurn, User specificPlayer) {
         specificPlayer.setTurns(specificPlayer.getTurns() + extraTurn);
     }
+    // cheat code for increasing the gold of user
     public void increaseGold(int extraGold, User specificPlayer) {
         specificPlayer.setGold(specificPlayer.getGold() + extraGold);
     }
-
-    public int findTile(int x, int y) {
+    // find the tile by given x and y coordinates
+    public Tile findTile(int x, int y) {
         for (int i = 0; i < mapSize; i++) {
-            if (map.getTileBoard()[i].getX() == x && map.getTileBoard()[i].getY() == y)
-                return i;
+            for (int j = 0; j < mapSize; j++) {
+                if (map.getTileBoard()[i][j].getX() == x && map.getTileBoard()[i][j].getY() == y)
+                    return map.getTileBoard()[i][j];
+            }
         }
-        return -1;
+        return null;
     }
 }

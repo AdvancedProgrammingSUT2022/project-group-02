@@ -1,11 +1,32 @@
 package model;
 
+import java.util.ArrayList;
+
 public class User {
-    private String username;
+    private final String username;
     private String nickname;
     private String password;
     private int turns;
     private int gold;
+    private Tile territory;
+    private int goldPerTurn;
+    private int happiness;
+    private int sciencePerTurn;
+    private int food;
+    private int foodPerTurn;
+    private int culture;
+    private int culturePerTurn;
+    private int faith;
+    private int faithPerTurn;
+    private ArrayList<Resource> resources;
+    private String civilization;
+    private ArrayList<Unit> Units;
+    private ArrayList<City> cities;
+    private City capital;
+    private ArrayList<Technology> technologies;
+    private ArrayList<Improvement> improvements;
+    private int turnNumber;
+
     public User(String username, String nickname, String password) {
         this.username = username;
         this.nickname = nickname;
@@ -50,4 +71,147 @@ public class User {
         return password;
     }
 
+    public Tile getTerritory() {
+        return territory;
+    }
+
+    public void setTerritory(Tile territory) {
+        this.territory = territory;
+    }
+
+    public int getGoldPerTurn() {
+        return goldPerTurn;
+    }
+
+    public void setGoldPerTurn(int goldPerTurn) {
+        this.goldPerTurn = goldPerTurn;
+    }
+
+    public int getHappiness() {
+        return happiness;
+    }
+
+    public void setHappiness(int happiness) {
+        this.happiness = happiness;
+    }
+
+    public int getSciencePerTurn() {
+        return sciencePerTurn;
+    }
+
+    public void setSciencePerTurn(int sciencePerTurn) {
+        this.sciencePerTurn = sciencePerTurn;
+    }
+
+    public int getFood() {
+        return food;
+    }
+
+    public void setFood(int food) {
+        this.food = food;
+    }
+
+    public int getFoodPerTurn() {
+        return foodPerTurn;
+    }
+
+    public void setFoodPerTurn(int foodPerTurn) {
+        this.foodPerTurn = foodPerTurn;
+    }
+
+    public int getCulture() {
+        return culture;
+    }
+
+    public void setCulture(int culture) {
+        this.culture = culture;
+    }
+
+    public int getCulturePerTurn() {
+        return culturePerTurn;
+    }
+
+    public void setCulturePerTurn(int culturePerTurn) {
+        this.culturePerTurn = culturePerTurn;
+    }
+
+    public int getFaith() {
+        return faith;
+    }
+
+    public void setFaith(int faith) {
+        this.faith = faith;
+    }
+
+    public int getFaithPerTurn() {
+        return faithPerTurn;
+    }
+
+    public void setFaithPerTurn(int faithPerTurn) {
+        this.faithPerTurn = faithPerTurn;
+    }
+
+    public ArrayList<Resource> getResources() {
+        return resources;
+    }
+
+    public void setResources(ArrayList<Resource> resources) {
+        this.resources = resources;
+    }
+
+    public String getCivilization() {
+        return civilization;
+    }
+
+    public void setCivilization(String civilization) {
+        this.civilization = civilization;
+    }
+
+    public ArrayList<Unit> getUnits() {
+        return Units;
+    }
+
+    public void setUnits(ArrayList<Unit> units) {
+        Units = units;
+    }
+
+    public ArrayList<City> getCities() {
+        return cities;
+    }
+
+    public void setCities(ArrayList<City> cities) {
+        this.cities = cities;
+    }
+
+    public City getCapital() {
+        return capital;
+    }
+
+    public void setCapital(City capital) {
+        this.capital = capital;
+    }
+
+    public ArrayList<Technology> getTechnologies() {
+        return technologies;
+    }
+
+    public void setTechnologies(ArrayList<Technology> technologies) {
+        this.technologies = technologies;
+    }
+
+    public ArrayList<Improvement> getImprovements() {
+        return improvements;
+    }
+
+    public void setImprovements(ArrayList<Improvement> improvements) {
+        this.improvements = improvements;
+    }
+
+    public int getTurnNumber() {
+        return turnNumber;
+    }
+
+    public void setTurnNumber(int turnNumber) {
+        this.turnNumber = turnNumber;
+    }
 }

@@ -55,6 +55,7 @@ public class Users {
         }
         return null;
     }
+    // read the information of users from .json file
     public ArrayList<User> readFromJson() {
         try {
             String usersJson = new String(Files.readAllBytes(Paths.get("usersInformation.json")));
@@ -66,7 +67,7 @@ public class Users {
         }
         return null;
     }
-
+    // write the information of users to .json file
     public void writeToJson() {
         try {
             FileWriter WriterToJson = new FileWriter("usersInformation.json");

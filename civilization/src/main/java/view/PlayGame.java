@@ -51,69 +51,53 @@ public class PlayGame {
             }
 
             else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.SELECT_TILE)) != null) {
-
-            }
-            /*else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.MOVE)) != null) {
-                //moving the unit
-                //find the origin coordinates from input's regex
-                int xOrigin = Integer.parseInt(matcher.group("originX"));
-                int yOrigin = Integer.parseInt(matcher.group("originY"));
-                //find the destination coordinates from input's regex
-                int xDestination = Integer.parseInt(matcher.group("destinationX"));
-                int yDestination = Integer.parseInt(matcher.group("destinationY"));
-                //valid coordinates (natural number for coordinates + 0)
-                if (xOrigin >= 0 && yOrigin >= 0 && xDestination >= 0 && yDestination >= 0) {
-                    //find the index of origin tile with regard to given coordinates
-                    int originIndex = gameController.findTile(xOrigin, yOrigin);
-                    Tile originTile = map.getSpecificTile(originIndex);
-                    //check if such tile exists
-                    if (originIndex >= 0) {
-                        //find the index of destination tile with regard to give coordinates
-                        int destinationIndex = gameController.findTile(xDestination, yDestination);
-                        Tile destinationTile = map.getSpecificTile(destinationIndex);
-                        //check if such tile exists
-                        if (destinationIndex >= 0) {
-                            //units on the origin tile
-                            Unit selectedUnitMilitary = originTile.getMilitaryUnit();
-                            Unit selectedUnitCivilian = destinationTile.getCivilianUnit();
-                            //which unit exists ? military or civilian or both ???
-                            if (selectedUnitMilitary != null) {
-                                //make sure there is no military unit in the destination tile
-                                if (destinationTile.getMilitaryUnit() == null) {
-                                    //swap
-                                    selectedUnitMilitary.setTile(destinationTile);
-                                    originTile.setMilitaryUnit(null);
-                                    destinationTile.setMilitaryUnit(selectedUnitMilitary);
-                                }
-                                else
-                                    System.out.println("there is already a military unit in this tile");
-                            }
-                            else if (selectedUnitCivilian != null) {
-                                //make sure there is no civilian unit in the destination tile
-                                if (destinationTile.getCivilianUnit() == null) {
-                                    //swap
-                                    selectedUnitCivilian.setTile(destinationTile);
-                                    originTile.setCivilianUnit(null);
-                                    destinationTile.setCivilianUnit(selectedUnitCivilian);
-                                }
-                                else
-                                    System.out.println("there is already a military unit in this tile");
-                            }
-                            else
-                                System.out.println("there is no unit in this tile");
-                        }
-                        else
-                            System.out.println("invalid destination");
+                int xOrigin = Integer.parseInt(matcher.group("x"));
+                int yOrigin = Integer.parseInt(matcher.group("y"));
+                // valid coordinates
+                if (xOrigin >= 0 && yOrigin >= 0) {
+                    Tile origin = gameController.findTile(xOrigin, yOrigin);
+                    if (origin != null) {
+                        selectedTile(scanner, origin, xOrigin, yOrigin);
                     }
                     else
-                        System.out.println("invalid origin");
+                        System.out.println("invalid tile");
                 }
                 else
-                    System.out.println("invalid coordinate");
-            }*/
+                    System.out.println("invalid coordinates");
+            }
 
             else
                 System.out.println("invalid command");
         }
+    }
+    public void selectedTile(Scanner scanner, Tile origin, int xOrigin, int yOrigin) {
+        boolean focusOnTile = true;
+        String tileInput;
+        while (focusOnTile) {
+            tileInput = scanner.nextLine();
+            if (tileInput.equals("tile exit"))
+                focusOnTile = false;
+            else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.MOVE)) != null) {
+                // move the unit to the destination
+                int xDestination = Integer.parseInt(matcher.group("x"));
+                int yDestination = Integer.parseInt(matcher.group("y"));
+                if (xDestination >= 0 && yDestination >= 0) {
+                    Tile destination = gameController.findTile(xDestination, yDestination);
+                    if (destination != null) {
+                        // call the function to move the unit
+                        moveUnit(scanner, origin, destination, xOrigin, yOrigin, xDestination, yDestination);
+                    }
+                    else
+                        System.out.println("invalid tile");
+                }
+                else
+                    System.out.println("invalid coordinates");
+            }
+        }
+    }
+    public void moveUnit(Scanner scanner, Tile origin, Tile destination, int xOrigin, int yOrigin, int xDestination, int yDestination) {
+        // TODO first check all the possibilities and move the unit
+        double distance = Math.sqrt(Math.pow((xDestination - xOrigin), 2) + Math.pow((yDestination - yOrigin), 2));
+        
     }
 }
