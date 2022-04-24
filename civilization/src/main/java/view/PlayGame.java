@@ -1,10 +1,8 @@
 package view;
 import controller.GameController;
+import controller.MapController;
 import enums.RegexEnums;
-import model.Maps;
-import model.Tile;
-import model.Unit;
-import model.User;
+import model.*;
 
 import java.util.*;
 import java.util.regex.*;
@@ -14,15 +12,24 @@ public class PlayGame {
     private Maps map;
     private Matcher matcher;
     private int mapSize;
-    public PlayGame (ArrayList<User> players, int mapSize) {
+    private MapController mapController;
+    private int role;
+    public PlayGame (ArrayList<User> players, int mapSize, MapController mapController) {
         this.players = players;
         this.mapSize = mapSize;
         map = new Maps(mapSize);
         gameController = new GameController(players, 1, map, mapSize);
+        this.mapController = mapController;
     }
     public void run(Scanner scanner) {
         String input;
         int role = 0;
+        // assign all the neighbors to each tile
+        for (int i = 0; i < map.getHeight(); i++)
+            for (int j = 0; j < map.getWidth(); j++)
+                mapController.setNeighbor(map.getTileBoard()[i][j]);
+
+
         while (players.get(role).getTurns() > 0) {
             input = scanner.nextLine();
             if (input.equals("game exit"))
@@ -146,7 +153,26 @@ public class PlayGame {
 
     public void moveUnit(Scanner scanner, Tile origin, Tile destination, int xOrigin, int yOrigin, int xDestination, int yDestination, Unit unit) {
         // TODO first check all the possibilities and move the unit
-        double distance = Math.sqrt(Math.pow((xDestination - xOrigin), 2) + Math.pow((yDestination - yOrigin), 2));
+        int deltaX = xDestination - xOrigin;
+        int deltaY = yDestination - yOrigin;
+        double distance = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
 
+        ArrayList<Tile> tilesInTheWay = new ArrayList<>();
+        Tile tile;
+        while ((tile = mapController.bestChoiceAmongNeighbors(origin, destination)) != destination) {
+            tilesInTheWay.add(tile);
+        }
+        int mp = 0;
+        for (Tile value : tilesInTheWay) {
+            if (value.getLand().getMovementPrice() > players.get(role).getTurns()) {
+                gameController.moveUnit(origin, value, unit);
+                return;
+            }
+            mp += value.getLand().getMovementPrice();
+            players.get(role).setTurns(players.get(role).getTurns() - value.getLand().getMovementPrice());
+        }
+        gameController.moveUnit(origin, destination, unit);
     }
+
+
 }
