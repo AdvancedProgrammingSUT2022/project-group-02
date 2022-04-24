@@ -73,6 +73,12 @@ public class PlayGame {
                     System.out.println("invalid coordinates");
             }
 
+            else if (input.trim().equals("show board")) {
+                // add all visible tiles and update visited files
+                mapController.addAllVisibleAndVisitedTiles();
+                showBoard();
+            }
+
             else
                 System.out.println("invalid command");
         }
@@ -163,13 +169,25 @@ public class PlayGame {
         for (Tile value : tilesInTheWay) {
             if (value.getLand().getMovementPrice() > players.get(role).getTurns()) {
                 gameController.moveUnit(origin, value, unit);
+                System.out.println(mp + " movement by unit to get to the destination");
                 return;
             }
             mp += value.getLand().getMovementPrice();
             players.get(role).setTurns(players.get(role).getTurns() - value.getLand().getMovementPrice());
         }
         gameController.moveUnit(origin, destination, unit);
+        System.out.println(mp + " movement by unit to get to the destination");
     }
 
+    private void showBoard() {
+        for (Tile tile : map.getVisible()) {
+            // TODO first show the visible tiles
+        }
 
+        for (Tile tile : map.getVisited()) {
+            if (!map.getVisible().contains(tile)) {
+                // TODO show the tiles which are not completely visible
+            }
+        }
+    }
 }

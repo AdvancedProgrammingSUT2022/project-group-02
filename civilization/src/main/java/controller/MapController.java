@@ -87,4 +87,26 @@ public class MapController {
         }
         return bestChoice;
     }
+
+    public void addAllVisibleAndVisitedTiles() {
+        map.setVisible(new ArrayList<>());
+        // add tiles that are completely visible
+        for (int i = 0; i < map.getHeight(); i++) {
+            for (int j = 0; j < map.getWidth(); j++) {
+                //add to visible
+                map.addVisible(map.getTileBoard()[i][j]);
+                //add to the visited tiles if not exists
+                if (!map.getVisited().contains(map.getTileBoard()[i][j]))
+                    map.addVisited(map.getTileBoard()[i][j]);
+
+                for (int k = 0; k < map.getTileBoard()[i][j].getNeighbors().size(); k++) {
+                    //add to visible
+                    map.addVisible(map.getTileBoard()[i][j].getNeighbors().get(k));
+                    //add to the visited tile if not exists
+                    if (!map.getVisited().contains(map.getTileBoard()[i][j].getNeighbors().get(k)))
+                        map.addVisited(map.getTileBoard()[i][j].getNeighbors().get(k));
+                }
+            }
+        }
+    }
 }
