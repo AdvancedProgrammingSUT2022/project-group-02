@@ -1,13 +1,4 @@
 public class MapController {
-    public static final String ANSI_RESET = "\033[0m";
-    public static final String ANSI_BLACK = "\033[0;30m";
-    public static final String ANSI_RED = "\033[0;31m";
-    public static final String ANSI_GREEN = "\033[0;32m";
-    public static final String ANSI_YELLOW = "\033[0;33m";
-    public static final String ANSI_BLUE = "\033[0;34m";
-    public static final String ANSI_PURPLE = "\033[0;35m";
-    public static final String ANSI_CYAN = "\033[0;36m";
-    public static final String ANSI_WHITE = "\033[0;37m";
 
     private Tile[][] tileBoard;
 
@@ -20,7 +11,7 @@ public class MapController {
     }
 
     public void printMap() {
-        String ANSI_COLOR = ANSI_WHITE;
+        String ANSI_COLOR = Colors.WHITE;
 
         //first top sides of left tiles of game board
         for (int j = 0; j < 4; j++)
@@ -36,13 +27,9 @@ public class MapController {
 
             //units on the left tiles and top sides of right tiles
             for (int j = 0; j < 4; j++) {
-                if (tileBoard[2 * i][j].getOwner().getColor() == "green") ANSI_COLOR = ANSI_GREEN;
-                else if (tileBoard[2 * i][j].getOwner().getColor() == "red") ANSI_COLOR = ANSI_RED;
-                else if (tileBoard[2 * i][j].getOwner().getColor() == "yellow") ANSI_COLOR = ANSI_YELLOW;
-                else if (tileBoard[2 * i][j].getOwner().getColor() == "purple") ANSI_COLOR = ANSI_PURPLE;
-                else if (tileBoard[2 * i][j].getOwner().getColor() == "cyan") ANSI_COLOR = ANSI_CYAN;
+                ANSI_COLOR = getColorOfTileOwner(tileBoard[2 * i][j]);
                 System.out.print("/    " + ANSI_COLOR + civilianUnit(tileBoard[2 * i][j])
-                        + "   " + militaryUnit(tileBoard[2 * i][j]) + ANSI_RESET + "    \\___________");
+                        + "   " + militaryUnit(tileBoard[2 * i][j]) + Colors.RESET + "    \\___________");
             }
             if (i != 0) System.out.println("/");
             else System.out.println();
@@ -73,19 +60,16 @@ public class MapController {
     }
 
     private void leftOwnerName(int i) {
-        String ANSI_COLOR = ANSI_WHITE;
+        String ANSI_COLOR = Colors.WHITE;
 
         //owner name and color of left tiles
         for (int j = 0; j < 4; j++) {
-            if (tileBoard[2 * i][j].getOwner().getColor() == "green") ANSI_COLOR = ANSI_GREEN;
-            else if (tileBoard[2 * i][j].getOwner().getColor() == "red") ANSI_COLOR = ANSI_RED;
-            else if (tileBoard[2 * i][j].getOwner().getColor() == "yellow") ANSI_COLOR = ANSI_YELLOW;
-            else if (tileBoard[2 * i][j].getOwner().getColor() == "purple") ANSI_COLOR = ANSI_PURPLE;
-            else if (tileBoard[2 * i][j].getOwner().getColor() == "cyan") ANSI_COLOR = ANSI_CYAN;
+            ANSI_COLOR = getColorOfTileOwner(tileBoard[2 * i][j]);
             if (i != 0)
-                System.out.print(" /     " +ANSI_COLOR+ tileOwner(tileBoard[2 * i][j]) + ANSI_RESET +"     \\     "
+                System.out.print(" /     " + ANSI_COLOR + tileOwner(tileBoard[2 * i][j]) + Colors.RESET + "     \\     "
                         + tileImprovement(tileBoard[2 * i + 1][j]) + "    ");
-            else System.out.print(" /     " + ANSI_COLOR+tileOwner(tileBoard[2 * i][j]) +ANSI_RESET+ "     \\            ");
+            else
+                System.out.print(" /     " + ANSI_COLOR + tileOwner(tileBoard[2 * i][j]) + Colors.RESET + "     \\            ");
         }
         if (i != 0) System.out.println(" /");
         else System.out.println();
@@ -109,18 +93,14 @@ public class MapController {
     }
 
     private void rightOwnerName(int i) {
-        String ANSI_COLOR = ANSI_WHITE;
+        String ANSI_COLOR = Colors.WHITE;
 
         //owner name and color of right tiles
         for (int j = 0; j < 4; j++) {
-            if (tileBoard[2 * i+1][j].getOwner().getColor() == "green") ANSI_COLOR = ANSI_GREEN;
-            else if (tileBoard[2 * i+1][j].getOwner().getColor() == "red") ANSI_COLOR = ANSI_RED;
-            else if (tileBoard[2 * i+1][j].getOwner().getColor() == "yellow") ANSI_COLOR = ANSI_YELLOW;
-            else if (tileBoard[2 * i+1][j].getOwner().getColor() == "purple") ANSI_COLOR = ANSI_PURPLE;
-            else if (tileBoard[2 * i+1][j].getOwner().getColor() == "cyan") ANSI_COLOR = ANSI_CYAN;
+            ANSI_COLOR = getColorOfTileOwner(tileBoard[2 * i][j]);
             if (i != 3)
                 System.out.print(" \\     " + tileImprovement(tileBoard[2 * i][j])
-                        + "     /     " + ANSI_COLOR+tileOwner(tileBoard[2 * i][j]) + ANSI_RESET+"    ");
+                        + "     /     " + ANSI_COLOR + tileOwner(tileBoard[2 * i][j]) + Colors.RESET + "    ");
             else System.out.print(" \\     " + tileImprovement(tileBoard[2 * i][j])
                     + "     /            ");
         }
@@ -131,17 +111,13 @@ public class MapController {
 
     private void leftBottomSides(int i) {
 
-        String ANSI_COLOR = ANSI_WHITE;
+        String ANSI_COLOR = Colors.WHITE;
         //bottom sides of left tiles and units on the right tiles
         for (int j = 0; j < 4; j++) {
-            if (tileBoard[2 * i+1][j].getOwner().getColor() == "green") ANSI_COLOR = ANSI_GREEN;
-            else if (tileBoard[2 * i+1][j].getOwner().getColor() == "red") ANSI_COLOR = ANSI_RED;
-            else if (tileBoard[2 * i+1][j].getOwner().getColor() == "yellow") ANSI_COLOR = ANSI_YELLOW;
-            else if (tileBoard[2 * i+1][j].getOwner().getColor() == "purple") ANSI_COLOR = ANSI_PURPLE;
-            else if (tileBoard[2 * i+1][j].getOwner().getColor() == "cyan") ANSI_COLOR = ANSI_CYAN;
+            ANSI_COLOR = getColorOfTileOwner(tileBoard[2 * i + 1][j]);
             if (i != 3)
                 System.out.print("  \\___________/    " + ANSI_COLOR + civilianUnit(tileBoard[2 * i + 1][0])
-                        + "   " + militaryUnit(tileBoard[2 * i + 1][j]) + ANSI_RESET + "  ");
+                        + "   " + militaryUnit(tileBoard[2 * i + 1][j]) + Colors.RESET + "  ");
             else System.out.print("  \\___________/             ");
         }
         if (i != 3) System.out.println("  \\");
@@ -177,6 +153,16 @@ public class MapController {
     private String tileTerrain(Tile tile, boolean isFirstRightRow) {
         if (isFirstRightRow || tile.getLand().getTerrain() == null) return "44";
         else return tile.getLand().getTerrain().getName().substring(0, 2);
+    }
+
+    private String getColorOfTileOwner(Tile tile) {
+        String ANSI_COLOR = Colors.BLUE;
+        if (tile.getOwner().getColor().equals("green")) ANSI_COLOR = Colors.GREEN;
+        else if (tile.getOwner().getColor().equals("red")) ANSI_COLOR = Colors.RED;
+        else if (tile.getOwner().getColor().equals("yellow")) ANSI_COLOR = Colors.YELLOW;
+        else if (tile.getOwner().getColor().equals("purple")) ANSI_COLOR = Colors.PURPLE;
+        else if (tile.getOwner().getColor().equals("cyan")) ANSI_COLOR = Colors.CYAN;
+        return ANSI_COLOR;
     }
 
 }
