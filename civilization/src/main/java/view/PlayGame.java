@@ -153,13 +153,10 @@ public class PlayGame {
 
     public void moveUnit(Scanner scanner, Tile origin, Tile destination, int xOrigin, int yOrigin, int xDestination, int yDestination, Unit unit) {
         // TODO first check all the possibilities and move the unit
-        int deltaX = xDestination - xOrigin;
-        int deltaY = yDestination - yOrigin;
-        double distance = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
 
         ArrayList<Tile> tilesInTheWay = new ArrayList<>();
-        Tile tile;
-        while ((tile = mapController.bestChoiceAmongNeighbors(origin, destination)) != destination) {
+        Tile tile = origin;
+        while ((tile = mapController.bestChoiceAmongNeighbors(tile, destination)) != destination) {
             tilesInTheWay.add(tile);
         }
         int mp = 0;
