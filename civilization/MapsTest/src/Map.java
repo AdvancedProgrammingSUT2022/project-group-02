@@ -18,7 +18,8 @@ public class Map {
         users[1] = user1;
         users[2] = user2;
         users[3] = user3;
-        Land land = new Land("L" , "W",0 ,0 , 0 , 0, 0 ,false , false , null);
+        boolean[] borderRiver = {false , false , false , false , false , false};
+        Land land = new Land("L" , "W",0 ,0 , 0 , 0, 0 ,false , false , null , borderRiver);
         for(int i = 0; i < 8; i++){
             for (int j = 0; j < 4; j++){
                 Tile tile = new Tile(i , j , users[j] , land , j);

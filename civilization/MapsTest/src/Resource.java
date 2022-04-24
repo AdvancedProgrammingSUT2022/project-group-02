@@ -8,6 +8,7 @@ public class Resource {
     private Technology requiredTechnology;
     private Improvement requiredImprovement;
 
+
     public Resource(String name, String resourceType, ArrayList<String> requiredLands,
                     Technology requiredTechnology, Improvement requiredImprovement) {
         this.name = name;

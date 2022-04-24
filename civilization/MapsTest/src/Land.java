@@ -10,13 +10,14 @@ public class Land {
     private int fightRate;
     private int goldRate;
     private int productionRate;
+    private boolean[] borderRiver = new boolean[6];
     private Terrain terrain;
     private boolean passable;
     private boolean nearRiver;
     private Resource resource;
 
     public Land(String name, String color, int movementPrice, int foodRate, int fightRate, int goldRate, int productionRate,
-                boolean passable, boolean nearRiver, Resource resource) {
+                boolean passable, boolean nearRiver, Resource resource, boolean[] borderRiver) {
         this.name = name;
         this.color = color;
         this.movementPrice = movementPrice;
@@ -27,6 +28,7 @@ public class Land {
         this.passable = passable;
         this.nearRiver = nearRiver;
         this.resource = resource;
+        this.borderRiver = borderRiver;
     }
 
     public String getName() {
@@ -71,5 +73,9 @@ public class Land {
 
     public Resource getResource() {
         return resource;
+    }
+
+    public boolean getBorderRiver(int X) {
+        return borderRiver[X];
     }
 }
