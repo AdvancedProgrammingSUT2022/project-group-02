@@ -18,7 +18,7 @@ public class PlayGame {
 
     public PlayGame (ArrayList<User> players, int height, int width) {
         this.players = players;
-        Maps map = new Maps(height, width);
+        this.map = new Maps(height, width);
         gameController = new GameController(players, 1, map, height, width);
         this.mapController = new MapController(map, height, width);
         this.height = height;
@@ -27,6 +27,11 @@ public class PlayGame {
     public void run(Scanner scanner) {
         String input;
         int role = 0;
+
+
+        // TODO fill the map first
+
+
         // assign all the neighbors to each tile
         for (int i = 0; i < map.getHeight(); i++)
             for (int j = 0; j < map.getWidth(); j++)
@@ -77,6 +82,9 @@ public class PlayGame {
                     // add all visible tiles and update visited files
                     mapController.addAllVisibleAndVisitedTiles(user);
                     showBoard(user);
+                }
+                else if (input.trim().equals("show players")) {
+                    showPlayers();
                 }
                 else
                     System.out.println("invalid command");
@@ -192,6 +200,14 @@ public class PlayGame {
             if (!players.get(role).getVisible().contains(tile)) {
                 // TODO show the tiles which are not completely visible
             }
+        }
+    }
+
+    private void showPlayers() {
+        int index = 1;
+        for (User player : players) {
+            System.out.println(index + "- username: " + player.getUsername() + " nickname: " + player.getNickname());
+            index++;
         }
     }
 }
