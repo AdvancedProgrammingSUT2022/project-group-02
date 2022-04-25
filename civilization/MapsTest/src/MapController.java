@@ -11,7 +11,6 @@ public class MapController {
     }
 
     public void printMap() {
-
         String ANSI_COLOR = Colors.WHITE;
         //first top sides of left tiles of game board
         for (int j = 0; j < 4; j++)
@@ -185,9 +184,10 @@ public class MapController {
 
     private String riverFinder(Tile tile, int x) {
         //print the river or normal border
-        if (tile.getLand().getBorderRiver(x) && (x == 0 || x == 3)) return "@@@@@@@@@@@";
-        if (tile.getLand().getBorderRiver(x) && (x == 2 || x == 5)) return "*";
-        else if (tile.getLand().getBorderRiver(x) && (x == 1 || x == 4)) return "#";
+        if (tile.getLand().getBorderRiver(x) && (x == 0 || x == 3)) return Colors.BLUE_BACKGROUND + "_" + Colors.RESET;
+        if (tile.getLand().getBorderRiver(x) && (x == 2 || x == 5)) return Colors.BLUE_BACKGROUND + "/" + Colors.RESET;
+        else if (tile.getLand().getBorderRiver(x) && (x == 1 || x == 4))
+            return Colors.BLUE_BACKGROUND + "\\" + Colors.RESET;
         else if (x == 0 || x == 3) return "___________";
         else if (x == 2 || x == 5) return "/";
         else return "\\";
