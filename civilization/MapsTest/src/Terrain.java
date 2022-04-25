@@ -3,11 +3,11 @@ public class Terrain {
     private String name;
     private int movementPrice;
     private int foodRate;
-    private int fightRate;
+    private double fightRate;
     private int goldRate;
     private int productionRate;
 
-    public Terrain(String name, int movementPrice, int foodRate, int fightRate, int goldRate, int productionRate) {
+    public Terrain(String name, int movementPrice, int foodRate, double fightRate, int goldRate, int productionRate) {
         this.name = name;
         this.movementPrice = movementPrice;
         this.foodRate = foodRate;
@@ -28,7 +28,7 @@ public class Terrain {
         return foodRate;
     }
 
-    public int getFightRate() {
+    public double getFightRate() {
         return fightRate;
     }
 
