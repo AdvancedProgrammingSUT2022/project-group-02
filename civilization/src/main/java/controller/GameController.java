@@ -1,8 +1,6 @@
 package controller;
 
-import model.Maps;
-import model.Tile;
-import model.User;
+import model.*;
 
 import java.util.ArrayList;
 
@@ -36,5 +34,8 @@ public class GameController {
             }
         }
         return null;
+    }
+    public void moveUnit(Tile origin, Tile destination, Unit unit) {
+        // TODO move the unit to the destination
     }
 }

@@ -17,7 +17,8 @@ public class Tile {
     private boolean selectedTwo;
     private String color;
     private boolean inProgress;
-    public Tile (int x, int y, User owner, Land land, int fogOfWarLevel, String color) {
+    private ArrayList<Tile> neighbors;
+    public Tile (int x, int y, User owner, Land land, int fogOfWarLevel, String color, ArrayList<Tile> neighbors) {
         this.x = x;
         this.y = y;
         this.owner = owner;
@@ -30,6 +31,7 @@ public class Tile {
         physicalObjects = new ArrayList<>();
         selectedOne = false;
         selectedTwo = false;
+        this.neighbors = neighbors;
     }
 
     public boolean isSelectedOne() {
@@ -134,5 +136,13 @@ public class Tile {
 
     public void setMilitaryUnit(Unit militaryUnit) {
         this.militaryUnit = militaryUnit;
+    }
+
+    public ArrayList<Tile> getNeighbors() {
+        return neighbors;
+    }
+
+    public void setNeighbors(ArrayList<Tile> neighbors) {
+        this.neighbors = neighbors;
     }
 }

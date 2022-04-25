@@ -79,6 +79,7 @@ public class GameMenu {
                     System.out.println("successfully started game");
                     // TODO start a new game
                     // TODO cheat command
+                    //PlayGame().run()
                 }
             }
 
