@@ -57,10 +57,6 @@ public class Map {
         Tile tile26 = new Tile(6, 1, user1, Plain, 0, false, noRiver);
         Tile tile27 = new Tile(6, 2, user2, Plain, 0, false, noRiver);
         Tile tile28 = new Tile(6, 3, user3, Plain, 0, false, noRiver);
-        Tile tile29 = new Tile(7, 0, user3, Desert, 0, false, noRiver);
-        Tile tile30 = new Tile(7, 1, user2, Desert, 0, false, noRiver);
-        Tile tile31 = new Tile(7, 2, user1, Desert, 0, false, noRiver);
-        Tile tile32 = new Tile(7, 3, user3, Ocean, 0, false, noRiver);
         tileBoard[0][0] = tile1;
         tileBoard[0][1] = tile2;
         tileBoard[0][2] = tile3;
@@ -89,10 +85,7 @@ public class Map {
         tileBoard[6][1] = tile26;
         tileBoard[6][2] = tile27;
         tileBoard[6][3] = tile28;
-        tileBoard[7][0] = tile29;
-        tileBoard[7][1] = tile30;
-        tileBoard[7][2] = tile31;
-        tileBoard[7][3] = tile32;
+
 
     }
 

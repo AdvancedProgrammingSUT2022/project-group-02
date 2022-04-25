@@ -15,23 +15,26 @@ public class Tile {
     private boolean civilianUnitExists;
     private boolean selectedOne;
     private boolean selectedTwo;
-    private String color;
     private boolean inProgress;
     private ArrayList<Tile> neighbors;
-    public Tile (int x, int y, User owner, Land land, int fogOfWarLevel, String color, ArrayList<Tile> neighbors) {
+    private boolean isNearRiver;
+    private boolean[] riverBorder;
+    private Improvement improvement;
+
+    public Tile (int x, int y, User owner, Land land, int fogOfWarLevel, boolean isNearRiver,
+                 boolean[] riverBorder) {
         this.x = x;
         this.y = y;
         this.owner = owner;
         this.land = land;
         this.fogOfWarLevel = fogOfWarLevel;
-        this.color = color;
         this.militaryUnitExists = false;
         this.civilianUnitExists = false;
         this.inProgress = false;
-        physicalObjects = new ArrayList<>();
         selectedOne = false;
         selectedTwo = false;
-        this.neighbors = neighbors;
+        this.isNearRiver = isNearRiver;
+        this.riverBorder = riverBorder;
     }
 
     public boolean isSelectedOne() {
@@ -82,20 +85,12 @@ public class Tile {
         return land;
     }
 
-    public String getColor() {
-        return color;
-    }
-
     public User getOwner() {
         return owner;
     }
 
     public void setCivilianUnitExists(boolean civilianUnitExists) {
         this.civilianUnitExists = civilianUnitExists;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public void setFogOfWarLevel(int fogOfWarLevel) {
@@ -144,5 +139,17 @@ public class Tile {
 
     public void setNeighbors(ArrayList<Tile> neighbors) {
         this.neighbors = neighbors;
+    }
+
+    public Improvement getImprovement() {
+        return improvement;
+    }
+
+    public void setImprovement(Improvement improvement) {
+        this.improvement = improvement;
+    }
+
+    public boolean getRiverBorder(int x){
+        return riverBorder[x];
     }
 }

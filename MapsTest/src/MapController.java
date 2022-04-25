@@ -27,9 +27,13 @@ public class MapController {
             //units on the left tiles and top sides of right tiles
             for (int j = 0; j < 4; j++) {
                 ANSI_COLOR = getColorOfTileOwner(tileBoard[2 * i][j]);
-                System.out.print(riverFinder(tileBoard[2 * i][j], 5) + "    " + ANSI_COLOR + civilianUnit(tileBoard[2 * i][j])
-                        + "   " + ANSI_COLOR+militaryUnit(tileBoard[2 * i][j]) + "    " +Colors.RESET+ Colors.RESET + riverFinder(tileBoard[2 * i][j], 1)
-                        + riverFinder(tileBoard[2 * i + 1][j], 0));
+                System.out.print(riverFinder(tileBoard[2 * i][j], 5) + "    "
+                        + ANSI_COLOR + civilianUnit(tileBoard[2 * i][j])
+                        + "   " + ANSI_COLOR+militaryUnit(tileBoard[2 * i][j]) + "    "
+                        + Colors.RESET+ Colors.RESET + riverFinder(tileBoard[2 * i][j], 1)
+                );
+                if (i != 0) System.out.print(riverFinder(tileBoard[2 * i - 1][j], 3));
+                else System.out.print(riverFinder(tileBoard[1][j], 0));
             }
             if (i != 0) System.out.println(riverFinder(tileBoard[2 * i][3], 2));
             else System.out.println();
@@ -50,13 +54,15 @@ public class MapController {
         for (int j = 0; j < 4; j++) {
             if (i != 0)
                 System.out.print("  " + riverFinder(tileBoard[2 * i][j], 5)
-                        + getColorOfTile(tileBoard[2 * i][j]) + "   [" + 2 * i + "," + j + "]   " + Colors.RESET + riverFinder(tileBoard[2 * i][j], 1)
-                        + "    " + tileResource(tileBoard[2 * i + 1][j], true)
-                        + "   " + tileTerrain(tileBoard[2 * i + 1][j], true) + "  ");
+                        + getColorOfTile(tileBoard[2 * i][j]) + "   [" + 2 * i + "," + j + "]   "
+                        + Colors.RESET + riverFinder(tileBoard[2 * i][j], 1)
+                        + "    " + tileResource(tileBoard[2 * i - 1][j], true)
+                        + "   " + tileTerrain(tileBoard[2 * i - 1][j], true) + "  ");
             else System.out.print("  " + riverFinder(tileBoard[2 * i][j], 5)
-                    + getColorOfTile(tileBoard[2 * i][j]) + "   [" + 0 + "," + j + "]   " + Colors.RESET + riverFinder(tileBoard[2 * i][j], 1) + "             ");
+                    + getColorOfTile(tileBoard[2 * i][j])
+                    + "   [" + 0 + "," + j + "]   " + Colors.RESET + riverFinder(tileBoard[2 * i][j], 1) + "             ");
         }
-        if (i != 0) System.out.println("  " + riverFinder(tileBoard[2 * i + 1][3], 2));
+        if (i != 0) System.out.println("  " + riverFinder(tileBoard[2 * i - 1][3], 2));
         else System.out.println();
 
     }
@@ -71,7 +77,7 @@ public class MapController {
                 System.out.print(" " + riverFinder(tileBoard[2 * i][j], 5)
                         + "     " + ANSI_COLOR + tileOwner(tileBoard[2 * i][j]) + Colors.RESET + "     "
                         + riverFinder(tileBoard[2 * i][j], 1)
-                        + "     " + tileImprovement(tileBoard[2 * i + 1][j]) + "    ");
+                        + "     " + tileImprovement(tileBoard[2 * i - 1][j]) + "    ");
             else System.out.print(" " + riverFinder(tileBoard[2 * i][j], 5)
                     + "     " + ANSI_COLOR + tileOwner(tileBoard[2 * i][j]) + Colors.RESET + "     "
                     + riverFinder(tileBoard[2 * i][j], 1)
@@ -128,7 +134,7 @@ public class MapController {
 
         //bottom sides of left tiles and units on the right tiles
         for (int j = 0; j < 4; j++) {
-            ANSI_COLOR = getColorOfTileOwner(tileBoard[2 * i + 1][j]);
+            if (i != 3)ANSI_COLOR = getColorOfTileOwner(tileBoard[2 * i + 1][j]);
 
             if (i != 3)
                 System.out.print("  " + riverFinder(tileBoard[2 * i][j], 4)

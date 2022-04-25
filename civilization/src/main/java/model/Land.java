@@ -4,24 +4,28 @@ public class Land {
     private String name;
     private int movementPrice;
     private int foodRate;
-    private int fightRate;
+    private double fightRate;
     private int goldRate;
     private int productionRate;
-    private ArrayList<Terrain> terrains;
-    private ArrayList<Resource> resources;
+    private String color;
+    private Terrain terrain;
+    private Resource resource;
     private boolean transitAble;
     private boolean nearRiver;
-    public Land(String name, int foodRate, int fightRate, int goldRate, int productionRate, boolean transitAble, boolean nearRiver, int movementPrice) {
+    private boolean passable;
+
+    public Land(String name, String color, int movementPrice, int foodRate, double fightRate, int goldRate, int productionRate,
+                boolean passable, Resource resource, Terrain terrain) {
         this.name = name;
+        this.color = color;
+        this.movementPrice = movementPrice;
         this.foodRate = foodRate;
         this.fightRate = fightRate;
         this.goldRate = goldRate;
         this.productionRate = productionRate;
-        this.transitAble = transitAble;
-        this.nearRiver = nearRiver;
-        this.movementPrice = movementPrice;
-        terrains = new ArrayList<>();
-        resources = new ArrayList<>();
+        this.passable = passable;
+        this.resource = resource;
+        this.terrain = terrain;
     }
 
     public String getName() {
@@ -40,7 +44,7 @@ public class Land {
         this.foodRate = foodRate;
     }
 
-    public int getFightRate() {
+    public double getFightRate() {
         return fightRate;
     }
 
@@ -80,21 +84,23 @@ public class Land {
         this.nearRiver = nearRiver;
     }
 
-    public ArrayList<Resource> getResources() {
-        return resources;
+    public Resource getResource() {
+        return resource;
     }
 
-    public void setResources(ArrayList<Resource> resources) {
-        this.resources = resources;
+    public void setResources(Resource resource) {
+        this.resource = resource;
     }
 
-    public ArrayList<Terrain> getTerrains() {
-        return terrains;
+    public Terrain getTerrain() {
+        return terrain;
     }
 
-    public void setTerrains(ArrayList<Terrain> terrains) {
-        this.terrains = terrains;
+    public void setTerrains(Terrain terrains) {
+        this.terrain = terrains;
     }
+
+    public boolean isPassable(){return passable;}
 
     public int getMovementPrice() {
         return movementPrice;
@@ -102,5 +108,9 @@ public class Land {
 
     public void setMovementPrice(int movementPrice) {
         this.movementPrice = movementPrice;
+    }
+
+    public String getColor() {
+        return color;
     }
 }

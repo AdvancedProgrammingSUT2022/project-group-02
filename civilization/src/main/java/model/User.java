@@ -6,6 +6,7 @@ public class User {
     private final String username;
     private String nickname;
     private String password;
+    private String color;
     private int turns;
     private int gold;
     private ArrayList<Tile> territory;
@@ -37,6 +38,14 @@ public class User {
         gold = 0;
         turns = 1;
         visited = new ArrayList<>();
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getColor() {
+        return color;
     }
 
     public int getGold() {

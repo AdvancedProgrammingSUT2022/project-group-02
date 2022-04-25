@@ -28,9 +28,7 @@ public class PlayGame {
         String input;
         int role = 0;
 
-
-        // TODO fill the map first
-
+        fillMap(players.get(0), players.get(1));
 
         // assign all the neighbors to each tile
         for (int i = 0; i < map.getHeight(); i++)
@@ -150,14 +148,12 @@ public class PlayGame {
                         Tile destination = gameController.findTile(xDestination, yDestination);
                         if (destination != null) {
                             if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
-                                // TODO move the military unit to the destination
                                 if (!destination.isMilitaryUnitExists() && !destination.getLand().getName().equals("mountain") && !destination.getLand().getName().equals("ocean"))
                                     moveUnit(scanner, origin, destination, xOrigin, yOrigin, xDestination, yDestination, origin.getMilitaryUnit(), user, true);
                                 else
                                     System.out.println("can't move a unit to this tile");
                             }
                             else if (origin.isCivilianUnitExists() && origin.isSelectedTwo()) {
-                                // TODO move the civilian unit to the destination
                                 if (!destination.isCivilianUnitExists())
                                     moveUnit(scanner, origin, destination, xOrigin, yOrigin, xDestination, yDestination, origin.getCivilianUnit(), user, false);
                                 else
@@ -233,5 +229,93 @@ public class PlayGame {
         System.out.println("faith: " + user.getFaith());
         System.out.println("happiness: " + user.getHappiness());
         System.out.println("food: " + user.getFood());
+    }
+
+    private void fillMap(User user1, User user2){
+        //fill map
+        //should change with file
+
+        Terrain jungle = new Terrain("jungle", 2, 1, 0.25, 0, 1);
+        Land Desert = new Land("Ocean", "yellow", 1, 0, -0.33, 0, 0, true, null, jungle);
+        Land GrassLand = new Land("Grassland", "green", 1, 2, -0.33, 0, 0, true, null, jungle);
+        Land Hill = new Land("Hill", "purple", 2, 0, 0.25, 0, 2, true, null, jungle);
+        Land Mountain = new Land("Mountain", "cyan", 0, 0, 0, 0, 0, false, null, jungle);
+        Land Ocean = new Land("Ocean", "black", 0, 0,0, 0, 0, false, null, null);
+        Land Plain = new Land("Plain", "green", 1, 1, -0.33, 0, 1, true, null, jungle);
+        Land SnowLand = new Land("Snow", "white", 1, 0 ,-0.33, 0, 0, true, null, jungle);
+
+        boolean[] noRiver = {false ,false ,false ,false ,false ,false};
+        boolean[] riverBorder1 = {false ,true ,false ,false ,false ,false};
+        boolean[] riverBorder2 = {false ,false ,true ,true ,true ,false};
+        boolean[] riverBorder3 = {false ,false ,false ,true ,true ,false};
+        boolean[] riverBorder4 = {false ,false ,true ,true ,false ,false};
+        boolean[] riverBorder5 = {true ,false ,false ,false ,false ,true};
+        boolean[] riverBorder6 = {false ,false ,false ,true ,false ,false};
+        boolean[] riverBorder7 = {true ,true ,false ,false ,false ,false};
+        boolean[] riverBorder8 = {true ,false ,false ,false ,false ,false};
+        Tile tile1 = new Tile(0 , 0, null, Ocean, 0, false, noRiver);
+        Tile tile2 = new Tile(0, 1, null, Mountain, 0, false, noRiver);
+        Tile tile3 = new Tile(0, 2, null, Mountain, 0, false, noRiver);
+        Tile tile4 = new Tile(0, 3, null, Mountain, 0, true, riverBorder6);
+        Tile tile5 = new Tile(1, 0, user2, GrassLand, 0, true, riverBorder3);
+        Tile tile6 = new Tile(1, 1, user2, GrassLand, 0, false, noRiver);
+        Tile tile7 = new Tile(1, 2, user2, Plain, 0, true, riverBorder4);
+        Tile tile8 = new Tile(1, 3, null, Ocean, 0, false, noRiver);
+        Tile tile9 = new Tile(2, 0, null, Ocean, 0, true, riverBorder1);
+        Tile tile10 = new Tile(2, 1, user1, GrassLand, 0, true, riverBorder3);
+        Tile tile11 = new Tile(2, 2, user2, GrassLand, 0, true, riverBorder4);
+        Tile tile12 = new Tile(2, 3, user1, Plain, 0, true, riverBorder5);
+        Tile tile13 = new Tile(3, 0, user1, Hill, 0, true, riverBorder7);
+        Tile tile14 = new Tile(3, 1, null, Mountain, 0, true, riverBorder2);
+        Tile tile15 = new Tile(3, 2, user2, SnowLand, 0, true, riverBorder5);
+        Tile tile16 = new Tile(3, 3, null, Ocean, 0, false, noRiver);
+        Tile tile17 = new Tile(4, 0, null, Ocean, 0, false, noRiver);
+        Tile tile18 = new Tile(4, 1, user1, Desert, 0, true, riverBorder7);
+        Tile tile19 = new Tile(4, 2, user1, Desert, 0, true, riverBorder5);
+        Tile tile20 = new Tile(4, 3, user1, Desert, 0, false, noRiver);
+        Tile tile21 = new Tile(5, 0, user1, Desert, 0, false, noRiver);
+        Tile tile22 = new Tile(5, 1, user2, Desert, 0, true, riverBorder8);
+        Tile tile23 = new Tile(5, 2, user1, Desert, 0, false, noRiver);
+        Tile tile24 = new Tile(5, 3, null, Ocean, 0, false, noRiver);
+        Tile tile25 = new Tile(6, 0, null, Ocean, 0, false, noRiver);
+        Tile tile26 = new Tile(6, 1, user1, Plain, 0, false, noRiver);
+        Tile tile27 = new Tile(6, 2, user2, Plain, 0, false, noRiver);
+        Tile tile28 = new Tile(6, 3, user2, Plain, 0, false, noRiver);
+        Tile tile29 = new Tile(7, 0, user2, Desert, 0, false, noRiver);
+        Tile tile30 = new Tile(7, 1, user2, Desert, 0, false, noRiver);
+        Tile tile31 = new Tile(7, 2, user1, Desert, 0, false, noRiver);
+        Tile tile32 = new Tile(7, 3, user1, Ocean, 0, false, noRiver);
+        map.getTileBoard()[0][0] = tile1;
+        map.getTileBoard()[0][1] = tile2;
+        map.getTileBoard()[0][2] = tile3;
+        map.getTileBoard()[0][3] = tile4;
+        map.getTileBoard()[1][0] = tile5;
+        map.getTileBoard()[1][1] = tile6;
+        map.getTileBoard()[1][2] = tile7;
+        map.getTileBoard()[1][3] = tile8;
+        map.getTileBoard()[2][0] = tile9;
+        map.getTileBoard()[2][1] = tile10;
+        map.getTileBoard()[2][2] = tile11;
+        map.getTileBoard()[2][3] = tile12;
+        map.getTileBoard()[3][0] = tile13;
+        map.getTileBoard()[3][1] = tile14;
+        map.getTileBoard()[3][2] = tile15;
+        map.getTileBoard()[3][3] = tile16;
+        map.getTileBoard()[4][0] = tile17;
+        map.getTileBoard()[4][1] = tile18;
+        map.getTileBoard()[4][2] = tile19;
+        map.getTileBoard()[4][3] = tile20;
+        map.getTileBoard()[5][0] = tile21;
+        map.getTileBoard()[5][1] = tile22;
+        map.getTileBoard()[5][2] = tile23;
+        map.getTileBoard()[5][3] = tile24;
+        map.getTileBoard()[6][0] = tile25;
+        map.getTileBoard()[6][1] = tile26;
+        map.getTileBoard()[6][2] = tile27;
+        map.getTileBoard()[6][3] = tile28;
+        map.getTileBoard()[7][0] = tile29;
+        map.getTileBoard()[7][1] = tile30;
+        map.getTileBoard()[7][2] = tile31;
+        map.getTileBoard()[7][3] = tile32;
     }
 }
