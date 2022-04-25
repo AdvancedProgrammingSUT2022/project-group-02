@@ -78,6 +78,10 @@ public class PlayGame {
                 else
                     System.out.println("invalid command");
             }
+            role++;
+            user.setTurns(gameController.getTurnForEachPlayer());
+            if (role >= players.size())
+                role = 0;
         }
     }
 

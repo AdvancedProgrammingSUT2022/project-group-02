@@ -8,6 +8,7 @@ public class GameController {
     private ArrayList<User> players;
     private Maps map;
     private int mapSize;
+    private int turnForEachPlayer;
     public GameController(ArrayList<User> players, int turnForEachPlayer, Maps map, int mapSize) {
         this.players = players;
         this.map = map;
@@ -16,6 +17,7 @@ public class GameController {
             player.setTurns(turnForEachPlayer);
             player.setGold(0);
         }
+        this.turnForEachPlayer = turnForEachPlayer;
     }
     // cheat code for increasing the turn of user
     public void increaseTurn(int extraTurn, User specificPlayer) {
@@ -37,5 +39,13 @@ public class GameController {
     }
     public void moveUnit(Tile origin, Tile destination, Unit unit) {
         // TODO move the unit to the destination
+    }
+
+    public int getTurnForEachPlayer() {
+        return turnForEachPlayer;
+    }
+
+    public void setTurnForEachPlayer(int turnForEachPlayer) {
+        this.turnForEachPlayer = turnForEachPlayer;
     }
 }
