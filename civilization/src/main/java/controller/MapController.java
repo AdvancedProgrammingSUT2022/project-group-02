@@ -68,7 +68,7 @@ public class MapController {
         return (deltaX + deltaY) / 2;
     }
 
-    public Tile bestChoiceAmongNeighbors(Tile tile, Tile destination) {
+    public Tile bestChoiceAmongNeighbors(Tile tile, Tile destination, boolean isMilitary) {
         if (tile.getNeighbors().contains(destination))
             return destination;
         Tile bestChoice = tile.getNeighbors().get(0);
@@ -78,7 +78,8 @@ public class MapController {
         int cost = bestChoice.getLand().getMovementPrice();
         int fullCost = distance + cost;
         for (int i = 1; i < tile.getNeighbors().size(); i++) {
-            if (tile.getNeighbors().get(i).getLand().getName().equals("mountain") ||tile.getNeighbors().get(i).getLand().getName().equals("ocean"))
+            // if the tile is mountain or ocean or there is same unit in this tile do not add it
+            if (checkConditionOfAddingTheTile(tile, isMilitary))
                 continue;
             //swap
             if (tile.getNeighbors().get(i).getLand().getMovementPrice() + findDistance(tile.getNeighbors().get(i), destination) < fullCost) {
@@ -86,7 +87,16 @@ public class MapController {
                 bestChoice = tile.getNeighbors().get(i);
             }
         }
+        if (tile.getNeighbors().get(0).equals(bestChoice) && checkConditionOfAddingTheTile(bestChoice, isMilitary))
+            return null;
         return bestChoice;
+    }
+
+    private boolean checkConditionOfAddingTheTile(Tile tile, boolean isMilitary) {
+        boolean militaryConflict = isMilitary && tile.isMilitaryUnitExists();
+        boolean civilianConflict = !isMilitary && tile.isCivilianUnitExists();
+        boolean isMountainOrOcean = tile.getLand().getName().equals("mountain") || tile.getLand().getName().equals("ocean");
+        return militaryConflict || civilianConflict || isMountainOrOcean;
     }
 
     public void addAllVisibleAndVisitedTiles(User user) {
@@ -95,7 +105,8 @@ public class MapController {
         for (int i = 0; i < map.getHeight(); i++) {
             for (int j = 0; j < map.getWidth(); j++) {
                 //add to visible
-                if ((map.getTileBoard()[i][j].isMilitaryUnitExists() && map.getTileBoard()[i][j].getMilitaryUnit().getOwner().equals(user)) || (map.getTileBoard()[i][j].isCivilianUnitExists() && map.getTileBoard()[i][j].getCivilianUnit().getOwner().equals(user))) {
+                if ((map.getTileBoard()[i][j].isMilitaryUnitExists() && map.getTileBoard()[i][j].getMilitaryUnit().getOwner().equals(user)) ||
+                        (map.getTileBoard()[i][j].isCivilianUnitExists() && map.getTileBoard()[i][j].getCivilianUnit().getOwner().equals(user))) {
                     if (!user.getVisible().contains(map.getTileBoard()[i][j]))
                         user.addVisible(map.getTileBoard()[i][j]);
                     //add to the visited tiles if not exists

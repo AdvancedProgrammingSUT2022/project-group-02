@@ -39,8 +39,27 @@ public class GameController {
         }
         return null;
     }
-    public void moveUnit(Tile origin, Tile destination, Unit unit) {
+    public void moveUnit(Tile origin, Tile destination, Unit unit, boolean isMilitary) {
+        if (isMilitary)
+            moveMilitary(origin, destination, (MilitaryUnit) unit);
+        else
+            moveCivilian(origin, destination, (Civilian) unit);
         // TODO move the unit to the destination
+    }
+
+    private void moveMilitary(Tile origin, Tile destination, MilitaryUnit militaryUnit) {
+        militaryUnit.setTile(destination);
+        origin.setMilitaryUnit(null);
+        origin.setMilitaryUnitExists(false);
+        destination.setMilitaryUnit(militaryUnit);
+        destination.setMilitaryUnitExists(true);
+    }
+    private void moveCivilian(Tile origin, Tile destination, Civilian civilian) {
+        civilian.setTile(destination);
+        origin.setCivilianUnit(null);
+        origin.setCivilianUnitExists(false);
+        destination.setCivilianUnit(civilian);
+        destination.setCivilianUnitExists(true);
     }
 
     public int getTurnForEachPlayer() {

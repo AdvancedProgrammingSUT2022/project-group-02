@@ -86,6 +86,9 @@ public class PlayGame {
                 else if (input.trim().equals("show players")) {
                     showPlayers();
                 }
+                else if (input.trim().equals("show information")) {
+                    showInformation(user);
+                }
                 else
                     System.out.println("invalid command");
             }
@@ -148,11 +151,17 @@ public class PlayGame {
                         if (destination != null) {
                             if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
                                 // TODO move the military unit to the destination
-                                moveUnit(scanner, origin, destination, xOrigin, yOrigin, xDestination, yDestination, origin.getMilitaryUnit(), user);
+                                if (!destination.isMilitaryUnitExists() && !destination.getLand().getName().equals("mountain") && !destination.getLand().getName().equals("ocean"))
+                                    moveUnit(scanner, origin, destination, xOrigin, yOrigin, xDestination, yDestination, origin.getMilitaryUnit(), user, true);
+                                else
+                                    System.out.println("can't move a unit to this tile");
                             }
                             else if (origin.isCivilianUnitExists() && origin.isSelectedTwo()) {
                                 // TODO move the civilian unit to the destination
-                                moveUnit(scanner, origin, destination, xOrigin, yOrigin, xDestination, yDestination, origin.getCivilianUnit(), user);
+                                if (!destination.isCivilianUnitExists())
+                                    moveUnit(scanner, origin, destination, xOrigin, yOrigin, xDestination, yDestination, origin.getCivilianUnit(), user, false);
+                                else
+                                    System.out.println("can't move a unit to this tile");
                             }
                             else
                                 System.out.println("there is no unit in this tile!");
@@ -169,25 +178,29 @@ public class PlayGame {
         }
     }
 
-    public void moveUnit(Scanner scanner, Tile origin, Tile destination, int xOrigin, int yOrigin, int xDestination, int yDestination, Unit unit, User user) {
+    public void moveUnit(Scanner scanner, Tile origin, Tile destination, int xOrigin, int yOrigin, int xDestination, int yDestination, Unit unit, User user, boolean isMilitary) {
         // TODO first check all the possibilities and move the unit
 
         ArrayList<Tile> tilesInTheWay = new ArrayList<>();
         Tile tile = origin;
-        while ((tile = mapController.bestChoiceAmongNeighbors(tile, destination)) != destination) {
+        while ((tile = mapController.bestChoiceAmongNeighbors(tile, destination, isMilitary)) != destination) {
+            if (tile == null) {
+                System.out.println("sorry, moving is impossible");
+                return;
+            }
             tilesInTheWay.add(tile);
         }
         int mp = 0;
         for (Tile value : tilesInTheWay) {
             if (value.getLand().getMovementPrice() > user.getTurns()) {
-                gameController.moveUnit(origin, value, unit);
+                gameController.moveUnit(origin, value, unit, isMilitary);
                 System.out.println(mp + " movement by unit to get to the destination");
                 return;
             }
             mp += value.getLand().getMovementPrice();
             user.setTurns(user.getTurns() - value.getLand().getMovementPrice());
         }
-        gameController.moveUnit(origin, destination, unit);
+        gameController.moveUnit(origin, destination, unit, isMilitary);
         System.out.println(mp + " movement by unit to get to the destination");
     }
 
@@ -197,7 +210,7 @@ public class PlayGame {
         }
 
         for (Tile tile : user.getVisited()) {
-            if (!players.get(role).getVisible().contains(tile)) {
+            if (!user.getVisible().contains(tile)) {
                 // TODO show the tiles which are not completely visible
             }
         }
@@ -209,5 +222,16 @@ public class PlayGame {
             System.out.println(index + "- username: " + player.getUsername() + " nickname: " + player.getNickname());
             index++;
         }
+    }
+    private void showInformation(User user) {
+        //temporary
+        System.out.println("username: " + user.getUsername());
+        System.out.println("nickname: " + user.getNickname());
+        System.out.println("remained movements: " + user.getTurns());
+        System.out.println("gold: " + user.getGold());
+        System.out.println("culture: " + user.getCulture());
+        System.out.println("faith: " + user.getFaith());
+        System.out.println("happiness: " + user.getHappiness());
+        System.out.println("food: " + user.getFood());
     }
 }
