@@ -8,13 +8,10 @@ public class Maps {
     private int height;
     private int width;
 
-    private ArrayList<Tile> visited;
-    private ArrayList<Tile> visible;
 
     public Maps(int mapSize) {
         this.mapSize = mapSize;
         tileBoard = new Tile[mapSize][mapSize];
-        visited = new ArrayList<>();
     }
 
     public Tile[][] getTileBoard() {
@@ -47,27 +44,5 @@ public class Maps {
 
     public void setTileBoard(Tile[][] tileBoard) {
         this.tileBoard = tileBoard;
-    }
-
-    public ArrayList<Tile> getVisited() {
-        return visited;
-    }
-
-    public void setVisited(ArrayList<Tile> visited) {
-        this.visited = visited;
-    }
-
-    public ArrayList<Tile> getVisible() {
-        return visible;
-    }
-
-    public void setVisible(ArrayList<Tile> visible) {
-        this.visible = visible;
-    }
-    public void addVisited(Tile visit) {
-        visited.add(visit);
-    }
-    public void addVisible(Tile visible) {
-        this.visible.add(visible);
     }
 }

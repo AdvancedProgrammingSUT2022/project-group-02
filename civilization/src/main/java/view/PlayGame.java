@@ -29,62 +29,59 @@ public class PlayGame {
             for (int j = 0; j < map.getWidth(); j++)
                 mapController.setNeighbor(map.getTileBoard()[i][j]);
 
+        while (true) {
+            User user = players.get(role);
+            while (user.getTurns() > 0) {
 
-        while (players.get(role).getTurns() > 0) {
-            input = scanner.nextLine();
-            if (input.equals("game exit"))
-                return;
-            //cheat code for increasing turn
-            else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_TURN1)) != null ||
-                     (matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_TURN2)) != null) {
-                int amount = Integer.parseInt(matcher.group("amount"));
-                if (amount > 0) {
-                    gameController.increaseTurn(amount, players.get(role));
-                    System.out.println("turn increased successfully!");
+                input = scanner.nextLine();
+                if (input.equals("game exit"))
+                    return;
+                    //cheat code for increasing turn
+                else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_TURN1)) != null ||
+                        (matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_TURN2)) != null) {
+                    int amount = Integer.parseInt(matcher.group("amount"));
+                    if (amount > 0) {
+                        gameController.increaseTurn(amount, user);
+                        System.out.println("turn increased successfully!");
+                    } else
+                        System.out.println("invalid number");
                 }
-                else
-                    System.out.println("invalid number");
-            }
-            //cheat code for increasing gold
-            else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_GOLD1)) != null ||
-                    (matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_GOLD2)) != null) {
-                int amount = Integer.parseInt(matcher.group("amount"));
-                if (amount > 0) {
-                    gameController.increaseGold(amount, players.get(role));
-                    System.out.println("gold increased successfully!");
+                //cheat code for increasing gold
+                else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_GOLD1)) != null ||
+                        (matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_GOLD2)) != null) {
+                    int amount = Integer.parseInt(matcher.group("amount"));
+                    if (amount > 0) {
+                        gameController.increaseGold(amount, user);
+                        System.out.println("gold increased successfully!");
+                    } else
+                        System.out.println("invalid command");
+                }
+                // selecting tile
+                else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.SELECT_TILE)) != null) {
+                    int xOrigin = Integer.parseInt(matcher.group("x"));
+                    int yOrigin = Integer.parseInt(matcher.group("y"));
+                    // valid coordinates
+                    if (xOrigin >= 0 && yOrigin >= 0) {
+                        Tile origin = gameController.findTile(xOrigin, yOrigin);
+                        if (origin != null) {
+                            selectedTile(scanner, origin, xOrigin, yOrigin, user);
+                        } else
+                            System.out.println("invalid tile");
+                    } else
+                        System.out.println("invalid coordinates");
+                }
+                else if (input.trim().equals("show board")) {
+                    // add all visible tiles and update visited files
+                    mapController.addAllVisibleAndVisitedTiles(user);
+                    showBoard(user);
                 }
                 else
                     System.out.println("invalid command");
             }
-            // selecting tile
-            else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.SELECT_TILE)) != null) {
-                int xOrigin = Integer.parseInt(matcher.group("x"));
-                int yOrigin = Integer.parseInt(matcher.group("y"));
-                // valid coordinates
-                if (xOrigin >= 0 && yOrigin >= 0) {
-                    Tile origin = gameController.findTile(xOrigin, yOrigin);
-                    if (origin != null) {
-                        selectedTile(scanner, origin, xOrigin, yOrigin);
-                    }
-                    else
-                        System.out.println("invalid tile");
-                }
-                else
-                    System.out.println("invalid coordinates");
-            }
-
-            else if (input.trim().equals("show board")) {
-                // add all visible tiles and update visited files
-                mapController.addAllVisibleAndVisitedTiles();
-                showBoard();
-            }
-
-            else
-                System.out.println("invalid command");
         }
     }
 
-    public void selectedTile(Scanner scanner, Tile origin, int xOrigin, int yOrigin) {
+    public void selectedTile(Scanner scanner, Tile origin, int xOrigin, int yOrigin, User user) {
         origin.setSelectedOne(false);
         origin.setSelectedTwo(false);
         if (origin.isMilitaryUnitExists())
@@ -115,7 +112,7 @@ public class PlayGame {
                     else {
                         Tile destination = gameController.findTile(anotherXOrigin, anotherYOrigin);
                         if (destination != null) {
-                            selectedTile(scanner, destination, anotherXOrigin, anotherYOrigin);
+                            selectedTile(scanner, destination, anotherXOrigin, anotherYOrigin, user);
                             origin.setSelectedOne(false);
                             origin.setSelectedTwo(false);
                             return;
@@ -136,11 +133,11 @@ public class PlayGame {
                         if (destination != null) {
                             if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
                                 // TODO move the military unit to the destination
-                                moveUnit(scanner, origin, destination, xOrigin, yOrigin, xDestination, yDestination, origin.getMilitaryUnit());
+                                moveUnit(scanner, origin, destination, xOrigin, yOrigin, xDestination, yDestination, origin.getMilitaryUnit(), user);
                             }
                             else if (origin.isCivilianUnitExists() && origin.isSelectedTwo()) {
                                 // TODO move the civilian unit to the destination
-                                moveUnit(scanner, origin, destination, xOrigin, yOrigin, xDestination, yDestination, origin.getCivilianUnit());
+                                moveUnit(scanner, origin, destination, xOrigin, yOrigin, xDestination, yDestination, origin.getCivilianUnit(), user);
                             }
                             else
                                 System.out.println("there is no unit in this tile!");
@@ -157,7 +154,7 @@ public class PlayGame {
         }
     }
 
-    public void moveUnit(Scanner scanner, Tile origin, Tile destination, int xOrigin, int yOrigin, int xDestination, int yDestination, Unit unit) {
+    public void moveUnit(Scanner scanner, Tile origin, Tile destination, int xOrigin, int yOrigin, int xDestination, int yDestination, Unit unit, User user) {
         // TODO first check all the possibilities and move the unit
 
         ArrayList<Tile> tilesInTheWay = new ArrayList<>();
@@ -167,25 +164,25 @@ public class PlayGame {
         }
         int mp = 0;
         for (Tile value : tilesInTheWay) {
-            if (value.getLand().getMovementPrice() > players.get(role).getTurns()) {
+            if (value.getLand().getMovementPrice() > user.getTurns()) {
                 gameController.moveUnit(origin, value, unit);
                 System.out.println(mp + " movement by unit to get to the destination");
                 return;
             }
             mp += value.getLand().getMovementPrice();
-            players.get(role).setTurns(players.get(role).getTurns() - value.getLand().getMovementPrice());
+            user.setTurns(user.getTurns() - value.getLand().getMovementPrice());
         }
         gameController.moveUnit(origin, destination, unit);
         System.out.println(mp + " movement by unit to get to the destination");
     }
 
-    private void showBoard() {
-        for (Tile tile : map.getVisible()) {
+    private void showBoard(User user) {
+        for (Tile tile : user.getVisible()) {
             // TODO first show the visible tiles
         }
 
-        for (Tile tile : map.getVisited()) {
-            if (!map.getVisible().contains(tile)) {
+        for (Tile tile : user.getVisited()) {
+            if (!players.get(role).getVisible().contains(tile)) {
                 // TODO show the tiles which are not completely visible
             }
         }

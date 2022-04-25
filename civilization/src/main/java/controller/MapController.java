@@ -2,6 +2,7 @@ package controller;
 
 import model.Maps;
 import model.Tile;
+import model.User;
 
 import java.util.ArrayList;
 
@@ -88,25 +89,27 @@ public class MapController {
         return bestChoice;
     }
 
-    public void addAllVisibleAndVisitedTiles() {
-        map.setVisible(new ArrayList<>());
+    public void addAllVisibleAndVisitedTiles(User user) {
+        user.setVisible(new ArrayList<>());
         // add tiles that are completely visible
         for (int i = 0; i < map.getHeight(); i++) {
             for (int j = 0; j < map.getWidth(); j++) {
                 //add to visible
-                if (!map.getVisible().contains(map.getTileBoard()[i][j]))
-                    map.addVisible(map.getTileBoard()[i][j]);
-                //add to the visited tiles if not exists
-                if (!map.getVisited().contains(map.getTileBoard()[i][j]))
-                    map.addVisited(map.getTileBoard()[i][j]);
+                if ((map.getTileBoard()[i][j].isMilitaryUnitExists() && map.getTileBoard()[i][j].getMilitaryUnit().getOwner().equals(user)) || (map.getTileBoard()[i][j].isCivilianUnitExists() && map.getTileBoard()[i][j].getCivilianUnit().getOwner().equals(user))) {
+                    if (!user.getVisible().contains(map.getTileBoard()[i][j]))
+                        user.addVisible(map.getTileBoard()[i][j]);
+                    //add to the visited tiles if not exists
+                    if (!user.getVisited().contains(map.getTileBoard()[i][j]))
+                        //map.addVisited(map.getTileBoard()[i][j]);
 
-                for (int k = 0; k < map.getTileBoard()[i][j].getNeighbors().size(); k++) {
-                    //add to visible
-                    if (!map.getVisible().contains(map.getTileBoard()[i][j].getNeighbors().get(k)))
-                        map.addVisible(map.getTileBoard()[i][j].getNeighbors().get(k));
-                    //add to the visited tile if not exists
-                    if (!map.getVisited().contains(map.getTileBoard()[i][j].getNeighbors().get(k)))
-                        map.addVisited(map.getTileBoard()[i][j].getNeighbors().get(k));
+                        for (int k = 0; k < map.getTileBoard()[i][j].getNeighbors().size(); k++) {
+                            //add to visible
+                            if (!user.getVisible().contains(map.getTileBoard()[i][j].getNeighbors().get(k)))
+                                user.addVisible(map.getTileBoard()[i][j].getNeighbors().get(k));
+                            //add to the visited tile if not exists
+                            if (!user.getVisited().contains(map.getTileBoard()[i][j].getNeighbors().get(k)))
+                                user.addVisited(map.getTileBoard()[i][j].getNeighbors().get(k));
+                        }
                 }
             }
         }

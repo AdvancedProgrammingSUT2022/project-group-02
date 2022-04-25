@@ -12,8 +12,9 @@ public class Unit {
     private int XP;
     private int combatStrength;
     private int rangeCombatStrength;
+    private User owner;
 
-    public Unit(String name, Tile tile, int HP, int price, int level, int MP, int combatStrength, int rangeCombatStrength) {
+    public Unit(String name, Tile tile, int HP, int price, int level, int MP, int combatStrength, int rangeCombatStrength, User owner) {
         this.name = name;
         this.tile = tile;
         this.HP = HP;
@@ -24,6 +25,7 @@ public class Unit {
         this.rangeCombatStrength = rangeCombatStrength;
         intact = true;
         XP = 0;
+        this.owner = owner;
     }
 
     public String getName() {
@@ -104,5 +106,13 @@ public class Unit {
 
     public void setRangeCombatStrength(int rangeCombatStrength) {
         this.rangeCombatStrength = rangeCombatStrength;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }
