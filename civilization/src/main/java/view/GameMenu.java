@@ -79,9 +79,18 @@ public class GameMenu {
                 }
                 if (allUsernamesExist) {
                     System.out.println("successfully started game");
+                    ArrayList<String> colors = new ArrayList<>();
+                    colors.add("yellow");
+                    colors.add("purple");
+                    colors.add("red");
+                    colors.add("cyan");
+                    colors.add("green");
                     ArrayList<User> players = new ArrayList<>();
+                    int userNumber = 0;
                     for (String username : usernames) {
                         players.add(users.getUserByUsername(username));
+                        players.get(userNumber).setColor(colors.get(userNumber));
+                        userNumber++;
                     }
                     // temporary
                     int height = 7;
