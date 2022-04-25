@@ -84,8 +84,8 @@ public class GameMenu {
                         players.add(users.getUserByUsername(username));
                     }
                     // temporary
-                    int height = 4;
-                    int width = 7;
+                    int height = 7;
+                    int width = 4;
                     new PlayGame(players, height, width).run(scanner);
                 }
             }
