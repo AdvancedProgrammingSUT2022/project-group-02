@@ -1,8 +1,10 @@
 package view;
 
+import controller.MapController;
 import controller.Users;
 import model.User;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -77,9 +79,14 @@ public class GameMenu {
                 }
                 if (allUsernamesExist) {
                     System.out.println("successfully started game");
-                    // TODO start a new game
-                    // TODO cheat command
-                    //PlayGame().run()
+                    ArrayList<User> players = new ArrayList<>();
+                    for (String username : usernames) {
+                        players.add(users.getUserByUsername(username));
+                    }
+                    // temporary
+                    int height = 4;
+                    int width = 7;
+                    new PlayGame(players, height, width).run(scanner);
                 }
             }
 

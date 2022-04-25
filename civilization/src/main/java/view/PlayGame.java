@@ -11,15 +11,18 @@ public class PlayGame {
     private GameController gameController;
     private Maps map;
     private Matcher matcher;
-    private int mapSize;
     private MapController mapController;
     private int role;
-    public PlayGame (ArrayList<User> players, int mapSize, MapController mapController) {
+    private int height;
+    private int width;
+
+    public PlayGame (ArrayList<User> players, int height, int width) {
         this.players = players;
-        this.mapSize = mapSize;
-        map = new Maps(mapSize);
-        gameController = new GameController(players, 1, map, mapSize);
-        this.mapController = mapController;
+        Maps map = new Maps(height, width);
+        gameController = new GameController(players, 1, map, height, width);
+        this.mapController = new MapController(map, height, width);
+        this.height = height;
+        this.width = width;
     }
     public void run(Scanner scanner) {
         String input;

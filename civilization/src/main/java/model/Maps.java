@@ -3,15 +3,14 @@ package model;
 import java.util.ArrayList;
 
 public class Maps {
-    private final int mapSize;
     private Tile[][] tileBoard;
     private int height;
     private int width;
 
-
-    public Maps(int mapSize) {
-        this.mapSize = mapSize;
-        tileBoard = new Tile[mapSize][mapSize];
+    public Maps(int height, int width) {
+        this.height = height;
+        this.width = width;
+        tileBoard = new Tile[height][width];
     }
 
     public Tile[][] getTileBoard() {
@@ -28,10 +27,6 @@ public class Maps {
 
     public int getHeight() {
         return height;
-    }
-
-    public int getMapSize() {
-        return mapSize;
     }
 
     public void setHeight(int height) {
