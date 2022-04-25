@@ -150,16 +150,14 @@ public class PlayGame {
                         Tile destination = gameController.findTile(xDestination, yDestination);
                         if (destination != null) {
                             if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
-                                // TODO move the military unit to the destination
                                 if (!destination.isMilitaryUnitExists() && !destination.getLand().getName().equals("mountain") && !destination.getLand().getName().equals("ocean"))
-                                    moveUnit(scanner, origin, destination, xOrigin, yOrigin, xDestination, yDestination, origin.getMilitaryUnit(), user, true);
+                                    moveUnit(scanner, origin, destination, origin.getMilitaryUnit(), user, true);
                                 else
                                     System.out.println("can't move a unit to this tile");
                             }
                             else if (origin.isCivilianUnitExists() && origin.isSelectedTwo()) {
-                                // TODO move the civilian unit to the destination
                                 if (!destination.isCivilianUnitExists())
-                                    moveUnit(scanner, origin, destination, xOrigin, yOrigin, xDestination, yDestination, origin.getCivilianUnit(), user, false);
+                                    moveUnit(scanner, origin, destination, origin.getCivilianUnit(), user, false);
                                 else
                                     System.out.println("can't move a unit to this tile");
                             }
@@ -178,8 +176,7 @@ public class PlayGame {
         }
     }
 
-    public void moveUnit(Scanner scanner, Tile origin, Tile destination, int xOrigin, int yOrigin, int xDestination, int yDestination, Unit unit, User user, boolean isMilitary) {
-        // TODO first check all the possibilities and move the unit
+    public void moveUnit(Scanner scanner, Tile origin, Tile destination, Unit unit, User user, boolean isMilitary) {
 
         ArrayList<Tile> tilesInTheWay = new ArrayList<>();
         Tile tile = origin;

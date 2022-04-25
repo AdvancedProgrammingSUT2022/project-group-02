@@ -44,7 +44,6 @@ public class GameController {
             moveMilitary(origin, destination, (MilitaryUnit) unit);
         else
             moveCivilian(origin, destination, (Civilian) unit);
-        // TODO move the unit to the destination
     }
 
     private void moveMilitary(Tile origin, Tile destination, MilitaryUnit militaryUnit) {
