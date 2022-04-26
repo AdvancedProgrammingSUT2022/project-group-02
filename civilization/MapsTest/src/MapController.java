@@ -11,7 +11,8 @@ public class MapController {
     }
 
     public void printMap() {
-        String ANSI_COLOR = Colors.WHITE;
+        String ANSI_COLOR;
+        String BACKGROUND_COLOR = null;
         //first top sides of left tiles of game board
         for (int j = 0; j < 4; j++)
             System.out.print("   " + riverFinder(tileBoard[0][j], 0) + "              ");
@@ -26,6 +27,7 @@ public class MapController {
 
             //units on the left tiles and top sides of right tiles
             for (int j = 0; j < 4; j++) {
+                BACKGROUND_COLOR = getColorOfTile(tileBoard[2*i][j]);
                 ANSI_COLOR = getColorOfTileOwner(tileBoard[2 * i][j]);
                 System.out.print(riverFinder(tileBoard[2 * i][j], 5) + "    " + ANSI_COLOR + civilianUnit(tileBoard[2 * i][j])
                         + "   " + militaryUnit(tileBoard[2 * i][j]) + "    " + Colors.RESET + riverFinder(tileBoard[2 * i][j], 1)
@@ -191,6 +193,22 @@ public class MapController {
         else if (x == 0 || x == 3) return "___________";
         else if (x == 2 || x == 5) return "/";
         else return "\\";
+    }
+
+    private String getColorOfTile(Tile tile) {
+        String BACKGROUND_COLOR = null;
+        if (tile.getLand().getColor().equals("red")) {
+            BACKGROUND_COLOR = Colors.RED_BACKGROUND;
+        } else if (tile.getLand().getColor().equals("yellow")) {
+            BACKGROUND_COLOR = Colors.YELLOW_BACKGROUND;
+        }else if(tile.getLand().getColor().equals("purple")){
+            BACKGROUND_COLOR = Colors.PURPLE_BACKGROUND;
+        }else if(tile.getLand().getColor().equals("green")){
+            BACKGROUND_COLOR = Colors.GREEN_BACKGROUND;
+        }else if(tile.getLand().getColor().equals("cyan")){
+            BACKGROUND_COLOR = Colors.CYAN_BACKGROUND;
+        }
+        return BACKGROUND_COLOR;
     }
 
 }
