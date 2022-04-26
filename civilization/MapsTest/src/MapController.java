@@ -12,7 +12,6 @@ public class MapController {
 
     public void printMap() {
         String ANSI_COLOR;
-        String BACKGROUND_COLOR = null;
         //first top sides of left tiles of game board
         for (int j = 0; j < 4; j++)
             System.out.print("   " + riverFinder(tileBoard[0][j], 0) + "              ");
@@ -27,10 +26,9 @@ public class MapController {
 
             //units on the left tiles and top sides of right tiles
             for (int j = 0; j < 4; j++) {
-                BACKGROUND_COLOR = getColorOfTile(tileBoard[2*i][j]);
                 ANSI_COLOR = getColorOfTileOwner(tileBoard[2 * i][j]);
                 System.out.print(riverFinder(tileBoard[2 * i][j], 5) + "    " + ANSI_COLOR + civilianUnit(tileBoard[2 * i][j])
-                        + "   " + militaryUnit(tileBoard[2 * i][j]) + "    " + Colors.RESET + riverFinder(tileBoard[2 * i][j], 1)
+                        + "   " + ANSI_COLOR+militaryUnit(tileBoard[2 * i][j]) + "    " +Colors.RESET+ Colors.RESET + riverFinder(tileBoard[2 * i][j], 1)
                         + riverFinder(tileBoard[2 * i + 1][j], 0));
             }
             if (i != 0) System.out.println(riverFinder(tileBoard[2 * i][3], 2));
@@ -52,11 +50,11 @@ public class MapController {
         for (int j = 0; j < 4; j++) {
             if (i != 0)
                 System.out.print("  " + riverFinder(tileBoard[2 * i][j], 5)
-                        + "   [" + 2 * i + "," + j + "]   " + riverFinder(tileBoard[2 * i][j], 1)
+                        + getColorOfTile(tileBoard[2 * i][j]) + "   [" + 2 * i + "," + j + "]   " + Colors.RESET + riverFinder(tileBoard[2 * i][j], 1)
                         + "    " + tileResource(tileBoard[2 * i + 1][j], true)
                         + "   " + tileTerrain(tileBoard[2 * i + 1][j], true) + "  ");
             else System.out.print("  " + riverFinder(tileBoard[2 * i][j], 5)
-                    + "   [" + 0 + "," + j + "]   " + riverFinder(tileBoard[2 * i][j], 1) + "             ");
+                    + getColorOfTile(tileBoard[2 * i][j]) + "   [" + 0 + "," + j + "]   " + Colors.RESET + riverFinder(tileBoard[2 * i][j], 1) + "             ");
         }
         if (i != 0) System.out.println("  " + riverFinder(tileBoard[2 * i + 1][3], 2));
         else System.out.println();
@@ -75,7 +73,8 @@ public class MapController {
                         + riverFinder(tileBoard[2 * i][j], 1)
                         + "     " + tileImprovement(tileBoard[2 * i + 1][j]) + "    ");
             else System.out.print(" " + riverFinder(tileBoard[2 * i][j], 5)
-                    + "     " + ANSI_COLOR + tileOwner(tileBoard[2 * i][j]) + Colors.RESET + "     " + riverFinder(tileBoard[2 * i][j], 1)
+                    + "     " + ANSI_COLOR + tileOwner(tileBoard[2 * i][j]) + Colors.RESET + "     "
+                    + riverFinder(tileBoard[2 * i][j], 1)
                     + "            ");
         }
         if (i != 0) System.out.println(" " + riverFinder(tileBoard[2 * i][0], 2));
@@ -92,7 +91,7 @@ public class MapController {
                         + "    " + tileResource(tileBoard[2 * i][j], false)
                         + "   " + tileTerrain(tileBoard[2 * i][j], false)
                         + "    " + riverFinder(tileBoard[2 * i][j], 2)
-                        + "   [" + (2 * i + 1) + "," + j + "]   ");
+                        + getColorOfTile(tileBoard[2 * i+1][j]) + "   [" + (2 * i + 1) + "," + j + "]   " + Colors.RESET);
             else System.out.print(riverFinder(tileBoard[2 * i][j], 4)
                     + "    " + tileResource(tileBoard[2 * i][j], false)
                     + "   " + tileTerrain(tileBoard[2 * i][0], false) + "    "
@@ -135,7 +134,7 @@ public class MapController {
                 System.out.print("  " + riverFinder(tileBoard[2 * i][j], 4)
                         + riverFinder(tileBoard[2 * i][j], 3) + riverFinder(tileBoard[2 * i][j], 2)
                         + "    " + ANSI_COLOR + civilianUnit(tileBoard[2 * i + 1][0])
-                        + "   " + militaryUnit(tileBoard[2 * i + 1][j]) + Colors.RESET + "  ");
+                        + "   " + ANSI_COLOR+militaryUnit(tileBoard[2 * i + 1][j]) +Colors.RESET+ Colors.RESET + "  ");
             else System.out.print("  " + riverFinder(tileBoard[2 * i][j], 4) + riverFinder(tileBoard[2 * i][j], 3)
                     + riverFinder(tileBoard[2 * i][j], 2) + "             ");
         }
@@ -145,33 +144,33 @@ public class MapController {
     }
 
     private String tileImprovement(Tile tile) {
-        if (tile.getImprovement() == null) return "NIY";
-        else return tile.getImprovement().getName().substring(0, 3);
+        if (tile.getImprovement() == null) return getColorOfTile(tile) + "NIY"+ Colors.RESET;
+        else return getColorOfTile(tile) +tile.getImprovement().getName().substring(0, 3)+ Colors.RESET;
     }
 
     private String tileOwner(Tile tile) {
-        if (tile.getOwner() == null) return "FT0";
-        else return tile.getOwner().getName().substring(0, 3);
+        if (tile.getOwner() == null) return getColorOfTile(tile) +"FT0" + Colors.RESET;
+        else return getColorOfTile(tile) +tile.getOwner().getName().substring(0, 3)+ Colors.RESET;
     }
 
     private String civilianUnit(Tile tile) {
-        if (tile.getCivilianUnit() == null) return "11";
-        else return tile.getCivilianUnit().getName().substring(0, 2);
+        if (tile.getCivilianUnit() == null) return getColorOfTile(tile) +"11"+ Colors.RESET;
+        else return getColorOfTile(tile) +tile.getCivilianUnit().getName().substring(0, 2)+ Colors.RESET;
     }
 
     private String militaryUnit(Tile tile) {
-        if (tile.getMilitaryUnit() == null) return "22";
-        else return tile.getMilitaryUnit().getName().substring(0, 2);
+        if (tile.getMilitaryUnit() == null) return getColorOfTile(tile) +"22"+ Colors.RESET;
+        else return getColorOfTile(tile) +tile.getMilitaryUnit().getName().substring(0, 2)+ Colors.RESET;
     }
 
     private String tileResource(Tile tile, boolean isFirstRightRow) {
-        if (isFirstRightRow || tile.getLand().getResource() == null) return "33";
-        else return tile.getLand().getResource().getName().substring(0, 2);
+        if (isFirstRightRow || tile.getLand().getResource() == null) return getColorOfTile(tile) +"33"+ Colors.RESET;
+        else return getColorOfTile(tile) +tile.getLand().getResource().getName().substring(0, 2)+ Colors.RESET;
     }
 
     private String tileTerrain(Tile tile, boolean isFirstRightRow) {
-        if (isFirstRightRow || tile.getLand().getTerrain() == null) return "44";
-        else return tile.getLand().getTerrain().getName().substring(0, 2);
+        if (isFirstRightRow || tile.getLand().getTerrain() == null) return getColorOfTile(tile) +"44"+ Colors.RESET;
+        else return getColorOfTile(tile) +tile.getLand().getTerrain().getName().substring(0, 2)+ Colors.RESET;
     }
 
     private String getColorOfTileOwner(Tile tile) {
@@ -186,26 +185,26 @@ public class MapController {
 
     private String riverFinder(Tile tile, int x) {
         //print the river or normal border
-        if (tile.getLand().getBorderRiver(x) && (x == 0 || x == 3)) return Colors.BLUE_BACKGROUND + "_" + Colors.RESET;
-        if (tile.getLand().getBorderRiver(x) && (x == 2 || x == 5)) return Colors.BLUE_BACKGROUND + "/" + Colors.RESET;
+        if (tile.getLand().getBorderRiver(x) && (x == 0 || x == 3)) return Colors.CYAN_BACKGROUND + "_" + Colors.RESET;
+        if (tile.getLand().getBorderRiver(x) && (x == 2 || x == 5)) return Colors.CYAN_BACKGROUND + "/" + Colors.RESET;
         else if (tile.getLand().getBorderRiver(x) && (x == 1 || x == 4))
-            return Colors.BLUE_BACKGROUND + "\\" + Colors.RESET;
+            return Colors.CYAN_BACKGROUND + "\\" + Colors.RESET;
         else if (x == 0 || x == 3) return "___________";
         else if (x == 2 || x == 5) return "/";
         else return "\\";
     }
 
     private String getColorOfTile(Tile tile) {
-        String BACKGROUND_COLOR = null;
+        String BACKGROUND_COLOR = Colors.WHITE_BACKGROUND;
         if (tile.getLand().getColor().equals("red")) {
             BACKGROUND_COLOR = Colors.RED_BACKGROUND;
         } else if (tile.getLand().getColor().equals("yellow")) {
             BACKGROUND_COLOR = Colors.YELLOW_BACKGROUND;
-        }else if(tile.getLand().getColor().equals("purple")){
+        } else if (tile.getLand().getColor().equals("purple")) {
             BACKGROUND_COLOR = Colors.PURPLE_BACKGROUND;
-        }else if(tile.getLand().getColor().equals("green")){
+        } else if (tile.getLand().getColor().equals("green")) {
             BACKGROUND_COLOR = Colors.GREEN_BACKGROUND;
-        }else if(tile.getLand().getColor().equals("cyan")){
+        } else if (tile.getLand().getColor().equals("cyan")) {
             BACKGROUND_COLOR = Colors.CYAN_BACKGROUND;
         }
         return BACKGROUND_COLOR;
