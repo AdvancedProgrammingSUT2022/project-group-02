@@ -286,13 +286,13 @@ public class MapController {
     }
 
     private String tileResource(Tile tile, boolean isFirstRightRow) {
-        if (isFirstRightRow || tile.getLand().getResource() == null) return "  ";
-        else return tile.getLand().getResource().getName().substring(0, 2);
+        if (isFirstRightRow || tile.getResource() == null) return "  ";
+        else return tile.getResource().getName().substring(0, 2);
     }
 
     private String tileTerrain(Tile tile, boolean isFirstRightRow) {
-        if (isFirstRightRow || tile.getLand().getTerrain() == null) return "  ";
-        else return tile.getLand().getTerrain().getName().substring(0, 2);
+        if (isFirstRightRow || tile.getTerrain() == null) return "  ";
+        else return tile.getTerrain().getName().substring(0, 2);
     }
 
     private String getColorOfTileOwner(Tile tile) {

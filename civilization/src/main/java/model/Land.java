@@ -8,14 +8,11 @@ public class Land {
     private int goldRate;
     private int productionRate;
     private String color;
-    private Terrain terrain;
-    private Resource resource;
-    private boolean transitAble;
     private boolean nearRiver;
     private boolean passable;
 
     public Land(String name, String color, int movementPrice, int foodRate, double fightRate, int goldRate, int productionRate,
-                boolean passable, Resource resource, Terrain terrain) {
+                boolean passable) {
         this.name = name;
         this.color = color;
         this.movementPrice = movementPrice;
@@ -24,8 +21,6 @@ public class Land {
         this.goldRate = goldRate;
         this.productionRate = productionRate;
         this.passable = passable;
-        this.resource = resource;
-        this.terrain = terrain;
     }
 
     public String getName() {
@@ -68,36 +63,12 @@ public class Land {
         this.productionRate = productionRate;
     }
 
-    public boolean isTransitAble() {
-        return transitAble;
-    }
-
     public boolean isNearRiver() {
         return nearRiver;
     }
 
-    public void setTransitAble(boolean transitAble) {
-        this.transitAble = transitAble;
-    }
-
     public void setNearRiver(boolean nearRiver) {
         this.nearRiver = nearRiver;
-    }
-
-    public Resource getResource() {
-        return resource;
-    }
-
-    public void setResources(Resource resource) {
-        this.resource = resource;
-    }
-
-    public Terrain getTerrain() {
-        return terrain;
-    }
-
-    public void setTerrains(Terrain terrains) {
-        this.terrain = terrains;
     }
 
     public boolean isPassable(){return passable;}

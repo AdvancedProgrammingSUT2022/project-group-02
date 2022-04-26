@@ -20,9 +20,11 @@ public class Tile {
     private boolean isNearRiver;
     private boolean[] riverBorder;
     private Improvement improvement;
+    private Terrain terrain;
+    private Resource resource;
 
     public Tile (int x, int y, User owner, Land land, int fogOfWarLevel, boolean isNearRiver,
-                 boolean[] riverBorder) {
+                 boolean[] riverBorder, Resource resource, Terrain terrain) {
         this.x = x;
         this.y = y;
         this.owner = owner;
@@ -35,6 +37,28 @@ public class Tile {
         selectedTwo = false;
         this.isNearRiver = isNearRiver;
         this.riverBorder = riverBorder;
+        this.terrain = terrain;
+        this.resource = resource;
+    }
+
+    public boolean isNearRiver() {
+        return isNearRiver;
+    }
+
+    public Terrain getTerrain() {
+        return terrain;
+    }
+
+    public Resource getResource() {
+        return resource;
+    }
+
+    public void setTerrain(Terrain terrain) {
+        this.terrain = terrain;
+    }
+
+    public void setResource(Resource resource) {
+        this.resource = resource;
     }
 
     public boolean isSelectedOne() {
