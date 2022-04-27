@@ -1,6 +1,7 @@
 package view;
 import controller.GameController;
 import controller.MapController;
+import enums.Colors;
 import enums.RegexEnums;
 import model.*;
 
@@ -248,6 +249,8 @@ public class PlayGame {
     }
 
     private void showBoard(User user) {
+        showMap();
+        /*
         for (Tile tile : user.getVisible()) {
             // TODO first show the visible tiles
         }
@@ -257,6 +260,7 @@ public class PlayGame {
                 // TODO show the tiles which are not completely visible
             }
         }
+        */
     }
 
     private void showPlayers() {
@@ -390,5 +394,143 @@ public class PlayGame {
         citizensLocations.put(new Citizen(), tile);
         tile.setCity(new City(name, tile, tile.getCivilianUnit().getOwner(), ownerShipTiles, 100, 100, null, null, 50, 0, 1, 1, 1, 1, 1, 1, 1, citizensLocations, null, null, false, null));
         System.out.println("city located successfully!");
+    }
+
+    public void showMap(){
+        String ANSI_COLOR;
+        //first top sides of left tiles of game board
+        for (int j = 0; j < 4; j++)
+            System.out.print("   " + mapController.riverFinder(map.getTileBoard()[0][j], 0) + "              ");
+        System.out.println();
+
+        //print the game board
+        for (int i = 0; i < 4; i++) {
+
+            leftCoordinatesPlace(i);
+
+            leftOwnerName(i);
+
+            //units on the left tiles and top sides of right tiles
+            for (int j = 0; j < 4; j++) {
+                ANSI_COLOR = mapController.getColorOfTileOwner(map.getTileBoard()[2 * i][j]);
+                System.out.print(mapController.riverFinder(map.getTileBoard()[2 * i][j], 5) + "    "
+                        + ANSI_COLOR + mapController.civilianUnit(map.getTileBoard()[2 * i][j])
+                        + "   " + ANSI_COLOR + mapController.militaryUnit(map.getTileBoard()[2 * i][j]) + "    "
+                        + Colors.RESET+ Colors.RESET + mapController.riverFinder(map.getTileBoard()[2 * i][j], 1));
+                if (i != 0)System.out.print(mapController.riverFinder(map.getTileBoard()[2 * i - 1][j], 3));
+                else System.out.print(mapController.riverFinder(map.getTileBoard()[1][j], 0));
+            }
+            if (i != 0) System.out.println(mapController.riverFinder(map.getTileBoard()[2 * i][3], 2));
+            else System.out.println();
+
+            leftResourceAndTerrain(i);
+
+            rightOwnerName(i);
+
+            leftBottomSides(i);
+
+        }
+
+    }
+
+    private void leftCoordinatesPlace(int i) {
+
+        //Coordinates of left tiles and resource and terrain in right tiles
+        for (int j = 0; j < 4; j++) {
+            if (i != 0)
+                System.out.print("  " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 5)
+                        + mapController.getColorOfTile(map.getTileBoard()[2 * i][j])
+                        + "   [" + (2 * i) + "," + j + "]   " + Colors.RESET + mapController.riverFinder(map.getTileBoard()[2 * i][j], 1)
+                        + "    " + mapController.tileResource(map.getTileBoard()[2 * i - 1][j], true)
+                        + "   " + mapController.tileTerrain(map.getTileBoard()[2 * i - 1][j], true) + "  ");
+            else System.out.print("  " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 5)
+                    + mapController.getColorOfTile(map.getTileBoard()[2 * i][j])
+                    + "   [" + 0 + "," + j + "]   " + Colors.RESET + mapController.riverFinder(map.getTileBoard()[2 * i][j], 1) + "             ");
+        }
+        if (i != 0) System.out.println("  " + mapController.riverFinder(map.getTileBoard()[2 * i - 1][3], 2));
+        else System.out.println();
+
+    }
+
+    private void leftOwnerName(int i) {
+        String ANSI_COLOR = Colors.WHITE;
+
+        //owner name and color of left tiles
+        for (int j = 0; j < 4; j++) {
+            ANSI_COLOR = mapController.getColorOfTileOwner(map.getTileBoard()[2 * i][j]);
+            if (i != 0)
+                System.out.print(" " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 5)
+                        + "     " + ANSI_COLOR + mapController.tileOwner(map.getTileBoard()[2 * i][j]) + Colors.RESET + "     "
+                        + mapController.riverFinder(map.getTileBoard()[2 * i][j], 1)
+                        + "     " + mapController.tileImprovement(map.getTileBoard()[2 * i - 1][j]) + "    ");
+            else System.out.print(" " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 5)
+                    + "     " + ANSI_COLOR + mapController.tileOwner(map.getTileBoard()[2 * i][j]) + Colors.RESET + "     "
+                    + mapController.riverFinder(map.getTileBoard()[2 * i][j], 1)
+                    + "            ");
+        }
+        if (i != 0) System.out.println(" " + mapController.riverFinder(map.getTileBoard()[2 * i][0], 2));
+        else System.out.println();
+
+    }
+
+    private void leftResourceAndTerrain(int i) {
+
+        //resource and terrain in left tiles and Coordinates of right tiles
+        for (int j = 0; j < 4; j++) {
+            if (i != 3)
+                System.out.print(mapController.riverFinder(map.getTileBoard()[2 * i][j], 4)
+                        + "    " + mapController.tileResource(map.getTileBoard()[2 * i][j], false)
+                        + "   " + mapController.tileTerrain(map.getTileBoard()[2 * i][j], false)
+                        + "    " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 2)
+                        + mapController.getColorOfTile(map.getTileBoard()[2 * i+1][j]) + "   [" + (2 * i + 1) + "," + j + "]   " + Colors.RESET);
+            else System.out.print(mapController.riverFinder(map.getTileBoard()[2 * i][j], 4)
+                    + "    " + mapController.tileResource(map.getTileBoard()[2 * i][j], false)
+                    + "   " + mapController.tileTerrain(map.getTileBoard()[2 * i][0], false) + "    "
+                    + mapController.riverFinder(map.getTileBoard()[2 * i][j], 2) + "           ");
+        }
+        if (i != 3) System.out.println(mapController.riverFinder(map.getTileBoard()[2 * i + 1][3], 1));
+        else System.out.println();
+
+    }
+
+    private void rightOwnerName(int i) {
+        String ANSI_COLOR = Colors.WHITE;
+
+        //owner name and color of right tiles
+        for (int j = 0; j < 4; j++) {
+            ANSI_COLOR = mapController.getColorOfTileOwner(map.getTileBoard()[2 * i][j]);
+
+            if (i != 3)
+                System.out.print(" " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 4)
+                        + "     " + mapController.tileImprovement(map.getTileBoard()[2 * i][j])
+                        + "     " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 2)
+                        + "     " + ANSI_COLOR + mapController.tileOwner(map.getTileBoard()[2 * i][j]) + Colors.RESET + "    ");
+            else System.out.print(" " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 4)
+                    + "     " + mapController.tileImprovement(map.getTileBoard()[2 * i][j])
+                    + "     " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 2) + "            ");
+        }
+        if (i != 3) System.out.println(" " + mapController.riverFinder(map.getTileBoard()[2 * i + 1][3], 1));
+        else System.out.println();
+
+    }
+
+    private void leftBottomSides(int i) {
+        String ANSI_COLOR = Colors.WHITE;
+
+        //bottom sides of left tiles and units on the right tiles
+        for (int j = 0; j < 4; j++) {
+            if (i != 3)ANSI_COLOR = mapController.getColorOfTileOwner(map.getTileBoard()[2 * i + 1][j]);
+
+            if (i != 3)
+                System.out.print("  " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 4)
+                        + mapController.riverFinder(map.getTileBoard()[2 * i][j], 3) + mapController.riverFinder(map.getTileBoard()[2 * i][j], 2)
+                        + "    " + ANSI_COLOR + mapController.civilianUnit(map.getTileBoard()[2 * i + 1][0])
+                        + "   " + ANSI_COLOR + mapController.militaryUnit(map.getTileBoard()[2 * i + 1][j]) +Colors.RESET+ Colors.RESET + "  ");
+            else System.out.print("  " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 4) + mapController.riverFinder(map.getTileBoard()[2 * i][j], 3)
+                    + mapController.riverFinder(map.getTileBoard()[2 * i][j], 2) + "             ");
+        }
+        if (i != 3) System.out.println("  " + mapController.riverFinder(map.getTileBoard()[2 * i + 1][3], 1));
+        else System.out.println();
+
     }
 }
