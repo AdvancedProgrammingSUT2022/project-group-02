@@ -12,6 +12,13 @@ public class ProfileMenu {
     public void run(Users users, User user, Scanner scanner) {
         String input;
         Matcher matcher;
+        System.out.println("welcome to Profile Menu dear " + user.getUsername() + "!");
+        System.out.println("to change nickname :");
+        System.out.println("profile change --nickname <new nickname>");
+        System.out.println("profile change -n <new nickname");
+        System.out.println("to change password :");
+        System.out.println("profile change --password --current <current password> --new <new password>");
+        System.out.println("profile change -p -c <current password> -n <new password>");
         while (true) {
             input = scanner.nextLine();
             //exit
@@ -22,7 +29,7 @@ public class ProfileMenu {
                 System.out.println("Profile");
                 //change the nickname
             else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.CHANGE_NICKNAME1)) != null ||
-                    (matcher = RegexEnums.getMatcher(input, RegexEnums.CHANGE_NICKNAME1)) != null) {
+                    (matcher = RegexEnums.getMatcher(input, RegexEnums.CHANGE_NICKNAME2)) != null) {
                 String nickname = matcher.group("nickname");
                 if (users.sameNicknameExists(nickname)) {
                     user.setNickname(nickname);
@@ -33,7 +40,9 @@ public class ProfileMenu {
             }
             //change the password
             else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.CHANGE_PASSWORD1)) != null ||
-                    (matcher = RegexEnums.getMatcher(input, RegexEnums.CHANGE_PASSWORD1)) != null) {
+                    (matcher = RegexEnums.getMatcher(input, RegexEnums.CHANGE_PASSWORD2)) != null ||
+                    (matcher = RegexEnums.getMatcher(input, RegexEnums.CHANGE_PASSWORD3)) != null ||
+                    (matcher = RegexEnums.getMatcher(input, RegexEnums.CHANGE_PASSWORD4)) != null) {
                 String currentPassword = matcher.group("currentPassword");
                 String newPassword = matcher.group("newPassword");
                 //if the current username has entered correctly

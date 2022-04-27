@@ -27,9 +27,24 @@ public class PlayGame {
     public void run(Scanner scanner) {
         String input;
         int role = 0;
-
+        System.out.println("Game started , good luck");
+        System.out.println("the players are as follows:");
+        showPlayers();
         fillMap(players.get(0), players.get(1));
-
+        System.out.println("press \"game exit\" to end the game");
+        System.out.println("press \"show board\" to see the map");
+        System.out.println("press \"show players\" to see the players");
+        System.out.println("press \"show information\" to see the information of current player");
+        System.out.println("to select a tile :");
+        System.out.println("select tile -x <x> -y <y>");
+        System.out.println("**********************");
+        System.out.println("while you are in tile :");
+        System.out.println("press \"tile exit\" to get out of tile");
+        System.out.println("to move a unit :");
+        System.out.println("move unit -x <x> -y <y>");
+        System.out.println("notice ---> x and y are coordinates of destination , make sure to use valid coordinates");
+        System.out.println("to select another tile :");
+        System.out.println("select tile -x <x> -y <y>");
         // assign all the neighbors to each tile
         for (int i = 0; i < map.getHeight(); i++)
             for (int j = 0; j < map.getWidth(); j++)

@@ -12,6 +12,8 @@ public class MainMenu {
     public void run(Users users, User user, Scanner scanner) {
         String input;
         Matcher matcher;
+        System.out.println("press \"menu enter <menu name>\" to access to Play Game and Profile Menu");
+        System.out.println("press \"menu exit or user logout\" to get back to Register Menu");
         while (true) {
             input = scanner.nextLine();
             //exit the menu
