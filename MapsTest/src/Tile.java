@@ -11,13 +11,17 @@ public class Tile {
     private String userLandColor;
     private Improvement improvement;
     private boolean inProgress;
+    private boolean nearRiver;
+    private boolean[] borderRiver = new boolean[6];
 
-    public Tile(int x, int y ,User owner, Land land, int fogOfWarLevel) {
+    public Tile(int x, int y ,User owner, Land land, int fogOfWarLevel, boolean nearRiver, boolean[] borderRiver) {
         X = x;
         Y = y;
         this.owner = owner;
         this.land = land;
         this.fogOfWarLevel = fogOfWarLevel;
+        this.nearRiver = nearRiver;
+        this.borderRiver = borderRiver;
     }
 
     public int getX() {
@@ -93,4 +97,16 @@ public class Tile {
     public void setInProgress(boolean inProgress) {
         this.inProgress = inProgress;
     }
+<<<<<<< HEAD:civilization/MapsTest/src/Tile.java
 }
+=======
+
+    public boolean isNearRiver() {
+        return nearRiver;
+    }
+
+    public boolean getBorderRiver(int x) {
+        return borderRiver[x];
+    }
+}
+>>>>>>> main:MapsTest/src/Tile.java

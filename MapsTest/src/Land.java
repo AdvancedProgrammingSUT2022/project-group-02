@@ -7,17 +7,21 @@ public class Land {
     private String color;
     private int movementPrice;
     private int foodRate;
-    private int fightRate;
+    private double fightRate;
     private int goldRate;
     private int productionRate;
     private boolean[] borderRiver = new boolean[6];
     private Terrain terrain;
     private boolean passable;
-    private boolean nearRiver;
     private Resource resource;
 
+<<<<<<< HEAD:civilization/MapsTest/src/Land.java
     public Land(String name, String color, int movementPrice, int foodRate, int fightRate, int goldRate, int productionRate,
                 boolean passable, boolean nearRiver, Resource resource, boolean[] borderRiver) {
+=======
+    public Land(String name, String color, int movementPrice, int foodRate, double fightRate, int goldRate, int productionRate,
+                boolean passable, Resource resource, Terrain terrain) {
+>>>>>>> main:MapsTest/src/Land.java
         this.name = name;
         this.color = color;
         this.movementPrice = movementPrice;
@@ -26,9 +30,12 @@ public class Land {
         this.goldRate = goldRate;
         this.productionRate = productionRate;
         this.passable = passable;
-        this.nearRiver = nearRiver;
         this.resource = resource;
+<<<<<<< HEAD:civilization/MapsTest/src/Land.java
         this.borderRiver = borderRiver;
+=======
+        this.terrain = terrain;
+>>>>>>> main:MapsTest/src/Land.java
     }
 
     public String getName() {
@@ -47,7 +54,7 @@ public class Land {
         return foodRate;
     }
 
-    public int getFightRate() {
+    public double getFightRate() {
         return fightRate;
     }
 
@@ -65,10 +72,6 @@ public class Land {
 
     public boolean isPassable() {
         return passable;
-    }
-
-    public boolean isNearRiver() {
-        return nearRiver;
     }
 
     public Resource getResource() {

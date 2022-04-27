@@ -6,9 +6,10 @@ public class User {
     private final String username;
     private String nickname;
     private String password;
+    private String color;
     private int turns;
     private int gold;
-    private Tile territory;
+    private ArrayList<Tile> territory;
     private int goldPerTurn;
     private int happiness;
     private int sciencePerTurn;
@@ -27,12 +28,24 @@ public class User {
     private ArrayList<Improvement> improvements;
     private int turnNumber;
 
+    private ArrayList<Tile> visited;
+    private ArrayList<Tile> visible;
+
     public User(String username, String nickname, String password) {
         this.username = username;
         this.nickname = nickname;
         this.password = password;
         gold = 0;
         turns = 1;
+        visited = new ArrayList<>();
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getColor() {
+        return color;
     }
 
     public int getGold() {
@@ -71,11 +84,11 @@ public class User {
         return password;
     }
 
-    public Tile getTerritory() {
+    public ArrayList<Tile> getTerritory() {
         return territory;
     }
 
-    public void setTerritory(Tile territory) {
+    public void setTerritory(ArrayList<Tile> territory) {
         this.territory = territory;
     }
 
@@ -213,5 +226,41 @@ public class User {
 
     public void setTurnNumber(int turnNumber) {
         this.turnNumber = turnNumber;
+    }
+
+    public ArrayList<Tile> getVisited() {
+        return visited;
+    }
+
+    public void setVisited(ArrayList<Tile> visited) {
+        this.visited = visited;
+    }
+
+    public ArrayList<Tile> getVisible() {
+        return visible;
+    }
+
+    public void setVisible(ArrayList<Tile> visible) {
+        this.visible = visible;
+    }
+    public void addVisited(Tile visit) {
+        visited.add(visit);
+    }
+
+    public void addVisible(Tile visible) {
+        this.visible.add(visible);
+    }
+    public void addTerritory(Tile tile) {
+        territory.add(tile);
+    }
+    public void removeTerritory(Tile tile) {
+        int index = 0;
+        for (Tile tile1 : territory) {
+           if (tile1.equals(tile)) {
+               territory.remove(index);
+               return;
+           }
+           index++;
+        }
     }
 }

@@ -15,21 +15,50 @@ public class Tile {
     private boolean civilianUnitExists;
     private boolean selectedOne;
     private boolean selectedTwo;
-    private String color;
     private boolean inProgress;
-    public Tile (int x, int y, User owner, Land land, int fogOfWarLevel, String color) {
+    private ArrayList<Tile> neighbors;
+    private boolean isNearRiver;
+    private boolean[] riverBorder;
+    private Improvement improvement;
+    private Terrain terrain;
+    private Resource resource;
+
+    public Tile (int x, int y, User owner, Land land, int fogOfWarLevel, boolean isNearRiver,
+                 boolean[] riverBorder, Resource resource, Terrain terrain) {
         this.x = x;
         this.y = y;
         this.owner = owner;
         this.land = land;
         this.fogOfWarLevel = fogOfWarLevel;
-        this.color = color;
         this.militaryUnitExists = false;
         this.civilianUnitExists = false;
         this.inProgress = false;
-        physicalObjects = new ArrayList<>();
         selectedOne = false;
         selectedTwo = false;
+        this.isNearRiver = isNearRiver;
+        this.riverBorder = riverBorder;
+        this.terrain = terrain;
+        this.resource = resource;
+    }
+
+    public boolean isNearRiver() {
+        return isNearRiver;
+    }
+
+    public Terrain getTerrain() {
+        return terrain;
+    }
+
+    public Resource getResource() {
+        return resource;
+    }
+
+    public void setTerrain(Terrain terrain) {
+        this.terrain = terrain;
+    }
+
+    public void setResource(Resource resource) {
+        this.resource = resource;
     }
 
     public boolean isSelectedOne() {
@@ -80,20 +109,12 @@ public class Tile {
         return land;
     }
 
-    public String getColor() {
-        return color;
-    }
-
     public User getOwner() {
         return owner;
     }
 
     public void setCivilianUnitExists(boolean civilianUnitExists) {
         this.civilianUnitExists = civilianUnitExists;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public void setFogOfWarLevel(int fogOfWarLevel) {
@@ -134,5 +155,25 @@ public class Tile {
 
     public void setMilitaryUnit(Unit militaryUnit) {
         this.militaryUnit = militaryUnit;
+    }
+
+    public ArrayList<Tile> getNeighbors() {
+        return neighbors;
+    }
+
+    public void setNeighbors(ArrayList<Tile> neighbors) {
+        this.neighbors = neighbors;
+    }
+
+    public Improvement getImprovement() {
+        return improvement;
+    }
+
+    public void setImprovement(Improvement improvement) {
+        this.improvement = improvement;
+    }
+
+    public boolean getRiverBorder(int x){
+        return riverBorder[x];
     }
 }
