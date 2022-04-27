@@ -78,7 +78,7 @@ public class MapController {
                         +getColorOfTile(tileBoard[2*i][j])+ "     " + ANSI_COLOR +getColorOfTile(tileBoard[2*i][j])+ tileOwner(tileBoard[2 * i][j]) +
                         getColorOfTile(tileBoard[2*i][j])+"     " + Colors.RESET
                         + riverFinder(tileBoard[2 * i][j], 1)
-                        + getColorOfTile(tileBoard[2*i-1][j])+"     " + tileImprovement(tileBoard[2 * i - 1][j]) + "    "+Colors.RESET);
+                        +getColorOfTileOwner(tileBoard[2*i-1][j])+ getColorOfTile(tileBoard[2*i-1][j])+"     " + tileImprovement(tileBoard[2 * i - 1][j]) + "    "+Colors.RESET);
             else System.out.print(" " + riverFinder(tileBoard[2 * i][j], 5)
                     +getColorOfTile(tileBoard[2*i][j])+ "     " + ANSI_COLOR +getColorOfTile(tileBoard[2*i][j])+ tileOwner(tileBoard[2 * i][j]) +
                     getColorOfTile(tileBoard[2*i][j])+"     "+ Colors.RESET
@@ -119,12 +119,12 @@ public class MapController {
 
             if (i != 3)
                 System.out.print(" " + riverFinder(tileBoard[2 * i][j], 4)
-                        + getColorOfTile(tileBoard[2 * i][j])+"     " + tileImprovement(tileBoard[2 * i][j])
+                        +ANSI_COLOR + getColorOfTile(tileBoard[2 * i][j])+"     " + tileImprovement(tileBoard[2 * i][j])
                         + "     "+Colors.RESET + riverFinder(tileBoard[2 * i][j], 2)
-                        + getColorOfTile(tileBoard[2 * i+1][j])+"     " + ANSI_COLOR +getColorOfTile(tileBoard[2 * i+1][j])+ tileOwner(tileBoard[2 * i][j])
+                        + ANSI_COLOR +getColorOfTile(tileBoard[2 * i+1][j])+"     " +getColorOfTile(tileBoard[2 * i+1][j])+ tileOwner(tileBoard[2 * i][j])
                         +getColorOfTile(tileBoard[2 * i+1][j])+ "    "+ Colors.RESET);
             else System.out.print(" " + riverFinder(tileBoard[2 * i][j], 4)
-                    +getColorOfTile(tileBoard[2 * i][j])+ "     " + tileImprovement(tileBoard[2 * i][j])
+                    +ANSI_COLOR+getColorOfTile(tileBoard[2 * i][j])+ "     " + tileImprovement(tileBoard[2 * i][j])
                     + "     " + Colors.RESET+riverFinder(tileBoard[2 * i][j], 2) + "            ");
         }
         if (i != 3) System.out.println(" " + riverFinder(tileBoard[2 * i + 1][3], 1));
