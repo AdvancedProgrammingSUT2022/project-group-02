@@ -21,7 +21,7 @@ public class City {
     private int faith;
     private int tourism;
     private int culture;
-    private HashMap<Integer, Tile> citizensLocation;
+    private HashMap<Citizen, Tile> citizensLocation;
     private ArrayList<Building> buildings;
     private ArrayList<Unit> units;
     private boolean warStatus;
@@ -30,7 +30,7 @@ public class City {
 
     public City(String name, Tile cityLocation, User ownerShip, ArrayList<Tile> ownerShipTiles, int HP, int defence, Unit garrison,
                 ArrayList<Product> products, int productTurnLeft, int citizens, int food, int production, int gold, int science, int faith,
-                int tourism, int culture, HashMap<Integer, Tile> citizensLocation, ArrayList<Building> buildings, ArrayList<Unit> units,
+                int tourism, int culture, HashMap<Citizen, Tile> citizensLocation, ArrayList<Building> buildings, ArrayList<Unit> units,
                 boolean warStatus, ArrayList<Citizen> expertCitizens) {
         this.name = name;
         this.cityLocation = cityLocation;
@@ -164,11 +164,11 @@ public class City {
         return culture;
     }
 
-    public void addCitizensLocation(int number, Tile tile) {
-        this.citizensLocation.put(number, tile);
+    public void addCitizensLocation(Citizen citizen, Tile tile) {
+        this.citizensLocation.put(citizen, tile);
     }
 
-    public HashMap<Integer, Tile> getCitizensLocation() {
+    public HashMap<Citizen, Tile> getCitizensLocation() {
         return citizensLocation;
     }
 

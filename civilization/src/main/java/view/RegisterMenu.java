@@ -7,10 +7,8 @@ import java.util.*;
 import java.util.regex.*;
 
 public class RegisterMenu {
-    public void run(Scanner scanner, Users users) {
-        String input;
-        Matcher matcher;
-        ArrayList<User> usersFromJson = users.readFromJson();
+    // provide some information for user
+    private void manRegisterMenu() {
         System.out.println("to create new user :");
         System.out.println("the order of username and nickname and password is not important");
         System.out.println("user create --username <username> --nickname <nickname> --password <password>");
@@ -23,6 +21,12 @@ public class RegisterMenu {
         System.out.println("**********************");
         System.out.println("press \"menu show-current\" to see the menu you are in");
         System.out.println("press \"menu exit\" to exit the menu");
+    }
+    public void run(Scanner scanner, Users users) {
+        String input;
+        Matcher matcher;
+        manRegisterMenu();
+        ArrayList<User> usersFromJson = users.readFromJson();
         if (usersFromJson != null)
             users.setUsers(usersFromJson);
         while (true) {

@@ -10,16 +10,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class GameMenu {
-    public void run(Users users, User user, Scanner scanner) {
-        String input;
-        Matcher matcher;
+    // provide some information for user
+    private void manGameMenu(User user) {
         System.out.println("welcome to Game Menu dear " + user.getUsername() + "!");
         System.out.println("press \"menu exit\" to get back to Main Menu");
         System.out.println("to Play Game :");
         System.out.println("play game --player1 <username> ... --player(k) <username>");
         System.out.println("play game -p1 <username> ... -p(k) <username>");
         System.out.println("the order of players is not important");
-
+    }
+    public void run(Users users, User user, Scanner scanner) {
+        String input;
+        Matcher matcher;
         while (true) {
             input = scanner.nextLine();
             if (Pattern.matches("\\s*menu\\s+exit\\s*", input))

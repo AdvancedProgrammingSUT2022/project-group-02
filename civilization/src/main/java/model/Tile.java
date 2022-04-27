@@ -22,6 +22,7 @@ public class Tile {
     private Improvement improvement;
     private Terrain terrain;
     private Resource resource;
+    private City city;
 
     public Tile (int x, int y, User owner, Land land, int fogOfWarLevel, boolean isNearRiver,
                  boolean[] riverBorder, Resource resource, Terrain terrain) {
@@ -175,5 +176,13 @@ public class Tile {
 
     public boolean getRiverBorder(int x){
         return riverBorder[x];
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 }
