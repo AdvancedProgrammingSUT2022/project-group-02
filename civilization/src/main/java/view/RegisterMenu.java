@@ -7,9 +7,25 @@ import java.util.*;
 import java.util.regex.*;
 
 public class RegisterMenu {
+    // provide some information for user
+    private void manRegisterMenu() {
+        System.out.println("to create new user :");
+        System.out.println("the order of username and nickname and password is not important");
+        System.out.println("user create --username <username> --nickname <nickname> --password <password>");
+        System.out.println("user create -u <username> -n <nickname> -p <password>");
+        System.out.println("**********************");
+        System.out.println("to login :");
+        System.out.println("the order of username and password is not important");
+        System.out.println("user login --username <username> --password <password>");
+        System.out.println("user login -u <username> -p <password>");
+        System.out.println("**********************");
+        System.out.println("press \"menu show-current\" to see the menu you are in");
+        System.out.println("press \"menu exit\" to exit the menu");
+    }
     public void run(Scanner scanner, Users users) {
         String input;
         Matcher matcher;
+        manRegisterMenu();
         ArrayList<User> usersFromJson = users.readFromJson();
         if (usersFromJson != null)
             users.setUsers(usersFromJson);

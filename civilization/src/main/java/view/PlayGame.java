@@ -1,6 +1,7 @@
 package view;
 import controller.GameController;
 import controller.MapController;
+import enums.Colors;
 import enums.RegexEnums;
 import model.*;
 
@@ -24,12 +25,31 @@ public class PlayGame {
         this.height = height;
         this.width = width;
     }
+    // provide some information for players
+    private void manPlayGame() {
+        System.out.println("Game started , good luck");
+        System.out.println("the players are as follows:");
+        showPlayers();
+        System.out.println("press \"game exit\" to end the game");
+        System.out.println("press \"show board\" to see the map");
+        System.out.println("press \"show players\" to see the players");
+        System.out.println("press \"show information\" to see the information of current player");
+        System.out.println("to select a tile :");
+        System.out.println("select tile -x <x> -y <y>");
+        System.out.println("**********************");
+        System.out.println("while you are in tile :");
+        System.out.println("press \"tile exit\" to get out of tile");
+        System.out.println("to move a unit :");
+        System.out.println("move unit -x <x> -y <y>");
+        System.out.println("notice ---> x and y are coordinates of destination , make sure to use valid coordinates");
+        System.out.println("to select another tile :");
+        System.out.println("select tile -x <x> -y <y>");
+    }
     public void run(Scanner scanner) {
+        manPlayGame();
         String input;
         int role = 0;
-
         fillMap(players.get(0), players.get(1));
-
         // assign all the neighbors to each tile
         for (int i = 0; i < map.getHeight(); i++)
             for (int j = 0; j < map.getWidth(); j++)
@@ -49,7 +69,8 @@ public class PlayGame {
                     if (amount > 0) {
                         gameController.increaseTurn(amount, user);
                         System.out.println("turn increased successfully!");
-                    } else
+                    }
+                    else
                         System.out.println("invalid number");
                 }
                 //cheat code for increasing gold
@@ -59,7 +80,8 @@ public class PlayGame {
                     if (amount > 0) {
                         gameController.increaseGold(amount, user);
                         System.out.println("gold increased successfully!");
-                    } else
+                    }
+                    else
                         System.out.println("invalid command");
                 }
                 // selecting tile
@@ -71,9 +93,11 @@ public class PlayGame {
                         Tile origin = gameController.findTile(xOrigin, yOrigin);
                         if (origin != null) {
                             selectedTile(scanner, origin, xOrigin, yOrigin, user);
-                        } else
+                        }
+                        else
                             System.out.println("invalid tile");
-                    } else
+                    }
+                    else
                         System.out.println("invalid coordinates");
                 }
                 else if (input.trim().equals("show board")) {
@@ -97,7 +121,7 @@ public class PlayGame {
         }
     }
 
-    public void selectedTile(Scanner scanner, Tile origin, int xOrigin, int yOrigin, User user) {
+    private void selectedTile(Scanner scanner, Tile origin, int xOrigin, int yOrigin, User user) {
         origin.setSelectedOne(false);
         origin.setSelectedTwo(false);
         if (origin.isMilitaryUnitExists())
@@ -110,72 +134,97 @@ public class PlayGame {
             tileInput = scanner.nextLine();
             if (tileInput.equals("tile exit"))
                 return;
+
             else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.SELECT_TILE)) != null) {
-                int anotherXOrigin = Integer.parseInt(matcher.group("x"));
-                int anotherYOrigin = Integer.parseInt(matcher.group("y"));
-                if (anotherXOrigin >= 0 && anotherYOrigin >= 0) {
-                    if (anotherXOrigin == xOrigin && anotherYOrigin == yOrigin) {
-                        // if the user press again on the tile , change the unit if two exists
-                        if (origin.isMilitaryUnitExists() && origin.isSelectedOne() && origin.isCivilianUnitExists()) {
-                            origin.setSelectedOne(false);
-                            origin.setSelectedTwo(true);
+                if (selectAnotherTile(origin, scanner, user, xOrigin, yOrigin))
+                    return;
+            }
+            // move the unit in this tile to destination
+            else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.MOVE)) != null) {
+                moveUnitConditions(origin, user);
+            }
+            // order settler to place city
+            else if (tileInput.trim().equals("place city here")) {
+                if (conditionsForPlaceCity(tileInput, origin))
+                    createCity(origin);
+            }
+            else
+                System.out.println("invalid command");
+        }
+    }
+
+    private boolean selectAnotherTile(Tile origin, Scanner scanner, User user, int xOrigin, int yOrigin) {
+        int anotherXOrigin = Integer.parseInt(matcher.group("x"));
+        int anotherYOrigin = Integer.parseInt(matcher.group("y"));
+        if (anotherXOrigin >= 0 && anotherYOrigin >= 0) {
+            if (anotherXOrigin == xOrigin && anotherYOrigin == yOrigin) {
+                // if the user press again on the tile , change the unit if two exists
+                if (origin.isMilitaryUnitExists() && origin.isSelectedOne() && origin.isCivilianUnitExists()) {
+                    origin.setSelectedOne(false);
+                    origin.setSelectedTwo(true);
+                }
+                else if (origin.isCivilianUnitExists() && origin.isSelectedTwo() && origin.isMilitaryUnitExists()) {
+                    origin.setSelectedOne(true);
+                    origin.setSelectedTwo(false);
+                }
+                return false;
+            }
+            else {
+                Tile destination = gameController.findTile(anotherXOrigin, anotherYOrigin);
+                if (destination != null) {
+                    selectedTile(scanner, destination, anotherXOrigin, anotherYOrigin, user);
+                    origin.setSelectedOne(false);
+                    origin.setSelectedTwo(false);
+                    return true;
+                }
+                else
+                    System.out.println("invalid tile");
+            }
+        }
+        else
+            System.out.println("invalid coordinates");
+        return false;
+    }
+
+    // check everything about moving the unit
+    private void moveUnitConditions(Tile origin, User user) {
+        if (origin.getOwner().equals(user)) {
+            if (origin.isCivilianUnitExists() || origin.isMilitaryUnitExists()) {
+                int xDestination = Integer.parseInt("x");
+                int yDestination = Integer.parseInt("y");
+                if (xDestination >= 0 && yDestination >= 0) {
+                    Tile destination = gameController.findTile(xDestination, yDestination);
+                    if (destination != null) {
+                        if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
+                            if (!destination.isMilitaryUnitExists() && !destination.getLand().getName().equals("mountain") && !destination.getLand().getName().equals("ocean"))
+                                moveUnit(origin, destination, origin.getMilitaryUnit(), user, true);
+                            else
+                                System.out.println("can't move a unit to this tile");
                         }
-                        else if (origin.isCivilianUnitExists() && origin.isSelectedTwo() && origin.isMilitaryUnitExists()) {
-                            origin.setSelectedOne(true);
-                            origin.setSelectedTwo(false);
-                        }
-                    }
-                    else {
-                        Tile destination = gameController.findTile(anotherXOrigin, anotherYOrigin);
-                        if (destination != null) {
-                            selectedTile(scanner, destination, anotherXOrigin, anotherYOrigin, user);
-                            origin.setSelectedOne(false);
-                            origin.setSelectedTwo(false);
-                            return;
+                        else if (origin.isCivilianUnitExists() && origin.isSelectedTwo()) {
+                            if (!destination.isCivilianUnitExists())
+                                moveUnit(origin, destination, origin.getCivilianUnit(), user, false);
+                            else
+                                System.out.println("can't move a unit to this tile");
                         }
                         else
-                            System.out.println("invalid tile");
+                            System.out.println("there is no unit in this tile!");
                     }
+                    else
+                        System.out.println("invalid destination");
                 }
                 else
                     System.out.println("invalid coordinates");
             }
-            else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.MOVE)) != null) {
-                if (origin.isCivilianUnitExists() || origin.isMilitaryUnitExists()) {
-                    int xDestination = Integer.parseInt("x");
-                    int yDestination = Integer.parseInt("y");
-                    if (xDestination >= 0 && yDestination >= 0) {
-                        Tile destination = gameController.findTile(xDestination, yDestination);
-                        if (destination != null) {
-                            if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
-                                if (!destination.isMilitaryUnitExists() && !destination.getLand().getName().equals("mountain") && !destination.getLand().getName().equals("ocean"))
-                                    moveUnit(scanner, origin, destination, origin.getMilitaryUnit(), user, true);
-                                else
-                                    System.out.println("can't move a unit to this tile");
-                            }
-                            else if (origin.isCivilianUnitExists() && origin.isSelectedTwo()) {
-                                if (!destination.isCivilianUnitExists())
-                                    moveUnit(scanner, origin, destination, origin.getCivilianUnit(), user, false);
-                                else
-                                    System.out.println("can't move a unit to this tile");
-                            }
-                            else
-                                System.out.println("there is no unit in this tile!");
-                        }
-                        else
-                            System.out.println("invalid destination");
-                    }
-                    else
-                        System.out.println("invalid coordinates");
-                }
-                else
-                    System.out.println("there is no unit in this tile!");
-            }
+            else
+                System.out.println("there is no unit in this tile!");
         }
+        else
+            System.out.println("you are not the owner of this tile");
     }
 
-    public void moveUnit(Scanner scanner, Tile origin, Tile destination, Unit unit, User user, boolean isMilitary) {
-
+    private void moveUnit(Tile origin, Tile destination, Unit unit, User user, boolean isMilitary) {
+        // create an array list to store all the tiles to destination
         ArrayList<Tile> tilesInTheWay = new ArrayList<>();
         Tile tile = origin;
         while ((tile = mapController.bestChoiceAmongNeighbors(tile, destination, isMilitary)) != destination) {
@@ -200,6 +249,8 @@ public class PlayGame {
     }
 
     private void showBoard(User user) {
+        showMap();
+        /*
         for (Tile tile : user.getVisible()) {
             // TODO first show the visible tiles
         }
@@ -209,6 +260,7 @@ public class PlayGame {
                 // TODO show the tiles which are not completely visible
             }
         }
+        */
     }
 
     private void showPlayers() {
@@ -316,5 +368,169 @@ public class PlayGame {
         map.getTileBoard()[7][1] = tile30;
         map.getTileBoard()[7][2] = tile31;
         map.getTileBoard()[7][3] = tile32;
+    }
+    //check if tile is valid
+    private boolean conditionsForPlaceCity(String input, Tile tile) {
+        if (tile.isCivilianUnitExists() && tile.getCivilianUnit().getName().equals("settler")) {
+            if (tile.getCity() == null) {
+                if (tile.getOwner() == null) {
+                    return true;
+                }
+                System.out.println("you are in someone's territory");
+            }
+            else
+                System.out.println("there is already a city here");
+        }
+        else
+            System.out.println("no settler");
+        return false;
+    }
+    // create city
+    private void createCity(Tile tile) {
+        String name = tile.getCivilianUnit().getOwner().getUsername() + Integer.toString(tile.getCivilianUnit().getOwner().getCities().size() + 1);
+        ArrayList<Tile> ownerShipTiles = new ArrayList<>();
+        ownerShipTiles.add(tile);
+        HashMap<Citizen, Tile> citizensLocations = new HashMap<>();
+        citizensLocations.put(new Citizen(), tile);
+        tile.setCity(new City(name, tile, tile.getCivilianUnit().getOwner(), ownerShipTiles, 100, 100, null, null, 50, 0, 1, 1, 1, 1, 1, 1, 1, citizensLocations, null, null, false, null));
+        System.out.println("city located successfully!");
+    }
+
+    public void showMap(){
+        String ANSI_COLOR;
+        //first top sides of left tiles of game board
+        for (int j = 0; j < 4; j++)
+            System.out.print("   " + mapController.riverFinder(map.getTileBoard()[0][j], 0) + "              ");
+        System.out.println();
+
+        //print the game board
+        for (int i = 0; i < 4; i++) {
+
+            leftCoordinatesPlace(i);
+
+            leftOwnerName(i);
+
+            //units on the left tiles and top sides of right tiles
+            for (int j = 0; j < 4; j++) {
+                ANSI_COLOR = mapController.getColorOfTileOwner(map.getTileBoard()[2 * i][j]);
+                System.out.print(mapController.riverFinder(map.getTileBoard()[2 * i][j], 5) + "    "
+                        + ANSI_COLOR + mapController.civilianUnit(map.getTileBoard()[2 * i][j])
+                        + "   " + ANSI_COLOR + mapController.militaryUnit(map.getTileBoard()[2 * i][j]) + "    "
+                        + Colors.RESET+ Colors.RESET + mapController.riverFinder(map.getTileBoard()[2 * i][j], 1));
+                if (i != 0)System.out.print(mapController.riverFinder(map.getTileBoard()[2 * i - 1][j], 3));
+                else System.out.print(mapController.riverFinder(map.getTileBoard()[1][j], 0));
+            }
+            if (i != 0) System.out.println(mapController.riverFinder(map.getTileBoard()[2 * i][3], 2));
+            else System.out.println();
+
+            leftResourceAndTerrain(i);
+
+            rightOwnerName(i);
+
+            leftBottomSides(i);
+
+        }
+
+    }
+
+    private void leftCoordinatesPlace(int i) {
+
+        //Coordinates of left tiles and resource and terrain in right tiles
+        for (int j = 0; j < 4; j++) {
+            if (i != 0)
+                System.out.print("  " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 5)
+                        + mapController.getColorOfTile(map.getTileBoard()[2 * i][j])
+                        + "   [" + (2 * i) + "," + j + "]   " + Colors.RESET + mapController.riverFinder(map.getTileBoard()[2 * i][j], 1)
+                        + "    " + mapController.tileResource(map.getTileBoard()[2 * i - 1][j], true)
+                        + "   " + mapController.tileTerrain(map.getTileBoard()[2 * i - 1][j], true) + "  ");
+            else System.out.print("  " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 5)
+                    + mapController.getColorOfTile(map.getTileBoard()[2 * i][j])
+                    + "   [" + 0 + "," + j + "]   " + Colors.RESET + mapController.riverFinder(map.getTileBoard()[2 * i][j], 1) + "             ");
+        }
+        if (i != 0) System.out.println("  " + mapController.riverFinder(map.getTileBoard()[2 * i - 1][3], 2));
+        else System.out.println();
+
+    }
+
+    private void leftOwnerName(int i) {
+        String ANSI_COLOR = Colors.WHITE;
+
+        //owner name and color of left tiles
+        for (int j = 0; j < 4; j++) {
+            ANSI_COLOR = mapController.getColorOfTileOwner(map.getTileBoard()[2 * i][j]);
+            if (i != 0)
+                System.out.print(" " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 5)
+                        + "     " + ANSI_COLOR + mapController.tileOwner(map.getTileBoard()[2 * i][j]) + Colors.RESET + "     "
+                        + mapController.riverFinder(map.getTileBoard()[2 * i][j], 1)
+                        + "     " + mapController.tileImprovement(map.getTileBoard()[2 * i - 1][j]) + "    ");
+            else System.out.print(" " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 5)
+                    + "     " + ANSI_COLOR + mapController.tileOwner(map.getTileBoard()[2 * i][j]) + Colors.RESET + "     "
+                    + mapController.riverFinder(map.getTileBoard()[2 * i][j], 1)
+                    + "            ");
+        }
+        if (i != 0) System.out.println(" " + mapController.riverFinder(map.getTileBoard()[2 * i][0], 2));
+        else System.out.println();
+
+    }
+
+    private void leftResourceAndTerrain(int i) {
+
+        //resource and terrain in left tiles and Coordinates of right tiles
+        for (int j = 0; j < 4; j++) {
+            if (i != 3)
+                System.out.print(mapController.riverFinder(map.getTileBoard()[2 * i][j], 4)
+                        + "    " + mapController.tileResource(map.getTileBoard()[2 * i][j], false)
+                        + "   " + mapController.tileTerrain(map.getTileBoard()[2 * i][j], false)
+                        + "    " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 2)
+                        + mapController.getColorOfTile(map.getTileBoard()[2 * i+1][j]) + "   [" + (2 * i + 1) + "," + j + "]   " + Colors.RESET);
+            else System.out.print(mapController.riverFinder(map.getTileBoard()[2 * i][j], 4)
+                    + "    " + mapController.tileResource(map.getTileBoard()[2 * i][j], false)
+                    + "   " + mapController.tileTerrain(map.getTileBoard()[2 * i][0], false) + "    "
+                    + mapController.riverFinder(map.getTileBoard()[2 * i][j], 2) + "           ");
+        }
+        if (i != 3) System.out.println(mapController.riverFinder(map.getTileBoard()[2 * i + 1][3], 1));
+        else System.out.println();
+
+    }
+
+    private void rightOwnerName(int i) {
+        String ANSI_COLOR = Colors.WHITE;
+
+        //owner name and color of right tiles
+        for (int j = 0; j < 4; j++) {
+            ANSI_COLOR = mapController.getColorOfTileOwner(map.getTileBoard()[2 * i][j]);
+
+            if (i != 3)
+                System.out.print(" " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 4)
+                        + "     " + mapController.tileImprovement(map.getTileBoard()[2 * i][j])
+                        + "     " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 2)
+                        + "     " + ANSI_COLOR + mapController.tileOwner(map.getTileBoard()[2 * i][j]) + Colors.RESET + "    ");
+            else System.out.print(" " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 4)
+                    + "     " + mapController.tileImprovement(map.getTileBoard()[2 * i][j])
+                    + "     " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 2) + "            ");
+        }
+        if (i != 3) System.out.println(" " + mapController.riverFinder(map.getTileBoard()[2 * i + 1][3], 1));
+        else System.out.println();
+
+    }
+
+    private void leftBottomSides(int i) {
+        String ANSI_COLOR = Colors.WHITE;
+
+        //bottom sides of left tiles and units on the right tiles
+        for (int j = 0; j < 4; j++) {
+            if (i != 3)ANSI_COLOR = mapController.getColorOfTileOwner(map.getTileBoard()[2 * i + 1][j]);
+
+            if (i != 3)
+                System.out.print("  " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 4)
+                        + mapController.riverFinder(map.getTileBoard()[2 * i][j], 3) + mapController.riverFinder(map.getTileBoard()[2 * i][j], 2)
+                        + "    " + ANSI_COLOR + mapController.civilianUnit(map.getTileBoard()[2 * i + 1][0])
+                        + "   " + ANSI_COLOR + mapController.militaryUnit(map.getTileBoard()[2 * i + 1][j]) +Colors.RESET+ Colors.RESET + "  ");
+            else System.out.print("  " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 4) + mapController.riverFinder(map.getTileBoard()[2 * i][j], 3)
+                    + mapController.riverFinder(map.getTileBoard()[2 * i][j], 2) + "             ");
+        }
+        if (i != 3) System.out.println("  " + mapController.riverFinder(map.getTileBoard()[2 * i + 1][3], 1));
+        else System.out.println();
+
     }
 }

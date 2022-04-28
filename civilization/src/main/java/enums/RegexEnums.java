@@ -35,7 +35,9 @@ public enum RegexEnums {
     CHANGE_NICKNAME2("^\\s*profile\\s+change\\s+-n\\s+(?<nickname>[\\s\\S]+)\\s*$"),
     //change password + abbreviation
     CHANGE_PASSWORD1("^\\s*profile\\s+change\\s+--password\\s+--current\\s+(?<currentPassword>[\\s\\S]+)\\s+--new\\s+(?<newPassword>[\\s\\S]+)\\s*$"),
-    CHANGE_PASSWORD2("^\\s*profile\\s+change\\s+-p\\s+-c\\s+(?<currentPassword>[\\s\\S]+)\\s+-n\\s+(?<newPassword>[\\s\\S]+)\\s*$"),
+    CHANGE_PASSWORD2("^\\s*profile\\s+change\\s+--password\\s+--new\\s+(?<newPassword>[\\s\\S]+)\\s+--current\\s+(?<currentPassword>[\\s\\S]+)\\s*$"),
+    CHANGE_PASSWORD3("^\\s*profile\\s+change\\s+-p\\s+-c\\s+(?<currentPassword>[\\s\\S]+)\\s+-n\\s+(?<newPassword>[\\s\\S]+)\\s*$"),
+    CHANGE_PASSWORD4("^\\s*profile\\s+change\\s+-p\\s+-n\\s+(?<newPassword>[\\s\\S]+)\\s+-c\\s+(?<currentPassword>[\\s\\S]+)\\s*$"),
     //increase turn + abbreviation
     INCREASE_TURN1("^\\s*increase\\s+--turn\\s+(?<amount>\\-?\\d+)\\s*$"),
     INCREASE_TURN2("^\\s*increase\\s+-t\\s+(?<amount>\\-?\\d+)\\s*$"),

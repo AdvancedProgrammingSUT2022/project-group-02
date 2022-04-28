@@ -9,9 +9,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainMenu {
+    //provide some information for user
+    private void manMainMenu() {
+        System.out.println("press \"menu enter <menu name>\" to access to Play Game and Profile Menu");
+        System.out.println("press \"menu exit or user logout\" to get back to Register Menu");
+    }
     public void run(Users users, User user, Scanner scanner) {
         String input;
         Matcher matcher;
+        manMainMenu();
         while (true) {
             input = scanner.nextLine();
             //exit the menu
