@@ -62,18 +62,27 @@ public class PlayGame {
         String input;
         int role = 0;
         fillMap(players.get(0), players.get(1));
+        int turn = 1;
         // assign all the neighbors to each tile
         for (int i = 0; i < map.getHeight(); i++)
             for (int j = 0; j < map.getWidth(); j++)
                 mapController.setNeighbor(map.getTileBoard()[i][j]);
-
+        boolean nextTurn = true;
         while (true) {
             User user = players.get(role);
-            while (user.getTurns() > 0) {
+            while (nextTurn) {
 
                 input = scanner.nextLine();
                 if (input.equals("game exit"))
                     return;
+                else if (input.trim().equals("next turn")) {
+                    if (user.getTurns() <= 0) {
+                        nextTurn = false;
+                        user.setTurns(turn);
+                    }
+                    else
+                        System.out.println("you didn't play all your turns");
+                }
                     //cheat code for increasing turn
                 else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_TURN1)) != null ||
                         (matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_TURN2)) != null) {
@@ -122,6 +131,7 @@ public class PlayGame {
             user.setTurns(gameController.getTurnForEachPlayer());
             if (role >= players.size())
                 role = 0;
+            nextTurn = true;
         }
     }
 
