@@ -53,6 +53,8 @@ public class PlayGame {
         System.out.println("notice ---> x and y are coordinates of destination , make sure to use valid coordinates");
         System.out.println("to select another tile :");
         System.out.println("select tile -x <x> -y <y>");
+        System.out.println("to create city with settler :");
+        System.out.println("place city here");
     }
 
     public void run(Scanner scanner) {
@@ -150,6 +152,63 @@ public class PlayGame {
                 if (conditionsForPlaceCity(tileInput, origin))
                     createCity(origin, user);
             } else
+                System.out.println("invalid command");
+        }
+    }
+
+    private void cityPage(City city, User user, Scanner scanner) {
+        String cityInput;
+        System.out.println("you are in the city page");
+        while (true) {
+            cityInput = scanner.nextLine();
+            if (cityInput.trim().equals("city exit"))
+                return;
+            else if (cityInput.trim().equals("buy tile")) {
+                // TODO show nearby neutral tiles and then buy
+                ArrayList<Tile> neighborOfCity = mapController.neighborOfCity(city);
+
+            }
+            else if (cityInput.trim().equals("new production")) {
+                // TODO show all possible production and then buy
+                if (!city.isProductStatus())
+                    setProduction(city, user, scanner);
+                else
+                    System.out.println("you are already producing something");
+            }
+            else if (cityInput.trim().equals("terminate current production")) {
+                // TODO show current production and then terminate
+                if (city.isProductStatus()) {
+                    city.setProductStatus(false);
+                    // TODO end the process of producing
+                }
+                else
+                    System.out.println("you don't produce anything");
+            }
+            else
+                System.out.println("invalid command");
+        }
+    }
+
+    private void setProduction(City city, User user, Scanner scanner) {
+        int index = 1;
+        for (Product product : city.getProducts()) {
+            System.out.println(index + "- " + product.getName());
+        }
+        String productInput;
+        System.out.println("you are in production bar");
+        while (true) {
+            productInput = scanner.nextLine();
+            if (productInput.trim().equals("production exit"))
+                return;
+            else if (Pattern.matches("\\d+", productInput)) {
+                int numberOfProduct = Integer.parseInt(productInput);
+                if (numberOfProduct <= city.getProducts().size() && numberOfProduct >= 1) {
+                    // TODO set the production and get back to city page
+                }
+                else
+                    System.out.println("invalid number");
+            }
+            else
                 System.out.println("invalid command");
         }
     }

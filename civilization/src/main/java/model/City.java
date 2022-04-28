@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class City {
-    private String name;
-    private Tile cityLocation;
+    private final String name;
+    private final Tile cityLocation;
     private User ownerShip;
     private ArrayList<Tile> ownerShipTiles;
     private int HP;
@@ -26,6 +26,7 @@ public class City {
     private ArrayList<Unit> units;
     private boolean warStatus;
     private ArrayList<Citizen> expertCitizens;
+    private boolean productStatus;
 
 
     public City(String name, Tile cityLocation, User ownerShip, ArrayList<Tile> ownerShipTiles, int HP, int defence, Unit garrison,
@@ -216,4 +217,51 @@ public class City {
         this.ownerShip = ownerShip;
     }
 
+    public boolean isProductStatus() {
+        return productStatus;
+    }
+
+    public User getOwnerShip() {
+        return ownerShip;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public ArrayList<Tile> getOwnerShipTiles() {
+        return ownerShipTiles;
+    }
+
+    public void setUnits(ArrayList<Unit> units) {
+        this.units = units;
+    }
+
+    public void setBuildings(ArrayList<Building> buildings) {
+        this.buildings = buildings;
+    }
+
+    public boolean isWarStatus() {
+        return warStatus;
+    }
+
+    public void setCitizensLocation(HashMap<Citizen, Tile> citizensLocation) {
+        this.citizensLocation = citizensLocation;
+    }
+
+    public void setOwnerShipTiles(ArrayList<Tile> ownerShipTiles) {
+        this.ownerShipTiles = ownerShipTiles;
+    }
+
+    public void setProducts(ArrayList<Product> products) {
+        this.products = products;
+    }
+
+    public void setExpertCitizens(ArrayList<Citizen> expertCitizens) {
+        this.expertCitizens = expertCitizens;
+    }
+
+    public void setProductStatus(boolean productStatus) {
+        this.productStatus = productStatus;
+    }
 }

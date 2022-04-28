@@ -1,5 +1,6 @@
 package controller;
 
+import model.City;
 import model.Maps;
 import model.Tile;
 import model.User;
@@ -203,5 +204,16 @@ public class MapController {
     public void deleteMilitary(Tile tile) {
         tile.setMilitaryUnit(null);
         tile.setMilitaryUnitExists(false);
+    }
+    // storing tiles which can be bought
+    public ArrayList<Tile> neighborOfCity(City city) {
+        ArrayList<Tile> neighborOfCity = new ArrayList<>();
+        for (Tile ownerShipTile : city.getOwnerShipTiles()) {
+            for (Tile neighbor : ownerShipTile.getNeighbors()) {
+               if (!city.getOwnerShipTiles().contains(neighbor) && neighbor.getOwner() == null)
+                   neighborOfCity.add(neighbor);
+            }
+        }
+        return neighborOfCity;
     }
 }
