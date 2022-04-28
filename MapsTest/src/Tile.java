@@ -97,9 +97,6 @@ public class Tile {
     public void setInProgress(boolean inProgress) {
         this.inProgress = inProgress;
     }
-<<<<<<< HEAD:civilization/MapsTest/src/Tile.java
-}
-=======
 
     public boolean isNearRiver() {
         return nearRiver;
@@ -109,4 +106,3 @@ public class Tile {
         return borderRiver[x];
     }
 }
->>>>>>> main:MapsTest/src/Tile.java
