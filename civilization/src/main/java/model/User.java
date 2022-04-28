@@ -263,4 +263,15 @@ public class User {
            index++;
         }
     }
+
+    public void removeUnit(Unit unit) {
+        int index = 0;
+        for (Unit unit1 : Units) {
+            if (unit1.equals(unit)) {
+                Units.remove(index);
+                return;
+            }
+            index++;
+        }
+    }
 }

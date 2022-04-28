@@ -1,14 +1,19 @@
 package controller;
 
-import model.Maps;
-import model.Unit;
-import model.User;
+import model.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SettlerController extends UnitController{
-    public void createNewCity(int x, int y, Unit unit, User user, Maps map) {
-
-    }
-    public void removeSettler(Unit unit, User user) {
-
+    public void createNewCity(Unit unit, User user, Tile tile) {
+        String name = user.getUsername() + Integer.toString(user.getCities().size() + 1);
+        ArrayList<Tile> ownerShipTiles = new ArrayList<>();
+        ownerShipTiles.add(tile);
+        HashMap<Citizen, Tile> citizensLocations = new HashMap<>();
+        citizensLocations.put(new Citizen(), tile);
+        tile.setCity(new City(name, tile, user, ownerShipTiles, 100, 100, null, null, 50, 0, 1, 1, 1, 1, 1, 1, 1, citizensLocations, null, null, false, null));
+        tile.setOwner(user);
+        removeUnit(unit, user);
     }
 }

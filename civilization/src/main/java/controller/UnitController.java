@@ -27,6 +27,7 @@ public class UnitController {
 
     }
     public void removeUnit (Unit unit, User user) {
+        user.removeUnit(unit);
         units.remove(unit);
     }
 }

@@ -196,4 +196,12 @@ public class MapController {
         }
         return BACKGROUND_COLOR;
     }
+    public void deleteCivilian(Tile tile) {
+        tile.setCivilianUnit(null);
+        tile.setCivilianUnitExists(false);
+    }
+    public void deleteMilitary(Tile tile) {
+        tile.setMilitaryUnit(null);
+        tile.setMilitaryUnitExists(false);
+    }
 }

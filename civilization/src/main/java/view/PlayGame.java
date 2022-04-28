@@ -2,6 +2,8 @@ package view;
 
 import controller.GameController;
 import controller.MapController;
+import controller.SettlerController;
+import controller.UnitController;
 import enums.Colors;
 import enums.RegexEnums;
 import model.*;
@@ -15,6 +17,8 @@ public class PlayGame {
     private Maps map;
     private Matcher matcher;
     private MapController mapController;
+    private UnitController unitController;
+    private SettlerController settlerController;
     private int role;
     private int height;
     private int width;
@@ -24,6 +28,8 @@ public class PlayGame {
         this.map = new Maps(height, width);
         gameController = new GameController(players, 1, map, height, width);
         this.mapController = new MapController(map, height, width);
+        unitController = new UnitController();
+        settlerController = new SettlerController();
         this.height = height;
         this.width = width;
     }
@@ -142,7 +148,7 @@ public class PlayGame {
             // order settler to place city
             else if (tileInput.trim().equals("place city here")) {
                 if (conditionsForPlaceCity(tileInput, origin))
-                    createCity(origin);
+                    createCity(origin, user);
             } else
                 System.out.println("invalid command");
         }
@@ -372,13 +378,11 @@ public class PlayGame {
     }
 
     // create city
-    private void createCity(Tile tile) {
-        String name = tile.getCivilianUnit().getOwner().getUsername() + Integer.toString(tile.getCivilianUnit().getOwner().getCities().size() + 1);
-        ArrayList<Tile> ownerShipTiles = new ArrayList<>();
-        ownerShipTiles.add(tile);
-        HashMap<Citizen, Tile> citizensLocations = new HashMap<>();
-        citizensLocations.put(new Citizen(), tile);
-        tile.setCity(new City(name, tile, tile.getCivilianUnit().getOwner(), ownerShipTiles, 100, 100, null, null, 50, 0, 1, 1, 1, 1, 1, 1, 1, citizensLocations, null, null, false, null));
+    private void createCity(Tile tile, User user) {
+        // completely delete settler
+        settlerController.createNewCity(tile.getCivilianUnit(), user, tile);
+        // remove settler from tile
+        mapController.deleteCivilian(tile);
         System.out.println("city located successfully!");
     }
 
