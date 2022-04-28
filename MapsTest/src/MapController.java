@@ -27,9 +27,9 @@ public class MapController {
             //units on the left tiles and top sides of right tiles
             for (int j = 0; j < 4; j++) {
                 ANSI_COLOR = getColorOfTileOwner(tileBoard[2 * i][j]);
-                System.out.print(riverFinder(tileBoard[2 * i][j], 5) +getColorOfTile(tileBoard[2*i][j])+ "    "
-                        + ANSI_COLOR + getColorOfTile(tileBoard[2*i][j])+civilianUnit(tileBoard[2 * i][j])
-                        + "   " + ANSI_COLOR+getColorOfTile(tileBoard[2*i][j])+militaryUnit(tileBoard[2 * i][j]) + getColorOfTile(tileBoard[2*i][j])+"    "
+                System.out.print(riverFinder(tileBoard[2 * i][j], 5) + getColorOfTile(tileBoard[2 * i][j]) + "    "
+                        + ANSI_COLOR + getColorOfTile(tileBoard[2 * i][j]) + civilianUnit(tileBoard[2 * i][j])
+                        + "   " + ANSI_COLOR + getColorOfTile(tileBoard[2 * i][j]) + militaryUnit(tileBoard[2 * i][j]) + getColorOfTile(tileBoard[2 * i][j]) + "    "
                         + Colors.RESET + riverFinder(tileBoard[2 * i][j], 1)
                 );
                 if (i != 0) System.out.print(riverFinder(tileBoard[2 * i - 1][j], 3));
@@ -56,13 +56,14 @@ public class MapController {
                 System.out.print("  " + riverFinder(tileBoard[2 * i][j], 5)
                         + getColorOfTile(tileBoard[2 * i][j]) + "   [" + 2 * i + "," + j + "]   "
                         + Colors.RESET + riverFinder(tileBoard[2 * i][j], 1)
-                        + getColorOfTile(tileBoard[2 * i-1][j]) +"    " + tileResource(tileBoard[2 * i - 1][j], true)
-                        + "   " + tileTerrain(tileBoard[2 * i - 1][j], true) + "  "+Colors.RESET);
+                        + getColorOfTile(tileBoard[2 * i - 1][j]) + "    " + tileResource(tileBoard[2 * i - 1][j], true)
+                        + "   " + tileTerrain(tileBoard[2 * i - 1][j], true) + "  " + Colors.RESET);
             else System.out.print("  " + riverFinder(tileBoard[2 * i][j], 5)
                     + getColorOfTile(tileBoard[2 * i][j])
                     + "   [" + 0 + "," + j + "]   " + Colors.RESET + riverFinder(tileBoard[2 * i][j], 1) + "             ");
         }
-        if (i != 0) System.out.println("  " + riverFinder(tileBoard[2 * i - 1][3], 2));
+        if (i != 0)
+            System.out.println(getColorOfTile(tileBoard[2 * i - 1][3]) + "  " + Colors.RESET + riverFinder(tileBoard[2 * i - 1][3], 2));
         else System.out.println();
 
     }
@@ -75,13 +76,13 @@ public class MapController {
             ANSI_COLOR = getColorOfTileOwner(tileBoard[2 * i][j]);
             if (i != 0)
                 System.out.print(" " + riverFinder(tileBoard[2 * i][j], 5)
-                        +getColorOfTile(tileBoard[2*i][j])+ "     " + ANSI_COLOR +getColorOfTile(tileBoard[2*i][j])+ tileOwner(tileBoard[2 * i][j]) +
-                        getColorOfTile(tileBoard[2*i][j])+"     " + Colors.RESET
+                        + getColorOfTile(tileBoard[2 * i][j]) + "     " + ANSI_COLOR + getColorOfTile(tileBoard[2 * i][j]) + tileOwner(tileBoard[2 * i][j]) +
+                        getColorOfTile(tileBoard[2 * i][j]) + "     " + Colors.RESET
                         + riverFinder(tileBoard[2 * i][j], 1)
-                        +getColorOfTileOwner(tileBoard[2*i-1][j])+ getColorOfTile(tileBoard[2*i-1][j])+"     " + tileImprovement(tileBoard[2 * i - 1][j]) + "    "+Colors.RESET);
+                        + getColorOfTileOwner(tileBoard[2 * i - 1][j]) + getColorOfTile(tileBoard[2 * i - 1][j]) + "     " + tileImprovement(tileBoard[2 * i - 1][j]) + "    " + Colors.RESET);
             else System.out.print(" " + riverFinder(tileBoard[2 * i][j], 5)
-                    +getColorOfTile(tileBoard[2*i][j])+ "     " + ANSI_COLOR +getColorOfTile(tileBoard[2*i][j])+ tileOwner(tileBoard[2 * i][j]) +
-                    getColorOfTile(tileBoard[2*i][j])+"     "+ Colors.RESET
+                    + getColorOfTile(tileBoard[2 * i][j]) + "     " + ANSI_COLOR + getColorOfTile(tileBoard[2 * i][j]) + tileOwner(tileBoard[2 * i][j]) +
+                    getColorOfTile(tileBoard[2 * i][j]) + "     " + Colors.RESET
                     + riverFinder(tileBoard[2 * i][j], 1)
                     + "            ");
         }
@@ -96,14 +97,14 @@ public class MapController {
         for (int j = 0; j < 4; j++) {
             if (i != 3)
                 System.out.print(riverFinder(tileBoard[2 * i][j], 4)
-                        +getColorOfTile(tileBoard[2 * i][j]) +"    " + tileResource(tileBoard[2 * i][j], false)
+                        + getColorOfTile(tileBoard[2 * i][j]) + "    " + tileResource(tileBoard[2 * i][j], false)
                         + "   " + tileTerrain(tileBoard[2 * i][j], false)
-                        + "    " +Colors.RESET+ riverFinder(tileBoard[2 * i][j], 2)
-                        + getColorOfTile(tileBoard[2 * i+1][j]) + "   [" + (2 * i + 1) + "," + j + "]   " + Colors.RESET);
+                        + "    " + Colors.RESET + riverFinder(tileBoard[2 * i][j], 2)
+                        + getColorOfTile(tileBoard[2 * i + 1][j]) + "   [" + (2 * i + 1) + "," + j + "]   " + Colors.RESET);
             else System.out.print(riverFinder(tileBoard[2 * i][j], 4)
-                    +getColorOfTile(tileBoard[2 * i][j]) + "    " + tileResource(tileBoard[2 * i][j], false)
+                    + getColorOfTile(tileBoard[2 * i][j]) + "    " + tileResource(tileBoard[2 * i][j], false)
                     + "   " + tileTerrain(tileBoard[2 * i][0], false) + "    "
-                    +Colors.RESET+ riverFinder(tileBoard[2 * i][j], 2) + "           ");
+                    + Colors.RESET + riverFinder(tileBoard[2 * i][j], 2) + "           ");
         }
         if (i != 3) System.out.println(riverFinder(tileBoard[2 * i + 1][3], 1));
         else System.out.println();
@@ -119,15 +120,16 @@ public class MapController {
 
             if (i != 3)
                 System.out.print(" " + riverFinder(tileBoard[2 * i][j], 4)
-                        +ANSI_COLOR + getColorOfTile(tileBoard[2 * i][j])+"     " + tileImprovement(tileBoard[2 * i][j])
-                        + "     "+Colors.RESET + riverFinder(tileBoard[2 * i][j], 2)
-                        + ANSI_COLOR +getColorOfTile(tileBoard[2 * i+1][j])+"     " +getColorOfTile(tileBoard[2 * i+1][j])+ tileOwner(tileBoard[2 * i][j])
-                        +getColorOfTile(tileBoard[2 * i+1][j])+ "    "+ Colors.RESET);
+                        + ANSI_COLOR + getColorOfTile(tileBoard[2 * i][j]) + "     " + tileImprovement(tileBoard[2 * i][j])
+                        + "     " + Colors.RESET + riverFinder(tileBoard[2 * i][j], 2)
+                        + ANSI_COLOR + getColorOfTile(tileBoard[2 * i + 1][j]) + "     " + getColorOfTile(tileBoard[2 * i + 1][j]) + tileOwner(tileBoard[2 * i][j])
+                        + getColorOfTile(tileBoard[2 * i + 1][j]) + "    " + Colors.RESET);
             else System.out.print(" " + riverFinder(tileBoard[2 * i][j], 4)
-                    +ANSI_COLOR+getColorOfTile(tileBoard[2 * i][j])+ "     " + tileImprovement(tileBoard[2 * i][j])
-                    + "     " + Colors.RESET+riverFinder(tileBoard[2 * i][j], 2) + "            ");
+                    + ANSI_COLOR + getColorOfTile(tileBoard[2 * i][j]) + "     " + tileImprovement(tileBoard[2 * i][j])
+                    + "     " + Colors.RESET + riverFinder(tileBoard[2 * i][j], 2) + "            ");
         }
-        if (i != 3) System.out.println(" " + riverFinder(tileBoard[2 * i + 1][3], 1));
+        if (i != 3)
+            System.out.println(getColorOfTile(tileBoard[2 * i + 1][3]) + " " + Colors.RESET + riverFinder(tileBoard[2 * i + 1][3], 1));
         else System.out.println();
 
     }
@@ -137,17 +139,18 @@ public class MapController {
 
         //bottom sides of left tiles and units on the right tiles
         for (int j = 0; j < 4; j++) {
-            if (i != 3)ANSI_COLOR = getColorOfTileOwner(tileBoard[2 * i + 1][j]);
+            if (i != 3) ANSI_COLOR = getColorOfTileOwner(tileBoard[2 * i + 1][j]);
 
             if (i != 3)
                 System.out.print("  " + riverFinder(tileBoard[2 * i][j], 4)
                         + riverFinder(tileBoard[2 * i][j], 3) + riverFinder(tileBoard[2 * i][j], 2)
-                        + getColorOfTile(tileBoard[2 * i+1][j])+"    " + ANSI_COLOR + getColorOfTile(tileBoard[2 * i+1][j])+civilianUnit(tileBoard[2 * i + 1][0])
-                        + getColorOfTile(tileBoard[2 * i+1][j])+"   " + ANSI_COLOR+getColorOfTile(tileBoard[2 * i+1][j])+militaryUnit(tileBoard[2 * i + 1][j]) + "  "+Colors.RESET);
+                        + getColorOfTile(tileBoard[2 * i + 1][j]) + "    " + ANSI_COLOR + getColorOfTile(tileBoard[2 * i + 1][j]) + civilianUnit(tileBoard[2 * i + 1][0])
+                        + getColorOfTile(tileBoard[2 * i + 1][j]) + "   " + ANSI_COLOR + getColorOfTile(tileBoard[2 * i + 1][j]) + militaryUnit(tileBoard[2 * i + 1][j]) + "  " + Colors.RESET);
             else System.out.print("  " + riverFinder(tileBoard[2 * i][j], 4) + riverFinder(tileBoard[2 * i][j], 3)
                     + riverFinder(tileBoard[2 * i][j], 2) + "             ");
         }
-        if (i != 3) System.out.println("  " + riverFinder(tileBoard[2 * i + 1][3], 1));
+        if (i != 3)
+            System.out.println(getColorOfTile(tileBoard[2 * i + 1][3]) + "  " + Colors.RESET + riverFinder(tileBoard[2 * i + 1][3], 1));
         else System.out.println();
 
     }
@@ -210,11 +213,11 @@ public class MapController {
             BACKGROUND_COLOR = Colors.RED_BACKGROUND;
         } else if (tile.getLand().getColor().equals("yellow")) {
             BACKGROUND_COLOR = Colors.YELLOW_BACKGROUND;
-        }else if(tile.getLand().getColor().equals("purple")){
+        } else if (tile.getLand().getColor().equals("purple")) {
             BACKGROUND_COLOR = Colors.PURPLE_BACKGROUND;
-        }else if(tile.getLand().getColor().equals("green")){
+        } else if (tile.getLand().getColor().equals("green")) {
             BACKGROUND_COLOR = Colors.GREEN_BACKGROUND;
-        }else if(tile.getLand().getColor().equals("cyan")){
+        } else if (tile.getLand().getColor().equals("cyan")) {
             BACKGROUND_COLOR = Colors.CYAN_BACKGROUND;
         }
         return BACKGROUND_COLOR;

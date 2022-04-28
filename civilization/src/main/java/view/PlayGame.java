@@ -2,6 +2,7 @@ package view;
 
 import controller.GameController;
 import controller.MapController;
+import controller.UnitController;
 import enums.Colors;
 import enums.RegexEnums;
 import model.*;
@@ -112,8 +113,14 @@ public class PlayGame {
             }
             role++;
             user.setTurns(gameController.getTurnForEachPlayer());
-            if (role >= players.size())
+            if (role >= players.size()) {
+                for (int i = 0; i < players.size(); i++) {
+                    for (int j = 0; j < players.get(i).getCities().size(); j++) {
+                        gameController.periodicIncreases(players.get(i).getCities().get(j),players.get(i).getCities().get(j).getWorkers().get(0));
+                    }
+                }
                 role = 0;
+            }
         }
     }
 
@@ -273,13 +280,14 @@ public class PlayGame {
         //should change with file
 
         Terrain jungle = new Terrain("jungle", 2, 1, 0.25, 0, 1);
-        Land Desert = new Land("Ocean", "yellow", 1, 0, -0.33, 0, 0, true);
+        Land Desert = new Land("Desert", "yellow", 1, 0, -0.33, 0, 0, true);
         Land GrassLand = new Land("Grassland", "green", 1, 2, -0.33, 0, 0, true);
         Land Hill = new Land("Hill", "purple", 2, 0, 0.25, 0, 2, true);
         Land Mountain = new Land("Mountain", "cyan", 0, 0, 0, 0, 0, false);
         Land Ocean = new Land("Ocean", "black", 0, 0, 0, 0, 0, false);
         Land Plain = new Land("Plain", "green", 1, 1, -0.33, 0, 1, true);
         Land SnowLand = new Land("Snow", "white", 1, 0, -0.33, 0, 0, true);
+        Land Tundra = new Land("Tundra","white",1,1,-.033,0,0,true);
 
         boolean[] noRiver = {false, false, false, false, false, false};
         boolean[] riverBorder1 = {false, true, false, false, false, false};
@@ -377,8 +385,10 @@ public class PlayGame {
         ArrayList<Tile> ownerShipTiles = new ArrayList<>();
         ownerShipTiles.add(tile);
         HashMap<Citizen, Tile> citizensLocations = new HashMap<>();
-        citizensLocations.put(new Citizen(), tile);
-        tile.setCity(new City(name, tile, tile.getCivilianUnit().getOwner(), ownerShipTiles, 100, 100, null, null, 50, 0, 1, 1, 1, 1, 1, 1, 1, citizensLocations, null, null, false, null));
+        citizensLocations.put(new Citizen(name,tile,100,100,0,0,100,100,tile.getCivilianUnit().getOwner()), tile);
+        tile.setCity(new City(name, tile, tile.getCivilianUnit().getOwner(), ownerShipTiles, 100, 100, null, null,
+                50, 0, 1, 1, 1, 1, 1, 1, 1, citizensLocations,
+                null, null, false, null,null));
         System.out.println("city located successfully!");
     }
 

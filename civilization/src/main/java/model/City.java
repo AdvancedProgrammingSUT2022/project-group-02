@@ -26,12 +26,13 @@ public class City {
     private ArrayList<Unit> units;
     private boolean warStatus;
     private ArrayList<Citizen> expertCitizens;
+    private ArrayList<Worker> workers;
 
 
     public City(String name, Tile cityLocation, User ownerShip, ArrayList<Tile> ownerShipTiles, int HP, int defence, Unit garrison,
                 ArrayList<Product> products, int productTurnLeft, int citizens, int food, int production, int gold, int science, int faith,
                 int tourism, int culture, HashMap<Citizen, Tile> citizensLocation, ArrayList<Building> buildings, ArrayList<Unit> units,
-                boolean warStatus, ArrayList<Citizen> expertCitizens) {
+                boolean warStatus, ArrayList<Citizen> expertCitizens,ArrayList<Worker> workers) {
         this.name = name;
         this.cityLocation = cityLocation;
         this.ownerShip = ownerShip;
@@ -54,6 +55,7 @@ public class City {
         this.units = units;
         this.warStatus = warStatus;
         this.expertCitizens = expertCitizens;
+        this.workers = workers;
     }
 
     public Tile getCityLocation() {
@@ -164,8 +166,8 @@ public class City {
         return culture;
     }
 
-    public void addCitizensLocation(Citizen citizen, Tile tile) {
-        this.citizensLocation.put(citizen, tile);
+    public void addCitizensLocation(Citizen Citizen, Tile tile) {
+        this.citizensLocation.put(Citizen, tile);
     }
 
     public HashMap<Citizen, Tile> getCitizensLocation() {
@@ -196,8 +198,8 @@ public class City {
         return warStatus;
     }
 
-    public void addExpertCitizen(Citizen citizen) {
-        this.expertCitizens.add(citizen);
+    public void addExpertCitizen(Citizen Citizen) {
+        this.expertCitizens.add(Citizen);
     }
 
     public ArrayList<Citizen> getExpertCitizens() {
@@ -216,4 +218,7 @@ public class City {
         this.ownerShip = ownerShip;
     }
 
+    public ArrayList<Worker> getWorkers() {
+        return workers;
+    }
 }

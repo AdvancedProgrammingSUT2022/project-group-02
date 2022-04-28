@@ -68,4 +68,26 @@ public class GameController {
     public void setTurnForEachPlayer(int turnForEachPlayer) {
         this.turnForEachPlayer = turnForEachPlayer;
     }
+
+    public void periodicIncreases(City city,Worker worker){
+        city.setCitizens(city.getCitizens()+4);
+        Citizen citizen = new Citizen(city.getExpertCitizens().get(1).getName(),city.getCityLocation(),city.getExpertCitizens().get(1).getHP(),
+                city.getExpertCitizens().get(1).getPrice(),city.getExpertCitizens().get(1).getLevel(),city.getExpertCitizens().get(1).getMP(),
+                city.getExpertCitizens().get(1).getCombatStrength(),city.getExpertCitizens().get(1).getRangeCombatStrength(),city.getExpertCitizens().get(1).getOwner());
+        for (int i = 0; i < 4; i++) {
+            city.addExpertCitizen(citizen);
+        }
+        if (worker.isWorking()) {
+            if (worker.getTile().getLand().getName().equals("Grassland")) {
+                city.setFood(city.getFood() + worker.getTile().getLand().getFoodRate());
+            } else if (worker.getTile().getLand().getName().equals("Hill")) {
+                city.setProduction(city.getProduction() + worker.getTile().getLand().getProductionRate());
+            } else if (worker.getTile().getLand().getName().equals("Plain")) {
+                city.setFood(city.getFood() + worker.getTile().getLand().getFoodRate());
+                city.setProduction(city.getProduction() + worker.getTile().getLand().getProductionRate());
+            } else if (worker.getTile().getLand().getName().equals("Tundra")) {
+                city.setFood(city.getFood() + worker.getTile().getLand().getFoodRate());
+            }
+        }
+    }
 }
