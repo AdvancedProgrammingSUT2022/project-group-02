@@ -49,7 +49,7 @@ public class PlayGame {
         System.out.println("while you are in tile :");
         System.out.println("press \"tile exit\" to get out of tile");
         System.out.println("to move a unit :");
-        System.out.println("move unit -x <x> -y <y>");
+        System.out.println("move unit to -x <x> -y <y>");
         System.out.println("notice ---> x and y are coordinates of destination , make sure to use valid coordinates");
         System.out.println("to select another tile :");
         System.out.println("select tile -x <x> -y <y>");
@@ -254,33 +254,36 @@ public class PlayGame {
 
     // check everything about moving the unit
     private void moveUnitConditions(Tile origin, User user) {
-        if (origin.getOwner().equals(user)) {
-            if (origin.isCivilianUnitExists() || origin.isMilitaryUnitExists()) {
-                int xDestination = Integer.parseInt("x");
-                int yDestination = Integer.parseInt("y");
-                if (xDestination >= 0 && yDestination >= 0) {
-                    Tile destination = gameController.findTile(xDestination, yDestination);
-                    if (destination != null) {
-                        if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
-                            if (!destination.isMilitaryUnitExists() && !destination.getLand().getName().equals("mountain") && !destination.getLand().getName().equals("ocean"))
-                                moveUnit(origin, destination, origin.getMilitaryUnit(), user, true);
-                            else
-                                System.out.println("can't move a unit to this tile");
-                        } else if (origin.isCivilianUnitExists() && origin.isSelectedTwo()) {
-                            if (!destination.isCivilianUnitExists())
-                                moveUnit(origin, destination, origin.getCivilianUnit(), user, false);
-                            else
-                                System.out.println("can't move a unit to this tile");
-                        } else
-                            System.out.println("there is no unit in this tile!");
-                    } else
-                        System.out.println("invalid destination");
-                } else
-                    System.out.println("invalid coordinates");
-            } else
-                System.out.println("there is no unit in this tile!");
-        } else
-            System.out.println("you are not the owner of this tile");
+        if ((origin.getCivilianUnit() != null && origin.getCivilianUnit().getOwner().equals(user)) ||
+                (origin.getMilitaryUnit() != null && origin.getMilitaryUnit().getOwner().equals(user))) {
+            int xDestination = Integer.parseInt("x");
+            int yDestination = Integer.parseInt("y");
+            if (xDestination >= 0 && yDestination >= 0) {
+                Tile destination = gameController.findTile(xDestination, yDestination);
+                if (destination != null) {
+                    if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
+                        if (!destination.isMilitaryUnitExists() && !destination.getLand().getName().equals("mountain") && !destination.getLand().getName().equals("ocean"))
+                            moveUnit(origin, destination, origin.getMilitaryUnit(), user, true);
+                        else
+                            System.out.println("can't move a unit to this tile");
+                    }
+                    else if (origin.isCivilianUnitExists() && origin.isSelectedTwo()) {
+                        if (!destination.isCivilianUnitExists())
+                            moveUnit(origin, destination, origin.getCivilianUnit(), user, false);
+                        else
+                            System.out.println("can't move a unit to this tile");
+                    }
+                    else
+                        System.out.println("there is no unit in this tile!");
+                }
+                else
+                    System.out.println("invalid destination");
+            }
+            else
+                System.out.println("invalid coordinates");
+        }
+        else
+            System.out.println("there is no unit here or you are not the owner of this unit");
     }
 
     private void moveUnit(Tile origin, Tile destination, Unit unit, User user, boolean isMilitary) {

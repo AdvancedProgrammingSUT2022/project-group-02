@@ -177,7 +177,8 @@ public class MapController {
         if (tile.getRiverBorder(x) && (x == 2 || x == 5)) return Colors.BLUE_BACKGROUND + "/" + Colors.RESET;
         else if (tile.getRiverBorder(x) && (x == 1 || x == 4))
             return Colors.BLUE_BACKGROUND + "\\" + Colors.RESET;
-        else if (x == 0 || x == 3) return "___________";
+        else if ((x == 0 && tile.getX() >= 2) || x == 3) return getColorOfTile(tile) + "___________" + Colors.RESET;
+        else if (x == 0) return "___________";
         else if (x == 2 || x == 5) return "/";
         else return "\\";
     }

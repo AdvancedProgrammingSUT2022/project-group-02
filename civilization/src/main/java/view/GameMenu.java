@@ -22,6 +22,7 @@ public class GameMenu {
     public void run(Users users, User user, Scanner scanner) {
         String input;
         Matcher matcher;
+        manGameMenu(user);
         while (true) {
             input = scanner.nextLine();
             if (Pattern.matches("\\s*menu\\s+exit\\s*", input))
