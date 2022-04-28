@@ -184,18 +184,14 @@ public class MapController {
     }
 
     public String getColorOfTile(Tile tile) {
-        String BACKGROUND_COLOR = Colors.CYAN_BACKGROUND;
-        if (tile.getLand().getColor().equals("red")) {
-            BACKGROUND_COLOR = Colors.RED_BACKGROUND;
-        } else if (tile.getLand().getColor().equals("yellow")) {
-            BACKGROUND_COLOR = Colors.YELLOW_BACKGROUND;
-        }else if(tile.getLand().getColor().equals("purple")){
-            BACKGROUND_COLOR = Colors.PURPLE_BACKGROUND;
-        }else if(tile.getLand().getColor().equals("green")){
-            BACKGROUND_COLOR = Colors.GREEN_BACKGROUND;
-        }else if(tile.getLand().getColor().equals("cyan")){
-            BACKGROUND_COLOR = Colors.CYAN_BACKGROUND;
-        }
+        String BACKGROUND_COLOR = switch (tile.getLand().getColor()) {
+            case "red" -> Colors.RED_BACKGROUND;
+            case "yellow" -> Colors.YELLOW_BACKGROUND;
+            case "purple" -> Colors.PURPLE_BACKGROUND;
+            case "green" -> Colors.GREEN_BACKGROUND;
+            case "cyan" -> Colors.CYAN_BACKGROUND;
+            default -> Colors.CYAN_BACKGROUND;
+        };
         return BACKGROUND_COLOR;
     }
     public void deleteCivilian(Tile tile) {
