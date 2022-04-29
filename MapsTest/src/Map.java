@@ -1,8 +1,6 @@
 public class Map {
 
-    public Tile[][] tileBoard = new Tile[10][10];
-
-    private final MapController mapController = new MapController(tileBoard);
+    private Tile[][] tileBoard = new Tile[10][10];
 
     public Map (){}
 
@@ -85,14 +83,10 @@ public class Map {
         tileBoard[6][1] = tile26;
         tileBoard[6][2] = tile27;
         tileBoard[6][3] = tile28;
-
-
     }
 
-    public void printMapBoard(){
-        mapController.setTileBoard(tileBoard);
-        mapController.printMap();
+    public Tile[][] getTileBoard() {
+        return tileBoard;
     }
-
 
 }
