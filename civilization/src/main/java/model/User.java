@@ -216,8 +216,8 @@ public class User {
         return improvements;
     }
 
-    public void setImprovements(ArrayList<Improvement> improvements) {
-        this.improvements = improvements;
+    public void setImprovements(Improvement improvement) {
+        this.improvements.add(improvement);
     }
 
     public int getTurnNumber() {
