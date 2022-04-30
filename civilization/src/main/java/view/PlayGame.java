@@ -351,13 +351,18 @@ public class PlayGame {
         //should change with file
 
         Terrain jungle = new Terrain("jungle", 2, 1, 0.25, 0, 1);
-        Land Desert = new Land("Ocean", "yellow", 1, 0, -0.33, 0, 0, true);
+        Land Desert = new Land("Desert", "yellow", 1, 0, -0.33, 0, 0, true);
         Land GrassLand = new Land("Grassland", "green", 1, 2, -0.33, 0, 0, true);
         Land Hill = new Land("Hill", "purple", 2, 0, 0.25, 0, 2, true);
-        Land Mountain = new Land("Mountain", "cyan", 0, 0, 0, 0, 0, false);
-        Land Ocean = new Land("Ocean", "black", 0, 0, 0, 0, 0, false);
-        Land Plain = new Land("Plain", "green", 1, 1, -0.33, 0, 1, true);
+        Land Mountain = new Land("Mountain", "brightBlack", 0, 0, 0, 0, 0, false);
+        Land Ocean = new Land("Ocean", "brightBlue", 0, 0, 0, 0, 0, false);
+        Land Plain = new Land("Plain", "red", 1, 1, -0.33, 0, 1, true);
         Land SnowLand = new Land("Snow", "white", 1, 0, -0.33, 0, 0, true);
+
+        User userForCheck1 = new User("Amir", "Amir", "Amir");
+        userForCheck1.setColor("purple");
+        User userForCheck2 = new User("Rima", "Rima", "Rima");
+        userForCheck2.setColor("black");
 
         boolean[] noRiver = {false, false, false, false, false, false};
         boolean[] riverBorder1 = {false, true, false, false, false, false};
@@ -372,34 +377,34 @@ public class PlayGame {
         Tile tile2 = new Tile(0, 1, null, Mountain, 0, false, noRiver, null, jungle);
         Tile tile3 = new Tile(0, 2, null, Mountain, 0, false, noRiver, null, jungle);
         Tile tile4 = new Tile(0, 3, null, Mountain, 0, true, riverBorder6, null, jungle);
-        Tile tile5 = new Tile(1, 0, user2, GrassLand, 0, true, riverBorder3, null, jungle);
-        Tile tile6 = new Tile(1, 1, user2, GrassLand, 0, false, noRiver, null, jungle);
-        Tile tile7 = new Tile(1, 2, user2, Plain, 0, true, riverBorder4, null, jungle);
+        Tile tile5 = new Tile(1, 0, userForCheck2, GrassLand, 0, true, riverBorder3, null, jungle);
+        Tile tile6 = new Tile(1, 1, userForCheck2, GrassLand, 0, false, noRiver, null, jungle);
+        Tile tile7 = new Tile(1, 2, userForCheck2, Plain, 0, true, riverBorder4, null, jungle);
         Tile tile8 = new Tile(1, 3, null, Ocean, 0, false, noRiver, null, jungle);
         Tile tile9 = new Tile(2, 0, null, Ocean, 0, true, riverBorder1, null, jungle);
-        Tile tile10 = new Tile(2, 1, user1, GrassLand, 0, true, riverBorder3, null, jungle);
-        Tile tile11 = new Tile(2, 2, user2, GrassLand, 0, true, riverBorder4, null, jungle);
-        Tile tile12 = new Tile(2, 3, user1, Plain, 0, true, riverBorder5, null, jungle);
-        Tile tile13 = new Tile(3, 0, user1, Hill, 0, true, riverBorder7, null, jungle);
+        Tile tile10 = new Tile(2, 1, userForCheck1, GrassLand, 0, true, riverBorder3, null, jungle);
+        Tile tile11 = new Tile(2, 2, userForCheck2, GrassLand, 0, true, riverBorder4, null, jungle);
+        Tile tile12 = new Tile(2, 3, userForCheck1, Plain, 0, true, riverBorder5, null, jungle);
+        Tile tile13 = new Tile(3, 0, userForCheck1, Hill, 0, true, riverBorder7, null, jungle);
         Tile tile14 = new Tile(3, 1, null, Mountain, 0, true, riverBorder2, null, jungle);
-        Tile tile15 = new Tile(3, 2, user2, SnowLand, 0, true, riverBorder5, null, jungle);
+        Tile tile15 = new Tile(3, 2, userForCheck2, SnowLand, 0, true, riverBorder5, null, jungle);
         Tile tile16 = new Tile(3, 3, null, Ocean, 0, false, noRiver, null, jungle);
         Tile tile17 = new Tile(4, 0, null, Ocean, 0, false, noRiver, null, jungle);
-        Tile tile18 = new Tile(4, 1, user1, Desert, 0, true, riverBorder7, null, jungle);
-        Tile tile19 = new Tile(4, 2, user1, Desert, 0, true, riverBorder5, null, jungle);
-        Tile tile20 = new Tile(4, 3, user1, Desert, 0, false, noRiver, null, jungle);
-        Tile tile21 = new Tile(5, 0, user1, Desert, 0, false, noRiver, null, jungle);
-        Tile tile22 = new Tile(5, 1, user2, Desert, 0, true, riverBorder8, null, jungle);
-        Tile tile23 = new Tile(5, 2, user1, Desert, 0, false, noRiver, null, jungle);
+        Tile tile18 = new Tile(4, 1, userForCheck1, Desert, 0, true, riverBorder7, null, jungle);
+        Tile tile19 = new Tile(4, 2, userForCheck1, Desert, 0, true, riverBorder5, null, jungle);
+        Tile tile20 = new Tile(4, 3, userForCheck1, Desert, 0, false, noRiver, null, jungle);
+        Tile tile21 = new Tile(5, 0, userForCheck1, Desert, 0, false, noRiver, null, jungle);
+        Tile tile22 = new Tile(5, 1, userForCheck2, Desert, 0, true, riverBorder8, null, jungle);
+        Tile tile23 = new Tile(5, 2, userForCheck1, Desert, 0, false, noRiver, null, jungle);
         Tile tile24 = new Tile(5, 3, null, Ocean, 0, false, noRiver, null, jungle);
         Tile tile25 = new Tile(6, 0, null, Ocean, 0, false, noRiver, null, jungle);
-        Tile tile26 = new Tile(6, 1, user1, Plain, 0, false, noRiver, null, jungle);
-        Tile tile27 = new Tile(6, 2, user2, Plain, 0, false, noRiver, null, jungle);
-        Tile tile28 = new Tile(6, 3, user2, Plain, 0, false, noRiver, null, jungle);
-        Tile tile29 = new Tile(7, 0, user2, Desert, 0, false, noRiver, null, jungle);
-        Tile tile30 = new Tile(7, 1, user2, Desert, 0, false, noRiver, null, jungle);
-        Tile tile31 = new Tile(7, 2, user1, Desert, 0, false, noRiver, null, jungle);
-        Tile tile32 = new Tile(7, 3, user1, Ocean, 0, false, noRiver, null, jungle);
+        Tile tile26 = new Tile(6, 1, userForCheck1, Plain, 0, false, noRiver, null, jungle);
+        Tile tile27 = new Tile(6, 2, userForCheck2, Plain, 0, false, noRiver, null, jungle);
+        Tile tile28 = new Tile(6, 3, userForCheck2, Plain, 0, false, noRiver, null, jungle);
+        Tile tile29 = new Tile(7, 0, userForCheck2, Desert, 0, false, noRiver, null, jungle);
+        Tile tile30 = new Tile(7, 1, userForCheck2, Desert, 0, false, noRiver, null, jungle);
+        Tile tile31 = new Tile(7, 2, userForCheck1, Desert, 0, false, noRiver, null, jungle);
+        Tile tile32 = new Tile(7, 3, userForCheck1, Ocean, 0, false, noRiver, null, jungle);
         map.getTileBoard()[0][0] = tile1;
         map.getTileBoard()[0][1] = tile2;
         map.getTileBoard()[0][2] = tile3;
@@ -475,9 +480,13 @@ public class PlayGame {
             //units on the left tiles and top sides of right tiles
             for (int j = 0; j < 4; j++) {
                 ANSI_COLOR = mapController.getColorOfTileOwner(map.getTileBoard()[2 * i][j]);
-                System.out.print(mapController.riverFinder(map.getTileBoard()[2 * i][j], 5) + mapController.getColorOfTile(map.getTileBoard()[2 * i][j]) + "    "
-                        + ANSI_COLOR + mapController.getColorOfTile(map.getTileBoard()[2 * i][j]) + mapController.civilianUnit(map.getTileBoard()[2 * i][j])
-                        + "   " + ANSI_COLOR + mapController.getColorOfTile(map.getTileBoard()[2 * i][j]) + mapController.militaryUnit(map.getTileBoard()[2 * i][j]) + mapController.getColorOfTile(map.getTileBoard()[2 * i][j]) + "    "
+                System.out.print(mapController.riverFinder(map.getTileBoard()[2 * i][j], 5)
+                        + mapController.getColorOfTile(map.getTileBoard()[2 * i][j]) + "    "
+                        + ANSI_COLOR + mapController.getColorOfTile(map.getTileBoard()[2 * i][j])
+                        + mapController.civilianUnit(map.getTileBoard()[2 * i][j])
+                        + "   " + ANSI_COLOR + mapController.getColorOfTile(map.getTileBoard()[2 * i][j])
+                        + mapController.militaryUnit(map.getTileBoard()[2 * i][j])
+                        + mapController.getColorOfTile(map.getTileBoard()[2 * i][j]) + "    "
                         + Colors.RESET + mapController.riverFinder(map.getTileBoard()[2 * i][j], 1)
                 );
                 if (i != 0) System.out.print(mapController.riverFinder(map.getTileBoard()[2 * i - 1][j], 3));
@@ -500,17 +509,25 @@ public class PlayGame {
 
         //Coordinates of left tiles and resource and terrain in right tiles
         for (int j = 0; j < 4; j++) {
-            if (i != 0)
-                System.out.print("  " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 5)
+            if (i != 0) {
+                if (j != 0)
+                    System.out.print(mapController.getColorOfTile(map.getTileBoard()[2 * i - 1][j - 1])
+                        + "  " + Colors.RESET);
+                else System.out.print("  ");
+                System.out.print(mapController.riverFinder(map.getTileBoard()[2 * i][j], 5)
                         + mapController.getColorOfTile(map.getTileBoard()[2 * i][j]) + "   [" + 2 * i + "," + j + "]   "
                         + Colors.RESET + mapController.riverFinder(map.getTileBoard()[2 * i][j], 1)
-                        + mapController.getColorOfTile(map.getTileBoard()[2 * i - 1][j]) + "    " + mapController.tileResource(map.getTileBoard()[2 * i - 1][j], true)
-                        + "   " + mapController.tileTerrain(map.getTileBoard()[2 * i - 1][j], true) + "  " + Colors.RESET);
-            else System.out.print("  " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 5)
+                        + mapController.getColorOfTile(map.getTileBoard()[2 * i - 1][j]) + "    "
+                        + mapController.tileResource(map.getTileBoard()[2 * i - 1][j], true)
+                        + "   " + mapController.tileTerrain(map.getTileBoard()[2 * i - 1][j], true)
+                        + "  " + Colors.RESET);
+            } else System.out.print("  " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 5)
                     + mapController.getColorOfTile(map.getTileBoard()[2 * i][j])
-                    + "   [" + 0 + "," + j + "]   " + Colors.RESET + mapController.riverFinder(map.getTileBoard()[2 * i][j], 1) + "             ");
+                    + "   [" + 0 + "," + j + "]   " + Colors.RESET
+                    + mapController.riverFinder(map.getTileBoard()[2 * i][j], 1) + "             ");
         }
-        if (i != 0) System.out.println("  " + mapController.riverFinder(map.getTileBoard()[2 * i - 1][3], 2));
+        if (i != 0) System.out.println(mapController.getColorOfTile(map.getTileBoard()[2 * i - 1][3])
+                + "  " + Colors.RESET + mapController.riverFinder(map.getTileBoard()[2 * i - 1][3], 2));
         else System.out.println();
 
     }
@@ -518,22 +535,26 @@ public class PlayGame {
     private void leftOwnerName(int i) {
         String ANSI_COLOR = Colors.WHITE;
 
-        //owner name and color of left tiles
+        //owner name and color of left tiles and right Improvement
         for (int j = 0; j < 4; j++) {
             ANSI_COLOR = mapController.getColorOfTileOwner(map.getTileBoard()[2 * i][j]);
+            if (i != 0 && j != 0)
+                System.out.print(mapController.getColorOfTile(map.getTileBoard()[2 * i - 1][j - 1]));
+            System.out.print(" " + Colors.RESET + mapController.riverFinder(map.getTileBoard()[2 * i][j], 5)
+                    + mapController.getColorOfTile(map.getTileBoard()[2 * i][j]) + "     " + ANSI_COLOR
+                    + mapController.getColorOfTile(map.getTileBoard()[2 * i][j])
+                    + mapController.tileOwner(map.getTileBoard()[2 * i][j])
+                    + mapController.getColorOfTile(map.getTileBoard()[2 * i][j]) + "     " + Colors.RESET
+                    + mapController.riverFinder(map.getTileBoard()[2 * i][j], 1));
             if (i != 0)
-                System.out.print(" " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 5)
-                        + mapController.getColorOfTile(map.getTileBoard()[2 * i][j]) + "     " + ANSI_COLOR + mapController.getColorOfTile(map.getTileBoard()[2 * i][j]) + mapController.tileOwner(map.getTileBoard()[2 * i][j]) +
-                        mapController.getColorOfTile(map.getTileBoard()[2 * i][j]) + "     " + Colors.RESET
-                        + mapController.riverFinder(map.getTileBoard()[2 * i][j], 1)
-                        + mapController.getColorOfTileOwner(map.getTileBoard()[2 * i - 1][j]) + mapController.getColorOfTile(map.getTileBoard()[2 * i - 1][j]) + "     " + mapController.tileImprovement(map.getTileBoard()[2 * i - 1][j]) + "    " + Colors.RESET);
-            else System.out.print(" " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 5)
-                    + mapController.getColorOfTile(map.getTileBoard()[2 * i][j]) + "     " + ANSI_COLOR + mapController.getColorOfTile(map.getTileBoard()[2 * i][j]) + mapController.tileOwner(map.getTileBoard()[2 * i][j]) +
-                    mapController.getColorOfTile(map.getTileBoard()[2 * i][j]) + "     " + Colors.RESET
-                    + mapController.riverFinder(map.getTileBoard()[2 * i][j], 1)
-                    + "            ");
+                System.out.print(mapController.getColorOfTileOwner(map.getTileBoard()[2 * i - 1][j])
+                        + mapController.getColorOfTile(map.getTileBoard()[2 * i - 1][j])
+                        + "     " + mapController.tileImprovement(map.getTileBoard()[2 * i - 1][j])
+                        + "    " + Colors.RESET);
+            else System.out.print("            ");
         }
-        if (i != 0) System.out.println(" " + mapController.riverFinder(map.getTileBoard()[2 * i][0], 2));
+        if (i != 0) System.out.println(mapController.getColorOfTile(map.getTileBoard()[2 * i - 1][3])
+                + " " + Colors.RESET + mapController.riverFinder(map.getTileBoard()[2 * i][0], 2));
         else System.out.println();
 
     }
@@ -560,22 +581,29 @@ public class PlayGame {
 
     private void rightOwnerName(int i) {
         String ANSI_COLOR = Colors.WHITE;
-
-        //owner name and color of right tiles
+        String ANSI_COLOR2 = Colors.WHITE;
+        //owner name and color of right tiles and left Improvement
         for (int j = 0; j < 4; j++) {
             ANSI_COLOR = mapController.getColorOfTileOwner(map.getTileBoard()[2 * i][j]);
-
-            if (i != 3)
-                System.out.print(" " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 4)
-                        + ANSI_COLOR + mapController.getColorOfTile(map.getTileBoard()[2 * i][j]) + "     " + mapController.tileImprovement(map.getTileBoard()[2 * i][j])
+            ANSI_COLOR2 = mapController.getColorOfTileOwner(map.getTileBoard()[2 * i + 1][j]);;
+            if (i != 3) {
+                if (j != 0) System.out.print(mapController.getColorOfTile(map.getTileBoard()[2 * i + 1][j - 1]));
+                System.out.print(" " + Colors.RESET + mapController.riverFinder(map.getTileBoard()[2 * i][j], 4)
+                        + ANSI_COLOR + mapController.getColorOfTile(map.getTileBoard()[2 * i][j])
+                        + "     " + mapController.tileImprovement(map.getTileBoard()[2 * i][j])
                         + "     " + Colors.RESET + mapController.riverFinder(map.getTileBoard()[2 * i][j], 2)
-                        + ANSI_COLOR + mapController.getColorOfTile(map.getTileBoard()[2 * i + 1][j]) + "     " + mapController.getColorOfTile(map.getTileBoard()[2 * i + 1][j]) + mapController.tileOwner(map.getTileBoard()[2 * i][j])
+                        + ANSI_COLOR2 + mapController.getColorOfTile(map.getTileBoard()[2 * i + 1][j])
+                        + "     " + mapController.getColorOfTile(map.getTileBoard()[2 * i + 1][j])
+                        + mapController.tileOwner(map.getTileBoard()[2 * i + 1][j])
                         + mapController.getColorOfTile(map.getTileBoard()[2 * i + 1][j]) + "    " + Colors.RESET);
-            else System.out.print(" " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 4)
-                    + ANSI_COLOR + mapController.getColorOfTile(map.getTileBoard()[2 * i][j]) + "     " + mapController.tileImprovement(map.getTileBoard()[2 * i][j])
-                    + "     " + Colors.RESET + mapController.riverFinder(map.getTileBoard()[2 * i][j], 2) + "            ");
+            } else System.out.print(" " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 4)
+                    + ANSI_COLOR + mapController.getColorOfTile(map.getTileBoard()[2 * i][j])
+                    + "     " + mapController.tileImprovement(map.getTileBoard()[2 * i][j])
+                    + "     " + Colors.RESET + mapController.riverFinder(map.getTileBoard()[2 * i][j], 2)
+                    + "            ");
         }
-        if (i != 3) System.out.println(" " + mapController.riverFinder(map.getTileBoard()[2 * i + 1][3], 1));
+        if (i != 3) System.out.println(mapController.getColorOfTile(map.getTileBoard()[2 * i + 1][3])
+                + " " + Colors.RESET + mapController.riverFinder(map.getTileBoard()[2 * i + 1][3], 1));
         else System.out.println();
 
     }
@@ -587,16 +615,25 @@ public class PlayGame {
         for (int j = 0; j < 4; j++) {
             if (i != 3) ANSI_COLOR = mapController.getColorOfTileOwner(map.getTileBoard()[2 * i + 1][j]);
 
-            if (i != 3)
+            if (i != 3) {
+                if (j != 0) System.out.print(mapController.getColorOfTile(map.getTileBoard()[2 * i + 1][j - 1]));
+                System.out.print("  " + Colors.RESET + mapController.riverFinder(map.getTileBoard()[2 * i][j], 4)
+                        + mapController.riverFinder(map.getTileBoard()[2 * i][j], 3)
+                        + mapController.riverFinder(map.getTileBoard()[2 * i][j], 2)
+                        + mapController.getColorOfTile(map.getTileBoard()[2 * i + 1][j])
+                        + "    " + ANSI_COLOR + mapController.getColorOfTile(map.getTileBoard()[2 * i + 1][j])
+                        + mapController.civilianUnit(map.getTileBoard()[2 * i + 1][0])
+                        + mapController.getColorOfTile(map.getTileBoard()[2 * i + 1][j])
+                        + "   " + ANSI_COLOR + mapController.getColorOfTile(map.getTileBoard()[2 * i + 1][j])
+                        + mapController.militaryUnit(map.getTileBoard()[2 * i + 1][j]) + "  " + Colors.RESET);
+            } else
                 System.out.print("  " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 4)
-                        + mapController.riverFinder(map.getTileBoard()[2 * i][j], 3) + mapController.riverFinder(map.getTileBoard()[2 * i][j], 2)
-                        + mapController.getColorOfTile(map.getTileBoard()[2 * i + 1][j]) + "    " + ANSI_COLOR + mapController.getColorOfTile(map.getTileBoard()[2 * i + 1][j]) + mapController.civilianUnit(map.getTileBoard()[2 * i + 1][0])
-                        + mapController.getColorOfTile(map.getTileBoard()[2 * i + 1][j]) + "   " + ANSI_COLOR + mapController.getColorOfTile(map.getTileBoard()[2 * i + 1][j]) + mapController.militaryUnit(map.getTileBoard()[2 * i + 1][j]) + "  " + Colors.RESET);
-            else
-                System.out.print("  " + mapController.riverFinder(map.getTileBoard()[2 * i][j], 4) + mapController.riverFinder(map.getTileBoard()[2 * i][j], 3)
+                        + mapController.riverFinder(map.getTileBoard()[2 * i][j], 3)
                         + mapController.riverFinder(map.getTileBoard()[2 * i][j], 2) + "             ");
         }
-        if (i != 3) System.out.println("  " + mapController.riverFinder(map.getTileBoard()[2 * i + 1][3], 1));
+        if (i != 3)
+            System.out.println(mapController.getColorOfTile(map.getTileBoard()[2 * i + 1][3])
+                + "  " + Colors.RESET + mapController.riverFinder(map.getTileBoard()[2 * i + 1][3], 1));
         else System.out.println();
 
     }

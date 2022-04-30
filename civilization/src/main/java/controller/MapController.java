@@ -128,7 +128,8 @@ public class MapController {
 
 
     public String tileImprovement(Tile tile) {
-        if (tile.getImprovement() == null) return "NIY";
+        if (tile.getOwner() == null) return "   ";
+        else if (tile.getImprovement() == null) return "NIY";
         else return tile.getImprovement().getName().substring(0, 3);
     }
 
@@ -159,12 +160,14 @@ public class MapController {
 
     public String getColorOfTileOwner(Tile tile) {
         String ANSI_COLOR = Colors.BLUE;
-        if (tile.getOwner() == null) ANSI_COLOR = Colors.BLACK;
+        if (tile.getOwner() == null) return ANSI_COLOR;
+        else if (tile.getOwner().getColor().equals("black")) ANSI_COLOR = Colors.BLACK;
         else if (tile.getOwner().getColor().equals("green")) ANSI_COLOR = Colors.GREEN;
         else if (tile.getOwner().getColor().equals("red")) ANSI_COLOR = Colors.RED;
         else if (tile.getOwner().getColor().equals("yellow")) ANSI_COLOR = Colors.YELLOW;
         else if (tile.getOwner().getColor().equals("purple")) ANSI_COLOR = Colors.PURPLE;
         else if (tile.getOwner().getColor().equals("cyan")) ANSI_COLOR = Colors.CYAN;
+        else if (tile.getOwner().getColor().equals("blue")) ANSI_COLOR = Colors.BLUE;
         return ANSI_COLOR;
     }
 
@@ -186,8 +189,12 @@ public class MapController {
             case "yellow" -> Colors.YELLOW_BACKGROUND;
             case "purple" -> Colors.PURPLE_BACKGROUND;
             case "green" -> Colors.GREEN_BACKGROUND;
-            case "cyan" -> Colors.CYAN_BACKGROUND;
-            default -> Colors.CYAN_BACKGROUND;
+            case "cyan" -> Colors.CYAN_BACKGROUND_BRIGHT;
+            case "brightBlue" -> Colors.BLUE_BACKGROUND_BRIGHT;
+            case "brightGreen" -> Colors.GREEN_BACKGROUND_BRIGHT;
+            case "brightBlack" -> Colors.BLACK_BACKGROUND_BRIGHT;
+            case "white" -> Colors.WHITE_BACKGROUND_BRIGHT;
+            default -> Colors.GREEN_BACKGROUND_BRIGHT;
         };
         return BACKGROUND_COLOR;
     }
