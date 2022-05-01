@@ -1,6 +1,9 @@
 package controller;
 
+import model.Improvement;
 import model.Technology;
+import model.Tile;
+import model.User;
 
 import java.util.ArrayList;
 
@@ -30,5 +33,19 @@ public class TechController {
             }
         }
         return prerequisites;
+    }
+    public ArrayList<Improvement> possibleImprovements(Tile tile, User user) {
+        ArrayList<Improvement> improvements = new ArrayList<>();
+        ArrayList<Technology> technologies = user.getTechnologies();
+        if (tile.getLand().isPassable() && tile.getOwner().equals(user)) {
+            for (Technology technology : technologies) {
+                if (technology.getIndex() == 0) {
+                    improvements.addAll(technology.getGivenImprovement());
+                }
+            }
+            return improvements;
+        }
+        else
+            return null;
     }
 }
