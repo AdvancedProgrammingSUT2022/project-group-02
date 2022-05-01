@@ -221,84 +221,44 @@ public class MapController {
         return neighborOfCity;
     }
 
-    public String showImprovments(User user, Tile tile) {
-        String output = null;
+    public String showImprovements(User user, Tile tile) {
+        StringBuilder output = new StringBuilder("");
         for (int i = 0; i < user.getTechnologies().size(); i++) {
-            if (user.getTechnologies().get(i).equals("Pottery")) {
-                if (tile.getImprovement().equals("Granary")) output += "Granary\n";
-                else if (tile.getImprovement().equals("Mekewap")) output += "Mekewap\n";
-                else if (tile.getImprovement().equals("Great Bath")) output += "Great Bath\n";
+            if (user.getTechnologies().get(i).getName().equals("Pottery")) {
+                if (tile.getImprovement().getName().equals("Mekewap"))
+                    output.append("Mekewap\n");
             }
-            if (user.getTechnologies().get(i).equals("Animal Husbandry")) {
-                if (tile.getImprovement().equals("Camp")) output += "Camp\n";
-                else if (tile.getImprovement().equals("Pasture")) output += "Pasture\n";
-                else if (tile.getImprovement().equals("Kurgan")) output += "Kurgan\n";
+            if (user.getTechnologies().get(i).getName().equals("Animal Husbandry")) {
+                switch (tile.getImprovement().getName()) {
+                    case "Camp" -> output.append("Camp\n");
+                    case "Pasture" -> output.append("Pasture\n");
+                    case "Kurgan" -> output.append("Kurgan\n");
+                }
             }
-            if (user.getTechnologies().get(i).equals("Mining")) {
-                if (tile.getImprovement().equals("Mine")) output += "Mine\n";
-                else if (tile.getImprovement().equals("Quarry")) output += "Quarry\n";
+            if (user.getTechnologies().get(i).getName().equals("Mining")) {
+                if (tile.getImprovement().getName().equals("Mine"))
+                    output.append("Mine\n");
+                else if (tile.getImprovement().getName().equals("Quarry"))
+                    output.append("Quarry\n");
             }
-            if (user.getTechnologies().get(i).equals("Sailing")) {
-                if (tile.getImprovement().equals("Fishing Boats")) output += "Fishing Boats\n";
-                else if (tile.getImprovement().equals("Galley")) output += "Galley\n";
-                else if (tile.getImprovement().equals("Viking Longship")) output += "Viking Longship\n";
-                else if (tile.getImprovement().equals("Bireme")) output += "Bireme\n";
+            if (user.getTechnologies().get(i).getName().equals("Sailing")) {
+                if (tile.getImprovement().getName().equals("Fishing Boat"))
+                    output.append("Fishing Boat\n");
             }
-            if (user.getTechnologies().get(i).equals("Astrology")) {
-                if (tile.getImprovement().equals("Stonehenge")) output += "Stonehenge\n";
-                else if (tile.getImprovement().equals("Holy Site")) output += "Holy Site\n";
-                else if (tile.getImprovement().equals("Lavra")) output += "Lavra\n";
-                else if (tile.getImprovement().equals("Shrine")) output += "Shrine\n";
+            if (user.getTechnologies().get(i).getName().equals("Irrigation")) {
+                if (tile.getImprovement().getName().equals("Plantation"))
+                    output.append("Plantation\n");
+                else
+                    output.append("Stepwell\n");
             }
-            if (user.getTechnologies().get(i).equals("Irrigation") && user.getTechnologies().contains("Pottery")) {
-                if (tile.getImprovement().equals("Hanging Gardens")) output += "Hanging Gardens\n";
-                else if (tile.getImprovement().equals("Plantation")) output += "Plantation\n";
-                else if (tile.getImprovement().equals("Stepwell")) output += "Stepwell\n";
-                else if (tile.getImprovement().equals("Palgum")) output += "Palgum\n";
-            }
-            if (user.getTechnologies().get(i).equals("Writing") && user.getTechnologies().contains("Pottery")) {
-                if (tile.getImprovement().equals("Etemenanki")) output += "Etemenanki\n";
-                else if (tile.getImprovement().equals("Campus")) output += "Campus\n";
-                else if (tile.getImprovement().equals("Seowon")) output += "Seowon\n";
-                else if (tile.getImprovement().equals("Observatory")) output += "Observatory\n";
-                else if (tile.getImprovement().equals("Library")) output += "Library\n";
-            }
-            if (user.getTechnologies().get(i).equals("Archery") && user.getTechnologies().contains("Animal Husbandry")) {
-                if (tile.getImprovement().equals("Archer")) output += "Archer\n";
-                else if (tile.getImprovement().equals("Pítati Archer")) output += "Pítati Archer\n";
-                else if (tile.getImprovement().equals("Hul'che")) output += "Hul'che\n";
-                else if (tile.getImprovement().equals("Temple of Artemis")) output += "Temple of Artemis\n";
-            }
-            if (user.getTechnologies().get(i).equals("Masonry") && user.getTechnologies().contains("Mining")) {
-                if (tile.getImprovement().equals("Battering Ram")) output += "Battering Ram\n";
-                else if (tile.getImprovement().equals("Ancient Walls")) output += "Ancient Walls\n";
-                else if (tile.getImprovement().equals("Pyramids")) output += "Pyramids\n";
-                else if (tile.getImprovement().equals("Great Wall")) output += "Great Wall\n";
-                else if (tile.getImprovement().equals("Nubian Pyramid")) output += "Nubian Pyramid\n";
-            }
-            if (user.getTechnologies().get(i).equals("Bronze Working") && user.getTechnologies().contains("Mining")) {
-                if (tile.getImprovement().equals("Spearman")) output += "Spearman\n";
-                else if (tile.getImprovement().equals("Hoplite")) output += "Hoplite\n";
-                else if (tile.getImprovement().equals("Encampment")) output += "Encampment\n";
-                else if (tile.getImprovement().equals("Ikanda")) output += "Ikanda\n";
-                else if (tile.getImprovement().equals("Barracks")) output += "Barracks\n";
-                else if (tile.getImprovement().equals("Basilikoi Paides")) output += "Basilikoi Paides\n";
-            }
-            if (user.getTechnologies().get(i).equals("Wheel") && user.getTechnologies().contains("Mining")) {
-                if (tile.getImprovement().equals("Heavy Chariot")) output += "Heavy Chariot\n";
-                else if (tile.getImprovement().equals("Maryannu Chariot Archer")) output += "Maryannu Chariot Archer\n";
-                else if (tile.getImprovement().equals("Water Mill")) output += "Water Mill\n";
+            if (user.getTechnologies().get(i).getName().equals("Masonry")) {
+                if (tile.getImprovement().getName().equals("Great Wall"))
+                    output.append("Great Wall\n");
+                else
+                    output.append("Nubian Pyramid\n");
             }
         }
-        return output;
+        return output.toString();
     }
-
-    public String selectImprovment(User user,String improvment,String availableImprovments){
-        if(availableImprovments.contains(improvment)){
-            Improvement improvment2 = new Improvement(improvment, 0, 0, 0);
-            user.setImprovements(improvment2);
-            return "improvment added successfully to your civilization";
-        }
-        return "unavailable improvment";
-    }
+    
 }
