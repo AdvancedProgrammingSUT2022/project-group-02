@@ -73,7 +73,7 @@ public class GameMenu {
         int width = 4;
         int[][] ancientGraph = readFromJsonGraph();
         ArrayList<Technology> ancientTechnologies = readFromJsonTech();
-        new PlayGame(players, height, width).run(scanner);
+        new PlayGame(players, height, width, ancientGraph, ancientTechnologies).run(scanner);
     }
     // get the usernames from input
     private String[] findUsernames(String input, Users users) {

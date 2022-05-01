@@ -16,11 +16,12 @@ public class PlayGame {
     private MapController mapController;
     private UnitController unitController;
     private SettlerController settlerController;
+    private TechController techController;
     private int role;
     private int height;
     private int width;
 
-    public PlayGame(ArrayList<User> players, int height, int width) {
+    public PlayGame(ArrayList<User> players, int height, int width, int[][] ancientGraph, ArrayList<Technology> ancientTechnology) {
         this.players = players;
         this.map = new Maps(height, width);
         gameController = new GameController(players, 1, map, height, width);
@@ -29,6 +30,7 @@ public class PlayGame {
         settlerController = new SettlerController();
         this.height = height;
         this.width = width;
+        techController = new TechController(ancientGraph, ancientTechnology);
     }
 
     // provide some information for players
