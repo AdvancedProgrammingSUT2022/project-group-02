@@ -1,5 +1,6 @@
 package view;
 
+import com.google.gson.stream.JsonToken;
 import controller.*;
 import enums.Colors;
 import enums.RegexEnums;
@@ -52,6 +53,9 @@ public class PlayGame {
         System.out.println("notice ---> x and y are coordinates of destination , make sure to use valid coordinates");
         System.out.println("to select another tile :");
         System.out.println("select tile -x <x> -y <y>");
+        System.out.println("to see possible improvements which can be implemented on this tile :");
+        System.out.println("show possible improvements");
+        System.out.println("**********************");
         System.out.println("to create city with settler :");
         System.out.println("place city here");
     }
@@ -160,9 +164,51 @@ public class PlayGame {
             else if (tileInput.trim().equals("place city here")) {
                 if (conditionsForPlaceCity(tileInput, origin))
                     createCity(origin, user);
-            } else
+            }
+            // order worker to improve the tile
+            else if (tileInput.trim().equals("show possible improvements")) {
+                if (origin.isCivilianUnitExists() &&
+                        origin.getCivilianUnit().getOwner().equals(user) &&
+                        origin.getCivilianUnit().getName().equals("worker"))
+                    showImprovements(origin, user, scanner);
+                else
+                    System.out.println("there is no worker in this tile");
+            }
+            else
                 System.out.println("invalid command");
         }
+    }
+
+    private void showImprovements(Tile tile, User user, Scanner scanner) {
+        ArrayList<Improvement> improvements = techController.possibleImprovements(tile, user);
+        if (tile.getImprovement() != null)
+            System.out.println("your current improvement on this tile is :" + tile.getImprovement().getName());
+        int index = 1;
+        // print possible improvements with detail
+        for (Improvement improvement : improvements) {
+            System.out.println(index + "- " + improvement.getName() + "\nProduction : " + improvement.getProductionRate() + "\nFood : " + improvement.getFoodRate() + "\nGold : " + improvement.getGoldRate());
+            index++;
+        }
+        System.out.println("choose an improvement by index to be applied on this tile");
+        System.out.println("press <improvement exit> to get out of here");
+        String improvementInput;
+        while (true) {
+            improvementInput = scanner.nextLine();
+            if (improvementInput.equals("improvement exit"))
+                return;
+            else if (Pattern.matches("[\\d+]", improvementInput)) {
+                index = Integer.parseInt(improvementInput);
+                if (index <= improvements.size() && index >= 1) {
+                    tile.setInProgress(true);
+                    // TODO worker should work here until the work be finished
+                }
+                else
+                    System.out.println("invalid number");
+            }
+            else
+                System.out.println("invalid command");
+        }
+
     }
 
     private void cityPage(City city, User user, Scanner scanner) {

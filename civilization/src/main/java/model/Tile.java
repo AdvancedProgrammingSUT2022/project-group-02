@@ -40,6 +40,7 @@ public class Tile {
         this.riverBorder = riverBorder;
         this.terrain = terrain;
         this.resource = resource;
+        inProgress = false;
     }
 
     public boolean isNearRiver() {

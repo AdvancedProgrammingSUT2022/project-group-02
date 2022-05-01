@@ -37,14 +37,19 @@ public class TechController {
     public ArrayList<Improvement> possibleImprovements(Tile tile, User user) {
         ArrayList<Improvement> improvements = new ArrayList<>();
         ArrayList<Technology> technologies = user.getTechnologies();
+        // add every possible tile to list
         if (tile.getLand().isPassable() && tile.getOwner().equals(user)) {
             for (Technology technology : technologies) {
                 if (technology.getIndex() == 0) {
                     improvements.addAll(technology.getGivenImprovement());
                 }
             }
+            // remove the current improvement from suggested list
+            if (tile.getImprovement() != null)
+                improvements.remove(tile.getImprovement());
             return improvements;
         }
+        // if the user wasn't the owner of the tile or the tile wasn't proper for improving
         else
             return null;
     }
