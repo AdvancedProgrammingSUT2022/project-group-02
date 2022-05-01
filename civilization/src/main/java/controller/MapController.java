@@ -295,7 +295,7 @@ public class MapController {
 
     public String selectImprovment(User user,String improvment,String availableImprovments){
         if(availableImprovments.contains(improvment)){
-            Improvement improvment2 = new Improvement(improvment);
+            Improvement improvment2 = new Improvement(improvment, 0, 0, 0);
             user.setImprovements(improvment2);
             return "improvment added successfully to your civilization";
         }

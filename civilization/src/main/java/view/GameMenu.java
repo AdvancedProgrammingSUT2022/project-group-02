@@ -1,10 +1,19 @@
 package view;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import controller.MapController;
 import controller.Users;
+import model.Improvement;
+import model.Technology;
 import model.User;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -62,6 +71,8 @@ public class GameMenu {
         // temporary
         int height = 8;
         int width = 4;
+        int[][] ancientGraph = readFromJsonGraph();
+        ArrayList<Technology> ancientTechnologies = readFromJsonTech();
         new PlayGame(players, height, width).run(scanner);
     }
     // get the usernames from input
@@ -136,5 +147,24 @@ public class GameMenu {
             }
         }
         return true;
+    }
+
+    private int[][] readFromJsonGraph() {
+        try {
+            String all = new String(Files.readAllBytes(Paths.get("TechFile/graph.json")));
+            return new Gson().fromJson(all, int[][].class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    private ArrayList<Technology> readFromJsonTech() {
+        try {
+            String all = new String(Files.readAllBytes(Paths.get("TechFile/tech.json")));
+            return new Gson().fromJson(all, new TypeToken<List<Technology>>(){}.getType());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

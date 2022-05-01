@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class Technology {
     private final String name;
-    private final ArrayList<Product> givenProducts;
+    private final ArrayList<Improvement> givenImprovement;
     private final int index;
-    public Technology(String name, ArrayList<Product> givenProducts, int index) {
+    public Technology(String name, ArrayList<Improvement> givenImprovement, int index) {
         this.name = name;
-        this.givenProducts = givenProducts;
+        this.givenImprovement = givenImprovement;
         this.index = index;
     }
 
@@ -16,8 +16,8 @@ public class Technology {
         return name;
     }
 
-    public ArrayList<Product> getGivenProducts() {
-        return givenProducts;
+    public ArrayList<Improvement> getGivenImprovement() {
+        return givenImprovement;
     }
 
     public int getIndex() {

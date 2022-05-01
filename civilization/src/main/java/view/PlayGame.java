@@ -1,9 +1,6 @@
 package view;
 
-import controller.GameController;
-import controller.MapController;
-import controller.SettlerController;
-import controller.UnitController;
+import controller.*;
 import enums.Colors;
 import enums.RegexEnums;
 import model.*;
