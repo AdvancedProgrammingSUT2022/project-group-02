@@ -220,45 +220,4 @@ public class MapController {
         }
         return neighborOfCity;
     }
-
-    public String showImprovements(User user, Tile tile) {
-        StringBuilder output = new StringBuilder("");
-        for (int i = 0; i < user.getTechnologies().size(); i++) {
-            if (user.getTechnologies().get(i).getName().equals("Pottery")) {
-                if (tile.getImprovement().getName().equals("Mekewap"))
-                    output.append("Mekewap\n");
-            }
-            if (user.getTechnologies().get(i).getName().equals("Animal Husbandry")) {
-                switch (tile.getImprovement().getName()) {
-                    case "Camp" -> output.append("Camp\n");
-                    case "Pasture" -> output.append("Pasture\n");
-                    case "Kurgan" -> output.append("Kurgan\n");
-                }
-            }
-            if (user.getTechnologies().get(i).getName().equals("Mining")) {
-                if (tile.getImprovement().getName().equals("Mine"))
-                    output.append("Mine\n");
-                else if (tile.getImprovement().getName().equals("Quarry"))
-                    output.append("Quarry\n");
-            }
-            if (user.getTechnologies().get(i).getName().equals("Sailing")) {
-                if (tile.getImprovement().getName().equals("Fishing Boat"))
-                    output.append("Fishing Boat\n");
-            }
-            if (user.getTechnologies().get(i).getName().equals("Irrigation")) {
-                if (tile.getImprovement().getName().equals("Plantation"))
-                    output.append("Plantation\n");
-                else
-                    output.append("Stepwell\n");
-            }
-            if (user.getTechnologies().get(i).getName().equals("Masonry")) {
-                if (tile.getImprovement().getName().equals("Great Wall"))
-                    output.append("Great Wall\n");
-                else
-                    output.append("Nubian Pyramid\n");
-            }
-        }
-        return output.toString();
-    }
-    
 }
