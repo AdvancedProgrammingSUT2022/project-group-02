@@ -71,8 +71,8 @@ public class GameMenu {
         // temporary
         int height = 8;
         int width = 4;
-        int[][] ancientGraph = readFromJsonGraph();
-        ArrayList<Technology> ancientTechnologies = readFromJsonTech();
+        int[][] ancientGraph = users.readFromJsonGraph();
+        ArrayList<Technology> ancientTechnologies = users.readFromJsonTech();
         new PlayGame(players, height, width, ancientGraph, ancientTechnologies).run(scanner);
     }
     // get the usernames from input
@@ -147,24 +147,5 @@ public class GameMenu {
             }
         }
         return true;
-    }
-
-    private int[][] readFromJsonGraph() {
-        try {
-            String all = new String(Files.readAllBytes(Paths.get("TechFile/graph.json")));
-            return new Gson().fromJson(all, int[][].class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    private ArrayList<Technology> readFromJsonTech() {
-        try {
-            String all = new String(Files.readAllBytes(Paths.get("TechFile/tech.json")));
-            return new Gson().fromJson(all, new TypeToken<List<Technology>>(){}.getType());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 }

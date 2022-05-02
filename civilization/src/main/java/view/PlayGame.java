@@ -43,6 +43,7 @@ public class PlayGame {
         System.out.println("press \"show board\" to see the map");
         System.out.println("press \"show players\" to see the players");
         System.out.println("press \"show information\" to see the information of current player");
+        System.out.println("press \"choose technology\" to choose a technology for research");
         System.out.println("to select a tile :");
         System.out.println("select tile -x <x> -y <y>");
         System.out.println("**********************");
@@ -119,7 +120,13 @@ public class PlayGame {
                             System.out.println("invalid tile");
                     } else
                         System.out.println("invalid coordinates");
-                } else if (input.trim().equals("show board")) {
+                }
+
+                else if (input.trim().equals("choose technology")) {
+                    selectTech(user, scanner);
+                }
+
+                else if (input.trim().equals("show board")) {
                     // add all visible tiles and update visited files
                     mapController.addAllVisibleAndVisitedTiles(user);
                     showBoard(user);
@@ -136,6 +143,10 @@ public class PlayGame {
                 role = 0;
             nextTurn = true;
         }
+    }
+
+    private void selectTech(User user, Scanner scanner) {
+
     }
 
     private void selectedTile(Scanner scanner, Tile origin, int xOrigin, int yOrigin, User user) {

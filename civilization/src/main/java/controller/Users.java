@@ -2,6 +2,7 @@ package controller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import model.Technology;
 import model.User;
 
 import java.io.FileWriter;
@@ -77,5 +78,25 @@ public class Users {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    // read the graph and prerequisites
+    public int[][] readFromJsonGraph() {
+        try {
+            String all = new String(Files.readAllBytes(Paths.get("TechFile/graph.json")));
+            return new Gson().fromJson(all, int[][].class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    // read all technologies
+    public ArrayList<Technology> readFromJsonTech() {
+        try {
+            String all = new String(Files.readAllBytes(Paths.get("TechFile/tech.json")));
+            return new Gson().fromJson(all, new TypeToken<List<Technology>>(){}.getType());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
