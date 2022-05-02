@@ -50,4 +50,30 @@ public class TechController {
         else
             return null;
     }
+
+    public ArrayList<Technology> getUserResearches(User user) {
+        ArrayList<Technology> technologies = new ArrayList<>();
+        ArrayList<Technology> userTechnologies = user.getTechnologies();
+        ArrayList<Technology> prerequisites;
+        boolean treeTech = true;
+        for (Technology ancientTechnology : ancientTechnologies) {
+            // first check user do not have this
+            if (!userTechnologies.contains(ancientTechnology)) {
+                prerequisites = getPrerequisitesAncientTech(ancientTechnology);
+                if (prerequisites != null) {
+                    // check if all prerequisites are exists in user technologies
+                    for (int i = 0; i < prerequisites.size(); i++) {
+                        if (!userTechnologies.contains(prerequisites.get(i))) {
+                            treeTech = false;
+                            i = prerequisites.size();
+                        }
+                    }
+                }
+                if (treeTech)
+                    technologies.add(ancientTechnology);
+                treeTech = true;
+            }
+        }
+        return technologies;
+    }
 }

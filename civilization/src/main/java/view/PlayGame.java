@@ -147,6 +147,34 @@ public class PlayGame {
 
     private void selectTech(User user, Scanner scanner) {
 
+        ArrayList<Technology> technologies = techController.getUserResearches(user);
+        int index = 1;
+        for (Technology technology : technologies) {
+            System.out.println(index + "- " + technology.getName());
+            if (technology.getGivenImprovement() != null) {
+                System.out.println("given improvements : ");
+                for (Improvement improvement : technology.getGivenImprovement())
+                    System.out.println("name: " + improvement.getName() + " | production: " + improvement.getProductionRate() + " | food: " + improvement.getFoodRate() + " | gold: " + improvement.getGoldRate());
+
+            }
+        }
+        System.out.println("choose an index | <tech exit> to get out");
+        String techInput;
+        while (true) {
+            techInput = scanner.nextLine();
+            if (techInput.trim().equals("tech exit"))
+                return;
+            else if (Pattern.matches("[\\d+]", techInput)) {
+                index = Integer.parseInt(techInput);
+                if (index >= 1 && index <= technologies.size()) {
+                    // TODO choose the tech with this index to research on it
+                }
+                else
+                    System.out.println("invalid number");
+            }
+            else
+                System.out.println("invalid command");
+        }
     }
 
     private void selectedTile(Scanner scanner, Tile origin, int xOrigin, int yOrigin, User user) {
