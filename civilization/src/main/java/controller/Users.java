@@ -99,4 +99,24 @@ public class Users {
         }
         return null;
     }
+    // write graph to json
+    public void writeToJson(int[][] graph) {
+        try {
+            FileWriter fileWriter = new FileWriter("TechFile/graph.json");
+            fileWriter.write(new Gson().toJson(graph));
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    // write technologies to json
+    public void writeToJson(ArrayList<Technology> technologies) {
+        try {
+            FileWriter fileWriter = new FileWriter("TechFile/tech.json");
+            fileWriter.write(new Gson().toJson(technologies));
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

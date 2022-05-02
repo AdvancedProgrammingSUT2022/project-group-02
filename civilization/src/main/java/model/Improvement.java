@@ -6,12 +6,14 @@ public class Improvement {
     private int productionRate;
     private int foodRate;
     private int goldRate;
+    private int price;
 
-    public Improvement(String name, int productionRate, int foodRate, int goldRate) {
+    public Improvement(String name, int productionRate, int foodRate, int goldRate, int price) {
         this.name = name;
         this.productionRate = productionRate;
         this.foodRate = foodRate;
         this.goldRate = goldRate;
+        this.price = price;
     }
 
     public String getName() {
@@ -40,5 +42,13 @@ public class Improvement {
 
     public int getFoodRate() {
         return foodRate;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }

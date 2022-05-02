@@ -72,6 +72,8 @@ public class GameMenu {
         int height = 8;
         int width = 4;
         int[][] ancientGraph = users.readFromJsonGraph();
+        ArrayList<Technology> technologies = ancientTechnologies();
+        users.writeToJson(technologies);
         ArrayList<Technology> ancientTechnologies = users.readFromJsonTech();
         new PlayGame(players, height, width, ancientGraph, ancientTechnologies).run(scanner);
     }
@@ -147,5 +149,49 @@ public class GameMenu {
             }
         }
         return true;
+    }
+    private ArrayList<Technology> ancientTechnologies() {
+        ArrayList<Technology> technologies = new ArrayList<>();
+
+        ArrayList<Improvement> improvements = new ArrayList<>();
+        improvements.add(new Improvement("Mekewap", 1, 0, 0, 5));
+        technologies.add(new Technology("Pottery", improvements, 0, 10));
+        //pottery
+        improvements = new ArrayList<>();
+        improvements.add(new Improvement("Camp", 0, 0, 1, 5));
+        improvements.add(new Improvement("Pasture", 1, 0, 0, 5));
+        improvements.add(new Improvement("Kurgan", 0, 0, 3, 5));
+        technologies.add(new Technology("Animal Husbandry", improvements, 1, 10));
+        //mining
+        improvements = new ArrayList<>();
+        improvements.add(new Improvement("Mine", 1, 0, 0, 5));
+        improvements.add(new Improvement("Quarry", 1, 0, 0, 5));
+        technologies.add(new Technology("Mining", improvements, 2, 10));
+        //sailing
+        improvements = new ArrayList<>();
+        improvements.add(new Improvement("Fishing Boat", 0, 1, 0, 5));
+        technologies.add(new Technology("Sailing", improvements, 3, 10));
+        //astrology
+        technologies.add(new Technology("Astrology", null, 4, 10));
+        //irrigation
+        improvements = new ArrayList<>();
+        improvements.add(new Improvement("Plantation", 0, 0, 2, 5));
+        improvements.add(new Improvement("Stepwell", 0, 1, 0, 5));
+        technologies.add(new Technology("Irrigation", improvements, 5, 10));
+        //writing
+        technologies.add(new Technology("Writing", null, 6, 10));
+        //archery
+        technologies.add(new Technology("Archery", null, 7, 10));
+        //masonry
+        improvements = new ArrayList<>();
+        improvements.add(new Improvement("Great Wall", 0, 0, 0, 5));
+        improvements.add(new Improvement("Nubial Pyramid", 0, 2, 0, 5));
+        technologies.add(new Technology("Masonary", improvements, 8, 10));
+        //bronze working
+        technologies.add(new Technology("Bronze Working", null, 9, 10));
+        //wheel
+        technologies.add(new Technology("Wheel", null, 10, 10));
+
+        return technologies;
     }
 }
