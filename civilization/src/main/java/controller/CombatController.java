@@ -1,27 +1,37 @@
 package controller;
 
-import model.Maps;
-import model.Unit;
-import model.User;
+import enums.Colors;
+import model.*;
 
 public class CombatController extends UnitController{
 
-    public boolean setCellForAttacking(int x, int y, Unit unit, User user, Maps map) {
-        return false;
-    }
-    public void AttackToChosenCell(int x, int y, Unit unit, User user, Maps map) {
+    //TODO : every city has a combat strength and a HP and a attacking point
 
+    public void MeleeAttack(MilitaryUnit militaryUnit, User user){
+        militaryUnit.setHP(militaryUnit.getHP() - militaryUnit.getAttackingTarget().getAttackPoint());
+        if (attackerHPCheck(militaryUnit)){
+            militaryUnit.getAttackingTarget().setHP(militaryUnit.getAttackingTarget().getHP() - militaryUnit.getAttackPoint());
+            if (!defenderHPCheck(militaryUnit.getAttackingTarget())) attackerWinHandler(militaryUnit, user);
+        } else {
+            user.removeUnit(militaryUnit);
+            militaryUnit.getTile().setMilitaryUnit(null);
+        }
     }
-    private void shortRangeAttack(int x, int y, Unit unit, User user, Maps map) {
 
+    public void attackerWinHandler(MilitaryUnit militaryUnit, User user){
+        if (!militaryUnit.getAttackingTarget().isCity()){
+            militaryUnit.getAttackingTarget().getOwner().removeUnit(militaryUnit.getAttackingTarget());
+            militaryUnit.getAttackingTarget().getTile().setMilitaryUnit(null);
+        } else {
+            //(Audience : mohammad)|(Time : next phase)
+            // TODO : we have 3 choice so print them and get user input and do the consequence of that choice
+        }
     }
-    private void longRangeAttack(int x, int y, Unit unit, User user, Maps map) {
 
+    public boolean attackerHPCheck(PhysicalObject physicalObject) {
+        return physicalObject.getHP() > 0;
     }
-    public boolean attackerHPCheck(Unit unit) {
-        return unit.getHP() > 0;
-    }
-    public boolean defenderHPCheck(Unit unit) {
-        return unit.getHP() > 0;
+    public boolean defenderHPCheck(PhysicalObject physicalObject) {
+        return physicalObject.getHP() > 0;
     }
 }
