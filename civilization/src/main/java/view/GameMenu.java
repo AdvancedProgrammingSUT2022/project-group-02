@@ -167,10 +167,10 @@ public class GameMenu {
         improvements.add(new Improvement("Mine", 1, 0, 0, 5));
         improvements.add(new Improvement("Quarry", 1, 0, 0, 5));
         technologies.add(new Technology("Mining", improvements, 2, 10));
-        //sailing
-        improvements = new ArrayList<>();
-        improvements.add(new Improvement("Fishing Boat", 0, 1, 0, 5));
-        technologies.add(new Technology("Sailing", improvements, 3, 10));
+//        //sailing
+//        improvements = new ArrayList<>();
+//        improvements.add(new Improvement("Fishing Boat", 0, 1, 0, 5));
+//        technologies.add(new Technology("Sailing", improvements, 3, 10));
         //astrology
         technologies.add(new Technology("Astrology", null, 4, 10));
         //irrigation

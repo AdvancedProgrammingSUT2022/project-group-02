@@ -1,10 +1,13 @@
 package model;
 
-public class Unit {
+import handlers.Handlers;
+import handlers.MPHandler;
+import handlers.WorkerWorkingHandler;
 
+public class Unit extends PhysicalObject{
+
+    Handlers MPHandler = new MPHandler();
     private String name;
-    private Tile tile;
-    private int HP;
     private int price;
     private int level;
     private int MP;
@@ -12,12 +15,11 @@ public class Unit {
     private int XP;
     private int combatStrength;
     private int rangeCombatStrength;
-    private User owner;
 
-    public Unit(String name, Tile tile, int HP, int price, int level, int MP, int combatStrength, int rangeCombatStrength, User owner) {
+    public Unit(String name, Tile tile, int price, int level, int MP, int combatStrength, int rangeCombatStrength,
+                User owner, int attackPoint, int HP) {
+        super(false, attackPoint, HP, owner, tile);
         this.name = name;
-        this.tile = tile;
-        this.HP = HP;
         this.price = price;
         this.level = level;
         this.MP = MP;
@@ -25,7 +27,6 @@ public class Unit {
         this.rangeCombatStrength = rangeCombatStrength;
         intact = true;
         XP = 0;
-        this.owner = owner;
     }
 
     public String getName() {
@@ -34,22 +35,6 @@ public class Unit {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Tile getTile() {
-        return tile;
-    }
-
-    public void setTile(Tile tile) {
-        this.tile = tile;
-    }
-
-    public int getHP() {
-        return HP;
-    }
-
-    public void setHP(int HP) {
-        this.HP = HP;
     }
 
     public int getPrice() {
@@ -108,11 +93,7 @@ public class Unit {
         this.rangeCombatStrength = rangeCombatStrength;
     }
 
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public Handlers getMPHandler() {
+        return MPHandler;
     }
 }
