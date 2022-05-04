@@ -9,7 +9,7 @@ public class Tile {
     private final int y;
     private ArrayList<PhysicalObject> physicalObjects;
     private User owner;
-    private Land land;
+    private Terrain land;
     private int fogOfWarLevel;
     private boolean militaryUnitExists;
     private boolean civilianUnitExists;
@@ -20,13 +20,13 @@ public class Tile {
     private boolean isNearRiver;
     private boolean[] riverBorder;
     private Improvement improvement;
-    private Terrain terrain;
+    private Feature terrain;
     private Resource resource;
     private City city;
     private int price;
 
-    public Tile (int x, int y, User owner, Land land, int fogOfWarLevel, boolean isNearRiver,
-                 boolean[] riverBorder, Resource resource, Terrain terrain) {
+    public Tile (int x, int y, User owner, Terrain land, int fogOfWarLevel, boolean isNearRiver,
+                 boolean[] riverBorder, Resource resource, Feature terrain) {
         this.x = x;
         this.y = y;
         this.owner = owner;
@@ -49,7 +49,7 @@ public class Tile {
         return isNearRiver;
     }
 
-    public Terrain getTerrain() {
+    public Feature getTerrain() {
         return terrain;
     }
 
@@ -57,7 +57,7 @@ public class Tile {
         return resource;
     }
 
-    public void setTerrain(Terrain terrain) {
+    public void setTerrain(Feature terrain) {
         this.terrain = terrain;
     }
 
@@ -109,7 +109,7 @@ public class Tile {
         return fogOfWarLevel;
     }
 
-    public Land getLand() {
+    public Terrain getLand() {
         return land;
     }
 
@@ -129,7 +129,7 @@ public class Tile {
         this.inProgress = inProgress;
     }
 
-    public void setLand(Land land) {
+    public void setLand(Terrain land) {
         this.land = land;
     }
 

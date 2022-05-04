@@ -1,6 +1,5 @@
 package view;
 
-import com.google.gson.stream.JsonToken;
 import controller.*;
 import enums.Colors;
 import enums.RegexEnums;
@@ -475,14 +474,14 @@ public class PlayGame {
         //fill map
         //should change with file
 
-        Terrain jungle = new Terrain("jungle", 2, 1, 0.25, 0, 1);
-        Land Desert = new Land("Desert", "yellow", 1, 0, -0.33, 0, 0, true);
-        Land GrassLand = new Land("Grassland", "green", 1, 2, -0.33, 0, 0, true);
-        Land Hill = new Land("Hill", "purple", 2, 0, 0.25, 0, 2, true);
-        Land Mountain = new Land("Mountain", "brightBlack", 0, 0, 0, 0, 0, false);
-        Land Ocean = new Land("Ocean", "brightBlue", 0, 0, 0, 0, 0, false);
-        Land Plain = new Land("Plain", "red", 1, 1, -0.33, 0, 1, true);
-        Land SnowLand = new Land("Snow", "white", 1, 0, -0.33, 0, 0, true);
+        Feature jungle = new Feature("jungle", 2, 1, 0.25, 0, 1);
+        Terrain Desert = new Terrain("Desert", "yellow", 1, 0, -0.33, 0, 0, true);
+        Terrain GrassLand = new Terrain("Grassland", "green", 1, 2, -0.33, 0, 0, true);
+        Terrain Hill = new Terrain("Hill", "purple", 2, 0, 0.25, 0, 2, true);
+        Terrain Mountain = new Terrain("Mountain", "brightBlack", 0, 0, 0, 0, 0, false);
+        Terrain Ocean = new Terrain("Ocean", "brightBlue", 0, 0, 0, 0, 0, false);
+        Terrain Plain = new Terrain("Plain", "red", 1, 1, -0.33, 0, 1, true);
+        Terrain SnowLand = new Terrain("Snow", "white", 1, 0, -0.33, 0, 0, true);
 
         User userForCheck1 = new User("Amir", "Amir", "Amir");
         userForCheck1.setColor("purple");
