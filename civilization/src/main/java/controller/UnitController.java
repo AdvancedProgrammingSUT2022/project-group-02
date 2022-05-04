@@ -1,8 +1,5 @@
 package controller;
-import model.Maps;
-import model.Tile;
-import model.Unit;
-import model.User;
+import model.*;
 
 import java.util.ArrayList;
 
@@ -13,7 +10,6 @@ public class UnitController {
         units = new ArrayList<>();
     }
     public boolean moving (Unit unit, User user, int x, int y, Maps map) {
-
         return false;
     }
     public void createUnit (Unit unit, User user) {

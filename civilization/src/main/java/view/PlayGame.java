@@ -386,7 +386,8 @@ public class PlayGame {
                 Tile destination = gameController.findTile(xDestination, yDestination);
                 if (destination != null) {
                     if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
-                        if (!destination.isMilitaryUnitExists() && !destination.getLand().getName().equals("mountain") && !destination.getLand().getName().equals("ocean"))
+                        if (!destination.isMilitaryUnitExists() && !destination.getTerrain().getName().equals("mountain")
+                                && !destination.getTerrain().getName().equals("ocean"))
                             moveUnit(origin, destination, origin.getMilitaryUnit(), user, true);
                         else
                             System.out.println("can't move a unit to this tile");
@@ -423,13 +424,13 @@ public class PlayGame {
         }
         int mp = 0;
         for (Tile value : tilesInTheWay) {
-            if (value.getLand().getMovementPrice() > user.getTurns()) {
+            if (value.getTerrain().getMovementPrice() > user.getTurns()) {
                 gameController.moveUnit(origin, value, unit, isMilitary);
                 System.out.println(mp + " movement by unit to get to the destination");
                 return;
             }
-            mp += value.getLand().getMovementPrice();
-            user.setTurns(user.getTurns() - value.getLand().getMovementPrice());
+            mp += value.getTerrain().getMovementPrice();
+            user.setTurns(user.getTurns() - value.getTerrain().getMovementPrice());
         }
         gameController.moveUnit(origin, destination, unit, isMilitary);
         System.out.println(mp + " movement by unit to get to the destination");
@@ -476,12 +477,12 @@ public class PlayGame {
 
         Feature jungle = new Feature("jungle", 2, 1, 0.25, 0, 1);
         Terrain Desert = new Terrain("Desert", "yellow", 1, 0, -0.33, 0, 0, true);
-        Terrain GrassLand = new Terrain("Grassland", "green", 1, 2, -0.33, 0, 0, true);
+        Terrain grassTerrain = new Terrain("Grassland", "green", 1, 2, -0.33, 0, 0, true);
         Terrain Hill = new Terrain("Hill", "purple", 2, 0, 0.25, 0, 2, true);
         Terrain Mountain = new Terrain("Mountain", "brightBlack", 0, 0, 0, 0, 0, false);
         Terrain Ocean = new Terrain("Ocean", "brightBlue", 0, 0, 0, 0, 0, false);
         Terrain Plain = new Terrain("Plain", "red", 1, 1, -0.33, 0, 1, true);
-        Terrain SnowLand = new Terrain("Snow", "white", 1, 0, -0.33, 0, 0, true);
+        Terrain snowTerrain = new Terrain("Snow", "white", 1, 0, -0.33, 0, 0, true);
 
         User userForCheck1 = new User("Amir", "Amir", "Amir");
         userForCheck1.setColor("purple");
@@ -501,17 +502,17 @@ public class PlayGame {
         Tile tile2 = new Tile(0, 1, null, Mountain, 0, false, noRiver, null, jungle);
         Tile tile3 = new Tile(0, 2, null, Mountain, 0, false, noRiver, null, jungle);
         Tile tile4 = new Tile(0, 3, null, Mountain, 0, true, riverBorder6, null, jungle);
-        Tile tile5 = new Tile(1, 0, userForCheck2, GrassLand, 0, true, riverBorder3, null, jungle);
-        Tile tile6 = new Tile(1, 1, userForCheck2, GrassLand, 0, false, noRiver, null, jungle);
+        Tile tile5 = new Tile(1, 0, userForCheck2, grassTerrain, 0, true, riverBorder3, null, jungle);
+        Tile tile6 = new Tile(1, 1, userForCheck2, grassTerrain, 0, false, noRiver, null, jungle);
         Tile tile7 = new Tile(1, 2, userForCheck2, Plain, 0, true, riverBorder4, null, jungle);
         Tile tile8 = new Tile(1, 3, null, Ocean, 0, false, noRiver, null, jungle);
         Tile tile9 = new Tile(2, 0, null, Ocean, 0, true, riverBorder1, null, jungle);
-        Tile tile10 = new Tile(2, 1, userForCheck1, GrassLand, 0, true, riverBorder3, null, jungle);
-        Tile tile11 = new Tile(2, 2, userForCheck2, GrassLand, 0, true, riverBorder4, null, jungle);
+        Tile tile10 = new Tile(2, 1, userForCheck1, grassTerrain, 0, true, riverBorder3, null, jungle);
+        Tile tile11 = new Tile(2, 2, userForCheck2, grassTerrain, 0, true, riverBorder4, null, jungle);
         Tile tile12 = new Tile(2, 3, userForCheck1, Plain, 0, true, riverBorder5, null, jungle);
         Tile tile13 = new Tile(3, 0, userForCheck1, Hill, 0, true, riverBorder7, null, jungle);
         Tile tile14 = new Tile(3, 1, null, Mountain, 0, true, riverBorder2, null, jungle);
-        Tile tile15 = new Tile(3, 2, userForCheck2, SnowLand, 0, true, riverBorder5, null, jungle);
+        Tile tile15 = new Tile(3, 2, userForCheck2, snowTerrain, 0, true, riverBorder5, null, jungle);
         Tile tile16 = new Tile(3, 3, null, Ocean, 0, false, noRiver, null, jungle);
         Tile tile17 = new Tile(4, 0, null, Ocean, 0, false, noRiver, null, jungle);
         Tile tile18 = new Tile(4, 1, userForCheck1, Desert, 0, true, riverBorder7, null, jungle);

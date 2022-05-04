@@ -38,7 +38,7 @@ public class TechController {
         ArrayList<Improvement> improvements = new ArrayList<>();
         ArrayList<Technology> technologies = user.getTechnologies();
         // add every possible tile to list
-        if (tile.getLand().isPassable() && tile.getOwner().equals(user)) {
+        if (tile.getTerrain().isPassable() && tile.getOwner().equals(user)) {
             for (Technology technology : technologies)
                 improvements.addAll(technology.getGivenImprovement());
             // remove the current improvement from suggested list

@@ -294,7 +294,8 @@ public class User {
         }
     }
 
-    public void removeUnit(Unit unit) {
+    public void removeUnit(PhysicalObject unit) {
+        //(Audience : Amir)TODO : check that can a child class be equal with parent class?
         int index = 0;
         for (Unit unit1 : Units) {
             if (unit1.equals(unit)) {

@@ -75,15 +75,15 @@ public class MapController {
         //distance to destination
         int distance = findDistance(bestChoice, destination);
         //cost of movement in the land of the tile
-        int cost = bestChoice.getLand().getMovementPrice();
+        int cost = bestChoice.getTerrain().getMovementPrice();
         int fullCost = distance + cost;
         for (int i = 1; i < tile.getNeighbors().size(); i++) {
             // if the tile is mountain or ocean or there is same unit in this tile do not add it
             if (checkConditionOfAddingTheTile(tile, isMilitary))
                 continue;
             //swap
-            if (tile.getNeighbors().get(i).getLand().getMovementPrice() + findDistance(tile.getNeighbors().get(i), destination) < fullCost) {
-                fullCost = tile.getNeighbors().get(i).getLand().getMovementPrice() + findDistance(tile.getNeighbors().get(i), destination);
+            if (tile.getNeighbors().get(i).getTerrain().getMovementPrice() + findDistance(tile.getNeighbors().get(i), destination) < fullCost) {
+                fullCost = tile.getNeighbors().get(i).getTerrain().getMovementPrice() + findDistance(tile.getNeighbors().get(i), destination);
                 bestChoice = tile.getNeighbors().get(i);
             }
         }
@@ -95,7 +95,7 @@ public class MapController {
     private boolean checkConditionOfAddingTheTile(Tile tile, boolean isMilitary) {
         boolean militaryConflict = isMilitary && tile.isMilitaryUnitExists();
         boolean civilianConflict = !isMilitary && tile.isCivilianUnitExists();
-        boolean isMountainOrOcean = tile.getLand().getName().equals("mountain") || tile.getLand().getName().equals("ocean");
+        boolean isMountainOrOcean = tile.getTerrain().getName().equals("mountain") || tile.getTerrain().getName().equals("ocean");
         return militaryConflict || civilianConflict || isMountainOrOcean;
     }
 
@@ -154,8 +154,8 @@ public class MapController {
     }
 
     public String tileTerrain(Tile tile, boolean isFirstRightRow) {
-        if (isFirstRightRow || tile.getTerrain() == null) return "  ";
-        else return tile.getTerrain().getName().substring(0, 2);
+        if (isFirstRightRow || tile.getFeature() == null) return "  ";
+        else return tile.getFeature().getName().substring(0, 2);
     }
 
     public String getColorOfTileOwner(Tile tile) {
@@ -184,7 +184,7 @@ public class MapController {
     }
 
     public String getColorOfTile(Tile tile) {
-        String BACKGROUND_COLOR = switch (tile.getLand().getColor()) {
+        String BACKGROUND_COLOR = switch (tile.getTerrain().getColor()) {
             case "red" -> Colors.RED_BACKGROUND;
             case "yellow" -> Colors.YELLOW_BACKGROUND;
             case "purple" -> Colors.PURPLE_BACKGROUND;

@@ -1,14 +1,17 @@
 package model;
 
+import handlers.Handlers;
+import handlers.WorkerWorkingHandler;
+
 public class MilitaryUnit extends Unit{
     private String status;
-    private Unit attackedUnit;
-    private City attackedCity;
+    private PhysicalObject attackingTarget;
     private Resource requiredResource;
     private Technology requiredTechnology;
+    Handlers IsTargetUnitExist = new WorkerWorkingHandler();
 
-    public MilitaryUnit(String name, Tile tile, int HP, int price, int level, int MP, int combatStrength, int rangeCombatStrength, User user) {
-        super(name, tile, HP, price, level, MP, combatStrength, rangeCombatStrength, user);
+    public MilitaryUnit(String name, Tile tile, int HP, int price, int level, int MP, int combatStrength, int rangeCombatStrength, User user, int attackPoint) {
+        super(name, tile, HP, price, level, MP, combatStrength, rangeCombatStrength, user, attackPoint);
     }
 
     public String getStatus() {
@@ -19,20 +22,12 @@ public class MilitaryUnit extends Unit{
         this.status = status;
     }
 
-    public Unit getAttackedUnit() {
-        return attackedUnit;
+    public PhysicalObject getAttackingTarget() {
+        return attackingTarget;
     }
 
-    public void setAttackedUnit(Unit attackedUnit) {
-        this.attackedUnit = attackedUnit;
-    }
-
-    public City getAttackedCity() {
-        return attackedCity;
-    }
-
-    public void setAttackedCity(City attackedCity) {
-        this.attackedCity = attackedCity;
+    public void setAttackingTarget(PhysicalObject attackingTarget) {
+        this.attackingTarget = attackingTarget;
     }
 
     public Resource getRequiredResource() {

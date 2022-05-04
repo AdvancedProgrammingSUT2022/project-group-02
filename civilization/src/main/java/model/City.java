@@ -3,12 +3,10 @@ package model;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class City {
+public class City extends PhysicalObject {
     private final String name;
-    private final Tile cityLocation;
-    private User ownerShip;
+    private Tile cityLocation;
     private ArrayList<Tile> ownerShipTiles;
-    private int HP;
     private int defence;
     private Unit garrison;
     private ArrayList<Product> products;
@@ -23,21 +21,19 @@ public class City {
     private int culture;
     private HashMap<Citizen, Tile> citizensLocation;
     private ArrayList<Building> buildings;
-    private ArrayList<Unit> units;
     private boolean warStatus;
     private ArrayList<Citizen> expertCitizens;
     private boolean productStatus;
     private Product currentProduction;
 
-    public City(String name, Tile cityLocation, User ownerShip, ArrayList<Tile> ownerShipTiles, int HP, int defence, Unit garrison,
-                ArrayList<Product> products, int productTurnLeft, int citizens, int food, int production, int gold, int science, int faith,
-                int tourism, int culture, HashMap<Citizen, Tile> citizensLocation, ArrayList<Building> buildings, ArrayList<Unit> units,
-                boolean warStatus, ArrayList<Citizen> expertCitizens) {
+    public City(String name, Tile cityLocation, User ownerShip, ArrayList<Tile> ownerShipTiles, int HP, int defence,
+                Unit garrison, ArrayList<Product> products, int productTurnLeft, int citizens, int food, int production,
+                int gold, int science, int faith, int tourism, int culture, HashMap<Citizen, Tile> citizensLocation,
+                ArrayList<Building> buildings, ArrayList<Unit> units, boolean warStatus, ArrayList<Citizen> expertCitizens,
+                int attackPoint) {
+        super(true, attackPoint, HP, ownerShip, cityLocation);
         this.name = name;
-        this.cityLocation = cityLocation;
-        this.ownerShip = ownerShip;
         this.ownerShipTiles = ownerShipTiles;
-        this.HP = HP;
         this.defence = defence;
         this.garrison = garrison;
         this.products = products;
@@ -52,14 +48,10 @@ public class City {
         this.culture = culture;
         this.citizensLocation = citizensLocation;
         this.buildings = buildings;
-        this.units = units;
         this.warStatus = warStatus;
         this.expertCitizens = expertCitizens;
         this.currentProduction = null;
-    }
-
-    public Tile getCityLocation() {
-        return this.cityLocation;
+        this.cityLocation = cityLocation;
     }
 
     public void addOwnerShipLand(Tile tile) {
@@ -182,14 +174,6 @@ public class City {
         return buildings;
     }
 
-    public void addUnit(Unit unit) {
-        this.units.add(unit);
-    }
-
-    public ArrayList<Unit> getUnits() {
-        return units;
-    }
-
     public void setWarStatus(boolean status) {
         this.warStatus = status;
     }
@@ -206,24 +190,8 @@ public class City {
         return expertCitizens;
     }
 
-    public void setHP(int HP) {
-        this.HP = HP;
-    }
-
-    public int getHP() {
-        return HP;
-    }
-
-    public void setOwnerShip(User ownerShip) {
-        this.ownerShip = ownerShip;
-    }
-
     public boolean isProductStatus() {
         return productStatus;
-    }
-
-    public User getOwnerShip() {
-        return ownerShip;
     }
 
     public String getName() {
@@ -232,10 +200,6 @@ public class City {
 
     public ArrayList<Tile> getOwnerShipTiles() {
         return ownerShipTiles;
-    }
-
-    public void setUnits(ArrayList<Unit> units) {
-        this.units = units;
     }
 
     public void setBuildings(ArrayList<Building> buildings) {
@@ -272,5 +236,13 @@ public class City {
 
     public void setCurrentProduction(Product currentProduction) {
         this.currentProduction = currentProduction;
+    }
+
+    public Tile getCityLocation() {
+        return cityLocation;
+    }
+
+    public void setCityLocation(Tile cityLocation) {
+        this.cityLocation = cityLocation;
     }
 }

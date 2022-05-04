@@ -9,28 +9,29 @@ public class Tile {
     private final int y;
     private ArrayList<PhysicalObject> physicalObjects;
     private User owner;
-    private Terrain land;
+    private Terrain terrain;
     private int fogOfWarLevel;
     private boolean militaryUnitExists;
     private boolean civilianUnitExists;
     private boolean selectedOne;
     private boolean selectedTwo;
     private boolean inProgress;
+    private boolean road;
     private ArrayList<Tile> neighbors;
     private boolean isNearRiver;
     private boolean[] riverBorder;
     private Improvement improvement;
-    private Feature terrain;
+    private Feature feature;
     private Resource resource;
     private City city;
     private int price;
 
-    public Tile (int x, int y, User owner, Terrain land, int fogOfWarLevel, boolean isNearRiver,
-                 boolean[] riverBorder, Resource resource, Feature terrain) {
+    public Tile (int x, int y, User owner, Terrain terrain, int fogOfWarLevel, boolean isNearRiver,
+                 boolean[] riverBorder, Resource resource, Feature feature) {
         this.x = x;
         this.y = y;
         this.owner = owner;
-        this.land = land;
+        this.terrain = terrain;
         this.fogOfWarLevel = fogOfWarLevel;
         this.militaryUnitExists = false;
         this.civilianUnitExists = false;
@@ -39,7 +40,7 @@ public class Tile {
         selectedTwo = false;
         this.isNearRiver = isNearRiver;
         this.riverBorder = riverBorder;
-        this.terrain = terrain;
+        this.feature = feature;
         this.resource = resource;
         inProgress = false;
         price = 100;
@@ -49,16 +50,16 @@ public class Tile {
         return isNearRiver;
     }
 
-    public Feature getTerrain() {
-        return terrain;
+    public Feature getFeature() {
+        return feature;
     }
 
     public Resource getResource() {
         return resource;
     }
 
-    public void setTerrain(Feature terrain) {
-        this.terrain = terrain;
+    public void setFeature(Feature feature) {
+        this.feature = feature;
     }
 
     public void setResource(Resource resource) {
@@ -109,8 +110,8 @@ public class Tile {
         return fogOfWarLevel;
     }
 
-    public Terrain getLand() {
-        return land;
+    public Terrain getTerrain() {
+        return terrain;
     }
 
     public User getOwner() {
@@ -129,8 +130,8 @@ public class Tile {
         this.inProgress = inProgress;
     }
 
-    public void setLand(Terrain land) {
-        this.land = land;
+    public void setLand(Terrain terrain) {
+        this.terrain = terrain;
     }
 
     public void setMilitaryUnitExists(boolean militaryUnitExists) {
@@ -195,5 +196,12 @@ public class Tile {
 
     public int getPrice() {
         return price;
+    }
+    public boolean isRoad() {
+        return road;
+    }
+
+    public void setRoad(boolean road) {
+        this.road = road;
     }
 }

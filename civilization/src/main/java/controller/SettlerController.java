@@ -12,7 +12,9 @@ public class SettlerController extends UnitController{
         ownerShipTiles.add(tile);
         HashMap<Citizen, Tile> citizensLocations = new HashMap<>();
         citizensLocations.put(new Citizen(), tile);
-        tile.setCity(new City(name, tile, user, ownerShipTiles, 100, 100, null, null, 50, 0, 1, 1, 1, 1, 1, 1, 1, citizensLocations, null, null, false, null));
+        tile.setCity(new City(name, tile, user, ownerShipTiles, 100, 100, null, null,
+                50, 0, 1, 1, 1, 1, 1, 1, 1,
+                citizensLocations, null, null, false, null, 20));
         tile.setOwner(user);
         removeUnit(unit, user);
     }
