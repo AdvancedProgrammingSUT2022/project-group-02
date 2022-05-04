@@ -27,7 +27,7 @@ public class City {
     private boolean warStatus;
     private ArrayList<Citizen> expertCitizens;
     private boolean productStatus;
-
+    private Product currentProduction;
 
     public City(String name, Tile cityLocation, User ownerShip, ArrayList<Tile> ownerShipTiles, int HP, int defence, Unit garrison,
                 ArrayList<Product> products, int productTurnLeft, int citizens, int food, int production, int gold, int science, int faith,
@@ -55,6 +55,7 @@ public class City {
         this.units = units;
         this.warStatus = warStatus;
         this.expertCitizens = expertCitizens;
+        this.currentProduction = null;
     }
 
     public Tile getCityLocation() {
@@ -85,7 +86,7 @@ public class City {
         return this.garrison;
     }
 
-    public void setProduct(Product product) {
+    public void addProduct(Product product) {
         this.products.add(product);
     }
 
@@ -263,5 +264,13 @@ public class City {
 
     public void setProductStatus(boolean productStatus) {
         this.productStatus = productStatus;
+    }
+
+    public Product getCurrentProduction() {
+        return currentProduction;
+    }
+
+    public void setCurrentProduction(Product currentProduction) {
+        this.currentProduction = currentProduction;
     }
 }

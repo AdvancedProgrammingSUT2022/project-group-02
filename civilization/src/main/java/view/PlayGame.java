@@ -74,6 +74,9 @@ public class PlayGame {
         boolean nextTurn = true;
         while (true) {
             User user = players.get(role);
+            // handle production turn in cities and research turn of user
+            gameController.cityTurnProducts(user);
+            gameController.userTurnResearch(user);
             while (nextTurn) {
 
                 input = scanner.nextLine();
@@ -123,7 +126,10 @@ public class PlayGame {
                 }
 
                 else if (input.trim().equals("choose technology")) {
-                    selectTech(user, scanner);
+                    if (!user.isResearching())
+                        selectTech(user, scanner);
+                    else
+                        System.out.println("you are researching on something right now!");
                 }
 
                 else if (input.trim().equals("show board")) {
@@ -168,6 +174,9 @@ public class PlayGame {
                 index = Integer.parseInt(techInput);
                 if (index >= 1 && index <= technologies.size()) {
                     // TODO choose the tech with this index to research on it
+                    user.setResearching(true);
+                    user.setCurrentTechnology(technologies.get(index));
+                    user.setResearchTurnLeft(technologies.get(index).getPrice());
                 }
                 else
                     System.out.println("invalid number");
@@ -263,7 +272,6 @@ public class PlayGame {
 
             }
             else if (cityInput.trim().equals("new production")) {
-                // TODO show all possible production and then buy
                 if (!city.isProductStatus())
                     setProduction(city, user, scanner);
                 else
@@ -297,7 +305,9 @@ public class PlayGame {
             else if (Pattern.matches("\\d+", productInput)) {
                 int numberOfProduct = Integer.parseInt(productInput);
                 if (numberOfProduct <= city.getProducts().size() && numberOfProduct >= 1) {
-                    // TODO set the production and get back to city page
+                    city.setCurrentProduction(city.getProducts().get(numberOfProduct - 1));
+                    city.setProductStatus(true);
+                    city.setProductTurnLeft(city.getCurrentProduction().getTurnCost());
                 }
                 else
                     System.out.println("invalid number");

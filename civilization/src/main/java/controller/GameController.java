@@ -68,4 +68,34 @@ public class GameController {
     public void setTurnForEachPlayer(int turnForEachPlayer) {
         this.turnForEachPlayer = turnForEachPlayer;
     }
+
+    public void cityTurnProducts(User user) {
+        // for each on user's cities
+        for (City city : user.getCities()) {
+            // if producing production
+            if (city.isProductStatus()) {
+                // done?
+                if (city.getProductTurnLeft() <= 1) {
+                    city.setProductTurnLeft(0);
+                    city.addProduct(city.getCurrentProduction());
+                    city.setCurrentProduction(null);
+                    city.setProductStatus(false);
+                }
+                else
+                    city.setProductTurnLeft(city.getProductTurnLeft() - 1);
+            }
+        }
+    }
+    public void userTurnResearch(User user) {
+        if (user.isResearching()) {
+            if (user.getResearchTurnLeft() <= 1) {
+                user.setResearching(false);
+                user.setResearchTurnLeft(0);
+                user.addTechnology(user.getCurrentTechnology());
+                user.setCurrentTechnology(null);
+            }
+            else
+                user.setResearchTurnLeft(user.getResearchTurnLeft() - 1);
+        }
+    }
 }
