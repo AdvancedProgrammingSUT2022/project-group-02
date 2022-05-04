@@ -23,6 +23,7 @@ public class Tile {
     private Terrain terrain;
     private Resource resource;
     private City city;
+    private int price;
 
     public Tile (int x, int y, User owner, Land land, int fogOfWarLevel, boolean isNearRiver,
                  boolean[] riverBorder, Resource resource, Terrain terrain) {
@@ -41,6 +42,7 @@ public class Tile {
         this.terrain = terrain;
         this.resource = resource;
         inProgress = false;
+        price = 100;
     }
 
     public boolean isNearRiver() {
@@ -185,5 +187,13 @@ public class Tile {
 
     public void setCity(City city) {
         this.city = city;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }

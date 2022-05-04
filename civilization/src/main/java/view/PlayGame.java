@@ -173,7 +173,7 @@ public class PlayGame {
             else if (Pattern.matches("[\\d+]", techInput)) {
                 index = Integer.parseInt(techInput);
                 if (index >= 1 && index <= technologies.size()) {
-                    // TODO choose the tech with this index to research on it
+                    // choose the tech and research on it
                     user.setResearching(true);
                     user.setCurrentTechnology(technologies.get(index));
                     user.setResearchTurnLeft(technologies.get(index).getPrice());
@@ -222,6 +222,13 @@ public class PlayGame {
                 else
                     System.out.println("there is no worker in this tile");
             }
+            else if (tileInput.trim().equals("city page")) {
+                if (origin.getCity().getCityLocation().equals(origin)) {
+                    cityPage(origin.getCity(), user, scanner);
+                }
+                else
+                    System.out.println("this tile is not a city");
+            }
             else
                 System.out.println("invalid command");
         }
@@ -248,7 +255,7 @@ public class PlayGame {
                 index = Integer.parseInt(improvementInput);
                 if (index <= improvements.size() && index >= 1) {
                     tile.setInProgress(true);
-                    // TODO worker should work here until the work be finished
+                    // TODO worker should work here until the work be finished ,,, when worker unit is ready
                 }
                 else
                     System.out.println("invalid number");
@@ -267,9 +274,34 @@ public class PlayGame {
             if (cityInput.trim().equals("city exit"))
                 return;
             else if (cityInput.trim().equals("buy tile")) {
-                // TODO show nearby neutral tiles and then buy
                 ArrayList<Tile> neighborOfCity = mapController.neighborOfCity(city);
 
+                // TODO show nearby neutral tiles and then buy ,,, when map is ready
+
+                String buyTileInput;
+                boolean buying = true;
+                while (buying) {
+                    buyTileInput = scanner.nextLine();
+                    if (buyTileInput.equals("buy tile exit"))
+                        buying = false;
+                    else if (Pattern.matches("[\\d+]", buyTileInput)) {
+                        int index = Integer.parseInt(buyTileInput);
+                        if (index >= 1 && index <= neighborOfCity.size()) {
+                            // add the tile to the city and user
+                            if (user.getGold() >= neighborOfCity.get(index - 1).getPrice()) {
+                                user.setGold(user.getGold() - neighborOfCity.get(index - 1).getPrice());
+                                city.addOwnerShipLand(neighborOfCity.get(index - 1));
+                                user.addTerritory(neighborOfCity.get(index - 1));
+                            }
+                            else
+                                System.out.println("not enough gold!");
+                        }
+                        else
+                            System.out.println("invalid number");
+                    }
+                    else
+                        System.out.println("invalid command");
+                }
             }
             else if (cityInput.trim().equals("new production")) {
                 if (!city.isProductStatus())
@@ -278,10 +310,9 @@ public class PlayGame {
                     System.out.println("you are already producing something");
             }
             else if (cityInput.trim().equals("terminate current production")) {
-                // TODO show current production and then terminate
                 if (city.isProductStatus()) {
+                    // producing eliminated
                     city.setProductStatus(false);
-                    // TODO end the process of producing
                 }
                 else
                     System.out.println("you don't produce anything");
