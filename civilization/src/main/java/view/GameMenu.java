@@ -167,30 +167,30 @@ public class GameMenu {
         improvements.add(new Improvement("Mine", 1, 0, 0, 5));
         improvements.add(new Improvement("Quarry", 1, 0, 0, 5));
         technologies.add(new Technology("Mining", improvements, 2, 10));
-        //sailing
+        /*//sailing
         improvements = new ArrayList<>();
         improvements.add(new Improvement("Fishing Boat", 0, 1, 0, 5));
-        technologies.add(new Technology("Sailing", improvements, 3, 10));
+        technologies.add(new Technology("Sailing", improvements, 3, 10));*/
         //astrology
-        technologies.add(new Technology("Astrology", null, 4, 10));
+        technologies.add(new Technology("Astrology", null, 3, 10));
         //irrigation
         improvements = new ArrayList<>();
         improvements.add(new Improvement("Plantation", 0, 0, 2, 5));
         improvements.add(new Improvement("Stepwell", 0, 1, 0, 5));
-        technologies.add(new Technology("Irrigation", improvements, 5, 10));
+        technologies.add(new Technology("Irrigation", improvements, 4, 10));
         //writing
-        technologies.add(new Technology("Writing", null, 6, 10));
+        technologies.add(new Technology("Writing", null, 5, 10));
         //archery
-        technologies.add(new Technology("Archery", null, 7, 10));
+        technologies.add(new Technology("Archery", null, 6, 10));
         //masonry
         improvements = new ArrayList<>();
         improvements.add(new Improvement("Great Wall", 0, 0, 0, 5));
         improvements.add(new Improvement("Nubial Pyramid", 0, 2, 0, 5));
-        technologies.add(new Technology("Masonary", improvements, 8, 10));
+        technologies.add(new Technology("Masonary", improvements, 7, 10));
         //bronze working
-        technologies.add(new Technology("Bronze Working", null, 9, 10));
+        technologies.add(new Technology("Bronze Working", null, 8, 10));
         //wheel
-        technologies.add(new Technology("Wheel", null, 10, 10));
+        technologies.add(new Technology("Wheel", null, 9, 10));
 
         return technologies;
     }
