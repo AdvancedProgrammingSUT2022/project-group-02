@@ -4,9 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import controller.MapController;
 import controller.Users;
-import model.Improvement;
-import model.Technology;
-import model.User;
+import model.*;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -153,45 +151,47 @@ public class GameMenu {
     }
     private ArrayList<Technology> ancientTechnologies() {
         ArrayList<Technology> technologies = new ArrayList<>();
-
+        ArrayList<Unit> units;
         ArrayList<Improvement> improvements = new ArrayList<>();
         improvements.add(new Improvement("Mekewap", 1, 0, 0, 5));
-        technologies.add(new Technology("Pottery", improvements, 0, 10));
+        technologies.add(new Technology("Pottery", improvements, 0, 10, null));
         //pottery
         improvements = new ArrayList<>();
         improvements.add(new Improvement("Camp", 0, 0, 1, 5));
         improvements.add(new Improvement("Pasture", 1, 0, 0, 5));
         improvements.add(new Improvement("Kurgan", 0, 0, 3, 5));
-        technologies.add(new Technology("Animal Husbandry", improvements, 1, 10));
+        technologies.add(new Technology("Animal Husbandry", improvements, 1, 10, null));
         //mining
         improvements = new ArrayList<>();
         improvements.add(new Improvement("Mine", 1, 0, 0, 5));
         improvements.add(new Improvement("Quarry", 1, 0, 0, 5));
-        technologies.add(new Technology("Mining", improvements, 2, 10));
+        technologies.add(new Technology("Mining", improvements, 2, 10, null));
         /*//sailing
         improvements = new ArrayList<>();
         improvements.add(new Improvement("Fishing Boat", 0, 1, 0, 5));
         technologies.add(new Technology("Sailing", improvements, 3, 10));*/
         //astrology
-        technologies.add(new Technology("Astrology", null, 3, 10));
+        technologies.add(new Technology("Astrology", null, 3, 10, null));
         //irrigation
         improvements = new ArrayList<>();
         improvements.add(new Improvement("Plantation", 0, 0, 2, 5));
         improvements.add(new Improvement("Stepwell", 0, 1, 0, 5));
-        technologies.add(new Technology("Irrigation", improvements, 4, 10));
+        technologies.add(new Technology("Irrigation", improvements, 4, 10, null));
         //writing
-        technologies.add(new Technology("Writing", null, 5, 10));
+        technologies.add(new Technology("Writing", null, 5, 10, null));
         //archery
-        technologies.add(new Technology("Archery", null, 6, 10));
+        units = new ArrayList<>();
+        units.add(new RangeMilitaryUnit("archery", null, 100, 5, 1, 2, 15, 25, null, 20));
+        technologies.add(new Technology("Archery", null, 6, 10, units));
         //masonry
         improvements = new ArrayList<>();
         improvements.add(new Improvement("Great Wall", 0, 0, 0, 5));
         improvements.add(new Improvement("Nubial Pyramid", 0, 2, 0, 5));
-        technologies.add(new Technology("Masonary", improvements, 7, 10));
+        technologies.add(new Technology("Masonary", improvements, 7, 10, null));
         //bronze working
-        technologies.add(new Technology("Bronze Working", null, 8, 10));
+        technologies.add(new Technology("Bronze Working", null, 8, 10, null));
         //wheel
-        technologies.add(new Technology("Wheel", null, 9, 10));
+        technologies.add(new Technology("Wheel", null, 9, 10, null));
 
         return technologies;
     }

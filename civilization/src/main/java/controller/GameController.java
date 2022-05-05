@@ -99,6 +99,14 @@ public class GameController {
                         user.addImprovement(improvement);
                     }
                 }
+                // add given units to all the cities products
+                if (user.getCurrentTechnology().getGivenUnits() != null) {
+                    for (Unit givenUnit : user.getCurrentTechnology().getGivenUnits()) {
+                        for (City city : user.getCities()) {
+                            city.addProduct(new Product(givenUnit.getName(), givenUnit.getPrice()));
+                        }
+                    }
+                }
                 user.setCurrentTechnology(null);
             }
             else
