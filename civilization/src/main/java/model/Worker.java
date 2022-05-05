@@ -1,11 +1,7 @@
 package model;
 
-import handlers.Handlers;
-import handlers.WorkerWorkingHandler;
-
 public class Worker extends Civilian{
 
-    Handlers workerWorkingHandler = new WorkerWorkingHandler();
     private Improvement improvement;
     private boolean buildingRoad;
     private boolean workingStatus;
@@ -47,7 +43,4 @@ public class Worker extends Civilian{
         this.buildingRoad = buildingRoad;
     }
 
-    public Handlers getWorkerWorkingHandler() {
-        return workerWorkingHandler;
-    }
 }

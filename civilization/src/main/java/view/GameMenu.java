@@ -71,8 +71,8 @@ public class GameMenu {
         int width = 4;
 
         int[][] ancientGraph = users.readFromJsonGraph();
-        ArrayList<Technology> technologies = ancientTechnologies();
-        users.writeToJson(technologies);
+        //ArrayList<Technology> technologies = ancientTechnologies();
+        //users.writeToJson(technologies);
         ArrayList<Technology> ancientTechnologies = users.readFromJsonTech();
         new PlayGame(players, height, width, ancientGraph, ancientTechnologies).run(scanner);
     }

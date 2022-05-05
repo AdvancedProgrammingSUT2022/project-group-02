@@ -1,6 +1,5 @@
 package unitcommands;
 
-import handlers.IsForestExistHandler;
 import model.Tile;
 import model.UnitCommand;
 import model.User;
@@ -10,8 +9,8 @@ public abstract class ChopDownForest extends RemoveFeature implements UnitComman
 
     @Override
     public void doWorkerAction(Worker worker, Tile tile, User user){
-        worker.getWorkerWorkingHandler().setNextHandler(worker.getMPHandler());
-        worker.getMPHandler().setNextHandler(new IsForestExistHandler());
+        //worker.getWorkerWorkingHandler().setNextHandler(worker.getMPHandler());
+        //worker.getMPHandler().setNextHandler(new IsForestExistHandler());
         removeFeature(worker, tile, user);
     }
 }

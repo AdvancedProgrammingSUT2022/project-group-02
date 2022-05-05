@@ -6,5 +6,4 @@ public class MeleeMilitaryUnit extends MilitaryUnit{
         super(name, tile, HP, price, level, MP, combatStrength, rangeCombatStrength, user, combatStrength);
     }
 
-
 }

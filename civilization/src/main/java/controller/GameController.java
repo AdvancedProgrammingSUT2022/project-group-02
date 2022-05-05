@@ -104,6 +104,7 @@ public class GameController {
                     for (Unit givenUnit : user.getCurrentTechnology().getGivenUnits()) {
                         for (City city : user.getCities()) {
                             city.addProduct(new Product(givenUnit.getName(), givenUnit.getPrice()));
+                            // TODO add unit to possible units in city page
                         }
                     }
                 }
@@ -118,6 +119,7 @@ public class GameController {
         for (int i = 0; i < city.getPossibleUnits().size(); i++) {
             if (city.getPossibleUnits().get(i).getName().equals(product.getName())) {
                 city.getOwner().addUnit(city.getPossibleUnits().get(i));
+                //  TODO add the city to unit information
                 i = city.getPossibleUnits().size();
             }
         }

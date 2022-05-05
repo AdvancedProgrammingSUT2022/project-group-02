@@ -1,12 +1,7 @@
 package model;
 
-import handlers.Handlers;
-import handlers.MPHandler;
-import handlers.WorkerWorkingHandler;
-
 public class Unit extends PhysicalObject{
 
-    Handlers MPHandler = new MPHandler();
     private String name;
     private int price;
     private int level;
@@ -93,7 +88,4 @@ public class Unit extends PhysicalObject{
         this.rangeCombatStrength = rangeCombatStrength;
     }
 
-    public Handlers getMPHandler() {
-        return MPHandler;
-    }
 }

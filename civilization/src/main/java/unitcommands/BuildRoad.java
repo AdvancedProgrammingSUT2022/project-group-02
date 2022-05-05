@@ -9,7 +9,7 @@ public abstract class BuildRoad implements UnitCommand {
 
     @Override
     public void doWorkerAction(Worker worker, Tile tile, User user) {
-        worker.getWorkerWorkingHandler().setNextHandler(worker.getMPHandler());
+        /*worker.getWorkerWorkingHandler().setNextHandler(worker.getMPHandler());
         if (worker.getWorkerWorkingHandler().handle(worker, null, tile, user)){
             worker.setWorkingStatus(true);
             //required turns To build a road is 3
@@ -17,6 +17,6 @@ public abstract class BuildRoad implements UnitCommand {
             worker.setBuildingRoad(true);
             tile.setInProgress(true);
         }
-        worker.getWorkerWorkingHandler().setNextHandler(null);
+        worker.getWorkerWorkingHandler().setNextHandler(null);*/
     }
 }

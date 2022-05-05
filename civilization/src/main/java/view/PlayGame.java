@@ -186,6 +186,7 @@ public class PlayGame {
     }
 
     private void selectedTile(Scanner scanner, Tile origin, int xOrigin, int yOrigin, User user) {
+        // TODO enable far working
         origin.setSelectedOne(false);
         origin.setSelectedTwo(false);
         if (origin.isMilitaryUnitExists())
@@ -308,6 +309,7 @@ public class PlayGame {
                 else
                     System.out.println("you are already producing something");
             }
+            // TODO add resume current production
             else if (cityInput.trim().equals("terminate current production")) {
                 if (city.isProductStatus()) {
                     // producing eliminated
