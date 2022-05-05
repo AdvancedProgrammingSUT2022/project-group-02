@@ -34,6 +34,7 @@ public class TechController {
         }
         return prerequisites;
     }
+    /*
     public ArrayList<Improvement> possibleImprovements(Tile tile, User user) {
         ArrayList<Improvement> improvements = new ArrayList<>();
         ArrayList<Technology> technologies = user.getTechnologies();
@@ -50,6 +51,7 @@ public class TechController {
         else
             return null;
     }
+    */
 
     public ArrayList<Technology> getUserResearches(User user) {
         ArrayList<Technology> technologies = new ArrayList<>();

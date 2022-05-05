@@ -25,6 +25,7 @@ public class City extends PhysicalObject {
     private ArrayList<Citizen> expertCitizens;
     private boolean productStatus;
     private Product currentProduction;
+    private ArrayList<Unit> possibleUnits;
 
     public City(String name, Tile cityLocation, User ownerShip, ArrayList<Tile> ownerShipTiles, int HP, int defence,
                 Unit garrison, ArrayList<Product> products, int productTurnLeft, int citizens, int food, int production,
@@ -244,5 +245,13 @@ public class City extends PhysicalObject {
 
     public void setCityLocation(Tile cityLocation) {
         this.cityLocation = cityLocation;
+    }
+
+    public ArrayList<Unit> getPossibleUnits() {
+        return possibleUnits;
+    }
+
+    public void setPossibleUnits(ArrayList<Unit> possibleUnits) {
+        this.possibleUnits = possibleUnits;
     }
 }

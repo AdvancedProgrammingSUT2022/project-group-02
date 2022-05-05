@@ -2,8 +2,7 @@ package controller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import model.Technology;
-import model.User;
+import model.*;
 
 import java.io.FileWriter;
 import java.util.*;
@@ -117,6 +116,14 @@ public class Users {
             fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    public void addBasicImprovements(ArrayList<User> players) {
+        ArrayList<Improvement> improvements;
+        for (User player : players) {
+            improvements = new ArrayList<>();
+            improvements.add(new Improvement("Farm", 0, 1, 0, 5));
+            player.setImprovements(improvements);
         }
     }
 }

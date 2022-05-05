@@ -234,7 +234,7 @@ public class PlayGame {
     }
 
     private void showImprovements(Tile tile, User user, Scanner scanner) {
-        ArrayList<Improvement> improvements = techController.possibleImprovements(tile, user);
+        ArrayList<Improvement> improvements = user.getImprovements();
         if (tile.getImprovement() != null)
             System.out.println("your current improvement on this tile is :" + tile.getImprovement().getName());
         int index = 1;

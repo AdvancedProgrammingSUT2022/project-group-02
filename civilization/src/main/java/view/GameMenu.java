@@ -71,6 +71,7 @@ public class GameMenu {
         // temporary
         int height = 8;
         int width = 4;
+
         int[][] ancientGraph = users.readFromJsonGraph();
         ArrayList<Technology> technologies = ancientTechnologies();
         users.writeToJson(technologies);

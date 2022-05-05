@@ -74,10 +74,10 @@ public class GameController {
         for (City city : user.getCities()) {
             // if producing production
             if (city.isProductStatus()) {
-                // done?
+                // if product is done
                 if (city.getProductTurnLeft() <= 1) {
                     city.setProductTurnLeft(0);
-                    city.addProduct(city.getCurrentProduction());
+                    findProduction(city, city.getCurrentProduction());
                     city.setCurrentProduction(null);
                     city.setProductStatus(false);
                 }
@@ -88,14 +88,30 @@ public class GameController {
     }
     public void userTurnResearch(User user) {
         if (user.isResearching()) {
+            // if research is done
             if (user.getResearchTurnLeft() <= 1) {
                 user.setResearching(false);
                 user.setResearchTurnLeft(0);
                 user.addTechnology(user.getCurrentTechnology());
+                // add given improvements to user's arraylist of improvements
+                if (user.getCurrentTechnology().getGivenImprovement() != null) {
+                    for (Improvement improvement : user.getCurrentTechnology().getGivenImprovement()) {
+                        user.addImprovement(improvement);
+                    }
+                }
                 user.setCurrentTechnology(null);
             }
             else
                 user.setResearchTurnLeft(user.getResearchTurnLeft() - 1);
+        }
+    }
+    // find the unit based on production name
+    private void findProduction(City city, Product product) {
+        for (int i = 0; i < city.getPossibleUnits().size(); i++) {
+            if (city.getPossibleUnits().get(i).getName().equals(product.getName())) {
+                city.getOwner().addUnit(city.getPossibleUnits().get(i));
+                i = city.getPossibleUnits().size();
+            }
         }
     }
 }

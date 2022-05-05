@@ -4,12 +4,10 @@ public class Product {
     private int turnCost;
     private int processing;
     private final String name;
-    private final ArrayList<Technology> requirements;
-    public Product(String name, int turnCost, ArrayList<Technology> requirements) {
+    public Product(String name, int turnCost) {
         this.name = name;
         this.turnCost = turnCost;
         processing = 0;
-        this.requirements = requirements;
     }
 
     public String getName() {
@@ -30,9 +28,5 @@ public class Product {
 
     public void setTurnCost(int turnCost) {
         this.turnCost = turnCost;
-    }
-
-    public ArrayList<Technology> getRequirements() {
-        return requirements;
     }
 }

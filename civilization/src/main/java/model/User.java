@@ -21,10 +21,11 @@ public class User {
     private int faithPerTurn;
     private ArrayList<Resource> resources;
     private String civilization;
-    private ArrayList<Unit> Units;
+    private ArrayList<Unit> units;
     private ArrayList<City> cities;
     private City capital;
     private ArrayList<Technology> technologies;
+    private ArrayList<Improvement> improvements;
     private int turnNumber;
 
     private ArrayList<Tile> visited;
@@ -187,11 +188,15 @@ public class User {
     }
 
     public ArrayList<Unit> getUnits() {
-        return Units;
+        return units;
     }
 
     public void setUnits(ArrayList<Unit> units) {
-        Units = units;
+        units = units;
+    }
+
+    public void addUnit(Unit unit) {
+        this.units.add(unit);
     }
 
     public ArrayList<City> getCities() {
@@ -297,12 +302,23 @@ public class User {
     public void removeUnit(PhysicalObject unit) {
         //(Audience : Amir)TODO : check that can a child class be equal with parent class?
         int index = 0;
-        for (Unit unit1 : Units) {
+        for (Unit unit1 : units) {
             if (unit1.equals(unit)) {
-                Units.remove(index);
+                units.remove(index);
                 return;
             }
             index++;
         }
+    }
+
+    public ArrayList<Improvement> getImprovements() {
+        return improvements;
+    }
+
+    public void setImprovements(ArrayList<Improvement> improvements) {
+        this.improvements = improvements;
+    }
+    public void addImprovement(Improvement improvement) {
+        this.improvements.add(improvement);
     }
 }
