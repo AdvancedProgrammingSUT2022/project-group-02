@@ -37,7 +37,7 @@ public class Maps {
         this.width = width;
     }
 
-    public void setTileBoard(Tile[][] tileBoard) {
-        this.tileBoard = tileBoard;
+    public void setTileBoard(Tile tileBoard) {
+        this.tileBoard[tileBoard.getX()][tileBoard.getY()] = tileBoard;
     }
 }
