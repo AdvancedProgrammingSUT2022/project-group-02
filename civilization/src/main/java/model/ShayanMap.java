@@ -109,7 +109,9 @@ public class ShayanMap {
         Tile tile13_78 = new Tile(12, 77, null, GrassLand, 0, false, null, null, Forest);
         Tile tile13_79 = new Tile(12, 78, null, Ocean, 0, false, null, null, null);
         Tile tile13_80 = new Tile(12, 79, null, Ocean, 0, false, null, null, null);
+
         //14th row between america and asia
+
         Tile tile14_1 = new Tile(13, 0, null, Ocean, 0, false, null, null, null);
         Tile tile14_2 = new Tile(13, 1, null, Ocean, 0, false, null, null, null);
         Tile tile14_3 = new Tile(13, 2, null, Ocean, 0, false, null, null, null);
@@ -196,7 +198,9 @@ public class ShayanMap {
         Tile tile14_78 = new Tile(13, 77, null, Ocean, 0, false, null, null, null);
         Tile tile14_79 = new Tile(13, 78, null, Ocean, 0, false, null, null, null);
         Tile tile14_80 = new Tile(13, 79, null, Ocean, 0, false, null, null, null);
+
         //15th row
+
         // between asia and america
         Tile tile15_1 = new Tile(14, 0, null, Ocean, 0, false, null, null, null);
         Tile tile15_2 = new Tile(14, 1, null, Ocean, 0, false, null, null, null);
@@ -284,11 +288,385 @@ public class ShayanMap {
         Tile tile15_78 = new Tile(14, 77, null, Ocean, 0, false, null, null, null);
         Tile tile15_79 = new Tile(14, 78, null, Ocean, 0, false, null, null, null);
         Tile tile15_80 = new Tile(14, 79, null, Ocean, 0, false, null, null, null);
-        // todo :
+
         // 16th row
+        //between asia and america
+        Tile tile16_1 = new Tile(15, 0, null, Ocean, 0, false, null, null, null);
+        Tile tile16_2 = new Tile(15, 1, null, Ocean, 0, false, null, null, null);
+        Tile tile16_3 = new Tile(15, 2, null, Ocean, 0, false, null, null, null);
+        Tile tile16_4 = new Tile(15, 3, null, Ocean, 0, false, null, null, null);
+        Tile tile16_5 = new Tile(15, 4, null, Ocean, 0, false, null, null, null);
+        Tile tile16_6 = new Tile(15, 5, null, Ocean, 0, false, null, null, null);
+        Tile tile16_7 = new Tile(15, 6, null, Ocean, 0, false, null, null, null);
+        Tile tile16_8 = new Tile(15, 7, null, Ocean, 0, false, null, null, null);
+        // west america
+        Tile tile16_9 = new Tile(15, 8, null, Hill, 0, false, null, null, Forest);
+        Tile tile16_10 = new Tile(15, 9, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile16_11 = new Tile(15, 10, null, Hill, 0, false, null, null, Forest);
+        Tile tile16_12 = new Tile(15, 11, null, Mountain, 0, false, null, null, null);
+        Tile tile16_13 = new Tile(15, 12, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile16_14 = new Tile(15, 13, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile16_15 = new Tile(15, 14, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile16_16 = new Tile(15, 15, null, GrassLand, 0, false, null, null, Forest);
+        // a lake
+        Tile tile16_17 = new Tile(15, 16, null, Ocean, 0, false, null, null, null);
+        Tile tile16_18 = new Tile(15, 17, null, Ocean, 0, false, null, null, null);
+        //east america
+        Tile tile16_19 = new Tile(15, 18, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile16_20 = new Tile(15, 19, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile16_21 = new Tile(15, 20, null, Hill, 0, false, null, null, Forest);
+        Tile tile16_22 = new Tile(15, 21, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile16_23 = new Tile(15, 22, null, GrassLand, 0, false, null, null, Forest);
+        // between america and europe
+        Tile tile16_24 = new Tile(15, 23, null, Ocean, 0, false, null, null, null);
+        Tile tile16_25 = new Tile(15, 24, null, Ocean, 0, false, null, null, null);
+        Tile tile16_26 = new Tile(15, 25, null, Ocean, 0, false, null, null, null);
+        Tile tile16_27 = new Tile(15, 26, null, Ocean, 0, false, null, null, null);
+        Tile tile16_28 = new Tile(15, 27, null, Ocean, 0, false, null, null, null);
+        Tile tile16_29 = new Tile(15, 28, null, Ocean, 0, false, null, null, null);
+        Tile tile16_30 = new Tile(15, 29, null, Ocean, 0, false, null, null, null);
+        Tile tile16_31 = new Tile(15, 30, null, Ocean, 0, false, null, null, null);
+        Tile tile16_32 = new Tile(15, 31, null, Ocean, 0, false, null, null, null);
+        Tile tile16_33 = new Tile(15, 32, null, Ocean, 0, false, null, null, null);
+        // europe
+        Tile tile16_34 = new Tile(15, 33, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile16_35 = new Tile(15, 34, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile16_36 = new Tile(15, 35, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile16_37 = new Tile(15, 36, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile16_38 = new Tile(15, 37, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile16_39 = new Tile(15, 38, null, Hill, 0, false, null, null, Forest);
+        Tile tile16_40 = new Tile(15, 39, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile16_41 = new Tile(15, 40, null, Hill, 0, false, null, null, Forest);
+        Tile tile16_42 = new Tile(15, 41, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile16_43 = new Tile(15, 42, null, Hill, 0, false, null, null, Forest);
+        Tile tile16_44 = new Tile(15, 43, null, Hill, 0, false, null, null, Forest);
+        Tile tile16_45 = new Tile(15, 44, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile16_46 = new Tile(15, 45, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile16_47 = new Tile(15, 46, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile16_48 = new Tile(15, 47, null, Plain, 0, false, null, null, null);
+        Tile tile16_49 = new Tile(15, 48, null, Plain, 0, false, null, null, null);
+        // Caspian sea
+        Tile tile16_50 = new Tile(15, 49, null, Ocean, 0, false, null, null, null);
+        // asia
+        Tile tile16_51 = new Tile(15, 50, null, Plain, 0, false, null, null, null);
+        Tile tile16_52 = new Tile(15, 51, null, Desert, 0, false, null, null, null);
+        Tile tile16_53 = new Tile(15, 52, null, Desert, 0, false, null, null, Oasis);
+        Tile tile16_54 = new Tile(15, 53, null, Desert, 0, false, null, null, null);
+        Tile tile16_55 = new Tile(15, 54, null, Desert, 0, false, null, null, null);
+        Tile tile16_56 = new Tile(15, 55, null, Hill, 0, false, null, null, null);
+        Tile tile16_57 = new Tile(15, 56, null, Mountain, 0, false, null, null, null);
+        Tile tile16_58 = new Tile(15, 57, null, Mountain, 0, false, null, null, null);
+        Tile tile16_59 = new Tile(15, 58, null, Desert, 0, false, null, null, null);
+        Tile tile16_60 = new Tile(15, 59, null, Desert, 0, false, null, null, null);
+        Tile tile16_61 = new Tile(15, 60, null, Desert, 0, false, null, null, null);
+        Tile tile16_62 = new Tile(15, 61, null, Desert, 0, false, null, null, null);
+        Tile tile16_63 = new Tile(15, 62, null, Desert, 0, false, null, null, null);
+        Tile tile16_64 = new Tile(15, 63, null, Plain, 0, false, null, null, null);
+        Tile tile16_65 = new Tile(15, 64, null, Plain, 0, false, null, null, null);
+        Tile tile16_66 = new Tile(15, 65, null, Desert, 0, false, null, null, Oasis);
+        Tile tile16_67 = new Tile(15, 66, null, Plain, 0, false, null, null, null);
+        Tile tile16_68 = new Tile(15, 67, null, Hill, 0, false, null, null, Forest);
+        Tile tile16_69 = new Tile(15, 68, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile16_70 = new Tile(15, 69, null, Mountain, 0, false, null, null, Forest);
+        // east asian sea
+        Tile tile16_71 = new Tile(15, 70, null, Ocean, 0, false, null, null, null);
+        Tile tile16_72 = new Tile(15, 71, null, Ocean, 0, false, null, null, null);
+        // japan
+        Tile tile16_73 = new Tile(15, 72, null, GrassLand, 0, false, null, null, null);
+        Tile tile16_74 = new Tile(15, 73, null, GrassLand, 0, false, null, null, null);
+        // between asia and europe
+        Tile tile16_75 = new Tile(15, 74, null, Ocean, 0, false, null, null, null);
+        Tile tile16_76 = new Tile(15, 75, null, Ocean, 0, false, null, null, null);
+        Tile tile16_77 = new Tile(15, 76, null, Ocean, 0, false, null, null, null);
+        Tile tile16_78 = new Tile(15, 77, null, Ocean, 0, false, null, null, null);
+        Tile tile16_79 = new Tile(15, 78, null, Ocean, 0, false, null, null, null);
+        Tile tile16_80 = new Tile(15, 79, null, Ocean, 0, false, null, null, null);
+
         // 17th row
+        // between asia and america
+        Tile tile17_1 = new Tile(16, 0, null, Ocean, 0, false, null, null, null);
+        Tile tile17_2 = new Tile(16, 1, null, Ocean, 0, false, null, null, null);
+        Tile tile17_3 = new Tile(16, 2, null, Ocean, 0, false, null, null, null);
+        Tile tile17_4 = new Tile(16, 3, null, Ocean, 0, false, null, null, null);
+        Tile tile17_5 = new Tile(16, 4, null, Ocean, 0, false, null, null, null);
+        Tile tile17_6 = new Tile(16, 5, null, Ocean, 0, false, null, null, null);
+        Tile tile17_7 = new Tile(16, 6, null, Ocean, 0, false, null, null, null);
+        Tile tile17_8 = new Tile(16, 7, null, Ocean, 0, false, null, null, null);
+        Tile tile17_9 = new Tile(16, 8, null, Ocean, 0, false, null, null, null);
+        //west america
+        Tile tile17_10 = new Tile(16, 9, null, Hill, 0, false, null, null, null);
+        Tile tile17_11 = new Tile(16, 10, null, Mountain, 0, false, null, null, null);
+        Tile tile17_12 = new Tile(16, 11, null, Plain, 0, false, null, null, null);
+        Tile tile17_13 = new Tile(16, 12, null, Plain, 0, false, null, null, null);
+        Tile tile17_14 = new Tile(16, 13, null, Hill, 0, false, null, null, null);
+        Tile tile17_15 = new Tile(16, 14, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile17_16 = new Tile(16, 15, null, GrassLand, 0, false, null, null, Forest);
+        // a lake
+        Tile tile17_17 = new Tile(16, 16, null, Ocean, 0, false, null, null, null);
+        // east america
+        Tile tile17_18 = new Tile(16, 17, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile17_19 = new Tile(16, 18, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile17_20 = new Tile(16, 19, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile17_21 = new Tile(16, 20, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile17_22 = new Tile(16, 21, null, GrassLand, 0, false, null, null, Forest);
+        // between america and europe
+        Tile tile17_23 = new Tile(16, 22, null, Ocean, 0, false, null, null, null);
+        Tile tile17_24 = new Tile(16, 23, null, Ocean, 0, false, null, null, null);
+        Tile tile17_25 = new Tile(16, 24, null, Ocean, 0, false, null, null, null);
+        Tile tile17_26 = new Tile(16, 25, null, Ocean, 0, false, null, null, null);
+        Tile tile17_27 = new Tile(16, 26, null, Ocean, 0, false, null, null, null);
+        Tile tile17_28 = new Tile(16, 27, null, Ocean, 0, false, null, null, null);
+        Tile tile17_29 = new Tile(16, 28, null, Ocean, 0, false, null, null, null);
+        Tile tile17_30 = new Tile(16, 29, null, Ocean, 0, false, null, null, null);
+        Tile tile17_31 = new Tile(16, 30, null, Ocean, 0, false, null, null, null);
+        Tile tile17_32 = new Tile(16, 31, null, Ocean, 0, false, null, null, null);
+        Tile tile17_33 = new Tile(16, 32, null, Ocean, 0, false, null, null, null);
+        Tile tile17_34 = new Tile(16, 33, null, Ocean, 0, false, null, null, null);
+        // europe
+        Tile tile17_35 = new Tile(16, 34, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile17_36 = new Tile(16, 35, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile17_37 = new Tile(16, 36, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile17_38 = new Tile(16, 37, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile17_39 = new Tile(16, 38, null, Mountain, 0, false, null, null, null);
+        Tile tile17_40 = new Tile(16, 39, null, Mountain, 0, false, null, null, null);
+        Tile tile17_41 = new Tile(16, 40, null, Mountain, 0, false, null, null, null);
+        Tile tile17_42 = new Tile(16, 41, null, Hill, 0, false, null, null, Forest);
+        Tile tile17_43 = new Tile(16, 42, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile17_44 = new Tile(16, 43, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile17_45 = new Tile(16, 44, null, Hill, 0, false, null, null, Forest);
+        // Black Sea
+        Tile tile17_46 = new Tile(16, 45, null, Ocean, 0, false, null, null, null);
+        Tile tile17_47 = new Tile(16, 46, null, Ocean, 0, false, null, null, null);
+        Tile tile17_48 = new Tile(16, 47, null, Ocean, 0, false, null, null, null);
+        // island
+        Tile tile17_49 = new Tile(16, 48, null, Plain, 0, false, null, null, null);
+        // caspian sea
+        Tile tile17_50 = new Tile(16, 49, null, Ocean, 0, false, null, null, null);
+        Tile tile17_51 = new Tile(16, 50, null, Ocean, 0, false, null, null, null);
+        // asia
+        Tile tile17_52 = new Tile(16, 51, null, Desert, 0, false, null, null, null);
+        Tile tile17_53 = new Tile(16, 52, null, Desert, 0, false, null, null, null);
+        Tile tile17_54 = new Tile(16, 53, null, Desert, 0, false, null, null, null);
+        Tile tile17_55 = new Tile(16, 54, null, Mountain, 0, false, null, null, null);
+        Tile tile17_56 = new Tile(16, 55, null, Mountain, 0, false, null, null, null);
+        Tile tile17_57 = new Tile(16, 56, null, Mountain, 0, false, null, null, null);
+        Tile tile17_58 = new Tile(16, 57, null, Hill, 0, false, null, null, null);
+        Tile tile17_59 = new Tile(16, 58, null, Hill, 0, false, null, null, null);
+        Tile tile17_60 = new Tile(16, 59, null, Desert, 0, false, null, null, null);
+        Tile tile17_61 = new Tile(16, 60, null, Hill, 0, false, null, null, null);
+        Tile tile17_62 = new Tile(16, 61, null, Desert, 0, false, null, null, null);
+        Tile tile17_63 = new Tile(16, 62, null, Desert, 0, false, null, null, null);
+        Tile tile17_64 = new Tile(16, 63, null, Desert, 0, false, null, null, null);
+        Tile tile17_65 = new Tile(16, 64, null, Desert, 0, false, null, null, null);
+        Tile tile17_66 = new Tile(16, 65, null, Desert, 0, false, null, null, null);
+        Tile tile17_67 = new Tile(16, 66, null, Hill, 0, false, null, null, null);
+        Tile tile17_68 = new Tile(16, 67, null, Plain, 0, false, null, null, null);
+        Tile tile17_69 = new Tile(16, 68, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile17_70 = new Tile(16, 69, null, GrassLand, 0, false, null, null, Forest);
+        // east asian sea
+        Tile tile17_71 = new Tile(16, 70, null, Ocean, 0, false, null, null, null);
+        Tile tile17_72 = new Tile(16, 71, null, Ocean, 0, false, null, null, null);
+        // japan
+        Tile tile17_73 = new Tile(16, 72, null, GrassLand, 0, false, null, null, null);
+        Tile tile17_74 = new Tile(16, 73, null, GrassLand, 0, false, null, null, null);
+        // between asia and america
+        Tile tile17_75 = new Tile(16, 74, null, Ocean, 0, false, null, null, null);
+        Tile tile17_76 = new Tile(16, 75, null, Ocean, 0, false, null, null, null);
+        Tile tile17_77 = new Tile(16, 76, null, Ocean, 0, false, null, null, null);
+        Tile tile17_78 = new Tile(16, 77, null, Ocean, 0, false, null, null, null);
+        Tile tile17_79 = new Tile(16, 78, null, Ocean, 0, false, null, null, null);
+        Tile tile17_80 = new Tile(16, 79, null, Ocean, 0, false, null, null, null);
+
         // 18th row
+
+        Tile tile18_1 = new Tile(17, 0, null, Ocean, 0, false, null, null, null);
+        Tile tile18_2 = new Tile(17, 1, null, Ocean, 0, false, null, null, null);
+        Tile tile18_3 = new Tile(17, 2, null, Ocean, 0, false, null, null, null);
+        Tile tile18_4 = new Tile(17, 3, null, Ocean, 0, false, null, null, null);
+        Tile tile18_5 = new Tile(17, 4, null, Ocean, 0, false, null, null, null);
+        Tile tile18_6 = new Tile(17, 5, null, Ocean, 0, false, null, null, null);
+        Tile tile18_7 = new Tile(17, 6, null, Ocean, 0, false, null, null, null);
+        Tile tile18_8 = new Tile(17, 7, null, Ocean, 0, false, null, null, null);
+        // america
+        Tile tile18_9 = new Tile(17, 8, null, Plain, 0, false, null, null, null);
+        Tile tile18_10 = new Tile(17, 9, null, Hill, 0, false, null, null, null);
+        Tile tile18_11 = new Tile(17, 10, null, Mountain, 0, false, null, null, null);
+        Tile tile18_12 = new Tile(17, 11, null, Plain, 0, false, null, null, null);
+        Tile tile18_13 = new Tile(17, 12, null, Plain, 0, false, null, null, null);
+        Tile tile18_14 = new Tile(17, 13, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile18_15 = new Tile(17, 14, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile18_16 = new Tile(17, 15, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile18_17 = new Tile(17, 16, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile18_18 = new Tile(17, 17, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile18_19 = new Tile(17, 18, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile18_20 = new Tile(17, 19, null, GrassLand, 0, false, null, null, Forest);
+        // between america and europe
+        Tile tile18_21 = new Tile(17, 20, null, Ocean, 0, false, null, null, null);
+        Tile tile18_22 = new Tile(17, 21, null, Ocean, 0, false, null, null, null);
+        Tile tile18_23 = new Tile(17, 22, null, Ocean, 0, false, null, null, null);
+        Tile tile18_24 = new Tile(17, 23, null, Ocean, 0, false, null, null, null);
+        Tile tile18_25 = new Tile(17, 24, null, Ocean, 0, false, null, null, null);
+        Tile tile18_26 = new Tile(17, 25, null, Ocean, 0, false, null, null, null);
+        Tile tile18_27 = new Tile(17, 26, null, Ocean, 0, false, null, null, null);
+        Tile tile18_28 = new Tile(17, 27, null, Ocean, 0, false, null, null, null);
+        Tile tile18_29 = new Tile(17, 28, null, Ocean, 0, false, null, null, null);
+        Tile tile18_30 = new Tile(17, 29, null, Ocean, 0, false, null, null, null);
+        Tile tile18_31 = new Tile(17, 30, null, Ocean, 0, false, null, null, null);
+        Tile tile18_32 = new Tile(17, 31, null, Ocean, 0, false, null, null, null);
+        Tile tile18_33 = new Tile(17, 32, null, Ocean, 0, false, null, null, null);
+        Tile tile18_34 = new Tile(17, 33, null, Ocean, 0, false, null, null, null);
+        // europe
+        Tile tile18_35 = new Tile(17, 34, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile18_36 = new Tile(17, 35, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile18_37 = new Tile(17, 36, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile18_38 = new Tile(17, 37, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile18_39 = new Tile(17, 38, null, Hill, 0, false, null, null, null);
+        Tile tile18_40 = new Tile(17, 39, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile18_41 = new Tile(17, 40, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile18_42 = new Tile(17, 41, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile18_43 = new Tile(17, 42, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile18_44 = new Tile(17, 43, null, Hill, 0, false, null, null, null);
+        Tile tile18_45 = new Tile(17, 44, null, GrassLand, 0, false, null, null, Forest);
+        // Black Sea
+        Tile tile18_46 = new Tile(17, 45, null, Ocean, 0, false, null, null, null);
+        Tile tile18_47 = new Tile(17, 46, null, Ocean, 0, false, null, null, null);
+        // island
+        Tile tile18_48 = new Tile(17, 47, null, Mountain, 0, false, null, null, null);
+        Tile tile18_49 = new Tile(17, 48, null, Hill, 0, false, null, null, null);
+        // caspian sea
+        Tile tile18_50 = new Tile(17, 49, null, Ocean, 0, false, null, null, null);
+        // asia
+        Tile tile18_51 = new Tile(17, 50, null, Desert, 0, false, null, null, null);
+        Tile tile18_52 = new Tile(17, 51, null, Desert, 0, false, null, null, null);
+        Tile tile18_53 = new Tile(17, 52, null, Desert, 0, false, null, null, null);
+        Tile tile18_54 = new Tile(17, 53, null, Mountain, 0, false, null, null, null);
+        Tile tile18_55 = new Tile(17, 54, null, Hill, 0, false, null, null, null);
+        Tile tile18_56 = new Tile(17, 55, null, Desert, 0, false, null, null, null);
+        Tile tile18_57 = new Tile(17, 56, null, Desert, 0, false, null, null, null);
+        Tile tile18_58 = new Tile(17, 57, null, Desert, 0, false, null, null, null);
+        Tile tile18_59 = new Tile(17, 58, null, Desert, 0, false, null, null, null);
+        Tile tile18_60 = new Tile(17, 59, null, Desert, 0, false, null, null, null);
+        Tile tile18_61 = new Tile(17, 60, null, Desert, 0, false, null, null, null);
+        Tile tile18_62 = new Tile(17, 61, null, Desert, 0, false, null, null, null);
+        Tile tile18_63 = new Tile(17, 62, null, Mountain, 0, false, null, null, null);
+        Tile tile18_64 = new Tile(17, 63, null, Plain, 0, false, null, null, null);
+        Tile tile18_65 = new Tile(17, 64, null, Plain, 0, false, null, null, null);
+        Tile tile18_66 = new Tile(17, 65, null, Plain, 0, false, null, null, Forest);
+        Tile tile18_67 = new Tile(17, 66, null, Plain, 0, false, null, null, null);
+        Tile tile18_68 = new Tile(17, 67, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile18_69 = new Tile(17, 68, null, Hill, 0, false, null, null, Forest);
+        // east asian sea
+        Tile tile18_70 = new Tile(17, 69, null, Ocean, 0, false, null, null, null);
+        Tile tile18_71 = new Tile(17, 70, null, Ocean, 0, false, null, null, null);
+        // japan
+        Tile tile18_72 = new Tile(17, 71, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile18_73 = new Tile(17, 72, null, Hill, 0, false, null, null, Forest);
+        // between asia and america
+        Tile tile18_74 = new Tile(17, 73, null, Ocean, 0, false, null, null, null);
+        Tile tile18_75 = new Tile(17, 74, null, Ocean, 0, false, null, null, null);
+        Tile tile18_76 = new Tile(17, 75, null, Ocean, 0, false, null, null, null);
+        Tile tile18_77 = new Tile(17, 76, null, Ocean, 0, false, null, null, null);
+        Tile tile18_78 = new Tile(17, 77, null, Ocean, 0, false, null, null, null);
+        Tile tile18_79 = new Tile(17, 78, null, Ocean, 0, false, null, null, null);
+        Tile tile18_80 = new Tile(17, 79, null, Ocean, 0, false, null, null, null);
+
         // 19th row
+        // between asia and america
+        Tile tile19_1 = new Tile(18, 0, null, Ocean, 0, false, null, null, null);
+        Tile tile19_2 = new Tile(18, 1, null, Ocean, 0, false, null, null, null);
+        Tile tile19_3 = new Tile(18, 2, null, Ocean, 0, false, null, null, null);
+        Tile tile19_4 = new Tile(18, 3, null, Ocean, 0, false, null, null, null);
+        Tile tile19_5 = new Tile(18, 4, null, Ocean, 0, false, null, null, null);
+        Tile tile19_6 = new Tile(18, 5, null, Ocean, 0, false, null, null, null);
+        Tile tile19_7 = new Tile(18, 6, null, Ocean, 0, false, null, null, null);
+        Tile tile19_8 = new Tile(18, 7, null, Ocean, 0, false, null, null, null);
+        Tile tile19_9 = new Tile(18, 8, null, Ocean, 0, false, null, null, null);
+        // america
+        Tile tile19_10 = new Tile(18, 9, null, Plain, 0, false, null, null, null);
+        Tile tile19_11 = new Tile(18, 10, null, Plain, 0, false, null, null, null);
+        Tile tile19_12 = new Tile(18, 11, null, Plain, 0, false, null, null, null);
+        Tile tile19_13 = new Tile(18, 12, null, Plain, 0, false, null, null, null);
+        Tile tile19_14 = new Tile(18, 13, null, Plain, 0, false, null, null, null);
+        Tile tile19_15 = new Tile(18, 14, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile19_16 = new Tile(18, 15, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile19_17 = new Tile(18, 16, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile19_18 = new Tile(18, 17, null, Hill, 0, false, null, null, Forest);
+        Tile tile19_19 = new Tile(18, 18, null, GrassLand, 0, false, null, null, Forest);
+        // between america and europe
+        Tile tile19_20 = new Tile(18, 19, null, Ocean, 0, false, null, null, null);
+        Tile tile19_21 = new Tile(18, 20, null, Ocean, 0, false, null, null, null);
+        Tile tile19_22 = new Tile(18, 21, null, Ocean, 0, false, null, null, null);
+        Tile tile19_23 = new Tile(18, 22, null, Ocean, 0, false, null, null, null);
+        Tile tile19_24 = new Tile(18, 23, null, Ocean, 0, false, null, null, null);
+        Tile tile19_25 = new Tile(18, 24, null, Ocean, 0, false, null, null, null);
+        Tile tile19_26 = new Tile(18, 25, null, Ocean, 0, false, null, null, null);
+        Tile tile19_27 = new Tile(18, 26, null, Ocean, 0, false, null, null, null);
+        Tile tile19_28 = new Tile(18, 27, null, Ocean, 0, false, null, null, null);
+        Tile tile19_29 = new Tile(18, 28, null, Ocean, 0, false, null, null, null);
+        Tile tile19_30 = new Tile(18, 29, null, Ocean, 0, false, null, null, null);
+        Tile tile19_31 = new Tile(18, 30, null, Ocean, 0, false, null, null, null);
+        Tile tile19_32 = new Tile(18, 31, null, Ocean, 0, false, null, null, null);
+        // europe
+        Tile tile19_33 = new Tile(18, 32, null, Hill, 0, false, null, null, Forest);
+        Tile tile19_34 = new Tile(18, 33, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile19_35 = new Tile(18, 34, null, Mountain, 0, false, null, null, null);
+        Tile tile19_36 = new Tile(18, 35, null, Mountain, 0, false, null, null, null);
+        Tile tile19_37 = new Tile(18, 36, null, GrassLand, 0, false, null, null, Forest);
+        // sea
+        Tile tile19_38 = new Tile(18, 37, null, Ocean, 0, false, null, null, null);
+        Tile tile19_39 = new Tile(18, 38, null, Ocean, 0, false, null, null, null);
+        // europe
+        Tile tile19_40 = new Tile(18, 39, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile19_41 = new Tile(18, 40, null, GrassLand, 0, false, null, null, Forest);
+        // sea
+        Tile tile19_42 = new Tile(18, 41, null, Ocean, 0, false, null, null, null);
+        // europe
+        Tile tile19_43 = new Tile(18, 42, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile19_44 = new Tile(18, 43, null, GrassLand, 0, false, null, null, Forest);
+        // sea
+        Tile tile19_45 = new Tile(18, 44, null, Ocean, 0, false, null, null, null);
+        // asia
+        Tile tile19_46 = new Tile(18, 45, null, Plain, 0, false, null, null, null);
+        Tile tile19_47 = new Tile(18, 46, null, Plain, 0, false, null, null, null);
+        Tile tile19_48 = new Tile(18, 47, null, Plain, 0, false, null, null, null);
+        Tile tile19_49 = new Tile(18, 48, null, Mountain, 0, false, null, null, null);
+        Tile tile19_50 = new Tile(18, 49, null, Plain, 0, false, null, null, null);
+        Tile tile19_51 = new Tile(18, 50, null, Plain, 0, false, null, null, null);
+        Tile tile19_52 = new Tile(18, 51, null, Plain, 0, false, null, null, null);
+        Tile tile19_53 = new Tile(18, 52, null, Desert, 0, false, null, null, null);
+        Tile tile19_54 = new Tile(18, 53, null, Hill, 0, false, null, null, null);
+        Tile tile19_55 = new Tile(18, 54, null, Hill, 0, false, null, null, null);
+        Tile tile19_56 = new Tile(18, 55, null, Desert, 0, false, null, null, null);
+        Tile tile19_57 = new Tile(18, 56, null, Desert, 0, false, null, null, null);
+        Tile tile19_58 = new Tile(18, 57, null, Desert, 0, false, null, null, null);
+        Tile tile19_59 = new Tile(18, 58, null, Desert, 0, false, null, null, Oasis);
+        Tile tile19_60 = new Tile(18, 59, null, Desert, 0, false, null, null, null);
+        Tile tile19_61 = new Tile(18, 60, null, Hill, 0, false, null, null, null);
+        Tile tile19_62 = new Tile(18, 61, null, Hill, 0, false, null, null, null);
+        Tile tile19_63 = new Tile(18, 62, null, Mountain, 0, false, null, null, null);
+        Tile tile19_64 = new Tile(18, 63, null, Plain, 0, false, null, null, null);
+        Tile tile19_65 = new Tile(18, 64, null, Plain, 0, false, null, null, null);
+        Tile tile19_66 = new Tile(18, 65, null, Mountain, 0, false, null, null, null);
+        Tile tile19_67 = new Tile(18, 66, null, Plain, 0, false, null, null, null);
+        Tile tile19_68 = new Tile(18, 67, null, GrassLand, 0, false, null, null, null);
+        Tile tile19_69 = new Tile(18, 68, null, GrassLand, 0, false, null, null, null);
+        // east asian sea
+        Tile tile19_70 = new Tile(18, 69, null, Ocean, 0, false, null, null, null);
+        Tile tile19_71 = new Tile(18, 70, null, Ocean, 0, false, null, null, null);
+        // japan
+        Tile tile19_72 = new Tile(18, 71, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile19_73 = new Tile(18, 72, null, GrassLand, 0, false, null, null, Forest);
+        Tile tile19_74 = new Tile(18, 73, null, Hill, 0, false, null, null, null);
+        // between america and asia
+        Tile tile19_75 = new Tile(18, 74, null, Ocean, 0, false, null, null, null);
+        Tile tile19_76 = new Tile(18, 75, null, Ocean, 0, false, null, null, null);
+        Tile tile19_77 = new Tile(18, 76, null, Ocean, 0, false, null, null, null);
+        Tile tile19_78 = new Tile(18, 77, null, Ocean, 0, false, null, null, null);
+        Tile tile19_79 = new Tile(18, 78, null, Ocean, 0, false, null, null, null);
+        Tile tile19_80 = new Tile(18, 79, null, Ocean, 0, false, null, null, null);
+
+
+
 
 
 
