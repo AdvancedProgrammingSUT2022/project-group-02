@@ -116,7 +116,7 @@ public class PlayGame {
             if (role >= players.size()) {
                 for (int i = 0; i < players.size(); i++) {
                     for (int j = 0; j < players.get(i).getCities().size(); j++) {
-                        gameController.periodicIncreases(players.get(i).getCities().get(j),players.get(i).getCities().get(j).getWorkers().get(0));
+                        gameController.periodicIncreases(players.get(i).getCities().get(j));
                     }
                 }
                 role = 0;
