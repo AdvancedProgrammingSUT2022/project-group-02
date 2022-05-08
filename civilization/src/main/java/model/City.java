@@ -254,4 +254,8 @@ public class City extends PhysicalObject {
     public void setPossibleUnits(ArrayList<Unit> possibleUnits) {
         this.possibleUnits = possibleUnits;
     }
+
+    public void addPossibleUnit(Unit unit) {
+        this.possibleUnits.add(unit);
+    }
 }

@@ -76,6 +76,7 @@ public class PlayGame {
             // handle production turn in cities and research turn of user
             gameController.cityTurnProducts(user);
             gameController.userTurnResearch(user);
+            gameController.userTurnWorker(user);
             while (nextTurn) {
 
                 input = scanner.nextLine();
@@ -255,6 +256,10 @@ public class PlayGame {
                 index = Integer.parseInt(improvementInput);
                 if (index <= improvements.size() && index >= 1) {
                     tile.setInProgress(true);
+                    Worker worker = (Worker)tile.getCivilianUnit();
+                    worker.setRemainingTurnsToComplete(improvements.get(index - 1).getPrice());
+                    worker.setWorkingStatus(true);
+                    worker.setImprovement(improvements.get(index - 1));
                     // TODO worker should work here until the work be finished ,,, when worker unit is ready
                 }
                 else
@@ -308,6 +313,14 @@ public class PlayGame {
                     setProduction(city, user, scanner);
                 else
                     System.out.println("you are already producing something");
+            }
+            else if (cityInput.trim().equals("resume production")) {
+                if (city.getCurrentProduction() != null) {
+                    city.setProductStatus(true);
+                    System.out.println("production running");
+                }
+                else
+                    System.out.println("city do not have production in queue");
             }
             // TODO add resume current production
             else if (cityInput.trim().equals("terminate current production")) {
@@ -476,7 +489,7 @@ public class PlayGame {
     private void fillMap(User user1, User user2) {
         //fill map
         //should change with file
-
+        /*
         Feature jungle = new Feature("jungle", 2, 1, 0.25, 0, 1);
         Terrain Desert = new Terrain("Desert", "yellow", 1, 0, -0.33, 0, 0, true);
         Terrain grassTerrain = new Terrain("Grassland", "green", 1, 2, -0.33, 0, 0, true);
@@ -564,6 +577,8 @@ public class PlayGame {
         map.getTileBoard()[7][1] = tile30;
         map.getTileBoard()[7][2] = tile31;
         map.getTileBoard()[7][3] = tile32;
+        */
+        ShayanMap.myTiles();
     }
 
     //check if tile is valid

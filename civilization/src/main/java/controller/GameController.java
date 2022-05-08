@@ -105,6 +105,7 @@ public class GameController {
                         for (City city : user.getCities()) {
                             city.addProduct(new Product(givenUnit.getName(), givenUnit.getPrice()));
                             // TODO add unit to possible units in city page
+                            city.addPossibleUnit(new Unit(givenUnit.getName(), city.getTile(), givenUnit.getHP(), givenUnit.getPrice(), givenUnit.getLevel(), givenUnit.getMP(), givenUnit.getCombatStrength(), givenUnit.getRangeCombatStrength(), city.getOwner(), givenUnit.getAttackPoint()));
                         }
                     }
                 }
@@ -112,6 +113,27 @@ public class GameController {
             }
             else
                 user.setResearchTurnLeft(user.getResearchTurnLeft() - 1);
+        }
+    }
+    // check all workers
+    public void userTurnWorker(User player) {
+
+        for (Unit unit : player.getUnits()) {
+            // find worker
+            if (unit.getName().equals("worker") && ((Worker)unit).getWorkingStatus()) {
+                Worker worker = (Worker)unit;
+                // if it is done
+                if (worker.getRemainingTurnsToComplete() <= 1) {
+                    worker.setWorkingStatus(false);
+                    worker.setRemainingTurnsToComplete(0);
+                    worker.getTile().setInProgress(false);
+                    worker.getTile().setImprovement(worker.getImprovement());
+                    worker.setImprovement(null);
+                }
+                else {
+                    worker.setRemainingTurnsToComplete(worker.getRemainingTurnsToComplete() - 1);
+                }
+            }
         }
     }
     // find the unit based on production name
