@@ -74,7 +74,8 @@ public class GameMenu {
         //ArrayList<Technology> technologies = ancientTechnologies();
         //users.writeToJson(technologies);
         ArrayList<Technology> ancientTechnologies = users.readFromJsonTech();
-        new PlayGame(players, height, width, ancientGraph, ancientTechnologies).run(scanner);
+        Maps map = ShayanMap.myTiles();
+        new PlayGame(players, map, ancientGraph, ancientTechnologies).run(scanner);
     }
     // get the usernames from input
     private String[] findUsernames(String input, Users users) {

@@ -21,15 +21,13 @@ public class PlayGame {
     private int height;
     private int width;
 
-    public PlayGame(ArrayList<User> players, int height, int width, int[][] ancientGraph, ArrayList<Technology> ancientTechnology) {
+    public PlayGame(ArrayList<User> players, Maps map, int[][] ancientGraph, ArrayList<Technology> ancientTechnology) {
         this.players = players;
-        this.map = new Maps(height, width);
+        this.map = map;
         gameController = new GameController(players, 1, map, height, width);
         this.mapController = new MapController(map, height, width);
         unitController = new UnitController();
         settlerController = new SettlerController();
-        this.height = height;
-        this.width = width;
         techController = new TechController(ancientGraph, ancientTechnology);
     }
 
@@ -60,16 +58,21 @@ public class PlayGame {
         System.out.println("place city here");
     }
 
+    private void assignNeighbor() {
+
+        // assign all the neighbors to each tile
+        for (int i = 0; i < map.getHeight(); i++)
+            for (int j = 0; j < map.getWidth(); j++)
+                mapController.setNeighbor(map.getTileBoard()[i][j]);
+    }
+
     public void run(Scanner scanner) {
         manPlayGame();
         String input;
         int role = 0;
         fillMap(players.get(0), players.get(1));
         int turn = 1;
-        // assign all the neighbors to each tile
-        for (int i = 0; i < map.getHeight(); i++)
-            for (int j = 0; j < map.getWidth(); j++)
-                mapController.setNeighbor(map.getTileBoard()[i][j]);
+        assignNeighbor();
         boolean nextTurn = true;
         while (true) {
             User user = players.get(role);
@@ -578,7 +581,6 @@ public class PlayGame {
         map.getTileBoard()[7][2] = tile31;
         map.getTileBoard()[7][3] = tile32;
         */
-        ShayanMap.myTiles();
     }
 
     //check if tile is valid

@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class ShayanMap {
-    public static void myTiles() {
+    public static Maps myTiles() {
 
         Maps map = new Maps(26, 80);
 
@@ -3161,6 +3161,12 @@ public class ShayanMap {
             map.setTileBoard(tile);
         }
 
-
+        for (Tile[] tiles : map.getTileBoard()) {
+            for (Tile tile1 : tiles) {
+                if (tile1 == null) 
+                    System.out.println("error!!!");
+            }
+        }
+        return map;
     }
 }
