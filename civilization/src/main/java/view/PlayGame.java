@@ -20,12 +20,10 @@ public class PlayGame {
     private int role;
     private int height;
     private int width;
-<<<<<<< HEAD
     private ArrayList<Tile> firstTurnsSettlers;
-=======
     private CityMenu cityMenu;
     private ResearchMenu researchMenu;
->>>>>>> dc181faec152efbadc7ac5c3ddd57e7bfde0d016
+
 
     public PlayGame(ArrayList<User> players, Maps map, int[][] ancientGraph, ArrayList<Technology> ancientTechnology) {
         this.players = players;
