@@ -20,6 +20,7 @@ public class PlayGame {
     private int role;
     private int height;
     private int width;
+    private ArrayList<Tile> firstTurnsSettlers;
 
     public PlayGame(ArrayList<User> players, int height, int width, int[][] ancientGraph, ArrayList<Technology> ancientTechnology) {
         this.players = players;
@@ -65,6 +66,7 @@ public class PlayGame {
         String input;
         int role = 0;
         fillMap(players.get(0), players.get(1));
+        firstTurnsSettlers = mapController.firstSetOfSettlers(players);
         int turn = 1;
         // assign all the neighbors to each tile
         for (int i = 0; i < map.getHeight(); i++)

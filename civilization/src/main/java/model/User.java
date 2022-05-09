@@ -92,7 +92,7 @@ public class User {
     }
 
     public ArrayList<Tile> getTerritory() {
-        return territory;
+        return this.territory;
     }
 
     public void setTerritory(ArrayList<Tile> territory) {
