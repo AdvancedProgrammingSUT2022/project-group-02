@@ -1,6 +1,8 @@
 package view;
 
-import controller.Users;
+import controller.ColorsController;
+import controller.UsersController;
+import enums.Colors;
 import enums.RegexEnums;
 import model.User;
 
@@ -11,15 +13,18 @@ import java.util.regex.Pattern;
 public class ProfileMenu {
     //provide some information for user
     private void manProfileMenu(User user) {
-        System.out.println("welcome to Profile Menu dear " + user.getUsername() + "!");
-        System.out.println("to change nickname :");
-        System.out.println("profile change --nickname <new nickname>");
-        System.out.println("profile change -n <new nickname");
-        System.out.println("to change password :");
-        System.out.println("profile change --password --current <current password> --new <new password>");
-        System.out.println("profile change -p -c <current password> -n <new password>");
+        String userColor = new ColorsController().getColorOfUser(user);
+        String boldColor = Colors.YELLOW_BOLD;
+        String color = Colors.CYAN;
+        System.out.println("welcome to Profile Menu dear " + userColor + user.getUsername() + Colors.RESET + "!");
+        System.out.println(boldColor + "to change nickname :" + Colors.RESET);
+        System.out.println(color + "profile change --nickname <new nickname>");
+        System.out.println("profile change -n <new nickname" + Colors.RESET);
+        System.out.println(boldColor + "to change password :" + Colors.RESET);
+        System.out.println(color + "profile change --password --current <current password> --new <new password>");
+        System.out.println("profile change -p -c <current password> -n <new password>" + Colors.RESET);
     }
-    public void run(Users users, User user, Scanner scanner) {
+    public void run(UsersController users, User user, Scanner scanner) {
         String input;
         Matcher matcher;
         manProfileMenu(user);

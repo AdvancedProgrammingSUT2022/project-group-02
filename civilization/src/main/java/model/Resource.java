@@ -6,18 +6,23 @@ public class Resource {
 
     private String name;
     private String resourceType;
-    private ArrayList<String> requiredLands;
     private Technology requiredTechnology;
     private Improvement requiredImprovement;
+    private int goldRate;
+    private int foodRate;
+    private int productRate;
+    private int happiness;
 
-
-    public Resource(String name, String resourceType, ArrayList<String> requiredLands,
-                    Technology requiredTechnology, Improvement requiredImprovement) {
+    public Resource(String name, String resourceType, Technology requiredTechnology, Improvement requiredImprovement,
+                    int goldRate, int foodRate, int productRate, int happiness) {
         this.name = name;
         this.resourceType = resourceType;
-        this.requiredLands = requiredLands;
         this.requiredTechnology = requiredTechnology;
         this.requiredImprovement = requiredImprovement;
+        this.goldRate = goldRate;
+        this.foodRate = foodRate;
+        this.productRate = productRate;
+        this.happiness = happiness;
     }
 
     public String getName() {
@@ -26,10 +31,6 @@ public class Resource {
 
     public String getResourceType() {
         return resourceType;
-    }
-
-    public ArrayList<String> getRequiredLands() {
-        return requiredLands;
     }
 
     public Technology getRequiredTechnology() {

@@ -1,5 +1,6 @@
 package view;
-import controller.Users;
+import controller.UsersController;
+import enums.Colors;
 import enums.RegexEnums;
 import model.User;
 
@@ -9,20 +10,22 @@ import java.util.regex.*;
 public class RegisterMenu {
     // provide some information for user
     private void manRegisterMenu() {
-        System.out.println("to create new user :");
-        System.out.println("the order of username and nickname and password is not important");
+        String boldColor = Colors.YELLOW_BOLD;
+        String Color = Colors.CYAN;
+        System.out.println(boldColor + "to create new user :" + Colors.RESET);
+        System.out.println(Color + "the order of username and nickname and password is not important");
         System.out.println("user create --username <username> --nickname <nickname> --password <password>");
-        System.out.println("user create -u <username> -n <nickname> -p <password>");
+        System.out.println("user create -u <username> -n <nickname> -p <password>" + Colors.RESET);
         System.out.println("**********************");
-        System.out.println("to login :");
-        System.out.println("the order of username and password is not important");
+        System.out.println(boldColor + "to login :" + Colors.RESET);
+        System.out.println(Color + "the order of username and password is not important");
         System.out.println("user login --username <username> --password <password>");
-        System.out.println("user login -u <username> -p <password>");
+        System.out.println("user login -u <username> -p <password>" + Colors.RESET);
         System.out.println("**********************");
-        System.out.println("press \"menu show-current\" to see the menu you are in");
-        System.out.println("press \"menu exit\" to exit the menu");
+        System.out.println(Color + "press \"menu show-current\" to see the menu you are in");
+        System.out.println("press \"menu exit\" to exit the menu" + Colors.RESET);
     }
-    public void run(Scanner scanner, Users users) {
+    public void run(Scanner scanner, UsersController users) {
         String input;
         Matcher matcher;
         manRegisterMenu();
@@ -59,7 +62,14 @@ public class RegisterMenu {
                 if (!users.sameUsernameExists(username)) {
                     //check if there is a same nickname
                     if (users.sameNicknameExists(nickname)) {
-                        users.addUser(new User(username, nickname, password));
+                        User user = new User(username, nickname, password);
+                        System.out.println("select your Avatar Color");
+                        users.printRemainColors();
+                        String color = scanner.nextLine();
+                        while (!users.isSelectedColorValid(color))
+                            color = scanner.nextLine();
+                        users.setUserColor(color , user);
+                        users.addUser(user);
                         System.out.println("user created successfully!");
                     }
                     else

@@ -2,6 +2,7 @@ package controller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import enums.Colors;
 import model.*;
 
 import java.io.FileWriter;
@@ -10,13 +11,22 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class Users {
+public class UsersController {
     //arraylist of registered users;
     private ArrayList<User> users;
+    private HashMap<String , Boolean> availableColors = new HashMap<>();
 
-    public Users() {
+    public UsersController() {
         users = new ArrayList<>();
+        availableColors.put("white" , true);
+        availableColors.put("red" , true);
+        availableColors.put("green" , true);
+        availableColors.put("yellow" , true);
+        availableColors.put("blue" , true);
+        availableColors.put("purple" , true);
+        availableColors.put("cyan" , true);
     }
 
     public ArrayList<User> getUsers() {
@@ -125,5 +135,31 @@ public class Users {
             improvements.add(new Improvement("Farm", 0, 1, 0, 5));
             player.setImprovements(improvements);
         }
+    }
+
+    public void printRemainColors(){
+        AtomicInteger number = new AtomicInteger(1);
+        availableColors.forEach((key , value) -> {
+            if (value){
+                String color = new ColorsController().getColorOfString(key);
+                System.out.println(number + "- " + color + key + Colors.RESET);
+                number.getAndIncrement();
+            }
+        });
+    }
+
+    public Boolean isSelectedColorValid(String color){
+        if (!availableColors.containsKey(color)){
+            System.out.println("The selected color is not an available color");
+            return false;
+        } else if (!availableColors.get(color)){
+            System.out.println("The selected color is taken by another user");
+            return false;
+        } else return true;
+    }
+
+    public void setUserColor(String color , User user){
+        user.setColor(color);
+        availableColors.replace(color , false);
     }
 }

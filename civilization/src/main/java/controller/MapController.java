@@ -6,14 +6,10 @@ import enums.Colors;
 import java.util.ArrayList;
 
 public class MapController {
-    private final int height;
-    private final int width;
-    private Maps map;
+    private final Maps map;
 
-    public MapController(Maps map, int height, int width) {
+    public MapController(Maps map) {
         this.map = map;
-        this.height = height;
-        this.width = width;
     }
 
     public void setNeighbor(Tile tile) {
@@ -129,7 +125,8 @@ public class MapController {
 
     public String tileImprovement(Tile tile) {
         if (tile.getOwner() == null) return "   ";
-        else if (tile.getImprovement() == null) return "NIY";
+        else if (tile.getImprovement() == null && tile.getCity() == null) return "NIY";
+        else if (tile.getCity() != null) return tile.getCity().getName().substring(0 , 3);
         else return tile.getImprovement().getName().substring(0, 3);
     }
 
@@ -149,32 +146,26 @@ public class MapController {
     }
 
     public String tileResource(Tile tile, boolean isFirstRightRow) {
-        if (isFirstRightRow || tile.getResource() == null) return "  ";
-        else return tile.getResource().getName().substring(0, 2);
+        if (isFirstRightRow || tile.getResource() == null) return "   ";
+        else return tile.getResource().getName().substring(0, 3);
     }
 
-    public String tileTerrain(Tile tile, boolean isFirstRightRow) {
+    public String tileFeature(Tile tile, boolean isFirstRightRow) {
         if (isFirstRightRow || tile.getFeature() == null) return "  ";
         else return tile.getFeature().getName().substring(0, 2);
     }
 
     public String getColorOfTileOwner(Tile tile) {
-        String ANSI_COLOR = Colors.BLUE;
-        if (tile.getOwner() == null) return ANSI_COLOR;
-        else if (tile.getOwner().getColor().equals("black")) ANSI_COLOR = Colors.BLACK;
-        else if (tile.getOwner().getColor().equals("green")) ANSI_COLOR = Colors.GREEN;
-        else if (tile.getOwner().getColor().equals("red")) ANSI_COLOR = Colors.RED;
-        else if (tile.getOwner().getColor().equals("yellow")) ANSI_COLOR = Colors.YELLOW;
-        else if (tile.getOwner().getColor().equals("purple")) ANSI_COLOR = Colors.PURPLE;
-        else if (tile.getOwner().getColor().equals("cyan")) ANSI_COLOR = Colors.CYAN;
-        else if (tile.getOwner().getColor().equals("blue")) ANSI_COLOR = Colors.BLUE;
-        return ANSI_COLOR;
+        ColorsController colorsController = new ColorsController();
+        return colorsController.getColorOfUser(tile.getOwner());
     }
 
     public String riverFinder(Tile tile, int x) {
         //print the river or normal border
-        if (tile.getRiverBorder() != null && tile.getRiverBorder(x) && (x == 0 || x == 3)) return Colors.BLUE_BACKGROUND + "___________" + Colors.RESET;
-        if (tile.getRiverBorder() != null && tile.getRiverBorder(x) && (x == 2 || x == 5)) return Colors.BLUE_BACKGROUND + "/" + Colors.RESET;
+        if (tile.getRiverBorder() != null && tile.getRiverBorder(x) && (x == 0 || x == 3))
+            return Colors.BLUE_BACKGROUND + "___________" + Colors.RESET;
+        if (tile.getRiverBorder() != null && tile.getRiverBorder(x) && (x == 2 || x == 5))
+            return Colors.BLUE_BACKGROUND + "/" + Colors.RESET;
         else if (tile.getRiverBorder() != null && tile.getRiverBorder(x) && (x == 1 || x == 4))
             return Colors.BLUE_BACKGROUND + "\\" + Colors.RESET;
         else if ((x == 0 && tile.getX() >= 2) || x == 3) return getColorOfTile(tile) + "___________" + Colors.RESET;
@@ -184,19 +175,8 @@ public class MapController {
     }
 
     public String getColorOfTile(Tile tile) {
-        String BACKGROUND_COLOR = switch (tile.getTerrain().getColor()) {
-            case "red" -> Colors.RED_BACKGROUND;
-            case "yellow" -> Colors.YELLOW_BACKGROUND;
-            case "purple" -> Colors.PURPLE_BACKGROUND;
-            case "green" -> Colors.GREEN_BACKGROUND;
-            case "cyan" -> Colors.CYAN_BACKGROUND_BRIGHT;
-            case "brightBlue" -> Colors.BLUE_BACKGROUND_BRIGHT;
-            case "brightGreen" -> Colors.GREEN_BACKGROUND_BRIGHT;
-            case "brightBlack" -> Colors.BLACK_BACKGROUND_BRIGHT;
-            case "white" -> Colors.WHITE_BACKGROUND_BRIGHT;
-            default -> Colors.GREEN_BACKGROUND_BRIGHT;
-        };
-        return BACKGROUND_COLOR;
+        ColorsController colorsController = new ColorsController();
+        return colorsController.getColorOfTile(tile);
     }
 
     public void deleteCivilian(Tile tile) {
