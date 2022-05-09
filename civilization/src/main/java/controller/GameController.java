@@ -108,4 +108,8 @@ public class GameController {
         citizensIncrease(city);
         workersIncomes(city);
     }
+
+    public void setFirstSettlers(User user){
+
+    }
 }
