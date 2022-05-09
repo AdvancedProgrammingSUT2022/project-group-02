@@ -7,12 +7,12 @@ public class Technology {
     private final ArrayList<Improvement> givenImprovement;
     private final ArrayList<Unit> givenUnits;
     private final int index;
-    private int price;
-    public Technology(String name, ArrayList<Improvement> givenImprovement, int index, int price, ArrayList<Unit> givenUnits) {
+    private int sciencePrice;
+    public Technology(String name, ArrayList<Improvement> givenImprovement, int index, int sciencePrice, ArrayList<Unit> givenUnits) {
         this.name = name;
         this.givenImprovement = givenImprovement;
         this.index = index;
-        this.price = price;
+        this.sciencePrice = sciencePrice;
         this.givenUnits = givenUnits;
     }
 
@@ -28,15 +28,16 @@ public class Technology {
         return index;
     }
 
-    public int getPrice() {
-        return price;
+    public int getSciencePrice() {
+        return sciencePrice;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setSciencePrice(int sciencePrice) {
+        this.sciencePrice = sciencePrice;
     }
 
     public ArrayList<Unit> getGivenUnits() {
         return givenUnits;
     }
+
 }

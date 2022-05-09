@@ -3,25 +3,29 @@ package model;
 public class Unit extends PhysicalObject{
 
     private String name;
-    private int price;
+    private int goldPrice;
+    private int productionPrice;
     private int level;
     private int MP;
     private boolean intact;
     private int XP;
     private int combatStrength;
     private int rangeCombatStrength;
+    private int maintainGold;
 
-    public Unit(String name, Tile tile, int HP, int price, int level, int MP, int combatStrength, int rangeCombatStrength,
-                User owner, int attackPoint) {
+    public Unit(String name, Tile tile, int HP, int goldPrice, int productionPrice, int level, int MP, int combatStrength, int rangeCombatStrength,
+                User owner, int attackPoint, int maintainGold) {
         super(false, attackPoint, HP, owner, tile);
         this.name = name;
-        this.price = price;
+        this.goldPrice = goldPrice;
+        this.productionPrice = productionPrice;
         this.level = level;
         this.MP = MP;
         this.combatStrength = combatStrength;
         this.rangeCombatStrength = rangeCombatStrength;
         intact = true;
         XP = 0;
+        this.maintainGold = maintainGold;
     }
 
     public String getName() {
@@ -32,12 +36,20 @@ public class Unit extends PhysicalObject{
         this.name = name;
     }
 
-    public int getPrice() {
-        return price;
+    public int getGoldPrice() {
+        return goldPrice;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public int getProductionPrice() {
+        return productionPrice;
+    }
+
+    public void setGoldPrice(int goldPrice) {
+        this.goldPrice = goldPrice;
+    }
+
+    public void setProductionPrice(int productionPrice) {
+        this.productionPrice = productionPrice;
     }
 
     public int getLevel() {
@@ -88,4 +100,11 @@ public class Unit extends PhysicalObject{
         this.rangeCombatStrength = rangeCombatStrength;
     }
 
+    public void setMaintainGold(int maintainGold) {
+        this.maintainGold = maintainGold;
+    }
+
+    public int getMaintainGold() {
+        return maintainGold;
+    }
 }

@@ -104,9 +104,9 @@ public class GameController {
                 if (user.getCurrentTechnology().getGivenUnits() != null) {
                     for (Unit givenUnit : user.getCurrentTechnology().getGivenUnits()) {
                         for (City city : user.getCities()) {
-                            city.addProduct(new Product(givenUnit.getName(), givenUnit.getPrice()));
+                            city.addProduct(new Product(givenUnit.getName(), givenUnit.getGoldPrice()));
                             // TODO add unit to possible units in city page
-                            city.addPossibleUnit(new Unit(givenUnit.getName(), city.getTile(), givenUnit.getHP(), givenUnit.getPrice(), givenUnit.getLevel(), givenUnit.getMP(), givenUnit.getCombatStrength(), givenUnit.getRangeCombatStrength(), city.getOwner(), givenUnit.getAttackPoint()));
+                            city.addPossibleUnit(new Unit(givenUnit.getName(), city.getTile(), givenUnit.getHP(), givenUnit.getGoldPrice(), givenUnit.getProductionPrice(), givenUnit.getLevel(), givenUnit.getMP(), givenUnit.getCombatStrength(), givenUnit.getRangeCombatStrength(), city.getOwner(), givenUnit.getAttackPoint(), givenUnit.getMaintainGold()));
                         }
                     }
                 }

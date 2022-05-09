@@ -6,9 +6,10 @@ public class Worker extends Civilian{
     private boolean buildingRoad;
     private boolean workingStatus;
     private int remainingTurnsToComplete;
+    private int maintainGold;
 
-    public Worker(String name, Tile tile, int HP, int price, int level, int MP, int combatStrength, int rangeCombatStrength, boolean working, User user, int attackPoint) {
-        super(name, tile, HP, price, level, MP, combatStrength, rangeCombatStrength, user, attackPoint);
+    public Worker(String name, Tile tile, int HP, int price, int level, int MP, int combatStrength, int rangeCombatStrength, boolean working, User user, int attackPoint, int maintainGold) {
+        super(name, tile, HP, price, level, MP, combatStrength, rangeCombatStrength, user, attackPoint, maintainGold);
     }
 
     public Improvement getImprovement() {

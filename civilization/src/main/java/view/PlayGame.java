@@ -190,7 +190,7 @@ public class PlayGame {
                     // choose the tech and research on it
                     user.setResearching(true);
                     user.setCurrentTechnology(technologies.get(index));
-                    user.setResearchTurnLeft(technologies.get(index).getPrice());
+                    user.setResearchTurnLeft(technologies.get(index).getSciencePrice());
                 }
                 else
                     System.out.println("invalid number");
