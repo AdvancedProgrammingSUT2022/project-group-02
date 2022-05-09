@@ -104,9 +104,19 @@ public class GameController {
         }
     }
 
+    public void citizensAndWorkersFood(City city){
+        city.setFood(city.getFood() - city.getCitizens());
+        int unemployedWorkers = 0;
+        for (int i = 0; i < city.getWorkers().size(); i++) {
+            if(city.getWorkers().get(i).isWorking() == false)unemployedWorkers++;
+        }
+        city.setFood(city.getFood() - unemployedWorkers);
+    }
+
     public void periodicIncreases(City city) {
         citizensIncrease(city);
         workersIncomes(city);
+        citizensAndWorkersFood(city);
     }
 
     public void setFirstSettlers(User user){
