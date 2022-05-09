@@ -14,6 +14,7 @@ public class User {
     private ArrayList<Tile> territory;
     private int goldPerTurn;
     private int happiness;
+    private int science;
     private int sciencePerTurn;
     private int food;
     private int foodPerTurn;
@@ -94,7 +95,7 @@ public class User {
     }
 
     public ArrayList<Tile> getTerritory() {
-        return territory;
+        return this.territory;
     }
 
     public void setTerritory(ArrayList<Tile> territory) {
@@ -115,6 +116,14 @@ public class User {
 
     public void setHappiness(int happiness) {
         this.happiness = happiness;
+    }
+
+    public void setScience(int science) {
+        this.science = science;
+    }
+
+    public int getScience() {
+        return science;
     }
 
     public int getSciencePerTurn() {
@@ -248,6 +257,7 @@ public class User {
     public void setVisible(ArrayList<Tile> visible) {
         this.visible = visible;
     }
+
     public void addVisited(Tile visit) {
         visited.add(visit);
     }
@@ -255,6 +265,7 @@ public class User {
     public void addVisible(Tile visible) {
         this.visible.add(visible);
     }
+
     public void addTerritory(Tile tile) {
         territory.add(tile);
     }
@@ -262,6 +273,7 @@ public class User {
     public void addTechnology(Technology technology) {
         technologies.add(technology);
     }
+
     public void addCity(City city) {
         cities.add(city);
     }
@@ -293,11 +305,11 @@ public class User {
     public void removeTerritory(Tile tile) {
         int index = 0;
         for (Tile tile1 : territory) {
-           if (tile1.equals(tile)) {
-               territory.remove(index);
-               return;
-           }
-           index++;
+            if (tile1.equals(tile)) {
+                territory.remove(index);
+                return;
+            }
+            index++;
         }
     }
 
@@ -320,6 +332,7 @@ public class User {
     public void setImprovements(ArrayList<Improvement> improvements) {
         this.improvements = improvements;
     }
+
     public void addImprovement(Improvement improvement) {
         this.improvements.add(improvement);
     }
