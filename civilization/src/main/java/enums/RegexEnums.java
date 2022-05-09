@@ -44,8 +44,15 @@ public enum RegexEnums {
     //increase gold + abbreviation
     INCREASE_GOLD1("^\\s*increase\\s+--gold\\s+(?<amount>\\-?\\d+)\\s*$"),
     INCREASE_GOLD2("^\\s*increase\\s+-g\\s+(?<amount>\\-?\\d+)\\s*$"),
-    SELECT_TILE("^\\s*select\\s+tile\\s+-x\\s+(?<x>\\-?\\d+)\\s+-y\\s+(?<y>\\-?\\d+)\\s*$"),
-    MOVE("^\\s*move\\s+unit\\s+to\\s+-x\\s+(?<x>\\-?\\d+)\\s+-y\\s+(?<y>\\-?\\d+)\\s*$");
+    //selecting a tile
+    SELECT_TILE1("^\\s*select\\s+tile\\s+-x\\s+(?<x>\\-?\\d+)\\s+-y\\s+(?<y>\\-?\\d+)\\s*$"),
+    SELECT_TILE2("^\\s*select\\s+tile\\s+-y\\s+(?<y>\\-?\\d+)\\s+-x\\s+(?<x>\\-?\\d+)\\s*$"),
+    MOVE1("^\\s*move\\s+unit\\s+to\\s+-x\\s+(?<x>\\-?\\d+)\\s+-y\\s+(?<y>\\-?\\d+)\\s*$"),
+    MOVE2("^\\s*move\\s+unit\\s+to\\s+-y\\s+(?<y>\\-?\\d+)\\s+-x\\s+(?<x>\\-?\\d+)\\s*$"),
+    //place city
+    CITY1("^\\s*place\\s+city\\s+--name\\s+(?<city>[\\s\\S]+)\\s*$"),
+    CITY2("^\\s*place\\s+city\\s+-n\\s+(?<city>[\\s\\S]+)\\s*$");
+
 
 
     private String regex;

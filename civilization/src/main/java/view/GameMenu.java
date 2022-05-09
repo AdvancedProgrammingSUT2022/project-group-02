@@ -38,10 +38,10 @@ public class GameMenu {
             else if (Pattern.matches("\\s*menu\\s+show-current\\s*", input))
                 System.out.println("Play Game");
 
-            else if (input.startsWith("play game")) {
+            else if (input.startsWith("play game") && (input.contains("-p1") || input.contains("--player1"))) {
                 String[] usernames = findUsernames(input, users);
 
-                if (checkIfUsernamesAreValid(usernames, users) && ifAllUsernamesAreUnique(usernames)) {
+                if (usernames != null && usernames.length >= 2 && checkIfUsernamesAreValid(usernames, users) && ifAllUsernamesAreUnique(usernames)) {
                     startGame(usernames, users, scanner);
                 }
             }
@@ -74,7 +74,8 @@ public class GameMenu {
         //ArrayList<Technology> technologies = ancientTechnologies();
         //users.writeToJson(technologies);
         ArrayList<Technology> ancientTechnologies = users.readFromJsonTech();
-        new PlayGame(players, height, width, ancientGraph, ancientTechnologies).run(scanner);
+        Maps map = ShayanMap.myTiles();
+        new PlayGame(players, map, ancientGraph, ancientTechnologies).run(scanner);
     }
     // get the usernames from input
     private String[] findUsernames(String input, Users users) {
@@ -91,14 +92,17 @@ public class GameMenu {
                 if (splitPlayerAndUsername[0].startsWith("player")) {
                     subStringForNumber = splitPlayerAndUsername[0].substring(6);
                     if (Pattern.matches("[0-9]+", subStringForNumber)) {
-                        indexOfPlayer = Integer.parseInt(subStringForNumber);
-                        usernames[indexOfPlayer - 1] = splitPlayerAndUsername[1].trim();
+                        if (assignUsernames(size, usernames, splitPlayerAndUsername, subStringForNumber)) return null;
                     }
-                    else
-                        System.out.println("invalid command");
+                    else {
+                        System.out.println("invalid number for player , only number after <player>");
+                        return null;
+                    }
                 }
-                else
-                    System.out.println("invalid command");
+                else {
+                    System.out.println("invalid command for players , each should start with key word <player>");
+                    return null;
+                }
             }
         }
 
@@ -116,9 +120,17 @@ public class GameMenu {
                     if (splitPlayerAndUsername[0].startsWith("p")) {
                         subStringForNumber = splitPlayerAndUsername[0].substring(1);
                         if (Pattern.matches("[0-9]+", subStringForNumber)) {
-                            indexOfPlayer = Integer.parseInt(subStringForNumber);
-                            usernames[indexOfPlayer - 1] = splitPlayerAndUsername[1].trim();
+                            if (assignUsernames(size, usernames, splitPlayerAndUsername, subStringForNumber))
+                                return null;
                         }
+                        else {
+                            System.out.println("invalid number for player , only number after <p>");
+                            return null;
+                        }
+                    }
+                    else {
+                        System.out.println("invalid command for players , each should start with key word <p>");
+                        return null;
                     }
                 }
             }
@@ -127,8 +139,35 @@ public class GameMenu {
         }
         return usernames;
     }
+
+    private boolean assignUsernames(int size, String[] usernames, String[] splitPlayerAndUsername, String subStringForNumber) {
+        int indexOfPlayer;
+        indexOfPlayer = Integer.parseInt(subStringForNumber);
+        if (indexOfPlayer <= size) {
+            if (usernames[indexOfPlayer - 1] == null)
+                usernames[indexOfPlayer - 1] = splitPlayerAndUsername[1].trim();
+            else {
+                System.out.println("identical number for players");
+                return true;
+            }
+        }
+        else {
+            System.out.println("given numbers are not proper");
+            return true;
+        }
+        return false;
+    }
+
     //all usernames should be valid
     private boolean checkIfUsernamesAreValid(String[] usernames, Users users) {
+
+        for (int i = 0; i < usernames.length; i++) {
+            if (usernames[i] == null) {
+                System.out.println("error occurred with given numbers");
+                return false;
+            }
+        }
+
         for (String username : usernames) {
             if (!users.sameUsernameExists(username)) {
                 System.out.println("some usernames are not valid");

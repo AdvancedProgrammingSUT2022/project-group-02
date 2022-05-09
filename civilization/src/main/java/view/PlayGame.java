@@ -20,17 +20,20 @@ public class PlayGame {
     private int role;
     private int height;
     private int width;
+<<<<<<< HEAD
     private ArrayList<Tile> firstTurnsSettlers;
+=======
+    private CityMenu cityMenu;
+    private ResearchMenu researchMenu;
+>>>>>>> dc181faec152efbadc7ac5c3ddd57e7bfde0d016
 
-    public PlayGame(ArrayList<User> players, int height, int width, int[][] ancientGraph, ArrayList<Technology> ancientTechnology) {
+    public PlayGame(ArrayList<User> players, Maps map, int[][] ancientGraph, ArrayList<Technology> ancientTechnology) {
         this.players = players;
-        this.map = new Maps(height, width);
+        this.map = map;
         gameController = new GameController(players, 1, map, height, width);
         this.mapController = new MapController(map, height, width);
         unitController = new UnitController();
         settlerController = new SettlerController();
-        this.height = height;
-        this.width = width;
         techController = new TechController(ancientGraph, ancientTechnology);
     }
 
@@ -61,17 +64,24 @@ public class PlayGame {
         System.out.println("place city here");
     }
 
+    private void assignNeighbor() {
+
+        // assign all the neighbors to each tile
+        for (int i = 0; i < map.getHeight(); i++)
+            for (int j = 0; j < map.getWidth(); j++)
+                mapController.setNeighbor(map.getTileBoard()[i][j]);
+    }
+
     public void run(Scanner scanner) {
+        cityMenu = new CityMenu(mapController, techController, settlerController, gameController);
+        researchMenu = new ResearchMenu();
         manPlayGame();
         String input;
         int role = 0;
         fillMap(players.get(0), players.get(1));
         firstTurnsSettlers = mapController.firstSetOfSettlers(players);
         int turn = 1;
-        // assign all the neighbors to each tile
-        for (int i = 0; i < map.getHeight(); i++)
-            for (int j = 0; j < map.getWidth(); j++)
-                mapController.setNeighbor(map.getTileBoard()[i][j]);
+        assignNeighbor();
         boolean nextTurn = true;
         while (true) {
             User user = players.get(role);
@@ -91,6 +101,12 @@ public class PlayGame {
                     }
                     else
                         System.out.println("you didn't play all your turns");
+                }
+                else if (input.trim().equals("city menu")) {
+                    cityMenu.run(scanner, user);
+                }
+                else if (input.trim().equals("research panel")) {
+
                 }
                     //cheat code for increasing turn
                 else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_TURN1)) != null ||
@@ -113,7 +129,8 @@ public class PlayGame {
                         System.out.println("invalid command");
                 }
                 // selecting tile
-                else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.SELECT_TILE)) != null) {
+                else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.SELECT_TILE1)) != null ||
+                        (matcher = RegexEnums.getMatcher(input, RegexEnums.SELECT_TILE2)) != null) {
                     int xOrigin = Integer.parseInt(matcher.group("x"));
                     int yOrigin = Integer.parseInt(matcher.group("y"));
                     // valid coordinates
@@ -203,18 +220,23 @@ public class PlayGame {
             if (tileInput.equals("tile exit"))
                 return;
 
-            else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.SELECT_TILE)) != null) {
+            else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.SELECT_TILE1)) != null ||
+                    (matcher = RegexEnums.getMatcher(tileInput, RegexEnums.SELECT_TILE2)) != null) {
                 if (selectAnotherTile(origin, scanner, user, xOrigin, yOrigin))
                     return;
             }
             // move the unit in this tile to destination
-            else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.MOVE)) != null) {
+            else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.MOVE1)) != null ||
+                    (matcher = RegexEnums.getMatcher(tileInput, RegexEnums.MOVE2)) != null) {
                 moveUnitConditions(origin, user);
             }
             // order settler to place city
-            else if (tileInput.trim().equals("place city here")) {
-                if (conditionsForPlaceCity(tileInput, origin))
-                    createCity(origin, user);
+            else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.CITY1)) != null ||
+                    (matcher = RegexEnums.getMatcher(tileInput, RegexEnums.CITY2)) != null) {
+                if (conditionsForPlaceCity(tileInput, origin)) {
+                    String nameOfCity = matcher.group("city");
+                    createCity(origin, user, nameOfCity);
+                }
             }
             // order worker to improve the tile
             else if (tileInput.trim().equals("show possible improvements")) {
@@ -227,7 +249,7 @@ public class PlayGame {
             }
             else if (tileInput.trim().equals("city page")) {
                 if (origin.getCity().getCityLocation().equals(origin)) {
-                    cityPage(origin.getCity(), user, scanner);
+                    cityMenu.cityPage(origin.getCity(), user, scanner);
                 }
                 else
                     System.out.println("this tile is not a city");
@@ -271,97 +293,6 @@ public class PlayGame {
                 System.out.println("invalid command");
         }
 
-    }
-
-    private void cityPage(City city, User user, Scanner scanner) {
-        String cityInput;
-        System.out.println("you are in the city page");
-        while (true) {
-            cityInput = scanner.nextLine();
-            if (cityInput.trim().equals("city exit"))
-                return;
-            else if (cityInput.trim().equals("buy tile")) {
-                ArrayList<Tile> neighborOfCity = mapController.neighborOfCity(city);
-
-                // TODO show nearby neutral tiles and then buy ,,, when map is ready
-
-                String buyTileInput;
-                boolean buying = true;
-                while (buying) {
-                    buyTileInput = scanner.nextLine();
-                    if (buyTileInput.equals("buy tile exit"))
-                        buying = false;
-                    else if (Pattern.matches("[\\d+]", buyTileInput)) {
-                        int index = Integer.parseInt(buyTileInput);
-                        if (index >= 1 && index <= neighborOfCity.size()) {
-                            // add the tile to the city and user
-                            if (user.getGold() >= neighborOfCity.get(index - 1).getPrice()) {
-                                user.setGold(user.getGold() - neighborOfCity.get(index - 1).getPrice());
-                                city.addOwnerShipLand(neighborOfCity.get(index - 1));
-                                user.addTerritory(neighborOfCity.get(index - 1));
-                            }
-                            else
-                                System.out.println("not enough gold!");
-                        }
-                        else
-                            System.out.println("invalid number");
-                    }
-                    else
-                        System.out.println("invalid command");
-                }
-            }
-            else if (cityInput.trim().equals("new production")) {
-                if (!city.isProductStatus())
-                    setProduction(city, user, scanner);
-                else
-                    System.out.println("you are already producing something");
-            }
-            else if (cityInput.trim().equals("resume production")) {
-                if (city.getCurrentProduction() != null) {
-                    city.setProductStatus(true);
-                    System.out.println("production running");
-                }
-                else
-                    System.out.println("city do not have production in queue");
-            }
-            // TODO add resume current production
-            else if (cityInput.trim().equals("terminate current production")) {
-                if (city.isProductStatus()) {
-                    // producing eliminated
-                    city.setProductStatus(false);
-                }
-                else
-                    System.out.println("you don't produce anything");
-            }
-            else
-                System.out.println("invalid command");
-        }
-    }
-
-    private void setProduction(City city, User user, Scanner scanner) {
-        int index = 1;
-        for (Product product : city.getProducts()) {
-            System.out.println(index + "- " + product.getName());
-        }
-        String productInput;
-        System.out.println("you are in production bar");
-        while (true) {
-            productInput = scanner.nextLine();
-            if (productInput.trim().equals("production exit"))
-                return;
-            else if (Pattern.matches("\\d+", productInput)) {
-                int numberOfProduct = Integer.parseInt(productInput);
-                if (numberOfProduct <= city.getProducts().size() && numberOfProduct >= 1) {
-                    city.setCurrentProduction(city.getProducts().get(numberOfProduct - 1));
-                    city.setProductStatus(true);
-                    city.setProductTurnLeft(city.getCurrentProduction().getTurnCost());
-                }
-                else
-                    System.out.println("invalid number");
-            }
-            else
-                System.out.println("invalid command");
-        }
     }
 
     private boolean selectAnotherTile(Tile origin, Scanner scanner, User user, int xOrigin, int yOrigin) {
@@ -580,7 +511,6 @@ public class PlayGame {
         map.getTileBoard()[7][2] = tile31;
         map.getTileBoard()[7][3] = tile32;
         */
-        ShayanMap.myTiles();
     }
 
     //check if tile is valid
@@ -599,9 +529,9 @@ public class PlayGame {
     }
 
     // create city
-    private void createCity(Tile tile, User user) {
+    private void createCity(Tile tile, User user, String nameOfCity) {
         // completely delete settler
-        settlerController.createNewCity(tile.getCivilianUnit(), user, tile);
+        settlerController.createNewCity(tile.getCivilianUnit(), user, tile, nameOfCity);
         // remove settler from tile
         mapController.deleteCivilian(tile);
         System.out.println("city located successfully!");

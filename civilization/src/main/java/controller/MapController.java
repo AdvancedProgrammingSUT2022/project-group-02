@@ -173,9 +173,9 @@ public class MapController {
 
     public String riverFinder(Tile tile, int x) {
         //print the river or normal border
-        if (tile.getRiverBorder(x) && (x == 0 || x == 3)) return Colors.BLUE_BACKGROUND + "___________" + Colors.RESET;
-        if (tile.getRiverBorder(x) && (x == 2 || x == 5)) return Colors.BLUE_BACKGROUND + "/" + Colors.RESET;
-        else if (tile.getRiverBorder(x) && (x == 1 || x == 4))
+        if (tile.getRiverBorder() != null && tile.getRiverBorder(x) && (x == 0 || x == 3)) return Colors.BLUE_BACKGROUND + "___________" + Colors.RESET;
+        if (tile.getRiverBorder() != null && tile.getRiverBorder(x) && (x == 2 || x == 5)) return Colors.BLUE_BACKGROUND + "/" + Colors.RESET;
+        else if (tile.getRiverBorder() != null && tile.getRiverBorder(x) && (x == 1 || x == 4))
             return Colors.BLUE_BACKGROUND + "\\" + Colors.RESET;
         else if ((x == 0 && tile.getX() >= 2) || x == 3) return getColorOfTile(tile) + "___________" + Colors.RESET;
         else if (x == 0) return "___________";
