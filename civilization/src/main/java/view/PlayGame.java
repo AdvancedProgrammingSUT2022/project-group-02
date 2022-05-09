@@ -117,8 +117,10 @@ public class PlayGame {
                     if (amount > 0) {
                         gameController.increaseTurn(amount, user);
                         System.out.println("turn increased successfully!");
+                        showMap(user);
                     } else
                         System.out.println("invalid number");
+
                 }
                 else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_GOLD1)) != null ||
                         (matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_GOLD2)) != null) {
@@ -126,6 +128,7 @@ public class PlayGame {
                     if (amount > 0) {
                         gameController.increaseGold(amount, user);
                         System.out.println("gold increased successfully!");
+                        showMap(user);
                     } else
                         System.out.println("invalid command");
                 }
@@ -134,6 +137,7 @@ public class PlayGame {
                     if (amount > 0) {
                         gameController.increaseFood(amount, user);
                         System.out.println("food increased successfully!");
+                        showMap(user);
                     } else
                         System.out.println("invalid command");
                 }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_FAITH)) != null){
@@ -141,6 +145,7 @@ public class PlayGame {
                     if (amount > 0) {
                         gameController.increaseFaith(amount, user);
                         System.out.println("faith increased successfully!");
+                        showMap(user);
                     } else
                         System.out.println("invalid command");
                 }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_SCIENCE)) != null){
@@ -148,6 +153,7 @@ public class PlayGame {
                     if (amount > 0) {
                         gameController.increaseScience(amount, user);
                         System.out.println("science increased successfully!");
+                        showMap(user);
                     } else
                         System.out.println("invalid command");
                 }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_CAPITAL_CITIZENS)) != null){
@@ -155,13 +161,15 @@ public class PlayGame {
                     if (amount > 0) {
                         gameController.increaseCapitalCitizens(amount, user);
                         System.out.println("capitalCitizens increased successfully!");
+                        showMap(user);
                     } else
                         System.out.println("invalid command");
-                }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_CAPITLADEFENCE)) != null){
+                }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_CAPITAL_DEFENCE)) != null){
                     int amount = Integer.parseInt(matcher.group("amount"));
                     if (amount > 0) {
                         gameController.increaseCapitalDefence(amount, user);
                         System.out.println("capitalDefence increased successfully!");
+                        showMap(user);
                     } else
                         System.out.println("invalid command");
                 }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_CULTURE)) != null){
@@ -169,6 +177,7 @@ public class PlayGame {
                     if (amount > 0) {
                         gameController.increaseCulture(amount, user);
                         System.out.println("culture increased successfully!");
+                        showMap(user);
                     } else
                         System.out.println("invalid command");
                 }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_HAPPINESS)) != null){
@@ -176,13 +185,15 @@ public class PlayGame {
                     if (amount > 0) {
                         gameController.increaseHappiness(amount, user);
                         System.out.println("happiness increased successfully!");
+                        showMap(user);
                     } else
                         System.out.println("invalid command");
-                }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_RESEARCHTURNLEFT)) != null){
+                }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_RESEARCH_TURN_LEFT)) != null){
                     int amount = Integer.parseInt(matcher.group("amount"));
                     if (amount > 0) {
                         gameController.increaseResearchTurnLeft(amount, user);
-                        System.out.println("researchs increased successfully!");
+                        System.out.println("researches increased successfully!");
+                        showMap(user);
                     } else
                         System.out.println("invalid command");
                 }

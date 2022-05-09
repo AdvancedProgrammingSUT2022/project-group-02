@@ -49,9 +49,9 @@ public enum RegexEnums {
     INCREASE_CULTURE("^\\s*increase\\s+--culture\\s+(?amount\\-?\\d+)$"),
     INCREASE_FAITH("^\\s*increase\\s+--faith\\s+(?amount\\-?\\d+)$"),
     INCREASE_CAPITAL_CITIZENS("^\\s*increase\\s+--citizens\\s+(?amount\\-?\\d+)$"),
-    INCREASE_RESEARCHTURNLEFT("^\\s*increase\\s+--research\\s+(?amount\\-?\\d+)$"),
+    INCREASE_RESEARCH_TURN_LEFT("^\\s*increase\\s+--research\\s+(?amount\\-?\\d+)$"),
     INCREASE_SCIENCE("^\\s*increase\\s+--science\\s+(?amount\\-?\\d+)$"),
-    INCREASE_CAPITLADEFENCE("^\\s*increase\\s+--defence\\s+(?amount\\-?\\d+)$"),
+    INCREASE_CAPITAL_DEFENCE("^\\s*increase\\s+--defence\\s+(?amount\\-?\\d+)$"),
     //selecting a tile
     SELECT_TILE1("^\\s*select\\s+tile\\s+-x\\s+(?<x>\\-?\\d+)\\s+-y\\s+(?<y>\\-?\\d+)\\s*$"),
     SELECT_TILE2("^\\s*select\\s+tile\\s+-y\\s+(?<y>\\-?\\d+)\\s+-x\\s+(?<x>\\-?\\d+)\\s*$"),
