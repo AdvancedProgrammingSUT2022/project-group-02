@@ -1,6 +1,7 @@
 package view;
 
-import controller.Users;
+import controller.UsersController;
+import enums.Colors;
 import enums.RegexEnums;
 import model.User;
 
@@ -11,10 +12,11 @@ import java.util.regex.Pattern;
 public class MainMenu {
     //provide some information for user
     private void manMainMenu() {
-        System.out.println("press \"menu enter <menu name>\" to access to Play Game and Profile Menu");
-        System.out.println("press \"menu exit or user logout\" to get back to Register Menu");
+        String color = Colors.CYAN;
+        System.out.println(color + "press \"menu enter <menu name>\" to access to Play Game and Profile Menu");
+        System.out.println("press \"menu exit or user logout\" to get back to Register Menu" + Colors.RESET);
     }
-    public void run(Users users, User user, Scanner scanner) {
+    public void run(UsersController users, User user, Scanner scanner) {
         String input;
         Matcher matcher;
         manMainMenu();

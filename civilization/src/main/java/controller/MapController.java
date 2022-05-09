@@ -6,14 +6,10 @@ import enums.Colors;
 import java.util.ArrayList;
 
 public class MapController {
-    private final int height;
-    private final int width;
-    private Maps map;
+    private final Maps map;
 
-    public MapController(Maps map, int height, int width) {
+    public MapController(Maps map) {
         this.map = map;
-        this.height = height;
-        this.width = width;
     }
 
     public void setNeighbor(Tile tile) {
@@ -129,7 +125,8 @@ public class MapController {
 
     public String tileImprovement(Tile tile) {
         if (tile.getOwner() == null) return "   ";
-        else if (tile.getImprovement() == null) return "NIY";
+        else if (tile.getImprovement() == null && tile.getCity() == null) return "NIY";
+        else if (tile.getCity() != null) return tile.getCity().getName().substring(0 , 3);
         else return tile.getImprovement().getName().substring(0, 3);
     }
 
@@ -149,32 +146,26 @@ public class MapController {
     }
 
     public String tileResource(Tile tile, boolean isFirstRightRow) {
-        if (isFirstRightRow || tile.getResource() == null) return "  ";
-        else return tile.getResource().getName().substring(0, 2);
+        if (isFirstRightRow || tile.getResource() == null) return "   ";
+        else return tile.getResource().getName().substring(0, 3);
     }
 
-    public String tileTerrain(Tile tile, boolean isFirstRightRow) {
+    public String tileFeature(Tile tile, boolean isFirstRightRow) {
         if (isFirstRightRow || tile.getFeature() == null) return "  ";
         else return tile.getFeature().getName().substring(0, 2);
     }
 
     public String getColorOfTileOwner(Tile tile) {
-        String ANSI_COLOR = Colors.BLUE;
-        if (tile.getOwner() == null) return ANSI_COLOR;
-        else if (tile.getOwner().getColor().equals("black")) ANSI_COLOR = Colors.BLACK;
-        else if (tile.getOwner().getColor().equals("green")) ANSI_COLOR = Colors.GREEN;
-        else if (tile.getOwner().getColor().equals("red")) ANSI_COLOR = Colors.RED;
-        else if (tile.getOwner().getColor().equals("yellow")) ANSI_COLOR = Colors.YELLOW;
-        else if (tile.getOwner().getColor().equals("purple")) ANSI_COLOR = Colors.PURPLE;
-        else if (tile.getOwner().getColor().equals("cyan")) ANSI_COLOR = Colors.CYAN;
-        else if (tile.getOwner().getColor().equals("blue")) ANSI_COLOR = Colors.BLUE;
-        return ANSI_COLOR;
+        ColorsController colorsController = new ColorsController();
+        return colorsController.getColorOfUser(tile.getOwner());
     }
 
     public String riverFinder(Tile tile, int x) {
         //print the river or normal border
-        if (tile.getRiverBorder() != null && tile.getRiverBorder(x) && (x == 0 || x == 3)) return Colors.BLUE_BACKGROUND + "___________" + Colors.RESET;
-        if (tile.getRiverBorder() != null && tile.getRiverBorder(x) && (x == 2 || x == 5)) return Colors.BLUE_BACKGROUND + "/" + Colors.RESET;
+        if (tile.getRiverBorder() != null && tile.getRiverBorder(x) && (x == 0 || x == 3))
+            return Colors.BLUE_BACKGROUND + "___________" + Colors.RESET;
+        if (tile.getRiverBorder() != null && tile.getRiverBorder(x) && (x == 2 || x == 5))
+            return Colors.BLUE_BACKGROUND + "/" + Colors.RESET;
         else if (tile.getRiverBorder() != null && tile.getRiverBorder(x) && (x == 1 || x == 4))
             return Colors.BLUE_BACKGROUND + "\\" + Colors.RESET;
         else if ((x == 0 && tile.getX() >= 2) || x == 3) return getColorOfTile(tile) + "___________" + Colors.RESET;
@@ -184,19 +175,8 @@ public class MapController {
     }
 
     public String getColorOfTile(Tile tile) {
-        String BACKGROUND_COLOR = switch (tile.getTerrain().getColor()) {
-            case "red" -> Colors.RED_BACKGROUND;
-            case "yellow" -> Colors.YELLOW_BACKGROUND;
-            case "purple" -> Colors.PURPLE_BACKGROUND;
-            case "green" -> Colors.GREEN_BACKGROUND;
-            case "cyan" -> Colors.CYAN_BACKGROUND_BRIGHT;
-            case "brightBlue" -> Colors.BLUE_BACKGROUND_BRIGHT;
-            case "brightGreen" -> Colors.GREEN_BACKGROUND_BRIGHT;
-            case "brightBlack" -> Colors.BLACK_BACKGROUND_BRIGHT;
-            case "white" -> Colors.WHITE_BACKGROUND_BRIGHT;
-            default -> Colors.GREEN_BACKGROUND_BRIGHT;
-        };
-        return BACKGROUND_COLOR;
+        ColorsController colorsController = new ColorsController();
+        return colorsController.getColorOfTile(tile);
     }
 
     public void deleteCivilian(Tile tile) {
@@ -219,5 +199,83 @@ public class MapController {
             }
         }
         return neighborOfCity;
+    }
+
+    public ArrayList<Tile> firstSetOfSettlers(ArrayList<User> users){
+        ArrayList<Tile> tiles = new ArrayList<>();
+        ArrayList<Tile> newTiles = new ArrayList<>();
+        if(users.size()<=0)return tiles;
+        newTiles = users.get(0).getTerritory();
+        newTiles.add(map.getSpecificTile(12,15));
+        users.get(0).setTerritory(newTiles);
+        map.getSpecificTile(12,15).setCivilianUnit(new Unit(users.get(0).getUsername(),map.getSpecificTile(12,15),0,0,0,0,0,0,users.get(0),0));
+        tiles.add(map.getSpecificTile(12,15));
+        if(users.size()<=1)return tiles;
+        newTiles = users.get(1).getTerritory();
+        newTiles.add(map.getSpecificTile(25,19));
+        users.get(1).setTerritory(newTiles);
+        map.getSpecificTile(25,19).setCivilianUnit(new Unit(users.get(1).getUsername(),map.getSpecificTile(25,19),0,0,0,0,0,0,users.get(1),0));
+        tiles.add(map.getSpecificTile(25,19));
+        if(users.size()<=2)return tiles;
+        newTiles = users.get(2).getTerritory();
+        newTiles.add(map.getSpecificTile(40,11));
+        users.get(2).setTerritory(newTiles);
+        map.getSpecificTile(40,11).setCivilianUnit(new Unit(users.get(2).getUsername(),map.getSpecificTile(40,11),0,0,0,0,0,0,users.get(2),0));
+        tiles.add(map.getSpecificTile(40,11));
+        if(users.size()<=3)return tiles;
+        newTiles = users.get(3).getTerritory();
+        newTiles.add(map.getSpecificTile(45,8));
+        users.get(3).setTerritory(newTiles);
+        map.getSpecificTile(45,8).setCivilianUnit(new Unit(users.get(3).getUsername(),map.getSpecificTile(45,8),0,0,0,0,0,0,users.get(3),0));
+        tiles.add(map.getSpecificTile(45,8));
+        if(users.size()<=4)return tiles;
+        newTiles = users.get(4).getTerritory();
+        newTiles.add(map.getSpecificTile(20,6));
+        users.get(4).setTerritory(newTiles);
+        map.getSpecificTile(20,6).setCivilianUnit(new Unit(users.get(4).getUsername(),map.getSpecificTile(20,6),0,0,0,0,0,0,users.get(4),0));
+        tiles.add(map.getSpecificTile(20,6));
+        if(users.size()<=5)return tiles;
+        newTiles = users.get(5).getTerritory();
+        newTiles.add(map.getSpecificTile(28,2));
+        users.get(5).setTerritory(newTiles);
+        map.getSpecificTile(28,2).setCivilianUnit(new Unit(users.get(4).getUsername(),map.getSpecificTile(28,2),0,0,0,0,0,0,users.get(5),0));
+        tiles.add(map.getSpecificTile(28,2));
+        if(users.size()<=6)return tiles;
+        newTiles = users.get(6).getTerritory();
+        newTiles.add(map.getSpecificTile(54,20));
+        users.get(6).setTerritory(newTiles);
+        map.getSpecificTile(54,20).setCivilianUnit(new Unit(users.get(4).getUsername(),map.getSpecificTile(54,20),0,0,0,0,0,0,users.get(6),0));
+        tiles.add(map.getSpecificTile(54,20));
+        if(users.size()<=7)return tiles;
+        newTiles = users.get(7).getTerritory();
+        newTiles.add(map.getSpecificTile(60,23));
+        users.get(7).setTerritory(newTiles);
+        map.getSpecificTile(60,23).setCivilianUnit(new Unit(users.get(4).getUsername(),map.getSpecificTile(60,23),0,0,0,0,0,0,users.get(7),0));
+        tiles.add(map.getSpecificTile(60,23));
+        if(users.size()<=8)return tiles;
+        newTiles = users.get(8).getTerritory();
+        newTiles.add(map.getSpecificTile(65,16));
+        users.get(8).setTerritory(newTiles);
+        map.getSpecificTile(65,16).setCivilianUnit(new Unit(users.get(4).getUsername(),map.getSpecificTile(65,16),0,0,0,0,0,0,users.get(8),0));
+        tiles.add(map.getSpecificTile(65,16));
+        if(users.size()<=9)return tiles;
+        newTiles = users.get(9).getTerritory();
+        newTiles.add(map.getSpecificTile(75,17));
+        users.get(9).setTerritory(newTiles);
+        map.getSpecificTile(75,17).setCivilianUnit(new Unit(users.get(4).getUsername(),map.getSpecificTile(75,17),0,0,0,0,0,0,users.get(9),0));
+        tiles.add(map.getSpecificTile(75,17));
+        if(users.size()<=10)return tiles;
+        newTiles = users.get(10).getTerritory();
+        newTiles.add(map.getSpecificTile(78,21));
+        users.get(10).setTerritory(newTiles);
+        map.getSpecificTile(78,21).setCivilianUnit(new Unit(users.get(4).getUsername(),map.getSpecificTile(78,21),0,0,0,0,0,0,users.get(10),0));
+        tiles.add(map.getSpecificTile(78,21));
+        if(users.size()<=11)return tiles;
+        newTiles = users.get(11).getTerritory();
+        newTiles.add(map.getSpecificTile(19,4));
+        users.get(11).setTerritory(newTiles);
+        map.getSpecificTile(19,4).setCivilianUnit(new Unit(users.get(11).getUsername(),map.getSpecificTile(19,4),0,0,0,0,0,0,users.get(11),0));
+        tiles.add(map.getSpecificTile(19,4));
+        return tiles;
     }
 }

@@ -1,17 +1,11 @@
 package view;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import controller.MapController;
-import controller.Users;
+import controller.ColorsController;
+import controller.UsersController;
+import enums.Colors;
 import model.*;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,14 +13,17 @@ import java.util.regex.Pattern;
 public class GameMenu {
     // provide some information for user
     private void manGameMenu(User user) {
-        System.out.println("welcome to Game Menu dear " + user.getUsername() + "!");
-        System.out.println("press \"menu exit\" to get back to Main Menu");
-        System.out.println("to Play Game :");
-        System.out.println("play game --player1 <username> ... --player(k) <username>");
+        String userColor = new ColorsController().getColorOfUser(user);
+        String boldColor = Colors.YELLOW_BOLD;
+        String color = Colors.CYAN;
+        System.out.println("welcome to Game Menu dear " + userColor + user.getUsername() + Colors.RESET + "!");
+        System.out.println(color + "press \"menu exit\" to get back to Main Menu" + Colors.RESET);
+        System.out.println(boldColor + "to Play Game :" + Colors.RESET);
+        System.out.println(color + "play game --player1 <username> ... --player(k) <username>");
         System.out.println("play game -p1 <username> ... -p(k) <username>");
-        System.out.println("the order of players is not important");
+        System.out.println("the order of players is not important" + Colors.RESET);
     }
-    public void run(Users users, User user, Scanner scanner) {
+    public void run(UsersController users, User user, Scanner scanner) {
         String input;
         Matcher matcher;
         manGameMenu(user);
@@ -51,34 +48,22 @@ public class GameMenu {
         }
     }
     // start game
-    private void startGame(String[] usernames, Users users, Scanner scanner) {
+    private void startGame(String[] usernames, UsersController users, Scanner scanner) {
         System.out.println("successfully started game");
-        ArrayList<String> colors = new ArrayList<>();
-        colors.add("yellow");
-        colors.add("purple");
-        colors.add("red");
-        colors.add("cyan");
-        colors.add("green");
         ArrayList<User> players = new ArrayList<>();
-        int userNumber = 0;
         for (String username : usernames) {
             players.add(users.getUserByUsername(username));
-            players.get(userNumber).setColor(colors.get(userNumber));
-            userNumber++;
         }
-        // temporary
-        int height = 8;
-        int width = 4;
 
         int[][] ancientGraph = users.readFromJsonGraph();
         //ArrayList<Technology> technologies = ancientTechnologies();
         //users.writeToJson(technologies);
         ArrayList<Technology> ancientTechnologies = users.readFromJsonTech();
-        Maps map = ShayanMap.myTiles();
+        Maps map = new MapMaker().myTiles();
         new PlayGame(players, map, ancientGraph, ancientTechnologies).run(scanner);
     }
     // get the usernames from input
-    private String[] findUsernames(String input, Users users) {
+    private String[] findUsernames(String input, UsersController users) {
         String[] all = input.split("--");
         int size = all.length - 1;
         String[] usernames = new String[size];
@@ -159,7 +144,7 @@ public class GameMenu {
     }
 
     //all usernames should be valid
-    private boolean checkIfUsernamesAreValid(String[] usernames, Users users) {
+    private boolean checkIfUsernamesAreValid(String[] usernames, UsersController users) {
 
         for (int i = 0; i < usernames.length; i++) {
             if (usernames[i] == null) {

@@ -1,20 +1,19 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.Map;
 
-public class ShayanMap {
-    public static Maps myTiles() {
+public class MapMaker {
+    public Maps myTiles() {
 
         Maps map = new Maps(26, 80);
-
+        //all features of map
         Feature Jungle = new Feature("Jungle", 2, 1, 0.25, 0, 1);
         Feature Forest = new Feature("Forest", 2, 1, 0.25, 0, 1);
         Feature Marsh = new Feature("Marsh", 2, -1, -0.33, 0, 0);
         Feature Oasis = new Feature("Oasis", 1, 3, -0.33, 1, 0);
         Feature Ice = new Feature("Ice", 0, 0, 0, 0, 0);
         Feature FloodPlain = new Feature("FloodPlain", 1, 2, -0.33, 0, 0);
-
-
+        //all terrains of map
         Terrain Desert = new Terrain("Desert", "yellow", 1, 0, -0.33, 0, 0, true);
         Terrain GrassLand = new Terrain("Grassland", "green", 1, 2, -0.33, 0, 0, true);
         Terrain Hill = new Terrain("Hill", "purple", 2, 0, 0.25, 0, 2, true);
@@ -22,7 +21,29 @@ public class ShayanMap {
         Terrain Ocean = new Terrain("Ocean", "brightBlue", 0, 0, 0, 0, 0, false);
         Terrain Plain = new Terrain("Plain", "red", 1, 1, -0.33, 0, 1, true);
         Terrain Snow = new Terrain("Snow", "white", 1, 0, -0.33, 0, 0, true);
-        Terrain Tundra = new Terrain("Tundra", "", 1, 1, -0.33, 0, 0, true);
+        Terrain Tundra = new Terrain("Tundra", "cyan", 1, 1, -0.33, 0, 0, true);
+        //all Bonus Resources of map
+        Resource Banana = new Resource("Banana", "Bonus", null, null, 0, 1, 0, 0);
+        Resource Cow = new Resource("Cow", "Bonus", null, null, 0, 1, 0, 0);
+        Resource Gazelle = new Resource("Gazelle", "Bonus", null, null, 0, 1, 0, 0);
+        Resource Wheat = new Resource("Wheat", "Bonus", null, null, 0, 1, 0, 0);
+        Resource Sheep = new Resource("Sheep", "Bonus", null, null, 0, 2, 0, 0);
+        //all Strategic Resources of map
+        Resource Coal = new Resource("Coal", "Strategic", null, null, 0, 0, 1, 0);
+        Resource Horse = new Resource("Horse", "Strategic", null, null, 0, 0, 1, 0);
+        Resource Iron = new Resource("Iron", "Strategic", null, null, 0, 0, 1, 0);
+        //all Luxury Resources of map
+        Resource Cotton = new Resource("Cotton", "Luxury", null, null, 2, 0, 0, 3);
+        Resource Color = new Resource("Color", "Luxury", null, null, 2, 0, 0, 2);
+        Resource Fur = new Resource("Fur", "Luxury", null, null, 2, 0, 0, 3);
+        Resource Gemstones = new Resource("Gemstones", "Luxury", null, null, 3, 0, 0, 5);
+        Resource Gold = new Resource("Gold", "Luxury", null, null, 2, 0, 0, 4);
+        Resource Fumigation = new Resource("Fumigation", "Luxury", null, null, 2, 0, 0, 2);
+        Resource Ivory = new Resource("Ivory", "Luxury", null, null, 2, 0, 0, 3);
+        Resource Silk = new Resource("Silk", "Luxury", null, null, 2, 0, 0, 3);
+        Resource Sugar = new Resource("Sugar", "Luxury", null, null, 2, 0, 0, 2);
+        Resource Silver = new Resource("Silver", "Luxury", null, null, 2, 0, 0, 3);
+        Resource Marble = new Resource("Marble", "Luxury", null, null, 2, 0, 0, 3);
 
         //1st row
         for (int i = 0; i < 80; i++){
@@ -595,8 +616,8 @@ public class ShayanMap {
         }
         //10th row
         for (int i = 0; i < 80; i++){
-            if (i == 3){
-                Tile tile = new Tile(9, 3, null, Hill, 3, false, null, null, FloodPlain);
+            if (i == 2){
+                Tile tile = new Tile(9, 2, null, Hill, 3, false, null, null, FloodPlain);
                 map.setTileBoard(tile);
                 continue;
             }
@@ -656,7 +677,7 @@ public class ShayanMap {
                 map.setTileBoard(tile);
                 tile = new Tile(9, 56, null, GrassLand, 3, false, null, null, Forest);
                 map.setTileBoard(tile);
-                tile = new Tile(9, 57, null, GrassLand, 3, false, null, null, Forest);
+                tile = new Tile(9, 57, null, GrassLand, 3, false, null, null, Jungle);
                 map.setTileBoard(tile);
                 tile = new Tile(9, 58, null, GrassLand, 3, false, null, null, Forest);
                 map.setTileBoard(tile);
@@ -1218,7 +1239,7 @@ public class ShayanMap {
         map.setTileBoard(tile);
         tile = new Tile(13, 63, null, GrassLand, 0, false, null, null, Forest);
         map.setTileBoard(tile);
-        tile = new Tile(13, 64, null, GrassLand, 0, false, null, null, Forest);
+        tile = new Tile(13, 64, null, GrassLand, 0, false, null, null, Jungle);
         map.setTileBoard(tile);
         tile = new Tile(13, 65, null, GrassLand, 0, false, null, null, Forest);
         map.setTileBoard(tile);
@@ -2526,7 +2547,7 @@ public class ShayanMap {
         map.setTileBoard(tile);
         tile = new Tile(21, 52, null, Mountain, 0, false, null, null, null);
         map.setTileBoard(tile);
-        tile = new Tile(21, 53, null, GrassLand, 0, false, null, null, Forest);
+        tile = new Tile(21, 53, null, GrassLand, 0, false, null, null, Jungle);
         map.setTileBoard(tile);
         tile = new Tile(21, 54, null, Mountain, 0, false, null, null, null);
         map.setTileBoard(tile);
@@ -2836,7 +2857,7 @@ public class ShayanMap {
         map.setTileBoard(tile);
         tile = new Tile(23, 55, null, GrassLand, 0, false, null, null, Forest);
         map.setTileBoard(tile);
-        tile = new Tile(23, 56, null, Hill, 0, false, null, null, Forest);
+        tile = new Tile(23, 56, null, Hill, 0, false, null, null, Jungle);
         map.setTileBoard(tile);
         /*
         Tile tile24_58 = new Tile(23, 57, null, GrassLand, 0, false, null, null, Forest);
@@ -3170,6 +3191,174 @@ public class ShayanMap {
                 }
             }
         }
+
+        addResource(3 , 39, map, Banana);
+        addResource(7, 4, map, Banana);
+        addResource(9, 34, map, Banana);
+        addResource(11, 51, map, Banana);
+        addResource(10, 46, map, Banana);
+        addResource(11, 34, map, Banana);
+        addResource(21, 12, map, Banana);
+        addResource(17, 13, map, Banana);
+        addResource(9, 12, map, Cow);
+        addResource(10, 16, map, Cow);
+        addResource(13, 12, map, Cow);
+        addResource(17, 36, map, Cow);
+        addResource(15, 34, map, Cow);
+        addResource(22, 35, map, Cow);
+        addResource(20, 14, map, Cow);
+        addResource(4, 42 , map, Gazelle);
+        addResource(6, 52 , map, Gazelle);
+        addResource(8, 48 , map, Gazelle);
+        addResource(11, 22 , map, Gazelle);
+        addResource(18, 54 , map, Gazelle);
+        addResource(8, 59 , map, Gazelle);
+        addResource(16, 58 , map, Gazelle);
+        addResource(9, 33 , map, Gazelle);
+        addResource(8, 49 , map, Gazelle);
+        addResource(6, 45 , map, Sheep);
+        addResource(8, 47 , map, Sheep);
+        addResource(9, 32 , map, Sheep);
+        addResource(20, 53 , map, Sheep);
+        addResource(19, 43 , map, Sheep);
+        addResource(14, 67 , map, Sheep);
+        addResource(13, 70 , map, Sheep);
+        addResource(11, 68 , map, Sheep);
+        addResource(9, 63 , map, Sheep);
+        addResource(17, 11 , map, Wheat);
+        addResource(18, 13 , map, Wheat);
+        addResource(19, 41 , map, Wheat);
+        addResource(19, 35 , map, Wheat);
+        addResource(25, 31 , map, Wheat);
+        addResource(10, 44 , map, Wheat);
+        addResource(18, 45 , map, Wheat);
+        addResource(18, 45 , map, Wheat);
+        addResource(13, 60 , map, Coal);
+        addResource(18, 12 , map, Coal);
+        addResource(19, 33 , map, Coal);
+        addResource(23, 31 , map, Coal);
+        addResource(14, 43 , map, Coal);
+        addResource(10, 48 , map, Coal);
+        addResource(12, 68 , map, Coal);
+        addResource(6, 72 , map, Horse);
+        addResource(4, 61 , map, Horse);
+        addResource(11, 59 , map, Horse);
+        addResource(18, 32 , map, Horse);
+        addResource(23, 41 , map, Horse);
+        addResource(18, 46 , map, Horse);
+        addResource(14, 51 , map, Horse);
+        addResource(17, 54 , map, Horse);
+        addResource(6, 55 , map, Horse);
+        addResource(23, 32 , map, Iron);
+        addResource(22, 44 , map, Iron);
+        addResource(23, 52 , map, Iron);
+        addResource(17, 50 , map, Iron);
+        addResource(19, 59 , map, Iron);
+        addResource(14, 58 , map, Iron);
+        addResource(9, 55 , map, Iron);
+        addResource(7, 57 , map, Iron);
+        addResource(8, 60 , map, Iron);
+        addResource(8, 60 , map, Iron);
+        addResource(23, 46 , map, Cotton);
+        addResource(18, 50 , map, Cotton);
+        addResource(17, 52 , map, Cotton);
+        addResource(8, 62 , map, Cotton);
+        addResource(18, 10 , map, Cotton);
+        addResource(17, 8 , map, Cotton);
+        addResource(12, 40 , map, Cotton);
+        addResource(11, 35 , map, Cotton);
+        addResource(14, 50 , map, Color);
+        addResource(10, 21 , map, Color);
+        addResource(6, 43 , map, Color);
+        addResource(12, 37 , map, Color);
+        addResource(16, 35 , map, Color);
+        addResource(20, 32 , map, Color);
+        addResource(12, 53 , map, Color);
+        addResource(8, 57 , map, Color);
+        addResource(9, 33 , map, Fur);
+        addResource(10, 32 , map, Fur);
+        addResource(8, 50 , map, Fur);
+        addResource(6, 62 , map, Fur);
+        addResource(6, 71 , map, Fur);
+        addResource(8, 50 , map, Fur);
+        addResource(8, 53 , map, Fur);
+        addResource(8, 21 , map, Fur);
+        addResource(10, 35 , map, Gemstones);
+        addResource(11, 38 , map, Gemstones);
+        addResource(14, 38 , map, Gemstones);
+        addResource(18, 35 , map, Gemstones);
+        addResource(10, 47 , map, Gemstones);
+        addResource(21, 50 , map, Gemstones);
+        addResource(15, 55 , map, Gemstones);
+        addResource(11, 59 , map, Gemstones);
+        addResource(5, 59 , map, Gemstones);
+        addResource(9, 53 , map, Gemstones);
+        addResource(16, 53 , map, Gold);
+        addResource(19, 60 , map, Gold);
+        addResource(16, 63 , map, Gold);
+        addResource(9, 59 , map, Gold);
+        addResource(8, 56 , map, Gold);
+        addResource(12, 47 , map, Gold);
+        addResource(13, 44 , map, Gold);
+        addResource(11, 20 , map, Gold);
+        addResource(16, 18 , map, Gold);
+        addResource(14, 46 , map, Fumigation);
+        addResource(11, 38 , map, Fumigation);
+        addResource(10, 34 , map, Fumigation);
+        addResource(22, 36 , map, Fumigation);
+        addResource(24, 32 , map, Fumigation);
+        addResource(23, 52 , map, Fumigation);
+        addResource(19, 62 , map, Fumigation);
+        addResource(14, 64 , map, Fumigation);
+        addResource(11, 63 , map, Ivory);
+        addResource(20, 8 , map, Ivory);
+        addResource(16, 11 , map, Ivory);
+        addResource(3, 39 , map, Ivory);
+        addResource(11, 38 , map, Ivory);
+        addResource(9, 45 , map, Ivory);
+        addResource(18, 47 , map, Ivory);
+        addResource(19, 43 , map, Ivory);
+        addResource(23, 41 , map, Ivory);
+        addResource(22, 49 , map, Marble);
+        addResource(12, 9 , map, Marble);
+        addResource(6, 8 , map, Marble);
+        addResource(9, 22 , map, Marble);
+        addResource(18, 43 , map, Marble);
+        addResource(19, 39, map, Marble);
+        addResource(22, 51 , map, Marble);
+        addResource(21, 59 , map, Marble);
+        addResource(13, 59 , map, Marble);
+        addResource(6, 2 , map, Silk);
+        addResource(6, 5 , map, Silk);
+        addResource(10, 33 , map, Silk);
+        addResource(6, 38 , map, Silk);
+        addResource(10, 49 , map, Silk);
+        addResource(21, 53 , map, Silk);
+        addResource(23, 56 , map, Silk);
+        addResource(13, 64 , map, Silk);
+        addResource(9, 57 , map, Silk);
+        addResource(7, 68 , map, Silver);
+        addResource(16, 61 , map, Silver);
+        addResource(17, 50 , map, Silver);
+        addResource(14, 52 , map, Silver);
+        addResource(15, 40 , map, Silver);
+        addResource(8, 33 , map, Silver);
+        addResource(10, 30, map, Silver);
+        addResource(9, 33 , map, Silver);
+        addResource(23, 0 , map, Silver);
+        addResource(6, 75 , map, Sugar);
+        addResource(10, 52 , map, Sugar);
+        addResource(10, 59 , map, Sugar);
+        addResource(10, 61 , map, Sugar);
+        addResource(8, 30 , map, Sugar);
+        addResource(4, 40 , map, Sugar);
+        addResource(10, 43 , map, Sugar);
+
+
         return map;
+    }
+
+    private void addResource(int x, int y, Maps map, Resource resource){
+        map.getSpecificTile(x, y).setResource(resource);
     }
 }

@@ -4,23 +4,25 @@ import java.util.ArrayList;
 
 public class Resource {
 
-    private final String name;
-    private final String resourceType;
-    private final ArrayList<String> requiredLands;
-    private int food;
-    private int production;
-    private int gold;
-    private int science;
+    private String name;
+    private String resourceType;
+    private Technology requiredTechnology;
+    private Improvement requiredImprovement;
+    private int goldRate;
+    private int foodRate;
+    private int productRate;
+    private int happiness;
 
-
-    public Resource(String name, String resourceType, ArrayList<String> requiredLands, int food, int production, int gold, int science) {
+    public Resource(String name, String resourceType, Technology requiredTechnology, Improvement requiredImprovement,
+                    int goldRate, int foodRate, int productRate, int happiness) {
         this.name = name;
         this.resourceType = resourceType;
-        this.requiredLands = requiredLands;
-        this.food = food;
-        this.production = production;
-        this.gold = gold;
-        this.science = science;
+        this.requiredTechnology = requiredTechnology;
+        this.requiredImprovement = requiredImprovement;
+        this.goldRate = goldRate;
+        this.foodRate = foodRate;
+        this.productRate = productRate;
+        this.happiness = happiness;
     }
 
     public String getName() {
@@ -31,40 +33,28 @@ public class Resource {
         return resourceType;
     }
 
-    public ArrayList<String> getRequiredLands() {
-        return requiredLands;
-    }
-
-
-    public void setGold(int gold) {
-        this.gold = gold;
+    public Technology getRequiredTechnology() {
+        return requiredTechnology;
     }
 
     public int getGold() {
-        return gold;
+        return goldRate;
     }
 
     public int getFood() {
-        return food;
+        return foodRate;
     }
 
     public int getProduction() {
-        return production;
+        return productRate;
     }
 
     public void setFood(int food) {
-        this.food = food;
-    }
-
-    public int getScience() {
-        return science;
+        this.foodRate = food;
     }
 
     public void setProduction(int production) {
-        this.production = production;
+        this.productRate = production;
     }
 
-    public void setScience(int science) {
-        this.science = science;
-    }
 }
