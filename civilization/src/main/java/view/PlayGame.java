@@ -106,7 +106,7 @@ public class PlayGame {
                 else if (input.trim().equals("research panel")) {
 
                 }
-                    //cheat code for increasing turn
+                    //cheat codes
                 else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_TURN1)) != null ||
                         (matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_TURN2)) != null) {
                     int amount = Integer.parseInt(matcher.group("amount"));
@@ -116,12 +116,68 @@ public class PlayGame {
                     } else
                         System.out.println("invalid number");
                 }
-                //cheat code for increasing gold
                 else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_GOLD1)) != null ||
                         (matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_GOLD2)) != null) {
                     int amount = Integer.parseInt(matcher.group("amount"));
                     if (amount > 0) {
                         gameController.increaseGold(amount, user);
+                        System.out.println("gold increased successfully!");
+                    } else
+                        System.out.println("invalid command");
+                }
+                else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_FOOD)) != null){
+                    int amount = Integer.parseInt(matcher.group("amount"));
+                    if (amount > 0) {
+                        gameController.increaseFood(amount, user);
+                        System.out.println("gold increased successfully!");
+                    } else
+                        System.out.println("invalid command");
+                }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_FAITH)) != null){
+                    int amount = Integer.parseInt(matcher.group("amount"));
+                    if (amount > 0) {
+                        gameController.increaseFaith(amount, user);
+                        System.out.println("gold increased successfully!");
+                    } else
+                        System.out.println("invalid command");
+                }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_SCIENCE)) != null){
+                    int amount = Integer.parseInt(matcher.group("amount"));
+                    if (amount > 0) {
+                        gameController.increaseScience(amount, user);
+                        System.out.println("gold increased successfully!");
+                    } else
+                        System.out.println("invalid command");
+                }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_CAPITAL_CITIZENS)) != null){
+                    int amount = Integer.parseInt(matcher.group("amount"));
+                    if (amount > 0) {
+                        gameController.increaseCapitalCitizens(amount, user);
+                        System.out.println("gold increased successfully!");
+                    } else
+                        System.out.println("invalid command");
+                }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_CAPITLADEFENCE)) != null){
+                    int amount = Integer.parseInt(matcher.group("amount"));
+                    if (amount > 0) {
+                        gameController.increaseCapitalDefence(amount, user);
+                        System.out.println("gold increased successfully!");
+                    } else
+                        System.out.println("invalid command");
+                }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_CULTURE)) != null){
+                    int amount = Integer.parseInt(matcher.group("amount"));
+                    if (amount > 0) {
+                        gameController.increaseCulture(amount, user);
+                        System.out.println("gold increased successfully!");
+                    } else
+                        System.out.println("invalid command");
+                }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_HAPPINESS)) != null){
+                    int amount = Integer.parseInt(matcher.group("amount"));
+                    if (amount > 0) {
+                        gameController.increaseHappiness(amount, user);
+                        System.out.println("gold increased successfully!");
+                    } else
+                        System.out.println("invalid command");
+                }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_RESEARCHTURNLEFT)) != null){
+                    int amount = Integer.parseInt(matcher.group("amount"));
+                    if (amount > 0) {
+                        gameController.increaseResearchTurnLeft(amount, user);
                         System.out.println("gold increased successfully!");
                     } else
                         System.out.println("invalid command");

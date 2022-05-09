@@ -21,13 +21,36 @@ public class GameController {
         this.height = height;
         this.width = width;
     }
-    // cheat code for increasing the turn of user
+    // cheat codes
     public void increaseTurn(int extraTurn, User specificPlayer) {
         specificPlayer.setTurns(specificPlayer.getTurns() + extraTurn);
     }
-    // cheat code for increasing the gold of user
     public void increaseGold(int extraGold, User specificPlayer) {
         specificPlayer.setGold(specificPlayer.getGold() + extraGold);
+    }
+    public void increaseHappiness(int extraHappiness, User specificPlayer){
+        specificPlayer.setHappiness(specificPlayer.getHappiness() + extraHappiness);
+    }
+    public void increaseFood(int extraFood, User specificPlayer){
+        specificPlayer.setFood(specificPlayer.getFood() + extraFood);
+    }
+    public void increaseFaith(int extraFaith , User specificPlayer){
+        specificPlayer.setFaith(specificPlayer.getFaith() + extraFaith);
+    }
+    public void increaseScience(int extraScience , User specificPlayer){
+        specificPlayer.setScience(specificPlayer.getScience() + extraScience);
+    }
+    public void increaseCapitalCitizens(int extraCitizens , User specificPlayer){
+        specificPlayer.getCapital().setCitizens(specificPlayer.getCapital().getCitizens() + extraCitizens);
+    }
+    public void increaseCapitalDefence(int extraDefence , User specificPlayer){
+        specificPlayer.getCapital().setDefence(specificPlayer.getCapital().getDefence() + extraDefence);
+    }
+    public void increaseCulture(int extraCulture , User specificPlayer){
+        specificPlayer.setCulture(specificPlayer.getCulture() + extraCulture);
+    }
+    public void increaseResearchTurnLeft(int extraResearch , User specificPlayer){
+        specificPlayer.setResearchTurnLeft(specificPlayer.getCulturePerTurn() + extraResearch);
     }
     // find the tile by given x and y coordinates
     public Tile findTile(int x, int y) {
