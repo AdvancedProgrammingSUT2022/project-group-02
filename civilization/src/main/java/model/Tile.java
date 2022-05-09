@@ -204,4 +204,8 @@ public class Tile {
     public void setRoad(boolean road) {
         this.road = road;
     }
+
+    public boolean[] getRiverBorder() {
+        return riverBorder;
+    }
 }

@@ -71,18 +71,19 @@ public class GameController {
 
     public void cityTurnProducts(User user) {
         // for each on user's cities
-        for (City city : user.getCities()) {
-            // if producing production
-            if (city.isProductStatus()) {
-                // if product is done
-                if (city.getProductTurnLeft() <= 1) {
-                    city.setProductTurnLeft(0);
-                    findProduction(city, city.getCurrentProduction());
-                    city.setCurrentProduction(null);
-                    city.setProductStatus(false);
+        if (user.getCities() != null) {
+            for (City city : user.getCities()) {
+                // if producing production
+                if (city.isProductStatus()) {
+                    // if product is done
+                    if (city.getProductTurnLeft() <= 1) {
+                        city.setProductTurnLeft(0);
+                        findProduction(city, city.getCurrentProduction());
+                        city.setCurrentProduction(null);
+                        city.setProductStatus(false);
+                    } else
+                        city.setProductTurnLeft(city.getProductTurnLeft() - 1);
                 }
-                else
-                    city.setProductTurnLeft(city.getProductTurnLeft() - 1);
             }
         }
     }
@@ -117,21 +118,22 @@ public class GameController {
     }
     // check all workers
     public void userTurnWorker(User player) {
+        if (player.getUnits() != null) {
 
-        for (Unit unit : player.getUnits()) {
-            // find worker
-            if (unit.getName().equals("worker") && ((Worker)unit).getWorkingStatus()) {
-                Worker worker = (Worker)unit;
-                // if it is done
-                if (worker.getRemainingTurnsToComplete() <= 1) {
-                    worker.setWorkingStatus(false);
-                    worker.setRemainingTurnsToComplete(0);
-                    worker.getTile().setInProgress(false);
-                    worker.getTile().setImprovement(worker.getImprovement());
-                    worker.setImprovement(null);
-                }
-                else {
-                    worker.setRemainingTurnsToComplete(worker.getRemainingTurnsToComplete() - 1);
+            for (Unit unit : player.getUnits()) {
+                // find worker
+                if (unit.getName().equals("worker") && ((Worker) unit).getWorkingStatus()) {
+                    Worker worker = (Worker) unit;
+                    // if it is done
+                    if (worker.getRemainingTurnsToComplete() <= 1) {
+                        worker.setWorkingStatus(false);
+                        worker.setRemainingTurnsToComplete(0);
+                        worker.getTile().setInProgress(false);
+                        worker.getTile().setImprovement(worker.getImprovement());
+                        worker.setImprovement(null);
+                    } else {
+                        worker.setRemainingTurnsToComplete(worker.getRemainingTurnsToComplete() - 1);
+                    }
                 }
             }
         }

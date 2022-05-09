@@ -147,7 +147,7 @@ public class ShayanMap {
             }
             if (i > 49 && i < 78){
                 if (i > 59 && i < 64){
-                    Tile tile = new Tile(4, 59, null, Tundra, 3, false, null, null, null);
+                    Tile tile = new Tile(4, i, null, Tundra, 3, false, null, null, null);
                     map.setTileBoard(tile);
                     continue;
                 }
@@ -347,7 +347,7 @@ public class ShayanMap {
                 i = 75;
                 continue;
             }
-            Tile tile = new Tile(4, i, null, Ocean, 3, false, null, null, Ice);
+            Tile tile = new Tile(6, i, null, Ocean, 3, false, null, null, Ice);
             map.setTileBoard(tile);
         }
         //8th row
@@ -974,7 +974,7 @@ public class ShayanMap {
         map.setTileBoard(tile);
         tile = new Tile(12, 28, null, Ocean, 0, false, null, null, null);
         map.setTileBoard(tile);
-        tile = new Tile(12, 39, null, Ocean, 0, false, null, null, null);
+        tile = new Tile(12, 29, null, Ocean, 0, false, null, null, null);
         map.setTileBoard(tile);
         tile = new Tile(12, 30, null, Ocean, 0, false, null, null, null);
         map.setTileBoard(tile);
@@ -3161,10 +3161,13 @@ public class ShayanMap {
             map.setTileBoard(tile);
         }
 
-        for (Tile[] tiles : map.getTileBoard()) {
-            for (Tile tile1 : tiles) {
-                if (tile1 == null) 
-                    System.out.println("error!!!");
+        for (int i = 0; i < 26; i++) {
+            for (int j = 0; j < 80; j++) {
+                if (map.getTileBoard()[i][j] == null) {
+                    System.out.println("**********");
+                    System.out.println(i + " --> " + j);
+                    System.out.println("**********");
+                }
             }
         }
         return map;
