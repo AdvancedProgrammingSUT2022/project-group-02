@@ -129,56 +129,56 @@ public class PlayGame {
                     int amount = Integer.parseInt(matcher.group("amount"));
                     if (amount > 0) {
                         gameController.increaseFood(amount, user);
-                        System.out.println("gold increased successfully!");
+                        System.out.println("food increased successfully!");
                     } else
                         System.out.println("invalid command");
                 }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_FAITH)) != null){
                     int amount = Integer.parseInt(matcher.group("amount"));
                     if (amount > 0) {
                         gameController.increaseFaith(amount, user);
-                        System.out.println("gold increased successfully!");
+                        System.out.println("faith increased successfully!");
                     } else
                         System.out.println("invalid command");
                 }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_SCIENCE)) != null){
                     int amount = Integer.parseInt(matcher.group("amount"));
                     if (amount > 0) {
                         gameController.increaseScience(amount, user);
-                        System.out.println("gold increased successfully!");
+                        System.out.println("science increased successfully!");
                     } else
                         System.out.println("invalid command");
                 }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_CAPITAL_CITIZENS)) != null){
                     int amount = Integer.parseInt(matcher.group("amount"));
                     if (amount > 0) {
                         gameController.increaseCapitalCitizens(amount, user);
-                        System.out.println("gold increased successfully!");
+                        System.out.println("capitalCitizens increased successfully!");
                     } else
                         System.out.println("invalid command");
                 }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_CAPITLADEFENCE)) != null){
                     int amount = Integer.parseInt(matcher.group("amount"));
                     if (amount > 0) {
                         gameController.increaseCapitalDefence(amount, user);
-                        System.out.println("gold increased successfully!");
+                        System.out.println("capitalDefence increased successfully!");
                     } else
                         System.out.println("invalid command");
                 }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_CULTURE)) != null){
                     int amount = Integer.parseInt(matcher.group("amount"));
                     if (amount > 0) {
                         gameController.increaseCulture(amount, user);
-                        System.out.println("gold increased successfully!");
+                        System.out.println("culture increased successfully!");
                     } else
                         System.out.println("invalid command");
                 }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_HAPPINESS)) != null){
                     int amount = Integer.parseInt(matcher.group("amount"));
                     if (amount > 0) {
                         gameController.increaseHappiness(amount, user);
-                        System.out.println("gold increased successfully!");
+                        System.out.println("happiness increased successfully!");
                     } else
                         System.out.println("invalid command");
                 }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_RESEARCHTURNLEFT)) != null){
                     int amount = Integer.parseInt(matcher.group("amount"));
                     if (amount > 0) {
                         gameController.increaseResearchTurnLeft(amount, user);
-                        System.out.println("gold increased successfully!");
+                        System.out.println("researchs increased successfully!");
                     } else
                         System.out.println("invalid command");
                 }
