@@ -1,6 +1,7 @@
 package controller;
 
 import model.*;
+import view.UserPanel;
 
 import java.util.ArrayList;
 
@@ -56,12 +57,6 @@ public class GameController {
     public Tile findTile(int x, int y) {
         if (x < height && y < width)
             return map.getTileBoard()[x][y];
-        /*for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                if (map.getTileBoard()[i][j].getX() == x && map.getTileBoard()[i][j].getY() == y)
-                    return map.getTileBoard()[i][j];
-            }
-        }*/
         return null;
     }
     public void moveUnit(Tile origin, Tile destination, Unit unit, boolean isMilitary) {
@@ -102,6 +97,8 @@ public class GameController {
                 if (city.isProductStatus()) {
                     // if product is done
                     if (city.getProductTurnLeft() <= 1) {
+                        //notification for production
+                        UserPanel.productDoneNotification(user, city, city.getCurrentProduction(), this);
                         city.setProductTurnLeft(0);
                         findProduction(city, city.getCurrentProduction());
                         city.setCurrentProduction(null);
@@ -116,6 +113,8 @@ public class GameController {
         if (user.isResearching()) {
             // if research is done
             if (user.getResearchTurnLeft() <= 1) {
+                //notification for research
+                UserPanel.researchDoneNotification(user, user.getCurrentTechnology());
                 user.setResearching(false);
                 user.setResearchTurnLeft(0);
                 user.addTechnology(user.getCurrentTechnology());
@@ -130,8 +129,9 @@ public class GameController {
                     for (Unit givenUnit : user.getCurrentTechnology().getGivenUnits()) {
                         for (City city : user.getCities()) {
                             city.addProduct(new Product(givenUnit.getName(), givenUnit.getGoldPrice()));
-                            // TODO add unit to possible units in city page
-                            city.addPossibleUnit(new Unit(givenUnit.getName(), city.getTile(), givenUnit.getHP(), givenUnit.getGoldPrice(), givenUnit.getProductionPrice(), givenUnit.getLevel(), givenUnit.getMP(), givenUnit.getCombatStrength(), givenUnit.getRangeCombatStrength(), city.getOwner(), givenUnit.getAttackPoint(), givenUnit.getMaintainGold()));
+                            givenUnit.setTile(city.getTile());
+                            givenUnit.setOwner(city.getOwner());
+                            city.addPossibleUnit(givenUnit);
                         }
                     }
                 }
@@ -151,6 +151,8 @@ public class GameController {
                     Worker worker = (Worker) unit;
                     // if it is done
                     if (worker.getRemainingTurnsToComplete() <= 1) {
+                        // notification for improvement
+                        UserPanel.improvementDoneNotification(player, worker.getImprovement());
                         worker.setWorkingStatus(false);
                         worker.setRemainingTurnsToComplete(0);
                         worker.getTile().setInProgress(false);
