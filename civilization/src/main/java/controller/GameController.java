@@ -61,8 +61,8 @@ public class GameController {
         specificPlayer.setCulture(specificPlayer.getCulture() + extraCulture);
     }
 
-    public void increaseResearchTurnLeft(int extraResearch, User specificPlayer) {
-        specificPlayer.setResearchTurnLeft(specificPlayer.getCulturePerTurn() + extraResearch);
+    public void decreaseResearchTurnLeft(int extraResearch, User specificPlayer) {
+        specificPlayer.setResearchTurnLeft(specificPlayer.getResearchTurnLeft()- extraResearch);
     }
 
     // find the tile by given x and y coordinates
@@ -200,19 +200,16 @@ public class GameController {
     }
 
     public void usersGoldHandling(User user) {
-        int goldToIncrease = 0;
-        for (int i = 0; i < user.getResources().size(); i++) {
-            goldToIncrease += user.getResources().get(i).getGold();
+        user.setGoldPerTurn(0);
+        new ResourceController().useResource(user);
+        for (Improvement improvement : user.getImprovements()) {
+            if (!improvement.getTile().LootedStatus())
+            user.setGoldPerTurn(user.getGoldPerTurn() + improvement.getGoldRate());
         }
-        for (int i = 0; i < user.getImprovements().size(); i++) {
-            goldToIncrease += user.getImprovements().get(i).getGoldRate();
+        for (Tile tile : user.getTerritory()) {
+            user.setGoldPerTurn(user.getGoldPerTurn() + tile.getFeature().getGoldRate());
+            user.setGoldPerTurn(user.getGoldPerTurn() + tile.getTerrain().getGoldRate());
         }
-        for (int i = 0; i < user.getTerritory().size(); i++) {
-            goldToIncrease += user.getTerritory().get(i).getFeature().getGoldRate();
-        }
-        for (int i = 0; i < user.getTerritory().size(); i++) {
-            goldToIncrease += user.getTerritory().get(i).getTerrain().getGoldRate();
-        }
-        user.setGold(user.getGold() + goldToIncrease);
+        user.setGold(user.getGold() + user.getGoldPerTurn());
     }
 }

@@ -1,7 +1,6 @@
 package view;
 
 import controller.GameController;
-import controller.TechController;
 import enums.Colors;
 import model.*;
 
@@ -26,9 +25,9 @@ public class UserPanel {
                     for (Resource resource : improvement.getGivenResource()) {
                         System.out.println(Colors.GREEN + "Resource name : " + resource.getName());
                         System.out.println("Resource type : " + resource.getResourceType());
-                        System.out.println("Food rate : " + resource.getFood());
-                        System.out.println("Production rate : " + resource.getProduction());
-                        System.out.println("Gold rate : " + resource.getGold() + Colors.RESET);
+                        System.out.println("Food rate : " + resource.getFoodRate());
+                        System.out.println("Production rate : " + resource.getProductionRate());
+                        System.out.println("Gold rate : " + resource.getGoldRate() + Colors.RESET);
                     }
                 }
             }
@@ -58,9 +57,9 @@ public class UserPanel {
             for (Resource resource : improvement.getGivenResource()) {
                 System.out.println(Colors.GREEN + "Resource name : " + resource.getName());
                 System.out.println("Resource type : " + resource.getResourceType());
-                System.out.println("Food rate : " + resource.getFood());
-                System.out.println("Production rate : " + resource.getProduction());
-                System.out.println("Gold rate : " + resource.getGold() + Colors.RESET);
+                System.out.println("Food rate : " + resource.getFoodRate());
+                System.out.println("Production rate : " + resource.getProductionRate());
+                System.out.println("Gold rate : " + resource.getGoldRate() + Colors.RESET);
             }
         }
     }

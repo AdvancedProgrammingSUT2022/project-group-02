@@ -1,23 +1,24 @@
 package model;
 
-import java.util.ArrayList;
-
 public class Resource {
 
-    private String name;
-    private String resourceType;
-    private int goldRate;
-    private int foodRate;
-    private int productRate;
-    private int happiness;
+    private final String name;
+    private final String resourceType;
+    private Tile tile;
+    private final int goldRate;
+    private final int foodRate;
+    private final int productionRate;
+    private final int happiness;
+    private final String requiredImprovement;
 
-    public Resource(String name, String resourceType,
-                    int goldRate, int foodRate, int productRate, int happiness) {
+    public Resource(String name, String resourceType, String requiredImprovement,
+                    int goldRate, int foodRate, int productionRate, int happiness) {
         this.name = name;
         this.resourceType = resourceType;
         this.goldRate = goldRate;
+        this.requiredImprovement = requiredImprovement;
         this.foodRate = foodRate;
-        this.productRate = productRate;
+        this.productionRate = productionRate;
         this.happiness = happiness;
     }
 
@@ -29,25 +30,30 @@ public class Resource {
         return resourceType;
     }
 
+    public Tile getTile() {
+        return tile;
+    }
 
-    public int getGold() {
+    public void setTile(Tile tile) {
+        this.tile = tile;
+    }
+
+    public int getGoldRate() {
         return goldRate;
     }
 
-    public int getFood() {
+    public int getFoodRate() {
         return foodRate;
     }
 
-    public int getProduction() {
-        return productRate;
+    public int getProductionRate() {
+        return productionRate;
     }
 
-    public void setFood(int food) {
-        this.foodRate = food;
+    public int getHappiness() {
+        return happiness;
     }
-
-    public void setProduction(int production) {
-        this.productRate = production;
+    public String getRequiredImprovement(){
+        return requiredImprovement;
     }
-
 }

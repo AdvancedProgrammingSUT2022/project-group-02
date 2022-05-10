@@ -1,5 +1,6 @@
 package unitcommands;
 
+import controller.UnitController;
 import model.Tile;
 import model.UnitCommand;
 import model.User;
@@ -9,8 +10,8 @@ public abstract class RemoveMarsh extends RemoveFeature implements UnitCommand {
 
     @Override
     public void doWorkerAction(Worker worker, Tile tile, User user){
-        //worker.getWorkerWorkingHandler().setNextHandler(worker.getMPHandler());
-        //worker.getMPHandler().setNextHandler(new IsMarshExistHandler());
-        removeFeature(worker, tile, user);
+        if (new UnitController().workingWorker(worker) && new UnitController().MPCheckerForImprovement(worker) &&
+                new UnitController().isMarshExistOnTile(tile))
+        removeFeature(worker, tile);
     }
 }

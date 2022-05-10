@@ -191,14 +191,16 @@ public class PlayGame {
                         showMap(user);
                     } else
                         System.out.println("invalid command");
-                }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_RESEARCH_TURN_LEFT)) != null){
+                }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.DECREASE_RESEARCH_TURN_LEFT)) != null){
                     int amount = Integer.parseInt(matcher.group("amount"));
                     if (amount > 0) {
-                        gameController.increaseResearchTurnLeft(amount, user);
+                        gameController.decreaseResearchTurnLeft(amount, user);
                         System.out.println("researches increased successfully!");
                         showMap(user);
                     } else
                         System.out.println("invalid command");
+                }else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.ADD_RESEARCH)) != null){
+                    // TODO : add a research
                 }
                 // selecting tile
                 else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.SELECT_TILE1)) != null ||

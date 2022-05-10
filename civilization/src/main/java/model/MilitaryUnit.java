@@ -1,22 +1,16 @@
 package model;
 
 public class MilitaryUnit extends Unit{
-    private String status;
+
     private PhysicalObject attackingTarget;
     private Resource requiredResource;
     private Technology requiredTechnology;
+    private City garrisonMood;
 
     public MilitaryUnit(String name, Tile tile, int HP, int goldPrice, int productionPrice, int level, int MP, int combatStrength, int rangeCombatStrength, User user, int attackPoint, int maintainGold) {
         super(name, tile, HP, goldPrice, productionPrice, level, MP, combatStrength, rangeCombatStrength, user, attackPoint, maintainGold);
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     public PhysicalObject getAttackingTarget() {
         return attackingTarget;
@@ -40,5 +34,13 @@ public class MilitaryUnit extends Unit{
 
     public void setRequiredTechnology(Technology requiredTechnology) {
         this.requiredTechnology = requiredTechnology;
+    }
+
+    public City getGarrisonMood() {
+        return garrisonMood;
+    }
+
+    public void setGarrisonMood(City garrisonMood) {
+        this.garrisonMood = garrisonMood;
     }
 }

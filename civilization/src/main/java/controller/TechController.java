@@ -1,8 +1,6 @@
 package controller;
 
-import model.Improvement;
 import model.Technology;
-import model.Tile;
 import model.User;
 
 import java.util.ArrayList;

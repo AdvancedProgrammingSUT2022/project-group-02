@@ -25,6 +25,7 @@ public class Tile {
     private Resource resource;
     private City city;
     private int price;
+    private boolean looted;
 
     public Tile (int x, int y, User owner, Terrain terrain, int fogOfWarLevel, boolean isNearRiver,
                  boolean[] riverBorder, Resource resource, Feature feature) {
@@ -207,5 +208,13 @@ public class Tile {
 
     public boolean[] getRiverBorder() {
         return riverBorder;
+    }
+
+    public boolean LootedStatus() {
+        return looted;
+    }
+
+    public void setLooted(boolean looted) {
+        this.looted = looted;
     }
 }

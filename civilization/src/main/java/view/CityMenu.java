@@ -1,9 +1,6 @@
 package view;
 
-import controller.GameController;
-import controller.MapController;
-import controller.SettlerController;
-import controller.TechController;
+import controller.*;
 import model.City;
 import model.Product;
 import model.Tile;
@@ -108,6 +105,7 @@ public class CityMenu {
                         if (index >= 1 && index <= neighborOfCity.size()) {
                             // add the tile to the city and user
                             if (user.getGold() >= neighborOfCity.get(index - 1).getPrice()) {
+                                new ResourceController().addFoundResource(user, neighborOfCity.get(index - 1));
                                 user.setGold(user.getGold() - neighborOfCity.get(index - 1).getPrice());
                                 city.addOwnerShipLand(neighborOfCity.get(index - 1));
                                 user.addTerritory(neighborOfCity.get(index - 1));

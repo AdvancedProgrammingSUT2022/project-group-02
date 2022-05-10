@@ -21,6 +21,7 @@ public class SettlerController extends UnitController{
         addBasicUnits(tile.getCity());
         // add neighbors to the city for free
         for (Tile neighbor : tile.getNeighbors()) {
+            new ResourceController().addFoundResource(user, neighbor);
             neighbor.setCity(city);
             neighbor.setOwner(user);
         }

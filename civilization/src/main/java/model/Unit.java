@@ -3,6 +3,7 @@ package model;
 public class Unit extends PhysicalObject{
 
     private String name;
+    private String status;
     private int goldPrice;
     private int productionPrice;
     private int level;
@@ -26,6 +27,14 @@ public class Unit extends PhysicalObject{
         intact = true;
         XP = 0;
         this.maintainGold = maintainGold;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getName() {

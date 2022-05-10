@@ -1,8 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class User {
     private final String username;
@@ -22,7 +20,8 @@ public class User {
     private int culturePerTurn;
     private int faith;
     private int faithPerTurn;
-    private ArrayList<Resource> resources;
+    private ArrayList<Resource> availableResources;
+    private ArrayList<Resource> foundResources;
     private String civilization;
     private ArrayList<Unit> units;
     private ArrayList<City> cities;
@@ -182,12 +181,12 @@ public class User {
         this.faithPerTurn = faithPerTurn;
     }
 
-    public ArrayList<Resource> getResources() {
-        return resources;
+    public ArrayList<Resource> getAvailableResources() {
+        return availableResources;
     }
 
-    public void setResources(ArrayList<Resource> resources) {
-        this.resources = resources;
+    public void setAvailableResources(Resource availableResource) {
+        this.availableResources.add(availableResource);
     }
 
     public String getCivilization() {
@@ -300,6 +299,14 @@ public class User {
 
     public void setResearchTurnLeft(int researchTurnLeft) {
         this.researchTurnLeft = researchTurnLeft;
+    }
+
+    public ArrayList<Resource> getFoundResources() {
+        return foundResources;
+    }
+
+    public void setFoundResources(ArrayList<Resource> foundResources) {
+        this.foundResources = foundResources;
     }
 
     public void removeTerritory(Tile tile) {

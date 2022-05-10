@@ -23,27 +23,27 @@ public class MapMaker {
         Terrain Snow = new Terrain("Snow", "white", 1, 0, -0.33, 0, 0, true);
         Terrain Tundra = new Terrain("Tundra", "cyan", 1, 1, -0.33, 0, 0, true);
         //all Bonus Resources of map
-        Resource Banana = new Resource("Banana", "Bonus", null, null, 0, 1, 0, 0);
-        Resource Cow = new Resource("Cow", "Bonus", null, null, 0, 1, 0, 0);
-        Resource Gazelle = new Resource("Gazelle", "Bonus", null, null, 0, 1, 0, 0);
-        Resource Wheat = new Resource("Wheat", "Bonus", null, null, 0, 1, 0, 0);
-        Resource Sheep = new Resource("Sheep", "Bonus", null, null, 0, 2, 0, 0);
+        Resource Banana = new Resource("Banana", "Bonus", "Plantation", 0, 1, 0, 0);
+        Resource Cow = new Resource("Cow", "Bonus", "Pasture", 0, 1, 0, 0);
+        Resource Gazelle = new Resource("Gazelle", "Bonus", "Camp", 0, 1, 0, 0);
+        Resource Wheat = new Resource("Wheat", "Bonus", "Farm", 0, 1, 0, 0);
+        Resource Sheep = new Resource("Sheep", "Bonus", "Pasture", 0, 2, 0, 0);
         //all Strategic Resources of map
-        Resource Coal = new Resource("Coal", "Strategic", null, null, 0, 0, 1, 0);
-        Resource Horse = new Resource("Horse", "Strategic", null, null, 0, 0, 1, 0);
-        Resource Iron = new Resource("Iron", "Strategic", null, null, 0, 0, 1, 0);
+        Resource Coal = new Resource("Coal", "Strategic", "Mine", 0, 0, 1, 0);
+        Resource Horse = new Resource("Horse", "Strategic", "Pasture", 0, 0, 1, 0);
+        Resource Iron = new Resource("Iron", "Strategic", "Mine", 0, 0, 1, 0);
         //all Luxury Resources of map
-        Resource Cotton = new Resource("Cotton", "Luxury", null, null, 2, 0, 0, 3);
-        Resource Color = new Resource("Color", "Luxury", null, null, 2, 0, 0, 2);
-        Resource Fur = new Resource("Fur", "Luxury", null, null, 2, 0, 0, 3);
-        Resource Gemstones = new Resource("Gemstones", "Luxury", null, null, 3, 0, 0, 5);
-        Resource Gold = new Resource("Gold", "Luxury", null, null, 2, 0, 0, 4);
-        Resource Fumigation = new Resource("Fumigation", "Luxury", null, null, 2, 0, 0, 2);
-        Resource Ivory = new Resource("Ivory", "Luxury", null, null, 2, 0, 0, 3);
-        Resource Silk = new Resource("Silk", "Luxury", null, null, 2, 0, 0, 3);
-        Resource Sugar = new Resource("Sugar", "Luxury", null, null, 2, 0, 0, 2);
-        Resource Silver = new Resource("Silver", "Luxury", null, null, 2, 0, 0, 3);
-        Resource Marble = new Resource("Marble", "Luxury", null, null, 2, 0, 0, 3);
+        Resource Cotton = new Resource("Cotton", "Luxury", "Plantation", 2, 0, 0, 3);
+        Resource Color = new Resource("Color", "Luxury", "farming", 2, 0, 0, 2);
+        Resource Fur = new Resource("Fur", "Luxury", "Camp", 2, 0, 0, 3);
+        Resource Gemstones = new Resource("Gemstones", "Luxury", "Mine", 3, 0, 0, 5);
+        Resource Gold = new Resource("Gold", "Luxury", "Mine", 2, 0, 0, 4);
+        Resource Fumigation = new Resource("Fumigation", "Luxury", "Plantation", 2, 0, 0, 2);
+        Resource Ivory = new Resource("Ivory", "Luxury", "Camp", 2, 0, 0, 3);
+        Resource Silk = new Resource("Silk", "Luxury", "Plantation", 2, 0, 0, 3);
+        Resource Sugar = new Resource("Sugar", "Luxury", "Plantation", 2, 0, 0, 2);
+        Resource Silver = new Resource("Silver", "Luxury", "Mine", 2, 0, 0, 3);
+        Resource Marble = new Resource("Marble", "Luxury", "Quarry", 2, 0, 0, 3);
 
         //1st row
         for (int i = 0; i < 80; i++){
@@ -3359,6 +3359,9 @@ public class MapMaker {
     }
 
     private void addResource(int x, int y, Maps map, Resource resource){
-        map.getSpecificTile(x, y).setResource(resource);
+        Resource resource1 = new Resource(resource.getName(), resource.getResourceType(), resource.getRequiredImprovement(),
+                resource.getGoldRate(), resource.getFoodRate(), resource.getProductionRate(), resource.getHappiness());
+        map.getSpecificTile(x, y).setResource(resource1);
+        resource1.setTile(map.getSpecificTile(x, y));
     }
 }

@@ -10,6 +10,7 @@ public class Improvement {
     private int goldRate;
     private int price;
     private final ArrayList<Resource> givenResource;
+    private Tile tile;
     public Improvement(String name, int productionRate, int foodRate, int goldRate, int price, ArrayList<Resource> givenResource) {
         this.name = name;
         this.productionRate = productionRate;
@@ -57,5 +58,13 @@ public class Improvement {
 
     public ArrayList<Resource> getGivenResource() {
         return givenResource;
+    }
+
+    public Tile getTile() {
+        return tile;
+    }
+
+    public void setTile(Tile tile) {
+        this.tile = tile;
     }
 }

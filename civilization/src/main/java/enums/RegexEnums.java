@@ -44,14 +44,24 @@ public enum RegexEnums {
     //increase gold + abbreviation
     INCREASE_GOLD1("^\\s*increase\\s+--gold\\s+(?<amount>\\-?\\d+)\\s*$"),
     INCREASE_GOLD2("^\\s*increase\\s+-g\\s+(?<amount>\\-?\\d+)\\s*$"),
+    //increase happiness
     INCREASE_HAPPINESS("^\\s*increase\\s+--happiness\\s+(?<amount>\\-?\\d+)\\s*$"),
+    //increase food
     INCREASE_FOOD("^\\s*increase\\s+--food\\s+(?<amount>\\-?\\d+)\\s*$"),
+    //increase culture
     INCREASE_CULTURE("^\\s*increase\\s+--culture\\s+(?<amount>\\-?\\d+)\\s*$"),
+    //increase faith
     INCREASE_FAITH("^\\s*increase\\s+--faith\\s+(?<amount>\\-?\\d+)\\s*$"),
+    //increase citizen
     INCREASE_CAPITAL_CITIZENS("^\\s*increase\\s+--citizens\\s+(?<amount>\\-?\\d+)\\s*$"),
-    INCREASE_RESEARCH_TURN_LEFT("^\\s*increase\\s+--research\\s+(?<amount>\\-?\\d+)\\s*$"),
+    //decrease research turn left
+    DECREASE_RESEARCH_TURN_LEFT("^\\s*increase\\s+--research\\s+(?<amount>\\-?\\d+)\\s*$"),
+    //increase science
     INCREASE_SCIENCE("^\\s*increase\\s+--science\\s+(?<amount>\\-?\\d+)\\s*$"),
+    //increase city defence
     INCREASE_CAPITAL_DEFENCE("^\\s*increase\\s+--defence\\s+(?<amount>\\-?\\d+)\\s*$"),
+    //add a research
+    ADD_RESEARCH("^\\s*add\\s+--research\\s+(?<researchName>.+)$"),
     //selecting a tile
     SELECT_TILE1("^\\s*select\\s+tile\\s+-x\\s+(?<x>\\-?\\d+)\\s+-y\\s+(?<y>\\-?\\d+)\\s*$"),
     SELECT_TILE2("^\\s*select\\s+tile\\s+-y\\s+(?<y>\\-?\\d+)\\s+-x\\s+(?<x>\\-?\\d+)\\s*$"),
