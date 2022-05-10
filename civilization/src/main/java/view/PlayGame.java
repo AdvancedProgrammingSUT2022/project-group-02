@@ -74,7 +74,7 @@ public class PlayGame {
     }
 
     public void run(Scanner scanner) {
-        cityMenu = new CityMenu(mapController, techController, settlerController, gameController);
+        cityMenu = new CityMenu(mapController, techController, settlerController, gameController, players);
         researchMenu = new ResearchMenu();
         manPlayGame();
         String input;
@@ -478,6 +478,11 @@ public class PlayGame {
 
     //check if tile is valid
     private boolean conditionsForPlaceCity(String input, Tile tile) {
+        // neighbors of the tile should be neutral
+        for (Tile neighbor : tile.getNeighbors()) {
+            if (neighbor.getOwner() != null)
+                return false;
+        }
         if (tile.isCivilianUnitExists() && tile.getCivilianUnit().getName().equals("settler")) {
             if (tile.getCity() == null) {
                 if (tile.getOwner() == null) {

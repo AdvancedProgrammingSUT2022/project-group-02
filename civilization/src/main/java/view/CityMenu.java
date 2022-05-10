@@ -19,37 +19,69 @@ public class CityMenu {
     private TechController techController;
     private SettlerController settlerController;
     private GameController gameController;
+    private ArrayList<User> players;
 
-    public CityMenu (MapController mapController, TechController techController, SettlerController settlerController, GameController gameController) {
+    public CityMenu (MapController mapController, TechController techController, SettlerController settlerController, GameController gameController, ArrayList<User> players) {
         this.mapController = mapController;
         this.techController = techController;
         this.settlerController = settlerController;
         this.gameController = gameController;
+        this.players = players;
     }
 
     public void run(Scanner scanner, User user) {
         String cityInput;
-        if (user.getCities() != null) {
-            int index = 1;
-            for (City city : user.getCities()) {
-                System.out.println(index + "- " + city.getName());
-                index++;
-            }
-        }
         while (true) {
             cityInput = scanner.nextLine();
-            if (cityInput.equals("city exit")) {
-                System.out.println("back to play game");
+            // getout
+            if (cityInput.equals("city exit"))
                 return;
-            }
-            else if (Pattern.matches("[0-9]+", cityInput)) {
-                int index = Integer.parseInt(cityInput);
-                if (index >= 1 && index <= user.getCities().size()) {
-
+            // show player cities
+            else if (cityInput.equals("user cities")) {
+                if (user.getCities() != null) {
+                    int index = 1;
+                    for (City city : user.getCities()) {
+                        System.out.println(index + "- " + city.getName());
+                        index++;
+                    }
                 }
                 else
-                    System.out.println("invalid number");
+                    System.out.println("user do not have any city!");
+                while (true) {
+                    cityInput = scanner.nextLine();
+                    if (cityInput.equals("city exit")) {
+                        System.out.println("back to play game");
+                        return;
+                    } else if (Pattern.matches("[0-9]+", cityInput)) {
+                        int index = Integer.parseInt(cityInput);
+                        if (index >= 1 && index <= user.getCities().size()) {
+                            cityPage(user.getCities().get(index - 1), user, scanner);
+                        } else
+                            System.out.println("invalid number");
+                    }
+                    else
+                        System.out.println("invalid command");
+                }
             }
+            // show all cities in the game
+            else if (cityInput.equals("show all cities")) {
+                System.out.println("**********");
+                int index = 1;
+                for (User player : players) {
+                    if (player.getCities() != null) {
+                        for (City city : player.getCities()) {
+                            System.out.println(index + "- " + city.getName());
+                            index++;
+                        }
+                    }
+                    else
+                        System.out.println(player.getUsername() + " do not have any city!");
+                    System.out.println("**********");
+                    index = 1;
+                }
+            }
+            else
+                System.out.println("invalid command");
         }
     }
 
