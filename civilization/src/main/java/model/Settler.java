@@ -7,8 +7,8 @@ import java.util.ArrayList;
 public class Settler extends Civilian{
 
     private ArrayList<Tile> possibleTilesForCities;
-    public Settler(String name, Tile tile, int HP, int price, int level, int MP, int combatStrength, int rangeCombatStrength, ArrayList<Tile> possibleTilesForCities, User user, int attackPoint) {
-        super(name, tile, HP, price, level, MP, combatStrength, rangeCombatStrength, user, attackPoint);
+    public Settler(String name, Tile tile, int HP, int goldPrice, int productionPrice, int level, int MP, int combatStrength, int rangeCombatStrength, ArrayList<Tile> possibleTilesForCities, User user, int attackPoint, int maintainGold) {
+        super(name, tile, HP, goldPrice, productionPrice, level, MP, combatStrength, rangeCombatStrength, user, attackPoint, maintainGold);
         this.possibleTilesForCities = possibleTilesForCities;
 
     }
