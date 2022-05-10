@@ -28,7 +28,7 @@ public class TechController {
         int index = technology.getIndex();
         ArrayList<Technology> prerequisites = new ArrayList<>();
         for (int i = 0; i < ancientTechnologies.size(); i++) {
-            if (getAncientEraTechnologiesGraph()[i][index] == 1) {
+            if (ancientEraTechnologiesGraph[i][index] == 1) {
                 prerequisites.add(ancientTechnologies.get(i));
             }
         }

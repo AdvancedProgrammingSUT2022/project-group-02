@@ -75,7 +75,7 @@ public class PlayGame {
 
     public void run(Scanner scanner) {
         cityMenu = new CityMenu(mapController, techController, settlerController, gameController, players);
-        researchMenu = new ResearchMenu();
+        researchMenu = new ResearchMenu(techController);
         manPlayGame();
         String input;
         int role = 0;
@@ -108,7 +108,7 @@ public class PlayGame {
                     cityMenu.run(scanner, user);
                 }
                 else if (input.trim().equals("research panel")) {
-
+                    researchMenu.run(scanner, user);
                 }
                     //cheat codes
                 else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_TURN1)) != null ||
@@ -215,7 +215,7 @@ public class PlayGame {
 
                 else if (input.trim().equals("choose technology")) {
                     if (!user.isResearching())
-                        selectTech(user, scanner);
+                        researchMenu.selectTech(user, scanner);
                     else
                         System.out.println("you are researching on something right now!");
                 }
@@ -239,40 +239,6 @@ public class PlayGame {
         }
     }
 
-    private void selectTech(User user, Scanner scanner) {
-
-        ArrayList<Technology> technologies = techController.getUserResearches(user);
-        int index = 1;
-        for (Technology technology : technologies) {
-            System.out.println(index + "- " + technology.getName());
-            if (technology.getGivenImprovement() != null) {
-                System.out.println("given improvements : ");
-                for (Improvement improvement : technology.getGivenImprovement())
-                    System.out.println("name: " + improvement.getName() + " | production: " + improvement.getProductionRate() + " | food: " + improvement.getFoodRate() + " | gold: " + improvement.getGoldRate());
-
-            }
-        }
-        System.out.println("choose an index | <tech exit> to get out");
-        String techInput;
-        while (true) {
-            techInput = scanner.nextLine();
-            if (techInput.trim().equals("tech exit"))
-                return;
-            else if (Pattern.matches("[\\d+]", techInput)) {
-                index = Integer.parseInt(techInput);
-                if (index >= 1 && index <= technologies.size()) {
-                    // choose the tech and research on it
-                    user.setResearching(true);
-                    user.setCurrentTechnology(technologies.get(index));
-                    user.setResearchTurnLeft(technologies.get(index).getSciencePrice());
-                }
-                else
-                    System.out.println("invalid number");
-            }
-            else
-                System.out.println("invalid command");
-        }
-    }
 
     private void selectedTile(Scanner scanner, Tile origin, int xOrigin, int yOrigin, User user) {
         // TODO enable far working
