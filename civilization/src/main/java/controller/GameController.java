@@ -173,4 +173,10 @@ public class GameController {
             }
         }
     }
+    public Unit findProductionUnit(City city, Product product) {
+        for (int i = 0; i < city.getPossibleUnits().size(); i++)
+            if (city.getPossibleUnits().get(i).getName().equals(product.getName()))
+                return city.getPossibleUnits().get(i);
+        return null;
+    }
 }

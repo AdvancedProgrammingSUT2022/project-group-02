@@ -6,19 +6,15 @@ public class Resource {
 
     private String name;
     private String resourceType;
-    private Technology requiredTechnology;
-    private Improvement requiredImprovement;
     private int goldRate;
     private int foodRate;
     private int productRate;
     private int happiness;
 
-    public Resource(String name, String resourceType, Technology requiredTechnology, Improvement requiredImprovement,
+    public Resource(String name, String resourceType,
                     int goldRate, int foodRate, int productRate, int happiness) {
         this.name = name;
         this.resourceType = resourceType;
-        this.requiredTechnology = requiredTechnology;
-        this.requiredImprovement = requiredImprovement;
         this.goldRate = goldRate;
         this.foodRate = foodRate;
         this.productRate = productRate;
@@ -33,9 +29,6 @@ public class Resource {
         return resourceType;
     }
 
-    public Technology getRequiredTechnology() {
-        return requiredTechnology;
-    }
 
     public int getGold() {
         return goldRate;
