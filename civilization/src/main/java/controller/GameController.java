@@ -11,6 +11,7 @@ public class GameController {
     private int turnForEachPlayer;
     private int height;
     private int width;
+
     public GameController(ArrayList<User> players, int turnForEachPlayer, Maps map, int height, int width) {
         this.players = players;
         this.map = map;
@@ -22,43 +23,55 @@ public class GameController {
         this.height = height;
         this.width = width;
     }
+
     // cheat codes
     public void increaseTurn(int extraTurn, User specificPlayer) {
         specificPlayer.setTurns(specificPlayer.getTurns() + extraTurn);
     }
+
     public void increaseGold(int extraGold, User specificPlayer) {
         specificPlayer.setGold(specificPlayer.getGold() + extraGold);
     }
-    public void increaseHappiness(int extraHappiness, User specificPlayer){
+
+    public void increaseHappiness(int extraHappiness, User specificPlayer) {
         specificPlayer.setHappiness(specificPlayer.getHappiness() + extraHappiness);
     }
-    public void increaseFood(int extraFood, User specificPlayer){
+
+    public void increaseFood(int extraFood, User specificPlayer) {
         specificPlayer.setFood(specificPlayer.getFood() + extraFood);
     }
-    public void increaseFaith(int extraFaith , User specificPlayer){
+
+    public void increaseFaith(int extraFaith, User specificPlayer) {
         specificPlayer.setFaith(specificPlayer.getFaith() + extraFaith);
     }
-    public void increaseScience(int extraScience , User specificPlayer){
+
+    public void increaseScience(int extraScience, User specificPlayer) {
         specificPlayer.setScience(specificPlayer.getScience() + extraScience);
     }
-    public void increaseCapitalCitizens(int extraCitizens , User specificPlayer){
+
+    public void increaseCapitalCitizens(int extraCitizens, User specificPlayer) {
         specificPlayer.getCapital().setCitizens(specificPlayer.getCapital().getCitizens() + extraCitizens);
     }
-    public void increaseCapitalDefence(int extraDefence , User specificPlayer){
+
+    public void increaseCapitalDefence(int extraDefence, User specificPlayer) {
         specificPlayer.getCapital().setDefence(specificPlayer.getCapital().getDefence() + extraDefence);
     }
-    public void increaseCulture(int extraCulture , User specificPlayer){
+
+    public void increaseCulture(int extraCulture, User specificPlayer) {
         specificPlayer.setCulture(specificPlayer.getCulture() + extraCulture);
     }
-    public void increaseResearchTurnLeft(int extraResearch , User specificPlayer){
+
+    public void increaseResearchTurnLeft(int extraResearch, User specificPlayer) {
         specificPlayer.setResearchTurnLeft(specificPlayer.getCulturePerTurn() + extraResearch);
     }
+
     // find the tile by given x and y coordinates
     public Tile findTile(int x, int y) {
         if (x < height && y < width)
             return map.getTileBoard()[x][y];
         return null;
     }
+
     public void moveUnit(Tile origin, Tile destination, Unit unit, boolean isMilitary) {
         if (isMilitary)
             moveMilitary(origin, destination, (MilitaryUnit) unit);
@@ -73,6 +86,7 @@ public class GameController {
         destination.setMilitaryUnit(militaryUnit);
         destination.setMilitaryUnitExists(true);
     }
+
     private void moveCivilian(Tile origin, Tile destination, Civilian civilian) {
         civilian.setTile(destination);
         origin.setCivilianUnit(null);
@@ -109,6 +123,7 @@ public class GameController {
             }
         }
     }
+
     public void userTurnResearch(User user) {
         if (user.isResearching()) {
             // if research is done
@@ -136,11 +151,11 @@ public class GameController {
                     }
                 }
                 user.setCurrentTechnology(null);
-            }
-            else
+            } else
                 user.setResearchTurnLeft(user.getResearchTurnLeft() - 1);
         }
     }
+
     // check all workers
     public void userTurnWorker(User player) {
         if (player.getUnits() != null) {
@@ -165,6 +180,7 @@ public class GameController {
             }
         }
     }
+
     // find the unit based on production name
     private void findProduction(City city, Product product) {
         for (int i = 0; i < city.getPossibleUnits().size(); i++) {
@@ -175,10 +191,28 @@ public class GameController {
             }
         }
     }
+
     public Unit findProductionUnit(City city, Product product) {
         for (int i = 0; i < city.getPossibleUnits().size(); i++)
             if (city.getPossibleUnits().get(i).getName().equals(product.getName()))
                 return city.getPossibleUnits().get(i);
         return null;
+    }
+
+    public void usersGoldHandling(User user) {
+        int goldToIncrease = 0;
+        for (int i = 0; i < user.getResources().size(); i++) {
+            goldToIncrease += user.getResources().get(i).getGold();
+        }
+        for (int i = 0; i < user.getImprovements().size(); i++) {
+            goldToIncrease += user.getImprovements().get(i).getGoldRate();
+        }
+        for (int i = 0; i < user.getTerritory().size(); i++) {
+            goldToIncrease += user.getTerritory().get(i).getFeature().getGoldRate();
+        }
+        for (int i = 0; i < user.getTerritory().size(); i++) {
+            goldToIncrease += user.getTerritory().get(i).getTerrain().getGoldRate();
+        }
+        user.setGold(user.getGold() + goldToIncrease);
     }
 }

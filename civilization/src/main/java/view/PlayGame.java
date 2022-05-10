@@ -93,6 +93,7 @@ public class PlayGame {
             gameController.cityTurnProducts(user);
             gameController.userTurnResearch(user);
             gameController.userTurnWorker(user);
+            gameController.usersGoldHandling(user);
             while (nextTurn) {
 
                 input = scanner.nextLine();
