@@ -1,8 +1,10 @@
 package view;
 
 import controller.TechController;
+import enums.Colors;
 import model.Improvement;
 import model.Technology;
+import model.Unit;
 import model.User;
 
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ public class ResearchMenu {
     }
 
     public void run(Scanner scanner, User user) {
+        System.out.println("welcome to research panel dear " + user.getColor() +  user.getUsername() + Colors.RESET);
         String researchInput;
         if (user.getTechnologies() != null) {
             System.out.println("player has done this technologies");
@@ -77,13 +80,25 @@ public class ResearchMenu {
         ArrayList<Technology> prerequisites;
         System.out.println("**********");
         for (Technology ancientTechnology : techController.getAncientTechnologies()) {
-            System.out.println(ancientTechnology.getName());
+            System.out.println(ancientTechnology.getName() + " :");
+            if (ancientTechnology.getGivenUnits() != null) {
+                System.out.println("given units :");
+                for (Unit givenUnit : ancientTechnology.getGivenUnits())
+                    System.out.println(givenUnit.getName());
+
+            }
+            if (ancientTechnology.getGivenImprovement() != null) {
+                System.out.println("given improvements :");
+                for (Improvement improvement : ancientTechnology.getGivenImprovement())
+                    System.out.println(improvement.getName());
+
+            }
             prerequisites = techController.getPrerequisitesAncientTech(ancientTechnology);
-            if (prerequisites != null) {
+            if (prerequisites.size() >= 1) {
                 System.out.println("prerequisites :");
-                for (Technology prerequisite : prerequisites) {
+                for (Technology prerequisite : prerequisites)
                     System.out.println(prerequisite.getName());
-                }
+
             }
             else
                 System.out.println("this technology do not have any prerequisites");

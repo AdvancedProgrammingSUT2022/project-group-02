@@ -28,6 +28,8 @@ public class PlayGame {
     public PlayGame(ArrayList<User> players, Maps map, int[][] ancientGraph, ArrayList<Technology> ancientTechnology) {
         this.players = players;
         this.map = map;
+        this.height = 26;
+        this.width = 80;
         gameController = new GameController(players, 1, map, height, width);
         this.mapController = new MapController(map);
         unitController = new UnitController();
@@ -86,7 +88,7 @@ public class PlayGame {
         while (true) {
             User user = players.get(role);
             String color = new ColorsController().getColorOfUser(user);
-            System.out.println("it's " + color + user.getNickname() + Colors.RESET + "turn");
+            System.out.println("it's " + color + user.getNickname() + Colors.RESET + " turn");
             // handle production turn in cities and research turn of user
             gameController.cityTurnProducts(user);
             gameController.userTurnResearch(user);
@@ -283,9 +285,9 @@ public class PlayGame {
                     System.out.println("there is no worker in this tile");
             }
             else if (tileInput.trim().equals("city page")) {
-                if (origin.getCity().getCityLocation().equals(origin)) {
+                if (origin.getCity() != null && origin.getCity().getCityLocation().equals(origin))
                     cityMenu.cityPage(origin.getCity(), user, scanner);
-                }
+
                 else
                     System.out.println("this tile is not a city");
             }

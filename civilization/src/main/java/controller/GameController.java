@@ -54,12 +54,14 @@ public class GameController {
     }
     // find the tile by given x and y coordinates
     public Tile findTile(int x, int y) {
-        for (int i = 0; i < height; i++) {
+        if (x < height && y < width)
+            return map.getTileBoard()[x][y];
+        /*for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (map.getTileBoard()[i][j].getX() == x && map.getTileBoard()[i][j].getY() == y)
                     return map.getTileBoard()[i][j];
             }
-        }
+        }*/
         return null;
     }
     public void moveUnit(Tile origin, Tile destination, Unit unit, boolean isMilitary) {

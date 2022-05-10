@@ -174,6 +174,7 @@ public class GameMenu {
         return true;
     }
     private ArrayList<Technology> Technologies() {
+
         ArrayList<Technology> technologies = new ArrayList<>();
         ArrayList<Unit> units;
         ArrayList<Improvement> improvements = new ArrayList<>();
@@ -191,10 +192,10 @@ public class GameMenu {
         improvements.add(new Improvement("Mine", 1, 0, 0, 5));
         improvements.add(new Improvement("Quarry", 1, 0, 0, 5));
         technologies.add(new Technology("Mining", improvements, 2, 25, null));
-        /*//sailing
+        //sailing
         improvements = new ArrayList<>();
         improvements.add(new Improvement("Fishing Boat", 0, 1, 0, 5));
-        technologies.add(new Technology("Sailing", improvements, 3, 10));*/
+        technologies.add(new Technology("Sailing", improvements, 3, 10));
         //astrology
         technologies.add(new Technology("Astrology", null, 3, 50, null));
         //irrigation
@@ -502,7 +503,7 @@ public class GameMenu {
             if (i == 26)
                 graph[i][30] = 1;
             else
-                graph[i][30] = 0
+                graph[i][30] = 0;
         }
         // 31
         for (int i = 0; i < 44; i++) {
