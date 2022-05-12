@@ -75,7 +75,7 @@ public class CombatController extends UnitController {
             militaryUnit.getOwner().setTerritory(usersNewTiles1);
             ArrayList<Tile> usersNewTiles2 = selectedTileForDefend.getMilitaryUnit().getOwner().getTerritory();
             usersNewTiles2.remove(selectedTileForDefend);
-            selectedTileForDefend.getMilitaryUnit().getOwner().setTerritory(usersNewTiles2);
+            selectedTileForDefend.getOwner().setTerritory(usersNewTiles2);
             militaryUnit.getTile().getCity().setOwnerShipTiles(usersNewTiles1);
             selectedTileForDefend.getCity().setOwnerShipTiles(usersNewTiles2);
             return "you got a victory in this attack";
@@ -108,7 +108,7 @@ public class CombatController extends UnitController {
             militaryUnit.getOwner().setTerritory(usersNewTiles1);
             ArrayList<Tile> usersNewTiles2 = selectedTileForDefend.getMilitaryUnit().getOwner().getTerritory();
             usersNewTiles2.remove(selectedTileForDefend);
-            selectedTileForDefend.getMilitaryUnit().getOwner().setTerritory(usersNewTiles2);
+            selectedTileForDefend.getOwner().setTerritory(usersNewTiles2);
             militaryUnit.getTile().getCity().setOwnerShipTiles(usersNewTiles1);
             selectedTileForDefend.getCity().setOwnerShipTiles(usersNewTiles2);
             return "you got a victory in this attack";
