@@ -19,6 +19,7 @@ public class UserPanel {
         System.out.println("welcome to user panel dear " + user.getColor() + user.getUsername() + Colors.RESET);
         System.out.println(Colors.YELLOW + "to see history of notification press -show history-");
         System.out.println("to see military information and overview press -military overview-");
+        System.out.println("to see economic information and overview press -economic overview-" + Colors.RESET);
         String userInput;
         while (true){
             userInput = scanner.nextLine();
@@ -36,12 +37,15 @@ public class UserPanel {
             else if (userInput.equals("military overview")) {
                 militaryOverview(user);
             }
+            else if (userInput.equals("economic overview")) {
+                economicOverview(user);
+            }
             else
                 System.out.println("invalid command");
         }
     }
 
-    public void militaryOverview(User user) {
+    private void militaryOverview(User user) {
         System.out.println(user.getUsername() + " have " + user.getUnits().size() + " units");
         if (user.getUnits() != null) {
             int numberOfWorkers = 0;
@@ -70,10 +74,16 @@ public class UserPanel {
             System.out.println(numberOfWorkers + " of this units are workers");
             System.out.println(numberOfSettlers + " of this units are settlers");
             System.out.println(numberOfScout + " of this units are scout");
-
         }
         else
             System.out.println("user do not have any unit");
+    }
+
+    private void economicOverview(User user) {
+        System.out.println("Dear " + user.getColor() + user.getUsername() + Colors.RESET);
+        System.out.println(Colors.GREEN + "Gold per turn : " + user.getGoldPerTurn());
+        System.out.println("Production per turn : " + user.getProductPerTurn());
+        System.out.println("Food per turn : " + user.getFoodPerTurn() + Colors.RESET);
     }
 
     public static void researchDoneNotification(User user, Technology technology) {

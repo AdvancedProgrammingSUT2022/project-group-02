@@ -9,6 +9,7 @@ public class User {
     private String color;
     private int turns;
     private int gold;
+    private int product;
     private ArrayList<Tile> territory;
     private int goldPerTurn;
     private int happiness;
@@ -20,6 +21,7 @@ public class User {
     private int culturePerTurn;
     private int faith;
     private int faithPerTurn;
+    private int productPerTurn;
     private ArrayList<Resource> availableResources;
     private ArrayList<Resource> foundResources;
     private String civilization;
@@ -48,6 +50,14 @@ public class User {
         researching = false;
         researchTurnLeft = 0;
         historyOfNotification = new ArrayList<>();
+        food = 0;
+        product = 0;
+        territory = new ArrayList<>();
+        historyOfNotification = new ArrayList<>();
+        improvements = new ArrayList<>();
+        technologies = new ArrayList<>();
+        availableResources = new ArrayList<>();
+
     }
 
     public void setColor(String color) {
@@ -354,5 +364,21 @@ public class User {
     }
     public void addHistoryOfNotification(ArrayList<String> notification) {
         historyOfNotification.add(notification);
+    }
+
+    public int getProduct() {
+        return product;
+    }
+
+    public int getProductPerTurn() {
+        return productPerTurn;
+    }
+
+    public void setProduct(int product) {
+        this.product = product;
+    }
+
+    public void setProductPerTurn(int productPerTurn) {
+        this.productPerTurn = productPerTurn;
     }
 }
