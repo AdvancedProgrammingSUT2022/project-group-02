@@ -77,7 +77,7 @@ public class PlayGame {
 
     public void run(Scanner scanner) {
         cityMenu = new CityMenu(mapController, techController, settlerController, gameController, players);
-        researchMenu = new ResearchMenu(techController);
+        researchMenu = new ResearchMenu(techController, gameController);
         manPlayGame();
         String input;
         int role = 0;
@@ -199,8 +199,6 @@ public class PlayGame {
                         showMap(user);
                     } else
                         System.out.println("invalid command");
-                }else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.ADD_RESEARCH)) != null){
-                    // TODO : add a research
                 }
                 // selecting tile
                 else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.SELECT_TILE1)) != null ||
