@@ -57,8 +57,35 @@ public class CombatController extends UnitController {
         return "";
     }
 
-    public String remoteCombat(Unit meleeMilitaryUnit, Tile selectedTileForDefend) {
-
+    public String remoteCombat(Unit militaryUnit, Tile selectedTileForDefend) {
+        if (checkDefenderHill(selectedTileForDefend))
+            selectedTileForDefend.getMilitaryUnit().setHP(selectedTileForDefend.getMilitaryUnit().getHP() + 8);
+        militaryUnit.setXP(militaryUnit.getXP() + 5);
+        selectedTileForDefend.getMilitaryUnit().setXP(selectedTileForDefend.getMilitaryUnit().getXP() + 5);
+        militaryUnit.setMP(militaryUnit.getMP() - 5);
+        selectedTileForDefend.getMilitaryUnit().setMP(selectedTileForDefend.getMilitaryUnit().getMP() - 5);
+        if (militaryUnit.getHP() > selectedTileForDefend.getMilitaryUnit().getHP()) {
+            selectedTileForDefend.setMilitaryUnit(militaryUnit);
+            selectedTileForDefend.setOwner(militaryUnit.getOwner());
+            selectedTileForDefend.getCivilianUnit().setOwner(militaryUnit.getOwner());
+            if (militaryUnit.isCity())
+                selectedTileForDefend.setCity(militaryUnit.getTile().getCity());
+            ArrayList<Tile> usersNewTiles1 = militaryUnit.getOwner().getTerritory();
+            usersNewTiles1.add(selectedTileForDefend);
+            militaryUnit.getOwner().setTerritory(usersNewTiles1);
+            ArrayList<Tile> usersNewTiles2 = selectedTileForDefend.getMilitaryUnit().getOwner().getTerritory();
+            usersNewTiles2.remove(selectedTileForDefend);
+            selectedTileForDefend.getMilitaryUnit().getOwner().setTerritory(usersNewTiles2);
+            militaryUnit.getTile().getCity().setOwnerShipTiles(usersNewTiles1);
+            selectedTileForDefend.getCity().setOwnerShipTiles(usersNewTiles2);
+            return "you got a victory in this attack";
+        } else if (militaryUnit.getHP() == selectedTileForDefend.getMilitaryUnit().getHP()) {
+            selectedTileForDefend.setMilitaryUnit(null);
+            return "you could not get this tile. but you destroyed the military unit of adversary";
+        } else if (militaryUnit.getHP() < selectedTileForDefend.getMilitaryUnit().getHP()) {
+            selectedTileForDefend.getMilitaryUnit().setHP(selectedTileForDefend.getMilitaryUnit().getHP() - militaryUnit.getHP());
+            return "you made a damage to adversary military unit but you could not destroy and get the tile";
+        }
         return "";
     }
 
@@ -82,6 +109,8 @@ public class CombatController extends UnitController {
             ArrayList<Tile> usersNewTiles2 = selectedTileForDefend.getMilitaryUnit().getOwner().getTerritory();
             usersNewTiles2.remove(selectedTileForDefend);
             selectedTileForDefend.getMilitaryUnit().getOwner().setTerritory(usersNewTiles2);
+            militaryUnit.getTile().getCity().setOwnerShipTiles(usersNewTiles1);
+            selectedTileForDefend.getCity().setOwnerShipTiles(usersNewTiles2);
             return "you got a victory in this attack";
         } else if (militaryUnit.getHP() == selectedTileForDefend.getMilitaryUnit().getHP()) {
             militaryUnit.getTile().setMilitaryUnit(null);
