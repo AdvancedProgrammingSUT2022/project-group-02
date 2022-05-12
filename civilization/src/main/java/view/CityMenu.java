@@ -31,6 +31,7 @@ public class CityMenu {
 
     public void run(Scanner scanner, User user) {
         String cityInput;
+        System.out.println("welcome to city menu dear " + user.getUsername());
         while (true) {
             cityInput = scanner.nextLine();
             // getout
@@ -44,24 +45,24 @@ public class CityMenu {
                         System.out.println(index + "- " + city.getName());
                         index++;
                     }
+                    while (true) {
+                        cityInput = scanner.nextLine();
+                        if (cityInput.equals("city exit")) {
+                            System.out.println("back to play game");
+                            return;
+                        } else if (Pattern.matches("[0-9]+", cityInput)) {
+                            index = Integer.parseInt(cityInput);
+                            if (index >= 1 && index <= user.getCities().size()) {
+                                cityPage(user.getCities().get(index - 1), user, scanner);
+                            } else
+                                System.out.println("invalid number");
+                        }
+                        else
+                            System.out.println("invalid command");
+                    }
                 }
                 else
                     System.out.println("user do not have any city!");
-                while (true) {
-                    cityInput = scanner.nextLine();
-                    if (cityInput.equals("city exit")) {
-                        System.out.println("back to play game");
-                        return;
-                    } else if (Pattern.matches("[0-9]+", cityInput)) {
-                        int index = Integer.parseInt(cityInput);
-                        if (index >= 1 && index <= user.getCities().size()) {
-                            cityPage(user.getCities().get(index - 1), user, scanner);
-                        } else
-                            System.out.println("invalid number");
-                    }
-                    else
-                        System.out.println("invalid command");
-                }
             }
             // show all cities in the game
             else if (cityInput.equals("show all cities")) {

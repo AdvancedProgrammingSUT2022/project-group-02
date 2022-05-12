@@ -1,5 +1,6 @@
 package view;
 
+import controller.ColorsController;
 import controller.GameController;
 import controller.TechController;
 import enums.Colors;
@@ -26,7 +27,7 @@ public class ResearchMenu {
     }
 
     public void run(Scanner scanner, User user) {
-        System.out.println("welcome to research panel dear " + user.getColor() +  user.getUsername() + Colors.RESET);
+        System.out.println("welcome to research panel dear " + user.getUsername());
         String researchInput;
         if (user.getTechnologies() != null) {
             System.out.println("player has done this technologies");

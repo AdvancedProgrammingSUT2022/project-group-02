@@ -57,7 +57,6 @@ public class User {
         improvements = new ArrayList<>();
         technologies = new ArrayList<>();
         availableResources = new ArrayList<>();
-
     }
 
     public void setColor(String color) {

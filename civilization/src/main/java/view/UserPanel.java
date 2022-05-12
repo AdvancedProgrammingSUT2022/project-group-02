@@ -108,7 +108,7 @@ public class UserPanel {
                 notification.add("Gold rate : " + improvement.getGoldRate());
                 System.out.println("price : " + improvement.getPrice() + Colors.RESET);
                 notification.add("price : " + improvement.getPrice() + Colors.RESET);
-                improvementResourceNotification(improvement, notification);
+                //improvementResourceNotification(improvement, notification);
             }
         }
         if (technology.getGivenUnits() != null) {
@@ -137,10 +137,10 @@ public class UserPanel {
         notification.add("Production rate : " + improvement.getProductionRate());
         System.out.println("Gold rate : " + improvement.getGoldRate() + Colors.RESET);
         notification.add("Gold rate : " + improvement.getGoldRate() + Colors.RESET);
-        improvementResourceNotification(improvement, notification);
+        //improvementResourceNotification(improvement, notification);
         user.addHistoryOfNotification(notification);
     }
-
+    /*
     private static void improvementResourceNotification(Improvement improvement, ArrayList<String> notification) {
         if (improvement.getGivenResource() != null) {
             for (Resource resource : improvement.getGivenResource()) {
@@ -157,6 +157,7 @@ public class UserPanel {
             }
         }
     }
+    */
 
     public static void productDoneNotification(User user, City city, Product product, GameController gameController) {
         ArrayList<String> notification = new ArrayList<>();

@@ -54,10 +54,11 @@ public class GameMenu {
         for (String username : usernames) {
             players.add(users.getUserByUsername(username));
         }
-
+        int[][] graph = techGraph();
+        users.writeToJson(graph);
         int[][] ancientGraph = users.readFromJsonGraph();
-        //ArrayList<Technology> technologies = ancientTechnologies();
-        //users.writeToJson(technologies);
+        ArrayList<Technology> technologies = technologies();
+        users.writeToJson(technologies);
         ArrayList<Technology> ancientTechnologies = users.readFromJsonTech();
         Maps map = new MapMaker().myTiles();
         new PlayGame(players, map, ancientGraph, ancientTechnologies).run(scanner);
@@ -173,7 +174,7 @@ public class GameMenu {
         }
         return true;
     }
-    private ArrayList<Technology> Technologies() {
+    private ArrayList<Technology> technologies() {
 
         ArrayList<Technology> technologies = new ArrayList<>();
         ArrayList<Unit> units;
@@ -193,9 +194,11 @@ public class GameMenu {
         improvements.add(new Improvement("Quarry", 1, 0, 0, 5));
         technologies.add(new Technology("Mining", improvements, 2, 25, null));
         //sailing
+        /*
         improvements = new ArrayList<>();
         improvements.add(new Improvement("Fishing Boat", 0, 1, 0, 5));
-        technologies.add(new Technology("Sailing", improvements, 3, 10));
+        technologies.add(new Technology("Sailing", improvements, 3, 10, null));
+        */
         //astrology
         technologies.add(new Technology("Astrology", null, 3, 50, null));
         //irrigation

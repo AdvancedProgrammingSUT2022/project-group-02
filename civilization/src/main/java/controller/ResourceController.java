@@ -36,7 +36,7 @@ public class ResourceController {
     }
 
     public void addAvailableResource(User user, Tile tile){
-        if (tile.getImprovement().getGivenResource().contains(tile.getResource())){
+        if (tile.getResource().getRequiredImprovement().equals(tile.getImprovement().getName())){
             user.setAvailableResources(tile.getResource());
             System.out.println("now you can use " + tile.getResource().getName() + "benefits!");
         }
