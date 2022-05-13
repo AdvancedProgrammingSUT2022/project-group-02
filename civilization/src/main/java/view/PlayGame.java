@@ -93,7 +93,7 @@ public class PlayGame {
             gameController.cityTurnProducts(user);
             gameController.userTurnResearch(user);
             gameController.userTurnWorker(user);
-            gameController.usersGoldHandling(user);
+            gameController.usersGoldHandling(user , map);
             while (nextTurn) {
 
                 input = scanner.nextLine();
@@ -471,6 +471,15 @@ public class PlayGame {
     private void createCity(Tile tile, User user, String nameOfCity) {
         // completely delete settler
         settlerController.createNewCity(tile.getCivilianUnit(), user, tile, nameOfCity);
+        for (Resource foundResource : user.getFoundResources()) {
+            if (!foundResource.isAnnounce()){
+                System.out.println("You found" + foundResource.getName() + "in this tile.");
+                if (!user.getAvailableResources().contains(foundResource)){
+                    System.out.println("You should first build" + foundResource.getRequiredImprovement()
+                            + "on this tile to use this resource benefits!");
+                }
+            }
+        }
         // remove settler from tile
         mapController.deleteCivilian(tile);
         System.out.println("city located successfully!");

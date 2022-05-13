@@ -3,6 +3,28 @@ package model;
 import java.util.Map;
 
 public class MapMaker {
+    //all Bonus Resources of map
+    public Resource Banana = new Resource("Banana", "Bonus", "Plantation", 0, 1, 0, 0);
+    public Resource Cow = new Resource("Cow", "Bonus", "Pasture", 0, 1, 0, 0);
+    public Resource Gazelle = new Resource("Gazelle", "Bonus", "Camp", 0, 1, 0, 0);
+    public Resource Wheat = new Resource("Wheat", "Bonus", "Farm", 0, 1, 0, 0);
+    public Resource Sheep = new Resource("Sheep", "Bonus", "Pasture", 0, 2, 0, 0);
+    //all Strategic Resources of map
+    public Resource Coal = new Resource("Coal", "Strategic", "Mine", 0, 0, 1, 0);
+    public Resource Horse = new Resource("Horse", "Strategic", "Pasture", 0, 0, 1, 0);
+    public Resource Iron = new Resource("Iron", "Strategic", "Mine", 0, 0, 1, 0);
+    //all Luxury Resources of map
+    public Resource Cotton = new Resource("Cotton", "Luxury", "Plantation", 2, 0, 0, 3);
+    public Resource Color = new Resource("Color", "Luxury", "farming", 2, 0, 0, 2);
+    public Resource Fur = new Resource("Fur", "Luxury", "Camp", 2, 0, 0, 3);
+    public Resource Gemstones = new Resource("Gemstones", "Luxury", "Mine", 3, 0, 0, 5);
+    public Resource Gold = new Resource("Gold", "Luxury", "Mine", 2, 0, 0, 4);
+    public Resource Fumigation = new Resource("Fumigation", "Luxury", "Plantation", 2, 0, 0, 2);
+    public Resource Ivory = new Resource("Ivory", "Luxury", "Camp", 2, 0, 0, 3);
+    public Resource Silk = new Resource("Silk", "Luxury", "Plantation", 2, 0, 0, 3);
+    public Resource Sugar = new Resource("Sugar", "Luxury", "Plantation", 2, 0, 0, 2);
+    public Resource Silver = new Resource("Silver", "Luxury", "Mine", 2, 0, 0, 3);
+    public Resource Marble = new Resource("Marble", "Luxury", "Quarry", 2, 0, 0, 3);
     public Maps myTiles() {
 
         Maps map = new Maps(26, 80);
@@ -22,28 +44,6 @@ public class MapMaker {
         Terrain Plain = new Terrain("Plain", "red", 1, 1, -0.33, 0, 1, true);
         Terrain Snow = new Terrain("Snow", "white", 1, 0, -0.33, 0, 0, true);
         Terrain Tundra = new Terrain("Tundra", "cyan", 1, 1, -0.33, 0, 0, true);
-        //all Bonus Resources of map
-        Resource Banana = new Resource("Banana", "Bonus", "Plantation", 0, 1, 0, 0);
-        Resource Cow = new Resource("Cow", "Bonus", "Pasture", 0, 1, 0, 0);
-        Resource Gazelle = new Resource("Gazelle", "Bonus", "Camp", 0, 1, 0, 0);
-        Resource Wheat = new Resource("Wheat", "Bonus", "Farm", 0, 1, 0, 0);
-        Resource Sheep = new Resource("Sheep", "Bonus", "Pasture", 0, 2, 0, 0);
-        //all Strategic Resources of map
-        Resource Coal = new Resource("Coal", "Strategic", "Mine", 0, 0, 1, 0);
-        Resource Horse = new Resource("Horse", "Strategic", "Pasture", 0, 0, 1, 0);
-        Resource Iron = new Resource("Iron", "Strategic", "Mine", 0, 0, 1, 0);
-        //all Luxury Resources of map
-        Resource Cotton = new Resource("Cotton", "Luxury", "Plantation", 2, 0, 0, 3);
-        Resource Color = new Resource("Color", "Luxury", "farming", 2, 0, 0, 2);
-        Resource Fur = new Resource("Fur", "Luxury", "Camp", 2, 0, 0, 3);
-        Resource Gemstones = new Resource("Gemstones", "Luxury", "Mine", 3, 0, 0, 5);
-        Resource Gold = new Resource("Gold", "Luxury", "Mine", 2, 0, 0, 4);
-        Resource Fumigation = new Resource("Fumigation", "Luxury", "Plantation", 2, 0, 0, 2);
-        Resource Ivory = new Resource("Ivory", "Luxury", "Camp", 2, 0, 0, 3);
-        Resource Silk = new Resource("Silk", "Luxury", "Plantation", 2, 0, 0, 3);
-        Resource Sugar = new Resource("Sugar", "Luxury", "Plantation", 2, 0, 0, 2);
-        Resource Silver = new Resource("Silver", "Luxury", "Mine", 2, 0, 0, 3);
-        Resource Marble = new Resource("Marble", "Luxury", "Quarry", 2, 0, 0, 3);
 
         //1st row
         for (int i = 0; i < 80; i++){
@@ -3353,7 +3353,7 @@ public class MapMaker {
         addResource(8, 30 , map, Sugar);
         addResource(4, 40 , map, Sugar);
         addResource(10, 43 , map, Sugar);
-
+        riverMaker(map);
 
         return map;
     }
@@ -3362,6 +3362,162 @@ public class MapMaker {
         Resource resource1 = new Resource(resource.getName(), resource.getResourceType(), resource.getRequiredImprovement(),
                 resource.getGoldRate(), resource.getFoodRate(), resource.getProductionRate(), resource.getHappiness());
         map.getSpecificTile(x, y).setResource(resource1);
-        resource1.setTile(map.getSpecificTile(x, y));
+        resource1.setTileX(x);
+        resource1.setTileY(y);
+    }
+
+    private void riverMaker(Maps map){
+
+        for (int i = 8, j = 9; i < 20; i++){
+            boolean[] riverBoarder = {false, false, false, true, true, false};
+            map.getSpecificTile(i, j).setRiverBorder(riverBoarder);
+            map.getSpecificTile(i, j).setNearRiver(true);
+            if (i % 2 == 1)j++;
+        }
+
+        for (int i = 10, j = 9; i < 21; i++){
+            boolean[] riverBoarder = {true, true, false, false, false, false};
+            map.getSpecificTile(i, j).setRiverBorder(riverBoarder);
+            map.getSpecificTile(i, j).setNearRiver(true);
+            if (i % 2 == 1)j++;
+        }
+
+        for (int i = 8, j = 20; i < 18; i+=2){
+            boolean[] riverBoarder = {false, true, true, false, true, true};
+            map.getSpecificTile(i, j).setRiverBorder(riverBoarder);
+            map.getSpecificTile(i, j).setNearRiver(true);
+        }
+
+        for (int i = 11, j = 19; i < 18; i+=2){
+            boolean[] riverBoarder = {false, true, true, false, false, false};
+            map.getSpecificTile(i, j).setRiverBorder(riverBoarder);
+            map.getSpecificTile(i, j).setNearRiver(true);
+        }
+
+        for (int i = 9, j = 20; i < 16; i+=2){
+            boolean[] riverBoarder = {false, false, false, false, true, true};
+            map.getSpecificTile(i, j).setRiverBorder(riverBoarder);
+            map.getSpecificTile(i, j).setNearRiver(true);
+        }
+
+        for (int i = 4, j = 69; i < 14; i++){
+            boolean[] riverBoarder = {false, false, true, true, false, false};
+            map.getSpecificTile(i, j).setRiverBorder(riverBoarder);
+            map.getSpecificTile(i, j).setNearRiver(true);
+            if (i % 2 == 0)j--;
+        }
+
+        for (int i = 6, j = 69; i < 15; i++){
+            boolean[] riverBoarder = {true, false, false, false, false, true};
+            map.getSpecificTile(i, j).setRiverBorder(riverBoarder);
+            map.getSpecificTile(i, j).setNearRiver(true);
+            if (i % 2 == 0)j--;
+        }
+
+        for (int i = 4, j = 59; i < 14; i++){
+            boolean[] riverBoarder = {false, false, false, true, true, false};
+            map.getSpecificTile(i, j).setRiverBorder(riverBoarder);
+            map.getSpecificTile(i, j).setNearRiver(true);
+            if (i % 2 == 1)j++;
+        }
+
+        for (int i = 6, j = 59; i < 15; i++){
+            boolean[] riverBoarder = {true, true, false, false, false, false};
+            map.getSpecificTile(i, j).setRiverBorder(riverBoarder);
+            map.getSpecificTile(i, j).setNearRiver(true);
+            if (i % 2 == 1)j++;
+        }
+
+        for (int i = 19, j = 64; i < 24; i++){
+            boolean[] riverBoarder = {true, true, false, false, false, false};
+            map.getSpecificTile(i, j).setRiverBorder(riverBoarder);
+            map.getSpecificTile(i, j).setNearRiver(true);
+            if (i % 2 == 1)j++;
+        }
+
+        for (int i = 18, j = 65; i < 23; i++){
+            boolean[] riverBoarder = {false, false, false, true, true, false};
+            map.getSpecificTile(i, j).setRiverBorder(riverBoarder);
+            map.getSpecificTile(i, j).setNearRiver(true);
+            if (i % 2 == 1)j++;
+        }
+
+        for (int i = 19, j = 63; i < 25; i++){
+            boolean[] riverBoarder = {true, false, false, false, false, true};
+            map.getSpecificTile(i, j).setRiverBorder(riverBoarder);
+            map.getSpecificTile(i, j).setNearRiver(true);
+            if (i % 2 == 0)j--;
+        }
+
+        for (int i = 18, j = 63; i < 24; i++){
+            boolean[] riverBoarder = {false, false, true, true, false, false};
+            map.getSpecificTile(i, j).setRiverBorder(riverBoarder);
+            map.getSpecificTile(i, j).setNearRiver(true);
+            if (i % 2 == 0)j--;
+        }
+        boolean[] riverBoarder14_64 = {true, true, false, false, false, true};
+        map.getSpecificTile(14, 64).setRiverBorder(riverBoarder14_64);
+        map.getSpecificTile(14, 64).setNearRiver(true);
+
+        boolean[] riverBoarder15_64 = {true, true, true, false, false, false};
+        map.getSpecificTile(15, 64).setRiverBorder(riverBoarder15_64);
+        map.getSpecificTile(15, 64).setNearRiver(true);
+
+        boolean[] riverBoarder17_64 = {false, true, true, true, false, false};
+        map.getSpecificTile(17, 64).setRiverBorder(riverBoarder17_64);
+        map.getSpecificTile(17, 64).setNearRiver(true);
+
+        boolean[] riverBoarder18_64 = {false, false, true, true, true, false};
+        map.getSpecificTile(18, 64).setRiverBorder(riverBoarder18_64);
+        map.getSpecificTile(18, 64).setNearRiver(true);
+
+        boolean[] riverBoarder17_63 = {false, false, false, true, true, true};
+        map.getSpecificTile(17, 63).setRiverBorder(riverBoarder17_63);
+        map.getSpecificTile(17, 63).setNearRiver(true);
+
+        boolean[] riverBoarder15_63 = {true, false, false, false, true, true};
+        map.getSpecificTile(15, 63).setRiverBorder(riverBoarder15_63);
+        map.getSpecificTile(15, 63).setNearRiver(true);
+
+        map.getSpecificTile(14, 65).setRiverBorder(riverBoarder15_63);
+        map.getSpecificTile(14, 65).setNearRiver(true);
+
+        map.getSpecificTile(18, 65).setRiverBorder(riverBoarder17_63);
+        map.getSpecificTile(18, 65).setNearRiver(true);
+
+        map.getSpecificTile(18, 63).setRiverBorder(riverBoarder17_64);
+        map.getSpecificTile(18, 63).setNearRiver(true);
+
+        map.getSpecificTile(14, 63).setRiverBorder(riverBoarder15_64);
+        map.getSpecificTile(14, 63).setNearRiver(true);
+
+        boolean[] riverBoarder16_65 = {false, false, false, false, true, true};
+        map.getSpecificTile(16, 65).setRiverBorder(riverBoarder16_65);
+        map.getSpecificTile(16, 65).setNearRiver(true);
+
+        boolean[] riverBoarder16_63 = {false, true, true, false, false, false};
+        map.getSpecificTile(16, 63).setRiverBorder(riverBoarder16_63);
+        map.getSpecificTile(16, 63).setNearRiver(true);
+
+        boolean[] riverBoarder12_64 = {false, false, false, true, false, false};
+        map.getSpecificTile(12, 64).setRiverBorder(riverBoarder12_64);
+        map.getSpecificTile(12, 64).setNearRiver(true);
+
+        boolean[] riverBoarder20_64 = {true, false, false, false, false, false};
+        map.getSpecificTile(20, 64).setRiverBorder(riverBoarder20_64);
+        map.getSpecificTile(20, 64).setNearRiver(true);
+
+        for (int i = 19, j = 41; i > 5; i--){
+            boolean[] riverBoarder = {true, false, false, false, false, true};
+            map.getSpecificTile(i, j).setRiverBorder(riverBoarder);
+            map.getSpecificTile(i, j).setNearRiver(true);
+            if (i % 2 == 1)j++;
+        }
+        for (int i = 17, j = 41; i > 4; i--){
+            boolean[] riverBoarder = {false, false, true, true, false, false};
+            map.getSpecificTile(i, j).setRiverBorder(riverBoarder);
+            map.getSpecificTile(i, j).setNearRiver(true);
+            if (i % 2 == 1)j++;
+        }
     }
 }

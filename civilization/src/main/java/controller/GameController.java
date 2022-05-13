@@ -172,6 +172,10 @@ public class GameController {
                         worker.setRemainingTurnsToComplete(0);
                         worker.getTile().setInProgress(false);
                         worker.getTile().setImprovement(worker.getImprovement());
+                        for (Resource resource : worker.getImprovement().getGivenResource()) {
+                            if (resource.getName().equals(worker.getTile().getResource().getName()))
+                                 player.setAvailableResources(worker.getTile().getResource());
+                        }
                         worker.setImprovement(null);
                     } else {
                         worker.setRemainingTurnsToComplete(worker.getRemainingTurnsToComplete() - 1);
@@ -199,13 +203,15 @@ public class GameController {
         return null;
     }
 
-    public void usersGoldHandling(User user) {
+    public void usersGoldHandling(User user, Maps map) {
         user.setGoldPerTurn(0);
-        new ResourceController().useResource(user);
+        new ResourceController().useResource(user, map);
+        if (user.getImprovements() != null)
         for (Improvement improvement : user.getImprovements()) {
             if (!improvement.getTile().LootedStatus())
             user.setGoldPerTurn(user.getGoldPerTurn() + improvement.getGoldRate());
         }
+        if (user.getTerritory() != null)
         for (Tile tile : user.getTerritory()) {
             user.setGoldPerTurn(user.getGoldPerTurn() + tile.getFeature().getGoldRate());
             user.setGoldPerTurn(user.getGoldPerTurn() + tile.getTerrain().getGoldRate());

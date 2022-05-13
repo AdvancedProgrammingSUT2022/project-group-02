@@ -173,7 +173,7 @@ public class GameMenu {
         }
         return true;
     }
-    private ArrayList<Technology> Technologies() {
+   /*private ArrayList<Technology> Technologies() {
 
         ArrayList<Technology> technologies = new ArrayList<>();
         ArrayList<Unit> units;
@@ -327,7 +327,7 @@ public class GameMenu {
         technologies.add(new Technology("Combustion", null, 43, 1250, units));
 
         return technologies;
-    }
+    }*/
 
     private int[][] techGraph() {
         int[][] graph = new int[44][44];
