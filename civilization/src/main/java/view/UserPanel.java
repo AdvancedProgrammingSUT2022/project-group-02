@@ -140,10 +140,10 @@ public class UserPanel {
         //improvementResourceNotification(improvement, notification);
         user.addHistoryOfNotification(notification);
     }
-    /*
+
     private static void improvementResourceNotification(Improvement improvement, ArrayList<String> notification) {
-        if (improvement.getGivenResource() != null) {
-            for (Resource resource : improvement.getGivenResource()) {
+        if (improvement.getGivenResources() != null) {
+            for (Resource resource : improvement.getGivenResources()) {
                 System.out.println(Colors.GREEN + "Resource name : " + resource.getName());
                 notification.add(Colors.GREEN + "Resource name : " + resource.getName());
                 System.out.println("Resource type : " + resource.getResourceType());
@@ -157,7 +157,6 @@ public class UserPanel {
             }
         }
     }
-    */
 
     public static void productDoneNotification(User user, City city, Product product, GameController gameController) {
         ArrayList<String> notification = new ArrayList<>();

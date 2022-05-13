@@ -34,7 +34,7 @@ public class MapMaker {
         Resource Iron = new Resource("Iron", "Strategic", "Mine", 0, 0, 1, 0);
         //all Luxury Resources of map
         Resource Cotton = new Resource("Cotton", "Luxury", "Plantation", 2, 0, 0, 3);
-        Resource Color = new Resource("Color", "Luxury", "farming", 2, 0, 0, 2);
+        Resource Color = new Resource("Color", "Luxury", "Plantation", 2, 0, 0, 2);
         Resource Fur = new Resource("Fur", "Luxury", "Camp", 2, 0, 0, 3);
         Resource Gemstones = new Resource("Gemstones", "Luxury", "Mine", 3, 0, 0, 5);
         Resource Gold = new Resource("Gold", "Luxury", "Mine", 2, 0, 0, 4);

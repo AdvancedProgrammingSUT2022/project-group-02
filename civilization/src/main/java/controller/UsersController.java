@@ -128,14 +128,16 @@ public class UsersController {
             e.printStackTrace();
         }
     }
+    /*
     public void addBasicImprovements(ArrayList<User> players) {
         ArrayList<Improvement> improvements;
         for (User player : players) {
             improvements = new ArrayList<>();
-            improvements.add(new Improvement("Farm", 0, 1, 0, 5));
+            //improvements.add(new Improvement("Farm", 0, 1, 0, 5));
             player.setImprovements(improvements);
         }
     }
+     */
 
     public void printRemainColors(){
         AtomicInteger number = new AtomicInteger(1);
