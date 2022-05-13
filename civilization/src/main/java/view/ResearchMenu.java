@@ -1,7 +1,9 @@
 package view;
 
+import controller.GameController;
 import controller.TechController;
 import enums.Colors;
+import enums.RegexEnums;
 import model.Improvement;
 import model.Technology;
 import model.Unit;
@@ -9,14 +11,18 @@ import model.User;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ResearchMenu {
 
     private TechController techController;
+    private GameController gameController;
+    private Matcher matcher;
 
-    public ResearchMenu(TechController techController) {
+    public ResearchMenu(TechController techController, GameController gameController) {
         this.techController = techController;
+        this.gameController = gameController;
     }
 
     public void run(Scanner scanner, User user) {
@@ -65,8 +71,20 @@ public class ResearchMenu {
                 if (index >= 1 && index <= technologies.size()) {
                     // choose the tech and research on it
                     user.setResearching(true);
-                    user.setCurrentTechnology(technologies.get(index));
-                    user.setResearchTurnLeft(technologies.get(index).getSciencePrice());
+                    user.setCurrentTechnology(technologies.get(index - 1));
+                    user.setResearchTurnLeft(technologies.get(index - 1).getSciencePrice());
+                }
+                else
+                    System.out.println("invalid number");
+            }
+            // cheat code
+            else if ((matcher = RegexEnums.getMatcher(techInput, RegexEnums.ADD_RESEARCH1)) != null || (matcher = RegexEnums.getMatcher(techInput, RegexEnums.ADD_RESEARCH2)) != null) {
+                index = Integer.parseInt(matcher.group("index"));
+                if (index >= 1 && index <= technologies.size()) {
+                    user.setResearchTurnLeft(1);
+                    user.setResearching(true);
+                    user.setCurrentTechnology(technologies.get(index - 1));
+                    gameController.userTurnResearch(user);
                 }
                 else
                     System.out.println("invalid number");

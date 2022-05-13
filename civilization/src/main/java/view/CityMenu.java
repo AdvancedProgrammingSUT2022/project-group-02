@@ -2,9 +2,15 @@ package view;
 
 import controller.*;
 import model.*;
+import enums.RegexEnums;
+import model.City;
+import model.Product;
+import model.Tile;
+import model.User;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CityMenu {
@@ -14,6 +20,7 @@ public class CityMenu {
     private SettlerController settlerController;
     private GameController gameController;
     private ArrayList<User> players;
+    private Matcher matcher;
 
     public CityMenu (MapController mapController, TechController techController, SettlerController settlerController, GameController gameController, ArrayList<User> players) {
         this.mapController = mapController;
@@ -171,6 +178,18 @@ public class CityMenu {
                     city.setCurrentProduction(city.getProducts().get(numberOfProduct - 1));
                     city.setProductStatus(true);
                     city.setProductTurnLeft(city.getCurrentProduction().getTurnCost());
+                }
+                else
+                    System.out.println("invalid number");
+            }
+            else if ((matcher = RegexEnums.getMatcher(productInput, RegexEnums.ADD_PRODUCT1)) != null ||
+                    (matcher = RegexEnums.getMatcher(productInput, RegexEnums.ADD_PRODUCT2)) != null) {
+                index = Integer.parseInt(matcher.group("index"));
+                if (index >= 1 && index <= city.getProducts().size()) {
+                    city.setProductStatus(true);
+                    city.setCurrentProduction(city.getProducts().get(index - 1));
+                    city.setProductTurnLeft(1);
+                    gameController.cityTurnProducts(user);
                 }
                 else
                     System.out.println("invalid number");

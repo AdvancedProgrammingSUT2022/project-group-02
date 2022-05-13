@@ -32,7 +32,7 @@ public class User {
 
     private ArrayList<Tile> visited;
     private ArrayList<Tile> visible;
-
+    private ArrayList<ArrayList<String>> historyOfNotification;
     private Technology currentTechnology;
     private boolean researching;
     private int researchTurnLeft;
@@ -54,6 +54,7 @@ public class User {
         currentTechnology = null;
         researching = false;
         researchTurnLeft = 0;
+        historyOfNotification = new ArrayList<>();
     }
 
     public void setColor(String color) {
@@ -349,5 +350,16 @@ public class User {
 
     public void addImprovement(Improvement improvement) {
         this.improvements.add(improvement);
+    }
+
+    public ArrayList<ArrayList<String>> getHistoryOfNotification() {
+        return historyOfNotification;
+    }
+
+    public void setHistoryOfNotification(ArrayList<ArrayList<String>> historyOfNotification) {
+        this.historyOfNotification = historyOfNotification;
+    }
+    public void addHistoryOfNotification(ArrayList<String> notification) {
+        historyOfNotification.add(notification);
     }
 }
