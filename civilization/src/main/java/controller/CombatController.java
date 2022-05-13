@@ -65,6 +65,9 @@ public class CombatController extends UnitController {
         militaryUnit.setMP(militaryUnit.getMP() - 5);
         selectedTileForDefend.getMilitaryUnit().setMP(selectedTileForDefend.getMilitaryUnit().getMP() - 5);
         if (militaryUnit.getHP() > selectedTileForDefend.getMilitaryUnit().getHP()) {
+            selectedTileForDefend.getCity().setDefence(selectedTileForDefend.getCity().getDefence() - selectedTileForDefend.getMilitaryUnit().getHP());
+            if (selectedTileForDefend.getCity().getDefence() <= 0)
+                captureCity(selectedTileForDefend.getCity(), militaryUnit, "destroy");
             selectedTileForDefend.setMilitaryUnit(militaryUnit);
             selectedTileForDefend.setOwner(militaryUnit.getOwner());
             selectedTileForDefend.getCivilianUnit().setOwner(militaryUnit.getOwner());
@@ -98,6 +101,9 @@ public class CombatController extends UnitController {
         selectedTileForDefend.getMilitaryUnit().setMP(selectedTileForDefend.getMilitaryUnit().getMP() - 5);
         if (militaryUnit.getHP() > selectedTileForDefend.getMilitaryUnit().getHP()) {
             militaryUnit.setHP(militaryUnit.getHP() - selectedTileForDefend.getMilitaryUnit().getHP());
+            selectedTileForDefend.getCity().setDefence(selectedTileForDefend.getCity().getDefence() - selectedTileForDefend.getMilitaryUnit().getHP());
+            if (selectedTileForDefend.getCity().getDefence() <= 0)
+                captureCity(selectedTileForDefend.getCity(), militaryUnit, "destroy");
             selectedTileForDefend.setMilitaryUnit(militaryUnit);
             selectedTileForDefend.setOwner(militaryUnit.getOwner());
             selectedTileForDefend.getCivilianUnit().setOwner(militaryUnit.getOwner());
@@ -122,5 +128,36 @@ public class CombatController extends UnitController {
             return "you missed this attack and your military unit";
         }
         return "";
+    }
+
+    public void captureCity(City city, Unit unit, String command) {
+        if (command.equals("destroy")) destroyCity(city);
+        else annexCity(city, unit);
+    }
+
+    public void destroyCity(City city) {
+        ArrayList<City> cities = city.getOwner().getCities();
+        cities.remove(city);
+        city.getOwner().setCities(cities);
+        for (int i = 0; i < city.getOwnerShipTiles().size(); i++) {
+            if (city.getOwnerShipTiles().get(i).getCity().getName().equals(city.getName())) {
+                city.getOwnerShipTiles().get(i).setCity(null);
+                city.getOwnerShipTiles().get(i).setOwner(null);
+            }
+        }
+        city.setOwner(null);
+    }
+
+    public void annexCity(City city, Unit unit) {
+        ArrayList<City> cities = city.getOwner().getCities();
+        cities.remove(city);
+        city.getOwner().setCities(cities);
+        for (int i = 0; i < city.getOwnerShipTiles().size(); i++) {
+            if (city.getOwnerShipTiles().get(i).getCity().getName().equals(city.getName())) {
+                city.getOwnerShipTiles().get(i).setOwner(unit.getOwner());
+            }
+        }
+        city.setOwner(unit.getOwner());
+        unit.getOwner().setHappiness(unit.getOwner().getHappiness() - 5);
     }
 }
