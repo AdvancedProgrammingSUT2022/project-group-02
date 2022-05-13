@@ -7,7 +7,6 @@ import model.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class GameMenu {
@@ -25,7 +24,6 @@ public class GameMenu {
     }
     public void run(UsersController users, User user, Scanner scanner) {
         String input;
-        Matcher matcher;
         manGameMenu(user);
         while (true) {
             input = scanner.nextLine();
@@ -566,8 +564,8 @@ public class GameMenu {
             graph[i][0] = 0;
         //1
         for (int i = 0; i < 47; i++) {
-           if (i == 0) graph[i][1] = 1;
-           else graph[i][1] = 0;
+            if (i == 0) graph[i][1] = 1;
+            else graph[i][1] = 0;
         }
         //2
         for (int i = 0; i < 47; i++) {

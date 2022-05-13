@@ -217,4 +217,12 @@ public class Tile {
     public void setLooted(boolean looted) {
         this.looted = looted;
     }
+
+    public void setRiverBorder(boolean[] riverBorder) {
+        this.riverBorder = riverBorder;
+    }
+
+    public void setNearRiver(boolean nearRiver) {
+        isNearRiver = nearRiver;
+    }
 }

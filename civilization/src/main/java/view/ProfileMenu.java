@@ -11,6 +11,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ProfileMenu {
+    public ProfileMenu() {
+    }
+
     //provide some information for user
     private void manProfileMenu(User user) {
         String userColor = new ColorsController().getColorOfUser(user);
