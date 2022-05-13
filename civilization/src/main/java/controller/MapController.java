@@ -206,7 +206,7 @@ public class MapController {
         ArrayList<Tile> newTiles = new ArrayList<>();
         //newTiles = users.get(0).getTerritory();
         //newTiles.add(map.getSpecificTile(12,15));
-        users.get(0).setTerritory(newTiles);
+        //users.get(0).setTerritory(newTiles);
         map.getSpecificTile(12,15).setCivilianUnit(new Settler("settler",map.getSpecificTile(12,15),0,0,0,0,0,0,0, null, users.get(0), 0, 0));
         tiles.add(map.getSpecificTile(12,15));
         //newTiles = users.get(1).getTerritory();
