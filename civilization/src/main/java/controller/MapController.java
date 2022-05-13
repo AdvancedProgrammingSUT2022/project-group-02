@@ -204,13 +204,11 @@ public class MapController {
     public ArrayList<Tile> firstSetOfSettlers(ArrayList<User> users){
         ArrayList<Tile> tiles = new ArrayList<>();
         ArrayList<Tile> newTiles = new ArrayList<>();
-        if(users.size()<=0)return tiles;
         //newTiles = users.get(0).getTerritory();
         //newTiles.add(map.getSpecificTile(12,15));
         users.get(0).setTerritory(newTiles);
         map.getSpecificTile(12,15).setCivilianUnit(new Settler("settler",map.getSpecificTile(12,15),0,0,0,0,0,0,0, null, users.get(0), 0, 0));
         tiles.add(map.getSpecificTile(12,15));
-        if(users.size()<=1)return tiles;
         //newTiles = users.get(1).getTerritory();
         //newTiles.add(map.getSpecificTile(25,19));
         //users.get(1).setTerritory(newTiles);

@@ -209,15 +209,32 @@ public class GameController {
 
     public void usersGoldHandling(User user) {
         user.setGoldPerTurn(0);
-        new ResourceController().useResource(user);
-        for (Improvement improvement : user.getImprovements()) {
-            if (!improvement.getTile().LootedStatus())
-            user.setGoldPerTurn(user.getGoldPerTurn() + improvement.getGoldRate());
+        user.setFoodPerTurn(0);
+        user.setProductPerTurn(0);
+        new ResourceController().userResource(user);
+        if (user.getImprovements() != null) {
+            for (Improvement improvement : user.getImprovements()) {
+                if (!improvement.getTile().LootedStatus()) {
+                    user.setGoldPerTurn(user.getGoldPerTurn() + improvement.getGoldRate());
+                    user.setFoodPerTurn(user.getFoodPerTurn() + improvement.getFoodRate());
+                    user.setProductPerTurn(user.getProductPerTurn() + improvement.getProductionRate());
+                }
+            }
         }
-        for (Tile tile : user.getTerritory()) {
-            user.setGoldPerTurn(user.getGoldPerTurn() + tile.getFeature().getGoldRate());
-            user.setGoldPerTurn(user.getGoldPerTurn() + tile.getTerrain().getGoldRate());
+        if (user.getTerritory() != null) {
+            for (Tile tile : user.getTerritory()) {
+                if (tile.getFeature() != null) {
+                    user.setGoldPerTurn(user.getGoldPerTurn() + tile.getFeature().getGoldRate());
+                    user.setFoodPerTurn(user.getFoodPerTurn() + tile.getFeature().getFoodRate());
+                    user.setProductPerTurn(user.getProductPerTurn() + tile.getFeature().getProductionRate());
+                }
+                user.setGoldPerTurn(user.getGoldPerTurn() + tile.getTerrain().getGoldRate());
+                user.setGoldPerTurn(user.getFoodPerTurn() + tile.getTerrain().getFoodRate());
+                user.setProductPerTurn(user.getProductPerTurn() + tile.getTerrain().getProductionRate());
+            }
         }
         user.setGold(user.getGold() + user.getGoldPerTurn());
+        user.setFood(user.getFood() + user.getFoodPerTurn());
+        user.setProduct(user.getProduct() + user.getProductPerTurn());
     }
 }

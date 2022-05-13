@@ -4,15 +4,20 @@ import model.*;
 
 public class ResourceController {
 
-    public void useResource(User user){
-        for (Resource foundResource : user.getFoundResources()) {
-            if (user.getAvailableResources().contains(foundResource) && !foundResource.getTile().LootedStatus()){
-                user.setGoldPerTurn(user.getGoldPerTurn() + foundResource.getGoldRate());
-                user.setHappiness(user.getHappiness() + foundResource.getHappiness());
-                user.setFoodPerTurn(user.getFoodPerTurn() + foundResource.getFoodRate());
-                for (City city : user.getCities()) {
-                    if (city.getOwnerShipTiles().contains(foundResource.getTile())){
-                        city.setProduction(city.getProduction() + foundResource.getProductionRate());
+    public void userResource(User user){
+        if (user.getFoundResources() != null) {
+            for (Resource foundResource : user.getFoundResources()) {
+                if (user.getAvailableResources().contains(foundResource) && !foundResource.getTile().LootedStatus()) {
+                    user.setGoldPerTurn(user.getGoldPerTurn() + foundResource.getGoldRate());
+                    user.setHappiness(user.getHappiness() + foundResource.getHappiness());
+                    user.setFoodPerTurn(user.getFoodPerTurn() + foundResource.getFoodRate());
+                    user.setProductPerTurn(user.getProductPerTurn() + foundResource.getProductionRate());
+                    if (user.getCities() != null) {
+                        for (City city : user.getCities()) {
+                            if (city.getOwnerShipTiles().contains(foundResource.getTile())) {
+                                city.setProduction(city.getProduction() + foundResource.getProductionRate());
+                            }
+                        }
                     }
                 }
             }
@@ -31,7 +36,7 @@ public class ResourceController {
     }
 
     public void addAvailableResource(User user, Tile tile){
-        if (tile.getImprovement().getGivenResource().contains(tile.getResource())){
+        if (tile.getResource().getRequiredImprovement().equals(tile.getImprovement().getName())){
             user.setAvailableResources(tile.getResource());
             System.out.println("now you can use " + tile.getResource().getName() + "benefits!");
         }

@@ -61,7 +61,14 @@ public enum RegexEnums {
     //increase city defence
     INCREASE_CAPITAL_DEFENCE("^\\s*increase\\s+--defence\\s+(?<amount>\\-?\\d+)\\s*$"),
     //add a research
-    ADD_RESEARCH("^\\s*add\\s+--research\\s+(?<researchName>.+)$"),
+    ADD_RESEARCH1("^\\s*add\\s+--research\\s+(?<index>\\d+)\\s*$"),
+    ADD_RESEARCH2("^\\s*add\\s+-r\\s+(?<index>\\d+)\\s*$"),
+    // add a product
+    ADD_PRODUCT1("^\\s*add\\s+--product\\s+(?<index>\\d+)\\s*$"),
+    ADD_PRODUCT2("^\\s*add\\s+-p\\s+(?<index>\\d+)\\s*$"),
+    // add a improvement
+    ADD_IMPROVEMENT1("^\\s*add\\s+--improvement\\s+(?<index>\\d+)\\s*$"),
+    ADD_IMPROVEMENT2("^\\s*add\\s+-i\\s+(?<index>\\d+)\\s*$"),
     //selecting a tile
     SELECT_TILE1("^\\s*select\\s+tile\\s+-x\\s+(?<x>\\-?\\d+)\\s+-y\\s+(?<y>\\-?\\d+)\\s*$"),
     SELECT_TILE2("^\\s*select\\s+tile\\s+-y\\s+(?<y>\\-?\\d+)\\s+-x\\s+(?<x>\\-?\\d+)\\s*$"),

@@ -1,6 +1,7 @@
 package view;
 
 import controller.*;
+import enums.RegexEnums;
 import model.City;
 import model.Product;
 import model.Tile;
@@ -8,6 +9,7 @@ import model.User;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CityMenu {
@@ -17,6 +19,7 @@ public class CityMenu {
     private SettlerController settlerController;
     private GameController gameController;
     private ArrayList<User> players;
+    private Matcher matcher;
 
     public CityMenu (MapController mapController, TechController techController, SettlerController settlerController, GameController gameController, ArrayList<User> players) {
         this.mapController = mapController;
@@ -28,6 +31,7 @@ public class CityMenu {
 
     public void run(Scanner scanner, User user) {
         String cityInput;
+        System.out.println("welcome to city menu dear " + user.getUsername());
         while (true) {
             cityInput = scanner.nextLine();
             // getout
@@ -41,24 +45,24 @@ public class CityMenu {
                         System.out.println(index + "- " + city.getName());
                         index++;
                     }
+                    while (true) {
+                        cityInput = scanner.nextLine();
+                        if (cityInput.equals("city exit")) {
+                            System.out.println("back to play game");
+                            return;
+                        } else if (Pattern.matches("[0-9]+", cityInput)) {
+                            index = Integer.parseInt(cityInput);
+                            if (index >= 1 && index <= user.getCities().size()) {
+                                cityPage(user.getCities().get(index - 1), user, scanner);
+                            } else
+                                System.out.println("invalid number");
+                        }
+                        else
+                            System.out.println("invalid command");
+                    }
                 }
                 else
                     System.out.println("user do not have any city!");
-                while (true) {
-                    cityInput = scanner.nextLine();
-                    if (cityInput.equals("city exit")) {
-                        System.out.println("back to play game");
-                        return;
-                    } else if (Pattern.matches("[0-9]+", cityInput)) {
-                        int index = Integer.parseInt(cityInput);
-                        if (index >= 1 && index <= user.getCities().size()) {
-                            cityPage(user.getCities().get(index - 1), user, scanner);
-                        } else
-                            System.out.println("invalid number");
-                    }
-                    else
-                        System.out.println("invalid command");
-                }
             }
             // show all cities in the game
             else if (cityInput.equals("show all cities")) {
@@ -165,6 +169,18 @@ public class CityMenu {
                     city.setCurrentProduction(city.getProducts().get(numberOfProduct - 1));
                     city.setProductStatus(true);
                     city.setProductTurnLeft(city.getCurrentProduction().getTurnCost());
+                }
+                else
+                    System.out.println("invalid number");
+            }
+            else if ((matcher = RegexEnums.getMatcher(productInput, RegexEnums.ADD_PRODUCT1)) != null ||
+                    (matcher = RegexEnums.getMatcher(productInput, RegexEnums.ADD_PRODUCT2)) != null) {
+                index = Integer.parseInt(matcher.group("index"));
+                if (index >= 1 && index <= city.getProducts().size()) {
+                    city.setProductStatus(true);
+                    city.setCurrentProduction(city.getProducts().get(index - 1));
+                    city.setProductTurnLeft(1);
+                    gameController.cityTurnProducts(user);
                 }
                 else
                     System.out.println("invalid number");

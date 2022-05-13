@@ -9,6 +9,7 @@ public class User {
     private String color;
     private int turns;
     private int gold;
+    private int product;
     private ArrayList<Tile> territory;
     private int goldPerTurn;
     private int happiness;
@@ -20,6 +21,7 @@ public class User {
     private int culturePerTurn;
     private int faith;
     private int faithPerTurn;
+    private int productPerTurn;
     private ArrayList<Resource> availableResources;
     private ArrayList<Resource> foundResources;
     private String civilization;
@@ -32,7 +34,7 @@ public class User {
 
     private ArrayList<Tile> visited;
     private ArrayList<Tile> visible;
-
+    private ArrayList<ArrayList<String>> historyOfNotification;
     private Technology currentTechnology;
     private boolean researching;
     private int researchTurnLeft;
@@ -47,6 +49,14 @@ public class User {
         currentTechnology = null;
         researching = false;
         researchTurnLeft = 0;
+        historyOfNotification = new ArrayList<>();
+        food = 0;
+        product = 0;
+        territory = new ArrayList<>();
+        historyOfNotification = new ArrayList<>();
+        improvements = new ArrayList<>();
+        technologies = new ArrayList<>();
+        availableResources = new ArrayList<>();
     }
 
     public void setColor(String color) {
@@ -342,5 +352,32 @@ public class User {
 
     public void addImprovement(Improvement improvement) {
         this.improvements.add(improvement);
+    }
+
+    public ArrayList<ArrayList<String>> getHistoryOfNotification() {
+        return historyOfNotification;
+    }
+
+    public void setHistoryOfNotification(ArrayList<ArrayList<String>> historyOfNotification) {
+        this.historyOfNotification = historyOfNotification;
+    }
+    public void addHistoryOfNotification(ArrayList<String> notification) {
+        historyOfNotification.add(notification);
+    }
+
+    public int getProduct() {
+        return product;
+    }
+
+    public int getProductPerTurn() {
+        return productPerTurn;
+    }
+
+    public void setProduct(int product) {
+        this.product = product;
+    }
+
+    public void setProductPerTurn(int productPerTurn) {
+        this.productPerTurn = productPerTurn;
     }
 }

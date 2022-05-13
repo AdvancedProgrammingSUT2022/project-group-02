@@ -132,7 +132,7 @@ public class UsersController {
         ArrayList<Improvement> improvements;
         for (User player : players) {
             improvements = new ArrayList<>();
-            improvements.add(new Improvement("Farm", 0, 1, 0, 5, null));
+            improvements.add(new Improvement("Farm", 0, 1, 0, 5));
             player.setImprovements(improvements);
         }
     }
