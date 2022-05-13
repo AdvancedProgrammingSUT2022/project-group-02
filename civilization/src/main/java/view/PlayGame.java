@@ -78,6 +78,7 @@ public class PlayGame {
     public void run(Scanner scanner) {
         cityMenu = new CityMenu(mapController, techController, settlerController, gameController, players);
         researchMenu = new ResearchMenu(techController, gameController);
+        UserPanel userPanel = new UserPanel(gameController);
         manPlayGame();
         String input;
         int role = 0;
@@ -112,6 +113,9 @@ public class PlayGame {
                 }
                 else if (input.trim().equals("research panel")) {
                     researchMenu.run(scanner, user);
+                }
+                else if (input.trim().equals("user panel")) {
+                    userPanel.run(scanner, user);
                 }
                     //cheat codes
                 else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_TURN1)) != null ||
