@@ -10,6 +10,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainMenu {
+
+    MainMenu(){
+    }
     //provide some information for user
     private void manMainMenu() {
         String color = Colors.CYAN;

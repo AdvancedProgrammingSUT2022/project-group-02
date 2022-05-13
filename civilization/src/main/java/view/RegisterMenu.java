@@ -1,13 +1,25 @@
 package view;
+import controller.ColorsController;
 import controller.UsersController;
 import enums.Colors;
 import enums.RegexEnums;
 import model.User;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.*;
 
 public class RegisterMenu {
+    private final HashMap<String , Boolean> availableColors = new HashMap<>();
+    public RegisterMenu(){
+        availableColors.put("white" , true);
+        availableColors.put("red" , true);
+        availableColors.put("green" , true);
+        availableColors.put("yellow" , true);
+        availableColors.put("blue" , true);
+        availableColors.put("purple" , true);
+        availableColors.put("cyan" , true);
+    }
     // provide some information for user
     private void manRegisterMenu() {
         String boldColor = Colors.YELLOW_BOLD;
@@ -64,11 +76,12 @@ public class RegisterMenu {
                     if (users.sameNicknameExists(nickname)) {
                         User user = new User(username, nickname, password);
                         System.out.println("select your Avatar Color");
-                        users.printRemainColors();
+                        printRemainColors();
                         String color = scanner.nextLine();
-                        while (!users.isSelectedColorValid(color))
+                        while (!isSelectedColorValid(color)){
                             color = scanner.nextLine();
-                        users.setUserColor(color , user);
+                        }
+                        users.setUserColor(color , user, availableColors);
                         users.addUser(user);
                         System.out.println("user created successfully!");
                     }
@@ -100,5 +113,26 @@ public class RegisterMenu {
             else
                 System.out.println("invalid command");
         }
+    }
+
+    private void printRemainColors(){
+        AtomicInteger number = new AtomicInteger(1);
+        availableColors.forEach((key , value) -> {
+            if (value){
+                String color = new ColorsController().getColorOfString(key);
+                System.out.println(number + "- " + color + key + Colors.RESET);
+                number.getAndIncrement();
+            }
+        });
+    }
+
+    private Boolean isSelectedColorValid(String color){
+        if (!availableColors.containsKey(color)){
+            System.out.println("The selected color is not an available color");
+            return false;
+        } else if (!availableColors.get(color)){
+            System.out.println("The selected color is taken by another user");
+            return false;
+        } else return true;
     }
 }

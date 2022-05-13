@@ -46,6 +46,13 @@ public class User {
         gold = 0;
         turns = 1;
         visited = new ArrayList<>();
+        territory = new ArrayList<>();
+        foundResources = new ArrayList<>();
+        availableResources = new ArrayList<>();
+        technologies = new ArrayList<>();
+        improvements = new ArrayList<>();
+        units = new ArrayList<>();
+        cities = new ArrayList<>();
         currentTechnology = null;
         researching = false;
         researchTurnLeft = 0;

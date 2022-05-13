@@ -10,12 +10,16 @@ public class Improvement {
     private int goldRate;
     private int price;
     private Tile tile;
-    public Improvement(String name, int productionRate, int foodRate, int goldRate, int price) {
+    private ArrayList<Resource> givenResources;
+    private final ArrayList<String> land;
+    public Improvement(String name, int productionRate, int foodRate, int goldRate, int price, ArrayList<Resource> givenResources, ArrayList<String> land) {
         this.name = name;
         this.productionRate = productionRate;
         this.foodRate = foodRate;
         this.goldRate = goldRate;
         this.price = price;
+        this.givenResources = givenResources;
+        this.land = land;
     }
 
     public String getName() {
@@ -61,5 +65,17 @@ public class Improvement {
 
     public void setTile(Tile tile) {
         this.tile = tile;
+    }
+
+    public ArrayList<Resource> getGivenResources() {
+        return givenResources;
+    }
+
+    public void setGivenResources(ArrayList<Resource> givenResources) {
+        this.givenResources = givenResources;
+    }
+
+    public ArrayList<String> getLand() {
+        return land;
     }
 }

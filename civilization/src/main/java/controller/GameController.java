@@ -180,6 +180,10 @@ public class GameController {
                         worker.setRemainingTurnsToComplete(0);
                         worker.getTile().setInProgress(false);
                         worker.getTile().setImprovement(worker.getImprovement());
+                        for (Resource resource : worker.getImprovement().getGivenResources()) {
+                            if (resource.getName().equals(worker.getTile().getResource().getName()))
+                                 player.setAvailableResources(worker.getTile().getResource());
+                        }
                         worker.setImprovement(null);
                     } else {
                         worker.setRemainingTurnsToComplete(worker.getRemainingTurnsToComplete() - 1);
@@ -207,11 +211,11 @@ public class GameController {
         return null;
     }
 
-    public void usersGoldHandling(User user) {
+    public void usersGoldHandling(User user, Maps map) {
         user.setGoldPerTurn(0);
         user.setFoodPerTurn(0);
         user.setProductPerTurn(0);
-        new ResourceController().userResource(user);
+        new ResourceController().userResource(user, map);
         if (user.getImprovements() != null) {
             for (Improvement improvement : user.getImprovements()) {
                 if (!improvement.getTile().LootedStatus()) {

@@ -1,6 +1,7 @@
 package view;
 
 import controller.*;
+import model.*;
 import enums.RegexEnums;
 import model.City;
 import model.Product;
@@ -34,7 +35,7 @@ public class CityMenu {
         System.out.println("welcome to city menu dear " + user.getUsername());
         while (true) {
             cityInput = scanner.nextLine();
-            // getout
+            // get out
             if (cityInput.equals("city exit"))
                 return;
             // show player cities
@@ -110,6 +111,15 @@ public class CityMenu {
                             // add the tile to the city and user
                             if (user.getGold() >= neighborOfCity.get(index - 1).getPrice()) {
                                 new ResourceController().addFoundResource(user, neighborOfCity.get(index - 1));
+                                for (Resource foundResource : user.getFoundResources()) {
+                                    if (!foundResource.isAnnounce()){
+                                        System.out.println("You found" + foundResource.getName() + "in this tile.");
+                                        if (!user.getAvailableResources().contains(foundResource)){
+                                            System.out.println("You should first build" + foundResource.getRequiredImprovement()
+                                                    + "on this tile to use this resource benefits!");
+                                        }
+                                    }
+                                }
                                 user.setGold(user.getGold() - neighborOfCity.get(index - 1).getPrice());
                                 city.addOwnerShipLand(neighborOfCity.get(index - 1));
                                 user.addTerritory(neighborOfCity.get(index - 1));

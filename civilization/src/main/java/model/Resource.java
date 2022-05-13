@@ -4,12 +4,14 @@ public class Resource {
 
     private final String name;
     private final String resourceType;
-    private Tile tile;
+    private int tileX;
+    private int tileY;
     private final int goldRate;
     private final int foodRate;
     private final int productionRate;
     private final int happiness;
     private final String requiredImprovement;
+    private boolean announce;
 
     public Resource(String name, String resourceType, String requiredImprovement,
                     int goldRate, int foodRate, int productionRate, int happiness) {
@@ -30,14 +32,6 @@ public class Resource {
         return resourceType;
     }
 
-    public Tile getTile() {
-        return tile;
-    }
-
-    public void setTile(Tile tile) {
-        this.tile = tile;
-    }
-
     public int getGoldRate() {
         return goldRate;
     }
@@ -55,5 +49,29 @@ public class Resource {
     }
     public String getRequiredImprovement(){
         return requiredImprovement;
+    }
+
+    public int getTileX() {
+        return tileX;
+    }
+
+    public void setTileX(int tileX) {
+        this.tileX = tileX;
+    }
+
+    public int getTileY() {
+        return tileY;
+    }
+
+    public void setTileY(int tileY) {
+        this.tileY = tileY;
+    }
+
+    public boolean isAnnounce() {
+        return announce;
+    }
+
+    public void setAnnounce(boolean announce) {
+        this.announce = announce;
     }
 }
