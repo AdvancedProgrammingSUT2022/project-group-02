@@ -52,11 +52,11 @@ public class GameMenu {
         for (String username : usernames) {
             players.add(users.getUserByUsername(username));
         }
-        int[][] graph = techGraph2();
-        users.writeToJson(graph);
+        //int[][] graph = techGraph2();
+        //users.writeToJson(graph);
         int[][] ancientGraph = users.readFromJsonGraph();
-        ArrayList<Technology> technologies = better();
-        users.writeToJson(technologies);
+        //ArrayList<Technology> technologies = better();
+        //users.writeToJson(technologies);
         ArrayList<Technology> ancientTechnologies = users.readFromJsonTech();
         Maps map = new MapMaker().myTiles();
         new PlayGame(players, map, ancientGraph, ancientTechnologies).run(scanner);
