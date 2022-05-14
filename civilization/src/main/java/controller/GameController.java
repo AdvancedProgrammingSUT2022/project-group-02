@@ -72,27 +72,35 @@ public class GameController {
         return null;
     }
 
-    public void moveUnit(Tile origin, Tile destination, Unit unit, boolean isMilitary) {
-        if (isMilitary)
-            moveMilitary(origin, destination, (MilitaryUnit) unit);
-        else
-            moveCivilian(origin, destination, (Civilian) unit);
+    public String moveUnit(Tile origin, Tile destination, Unit unit, boolean isMilitary) {
+        if (isMilitary) {
+            if(destination.isMilitaryUnitExists())
+                return "there is already exists another military unit";
+            return moveMilitary(origin, destination, (MilitaryUnit) unit);
+        }
+        else {
+            if(destination.isCivilianUnitExists())
+                return "there is already exists another civilian unit";
+            return moveCivilian(origin, destination, (Civilian) unit);
+        }
     }
 
-    private void moveMilitary(Tile origin, Tile destination, MilitaryUnit militaryUnit) {
+    private String moveMilitary(Tile origin, Tile destination, MilitaryUnit militaryUnit) {
         militaryUnit.setTile(destination);
         origin.setMilitaryUnit(null);
         origin.setMilitaryUnitExists(false);
         destination.setMilitaryUnit(militaryUnit);
         destination.setMilitaryUnitExists(true);
+        return "military unit moved successfully";
     }
 
-    private void moveCivilian(Tile origin, Tile destination, Civilian civilian) {
+    private String moveCivilian(Tile origin, Tile destination, Civilian civilian) {
         civilian.setTile(destination);
         origin.setCivilianUnit(null);
         origin.setCivilianUnitExists(false);
         destination.setCivilianUnit(civilian);
         destination.setCivilianUnitExists(true);
+        return "civilian unit moved successfully";
     }
 
     public int getTurnForEachPlayer() {
