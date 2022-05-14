@@ -2,7 +2,7 @@ package view;
 
 import controller.*;
 import model.*;
-import enums.RegexEnums;
+import controller.enums.RegexEnums;
 import model.City;
 import model.Product;
 import model.Tile;
@@ -40,7 +40,7 @@ public class CityMenu {
                 return;
             // show player cities
             else if (cityInput.equals("user cities")) {
-                if (user.getCities() != null) {
+                if (user.getCities() != null || user.getCities().size() == 0) {
                     int index = 1;
                     for (City city : user.getCities()) {
                         System.out.println(index + "- " + city.getName());
@@ -148,7 +148,6 @@ public class CityMenu {
                 else
                     System.out.println("city do not have production in queue");
             }
-            // TODO add resume current production
             else if (cityInput.trim().equals("terminate current production")) {
                 if (city.isProductStatus()) {
                     // producing eliminated

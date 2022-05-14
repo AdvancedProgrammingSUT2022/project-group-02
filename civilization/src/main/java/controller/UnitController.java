@@ -1,5 +1,5 @@
 package controller;
-import enums.Colors;
+import controller.enums.Colors;
 import model.*;
 
 import java.util.ArrayList;

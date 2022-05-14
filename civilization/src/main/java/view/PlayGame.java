@@ -1,8 +1,8 @@
 package view;
 
 import controller.*;
-import enums.Colors;
-import enums.RegexEnums;
+import controller.enums.Colors;
+import controller.enums.RegexEnums;
 import model.*;
 
 import java.util.*;
@@ -78,6 +78,7 @@ public class PlayGame {
     public void run(Scanner scanner) {
         cityMenu = new CityMenu(mapController, techController, settlerController, gameController, players);
         researchMenu = new ResearchMenu(techController, gameController);
+        UserPanel userPanel = new UserPanel(gameController);
         manPlayGame();
         String input;
         int role = 0;
@@ -112,6 +113,9 @@ public class PlayGame {
                 }
                 else if (input.trim().equals("research panel")) {
                     researchMenu.run(scanner, user);
+                }
+                else if (input.trim().equals("user panel")) {
+                    userPanel.run(scanner, user);
                 }
                     //cheat codes
                 else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_TURN1)) != null ||
@@ -162,17 +166,25 @@ public class PlayGame {
                 }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_CAPITAL_CITIZENS)) != null){
                     int amount = Integer.parseInt(matcher.group("amount"));
                     if (amount > 0) {
-                        gameController.increaseCapitalCitizens(amount, user);
-                        System.out.println("capitalCitizens increased successfully!");
-                        showMap(user);
+                        if (user.getCapital() != null) {
+                            gameController.increaseCapitalCitizens(amount, user);
+                            System.out.println("capitalCitizens increased successfully!");
+                            showMap(user);
+                        }
+                        else
+                            System.out.println("user doesn't have capital right now!");
                     } else
                         System.out.println("invalid command");
                 }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_CAPITAL_DEFENCE)) != null){
                     int amount = Integer.parseInt(matcher.group("amount"));
                     if (amount > 0) {
-                        gameController.increaseCapitalDefence(amount, user);
-                        System.out.println("capitalDefence increased successfully!");
-                        showMap(user);
+                        if (user.getCapital() != null) {
+                            gameController.increaseCapitalDefence(amount, user);
+                            System.out.println("capitalDefence increased successfully!");
+                            showMap(user);
+                        }
+                        else
+                            System.out.println("user doesn't have capital right now!");
                     } else
                         System.out.println("invalid command");
                 }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_CULTURE)) != null){
@@ -194,11 +206,15 @@ public class PlayGame {
                 }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.DECREASE_RESEARCH_TURN_LEFT)) != null){
                     int amount = Integer.parseInt(matcher.group("amount"));
                     if (amount > 0) {
-                        gameController.decreaseResearchTurnLeft(amount, user);
-                        System.out.println("researches increased successfully!");
-                        showMap(user);
+                        if (user.getCurrentTechnology() != null) {
+                            gameController.decreaseResearchTurnLeft(amount, user);
+                            System.out.println("researches increased successfully!");
+                            showMap(user);
+                        }
+                        else
+                            System.out.println("user don't research on anything right now!");
                     } else
-                        System.out.println("invalid command");
+                        System.out.println("invalid number");
                 }
                 // selecting tile
                 else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.SELECT_TILE1)) != null ||
@@ -245,6 +261,7 @@ public class PlayGame {
 
     private void selectedTile(Scanner scanner, Tile origin, int xOrigin, int yOrigin, User user) {
         // TODO enable far working
+        System.out.println("you have selected a tile with -x " + origin.getX() + " -y " + origin.getY());
         origin.setSelectedOne(false);
         origin.setSelectedTwo(false);
         if (origin.isMilitaryUnitExists())
@@ -322,7 +339,6 @@ public class PlayGame {
                     worker.setRemainingTurnsToComplete(improvements.get(index - 1).getPrice());
                     worker.setWorkingStatus(true);
                     worker.setImprovement(improvements.get(index - 1));
-                    // TODO worker should work here until the work be finished ,,, when worker unit is ready
                 }
                 else
                     System.out.println("invalid number");

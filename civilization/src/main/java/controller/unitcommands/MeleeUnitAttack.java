@@ -1,4 +1,4 @@
-package unitcommands;
+package controller.unitcommands;
 
 import controller.CombatController;
 import model.MilitaryUnit;

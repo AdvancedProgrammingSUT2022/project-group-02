@@ -1,7 +1,7 @@
 package controller;
 
 import model.*;
-import enums.Colors;
+import controller.enums.Colors;
 
 import java.util.ArrayList;
 
@@ -26,7 +26,7 @@ public class MapController {
                 neighbors.add(map.getTileBoard()[x - 1][y - 1]);
             //up right
             if (y <= map.getWidth() - 2)
-                neighbors.add(map.getTileBoard()[x - 1][y + 1]);
+                neighbors.add(map.getTileBoard()[x - 1][y]);
         }
         //down
         if (x <= map.getHeight() - 3)
@@ -38,7 +38,7 @@ public class MapController {
                 neighbors.add(map.getTileBoard()[x + 1][y - 1]);
             //down right
             if (y <= map.getWidth() - 2)
-                neighbors.add(map.getTileBoard()[x + 1][y + 1]);
+                neighbors.add(map.getTileBoard()[x + 1][y]);
         }
         tile.setNeighbors(neighbors);
     }
@@ -203,6 +203,7 @@ public class MapController {
 
     public ArrayList<Tile> firstSetOfSettlers(ArrayList<User> users){
         ArrayList<Tile> tiles = new ArrayList<>();
+<<<<<<< HEAD
         ArrayList<Tile> newTiles = new ArrayList<>();
         //newTiles = users.get(0).getTerritory();
         //newTiles.add(map.getSpecificTile(12,15));
@@ -274,6 +275,89 @@ public class MapController {
         //users.get(11).setTerritory(newTiles);
         map.getSpecificTile(18,32).setCivilianUnit(new Settler("settler",map.getSpecificTile(19,4),0,0,0,0,0,0, 0, null,users.get(11),0, 0));
         tiles.add(map.getSpecificTile(19,4));
+=======
+        //user0
+        Settler settler = new Settler("settler", map.getSpecificTile(12, 15),0,0,0,0,0,0,0, null, users.get(0), 0, 0);
+        users.get(0).addUnit(settler);
+        map.getSpecificTile(12, 15).setCivilianUnit(settler);
+        map.getSpecificTile(12, 15).setCivilianUnitExists(true);
+        tiles.add(map.getSpecificTile(12, 15));
+        //user1
+        settler = new Settler("settler", map.getSpecificTile(25, 19),0,0,0,0,0,0, 0, null,users.get(1),0, 0);
+        users.get(1).addUnit(settler);
+        map.getSpecificTile(25, 19).setCivilianUnit(settler);
+        map.getSpecificTile(25, 19).setCivilianUnitExists(true);
+        tiles.add(map.getSpecificTile(25, 19));
+        if(users.size() <= 2) return tiles;
+        //user2
+        settler = new Settler("settler", map.getSpecificTile(40, 11),0,0,0,0,0,0, 0, null,users.get(2),0, 0);
+        users.get(2).addUnit(settler);
+        map.getSpecificTile(40, 11).setCivilianUnit(settler);
+        map.getSpecificTile(40, 11).setCivilianUnitExists(true);
+        tiles.add(map.getSpecificTile(40, 11));
+        if(users.size() <= 3) return tiles;
+        //user3
+        settler = new Settler("settler", map.getSpecificTile(45, 8),0,0,0,0,0,0, 0, null,users.get(3),0, 0);
+        users.get(3).addUnit(settler);
+        map.getSpecificTile(45, 8).setCivilianUnit(settler);
+        map.getSpecificTile(45, 8).setCivilianUnitExists(true);
+        tiles.add(map.getSpecificTile(45, 8));
+        if(users.size() <= 4) return tiles;
+        //user4
+        settler = new Settler("settler", map.getSpecificTile(20, 6),0,0,0,0,0,0, 0, null,users.get(4),0, 0);
+        users.get(4).addUnit(settler);
+        map.getSpecificTile(20, 6).setCivilianUnit(settler);
+        map.getSpecificTile(20, 6).setCivilianUnitExists(true);
+        tiles.add(map.getSpecificTile(20, 6));
+        if(users.size() <= 5) return tiles;
+        //user5
+        settler = new Settler("settler", map.getSpecificTile(28, 2),0,0,0,0,0,0, 0, null,users.get(5),0, 0);
+        users.get(5).addUnit(settler);
+        map.getSpecificTile(28, 2).setCivilianUnit(settler);
+        map.getSpecificTile(28, 2).setCivilianUnitExists(true);
+        tiles.add(map.getSpecificTile(28, 2));
+        if(users.size() <= 6) return tiles;
+        //user6
+        settler = new Settler("settler", map.getSpecificTile(54, 20),0,0,0,0,0,0, 0, null,users.get(6),0, 0);
+        users.get(6).addUnit(settler);
+        map.getSpecificTile(54, 20).setCivilianUnit(settler);
+        map.getSpecificTile(54, 20).setCivilianUnitExists(true);
+        tiles.add(map.getSpecificTile(54, 20));
+        if(users.size() <= 7) return tiles;
+        //user7
+        settler = new Settler("settler", map.getSpecificTile(60, 23),0,0,0,0,0,0, 0, null,users.get(7),0, 0);
+        users.get(7).addUnit(settler);
+        map.getSpecificTile(60, 23).setCivilianUnit(settler);
+        tiles.add(map.getSpecificTile(60, 23));
+        if(users.size() <= 8) return tiles;
+        //user8
+        settler = new Settler("settler", map.getSpecificTile(65, 16),0,0,0,0,0,0, 0, null,users.get(8),0, 0);
+        users.get(8).addUnit(settler);
+        map.getSpecificTile(65, 16).setCivilianUnit(settler);
+        map.getSpecificTile(65, 16).setCivilianUnitExists(true);
+        tiles.add(map.getSpecificTile(65, 16));
+        if(users.size() <= 9) return tiles;
+        //user9
+        settler = new Settler("settler", map.getSpecificTile(75, 17),0,0,0,0,0,0, 0, null,users.get(9),0, 0);
+        users.get(9).addUnit(settler);
+        map.getSpecificTile(75, 17).setCivilianUnit(settler);
+        map.getSpecificTile(75, 17).setCivilianUnitExists(true);
+        tiles.add(map.getSpecificTile(75, 17));
+        if(users.size() <= 10) return tiles;
+        //user10
+        settler = new Settler("settler", map.getSpecificTile(78, 21),0,0,0,0,0,0, 0, null,users.get(10),0, 0);
+        users.get(10).addUnit(settler);
+        map.getSpecificTile(78, 21).setCivilianUnit(settler);
+        map.getSpecificTile(78, 21).setCivilianUnitExists(true);
+        tiles.add(map.getSpecificTile(78, 21));
+        if(users.size() <= 11) return tiles;
+        //user11
+        settler = new Settler("settler",map.getSpecificTile(19, 4),0,0,0,0,0,0, 0, null,users.get(11),0, 0);
+        users.get(11).addUnit(settler);
+        map.getSpecificTile(19, 4).setCivilianUnit(settler);
+        map.getSpecificTile(19, 4).setCivilianUnitExists(true);
+        tiles.add(map.getSpecificTile(19, 4));
+>>>>>>> 3acb23c7f4fc15459317984c00d284f52359dfa8
         return tiles;
     }
 }

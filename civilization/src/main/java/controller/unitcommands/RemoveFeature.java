@@ -1,7 +1,6 @@
-package unitcommands;
+package controller.unitcommands;
 
 import model.Tile;
-import model.User;
 import model.Worker;
 
 public class RemoveFeature {

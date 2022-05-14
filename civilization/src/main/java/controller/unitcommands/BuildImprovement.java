@@ -1,4 +1,4 @@
-package unitcommands;
+package controller.unitcommands;
 
 import controller.UnitController;
 import model.Tile;

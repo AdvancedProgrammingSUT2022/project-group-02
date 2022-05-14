@@ -1,10 +1,8 @@
 package view;
 
-import controller.ColorsController;
 import controller.GameController;
 import controller.TechController;
-import enums.Colors;
-import enums.RegexEnums;
+import controller.enums.RegexEnums;
 import model.Improvement;
 import model.Technology;
 import model.Unit;
@@ -28,6 +26,10 @@ public class ResearchMenu {
 
     public void run(Scanner scanner, User user) {
         System.out.println("welcome to research panel dear " + user.getUsername());
+        System.out.println("to see technology tree press -show tree of technologies-");
+        System.out.println("to research on a technology press -select technology-");
+        System.out.println("cheat code in research bar is -add (--research | -r) <index> -");
+        System.out.println("to terminate current tech press -terminate current-");
         String researchInput;
         if (user.getTechnologies() != null) {
             System.out.println("player has done this technologies");
@@ -45,6 +47,8 @@ public class ResearchMenu {
             else if (researchInput.equals("show tree of technologies")) {
                 showTree(user, scanner);
             }
+            else
+                System.out.println("invalid command");
         }
     }
 
@@ -60,13 +64,15 @@ public class ResearchMenu {
                     System.out.println("name: " + improvement.getName() + " | production: " + improvement.getProductionRate() + " | food: " + improvement.getFoodRate() + " | gold: " + improvement.getGoldRate());
 
             }
+            index++;
         }
         System.out.println("choose an index | <tech exit> to get out");
         String techInput;
-        while (true) {
+        boolean researchBar = true;
+        while (researchBar) {
             techInput = scanner.nextLine();
-            if (techInput.trim().equals("tech exit"))
-                return;
+            if (techInput.trim().equals("bar exit"))
+                researchBar = false;
             else if (Pattern.matches("[\\d+]", techInput)) {
                 index = Integer.parseInt(techInput);
                 if (index >= 1 && index <= technologies.size()) {
@@ -77,6 +83,7 @@ public class ResearchMenu {
                 }
                 else
                     System.out.println("invalid number");
+                researchBar = false;
             }
             // cheat code
             else if ((matcher = RegexEnums.getMatcher(techInput, RegexEnums.ADD_RESEARCH1)) != null || (matcher = RegexEnums.getMatcher(techInput, RegexEnums.ADD_RESEARCH2)) != null) {
@@ -86,9 +93,13 @@ public class ResearchMenu {
                     user.setResearching(true);
                     user.setCurrentTechnology(technologies.get(index - 1));
                     gameController.userTurnResearch(user);
+                    researchBar = false;
                 }
                 else
                     System.out.println("invalid number");
+            }
+            else if (techInput.equals("terminate current")) {
+
             }
             else
                 System.out.println("invalid command");
