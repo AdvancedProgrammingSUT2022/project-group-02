@@ -1,16 +1,18 @@
 package controller;
 
 import model.*;
+import view.CityMenu;
 import view.UserPanel;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class GameController {
     private ArrayList<User> players;
-    private Maps map;
+    private final Maps map;
     private int turnForEachPlayer;
-    private int height;
-    private int width;
+    private final int height;
+    private final int width;
 
     public GameController(ArrayList<User> players, int turnForEachPlayer, Maps map, int height, int width) {
         this.players = players;
@@ -50,7 +52,7 @@ public class GameController {
     }
 
     public void increaseCapitalCitizens(int extraCitizens, User specificPlayer) {
-        specificPlayer.getCapital().setCitizens(specificPlayer.getCapital().getCitizens() + extraCitizens);
+        specificPlayer.getCapital().setCitizensNumber(specificPlayer.getCapital().getCitizensNumber() + extraCitizens);
     }
 
     public void increaseCapitalDefence(int extraDefence, User specificPlayer) {
@@ -211,34 +213,107 @@ public class GameController {
         return null;
     }
 
-    public void usersGoldHandling(User user, Maps map) {
+    public void increaseCitizens(User user){
+        for (City city : user.getCities()) {
+            if (city.getTurnNumber() >= 10){
+                city.setTurnNumber(0);
+                city.setCitizensNumber(city.getCitizensNumber() + 1);
+                Citizen citizen = new Citizen(null);
+                city.addCitizen(citizen);
+                new UserPanel(this).citizensIncreased(user, city);
+                if (city.getCitizensNumber() % 5 == 0){
+                    user.setUnhappiness(user.getUnhappiness() + 1);
+                }
+            } else city.setTurnNumber(city.getTurnNumber() + 1);
+        }
+    }
+
+    public void usersIncomeHandling(User user, Maps map) {
         user.setGoldPerTurn(0);
         user.setFoodPerTurn(0);
         user.setProductPerTurn(0);
+        user.setSciencePerTurn(0);
         new ResourceController().userResource(user, map);
         if (user.getImprovements() != null) {
             for (Improvement improvement : user.getImprovements()) {
                 if (!improvement.getTile().LootedStatus()) {
                     user.setGoldPerTurn(user.getGoldPerTurn() + improvement.getGoldRate());
                     user.setFoodPerTurn(user.getFoodPerTurn() + improvement.getFoodRate());
-                    user.setProductPerTurn(user.getProductPerTurn() + improvement.getProductionRate());
                 }
             }
         }
-        if (user.getTerritory() != null) {
-            for (Tile tile : user.getTerritory()) {
-                if (tile.getFeature() != null) {
-                    user.setGoldPerTurn(user.getGoldPerTurn() + tile.getFeature().getGoldRate());
-                    user.setFoodPerTurn(user.getFoodPerTurn() + tile.getFeature().getFoodRate());
-                    user.setProductPerTurn(user.getProductPerTurn() + tile.getFeature().getProductionRate());
-                }
-                user.setGoldPerTurn(user.getGoldPerTurn() + tile.getTerrain().getGoldRate());
-                user.setGoldPerTurn(user.getFoodPerTurn() + tile.getTerrain().getFoodRate());
-                user.setProductPerTurn(user.getProductPerTurn() + tile.getTerrain().getProductionRate());
+        if (user.getCities() != null){
+            for (City city : user.getCities()) {
+                user.setGoldPerTurn(user.getGoldPerTurn() + city.getGold());
+                user.setFood(user.getFoodPerTurn() + city.getFood());
+                user.setSciencePerTurn(city.getCitizensNumber() + 3);
             }
         }
         user.setGold(user.getGold() + user.getGoldPerTurn());
         user.setFood(user.getFood() + user.getFoodPerTurn());
-        user.setProduct(user.getProduct() + user.getProductPerTurn());
+        user.setScience(user.getScience() + user.getSciencePerTurn());
+        if (user.getUnits() != null){
+            for (Unit unit : user.getUnits()) {
+                user.setGold(user.getGold() - unit.getMaintenance());
+            }
+        }
+        for (Tile tile : user.getTerritory()) {
+            if (tile.isRoad()){
+                if(user.getTurns() % 3 == 0) user.setGold(user.getGold() - 1);
+            }
+        }
+        if (user.getGold() < 0){
+            user.setScience(user.getScience() + user.getGold());
+            user.setGold(0);
+        }
     }
+
+    public void userHappiness(User user){
+        for (City city : user.getCities()) {
+            if (!city.isUnhappinessEffect())
+                user.setUnhappiness(user.getUnhappiness() + 3);
+        }
+        for (Resource foundResource : user.getFoundResources()) {
+            if (user.getAvailableResources().contains(foundResource))
+                user.setHappiness(user.getHappiness() + foundResource.getHappiness());
+        }
+        for (City city : user.getAnnexedCities()) {
+            if (!city.isUnhappinessEffect())
+                user.setUnhappiness(user.getUnhappiness() + 4);
+        }
+    }
+
+    public void setCitizen(Scanner scanner, City city, CityMenu cityMenu){
+        cityMenu.setCitizenInterface(1, city);
+        int citizenIndex = Integer.parseInt(scanner.nextLine());
+        cityMenu.setCitizenInterface(2, city);
+        int tileIndex = Integer.parseInt(scanner.nextLine());
+        city.getCitizens().get(citizenIndex - 1).setTile(city.getOwnerShipTiles().get(tileIndex - 1));
+        city.getOwnerShipTiles().get(tileIndex - 1).setCitizenExist(true);
+        city.getCitizens().get(citizenIndex - 1).setTile(city.getOwnerShipTiles().get(tileIndex - 1));
+        cityMenu.setCitizenInterface(3, city);
+    }
+
+    public void citiesIncome(User user){
+        for (City city : user.getCities()) {
+            city.setProduction(0);
+            city.setFood(0);
+            city.setGold(0);
+            for (Citizen citizen : city.getCitizens()) {
+                if (citizen.getTile() != null){
+                    if (citizen.getTile().getFeature() != null){
+                        city.setGold(citizen.getTile().getFeature().getGoldRate());
+                        city.setFood(citizen.getTile().getFeature().getFoodRate());
+                        city.setProduction(citizen.getTile().getFeature().getProductionRate());
+                    }
+                    city.setGold(city.getGold() + citizen.getTile().getTerrain().getGoldRate());
+                    city.setFood(city.getFood() + citizen.getTile().getTerrain().getFoodRate());
+                    city.setProduction(city.getProduction() + citizen.getTile().getTerrain().getProductionRate());
+                }
+                city.setProduction(city.getProduction() + 1);
+                city.setFood(city.getFood() - 1);
+            }
+        }
+    }
+
 }

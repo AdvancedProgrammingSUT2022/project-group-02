@@ -3351,6 +3351,7 @@ public class MapMaker {
         addResource(4, 40 , map, Sugar);
         addResource(10, 43 , map, Sugar);
         riverMaker(map);
+        setPrice(map);
 
         return map;
     }
@@ -3516,5 +3517,12 @@ public class MapMaker {
             map.getSpecificTile(i, j).setNearRiver(true);
             if (i % 2 == 1)j++;
         }
+    }
+
+    public void setPrice(Maps map) {
+        for (int i = 0; i < 25; i++)
+            for (int j = 0; j < 80; j++)
+                map.getSpecificTile(i, j).setPrice();
+
     }
 }
