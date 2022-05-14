@@ -222,12 +222,9 @@ public class PlayGame {
                     int xOrigin = Integer.parseInt(matcher.group("x"));
                     int yOrigin = Integer.parseInt(matcher.group("y"));
                     // valid coordinates
-                    if (xOrigin >= 0 && yOrigin >= 0) {
-                        Tile origin = gameController.findTile(xOrigin, yOrigin);
-                        if (origin != null) {
-                            selectedTile(scanner, origin, xOrigin, yOrigin, user);
-                        } else
-                            System.out.println("invalid tile");
+                    if (xOrigin >= 0 && yOrigin >= 0 && xOrigin < map.getHeight() && yOrigin < map.getWidth()) {
+                        Tile origin = map.getSpecificTile(xOrigin, yOrigin);
+                        selectedTile(scanner, origin, xOrigin, yOrigin, user);
                     } else
                         System.out.println("invalid coordinates");
                 }
@@ -283,7 +280,7 @@ public class PlayGame {
             // move the unit in this tile to destination
             else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.MOVE1)) != null ||
                     (matcher = RegexEnums.getMatcher(tileInput, RegexEnums.MOVE2)) != null) {
-                moveUnitConditions(origin, user);
+                moveUnitConditions(origin, user, matcher);
             }
             // order settler to place city
             else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.CITY1)) != null ||
@@ -379,11 +376,12 @@ public class PlayGame {
     }
 
     // check everything about moving the unit
-    private void moveUnitConditions(Tile origin, User user) {
+    private void moveUnitConditions(Tile origin, User user, Matcher matcher) {
+        System.out.println(origin.getCivilianUnit() != null );
         if ((origin.getCivilianUnit() != null && origin.getCivilianUnit().getOwner().equals(user)) ||
                 (origin.getMilitaryUnit() != null && origin.getMilitaryUnit().getOwner().equals(user))) {
-            int xDestination = Integer.parseInt("x");
-            int yDestination = Integer.parseInt("y");
+            int xDestination = Integer.parseInt(matcher.group("x"));
+            int yDestination = Integer.parseInt(matcher.group("y"));
             if (xDestination >= 0 && yDestination >= 0) {
                 Tile destination = gameController.findTile(xDestination, yDestination);
                 if (destination != null) {

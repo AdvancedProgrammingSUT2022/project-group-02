@@ -165,6 +165,7 @@ public class CityMenu {
         int index = 1;
         for (Product product : city.getProducts()) {
             System.out.println(index + "- " + product.getName());
+            index++;
         }
         String productInput;
         System.out.println("you are in production bar");
