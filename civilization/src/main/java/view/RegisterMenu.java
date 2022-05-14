@@ -73,7 +73,7 @@ public class RegisterMenu {
                 //check if there is a same username
                 if (!users.sameUsernameExists(username)) {
                     //check if there is a same nickname
-                    if (users.sameNicknameExists(nickname)) {
+                    if (!users.sameNicknameExists(nickname)) {
                         User user = new User(username, nickname, password);
                         System.out.println("select your Avatar Color");
                         printRemainColors();

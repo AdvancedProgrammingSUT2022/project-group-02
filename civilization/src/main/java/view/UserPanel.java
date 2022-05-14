@@ -40,6 +40,9 @@ public class UserPanel {
             else if (userInput.equals("economic overview")) {
                 economicOverview(user);
             }
+            else if (userInput.equals("unit panel")) {
+
+            }
             else
                 System.out.println("invalid command");
         }
@@ -56,18 +59,7 @@ public class UserPanel {
                 if (unit.getName().equals("settler")) numberOfSettlers++;
                 if (unit.getName().equals("scout")) numberOfScout++;
                 // all information of the unit
-                System.out.println("Name : " + unit.getName());
-                if (!unit.getName().equals("worker") && !unit.getName().equals("scout") && !unit.getName().equals("settler"))
-                    System.out.println("this unit is military");
-                else
-                    System.out.println("this unit is civilian");
-                System.out.println("Position : -x " + unit.getTile().getX() + " -y " + unit.getTile().getY());
-                System.out.println("Health point : " + unit.getHP());
-                System.out.println("Movement point : " + unit.getMP());
-                System.out.println("Level : " + unit.getLevel());
-                System.out.println("Combat Strength : " + unit.getCombatStrength());
-                System.out.println("Ranged Combat Strength : " + unit.getRangeCombatStrength());
-                System.out.println("Cost of maintain : " + unit.getMaintainGold());
+                unitInformation(unit);
             }
             int numberOfMilitary = user.getUnits().size() - (numberOfSettlers + numberOfWorkers + numberOfScout);
             System.out.println(numberOfMilitary + " of this units are military units");
@@ -84,6 +76,32 @@ public class UserPanel {
         System.out.println(Colors.GREEN + "Gold per turn : " + user.getGoldPerTurn());
         System.out.println("Production per turn : " + user.getProductPerTurn());
         System.out.println("Food per turn : " + user.getFoodPerTurn() + Colors.RESET);
+    }
+
+    private void unitPanel(User user) {
+        System.out.println("welcome to unit panel");
+        if (user.getUnits() != null) {
+            System.out.println("**********");
+            for (Unit unit : user.getUnits()) {
+                unitInformation(unit);
+                System.out.println("**********");
+            }
+        }
+    }
+
+    private void unitInformation(Unit unit) {
+        System.out.println("Name : " + unit.getName());
+        if (!unit.getName().equals("worker") && !unit.getName().equals("scout") && !unit.getName().equals("settler"))
+            System.out.println("this unit is military");
+        else
+            System.out.println("this unit is civilian");
+        System.out.println("Position : -x " + unit.getTile().getX() + " -y " + unit.getTile().getY());
+        System.out.println("Health point : " + unit.getHP());
+        System.out.println("Movement point : " + unit.getMP());
+        System.out.println("Level : " + unit.getLevel());
+        System.out.println("Combat Strength : " + unit.getCombatStrength());
+        System.out.println("Ranged Combat Strength : " + unit.getRangeCombatStrength());
+        System.out.println("Cost of maintain : " + unit.getMaintainGold());
     }
 
     public static void researchDoneNotification(User user, Technology technology) {
@@ -108,7 +126,7 @@ public class UserPanel {
                 notification.add("Gold rate : " + improvement.getGoldRate());
                 System.out.println("price : " + improvement.getPrice() + Colors.RESET);
                 notification.add("price : " + improvement.getPrice() + Colors.RESET);
-                //improvementResourceNotification(improvement, notification);
+                improvementResourceNotification(improvement, notification);
             }
         }
         if (technology.getGivenUnits() != null) {
@@ -137,7 +155,7 @@ public class UserPanel {
         notification.add("Production rate : " + improvement.getProductionRate());
         System.out.println("Gold rate : " + improvement.getGoldRate() + Colors.RESET);
         notification.add("Gold rate : " + improvement.getGoldRate() + Colors.RESET);
-        //improvementResourceNotification(improvement, notification);
+        improvementResourceNotification(improvement, notification);
         user.addHistoryOfNotification(notification);
     }
 

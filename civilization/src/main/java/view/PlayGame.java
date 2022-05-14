@@ -249,6 +249,7 @@ public class PlayGame {
 
     private void selectedTile(Scanner scanner, Tile origin, int xOrigin, int yOrigin, User user) {
         // TODO enable far working
+        System.out.println("you have selected a tile with -x " + origin.getX() + " -y " + origin.getY());
         origin.setSelectedOne(false);
         origin.setSelectedTwo(false);
         if (origin.isMilitaryUnitExists())
@@ -326,7 +327,6 @@ public class PlayGame {
                     worker.setRemainingTurnsToComplete(improvements.get(index - 1).getPrice());
                     worker.setWorkingStatus(true);
                     worker.setImprovement(improvements.get(index - 1));
-                    // TODO worker should work here until the work be finished ,,, when worker unit is ready
                 }
                 else
                     System.out.println("invalid number");

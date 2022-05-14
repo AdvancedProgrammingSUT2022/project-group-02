@@ -46,9 +46,9 @@ public class UsersController {
     public boolean sameNicknameExists(String nickname) {
         for (User user : users) {
             if (user.getNickname().equals(nickname))
-                return false;
+                return true;
         }
-        return true;
+        return false;
     }
     //get user by username
     public User getUserByUsername(String username) {
