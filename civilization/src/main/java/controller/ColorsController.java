@@ -1,6 +1,6 @@
 package controller;
 
-import enums.Colors;
+import controller.enums.Colors;
 import model.Tile;
 import model.User;
 

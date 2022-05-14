@@ -1,10 +1,9 @@
 package view;
 
 import controller.GameController;
-import enums.Colors;
+import controller.enums.Colors;
 import model.*;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -41,7 +40,7 @@ public class UserPanel {
                 economicOverview(user);
             }
             else if (userInput.equals("unit panel")) {
-
+                unitPanel(user);
             }
             else
                 System.out.println("invalid command");

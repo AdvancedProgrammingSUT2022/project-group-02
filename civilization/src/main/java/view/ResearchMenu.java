@@ -1,10 +1,8 @@
 package view;
 
-import controller.ColorsController;
 import controller.GameController;
 import controller.TechController;
-import enums.Colors;
-import enums.RegexEnums;
+import controller.enums.RegexEnums;
 import model.Improvement;
 import model.Technology;
 import model.Unit;
@@ -28,9 +26,10 @@ public class ResearchMenu {
 
     public void run(Scanner scanner, User user) {
         System.out.println("welcome to research panel dear " + user.getUsername());
-        System.out.println("to see technology tree press -show tree of technology-");
+        System.out.println("to see technology tree press -show tree of technologies-");
         System.out.println("to research on a technology press -select technology-");
         System.out.println("cheat code in research bar is -add (--research | -r) <index> -");
+        System.out.println("to terminate current tech press -terminate current-");
         String researchInput;
         if (user.getTechnologies() != null) {
             System.out.println("player has done this technologies");
@@ -98,6 +97,9 @@ public class ResearchMenu {
                 }
                 else
                     System.out.println("invalid number");
+            }
+            else if (techInput.equals("terminate current")) {
+
             }
             else
                 System.out.println("invalid command");

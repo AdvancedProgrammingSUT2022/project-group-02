@@ -2,7 +2,7 @@ package view;
 
 import controller.ColorsController;
 import controller.UsersController;
-import enums.Colors;
+import controller.enums.Colors;
 import model.*;
 
 import java.util.ArrayList;

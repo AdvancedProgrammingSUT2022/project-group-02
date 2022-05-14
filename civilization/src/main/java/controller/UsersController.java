@@ -2,7 +2,6 @@ package controller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import enums.Colors;
 import model.*;
 
 import java.io.FileWriter;
@@ -11,7 +10,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class UsersController {
     //arraylist of registered users;

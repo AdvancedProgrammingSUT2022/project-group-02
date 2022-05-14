@@ -1,4 +1,4 @@
-package enums;
+package controller.enums;
 
 public class Colors {
     public static final String RESET = "\033[0m";

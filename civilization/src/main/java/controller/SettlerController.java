@@ -6,16 +6,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SettlerController extends UnitController{
+
     public void createNewCity(Unit unit, User user, Tile tile, String nameOfCity) {
         ArrayList<Tile> ownerShipTiles = new ArrayList<>();
         ownerShipTiles.add(tile);
         HashMap<Citizen, Tile> citizensLocations = new HashMap<>();
+        citizensLocations.put(new Citizen(), tile);
         City city = new City(nameOfCity, tile, user, ownerShipTiles, 100, 100, null, null,
                 50, 0, 1, 1, 1, 1, 1, 1, 1,
                 citizensLocations, null, null, false, null, 20);
-        citizensLocations.put(new Citizen(), tile);
         tile.setCity(city);
         tile.setOwner(user);
+        if (user.getCapital() == null)
+            user.setCapital(city);
+        user.addCity(city);
         removeUnit(unit, user);
         addBasicProducts(tile.getCity());
         addBasicUnits(tile.getCity());

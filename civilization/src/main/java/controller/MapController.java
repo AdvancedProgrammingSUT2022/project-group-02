@@ -1,7 +1,7 @@
 package controller;
 
 import model.*;
-import enums.Colors;
+import controller.enums.Colors;
 
 import java.util.ArrayList;
 
@@ -26,7 +26,7 @@ public class MapController {
                 neighbors.add(map.getTileBoard()[x - 1][y - 1]);
             //up right
             if (y <= map.getWidth() - 2)
-                neighbors.add(map.getTileBoard()[x - 1][y + 1]);
+                neighbors.add(map.getTileBoard()[x - 1][y]);
         }
         //down
         if (x <= map.getHeight() - 3)
@@ -38,7 +38,7 @@ public class MapController {
                 neighbors.add(map.getTileBoard()[x + 1][y - 1]);
             //down right
             if (y <= map.getWidth() - 2)
-                neighbors.add(map.getTileBoard()[x + 1][y + 1]);
+                neighbors.add(map.getTileBoard()[x + 1][y]);
         }
         tile.setNeighbors(neighbors);
     }
