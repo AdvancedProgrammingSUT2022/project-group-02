@@ -408,4 +408,8 @@ public class User {
     public void setAnnexedCities(ArrayList<City> annexedCities) {
         this.annexedCities = annexedCities;
     }
+
+    public void removeCity(City city) {
+        cities.remove(city);
+    }
 }

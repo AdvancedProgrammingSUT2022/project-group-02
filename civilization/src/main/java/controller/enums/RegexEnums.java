@@ -72,8 +72,12 @@ public enum RegexEnums {
     //selecting a tile
     SELECT_TILE1("^\\s*select\\s+tile\\s+-x\\s+(?<x>\\-?\\d+)\\s+-y\\s+(?<y>\\-?\\d+)\\s*$"),
     SELECT_TILE2("^\\s*select\\s+tile\\s+-y\\s+(?<y>\\-?\\d+)\\s+-x\\s+(?<x>\\-?\\d+)\\s*$"),
+    //move unit
     MOVE1("^\\s*move\\s+unit\\s+to\\s+-x\\s+(?<x>\\-?\\d+)\\s+-y\\s+(?<y>\\-?\\d+)\\s*$"),
     MOVE2("^\\s*move\\s+unit\\s+to\\s+-y\\s+(?<y>\\-?\\d+)\\s+-x\\s+(?<x>\\-?\\d+)\\s*$"),
+    //attack city
+    ATTACK_CITY1("^\\s*attack\\s+city\\s+-x\\s+(?<x>\\d+)\\s+-y\\s+(?<y>\\d+)\\s*$"),
+    ATTACK_CITY2("^\\s*attack\\s+city\\s+-y\\s+(?<y>\\d+)\\s+-x\\s+(?<x>\\d+)\\s*$"),
     //place city
     CITY1("^\\s*place\\s+city\\s+--name\\s+(?<city>[\\s\\S]+)\\s*$"),
     CITY2("^\\s*place\\s+city\\s+-n\\s+(?<city>[\\s\\S]+)\\s*$");

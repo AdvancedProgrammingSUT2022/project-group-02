@@ -119,17 +119,26 @@ public class UsersController {
             e.printStackTrace();
         }
     }
-    /*
-    public void addBasicImprovements(ArrayList<User> players) {
-        ArrayList<Improvement> improvements;
-        for (User player : players) {
-            improvements = new ArrayList<>();
-            //improvements.add(new Improvement("Farm", 0, 1, 0, 5));
-            player.setImprovements(improvements);
+
+    public void writeToJson(Maps map) {
+        try {
+            FileWriter fileWriter = new FileWriter("MapFile/map1.json");
+            fileWriter.write(new Gson().toJson(map));
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
-     */
 
+    public Maps readFromJsonMap() {
+        try {
+            String all = new String(Files.readAllBytes(Paths.get("MapFile/map1.json")));
+            return new Gson().fromJson(all, Maps.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public void setUserColor(String color , User user, HashMap<String, Boolean> availableColors){
         user.setColor(color);

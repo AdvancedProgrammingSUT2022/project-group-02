@@ -17,6 +17,7 @@ public class PlayGame {
     private UnitController unitController;
     private final SettlerController settlerController;
     private final TechController techController;
+    private CombatController combatController;
     private int role;
     private int height;
     private int width;
@@ -35,6 +36,7 @@ public class PlayGame {
         unitController = new UnitController();
         settlerController = new SettlerController();
         techController = new TechController(ancientGraph, ancientTechnology);
+        combatController = new CombatController();
     }
 
     // provide some information for players
@@ -88,6 +90,7 @@ public class PlayGame {
         boolean nextTurn = true;
         while (true) {
             User user = players.get(role);
+            unitController.repairMovementPoint(user);
             String color = new ColorsController().getColorOfUser(user);
             System.out.println("it's " + color + user.getNickname() + Colors.RESET + " turn");
             // handle production turn in cities and research turn of user
@@ -110,6 +113,10 @@ public class PlayGame {
                     }
                     else
                         System.out.println("you didn't play all your turns");
+                }
+                else if (input.trim().equals("next turn --force")) {
+                    nextTurn = false;
+                    user.setTurns(turn);
                 }
                 else if (input.trim().equals("city menu")) {
                     cityMenu.run(scanner, user);
@@ -298,6 +305,8 @@ public class PlayGame {
                     String nameOfCity = matcher.group("city");
                     createCity(origin, user, nameOfCity);
                 }
+                else
+                    System.out.println("");
             }
             // order worker to improve the tile
             else if (tileInput.trim().equals("show possible improvements")) {
@@ -317,6 +326,53 @@ public class PlayGame {
             }
             else if (tileInput.trim().equals("tile information")) {
                 tileInformation(origin);
+            }
+            else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.ATTACK_CITY1)) != null ||
+                    (matcher = RegexEnums.getMatcher(tileInput, RegexEnums.ATTACK_CITY2)) != null) {
+                int x = Integer.parseInt(matcher.group("x"));
+                int y = Integer.parseInt(matcher.group("y"));
+                boolean found = false;
+                if (x >= 0 && x < map.getHeight() && y >= 0 && y < map.getWidth()) {
+                    Tile des = map.getSpecificTile(x, y);
+                    if (des.getCity() != null && des.getCity().getTile().equals(des)) {
+                        if (origin.isMilitaryUnitExists()) {
+                            // melee
+                            if (origin.getMilitaryUnit().getRangeCombatStrength() == 0) {
+                                for (int i = 0; i < origin.getNeighbors().size(); i++) {
+                                    if (origin.getNeighbors().get(i).equals(des)) {
+                                        found = true;
+                                        attackCity(origin, des, des.getCity(), user, scanner);
+                                        i = 100;
+                                    }
+                                }
+                            }
+                            // ranged
+                            else {
+                                for (int i = 0; i < origin.getNeighbors().size(); i++) {
+                                    if (origin.getNeighbors().get(i).equals(des)) {
+                                        found = true;
+                                        attackCity(origin, des, des.getCity(), user, scanner);
+                                        i = 100;
+                                    }
+                                    for (int j = 0; j < origin.getNeighbors().get(i).getNeighbors().size(); j++) {
+                                        if (origin.getNeighbors().get(i).getNeighbors().get(j).equals(des)) {
+                                            found = true;
+                                            attackCity(origin, des, des.getCity(), user, scanner);
+                                            j = 100;
+                                        }
+                                    }
+                                }
+                            }
+                            if (!found)
+                                System.out.println("this city is not in the range of your unit");
+                        } else
+                            System.out.println("there is no military unit on this tile");
+                    }
+                    else
+                        System.out.println("there is no city on this tile");
+                }
+                else
+                    System.out.println("invalid coordinates");
             }
             else
                 System.out.println("invalid command");
@@ -480,8 +536,10 @@ public class PlayGame {
     private boolean conditionsForPlaceCity(String input, Tile tile) {
         // neighbors of the tile should be neutral
         for (Tile neighbor : tile.getNeighbors()) {
-            if (neighbor.getOwner() != null)
+            if (neighbor.getOwner() != null) {
+                System.out.println("a tile has owner here");
                 return false;
+            }
         }
         if (tile.isCivilianUnitExists() && tile.getCivilianUnit().getName().equals("settler")) {
             if (tile.getCity() == null) {
@@ -512,6 +570,48 @@ public class PlayGame {
         // remove settler from tile
         mapController.deleteCivilian(tile);
         System.out.println("city located successfully!");
+    }
+
+    private void attackCity(Tile origin, Tile destination, City city, User user, Scanner scanner) {
+        System.out.println("war panel with city");
+        Unit unit = origin.getMilitaryUnit();
+        System.out.println("use cheat code -destroy city-");
+        System.out.println("press -city war exit- to get out");
+        boolean cheat = true;
+        String cityCombatInput;
+        while (cheat) {
+            cityCombatInput = scanner.nextLine();
+            if (cityCombatInput.equals("city war exit")) {
+                System.out.println("get out of war panel with city");
+                cheat = false;
+            }
+            else if (cityCombatInput.equals("destroy city")) {
+                System.out.println("which one do you choose?");
+                System.out.println("1- completely destroy city");
+                System.out.println("2- annex city");
+                System.out.println("please press one of this numbers");
+                boolean decide = true;
+                while(decide) {
+                    cityCombatInput = scanner.nextLine();
+                    if (Pattern.matches("\\d+", cityCombatInput)) {
+                        int index = Integer.parseInt(cityCombatInput);
+                        if (index == 1) {
+                            combatController.destroyCity(city);
+                            decide = false;
+                        }
+                        else if (index == 2) {
+                            combatController.annexCity(city, unit);
+                            decide = false;
+                        }
+                        else
+                            System.out.println("invalid number");
+                    }
+                    else
+                        System.out.println("invalid command");
+                }
+            }
+        }
+
     }
 
     public void showMap(User user) {
@@ -715,6 +815,10 @@ public class PlayGame {
         if (tile.getCity() != null)
             System.out.println("City : " + tile.getCity().getName());
         System.out.println("Coordinate : -x " + tile.getX() + " -y " + tile.getY());
+        if (tile.isMilitaryUnitExists() && tile.isSelectedOne())
+            System.out.println("military unit selected");
+        if (tile.isCivilianUnitExists() && tile.isSelectedTwo())
+            System.out.println("civilian unit selected");
         tileDetails(tile);
     }
 

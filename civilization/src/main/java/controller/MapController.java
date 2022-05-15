@@ -210,11 +210,11 @@ public class MapController {
         map.getSpecificTile(2, 40).setCivilianUnitExists(true);
         tiles.add(map.getSpecificTile(2, 40));
         //user1
-        settler = new Settler("settler", map.getSpecificTile(3, 42), 100, 1, 1, 1, 2, 0, 0, null, users.get(1), 0, 0);
+        settler = new Settler("settler", map.getSpecificTile(7, 39), 100, 1, 1, 1, 2, 0, 0, null, users.get(1), 0, 0);
         users.get(1).addUnit(settler);
-        map.getSpecificTile(3, 42).setCivilianUnit(settler);
-        map.getSpecificTile(3, 42).setCivilianUnitExists(true);
-        tiles.add(map.getSpecificTile(3, 42));
+        map.getSpecificTile(7, 39).setCivilianUnit(settler);
+        map.getSpecificTile(7, 39).setCivilianUnitExists(true);
+        tiles.add(map.getSpecificTile(7, 39));
         if (users.size() <= 2) return tiles;
         //user2
         settler = new Settler("settler", map.getSpecificTile(4, 46), 100, 1, 1, 1, 2, 0, 0, null, users.get(2), 0, 0);
