@@ -286,8 +286,10 @@ public class PlayGame {
             else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.MOVE1)) != null ||
                     (matcher = RegexEnums.getMatcher(tileInput, RegexEnums.MOVE2)) != null) {
                 Tile tile = moveUnitConditions(origin, user, matcher);
-                if (tile != null && !tile.equals(origin) && selectAnotherTile(tile, scanner, user, tile.getX(), tile.getY()))
+                if (tile != null && !tile.equals(origin)) {
+                    selectedTile(scanner, tile, tile.getX(), tile.getY(), user);
                     return;
+                }
             }
             // order settler to place city
             else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.CITY1)) != null ||
@@ -433,16 +435,19 @@ public class PlayGame {
         }
         tilesInTheWay.add(tile);
         int mp = 0;
+        tile = origin;
         for (Tile value : tilesInTheWay) {
             tileInformation(value);
             if (value.getTerrain().getMovementPrice() > unit.getMP()) {
                 gameController.moveUnit(origin, value, unit, isMilitary);
                 System.out.println(mp + " movement by unit to get to the destination");
-                return value;
+                return tile;
             }
             mp += value.getTerrain().getMovementPrice();
             unit.setMP(unit.getMP() - value.getTerrain().getMovementPrice());
+            tile = value;
         }
+        System.out.println("hello");
         gameController.moveUnit(origin, destination, unit, isMilitary);
         System.out.println(mp + " movement by unit to get to the destination");
         return destination;
