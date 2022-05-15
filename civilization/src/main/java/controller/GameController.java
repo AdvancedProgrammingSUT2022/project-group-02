@@ -120,8 +120,6 @@ public class GameController {
                 if (city.isProductStatus()) {
                     // if product is done
                     if (city.getProductTurnLeft() <= 1) {
-                        //notification for production
-                        UserPanel.productDoneNotification(user, city, city.getCurrentProduction(), this);
                         city.setProductTurnLeft(0);
                         findProduction(city, city.getCurrentProduction());
                         city.setCurrentProduction(null);
@@ -150,20 +148,12 @@ public class GameController {
                 }
                 // add given units to all the cities products
                 if (user.getCurrentTechnology().getGivenUnits() != null) {
-
-                    Settler settler;
                     MeleeMilitaryUnit meleeMilitaryUnit;
                     RangeMilitaryUnit rangeMilitaryUnit;
                     for (Unit givenUnit : user.getCurrentTechnology().getGivenUnits()) {
                         for (City city : user.getCities()) {
-                            // settler
-                            if (givenUnit.getName().equals("settler")) {
-                                settler = new Settler("settler", null, givenUnit.getHP(), givenUnit.getGoldPrice(), givenUnit.getProductionPrice(), givenUnit.getLevel(), givenUnit.getMP(), givenUnit.getCombatStrength(), givenUnit.getRangeCombatStrength(), null, city.getOwner(), givenUnit.getAttackPoint(), givenUnit.getMaintainGold());
-                                city.addPossibleUnit(settler);
-                                city.addProduct(new Product("settler", settler.getProductionPrice()));
-                            }
                             // range military unit
-                            else if (givenUnit.getRangeCombatStrength() > 0) {
+                            if (givenUnit.getRangeCombatStrength() > 0) {
                                 rangeMilitaryUnit = new RangeMilitaryUnit(givenUnit.getName(), null, givenUnit.getHP(), givenUnit.getGoldPrice(), givenUnit.getProductionPrice(), givenUnit.getLevel(), givenUnit.getMP(), givenUnit.getCombatStrength(), givenUnit.getRangeCombatStrength(), city.getOwner(), givenUnit.getAttackPoint(), givenUnit.getMaintainGold());
                                 city.addPossibleUnit(rangeMilitaryUnit);
                                 city.addProduct(new Product(rangeMilitaryUnit.getName(), rangeMilitaryUnit.getProductionPrice()));
@@ -216,6 +206,7 @@ public class GameController {
     private void findProduction(City city, Product product) {
         Worker worker;
         Settler settler;
+        Civilian scout;
         MeleeMilitaryUnit meleeMilitaryUnit;
         RangeMilitaryUnit rangeMilitaryUnit;
         for (int i = 0; i < city.getPossibleUnits().size(); i++) {
@@ -229,6 +220,7 @@ public class GameController {
                     tile.setCivilianUnitExists(true);
                     worker.setTile(tile);
                     city.getOwner().addUnit(worker);
+                    UserPanel.productDoneNotification(city.getOwner(), city, worker, this);
                 }
                 // settler
                 else if (unit.getName().equals("settler")) {
@@ -238,6 +230,16 @@ public class GameController {
                     tile.setCivilianUnitExists(true);
                     settler.setTile(tile);
                     city.getOwner().addUnit(settler);
+                    UserPanel.productDoneNotification(city.getOwner(), city, settler, this);
+                }
+                else if (unit.getName().equals("scout")) {
+                    Tile tile = findTileForCivilian(city.getTile());
+                    scout = new Civilian("scout", tile, unit.getHP(), unit.getGoldPrice(), unit.getProductionPrice(), unit.getLevel(), unit.getMP(), unit.getCombatStrength(), unit.getRangeCombatStrength(), city.getOwner(), unit.getAttackPoint(), unit.getMaintainGold());
+                    tile.setCivilianUnit(scout);
+                    tile.setCivilianUnitExists(true);
+                    scout.setTile(tile);
+                    city.getOwner().addUnit(scout);
+                    UserPanel.productDoneNotification(city.getOwner(), city, scout, this);
                 }
                 // ranged
                 else if (unit.getRangeCombatStrength() > 0) {
@@ -247,25 +249,22 @@ public class GameController {
                     tile.setMilitaryUnitExists(true);
                     rangeMilitaryUnit.setTile(tile);
                     city.getOwner().addUnit(rangeMilitaryUnit);
+                    UserPanel.productDoneNotification(city.getOwner(), city, rangeMilitaryUnit, this);
                 }
                 // melee
                 else {
                     Tile tile = findTileForMilitary(city.getTile());
+                    System.out.println("i am here");
                     meleeMilitaryUnit = new MeleeMilitaryUnit(unit.getName(), tile, unit.getHP(), unit.getGoldPrice(), unit.getProductionPrice(), unit.getLevel(), unit.getMP(), unit.getCombatStrength(), unit.getRangeCombatStrength(), city.getOwner(), unit.getAttackPoint(), unit.getMaintainGold());
                     tile.setMilitaryUnit(meleeMilitaryUnit);
                     tile.setMilitaryUnitExists(true);
                     meleeMilitaryUnit.setTile(tile);
+                    city.getOwner().addUnit(meleeMilitaryUnit);
+                    UserPanel.productDoneNotification(city.getOwner(), city, meleeMilitaryUnit, this);
                 }
                 i = city.getPossibleUnits().size();
             }
         }
-    }
-
-    public Unit findProductionUnit(City city, Product product) {
-        for (int i = 0; i < city.getPossibleUnits().size(); i++)
-            if (city.getPossibleUnits().get(i).getName().equals(product.getName()))
-                return city.getPossibleUnits().get(i);
-        return null;
     }
 
     public void usersGoldHandling(User user, Maps map) {
@@ -302,12 +301,12 @@ public class GameController {
     private Tile findTileForMilitary(Tile origin) {
         if (origin.isMilitaryUnitExists()) {
             for (Tile neighbor : origin.getNeighbors()) {
-                if (!neighbor.isMilitaryUnitExists())
+                if (!neighbor.isMilitaryUnitExists() && neighbor.getTerrain().isPassable())
                     return neighbor;
             }
             for (Tile neighbor : origin.getNeighbors()) {
                 for (Tile neighborNeighbor : neighbor.getNeighbors()) {
-                    if (!neighborNeighbor.isMilitaryUnitExists())
+                    if (!neighborNeighbor.isMilitaryUnitExists() && neighbor.getTerrain().isPassable())
                         return neighborNeighbor;
                 }
             }
@@ -317,12 +316,12 @@ public class GameController {
     private Tile findTileForCivilian(Tile origin) {
         if (origin.isCivilianUnitExists()) {
             for (Tile neighbor : origin.getNeighbors()) {
-                if (!neighbor.isCivilianUnitExists())
+                if (!neighbor.isCivilianUnitExists() && neighbor.getTerrain().isPassable())
                     return neighbor;
             }
             for (Tile neighbor : origin.getNeighbors()) {
                 for (Tile neighborNeighbor : neighbor.getNeighbors()) {
-                    if (!neighborNeighbor.isCivilianUnitExists())
+                    if (!neighborNeighbor.isCivilianUnitExists() && neighbor.getTerrain().isPassable())
                         return neighborNeighbor;
                 }
             }

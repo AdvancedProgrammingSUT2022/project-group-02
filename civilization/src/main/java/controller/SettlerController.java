@@ -21,8 +21,8 @@ public class SettlerController extends UnitController{
             user.setCapital(city);
         user.addCity(city);
         removeUnit(unit, user);
-        addBasicProducts(tile.getCity());
-        addBasicUnits(tile.getCity());
+        addBasicProducts(city);
+        addBasicUnits(city);
         // add neighbors to the city for free
         for (Tile neighbor : tile.getNeighbors()) {
             new ResourceController().addFoundResource(user, neighbor);
@@ -43,10 +43,10 @@ public class SettlerController extends UnitController{
     // set basic units for production
     private void addBasicUnits(City city) {
         ArrayList<Unit> units = new ArrayList<>();
-        units.add(new Worker("worker", city.getTile(), 100, 1, 1, 1, 2, 0, 0, false, city.getOwner(), 0, 1));
-        units.add(new Settler("settler", city.getTile(), 100, 1, 1, 3, 0, 0, 0, null, city.getOwner(), 0, 1));
-        units.add(new MeleeMilitaryUnit("warrior", city.getTile(), 100, 5, 1, 1, 2, 20, 0, city.getOwner(), 30, 1));
-        units.add(new Civilian("scout", city.getTile(), 100, 5, 1, 1, 2, 4, 0, city.getOwner(), 4, 0));
+        units.add(new Worker("worker", null, 100, 1, 1, 1, 2, 0, 0, false, city.getOwner(), 0, 1));
+        units.add(new Settler("settler", null, 100, 1, 1, 1, 2, 0, 0, null, city.getOwner(), 0, 1));
+        units.add(new MeleeMilitaryUnit("warrior", null, 100, 5, 1, 1, 2, 20, 0, city.getOwner(), 30, 1));
+        units.add(new Civilian("scout", null, 100, 5, 1, 1, 2, 4, 0, city.getOwner(), 4, 0));
         city.setPossibleUnits(units);
     }
 }

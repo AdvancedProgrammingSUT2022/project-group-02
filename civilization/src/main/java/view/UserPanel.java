@@ -18,6 +18,8 @@ public class UserPanel {
         System.out.println("welcome to user panel dear " + user.getColor() + user.getUsername() + Colors.RESET);
         System.out.println(Colors.YELLOW + "to see history of notification press -show history-");
         System.out.println("to see military information and overview press -military overview-");
+        System.out.println("to see all the details about units press -unit panel-");
+        System.out.println("to see notification history press -show history-");
         System.out.println("to see economic information and overview press -economic overview-" + Colors.RESET);
         String userInput;
         while (true){
@@ -49,7 +51,7 @@ public class UserPanel {
 
     private void militaryOverview(User user) {
         System.out.println(user.getUsername() + " have " + user.getUnits().size() + " units");
-        if (user.getUnits() != null) {
+        if (user.getUnits() != null && user.getUnits().size() > 0) {
             int numberOfWorkers = 0;
             int numberOfSettlers = 0;
             int numberOfScout = 0;
@@ -175,24 +177,22 @@ public class UserPanel {
         }
     }
 
-    public static void productDoneNotification(User user, City city, Product product, GameController gameController) {
+    public static void productDoneNotification(User user, City city, Unit unit, GameController gameController) {
         ArrayList<String> notification = new ArrayList<>();
         System.out.println(Colors.RED + "NOTICE!!!" + Colors.RESET);
         notification.add(Colors.RED + "NOTICE!!!" + Colors.RESET);
         System.out.println("Dear " + user.getColor() + user.getUsername() + Colors.RESET);
         notification.add("Dear " + user.getColor() + user.getUsername() + Colors.RESET);
-        System.out.println("you have completed producing " + user.getColor() + product.getName() + Colors.RESET);
-        notification.add("you have completed producing " + user.getColor() + product.getName() + Colors.RESET);
-        Unit unit = gameController.findProductionUnit(city, product);
-        if (unit != null) {
-            unitNotification(notification, unit);
-        }
+        System.out.println("you have completed producing " + user.getColor() + unit.getName() + Colors.RESET);
+        notification.add("you have completed producing " + user.getColor() + unit.getName() + Colors.RESET);
+        unitNotification(notification, unit);
         user.addHistoryOfNotification(notification);
     }
 
     private static void unitNotification(ArrayList<String> notification, Unit unit) {
         System.out.println(Colors.PURPLE + "Unit name : " + unit.getName());
         notification.add(Colors.PURPLE + "Unit name : " + unit.getName());
+        System.out.println("Unit coordinate : -x " + unit.getTile().getX() + " -y " + unit.getTile().getY());
         System.out.println("Unit product price : " + unit.getProductionPrice());
         notification.add("Unit product price : " + unit.getProductionPrice());
         System.out.println("Unit gold price : " + unit.getGoldPrice());
