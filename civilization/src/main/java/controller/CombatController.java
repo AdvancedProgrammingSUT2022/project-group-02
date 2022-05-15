@@ -158,5 +158,8 @@ public class CombatController extends UnitController {
         }
         city.setOwner(unit.getOwner());
         unit.getOwner().setHappiness(unit.getOwner().getHappiness() - 5);
+        cities = unit.getOwner().getCities();
+        cities.add(city);
+        unit.getOwner().setCities(cities);
     }
 }
