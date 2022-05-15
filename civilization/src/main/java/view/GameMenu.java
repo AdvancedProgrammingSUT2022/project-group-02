@@ -58,7 +58,9 @@ public class GameMenu {
         //ArrayList<Technology> technologies = better();
         //users.writeToJson(technologies);
         ArrayList<Technology> ancientTechnologies = users.readFromJsonTech();
-        Maps map = new MapMaker().myTiles();
+        //Maps map = new MapMaker().myTiles();
+        //users.writeToJson(map);
+        Maps map = users.readFromJsonMap();
         new PlayGame(players, map, ancientGraph, ancientTechnologies).run(scanner);
     }
     // get the usernames from input

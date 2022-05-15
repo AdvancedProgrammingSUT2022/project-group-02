@@ -88,6 +88,7 @@ public class PlayGame {
         boolean nextTurn = true;
         while (true) {
             User user = players.get(role);
+            unitController.repairMovementPoint(user);
             String color = new ColorsController().getColorOfUser(user);
             System.out.println("it's " + color + user.getNickname() + Colors.RESET + " turn");
             // handle production turn in cities and research turn of user
@@ -110,6 +111,10 @@ public class PlayGame {
                     }
                     else
                         System.out.println("you didn't play all your turns");
+                }
+                else if (input.trim().equals("next turn --force")) {
+                    nextTurn = false;
+                    user.setTurns(turn);
                 }
                 else if (input.trim().equals("city menu")) {
                     cityMenu.run(scanner, user);
