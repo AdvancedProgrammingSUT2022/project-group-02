@@ -2,7 +2,7 @@ package view;
 
 import controller.GameController;
 import controller.TechController;
-import controller.enums.RegexEnums;
+import view.enums.RegexEnums;
 import model.Improvement;
 import model.Technology;
 import model.Unit;

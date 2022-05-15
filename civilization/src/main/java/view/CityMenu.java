@@ -1,9 +1,9 @@
 package view;
 
 import controller.*;
-import controller.enums.Colors;
+import view.enums.Colors;
 import model.*;
-import controller.enums.RegexEnums;
+import view.enums.RegexEnums;
 import model.City;
 import model.Product;
 import model.Tile;

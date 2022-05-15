@@ -2,8 +2,8 @@ package view;
 
 import controller.ColorsController;
 import controller.UsersController;
-import controller.enums.Colors;
-import controller.enums.RegexEnums;
+import view.enums.Colors;
+import view.enums.RegexEnums;
 import model.User;
 
 import java.util.Scanner;

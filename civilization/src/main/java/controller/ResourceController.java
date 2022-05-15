@@ -4,6 +4,8 @@ import model.*;
 
 public class ResourceController {
 
+    public ResourceController(){}
+
     public void userResource(User user, Maps map){
         if (user.getFoundResources() != null) {
             for (Resource foundResource : user.getFoundResources()) {

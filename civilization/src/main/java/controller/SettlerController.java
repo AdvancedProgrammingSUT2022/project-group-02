@@ -21,7 +21,7 @@ public class SettlerController extends UnitController{
         if (user.getCapital() == null)
             user.setCapital(city);
         user.addCity(city);
-        removeUnit(unit, user);
+        removeUnit(true, unit, user);
         addBasicProducts(city);
         addBasicUnits(city);
         // add neighbors to the city for free
