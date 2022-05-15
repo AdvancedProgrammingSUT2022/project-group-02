@@ -305,6 +305,8 @@ public class PlayGame {
                     String nameOfCity = matcher.group("city");
                     createCity(origin, user, nameOfCity);
                 }
+                else
+                    System.out.println("");
             }
             // order worker to improve the tile
             else if (tileInput.trim().equals("show possible improvements")) {
@@ -534,8 +536,10 @@ public class PlayGame {
     private boolean conditionsForPlaceCity(String input, Tile tile) {
         // neighbors of the tile should be neutral
         for (Tile neighbor : tile.getNeighbors()) {
-            if (neighbor.getOwner() != null)
+            if (neighbor.getOwner() != null) {
+                System.out.println("a tile has owner here");
                 return false;
+            }
         }
         if (tile.isCivilianUnitExists() && tile.getCivilianUnit().getName().equals("settler")) {
             if (tile.getCity() == null) {
