@@ -393,7 +393,7 @@ public class PlayGame {
             int yDestination = Integer.parseInt(matcher.group("y"));
             if (xDestination >= 0 && yDestination >= 0 && xDestination < map.getHeight() && yDestination < map.getWidth()) {
                 Tile destination = map.getSpecificTile(xDestination, yDestination);
-                if (destination != null) {
+                if (destination.getTerrain().isPassable()) {
                     if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
                         if (!destination.isMilitaryUnitExists() && destination.getTerrain().isPassable())
                             return moveUnit(origin, destination, origin.getMilitaryUnit(), user, true);
@@ -434,7 +434,8 @@ public class PlayGame {
         tilesInTheWay.add(tile);
         int mp = 0;
         for (Tile value : tilesInTheWay) {
-            if (value.getTerrain().getMovementPrice() > user.getTurns()) {
+            tileInformation(value);
+            if (value.getTerrain().getMovementPrice() > unit.getMP()) {
                 gameController.moveUnit(origin, value, unit, isMilitary);
                 System.out.println(mp + " movement by unit to get to the destination");
                 return value;
@@ -704,8 +705,10 @@ public class PlayGame {
     }
 
     private void tileInformation(Tile tile) {
-        System.out.println("Owner : " + tile.getOwner().getUsername());
-        System.out.println("City : " + tile.getCity().getName());
+        if (tile.getOwner() != null)
+            System.out.println("Owner : " + tile.getOwner().getUsername());
+        if (tile.getCity() != null)
+            System.out.println("City : " + tile.getCity().getName());
         System.out.println("Coordinate : -x " + tile.getX() + " -y " + tile.getY());
         tileDetails(tile);
     }

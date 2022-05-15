@@ -75,7 +75,7 @@ public class MapController {
         int fullCost = distance + cost;
         for (int i = 1; i < tile.getNeighbors().size(); i++) {
             // if the tile is mountain or ocean or there is same unit in this tile do not add it
-            if (checkConditionOfAddingTheTile(tile, isMilitary))
+            if (checkConditionOfAddingTheTile(tile.getNeighbors().get(i), isMilitary))
                 continue;
             //swap
             if (tile.getNeighbors().get(i).getTerrain().getMovementPrice() + findDistance(tile.getNeighbors().get(i), destination) < fullCost) {
