@@ -74,35 +74,27 @@ public class GameController {
         return null;
     }
 
-    public String moveUnit(Tile origin, Tile destination, Unit unit, boolean isMilitary) {
-        if (isMilitary) {
-            if(destination.isMilitaryUnitExists())
-                return "there is already exists another military unit";
-            return moveMilitary(origin, destination, (MilitaryUnit) unit);
-        }
-        else {
-            if(destination.isCivilianUnitExists())
-                return "there is already exists another civilian unit";
-            return moveCivilian(origin, destination, (Civilian) unit);
-        }
+    public void moveUnit(Tile origin, Tile destination, Unit unit, boolean isMilitary) {
+        if (isMilitary)
+            moveMilitary(origin, destination, (MilitaryUnit) unit);
+        else
+            moveCivilian(origin, destination, (Civilian) unit);
     }
 
-    private String moveMilitary(Tile origin, Tile destination, MilitaryUnit militaryUnit) {
+    private void moveMilitary(Tile origin, Tile destination, MilitaryUnit militaryUnit) {
         militaryUnit.setTile(destination);
         origin.setMilitaryUnit(null);
         origin.setMilitaryUnitExists(false);
         destination.setMilitaryUnit(militaryUnit);
         destination.setMilitaryUnitExists(true);
-        return "military unit moved successfully";
     }
 
-    private String moveCivilian(Tile origin, Tile destination, Civilian civilian) {
+    private void moveCivilian(Tile origin, Tile destination, Civilian civilian) {
         civilian.setTile(destination);
         origin.setCivilianUnit(null);
         origin.setCivilianUnitExists(false);
         destination.setCivilianUnit(civilian);
         destination.setCivilianUnitExists(true);
-        return "civilian unit moved successfully";
     }
 
     public int getTurnForEachPlayer() {
@@ -266,13 +258,6 @@ public class GameController {
                 i = city.getPossibleUnits().size();
             }
         }
-    }
-
-    public Unit findProductionUnit(City city, Product product) {
-        for (int i = 0; i < city.getPossibleUnits().size(); i++)
-            if (city.getPossibleUnits().get(i).getName().equals(product.getName()))
-                return city.getPossibleUnits().get(i);
-        return null;
     }
 
     public void increaseCitizens(User user){

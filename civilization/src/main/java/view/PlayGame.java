@@ -380,17 +380,15 @@ public class PlayGame {
 
     // check everything about moving the unit
     private void moveUnitConditions(Tile origin, User user, Matcher matcher) {
-        System.out.println(origin.getCivilianUnit() != null );
         if ((origin.getCivilianUnit() != null && origin.getCivilianUnit().getOwner().equals(user)) ||
                 (origin.getMilitaryUnit() != null && origin.getMilitaryUnit().getOwner().equals(user))) {
             int xDestination = Integer.parseInt(matcher.group("x"));
             int yDestination = Integer.parseInt(matcher.group("y"));
-            if (xDestination >= 0 && yDestination >= 0) {
-                Tile destination = gameController.findTile(xDestination, yDestination);
+            if (xDestination >= 0 && yDestination >= 0 && xDestination < map.getHeight() && yDestination < map.getWidth()) {
+                Tile destination = map.getSpecificTile(xDestination, yDestination);
                 if (destination != null) {
                     if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
-                        if (!destination.isMilitaryUnitExists() && !destination.getTerrain().getName().equals("mountain")
-                                && !destination.getTerrain().getName().equals("ocean"))
+                        if (!destination.isMilitaryUnitExists() && destination.getTerrain().isPassable())
                             moveUnit(origin, destination, origin.getMilitaryUnit(), user, true);
                         else
                             System.out.println("can't move a unit to this tile");
