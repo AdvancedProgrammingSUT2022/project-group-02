@@ -96,7 +96,7 @@ public class CombatControllerTest {
         militaryUnit.setHP(15);
         militaryUnit2.setHP(2);
         selectedTileForDefend.setMilitaryUnit(militaryUnit2);
-        City city = new City(" ", selectedTileForDefend, attackerUser, tileList, 20, 20, militaryUnit2, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, null, null, null, false, null, 0);
+        City city = new City(" ",selectedTileForDefend,attackerUser,tileList,20,20,militaryUnit2,null,0,0,0,0,0,0,0,0,0,null,null,false,null,0);
         selectedTileForDefend.setCity(city);
         selectedTileForDefend.setCivilianUnit(militaryUnit2);
         Assert.assertEquals("you got a victory in this attack", combatController.combatHandler(attackerUser, selectedTileForAttack, selectedTileForDefend));
@@ -123,7 +123,7 @@ public class CombatControllerTest {
         militaryUnit.setHP(15);
         militaryUnit2.setHP(7);
         selectedTileForDefend.setMilitaryUnit(militaryUnit2);
-        City city = new City(" ", selectedTileForDefend, attackerUser, tileList, 20, 20, militaryUnit2, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, null, null, null, false, null, 0);
+        City city = new City(" ",selectedTileForDefend,attackerUser,tileList,20,20,militaryUnit2,null,0,0,0,0,0,0,0,0,0,null,null,false,null,0);
         selectedTileForDefend.setCity(city);
         selectedTileForDefend.setCivilianUnit(militaryUnit2);
         Assert.assertEquals("you could not get this tile. but you destroyed the military unit of adversary", combatController.combatHandler(attackerUser, selectedTileForAttack, selectedTileForDefend));
@@ -150,7 +150,7 @@ public class CombatControllerTest {
         militaryUnit.setHP(15);
         militaryUnit2.setHP(20);
         selectedTileForDefend.setMilitaryUnit(militaryUnit2);
-        City city = new City(" ", selectedTileForDefend, attackerUser, tileList, 20, 20, militaryUnit2, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, null, null, null, false, null, 0);
+        City city = new City(" ",selectedTileForDefend,attackerUser,tileList,20,20,militaryUnit2,null,0,0,0,0,0,0,0,0,0,null,null,false,null,0);
         selectedTileForDefend.setCity(city);
         selectedTileForDefend.setCivilianUnit(militaryUnit2);
         Assert.assertEquals("you made a damage to adversary military unit but you could not destroy and get the tile", combatController.combatHandler(attackerUser, selectedTileForAttack, selectedTileForDefend));
@@ -177,7 +177,7 @@ public class CombatControllerTest {
         militaryUnit.setHP(15);
         militaryUnit2.setHP(2);
         selectedTileForDefend.setMilitaryUnit(militaryUnit2);
-        City city = new City(" ", selectedTileForDefend, attackerUser, tileList, 20, 20, militaryUnit2, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, null, null, null, false, null, 0);
+        City city = new City(" ",selectedTileForDefend,attackerUser,tileList,20,20,militaryUnit2,null,0,0,0,0,0,0,0,0,0,null,null,false,null,0);
         selectedTileForDefend.setCity(city);
         selectedTileForDefend.setCivilianUnit(militaryUnit2);
         Assert.assertEquals("you got a victory in this attack", combatController.combatHandler(attackerUser, selectedTileForAttack, selectedTileForDefend));
@@ -204,7 +204,7 @@ public class CombatControllerTest {
         militaryUnit.setHP(15);
         militaryUnit2.setHP(7);
         selectedTileForDefend.setMilitaryUnit(militaryUnit2);
-        City city = new City(" ", selectedTileForDefend, attackerUser, tileList, 20, 20, militaryUnit2, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, null, null, null, false, null, 0);
+        City city = new City(" ",selectedTileForDefend,attackerUser,tileList,20,20,militaryUnit2,null,0,0,0,0,0,0,0,0,0,null,null,false,null,0);
         selectedTileForDefend.setCity(city);
         selectedTileForDefend.setCivilianUnit(militaryUnit2);
         Assert.assertEquals("you missed your military unit but the unit of adversary is also killed", combatController.combatHandler(attackerUser, selectedTileForAttack, selectedTileForDefend));
@@ -231,7 +231,7 @@ public class CombatControllerTest {
         militaryUnit.setHP(15);
         militaryUnit2.setHP(20);
         selectedTileForDefend.setMilitaryUnit(militaryUnit2);
-        City city = new City(" ", selectedTileForDefend, attackerUser, tileList, 20, 20, militaryUnit2, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, null, null, null, false, null, 0);
+        City city = new City(" ",selectedTileForDefend,attackerUser,tileList,20,20,militaryUnit2,null,0,0,0,0,0,0,0,0,0,null,null,false,null,0);
         selectedTileForDefend.setCity(city);
         selectedTileForDefend.setCivilianUnit(militaryUnit2);
         Assert.assertEquals("you missed this attack and your military unit", combatController.combatHandler(attackerUser, selectedTileForAttack, selectedTileForDefend));
