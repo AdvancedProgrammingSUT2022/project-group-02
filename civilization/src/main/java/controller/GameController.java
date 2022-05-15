@@ -281,7 +281,7 @@ public class GameController {
         user.setProductPerTurn(0);
         user.setSciencePerTurn(0);
         new ResourceController().userResource(user, map);
-        if (user.getImprovements() != null) {
+        if (user.getImprovements() != null && user.getImprovements().size() > 0) {
             for (Improvement improvement : user.getImprovements()) {
                 if (!improvement.getTile().LootedStatus()) {
                     user.setGoldPerTurn(user.getGoldPerTurn() + improvement.getGoldRate());

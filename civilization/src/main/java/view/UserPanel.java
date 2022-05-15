@@ -191,6 +191,7 @@ public class UserPanel {
         notification.add("Dear " + user.getColor() + user.getUsername() + Colors.RESET);
         System.out.println("you have completed producing " + user.getColor() + unit.getName() + Colors.RESET);
         notification.add("you have completed producing " + user.getColor() + unit.getName() + Colors.RESET);
+        System.out.println("Unit coordinate : -x " + unit.getTile().getX() + " -y " + unit.getTile().getY());
         unitNotification(notification, unit);
         user.addHistoryOfNotification(notification);
     }
@@ -198,7 +199,6 @@ public class UserPanel {
     private static void unitNotification(ArrayList<String> notification, Unit unit) {
         System.out.println(Colors.PURPLE + "Unit name : " + unit.getName());
         notification.add(Colors.PURPLE + "Unit name : " + unit.getName());
-        System.out.println("Unit coordinate : -x " + unit.getTile().getX() + " -y " + unit.getTile().getY());
         System.out.println("Unit product price : " + unit.getProductionPrice());
         notification.add("Unit product price : " + unit.getProductionPrice());
         System.out.println("Unit gold price : " + unit.getGoldPrice());
