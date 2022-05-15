@@ -37,11 +37,13 @@ public class CityMenu {
         while (true) {
             cityInput = scanner.nextLine();
             // get out
-            if (cityInput.equals("city exit"))
+            if (cityInput.equals("city exit")) {
+                System.out.println("back to play game");
                 return;
+            }
             // show player cities
             else if (cityInput.equals("user cities")) {
-                if (user.getCities() != null || user.getCities().size() == 0) {
+                if (user.getCities() != null && user.getCities().size() > 0) {
                     int index = 1;
                     for (City city : user.getCities()) {
                         System.out.println(index + "- " + city.getName());
@@ -90,11 +92,13 @@ public class CityMenu {
 
     public void cityPage(City city, User user, Scanner scanner) {
         String cityInput;
-        System.out.println("you are in the city page of city : " + city.getName());
+        System.out.println("you are in the city page of : " + city.getName());
         while (true) {
             cityInput = scanner.nextLine();
-            if (cityInput.trim().equals("city exit"))
+            if (cityInput.trim().equals("city exit")) {
+                System.out.println("back to city menu");
                 return;
+            }
             else if (cityInput.trim().equals("buy tile")) {
                 ArrayList<Tile> neighborOfCity = mapController.neighborOfCity(city);
 
@@ -160,6 +164,9 @@ public class CityMenu {
             else if (cityInput.trim().equals("set citizens")){
                 gameController.setCitizen(scanner, city, this);
             }
+            else if (cityInput.trim().equals("city information")) {
+                cityInformation(city);
+            }
             else
                 System.out.println("invalid command");
         }
@@ -168,7 +175,7 @@ public class CityMenu {
     private void setProduction(City city, User user, Scanner scanner) {
         int index = 1;
         for (Product product : city.getProducts()) {
-            System.out.println(index + "- " + product.getName());
+            System.out.println(index + "- " + product.getName() + " cost : " + product.getTurnCost());
             index++;
         }
         String productInput;
@@ -239,6 +246,24 @@ public class CityMenu {
                 }
             case 3:
                     System.out.println("the citizen employed on the selected tile successfully");
+        }
+    }
+
+    private void cityInformation(City city) {
+        System.out.println(Colors.YELLOW + "Name : " + city.getName());
+        System.out.println("Owner : " + city.getOwner().getUsername());
+        System.out.println("Coordinate : -x " + city.getTile().getX() + " -y " + city.getTile().getY());
+        System.out.println("Possible products :");
+        for (Product product : city.getProducts()) {
+            System.out.println("Name : " + product.getName());
+            System.out.println("Price : " + product.getTurnCost());
+        }
+        System.out.println("Ownership tile :");
+        int index = 1;
+        for (Tile ownerShipTile : city.getOwnerShipTiles()) {
+            System.out.println(index + "- : -x " + ownerShipTile.getX() + " -y " + ownerShipTile.getY());
+            PlayGame.tileDetails(ownerShipTile);
+            index++;
         }
     }
 }

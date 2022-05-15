@@ -91,8 +91,7 @@ public class MapController {
     private boolean checkConditionOfAddingTheTile(Tile tile, boolean isMilitary) {
         boolean militaryConflict = isMilitary && tile.isMilitaryUnitExists();
         boolean civilianConflict = !isMilitary && tile.isCivilianUnitExists();
-        boolean isMountainOrOcean = tile.getTerrain().getName().equals("mountain") || tile.getTerrain().getName().equals("ocean");
-        return militaryConflict || civilianConflict || isMountainOrOcean;
+        return militaryConflict || civilianConflict || !tile.getTerrain().isPassable();
     }
 
     public void addAllVisibleAndVisitedTiles(User user) {
