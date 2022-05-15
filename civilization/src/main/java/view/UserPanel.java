@@ -1,5 +1,6 @@
 package view;
 
+import controller.ColorsController;
 import controller.GameController;
 import controller.enums.Colors;
 import model.*;
@@ -9,15 +10,18 @@ import java.util.Scanner;
 
 public class UserPanel {
     private GameController gameController;
+    private final ColorsController colorsController = new ColorsController();
 
     public UserPanel(GameController gameController) {
         this.gameController = gameController;
     }
 
     public void run(Scanner scanner, User user) {
-        System.out.println("welcome to user panel dear " + user.getColor() + user.getUsername() + Colors.RESET);
+        System.out.println("welcome to user panel dear " + colorsController.getColorOfUser(user) + user.getUsername() + Colors.RESET);
         System.out.println(Colors.YELLOW + "to see history of notification press -show history-");
         System.out.println("to see military information and overview press -military overview-");
+        System.out.println("to see all the details about units press -unit panel-");
+        System.out.println("to see notification history press -show history-");
         System.out.println("to see economic information and overview press -economic overview-" + Colors.RESET);
         String userInput;
         while (true){
@@ -49,7 +53,7 @@ public class UserPanel {
 
     private void militaryOverview(User user) {
         System.out.println(user.getUsername() + " have " + user.getUnits().size() + " units");
-        if (user.getUnits() != null) {
+        if (user.getUnits() != null && user.getUnits().size() > 0) {
             int numberOfWorkers = 0;
             int numberOfSettlers = 0;
             int numberOfScout = 0;
@@ -71,7 +75,7 @@ public class UserPanel {
     }
 
     private void economicOverview(User user) {
-        System.out.println("Dear " + user.getColor() + user.getUsername() + Colors.RESET);
+        System.out.println("Dear " + colorsController.getColorOfUser(user) + user.getUsername() + Colors.RESET);
         System.out.println(Colors.GREEN + "Gold per turn : " + user.getGoldPerTurn());
         System.out.println("Production per turn : " + user.getProductPerTurn());
         System.out.println("Food per turn : " + user.getFoodPerTurn() + Colors.RESET);
@@ -104,13 +108,16 @@ public class UserPanel {
     }
 
     public static void researchDoneNotification(User user, Technology technology) {
+        ColorsController colorsController = new ColorsController();
         ArrayList<String> notification = new ArrayList<>();
         System.out.println(Colors.RED + "NOTICE!!!" + Colors.RESET);
         notification.add(Colors.RED + "NOTICE!!!" + Colors.RESET);
-        System.out.println("Dear " + user.getColor() + user.getUsername() + Colors.RESET);
-        notification.add("Dear " + user.getColor() + user.getUsername() + Colors.RESET);
-        System.out.println("you have completed research on " + user.getColor() + technology.getName() + Colors.RESET);
-        notification.add("you have completed research on " + user.getColor() + technology.getName() + Colors.RESET);
+        System.out.println("Dear " + colorsController.getColorOfUser(user) + user.getUsername() + Colors.RESET);
+        notification.add("Dear " + colorsController.getColorOfUser(user) + user.getUsername() + Colors.RESET);
+        System.out.println("you have completed research on " + colorsController.getColorOfUser(user)
+                + technology.getName() + Colors.RESET);
+        notification.add("you have completed research on " + colorsController.getColorOfUser(user)
+                + technology.getName() + Colors.RESET);
         if (technology.getGivenImprovement() != null) {
             System.out.println("this technology will enable you to work on this improvements :");
             notification.add("this technology will enable you to work on this improvements :");
@@ -139,13 +146,14 @@ public class UserPanel {
         user.addHistoryOfNotification(notification);
     }
     public static void improvementDoneNotification(User user, Improvement improvement) {
+        ColorsController colorsController = new ColorsController();
         ArrayList<String> notification = new ArrayList<>();
         System.out.println(Colors.RED + "NOTICE!!!" + Colors.RESET);
         notification.add(Colors.RED + "NOTICE!!!" + Colors.RESET);
-        System.out.println("Dear " + user.getColor() + user.getUsername() + Colors.RESET);
-        notification.add("Dear " + user.getColor() + user.getUsername() + Colors.RESET);
-        System.out.println("you have completed working on " + user.getColor() + improvement.getName() + Colors.RESET);
-        notification.add("you have completed working on " + user.getColor() + improvement.getName() + Colors.RESET);
+        System.out.println("Dear " + colorsController.getColorOfUser(user) + user.getUsername() + Colors.RESET);
+        notification.add("Dear " + colorsController.getColorOfUser(user) + user.getUsername() + Colors.RESET);
+        System.out.println("you have completed working on " + colorsController.getColorOfUser(user) + improvement.getName() + Colors.RESET);
+        notification.add("you have completed working on " + colorsController.getColorOfUser(user) + improvement.getName() + Colors.RESET);
         System.out.println(Colors.YELLOW + "this improvement will give you : ");
         notification.add(Colors.YELLOW + "this improvement will give you : ");
         System.out.println("Food rate : " + improvement.getFoodRate());
@@ -175,18 +183,16 @@ public class UserPanel {
         }
     }
 
-    public static void productDoneNotification(User user, City city, Product product, GameController gameController) {
+    public static void productDoneNotification(User user, City city, Unit unit, GameController gameController) {
         ArrayList<String> notification = new ArrayList<>();
         System.out.println(Colors.RED + "NOTICE!!!" + Colors.RESET);
         notification.add(Colors.RED + "NOTICE!!!" + Colors.RESET);
         System.out.println("Dear " + user.getColor() + user.getUsername() + Colors.RESET);
         notification.add("Dear " + user.getColor() + user.getUsername() + Colors.RESET);
-        System.out.println("you have completed producing " + user.getColor() + product.getName() + Colors.RESET);
-        notification.add("you have completed producing " + user.getColor() + product.getName() + Colors.RESET);
-        Unit unit = gameController.findProductionUnit(city, product);
-        if (unit != null) {
-            unitNotification(notification, unit);
-        }
+        System.out.println("you have completed producing " + user.getColor() + unit.getName() + Colors.RESET);
+        notification.add("you have completed producing " + user.getColor() + unit.getName() + Colors.RESET);
+        System.out.println("Unit coordinate : -x " + unit.getTile().getX() + " -y " + unit.getTile().getY());
+        unitNotification(notification, unit);
         user.addHistoryOfNotification(notification);
     }
 
@@ -205,5 +211,16 @@ public class UserPanel {
         notification.add("Ranged combat strength : " + unit.getRangeCombatStrength());
         System.out.println("Movement point : " + unit.getMP() + Colors.RESET);
         notification.add("Movement point : " + unit.getMP() + Colors.RESET);
+    }
+
+    public void citizensIncreased(User user, City city){
+        ArrayList<String> notification = new ArrayList<>();
+        System.out.println(Colors.RED + "NOTICE!!!" + Colors.RESET);
+        notification.add(Colors.RED + "NOTICE!!!" + Colors.RESET);
+        System.out.println("Dear " + colorsController.getColorOfUser(user) + user.getNickname() + Colors.RESET);
+        notification.add("Dear " + colorsController.getColorOfUser(user) + user.getNickname() + Colors.RESET);
+        System.out.println("Citizens of your city: " + city.getName() + " increased");
+        notification.add("Citizens of your city: " + city.getName() + " increased");
+        user.addHistoryOfNotification(notification);
     }
 }

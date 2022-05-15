@@ -5,6 +5,7 @@ public class Unit extends PhysicalObject{
     private String name;
     private String status;
     private int goldPrice;
+    private int Maintenance;
     private int productionPrice;
     private int level;
     private int MP;
@@ -13,10 +14,12 @@ public class Unit extends PhysicalObject{
     private int combatStrength;
     private int rangeCombatStrength;
     private int maintainGold;
+    private int lastingMP;
 
     public Unit(String name, Tile tile, int HP, int goldPrice, int productionPrice, int level, int MP, int combatStrength, int rangeCombatStrength,
                 User owner, int attackPoint, int maintainGold) {
         super(false, attackPoint, HP, owner, tile);
+        this.maintainGold = 1;
         this.name = name;
         this.goldPrice = goldPrice;
         this.productionPrice = productionPrice;
@@ -27,6 +30,7 @@ public class Unit extends PhysicalObject{
         intact = true;
         XP = 0;
         this.maintainGold = maintainGold;
+        lastingMP = MP;
     }
 
     public String getStatus() {
@@ -115,5 +119,17 @@ public class Unit extends PhysicalObject{
 
     public int getMaintainGold() {
         return maintainGold;
+    }
+
+    public int getMaintenance() {
+        return Maintenance;
+    }
+
+    public int getLastingMP() {
+        return lastingMP;
+    }
+
+    public void setLastingMP(int lastingMP) {
+        this.lastingMP = lastingMP;
     }
 }

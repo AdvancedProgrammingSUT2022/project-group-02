@@ -65,4 +65,9 @@ public class UnitController {
             return false;
         } else return true;
     }
+
+    public void repairMovementPoint(User user) {
+        for (Unit unit : user.getUnits())
+            unit.setMP(unit.getLastingMP());
+    }
 }

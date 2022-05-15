@@ -1,6 +1,7 @@
 package view;
 
 import controller.*;
+import controller.enums.Colors;
 import model.*;
 import controller.enums.RegexEnums;
 import model.City;
@@ -36,11 +37,13 @@ public class CityMenu {
         while (true) {
             cityInput = scanner.nextLine();
             // get out
-            if (cityInput.equals("city exit"))
+            if (cityInput.equals("city exit")) {
+                System.out.println("back to play game");
                 return;
+            }
             // show player cities
             else if (cityInput.equals("user cities")) {
-                if (user.getCities() != null || user.getCities().size() == 0) {
+                if (user.getCities() != null && user.getCities().size() > 0) {
                     int index = 1;
                     for (City city : user.getCities()) {
                         System.out.println(index + "- " + city.getName());
@@ -89,11 +92,13 @@ public class CityMenu {
 
     public void cityPage(City city, User user, Scanner scanner) {
         String cityInput;
-        System.out.println("you are in the city page");
+        System.out.println("you are in the city page of : " + city.getName());
         while (true) {
             cityInput = scanner.nextLine();
-            if (cityInput.trim().equals("city exit"))
+            if (cityInput.trim().equals("city exit")) {
+                System.out.println("back to city menu");
                 return;
+            }
             else if (cityInput.trim().equals("buy tile")) {
                 ArrayList<Tile> neighborOfCity = mapController.neighborOfCity(city);
 
@@ -121,7 +126,7 @@ public class CityMenu {
                                     }
                                 }
                                 user.setGold(user.getGold() - neighborOfCity.get(index - 1).getPrice());
-                                city.addOwnerShipLand(neighborOfCity.get(index - 1));
+                                city.addOwnerShipTiles(neighborOfCity.get(index - 1));
                                 user.addTerritory(neighborOfCity.get(index - 1));
                             }
                             else
@@ -156,6 +161,12 @@ public class CityMenu {
                 else
                     System.out.println("you don't produce anything");
             }
+            else if (cityInput.trim().equals("set citizens")){
+                gameController.setCitizen(scanner, city, this);
+            }
+            else if (cityInput.trim().equals("city information")) {
+                cityInformation(city);
+            }
             else
                 System.out.println("invalid command");
         }
@@ -164,7 +175,8 @@ public class CityMenu {
     private void setProduction(City city, User user, Scanner scanner) {
         int index = 1;
         for (Product product : city.getProducts()) {
-            System.out.println(index + "- " + product.getName());
+            System.out.println(index + "- " + product.getName() + " cost : " + product.getTurnCost());
+            index++;
         }
         String productInput;
         System.out.println("you are in production bar");
@@ -196,6 +208,62 @@ public class CityMenu {
             }
             else
                 System.out.println("invalid command");
+        }
+    }
+
+    public void setCitizenInterface(int which, City city){
+        int index = 1;
+        switch (which){
+            case 1:
+                System.out.println("choose one the citizens number");
+
+                for (Citizen citizen : city.getCitizens()) {
+                    if (citizen.getTile() != null){
+                        System.out.println(index + ": working on Tile -> x " + citizen.getTile().getX() + " y " + citizen.getTile().getY());
+                    } else {
+                        System.out.println(index + ": unemployed");
+                    }
+                    index++;
+                }
+                break;
+            case 2:
+                System.out.println("choose one tile number to employ the citizen on the tile");
+                for (Tile ownerShipTile : city.getOwnerShipTiles()) {
+                    System.out.println(Colors.PURPLE + index + "- Tile coordination : x " + ownerShipTile.getX()
+                            + " y " + ownerShipTile.getY() + Colors.RESET);
+                    if (ownerShipTile.getFeature() != null) {
+                        System.out.println("tile information -> foodRate : "
+                                + (ownerShipTile.getTerrain().getFoodRate() + ownerShipTile.getFeature().getFoodRate())
+                                + " *** goldRate : "
+                                + (ownerShipTile.getTerrain().getGoldRate() + ownerShipTile.getFeature().getGoldRate())
+                                + " *** productionRate : "
+                                + (ownerShipTile.getTerrain().getProductionRate() + ownerShipTile.getFeature().getProductionRate()));
+                    } else
+                        System.out.println("tile information -> foodRate : "
+                                + ownerShipTile.getTerrain().getFoodRate() + " *** goldRate : "
+                                + ownerShipTile.getTerrain().getGoldRate() + " *** productionRate : "
+                                + ownerShipTile.getTerrain().getProductionRate());
+                }
+            case 3:
+                    System.out.println("the citizen employed on the selected tile successfully");
+        }
+    }
+
+    private void cityInformation(City city) {
+        System.out.println(Colors.YELLOW + "Name : " + city.getName());
+        System.out.println("Owner : " + city.getOwner().getUsername());
+        System.out.println("Coordinate : -x " + city.getTile().getX() + " -y " + city.getTile().getY());
+        System.out.println("Possible products :");
+        for (Product product : city.getProducts()) {
+            System.out.println("Name : " + product.getName());
+            System.out.println("Price : " + product.getTurnCost());
+        }
+        System.out.println("Ownership tile :");
+        int index = 1;
+        for (Tile ownerShipTile : city.getOwnerShipTiles()) {
+            System.out.println(index + "- : -x " + ownerShipTile.getX() + " -y " + ownerShipTile.getY());
+            PlayGame.tileDetails(ownerShipTile);
+            index++;
         }
     }
 }

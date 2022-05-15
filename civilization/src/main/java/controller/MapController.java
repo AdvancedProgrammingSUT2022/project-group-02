@@ -75,7 +75,7 @@ public class MapController {
         int fullCost = distance + cost;
         for (int i = 1; i < tile.getNeighbors().size(); i++) {
             // if the tile is mountain or ocean or there is same unit in this tile do not add it
-            if (checkConditionOfAddingTheTile(tile, isMilitary))
+            if (checkConditionOfAddingTheTile(tile.getNeighbors().get(i), isMilitary))
                 continue;
             //swap
             if (tile.getNeighbors().get(i).getTerrain().getMovementPrice() + findDistance(tile.getNeighbors().get(i), destination) < fullCost) {
@@ -91,8 +91,7 @@ public class MapController {
     private boolean checkConditionOfAddingTheTile(Tile tile, boolean isMilitary) {
         boolean militaryConflict = isMilitary && tile.isMilitaryUnitExists();
         boolean civilianConflict = !isMilitary && tile.isCivilianUnitExists();
-        boolean isMountainOrOcean = tile.getTerrain().getName().equals("mountain") || tile.getTerrain().getName().equals("ocean");
-        return militaryConflict || civilianConflict || isMountainOrOcean;
+        return militaryConflict || civilianConflict || !tile.getTerrain().isPassable();
     }
 
     public void addAllVisibleAndVisitedTiles(User user) {
@@ -205,83 +204,83 @@ public class MapController {
     public ArrayList<Tile> firstSetOfSettlers(ArrayList<User> users) {
         ArrayList<Tile> tiles = new ArrayList<>();
         //user0
-        Settler settler = new Settler("settler", map.getSpecificTile(2, 40), 0, 0, 0, 0, 0, 0, 0, null, users.get(0), 0, 0);
+        Settler settler = new Settler("settler", map.getSpecificTile(2, 40), 100, 1, 1, 1, 2, 0, 0, null, users.get(0), 0, 0);
         users.get(0).addUnit(settler);
         map.getSpecificTile(2, 40).setCivilianUnit(settler);
         map.getSpecificTile(2, 40).setCivilianUnitExists(true);
         tiles.add(map.getSpecificTile(2, 40));
         //user1
-        settler = new Settler("settler", map.getSpecificTile(3, 42), 0, 0, 0, 0, 0, 0, 0, null, users.get(1), 0, 0);
+        settler = new Settler("settler", map.getSpecificTile(7, 39), 100, 1, 1, 1, 2, 0, 0, null, users.get(1), 0, 0);
         users.get(1).addUnit(settler);
-        map.getSpecificTile(3, 42).setCivilianUnit(settler);
-        map.getSpecificTile(3, 42).setCivilianUnitExists(true);
-        tiles.add(map.getSpecificTile(3, 42));
+        map.getSpecificTile(7, 39).setCivilianUnit(settler);
+        map.getSpecificTile(7, 39).setCivilianUnitExists(true);
+        tiles.add(map.getSpecificTile(7, 39));
         if (users.size() <= 2) return tiles;
         //user2
-        settler = new Settler("settler", map.getSpecificTile(4, 46), 0, 0, 0, 0, 0, 0, 0, null, users.get(2), 0, 0);
+        settler = new Settler("settler", map.getSpecificTile(4, 46), 100, 1, 1, 1, 2, 0, 0, null, users.get(2), 0, 0);
         users.get(2).addUnit(settler);
         map.getSpecificTile(4, 46).setCivilianUnit(settler);
         map.getSpecificTile(4, 46).setCivilianUnitExists(true);
         tiles.add(map.getSpecificTile(4, 46));
         if (users.size() <= 3) return tiles;
         //user3
-        settler = new Settler("settler", map.getSpecificTile(5, 33), 0, 0, 0, 0, 0, 0, 0, null, users.get(3), 0, 0);
+        settler = new Settler("settler", map.getSpecificTile(5, 33), 100, 1, 1, 1, 2, 0, 0, null, users.get(3), 0, 0);
         users.get(3).addUnit(settler);
         map.getSpecificTile(5, 33).setCivilianUnit(settler);
         map.getSpecificTile(5, 33).setCivilianUnitExists(true);
         tiles.add(map.getSpecificTile(5, 33));
         if (users.size() <= 4) return tiles;
         //user4
-        settler = new Settler("settler", map.getSpecificTile(5, 61), 0, 0, 0, 0, 0, 0, 0, null, users.get(4), 0, 0);
+        settler = new Settler("settler", map.getSpecificTile(5, 61), 100, 1, 1, 1, 2, 0, 0, null, users.get(4), 0, 0);
         users.get(4).addUnit(settler);
         map.getSpecificTile(5, 61).setCivilianUnit(settler);
         map.getSpecificTile(5, 61).setCivilianUnitExists(true);
         tiles.add(map.getSpecificTile(5, 61));
         if (users.size() <= 5) return tiles;
         //user5
-        settler = new Settler("settler", map.getSpecificTile(7, 4), 0, 0, 0, 0, 0, 0, 0, null, users.get(5), 0, 0);
+        settler = new Settler("settler", map.getSpecificTile(7, 4), 100, 1, 1, 1, 2, 0, 0, null, users.get(5), 0, 0);
         users.get(5).addUnit(settler);
         map.getSpecificTile(7, 4).setCivilianUnit(settler);
         map.getSpecificTile(7, 4).setCivilianUnitExists(true);
         tiles.add(map.getSpecificTile(7, 4));
         if (users.size() <= 6) return tiles;
         //user6
-        settler = new Settler("settler", map.getSpecificTile(7, 57), 0, 0, 0, 0, 0, 0, 0, null, users.get(6), 0, 0);
+        settler = new Settler("settler", map.getSpecificTile(7, 57), 100, 1, 1, 1, 2, 0, 0, null, users.get(6), 0, 0);
         users.get(6).addUnit(settler);
         map.getSpecificTile(7, 57).setCivilianUnit(settler);
         map.getSpecificTile(7, 57).setCivilianUnitExists(true);
         tiles.add(map.getSpecificTile(7, 57));
         if (users.size() <= 7) return tiles;
         //user7
-        settler = new Settler("settler", map.getSpecificTile(8, 33), 0, 0, 0, 0, 0, 0, 0, null, users.get(7), 0, 0);
+        settler = new Settler("settler", map.getSpecificTile(8, 33), 100, 1, 1, 1, 2, 0, 0, null, users.get(7), 0, 0);
         users.get(7).addUnit(settler);
         map.getSpecificTile(8, 33).setCivilianUnit(settler);
         map.getSpecificTile(8, 33).setCivilianUnitExists(true);
         tiles.add(map.getSpecificTile(8, 33));
         if (users.size() <= 8) return tiles;
         //user8
-        settler = new Settler("settler", map.getSpecificTile(11, 22), 0, 0, 0, 0, 0, 0, 0, null, users.get(8), 0, 0);
+        settler = new Settler("settler", map.getSpecificTile(11, 22), 100, 1, 1, 1, 2, 0, 0, null, users.get(8), 0, 0);
         users.get(8).addUnit(settler);
         map.getSpecificTile(11, 22).setCivilianUnit(settler);
         map.getSpecificTile(11, 22).setCivilianUnitExists(true);
         tiles.add(map.getSpecificTile(11, 22));
         if (users.size() <= 9) return tiles;
         //user9
-        settler = new Settler("settler", map.getSpecificTile(15, 8), 0, 0, 0, 0, 0, 0, 0, null, users.get(9), 0, 0);
+        settler = new Settler("settler", map.getSpecificTile(15, 8), 100, 1, 1, 1, 2, 0, 0, null, users.get(9), 0, 0);
         users.get(9).addUnit(settler);
         map.getSpecificTile(15, 8).setCivilianUnit(settler);
         map.getSpecificTile(15, 8).setCivilianUnitExists(true);
         tiles.add(map.getSpecificTile(15, 8));
         if (users.size() <= 10) return tiles;
         //user10
-        settler = new Settler("settler", map.getSpecificTile(16, 13), 0, 0, 0, 0, 0, 0, 0, null, users.get(10), 0, 0);
+        settler = new Settler("settler", map.getSpecificTile(16, 13), 100, 1, 1, 1, 2, 0, 0, null, users.get(10), 0, 0);
         users.get(10).addUnit(settler);
         map.getSpecificTile(16, 13).setCivilianUnit(settler);
         map.getSpecificTile(16, 13).setCivilianUnitExists(true);
         tiles.add(map.getSpecificTile(16, 13));
         if (users.size() <= 11) return tiles;
         //user11
-        settler = new Settler("settler", map.getSpecificTile(18, 32), 0, 0, 0, 0, 0, 0, 0, null, users.get(11), 0, 0);
+        settler = new Settler("settler", map.getSpecificTile(18, 32), 100, 1, 1, 1, 2, 0, 0, null, users.get(11), 0, 0);
         users.get(11).addUnit(settler);
         map.getSpecificTile(18, 32).setCivilianUnit(settler);
         map.getSpecificTile(18, 32).setCivilianUnitExists(true);
