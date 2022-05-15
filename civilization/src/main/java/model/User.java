@@ -13,6 +13,7 @@ public class User {
     private ArrayList<Tile> territory;
     private int goldPerTurn;
     private int happiness;
+    private int unhappiness;
     private int science;
     private int sciencePerTurn;
     private int food;
@@ -27,6 +28,7 @@ public class User {
     private String civilization;
     private ArrayList<Unit> units;
     private ArrayList<City> cities;
+    private ArrayList<City> annexedCities;
     private City capital;
     private ArrayList<Technology> technologies;
     private ArrayList<Improvement> improvements;
@@ -53,9 +55,12 @@ public class User {
         improvements = new ArrayList<>();
         units = new ArrayList<>();
         cities = new ArrayList<>();
+        annexedCities = new ArrayList<>();
         currentTechnology = null;
         researching = false;
         researchTurnLeft = 0;
+        happiness = 15;
+        unhappiness = 0;
         historyOfNotification = new ArrayList<>();
         food = 0;
         product = 0;
@@ -386,5 +391,21 @@ public class User {
 
     public void setProductPerTurn(int productPerTurn) {
         this.productPerTurn = productPerTurn;
+    }
+
+    public int getUnhappiness() {
+        return unhappiness;
+    }
+
+    public void setUnhappiness(int unhappiness) {
+        this.unhappiness = unhappiness;
+    }
+
+    public ArrayList<City> getAnnexedCities() {
+        return annexedCities;
+    }
+
+    public void setAnnexedCities(ArrayList<City> annexedCities) {
+        this.annexedCities = annexedCities;
     }
 }

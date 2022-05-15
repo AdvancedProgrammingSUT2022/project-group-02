@@ -6,12 +6,13 @@ import java.util.HashMap;
 public class City extends PhysicalObject {
     private final String name;
     private Tile cityLocation;
+    private boolean unhappinessEffect;
     private ArrayList<Tile> ownerShipTiles;
     private int defence;
     private Unit garrison;
     private ArrayList<Product> products;
     private int productTurnLeft;
-    private int citizens;
+    private int citizensNumber;
     private int food;
     private int production;
     private int gold;
@@ -19,18 +20,18 @@ public class City extends PhysicalObject {
     private int faith;
     private int tourism;
     private int culture;
-    private HashMap<Citizen, Tile> citizensLocation;
+    private int turnNumber;
     private ArrayList<Building> buildings;
     private boolean warStatus;
-    private ArrayList<Citizen> expertCitizens;
+    private ArrayList<Citizen> Citizens;
     private boolean productStatus;
     private Product currentProduction;
     private ArrayList<Unit> possibleUnits;
 
     public City(String name, Tile cityLocation, User ownerShip, ArrayList<Tile> ownerShipTiles, int HP, int defence,
-                Unit garrison, ArrayList<Product> products, int productTurnLeft, int citizens, int food, int production,
-                int gold, int science, int faith, int tourism, int culture, HashMap<Citizen, Tile> citizensLocation,
-                ArrayList<Building> buildings, ArrayList<Unit> units, boolean warStatus, ArrayList<Citizen> expertCitizens,
+                Unit garrison, ArrayList<Product> products, int productTurnLeft, int citizensNumber, int food, int production,
+                int gold, int science, int faith, int tourism, int culture, ArrayList<Building> buildings,
+                ArrayList<Unit> units, boolean warStatus, ArrayList<Citizen> Citizens,
                 int attackPoint) {
         super(true, attackPoint, HP, ownerShip, cityLocation);
         this.name = name;
@@ -39,7 +40,7 @@ public class City extends PhysicalObject {
         this.garrison = garrison;
         this.products = products;
         this.productTurnLeft = productTurnLeft;
-        this.citizens = citizens;
+        this.citizensNumber = citizensNumber;
         this.food = food;
         this.production = production;
         this.gold = gold;
@@ -47,20 +48,12 @@ public class City extends PhysicalObject {
         this.faith = faith;
         this.tourism = tourism;
         this.culture = culture;
-        this.citizensLocation = citizensLocation;
+        this.turnNumber = 0;
         this.buildings = buildings;
         this.warStatus = warStatus;
-        this.expertCitizens = expertCitizens;
+        this.Citizens = Citizens;
         this.currentProduction = null;
         this.cityLocation = cityLocation;
-    }
-
-    public void addOwnerShipLand(Tile tile) {
-        this.ownerShipTiles.add(tile);
-    }
-
-    public ArrayList<Tile> getOwnerShipLands() {
-        return this.ownerShipTiles;
     }
 
     public void setDefence(int amount) {
@@ -95,12 +88,12 @@ public class City extends PhysicalObject {
         return productTurnLeft;
     }
 
-    public void setCitizens(int amount) {
-        this.citizens = amount;
+    public void setCitizensNumber(int amount) {
+        this.citizensNumber = amount;
     }
 
-    public int getCitizens() {
-        return citizens;
+    public int getCitizensNumber() {
+        return citizensNumber;
     }
 
     public void setFood(int amount) {
@@ -159,14 +152,6 @@ public class City extends PhysicalObject {
         return culture;
     }
 
-    public void addCitizensLocation(Citizen citizen, Tile tile) {
-        this.citizensLocation.put(citizen, tile);
-    }
-
-    public HashMap<Citizen, Tile> getCitizensLocation() {
-        return citizensLocation;
-    }
-
     public void addBuildings(Building building) {
         this.buildings.add(building);
     }
@@ -183,12 +168,12 @@ public class City extends PhysicalObject {
         return warStatus;
     }
 
-    public void addExpertCitizen(Citizen citizen) {
-        this.expertCitizens.add(citizen);
+    public void addCitizen(Citizen citizen) {
+        this.Citizens.add(citizen);
     }
 
-    public ArrayList<Citizen> getExpertCitizens() {
-        return expertCitizens;
+    public ArrayList<Citizen> getCitizens() {
+        return Citizens;
     }
 
     public boolean isProductStatus() {
@@ -211,20 +196,16 @@ public class City extends PhysicalObject {
         return warStatus;
     }
 
-    public void setCitizensLocation(HashMap<Citizen, Tile> citizensLocation) {
-        this.citizensLocation = citizensLocation;
-    }
-
-    public void setOwnerShipTiles(ArrayList<Tile> ownerShipTiles) {
-        this.ownerShipTiles = ownerShipTiles;
+    public void addOwnerShipTiles(Tile tile) {
+        this.ownerShipTiles.add(tile);
     }
 
     public void setProducts(ArrayList<Product> products) {
         this.products = products;
     }
 
-    public void setExpertCitizens(ArrayList<Citizen> expertCitizens) {
-        this.expertCitizens = expertCitizens;
+    public void setCitizens(ArrayList<Citizen> citizens) {
+        this.Citizens = citizens;
     }
 
     public void setProductStatus(boolean productStatus) {
@@ -257,5 +238,21 @@ public class City extends PhysicalObject {
 
     public void addPossibleUnit(Unit unit) {
         this.possibleUnits.add(unit);
+    }
+
+    public boolean isUnhappinessEffect() {
+        return unhappinessEffect;
+    }
+
+    public void setUnhappinessEffect(boolean unhappinessEffect) {
+        this.unhappinessEffect = unhappinessEffect;
+    }
+
+    public int getTurnNumber() {
+        return turnNumber;
+    }
+
+    public void setTurnNumber(int turnNumber) {
+        this.turnNumber = turnNumber;
     }
 }

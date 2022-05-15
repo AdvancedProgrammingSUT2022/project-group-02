@@ -4,6 +4,7 @@ public class Resource {
 
     private final String name;
     private final String resourceType;
+    private boolean happinessEffect;
     private int tileX;
     private int tileY;
     private final int goldRate;
@@ -73,5 +74,13 @@ public class Resource {
 
     public void setAnnounce(boolean announce) {
         this.announce = announce;
+    }
+
+    public boolean isHappinessEffect() {
+        return happinessEffect;
+    }
+
+    public void setHappinessEffect(boolean happinessEffect) {
+        this.happinessEffect = happinessEffect;
     }
 }

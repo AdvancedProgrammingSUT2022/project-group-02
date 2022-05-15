@@ -10,11 +10,12 @@ public class SettlerController extends UnitController{
     public void createNewCity(Unit unit, User user, Tile tile, String nameOfCity) {
         ArrayList<Tile> ownerShipTiles = new ArrayList<>();
         ownerShipTiles.add(tile);
-        HashMap<Citizen, Tile> citizensLocations = new HashMap<>();
-        citizensLocations.put(new Citizen(), tile);
+        Citizen citizen = new Citizen(tile);
+        ArrayList<Citizen> citizens = new ArrayList<>();
+        citizens.add(citizen);
         City city = new City(nameOfCity, tile, user, ownerShipTiles, 100, 100, null, null,
-                50, 0, 1, 1, 1, 1, 1, 1, 1,
-                citizensLocations, null, null, false, null, 20);
+                50, 1, 1, 1, 1, 1, 1, 1, 1,
+                null, null, false, citizens, 20);
         tile.setCity(city);
         tile.setOwner(user);
         if (user.getCapital() == null)

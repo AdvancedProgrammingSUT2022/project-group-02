@@ -94,7 +94,10 @@ public class PlayGame {
             gameController.cityTurnProducts(user);
             gameController.userTurnResearch(user);
             gameController.userTurnWorker(user);
-            gameController.usersGoldHandling(user , map);
+            gameController.increaseCitizens(user);
+            gameController.citiesIncome(user);
+            gameController.usersIncomeHandling(user , map);
+            gameController.userHappiness(user);
             while (nextTurn) {
 
                 input = scanner.nextLine();
@@ -498,7 +501,12 @@ public class PlayGame {
     }
 
     public void showMap(User user) {
-        String ANSI_COLOR;
+        System.out.println("user nickname : " + new ColorsController().getColorOfUser(user) + user.getNickname() + Colors.RESET);
+        System.out.print("user Happiness : " + user.getHappiness());
+        System.out.print("           user UnHappiness : " + user.getUnhappiness());
+        System.out.print("           user Food : " + user.getFood());
+        System.out.print("           user Gold : " + user.getGold());
+        System.out.println("           user Science : " + user.getScience());
         //first top sides of left tiles of game board
         for (int j = 0; j < map.getWidth(); j++)
             System.out.print("   " + mapController.riverFinder(map.getTileBoard()[0][j], 0) + "              ");

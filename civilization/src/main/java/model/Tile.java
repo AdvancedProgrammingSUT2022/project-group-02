@@ -26,6 +26,7 @@ public class Tile {
     private City city;
     private int price;
     private boolean looted;
+    private boolean citizenExist;
 
     public Tile (int x, int y, User owner, Terrain terrain, int fogOfWarLevel, boolean isNearRiver,
                  boolean[] riverBorder, Resource resource, Feature feature) {
@@ -45,6 +46,7 @@ public class Tile {
         this.resource = resource;
         inProgress = false;
         price = 100;
+        citizenExist = false;
     }
 
     public boolean isNearRiver() {
@@ -191,8 +193,19 @@ public class Tile {
         this.city = city;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setPrice() {
+        price = 0;
+        price += this.getTerrain().getFoodRate() * 5;
+        if (this.getFeature() != null)
+            price += this.getFeature().getFoodRate() * 5;
+        price += this.getTerrain().getGoldRate() * 5;
+        if (this.getFeature() != null)
+            price += this.getFeature().getGoldRate() * 5;
+        price += this.getTerrain().getProductionRate() * 5;
+        if (this.getFeature() != null)
+            price += this.getFeature().getProductionRate() * 5;
+        if (this.isNearRiver())
+            price += 20;
     }
 
     public int getPrice() {
@@ -224,5 +237,13 @@ public class Tile {
 
     public void setNearRiver(boolean nearRiver) {
         isNearRiver = nearRiver;
+    }
+
+    public boolean isCitizenExist() {
+        return citizenExist;
+    }
+
+    public void setCitizenExist(boolean citizenExist) {
+        this.citizenExist = citizenExist;
     }
 }

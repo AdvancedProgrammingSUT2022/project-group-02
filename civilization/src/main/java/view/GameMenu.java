@@ -194,6 +194,7 @@ public class GameMenu {
         resources = new ArrayList<>();
         resources.add(new Resource("Sheep", "Bonus", "Pasture", 0, 2, 0, 0));
         resources.add(new Resource("Horse", "Strategic", "Pasture", 0, 0, 1, 0));
+        resources.add(new Resource("Cow", "Bonus", "Pasture", 0, 1, 0, 0));
         land = new ArrayList<>();
         land.add("Plain");
         land.add("Desert");
@@ -234,6 +235,7 @@ public class GameMenu {
         resources.add(new Resource("Fumigation", "Luxury", "Plantation", 2, 0, 0, 2));
         resources.add(new Resource("Silk", "Luxury", "Plantation", 2, 0, 0, 3));
         resources.add(new Resource("Sugar", "Luxury", "Plantation", 2, 0, 0, 2));
+        resources.add(new Resource("Color", "Luxury", "Plantation", 2, 0, 0, 2));
         land = new ArrayList<>();
         land.add("Plain");
         land.add("Desert");

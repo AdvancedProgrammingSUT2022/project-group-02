@@ -8,7 +8,7 @@ public class RemoveFeature {
     public void removeFeature(Worker worker, Tile tile){
         tile.setFeature(null);
         //remove feature needs 3 turns
-        worker.setRemainingTurnsToComplete(3);
+        worker.setRemainingTurnsToComplete(5);
         worker.setWorkingStatus(true);
         tile.setInProgress(true);
     }
