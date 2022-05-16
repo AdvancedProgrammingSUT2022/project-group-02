@@ -179,7 +179,8 @@ public class GameController {
                         // delete jungle and jungle and forest and marsh
                         if (worker.getImprovement() != null) {
                             if (worker.getImprovement().getName().equals("Farm") || worker.getImprovement().getName().equals("Mine"))
-                                afterBuildingFarmOrMine(worker.getOwner(), worker.getTile());
+                                if (worker.getTile().getFeature() != null)
+                                    afterBuildingFarmOrMine(worker.getOwner(), worker.getTile());
 
                             // notification for improvement
                             UserPanel.improvementDoneNotification(player, worker.getImprovement());
