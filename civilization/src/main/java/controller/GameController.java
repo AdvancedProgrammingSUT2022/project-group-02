@@ -177,25 +177,34 @@ public class GameController {
                     // if it is done
                     if (worker.getRemainingTurnsToComplete() <= 1) {
                         // delete jungle and jungle and forest and marsh
-                        if (worker.getImprovement().getName().equals("Farm") || worker.getImprovement().getName().equals("Mine"))
-                            afterBuildingFarmOrMine(worker.getOwner(), worker.getTile());
+                        if (worker.getImprovement() != null) {
+                            if (worker.getImprovement().getName().equals("Farm") || worker.getImprovement().getName().equals("Mine"))
+                                afterBuildingFarmOrMine(worker.getOwner(), worker.getTile());
 
-                        // notification for improvement
-                        UserPanel.improvementDoneNotification(player, worker.getImprovement());
-                        worker.setWorkingStatus(false);
-                        worker.setRemainingTurnsToComplete(0);
-                        worker.getTile().setInProgress(false);
-                        worker.getTile().setImprovement(worker.getImprovement());
-                        worker.getImprovement().setTile(worker.getTile());
-                        if (worker.getImprovement().getGivenResources() != null) {
-                            for (Resource resource : worker.getImprovement().getGivenResources()) {
-                                if (worker.getTile().getResource() != null) {
-                                    if (resource.getName().equals(worker.getTile().getResource().getName()))
-                                        player.setAvailableResources(worker.getTile().getResource());
+                            // notification for improvement
+                            UserPanel.improvementDoneNotification(player, worker.getImprovement());
+                            worker.setWorkingStatus(false);
+                            worker.setRemainingTurnsToComplete(0);
+                            worker.getTile().setInProgress(false);
+                            worker.getTile().setImprovement(worker.getImprovement());
+                            worker.getImprovement().setTile(worker.getTile());
+                            if (worker.getImprovement().getGivenResources() != null) {
+                                for (Resource resource : worker.getImprovement().getGivenResources()) {
+                                    if (worker.getTile().getResource() != null) {
+                                        if (resource.getName().equals(worker.getTile().getResource().getName()))
+                                            player.setAvailableResources(worker.getTile().getResource());
+                                    }
                                 }
                             }
+                            worker.setImprovement(null);
                         }
-                        worker.setImprovement(null);
+                        else {
+                            worker.setWorkingStatus(false);
+                            worker.setRemainingTurnsToComplete(0);
+                            worker.getTile().setInProgress(false);
+                            worker.getTile().setRoad(true);
+                            UserPanel.roadNotification(worker.getTile());
+                        }
                     } else {
                         worker.setRemainingTurnsToComplete(worker.getRemainingTurnsToComplete() - 1);
                     }

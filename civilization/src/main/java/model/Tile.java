@@ -47,6 +47,7 @@ public class Tile {
         inProgress = false;
         price = 100;
         citizenExist = false;
+        this.road = false;
     }
 
     public boolean isNearRiver() {

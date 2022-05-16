@@ -393,6 +393,15 @@ public class PlayGame {
             System.out.println(index + "- " + improvement.getName() + "\nProduction : " + improvement.getProductionRate() + "\nFood : " + improvement.getFoodRate() + "\nGold : " + improvement.getGoldRate());
             index++;
         }
+        boolean road = false;
+        for (Technology technology : user.getTechnologies()) {
+            if (technology.getName().equals("The Wheel") && !tile.isRoad()) {
+                road = true;
+                System.out.println("press -build road- to build road on the tile");
+                System.out.println("press -build road cheat- to build road on the tile immediately");
+            }
+
+        }
         System.out.println("choose an improvement by index to be applied on this tile");
         System.out.println("press \"add (--improvement | -i) (index)\" to build the improvement immediately");
         System.out.println("press <improvement exit> to get out of here");
@@ -429,6 +438,19 @@ public class PlayGame {
                         return;
                     } else
                         System.out.println("invalid number");
+                }
+                else if (improvementInput.equals("build road") && road) {
+                    // later
+                    tile.setInProgress(true);
+                    Worker worker = (Worker) tile.getCivilianUnit();
+                    worker.setRemainingTurnsToComplete(5);
+                    worker.setWorkingStatus(true);
+                }
+                else if (improvementInput.equals("build road cheat") && road) {
+                    tile.setRoad(true);
+                    UserPanel.roadNotification(tile);
+                    System.out.println("get back to the tile page");
+                    return;
                 }
                 else
                     System.out.println("invalid command");
@@ -529,7 +551,8 @@ public class PlayGame {
                 System.out.println(mp + " movement by unit to get to the destination");
                 return tile;
             }
-            mp += value.getTerrain().getMovementPrice();
+            if (!tile.isRoad())
+                mp += value.getTerrain().getMovementPrice();
             unit.setMP(unit.getMP() - value.getTerrain().getMovementPrice());
             tile = value;
         }
