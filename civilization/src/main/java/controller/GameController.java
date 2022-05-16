@@ -402,21 +402,8 @@ public class GameController {
     }
 
     private void afterBuildingFarmOrMine(User user, Tile tile) {
-        if (tile.getTerrain().getName().equals("Jungle")) {
-            tile.getTerrain().setFoodRate(0);
-            tile.getTerrain().setFightRate(0);
-            tile.getTerrain().setProductionRate(0);
-            tile.getTerrain().setGoldRate(0);
-            if (tile.getFeature().getName().equals("Marsh"))
-                tile.setFeature(null);
-        }
-        else if (tile.getTerrain().getName().equals("Forest")) {
-            tile.getTerrain().setFoodRate(0);
-            tile.getTerrain().setFightRate(0);
-            tile.getTerrain().setProductionRate(0);
-            tile.getTerrain().setGoldRate(0);
-            if (tile.getFeature().getName().equals("Marsh"))
-                tile.setFeature(null);
+        switch (tile.getFeature().getName()) {
+            case "Jungle", "Forest", "Marsh" -> tile.setFeature(null);
         }
     }
 
