@@ -222,6 +222,15 @@ public class UserPanel {
         user.addHistoryOfNotification(notification);
     }
 
+    public static void foundCity(City city, User user) {
+        ArrayList<String> notification = new ArrayList<>();
+        System.out.println(Colors.RED + "NOTICE!!!" + Colors.RESET);
+        System.out.println("you found this city :");
+        System.out.println("Name : " + city.getName());
+        System.out.println("Owner : " + city.getOwner());
+        user.addHistoryOfNotification(notification);
+    }
+
     public void citizensIncreased(User user, City city){
         ArrayList<String> notification = new ArrayList<>();
         System.out.println(Colors.RED + "NOTICE!!!" + Colors.RESET);

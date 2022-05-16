@@ -102,6 +102,7 @@ public class PlayGame {
             gameController.usersIncomeHandling(user , map);
             gameController.userHappiness(user);
             gameController.makeAllUnOrdered(user);
+            gameController.foundCity(user);
             while (nextTurn) {
 
                 input = scanner.nextLine();

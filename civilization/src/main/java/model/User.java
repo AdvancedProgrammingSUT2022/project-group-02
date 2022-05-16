@@ -41,6 +41,7 @@ public class User {
     private boolean researching;
     private int researchTurnLeft;
     private ArrayList<String> specialWorking;
+    private ArrayList<City> foundCities;
 
     public User(String username, String nickname, String password) {
         this.username = username;
@@ -71,6 +72,7 @@ public class User {
         technologies = new ArrayList<>();
         availableResources = new ArrayList<>();
         specialWorking = new ArrayList<>();
+        foundCities = new ArrayList<>();
     }
 
     public void setColor(String color) {
@@ -436,5 +438,12 @@ public class User {
 
     public void addSpecialWorking(String specialWorking) {
         this.specialWorking.add(specialWorking);
+    }
+
+    public ArrayList<City> getFoundCities() {
+        return foundCities;
+    }
+    public void addFoundCities(City city) {
+        foundCities.add(city);
     }
 }

@@ -424,4 +424,18 @@ public class GameController {
         }
     }
 
+    public void foundCity(User user) {
+        if (user.getUnits() != null) {
+            for (Unit unit : user.getUnits()) {
+                for (Tile neighbor : unit.getTile().getNeighbors()) {
+                    if (neighbor.getCity() != null &&
+                            neighbor.getCity().getTile().equals(neighbor) &&
+                            !neighbor.getOwner().equals(user) &&
+                            !user.getFoundCities().contains(neighbor.getCity()))
+                        UserPanel.foundCity(neighbor.getCity(), user);
+                }
+            }
+        }
+    }
+
 }
