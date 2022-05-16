@@ -15,6 +15,9 @@ public class Unit extends PhysicalObject{
     private int rangeCombatStrength;
     private int maintainGold;
     private int lastingMP;
+    private boolean ordered;
+    private boolean sleep;
+    private boolean alert;
 
     public Unit(String name, Tile tile, int HP, int goldPrice, int productionPrice, int level, int MP, int combatStrength, int rangeCombatStrength,
                 User owner, int attackPoint, int maintainGold) {
@@ -31,6 +34,9 @@ public class Unit extends PhysicalObject{
         XP = 0;
         this.maintainGold = maintainGold;
         lastingMP = MP;
+        ordered = false;
+        sleep = false;
+        alert = false;
     }
 
     public String getStatus() {
@@ -131,5 +137,29 @@ public class Unit extends PhysicalObject{
 
     public void setLastingMP(int lastingMP) {
         this.lastingMP = lastingMP;
+    }
+
+    public void setSleep(boolean sleep) {
+        this.sleep = sleep;
+    }
+
+    public boolean isSleep() {
+        return sleep;
+    }
+
+    public boolean isAlert() {
+        return alert;
+    }
+
+    public boolean isOrdered() {
+        return ordered;
+    }
+
+    public void setAlert(boolean alert) {
+        this.alert = alert;
+    }
+
+    public void setOrdered(boolean ordered) {
+        this.ordered = ordered;
     }
 }

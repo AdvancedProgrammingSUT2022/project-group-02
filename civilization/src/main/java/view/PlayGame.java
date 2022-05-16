@@ -101,13 +101,23 @@ public class PlayGame {
             gameController.citiesIncome(user);
             gameController.usersIncomeHandling(user , map);
             gameController.userHappiness(user);
+            gameController.makeAllUnOrdered(user);
             while (nextTurn) {
 
                 input = scanner.nextLine();
                 if (input.equals("game exit"))
                     return;
                 else if (input.trim().equals("next turn")) {
-                    if (user.getTurns() <= 0) {
+                    boolean did = true;
+                    if (user.getUnits() != null) {
+                        for (Unit unit : user.getUnits()) {
+                            if (!unit.isOrdered() && !unit.isAlert() && !unit.isSleep()) {
+                                did = false;
+                                break;
+                            }
+                        }
+                    }
+                    if (did) {
                         nextTurn = false;
                         user.setTurns(turn);
                     }
@@ -374,6 +384,54 @@ public class PlayGame {
                 else
                     System.out.println("invalid coordinates");
             }
+            else if (tileInput.equals("delete unit")) {
+                if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
+                    origin.setMilitaryUnitExists(false);
+                    origin.setMilitaryUnit(null);
+                    origin.setSelectedOne(false);
+                    if (origin.isCivilianUnitExists())
+                        origin.setSelectedTwo(true);
+                }
+                else if (origin.isCivilianUnitExists() && origin.isSelectedTwo()) {
+                    origin.setCivilianUnitExists(false);
+                    origin.setCivilianUnit(null);
+                    origin.setSelectedTwo(false);
+                    if (origin.isMilitaryUnitExists())
+                        origin.setSelectedOne(true);
+                }
+            }
+            else if (tileInput.equals("sleep unit")) {
+                if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
+                    origin.getMilitaryUnit().setSleep(true);
+                    if (origin.isCivilianUnitExists()) {
+                        origin.setSelectedOne(false);
+                        origin.setSelectedTwo(true);
+                    }
+                }
+                else if (origin.isCivilianUnitExists() && origin.isSelectedTwo()) {
+                    origin.getCivilianUnit().setSleep(true);
+                    if (origin.isMilitaryUnitExists()) {
+                        origin.setSelectedOne(true);
+                        origin.setSelectedTwo(false);
+                    }
+                }
+            }
+            else if (tileInput.equals("alert unit")) {
+                if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
+                    origin.getMilitaryUnit().setAlert(true);
+                    if (origin.isCivilianUnitExists()) {
+                        origin.setSelectedOne(false);
+                        origin.setSelectedTwo(true);
+                    }
+                }
+                else if (origin.isCivilianUnitExists() && origin.isSelectedTwo()) {
+                    origin.getCivilianUnit().setAlert(true);
+                    if (origin.isMilitaryUnitExists()) {
+                        origin.setSelectedOne(true);
+                        origin.setSelectedTwo(false);
+                    }
+                }
+            }
             else
                 System.out.println("invalid command");
         }
@@ -419,6 +477,7 @@ public class PlayGame {
                         worker.setRemainingTurnsToComplete(improvements.get(index - 1).getPrice());
                         worker.setWorkingStatus(true);
                         worker.setImprovement(improvements.get(index - 1));
+                        worker.setOrdered(true);
                         gameController.userTurnWorker(user);
                         System.out.println("get back to tile page");
                         return;
@@ -433,6 +492,7 @@ public class PlayGame {
                         worker.setRemainingTurnsToComplete(1);
                         worker.setWorkingStatus(true);
                         worker.setImprovement(improvements.get(index - 1));
+                        worker.setOrdered(true);
                         gameController.userTurnWorker(user);
                         System.out.println("get back to tile page");
                         return;
@@ -445,9 +505,11 @@ public class PlayGame {
                     Worker worker = (Worker) tile.getCivilianUnit();
                     worker.setRemainingTurnsToComplete(5);
                     worker.setWorkingStatus(true);
+                    worker.setOrdered(true);
                 }
                 else if (improvementInput.equals("build road cheat") && road) {
                     tile.setRoad(true);
+                    tile.getCivilianUnit().setOrdered(true);
                     UserPanel.roadNotification(tile, user);
                     System.out.println("get back to the tile page");
                     return;
@@ -545,6 +607,7 @@ public class PlayGame {
         }
         tilesInTheWay.add(tile);
         int mp = 0;
+        unit.setOrdered(true);
         tile = origin;
         for (Tile value : tilesInTheWay) {
             tileInformation(value);
@@ -643,8 +706,10 @@ public class PlayGame {
             }
             else if (cityCombatInput.equals("destroy city")) {
                 cheat = decideOnWhatToDoWithCity(city, scanner, unit);
+                unit.setOrdered(true);
             }
             else if (cityCombatInput.equals("ordinary attack")){
+                unit.setOrdered(true);
                 if (city.getHP() < unit.getAttackPoint()) {
                     System.out.println("you won, congratulation " + user.getUsername());
                     cheat = decideOnWhatToDoWithCity(city, scanner, unit);

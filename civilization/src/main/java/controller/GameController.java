@@ -408,4 +408,21 @@ public class GameController {
         }
     }
 
+    public void makeAllUnOrdered(User user) {
+        if (user.getUnits() != null) {
+            for (Unit unit : user.getUnits()) {
+                if (!unit.isAlert() && !unit.isSleep())
+                    unit.setOrdered(false);
+                if (unit.isAlert()) {
+                    for (Tile neighbor : unit.getTile().getNeighbors()) {
+                        if (neighbor.isMilitaryUnitExists() && !neighbor.getMilitaryUnit().getOwner().equals(user)) {
+                            unit.setAlert(false);
+                            unit.setOrdered(false);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 }
