@@ -448,7 +448,7 @@ public class PlayGame {
                 }
                 else if (improvementInput.equals("build road cheat") && road) {
                     tile.setRoad(true);
-                    UserPanel.roadNotification(tile);
+                    UserPanel.roadNotification(tile, user);
                     System.out.println("get back to the tile page");
                     return;
                 }

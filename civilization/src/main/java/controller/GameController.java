@@ -203,7 +203,7 @@ public class GameController {
                             worker.setRemainingTurnsToComplete(0);
                             worker.getTile().setInProgress(false);
                             worker.getTile().setRoad(true);
-                            UserPanel.roadNotification(worker.getTile());
+                            UserPanel.roadNotification(worker.getTile(), worker.getOwner());
                         }
                     } else {
                         worker.setRemainingTurnsToComplete(worker.getRemainingTurnsToComplete() - 1);
