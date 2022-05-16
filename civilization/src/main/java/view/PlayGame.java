@@ -532,10 +532,12 @@ public class PlayGame {
 
     private Tile moveUnit(Tile origin, Tile destination, Unit unit, User user, boolean isMilitary) {
         // create an array list to store all the tiles to destination
+        int i = 0;
         ArrayList<Tile> tilesInTheWay = new ArrayList<>();
         Tile tile = origin;
         while ((tile = mapController.bestChoiceAmongNeighbors(tile, destination, isMilitary)) != destination) {
-            if (tile == null) {
+            i++;
+            if (tile == null || i > 50) {
                 System.out.println("sorry, moving is impossible");
                 return origin;
             }
