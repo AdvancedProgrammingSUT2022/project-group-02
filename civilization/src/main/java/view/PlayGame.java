@@ -101,13 +101,24 @@ public class PlayGame {
             gameController.citiesIncome(user);
             gameController.usersIncomeHandling(user , map);
             gameController.userHappiness(user);
+            gameController.makeAllUnOrdered(user);
+            gameController.foundCity(user);
             while (nextTurn) {
 
                 input = scanner.nextLine();
                 if (input.equals("game exit"))
                     return;
                 else if (input.trim().equals("next turn")) {
-                    if (user.getTurns() <= 0) {
+                    boolean did = true;
+                    if (user.getUnits() != null) {
+                        for (Unit unit : user.getUnits()) {
+                            if (!unit.isOrdered() && !unit.isAlert() && !unit.isSleep()) {
+                                did = false;
+                                break;
+                            }
+                        }
+                    }
+                    if (did) {
                         nextTurn = false;
                         user.setTurns(turn);
                     }
@@ -266,7 +277,7 @@ public class PlayGame {
     }
 
 
-    private void selectedTile(Scanner scanner, Tile origin, int xOrigin, int yOrigin, User user) {
+    public void selectedTile(Scanner scanner, Tile origin, int xOrigin, int yOrigin, User user) {
         // TODO enable far working
         System.out.println("you have selected a tile with -x " + origin.getX() + " -y " + origin.getY());
         origin.setSelectedOne(false);
@@ -342,7 +353,7 @@ public class PlayGame {
                                     if (origin.getNeighbors().get(i).equals(des)) {
                                         found = true;
                                         attackCity(origin, des, des.getCity(), user, scanner);
-                                        i = 100;
+                                        break;
                                     }
                                 }
                             }
@@ -352,13 +363,13 @@ public class PlayGame {
                                     if (origin.getNeighbors().get(i).equals(des)) {
                                         found = true;
                                         attackCity(origin, des, des.getCity(), user, scanner);
-                                        i = 100;
+                                        break;
                                     }
                                     for (int j = 0; j < origin.getNeighbors().get(i).getNeighbors().size(); j++) {
                                         if (origin.getNeighbors().get(i).getNeighbors().get(j).equals(des)) {
                                             found = true;
                                             attackCity(origin, des, des.getCity(), user, scanner);
-                                            j = 100;
+                                            break;
                                         }
                                     }
                                 }
@@ -374,6 +385,70 @@ public class PlayGame {
                 else
                     System.out.println("invalid coordinates");
             }
+            else if (tileInput.equals("delete unit")) {
+                if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
+                    origin.setMilitaryUnitExists(false);
+                    origin.setMilitaryUnit(null);
+                    origin.setSelectedOne(false);
+                    if (origin.isCivilianUnitExists())
+                        origin.setSelectedTwo(true);
+                }
+                else if (origin.isCivilianUnitExists() && origin.isSelectedTwo()) {
+                    origin.setCivilianUnitExists(false);
+                    origin.setCivilianUnit(null);
+                    origin.setSelectedTwo(false);
+                    if (origin.isMilitaryUnitExists())
+                        origin.setSelectedOne(true);
+                }
+            }
+            else if (tileInput.equals("sleep unit")) {
+                if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
+                    origin.getMilitaryUnit().setSleep(true);
+                    if (origin.isCivilianUnitExists()) {
+                        origin.setSelectedOne(false);
+                        origin.setSelectedTwo(true);
+                    }
+                }
+                else if (origin.isCivilianUnitExists() && origin.isSelectedTwo()) {
+                    origin.getCivilianUnit().setSleep(true);
+                    if (origin.isMilitaryUnitExists()) {
+                        origin.setSelectedOne(true);
+                        origin.setSelectedTwo(false);
+                    }
+                }
+            }
+            else if (tileInput.equals("alert unit")) {
+                if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
+                    origin.getMilitaryUnit().setAlert(true);
+                    if (origin.isCivilianUnitExists()) {
+                        origin.setSelectedOne(false);
+                        origin.setSelectedTwo(true);
+                    }
+                }
+                else if (origin.isCivilianUnitExists() && origin.isSelectedTwo()) {
+                    origin.getCivilianUnit().setAlert(true);
+                    if (origin.isMilitaryUnitExists()) {
+                        origin.setSelectedOne(true);
+                        origin.setSelectedTwo(false);
+                    }
+                }
+            }
+            else if (tileInput.equals("pause improving")){
+                if (origin.isInProgress()) {
+                    Worker worker = (Worker) origin.getCivilianUnit();
+                    worker.setWorkingStatus(false);
+                }
+                else
+                    System.out.println("not producing anything right now!");
+            }
+            else if (tileInput.equals("resume improving")) {
+                if (origin.isCivilianUnitExists() && origin.getCivilianUnit().getName().equals("worker")) {
+                    Worker worker = (Worker) origin.getCivilianUnit();
+                    worker.setWorkingStatus(true);
+                }
+                else
+                    System.out.println("do not have any improvement in queue");
+            }
             else
                 System.out.println("invalid command");
         }
@@ -381,35 +456,91 @@ public class PlayGame {
 
     private void showImprovements(Tile tile, User user, Scanner scanner) {
         ArrayList<Improvement> improvements = user.getImprovements();
-        if (tile.getImprovement() != null)
+        boolean deleted = true;
+        if (tile.getImprovement() != null) {
             System.out.println("your current improvement on this tile is :" + tile.getImprovement().getName());
+            System.out.println("you have to first remove the current improvement then you can build something else!");
+            deleted = false;
+        }
         int index = 1;
         // print possible improvements with detail
         for (Improvement improvement : improvements) {
             System.out.println(index + "- " + improvement.getName() + "\nProduction : " + improvement.getProductionRate() + "\nFood : " + improvement.getFoodRate() + "\nGold : " + improvement.getGoldRate());
             index++;
         }
+        boolean road = false;
+        for (Technology technology : user.getTechnologies()) {
+            if (technology.getName().equals("The Wheel") && !tile.isRoad()) {
+                road = true;
+                System.out.println("press -build road- to build road on the tile");
+                System.out.println("press -build road cheat- to build road on the tile immediately");
+            }
+
+        }
         System.out.println("choose an improvement by index to be applied on this tile");
+        System.out.println("press \"add (--improvement | -i) (index)\" to build the improvement immediately");
         System.out.println("press <improvement exit> to get out of here");
         String improvementInput;
         while (true) {
             improvementInput = scanner.nextLine();
             if (improvementInput.equals("improvement exit"))
                 return;
-            else if (Pattern.matches("[\\d+]", improvementInput)) {
-                index = Integer.parseInt(improvementInput);
-                if (index <= improvements.size() && index >= 1) {
+            if (deleted) {
+                if (Pattern.matches("[\\d+]", improvementInput)) {
+                    index = Integer.parseInt(improvementInput);
+                    if (index <= improvements.size() && index >= 1) {
+                        tile.setInProgress(true);
+                        Worker worker = (Worker) tile.getCivilianUnit();
+                        worker.setRemainingTurnsToComplete(improvements.get(index - 1).getPrice());
+                        worker.setWorkingStatus(true);
+                        worker.setImprovement(improvements.get(index - 1));
+                        worker.setOrdered(true);
+                        gameController.userTurnWorker(user);
+                        System.out.println("get back to tile page");
+                        return;
+                    } else
+                        System.out.println("invalid number");
+                } else if ((matcher = RegexEnums.getMatcher(improvementInput, RegexEnums.ADD_IMPROVEMENT1)) != null ||
+                        (matcher = RegexEnums.getMatcher(improvementInput, RegexEnums.ADD_IMPROVEMENT2)) != null) {
+                    index = Integer.parseInt(matcher.group("index"));
+                    if (index >= 1 && index <= improvements.size()) {
+                        tile.setInProgress(true);
+                        Worker worker = (Worker) tile.getCivilianUnit();
+                        worker.setRemainingTurnsToComplete(1);
+                        worker.setWorkingStatus(true);
+                        worker.setImprovement(improvements.get(index - 1));
+                        worker.setOrdered(true);
+                        gameController.userTurnWorker(user);
+                        System.out.println("get back to tile page");
+                        return;
+                    } else
+                        System.out.println("invalid number");
+                }
+                else if (improvementInput.equals("build road") && road) {
+                    // later
                     tile.setInProgress(true);
-                    Worker worker = (Worker)tile.getCivilianUnit();
-                    worker.setRemainingTurnsToComplete(improvements.get(index - 1).getPrice());
+                    Worker worker = (Worker) tile.getCivilianUnit();
+                    worker.setRemainingTurnsToComplete(5);
                     worker.setWorkingStatus(true);
-                    worker.setImprovement(improvements.get(index - 1));
+                    worker.setOrdered(true);
+                }
+                else if (improvementInput.equals("build road cheat") && road) {
+                    tile.setRoad(true);
+                    tile.getCivilianUnit().setOrdered(true);
+                    UserPanel.roadNotification(tile, user);
+                    System.out.println("get back to the tile page");
+                    return;
                 }
                 else
-                    System.out.println("invalid number");
+                    System.out.println("invalid command");
+            }
+            else if (improvementInput.equals("delete the current")) {
+                tile.setImprovement(null);
+                System.out.println("improvement deleted successfully!");
+                deleted = true;
             }
             else
-                System.out.println("invalid command");
+                System.out.println("delete the current");
         }
 
     }
@@ -480,10 +611,12 @@ public class PlayGame {
 
     private Tile moveUnit(Tile origin, Tile destination, Unit unit, User user, boolean isMilitary) {
         // create an array list to store all the tiles to destination
+        int i = 0;
         ArrayList<Tile> tilesInTheWay = new ArrayList<>();
         Tile tile = origin;
         while ((tile = mapController.bestChoiceAmongNeighbors(tile, destination, isMilitary)) != destination) {
-            if (tile == null) {
+            i++;
+            if (tile == null || i > 50) {
                 System.out.println("sorry, moving is impossible");
                 return origin;
             }
@@ -491,6 +624,7 @@ public class PlayGame {
         }
         tilesInTheWay.add(tile);
         int mp = 0;
+        unit.setOrdered(true);
         tile = origin;
         for (Tile value : tilesInTheWay) {
             tileInformation(value);
@@ -499,7 +633,8 @@ public class PlayGame {
                 System.out.println(mp + " movement by unit to get to the destination");
                 return tile;
             }
-            mp += value.getTerrain().getMovementPrice();
+            if (!tile.isRoad())
+                mp += value.getTerrain().getMovementPrice();
             unit.setMP(unit.getMP() - value.getTerrain().getMovementPrice());
             tile = value;
         }
@@ -577,6 +712,7 @@ public class PlayGame {
         Unit unit = origin.getMilitaryUnit();
         System.out.println("use cheat code -destroy city-");
         System.out.println("press -city war exit- to get out");
+        System.out.println("press -ordinary attack- to just attack the city");
         boolean cheat = true;
         String cityCombatInput;
         while (cheat) {
@@ -586,32 +722,49 @@ public class PlayGame {
                 cheat = false;
             }
             else if (cityCombatInput.equals("destroy city")) {
-                System.out.println("which one do you choose?");
-                System.out.println("1- completely destroy city");
-                System.out.println("2- annex city");
-                System.out.println("please press one of this numbers");
-                boolean decide = true;
-                while(decide) {
-                    cityCombatInput = scanner.nextLine();
-                    if (Pattern.matches("\\d+", cityCombatInput)) {
-                        int index = Integer.parseInt(cityCombatInput);
-                        if (index == 1) {
-                            combatController.destroyCity(city);
-                            decide = false;
-                        }
-                        else if (index == 2) {
-                            combatController.annexCity(city, unit);
-                            decide = false;
-                        }
-                        else
-                            System.out.println("invalid number");
-                    }
-                    else
-                        System.out.println("invalid command");
+                cheat = decideOnWhatToDoWithCity(city, scanner, unit);
+                unit.setOrdered(true);
+            }
+            else if (cityCombatInput.equals("ordinary attack")){
+                unit.setOrdered(true);
+                if (city.getHP() < unit.getAttackPoint()) {
+                    System.out.println("you won, congratulation " + user.getUsername());
+                    cheat = decideOnWhatToDoWithCity(city, scanner, unit);
+                }
+                else {
+                    combatController.attackCity(city, unit);
                 }
             }
         }
 
+    }
+
+    private boolean decideOnWhatToDoWithCity(City city, Scanner scanner, Unit unit) {
+        String cityCombatInput;
+        System.out.println("which one do you choose?");
+        System.out.println("1- completely destroy city");
+        System.out.println("2- annex city");
+        System.out.println("please press one of this numbers");
+        boolean decide = true;
+        while(decide) {
+            cityCombatInput = scanner.nextLine();
+            if (Pattern.matches("\\d+", cityCombatInput)) {
+                int index = Integer.parseInt(cityCombatInput);
+                if (index == 1) {
+                    combatController.destroyCity(city);
+                    decide = false;
+                }
+                else if (index == 2) {
+                    combatController.annexCity(city, unit);
+                    decide = false;
+                }
+                else
+                    System.out.println("invalid number");
+            }
+            else
+                System.out.println("invalid command");
+        }
+        return false;
     }
 
     public void showMap(User user) {

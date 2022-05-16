@@ -24,15 +24,18 @@ public class SettlerController extends UnitController{
         removeUnit(true, unit, user);
         addBasicProducts(city);
         addBasicUnits(city);
+        user.addTerritory(tile);
         // add neighbors to the city for free
         for (Tile neighbor : tile.getNeighbors()) {
             new ResourceController().addFoundResource(user, neighbor);
             neighbor.setCity(city);
             neighbor.setOwner(user);
+            city.addOwnerShipTiles(neighbor);
+            user.addTerritory(neighbor);
         }
     }
 
-    private void addBasicProducts(City city) {
+    public void addBasicProducts(City city) {
         ArrayList<Product> products = new ArrayList<>();
         products.add(new Product("worker", 5));
         products.add(new Product("settler", 5));
@@ -42,7 +45,7 @@ public class SettlerController extends UnitController{
     }
 
     // set basic units for production
-    private void addBasicUnits(City city) {
+    public void addBasicUnits(City city) {
         ArrayList<Unit> units = new ArrayList<>();
         units.add(new Worker("worker", null, 100, 1, 1, 1, 2, 0, 0, false, city.getOwner(), 0, 1));
         units.add(new Settler("settler", null, 100, 1, 1, 1, 2, 0, 0, null, city.getOwner(), 0, 1));

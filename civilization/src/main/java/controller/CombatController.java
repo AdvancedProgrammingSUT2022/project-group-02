@@ -6,38 +6,6 @@ import java.util.ArrayList;
 
 public class CombatController extends UnitController {
 
-//    //TODO : every city has a combat strength and a HP and a attacking point
-//
-//    public void MeleeAttack(MilitaryUnit militaryUnit, User user) {
-//        militaryUnit.setHP(militaryUnit.getHP() - militaryUnit.getAttackingTarget().getAttackPoint());
-//        if (attackerHPCheck(militaryUnit)) {
-//            militaryUnit.getAttackingTarget().setHP(militaryUnit.getAttackingTarget().getHP() - militaryUnit.getAttackPoint());
-//            if (!defenderHPCheck(militaryUnit.getAttackingTarget())) attackerWinHandler(militaryUnit, user);
-//        } else {
-//            user.removeUnit(militaryUnit);
-//            militaryUnit.getTile().setMilitaryUnit(null);
-//        }
-//    }
-//
-//    public void attackerWinHandler(MilitaryUnit militaryUnit, User user) {
-//        if (!militaryUnit.getAttackingTarget().isCity()) {
-//            militaryUnit.getAttackingTarget().getOwner().removeUnit(militaryUnit.getAttackingTarget());
-//            militaryUnit.getAttackingTarget().getTile().setMilitaryUnit(null);
-//        } else {
-//            //(Audience : mohammad)|(Time : next phase)
-//            // TODO : we have 3 choice so print them and get user input and do the consequence of that choice
-//        }
-//    }
-
-    public boolean attackerHPCheck(PhysicalObject physicalObject) {
-        return physicalObject.getHP() > 0;
-    }
-
-    public boolean defenderHPCheck(PhysicalObject physicalObject) {
-        return physicalObject.getHP() > 0;
-    }
-
-
     //combat handling : first version of code
     public boolean checkDefenderHill(Tile tile) {
         if (tile.getTerrain().getName().equals("Hill")) return true;
@@ -135,31 +103,35 @@ public class CombatController extends UnitController {
     }
 
     public void destroyCity(City city) {
-        ArrayList<City> cities = city.getOwner().getCities();
-        cities.remove(city);
-        city.getOwner().setCities(cities);
-        for (int i = 0; i < city.getOwnerShipTiles().size(); i++) {
-            if (city.getOwnerShipTiles().get(i).getCity().getName().equals(city.getName())) {
-                city.getOwnerShipTiles().get(i).setCity(null);
-                city.getOwnerShipTiles().get(i).setOwner(null);
-            }
+        User previous = city.getOwner();
+        previous.removeCity(city);
+        for (Tile ownerShipTile : city.getOwnerShipTiles()) {
+            ownerShipTile.setOwner(null);
+            ownerShipTile.setCity(null);
+            previous.removeTerritory(ownerShipTile);
         }
-        city.setOwner(null);
+        city = null;
     }
 
     public void annexCity(City city, Unit unit) {
-        ArrayList<City> cities = city.getOwner().getCities();
-        cities.remove(city);
-        city.getOwner().setCities(cities);
-        for (int i = 0; i < city.getOwnerShipTiles().size(); i++) {
-            if (city.getOwnerShipTiles().get(i).getCity().getName().equals(city.getName())) {
-                city.getOwnerShipTiles().get(i).setOwner(unit.getOwner());
-            }
-        }
+        User previous = city.getOwner();
+
+        previous.removeCity(city);
         city.setOwner(unit.getOwner());
-        unit.getOwner().setHappiness(unit.getOwner().getHappiness() - 5);
-        cities = unit.getOwner().getCities();
-        cities.add(city);
-        unit.getOwner().setCities(cities);
+        for (Tile ownerShipTile : city.getOwnerShipTiles()) {
+            ownerShipTile.setOwner(unit.getOwner());
+            unit.getOwner().addTerritory(ownerShipTile);
+            previous.removeTerritory(ownerShipTile);
+        }
+        unit.getOwner().addCity(city);
+    }
+
+    public void attackCity(City city, Unit unit) {
+        if (city.getTile() != null && city.getTile().getTerrain().getName().equals("Hill")) {
+            city.setHP(city.getHP() - (unit.getAttackPoint() / 2));
+        }
+        else {
+            city.setHP(city.getHP() - unit.getAttackPoint());
+        }
     }
 }

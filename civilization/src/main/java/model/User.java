@@ -40,6 +40,8 @@ public class User {
     private Technology currentTechnology;
     private boolean researching;
     private int researchTurnLeft;
+    private ArrayList<String> specialWorking;
+    private ArrayList<City> foundCities;
 
     public User(String username, String nickname, String password) {
         this.username = username;
@@ -69,6 +71,8 @@ public class User {
         improvements = new ArrayList<>();
         technologies = new ArrayList<>();
         availableResources = new ArrayList<>();
+        specialWorking = new ArrayList<>();
+        foundCities = new ArrayList<>();
     }
 
     public void setColor(String color) {
@@ -224,7 +228,19 @@ public class User {
     }
 
     public void setUnits(ArrayList<Unit> units) {
-        units = units;
+        this.units = units;
+    }
+
+    public void addAnnexedCity(City city){
+        this.annexedCities.add(city);
+    }
+
+    public void addFoundResourced(Resource foundResource){
+        this.foundResources.add(foundResource);
+    }
+
+    public void addAvailableResource(Resource resource){
+        this.availableResources.add(resource);
     }
 
     public void addUnit(Unit unit) {
@@ -410,5 +426,24 @@ public class User {
 
     public void removeCity(City city) {
         cities.remove(city);
+    }
+
+    public ArrayList<String> getSpecialWorking() {
+        return specialWorking;
+    }
+
+    public void setSpecialWorking(ArrayList<String> specialWorking) {
+        this.specialWorking = specialWorking;
+    }
+
+    public void addSpecialWorking(String specialWorking) {
+        this.specialWorking.add(specialWorking);
+    }
+
+    public ArrayList<City> getFoundCities() {
+        return foundCities;
+    }
+    public void addFoundCities(City city) {
+        foundCities.add(city);
     }
 }

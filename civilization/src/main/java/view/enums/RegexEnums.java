@@ -78,6 +78,9 @@ public enum RegexEnums {
     //attack city
     ATTACK_CITY1("^\\s*attack\\s+city\\s+-x\\s+(?<x>\\d+)\\s+-y\\s+(?<y>\\d+)\\s*$"),
     ATTACK_CITY2("^\\s*attack\\s+city\\s+-y\\s+(?<y>\\d+)\\s+-x\\s+(?<x>\\d+)\\s*$"),
+    //buy tile
+    BUY_TILE1("^\\s*buy\\s+--tile\\s+(?<index>\\d+)\\s*$"),
+    BUY_TILE2("^\\s*buy\\s+-t\\s+(?<index>\\d+)\\s*$"),
     //place city
     CITY1("^\\s*place\\s+city\\s+--name\\s+(?<city>[\\s\\S]+)\\s*$"),
     CITY2("^\\s*place\\s+city\\s+-n\\s+(?<city>[\\s\\S]+)\\s*$");

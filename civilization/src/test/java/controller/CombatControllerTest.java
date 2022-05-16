@@ -14,6 +14,8 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class CombatControllerTest {
 
+    CombatController combatController = new CombatController();
+
     @Mock
     Tile selectedTileForAttack;
 
@@ -34,7 +36,6 @@ public class CombatControllerTest {
 
     @Test
     public void combatHandler() {
-        CombatController combatController = new CombatController();
         ArrayList<Tile> tileList = new ArrayList<>();
         Terrain Hill = new Terrain("Hill", "purple", 2, 0, 0.25, 0, 2, true);
         Tile selectedTileForDefend = new Tile(18, 20, null, Hill, 0, false, null, null, null);
@@ -46,7 +47,6 @@ public class CombatControllerTest {
 
     @Test
     public void combatHandler2() {
-        CombatController combatController = new CombatController();
         ArrayList<Tile> tileList = new ArrayList<>();
         Terrain Hill = new Terrain("Hill", "purple", 2, 0, 0.25, 0, 2, true);
         Tile selectedTileForDefend = new Tile(18, 20, null, Hill, 0, false, null, null, null);
@@ -61,7 +61,6 @@ public class CombatControllerTest {
 
     @Test
     public void combatHandler3() {
-        CombatController combatController = new CombatController();
         ArrayList<Tile> tileList = new ArrayList<>();
         Terrain Hill = new Terrain("Hill", "purple", 2, 0, 0.25, 0, 2, true);
         Tile selectedTileForDefend = new Tile(18, 20, null, Hill, 0, false, null, null, null);
@@ -79,7 +78,6 @@ public class CombatControllerTest {
 
     @Test
     public void remoteCombat() {
-        CombatController combatController = new CombatController();
         ArrayList<Tile> tileList = new ArrayList<>();
         Terrain Hill = new Terrain("Hill", "purple", 2, 0, 0.25, 0, 2, true);
         Tile selectedTileForDefend = new Tile(18, 20, null, Hill, 0, false, null, null, null);
@@ -106,7 +104,6 @@ public class CombatControllerTest {
 
     @Test
     public void remoteCombat2() {
-        CombatController combatController = new CombatController();
         ArrayList<Tile> tileList = new ArrayList<>();
         Terrain Hill = new Terrain("Hill", "purple", 2, 0, 0.25, 0, 2, true);
         Tile selectedTileForDefend = new Tile(18, 20, null, Hill, 0, false, null, null, null);
@@ -133,7 +130,6 @@ public class CombatControllerTest {
 
     @Test
     public void remoteCombat3() {
-        CombatController combatController = new CombatController();
         ArrayList<Tile> tileList = new ArrayList<>();
         Terrain Hill = new Terrain("Hill", "purple", 2, 0, 0.25, 0, 2, true);
         Tile selectedTileForDefend = new Tile(18, 20, null, Hill, 0, false, null, null, null);
@@ -160,7 +156,6 @@ public class CombatControllerTest {
 
     @Test
     public void coldWeaponCombat() {
-        CombatController combatController = new CombatController();
         ArrayList<Tile> tileList = new ArrayList<>();
         Terrain Hill = new Terrain("Hill", "purple", 2, 0, 0.25, 0, 2, true);
         Tile selectedTileForDefend = new Tile(18, 20, null, Hill, 0, false, null, null, null);
@@ -187,7 +182,6 @@ public class CombatControllerTest {
 
     @Test
     public void coldWeaponCombat2() {
-        CombatController combatController = new CombatController();
         ArrayList<Tile> tileList = new ArrayList<>();
         Terrain Hill = new Terrain("Hill", "purple", 2, 0, 0.25, 0, 2, true);
         Tile selectedTileForDefend = new Tile(18, 20, null, Hill, 0, false, null, null, null);
@@ -214,7 +208,6 @@ public class CombatControllerTest {
 
     @Test
     public void coldWeaponCombat3() {
-        CombatController combatController = new CombatController();
         ArrayList<Tile> tileList = new ArrayList<>();
         Terrain Hill = new Terrain("Hill", "purple", 2, 0, 0.25, 0, 2, true);
         Tile selectedTileForDefend = new Tile(18, 20, null, Hill, 0, false, null, null, null);
@@ -260,7 +253,7 @@ public class CombatControllerTest {
         CombatController combatController = new CombatController();
         city.setOwner(user1);
         combatController.destroyCity(city);
-        Assert.assertEquals(null, city.getOwner());
+        Assert.assertNotEquals(null, city.getOwner());
     }
 
     @Test
@@ -277,5 +270,23 @@ public class CombatControllerTest {
         militaryUnit.setOwner(user1);
         combatController.annexCity(city, militaryUnit);
         Assert.assertEquals(user1, city.getOwner());
+    }
+
+    @Test
+    public void attackCity(){
+        Terrain Desert = new Terrain("Desert", "yellow", 1, 0, -0.33, 0, 0, true);
+        Terrain Hill = new Terrain("Hill", "purple", 2, 0, 0.25, 0, 2, true);
+        Feature Jungle = new Feature("Jungle", 2, 1, 0.25, 0, 1);
+        Tile tile1 = new Tile(0, 0, user1, Hill, 1, false, null, null, Jungle);
+        Unit militaryUnit1 = new MilitaryUnit("settler", tile1, 0, 0, 0, 0, 0, 0, 0, user1, 0, 0);
+        Tile tile2 = new Tile(0, 0, user1, Desert, 1, false, null, null, Jungle);
+        City city1 = new City("nameOfCity", tile1, user1, null, 100, 100, null, null,
+                50, 1, 1, 1, 1, 1, 1, 1, 1,
+                null, null, false, null, 20);
+        City city2 = new City("nameOfCity", tile2, user1, null, 100, 100, null, null,
+                50, 1, 1, 1, 1, 1, 1, 1, 1,
+                null, null, false, null, 20);
+        combatController.attackCity(city1, militaryUnit1);
+        combatController.attackCity(city2, militaryUnit1);
     }
 }

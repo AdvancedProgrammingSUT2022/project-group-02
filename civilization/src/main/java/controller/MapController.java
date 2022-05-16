@@ -22,11 +22,19 @@ public class MapController {
 
         if (x >= 1) {
             //up left
-            if (y >= 1)
-                neighbors.add(map.getTileBoard()[x - 1][y - 1]);
+            if (y >= 1) {
+                if (x % 2 == 0)
+                    neighbors.add(map.getTileBoard()[x - 1][y - 1]);
+                else
+                    neighbors.add(map.getTileBoard()[x - 1][y]);
+            }
             //up right
-            if (y <= map.getWidth() - 2)
-                neighbors.add(map.getTileBoard()[x - 1][y]);
+            if (y <= map.getWidth() - 2) {
+                if (x % 2 == 0)
+                    neighbors.add(map.getTileBoard()[x - 1][y]);
+                else
+                    neighbors.add(map.getTileBoard()[x - 1][y + 1]);
+            }
         }
         //down
         if (x <= map.getHeight() - 3)
@@ -34,11 +42,19 @@ public class MapController {
 
         if (x <= map.getHeight() - 2) {
             //down left
-            if (y >= 1)
-                neighbors.add(map.getTileBoard()[x + 1][y - 1]);
+            if (y >= 1) {
+                if (x % 2 == 0)
+                    neighbors.add(map.getTileBoard()[x + 1][y - 1]);
+                else
+                    neighbors.add(map.getTileBoard()[x + 1][y]);
+            }
             //down right
-            if (y <= map.getWidth() - 2)
-                neighbors.add(map.getTileBoard()[x + 1][y]);
+            if (y <= map.getWidth() - 2) {
+                if (x % 2 == 0)
+                    neighbors.add(map.getTileBoard()[x + 1][y]);
+                else
+                    neighbors.add(map.getTileBoard()[x + 1][y + 1]);
+            }
         }
         tile.setNeighbors(neighbors);
     }

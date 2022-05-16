@@ -101,8 +101,14 @@ public class CityMenu {
             }
             else if (cityInput.trim().equals("buy tile")) {
                 ArrayList<Tile> neighborOfCity = mapController.neighborOfCity(city);
-
-                // TODO show nearby neutral tiles and then buy ,,, when map is ready
+                int index = 1;
+                for (Tile tile : neighborOfCity) {
+                    System.out.println(index + "- coordinate : -x " + tile.getX() + " -y " + tile.getY());
+                    System.out.println("Terrain : " + tile.getTerrain().getName());
+                    if (tile.getFeature() != null)
+                        System.out.println("Feature : " + tile.getFeature().getName());
+                    index++;
+                }
 
                 String buyTileInput;
                 boolean buying = true;
@@ -111,7 +117,7 @@ public class CityMenu {
                     if (buyTileInput.equals("buy tile exit"))
                         buying = false;
                     else if (Pattern.matches("[\\d+]", buyTileInput)) {
-                        int index = Integer.parseInt(buyTileInput);
+                        index = Integer.parseInt(buyTileInput);
                         if (index >= 1 && index <= neighborOfCity.size()) {
                             // add the tile to the city and user
                             if (user.getGold() >= neighborOfCity.get(index - 1).getPrice()) {
@@ -128,9 +134,25 @@ public class CityMenu {
                                 user.setGold(user.getGold() - neighborOfCity.get(index - 1).getPrice());
                                 city.addOwnerShipTiles(neighborOfCity.get(index - 1));
                                 user.addTerritory(neighborOfCity.get(index - 1));
+                                neighborOfCity.get(index - 1).setCity(city);
+                                neighborOfCity.get(index - 1).setOwner(user);
+                                System.out.println("you bought tile with index " + index + " successfully!");
                             }
                             else
                                 System.out.println("not enough gold!");
+                        }
+                        else
+                            System.out.println("invalid number");
+                    }
+                    else if ((matcher = RegexEnums.getMatcher(buyTileInput, RegexEnums.BUY_TILE1)) != null ||
+                            (matcher = RegexEnums.getMatcher(buyTileInput, RegexEnums.BUY_TILE2)) != null) {
+                        index = Integer.parseInt(matcher.group("index"));
+                        if (index >= 1 && index <= neighborOfCity.size()) {
+                            city.addOwnerShipTiles(neighborOfCity.get(index - 1));
+                            user.addTerritory(neighborOfCity.get(index - 1));
+                            neighborOfCity.get(index - 1).setCity(city);
+                            neighborOfCity.get(index - 1).setOwner(user);
+                            System.out.println("you bought tile with index " + index + " successfully!");
                         }
                         else
                             System.out.println("invalid number");
@@ -162,7 +184,7 @@ public class CityMenu {
                     System.out.println("you don't produce anything");
             }
             else if (cityInput.trim().equals("set citizens")){
-                gameController.setCitizen(scanner, city, this);
+                setCitizen(scanner, city);
             }
             else if (cityInput.trim().equals("city information")) {
                 cityInformation(city);
@@ -211,6 +233,46 @@ public class CityMenu {
         }
     }
 
+    public void setCitizen(Scanner scanner, City city){
+        boolean loop = true;
+        boolean loop2 = false;
+        int citizenIndex = 0;
+        String citizenInput;
+        setCitizenInterface(1, city);
+        while (loop) {
+            citizenInput = scanner.nextLine();
+            if (Pattern.matches("\\d+", citizenInput)) {
+                citizenIndex = Integer.parseInt(citizenInput);
+                if (citizenIndex >= 1 && citizenIndex <= city.getCitizens().size()) {
+                    setCitizenInterface(2, city);
+                    loop2 = true;
+                    loop = false;
+                }
+                else
+                    System.out.println("invalid number");
+            }
+            else
+                System.out.println("invalid command");
+        }
+        while (loop2) {
+            citizenInput = scanner.nextLine();
+            if (Pattern.matches("\\d+", citizenInput)) {
+                int tileIndex = Integer.parseInt(citizenInput);
+                if (tileIndex >= 1 && tileIndex <= city.getOwnerShipTiles().size()) {
+                    city.getCitizens().get(citizenIndex - 1).setTile(city.getOwnerShipTiles().get(tileIndex - 1));
+                    city.getOwnerShipTiles().get(tileIndex - 1).setCitizenExist(true);
+                    city.getCitizens().get(citizenIndex - 1).setTile(city.getOwnerShipTiles().get(tileIndex - 1));
+                    setCitizenInterface(3, city);
+                    loop2 = false;
+                }
+                else
+                    System.out.println("invalid number");
+            }
+            else
+                System.out.println("invalid command");
+        }
+    }
+
     public void setCitizenInterface(int which, City city){
         int index = 1;
         switch (which){
@@ -243,6 +305,7 @@ public class CityMenu {
                                 + ownerShipTile.getTerrain().getFoodRate() + " *** goldRate : "
                                 + ownerShipTile.getTerrain().getGoldRate() + " *** productionRate : "
                                 + ownerShipTile.getTerrain().getProductionRate());
+                    index++;
                 }
             case 3:
                     System.out.println("the citizen employed on the selected tile successfully");
@@ -252,6 +315,7 @@ public class CityMenu {
     private void cityInformation(City city) {
         System.out.println(Colors.YELLOW + "Name : " + city.getName());
         System.out.println("Owner : " + city.getOwner().getUsername());
+        System.out.println("Health point : " + city.getHP());
         System.out.println("Coordinate : -x " + city.getTile().getX() + " -y " + city.getTile().getY());
         System.out.println("Possible products :");
         for (Product product : city.getProducts()) {
@@ -265,5 +329,6 @@ public class CityMenu {
             PlayGame.tileDetails(ownerShipTile);
             index++;
         }
+        System.out.println(Colors.RESET);
     }
 }

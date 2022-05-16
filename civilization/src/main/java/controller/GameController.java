@@ -176,17 +176,35 @@ public class GameController {
                     Worker worker = (Worker) unit;
                     // if it is done
                     if (worker.getRemainingTurnsToComplete() <= 1) {
-                        // notification for improvement
-                        UserPanel.improvementDoneNotification(player, worker.getImprovement());
-                        worker.setWorkingStatus(false);
-                        worker.setRemainingTurnsToComplete(0);
-                        worker.getTile().setInProgress(false);
-                        worker.getTile().setImprovement(worker.getImprovement());
-                        for (Resource resource : worker.getImprovement().getGivenResources()) {
-                            if (resource.getName().equals(worker.getTile().getResource().getName()))
-                                 player.setAvailableResources(worker.getTile().getResource());
+                        // delete jungle and jungle and forest and marsh
+                        if (worker.getImprovement() != null) {
+                            if (worker.getImprovement().getName().equals("Farm") || worker.getImprovement().getName().equals("Mine"))
+                                if (worker.getTile().getFeature() != null)
+                                    afterBuildingFarmOrMine(worker.getOwner(), worker.getTile());
+                            // notification for improvement
+                            UserPanel.improvementDoneNotification(player, worker.getImprovement());
+                            worker.setWorkingStatus(false);
+                            worker.setRemainingTurnsToComplete(0);
+                            worker.getTile().setInProgress(false);
+                            worker.getTile().setImprovement(worker.getImprovement());
+                            worker.getImprovement().setTile(worker.getTile());
+                            if (worker.getImprovement().getGivenResources() != null) {
+                                for (Resource resource : worker.getImprovement().getGivenResources()) {
+                                    if (worker.getTile().getResource() != null) {
+                                        if (resource.getName().equals(worker.getTile().getResource().getName()))
+                                            player.setAvailableResources(worker.getTile().getResource());
+                                    }
+                                }
+                            }
+                            worker.setImprovement(null);
                         }
-                        worker.setImprovement(null);
+                        else {
+                            worker.setWorkingStatus(false);
+                            worker.setRemainingTurnsToComplete(0);
+                            worker.getTile().setInProgress(false);
+                            worker.getTile().setRoad(true);
+                            UserPanel.roadNotification(worker.getTile(), worker.getOwner());
+                        }
                     } else {
                         worker.setRemainingTurnsToComplete(worker.getRemainingTurnsToComplete() - 1);
                     }
@@ -196,7 +214,7 @@ public class GameController {
     }
 
     // find the unit based on production name
-    private void findProduction(City city, Product product) {
+    public void findProduction(City city, Product product) {
         Worker worker;
         Settler settler;
         Civilian scout;
@@ -315,7 +333,7 @@ public class GameController {
         }
     }
 
-    private Tile findTileForMilitary(Tile origin) {
+    public Tile findTileForMilitary(Tile origin) {
         if (origin.isMilitaryUnitExists()) {
             for (Tile neighbor : origin.getNeighbors()) {
                 if (!neighbor.isMilitaryUnitExists() && neighbor.getTerrain().isPassable())
@@ -330,7 +348,7 @@ public class GameController {
         }
         return origin;
     }
-    private Tile findTileForCivilian(Tile origin) {
+    public Tile findTileForCivilian(Tile origin) {
         if (origin.isCivilianUnitExists()) {
             for (Tile neighbor : origin.getNeighbors()) {
                 if (!neighbor.isCivilianUnitExists() && neighbor.getTerrain().isPassable())
@@ -338,8 +356,8 @@ public class GameController {
             }
             for (Tile neighbor : origin.getNeighbors()) {
                 for (Tile neighborNeighbor : neighbor.getNeighbors()) {
-                    if (!neighborNeighbor.isCivilianUnitExists() && neighbor.getTerrain().isPassable())
-                        return neighborNeighbor;
+                    if (!neighborNeighbor.isCivilianUnitExists() && neighbor.getTerrain().isPassable()){
+                        return neighborNeighbor;}
                 }
             }
         }
@@ -360,16 +378,6 @@ public class GameController {
         }
     }
 
-    public void setCitizen(Scanner scanner, City city, CityMenu cityMenu){
-        cityMenu.setCitizenInterface(1, city);
-        int citizenIndex = Integer.parseInt(scanner.nextLine());
-        cityMenu.setCitizenInterface(2, city);
-        int tileIndex = Integer.parseInt(scanner.nextLine());
-        city.getCitizens().get(citizenIndex - 1).setTile(city.getOwnerShipTiles().get(tileIndex - 1));
-        city.getOwnerShipTiles().get(tileIndex - 1).setCitizenExist(true);
-        city.getCitizens().get(citizenIndex - 1).setTile(city.getOwnerShipTiles().get(tileIndex - 1));
-        cityMenu.setCitizenInterface(3, city);
-    }
 
     public void citiesIncome(User user){
         for (City city : user.getCities()) {
@@ -389,6 +397,43 @@ public class GameController {
                 }
                 city.setProduction(city.getProduction() + 1);
                 city.setFood(city.getFood() - 1);
+            }
+        }
+    }
+
+    private void afterBuildingFarmOrMine(User user, Tile tile) {
+        switch (tile.getFeature().getName()) {
+            case "Jungle", "Forest", "Marsh" -> tile.setFeature(null);
+        }
+    }
+
+    public void makeAllUnOrdered(User user) {
+        if (user.getUnits() != null) {
+            for (Unit unit : user.getUnits()) {
+                if (!unit.isAlert() && !unit.isSleep())
+                    unit.setOrdered(false);
+                if (unit.isAlert()) {
+                    for (Tile neighbor : unit.getTile().getNeighbors()) {
+                        if (neighbor.isMilitaryUnitExists() && !neighbor.getMilitaryUnit().getOwner().equals(user)) {
+                            unit.setAlert(false);
+                            unit.setOrdered(false);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void foundCity(User user) {
+        if (user.getUnits() != null) {
+            for (Unit unit : user.getUnits()) {
+                for (Tile neighbor : unit.getTile().getNeighbors()) {
+                    if (neighbor.getCity() != null &&
+                            neighbor.getCity().getTile().equals(neighbor) &&
+                            !neighbor.getOwner().equals(user) &&
+                            !user.getFoundCities().contains(neighbor.getCity()))
+                        UserPanel.foundCity(neighbor.getCity(), user);
+                }
             }
         }
     }
