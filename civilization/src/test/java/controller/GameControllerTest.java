@@ -371,4 +371,52 @@ public class GameControllerTest {
         tile1.setMilitaryUnitExists(true);
         Assertions.assertNotNull(gameController.findTileForMilitary(tile1));
     }
+
+    @Test
+    public void checkMakeAllUnderOrdered() {
+        UsersController usersController = new UsersController();
+        Maps maps = usersController.readFromJsonMap();
+        MapController mapController = new MapController(maps);
+        for (Tile[] tiles : maps.getTileBoard()) {
+            for (Tile tile : tiles) {
+                mapController.setNeighbor(tile);
+            }
+        }
+        Tile tile1 = maps.getSpecificTile(10, 65);
+        Unit militaryUnit1 = new MilitaryUnit("settler", tile1, 0, 0, 0, 0, 0, 0, 0, user1, 0, 0);
+        Unit militaryUnit2 = new MilitaryUnit("settler", tile1, 0, 0, 0, 0, 0, 0, 0, user1, 0, 0);
+        Unit militaryUnit3 = new MilitaryUnit("settler", maps.getSpecificTile(12, 65), 0, 0, 0, 0, 0, 0, 0, user2, 0, 0);
+        maps.getSpecificTile(12, 65).setMilitaryUnit(militaryUnit3);
+        maps.getSpecificTile(12, 65).setMilitaryUnitExists(true);
+        militaryUnit1.setAlert(false);
+        militaryUnit1.setSleep(false);
+        militaryUnit1.setAlert(true);
+        user1.addUnit(militaryUnit2);
+        user1.addUnit(militaryUnit1);
+        gameController.makeAllUnOrdered(user1);
+    }
+
+    @Test
+    public void checkFoundCity(){
+        UsersController usersController = new UsersController();
+        Maps maps = usersController.readFromJsonMap();
+        MapController mapController = new MapController(maps);
+        for (Tile[] tiles : maps.getTileBoard()) {
+            for (Tile tile : tiles) {
+                mapController.setNeighbor(tile);
+            }
+        }
+        Tile tile1 = maps.getSpecificTile(10, 65);
+        Tile tile2 = maps.getSpecificTile(12, 65);
+        City city1 = new City("nameOfCity", tile2, user2, null, 100, 100, null, null,
+                50, 1, 1, 1, 1, 1, 1, 1, 1,
+                null, null, false, null, 20);
+        Unit militaryUnit1 = new MilitaryUnit("settler", tile1, 0, 0, 0, 0, 0, 0, 0, user1, 0, 0);
+        tile2.setCity(city1);
+        tile1.setOwner(user1);
+        tile2.setOwner(user2);
+        user1.addTerritory(tile1);
+        user1.addUnit(militaryUnit1);
+        gameController.foundCity(user1);
+    }
 }

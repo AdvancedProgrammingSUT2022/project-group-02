@@ -37,6 +37,7 @@ public class WorkerUnitLogicTest {
         units.add(worker);
         units.add(unit);
         unitController.createUnit(unit);
+        Assertions.assertNotNull(unitController.getUnits());
         Assertions.assertTrue(unitController.getUnits().containsAll(units));
     }
 
@@ -84,5 +85,16 @@ public class WorkerUnitLogicTest {
         int userGoldAfterRun = user1.getGold();
         boolean result = userGoldAfterRun > userGoldBeforeRun;
         Assertions.assertTrue(result && !user1.getUnits().contains(worker));
+    }
+
+    @Test //cheat code : repair mp of units
+    public void checkRepairMovement(){
+        Tile tile = new Tile(0, 0, user1, null, 1, false, null, null, Jungle);
+        Unit militaryUnit1 = new MilitaryUnit("settler", tile, 0, 0, 0, 0, 0, 0, 0, user1, 0, 0);
+        user1.addUnit(militaryUnit1);
+        int unitMPBeforeRun = militaryUnit1.getMP();
+        unitController.repairMovementPoint(user1);
+        int unitMPAfterRun = militaryUnit1.getMP();
+        Assertions.assertEquals(unitMPBeforeRun, unitMPAfterRun);
     }
 }

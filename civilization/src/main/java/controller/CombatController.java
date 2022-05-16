@@ -6,38 +6,6 @@ import java.util.ArrayList;
 
 public class CombatController extends UnitController {
 
-//    //TODO : every city has a combat strength and a HP and a attacking point
-//
-//    public void MeleeAttack(MilitaryUnit militaryUnit, User user) {
-//        militaryUnit.setHP(militaryUnit.getHP() - militaryUnit.getAttackingTarget().getAttackPoint());
-//        if (attackerHPCheck(militaryUnit)) {
-//            militaryUnit.getAttackingTarget().setHP(militaryUnit.getAttackingTarget().getHP() - militaryUnit.getAttackPoint());
-//            if (!defenderHPCheck(militaryUnit.getAttackingTarget())) attackerWinHandler(militaryUnit, user);
-//        } else {
-//            user.removeUnit(militaryUnit);
-//            militaryUnit.getTile().setMilitaryUnit(null);
-//        }
-//    }
-//
-//    public void attackerWinHandler(MilitaryUnit militaryUnit, User user) {
-//        if (!militaryUnit.getAttackingTarget().isCity()) {
-//            militaryUnit.getAttackingTarget().getOwner().removeUnit(militaryUnit.getAttackingTarget());
-//            militaryUnit.getAttackingTarget().getTile().setMilitaryUnit(null);
-//        } else {
-//            //(Audience : mohammad)|(Time : next phase)
-//            // TODO : we have 3 choice so print them and get user input and do the consequence of that choice
-//        }
-//    }
-
-    public boolean attackerHPCheck(PhysicalObject physicalObject) {
-        return physicalObject.getHP() > 0;
-    }
-
-    public boolean defenderHPCheck(PhysicalObject physicalObject) {
-        return physicalObject.getHP() > 0;
-    }
-
-
     //combat handling : first version of code
     public boolean checkDefenderHill(Tile tile) {
         if (tile.getTerrain().getName().equals("Hill")) return true;
@@ -159,7 +127,7 @@ public class CombatController extends UnitController {
     }
 
     public void attackCity(City city, Unit unit) {
-        if (city.getTile().getTerrain().getName().equals("Hill")) {
+        if (city.getTile() != null && city.getTile().getTerrain().getName().equals("Hill")) {
             city.setHP(city.getHP() - (unit.getAttackPoint() / 2));
         }
         else {
