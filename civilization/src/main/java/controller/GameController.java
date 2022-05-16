@@ -181,7 +181,6 @@ public class GameController {
                             if (worker.getImprovement().getName().equals("Farm") || worker.getImprovement().getName().equals("Mine"))
                                 if (worker.getTile().getFeature() != null)
                                     afterBuildingFarmOrMine(worker.getOwner(), worker.getTile());
-
                             // notification for improvement
                             UserPanel.improvementDoneNotification(player, worker.getImprovement());
                             worker.setWorkingStatus(false);
@@ -215,7 +214,7 @@ public class GameController {
     }
 
     // find the unit based on production name
-    private void findProduction(City city, Product product) {
+    public void findProduction(City city, Product product) {
         Worker worker;
         Settler settler;
         Civilian scout;
@@ -334,7 +333,7 @@ public class GameController {
         }
     }
 
-    private Tile findTileForMilitary(Tile origin) {
+    public Tile findTileForMilitary(Tile origin) {
         if (origin.isMilitaryUnitExists()) {
             for (Tile neighbor : origin.getNeighbors()) {
                 if (!neighbor.isMilitaryUnitExists() && neighbor.getTerrain().isPassable())
@@ -349,7 +348,7 @@ public class GameController {
         }
         return origin;
     }
-    private Tile findTileForCivilian(Tile origin) {
+    public Tile findTileForCivilian(Tile origin) {
         if (origin.isCivilianUnitExists()) {
             for (Tile neighbor : origin.getNeighbors()) {
                 if (!neighbor.isCivilianUnitExists() && neighbor.getTerrain().isPassable())
@@ -357,8 +356,8 @@ public class GameController {
             }
             for (Tile neighbor : origin.getNeighbors()) {
                 for (Tile neighborNeighbor : neighbor.getNeighbors()) {
-                    if (!neighborNeighbor.isCivilianUnitExists() && neighbor.getTerrain().isPassable())
-                        return neighborNeighbor;
+                    if (!neighborNeighbor.isCivilianUnitExists() && neighbor.getTerrain().isPassable()){
+                        return neighborNeighbor;}
                 }
             }
         }
