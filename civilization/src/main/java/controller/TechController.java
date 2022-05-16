@@ -18,9 +18,9 @@ public class TechController {
         return ancientTechnologies;
     }
 
-    public int[][] getAncientEraTechnologiesGraph() {
-        return ancientEraTechnologiesGraph;
-    }
+//    public int[][] getAncientEraTechnologiesGraph() {
+//        return ancientEraTechnologiesGraph;
+//    }
 
     public ArrayList<Technology> getPrerequisitesAncientTech(Technology technology) {
         int index = technology.getIndex();

@@ -1,7 +1,7 @@
 package controller;
 
 import model.*;
-import controller.enums.Colors;
+import view.enums.Colors;
 
 import java.util.ArrayList;
 
@@ -60,7 +60,7 @@ public class MapController {
     }
 
     // find the distance between two hexagons
-    private int findDistance(Tile origin, Tile destination) {
+    public int findDistance(Tile origin, Tile destination) {
         int xOrigin = origin.getX();
         int yOrigin = origin.getY();
         int xDestination = destination.getX();

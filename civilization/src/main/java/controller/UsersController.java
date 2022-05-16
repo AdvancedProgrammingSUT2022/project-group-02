@@ -100,35 +100,35 @@ public class UsersController {
         return null;
     }
     // write graph to json
-    public void writeToJson(int[][] graph) {
-        try {
-            FileWriter fileWriter = new FileWriter("TechFile/graph.json");
-            fileWriter.write(new Gson().toJson(graph));
-            fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void writeToJson(int[][] graph) {
+//        try {
+//            FileWriter fileWriter = new FileWriter("TechFile/graph.json");
+//            fileWriter.write(new Gson().toJson(graph));
+//            fileWriter.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
     // write technologies to json
-    public void writeToJson(ArrayList<Technology> technologies) {
-        try {
-            FileWriter fileWriter = new FileWriter("TechFile/tech.json");
-            fileWriter.write(new Gson().toJson(technologies));
-            fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void writeToJson(ArrayList<Technology> technologies) {
+//        try {
+//            FileWriter fileWriter = new FileWriter("TechFile/tech.json");
+//            fileWriter.write(new Gson().toJson(technologies));
+//            fileWriter.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
-    public void writeToJson(Maps map) {
-        try {
-            FileWriter fileWriter = new FileWriter("MapFile/map1.json");
-            fileWriter.write(new Gson().toJson(map));
-            fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void writeToJson(Maps map) {
+//        try {
+//            FileWriter fileWriter = new FileWriter("MapFile/map1.json");
+//            fileWriter.write(new Gson().toJson(map));
+//            fileWriter.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public Maps readFromJsonMap() {
         try {

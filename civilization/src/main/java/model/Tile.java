@@ -246,4 +246,5 @@ public class Tile {
     public void setCitizenExist(boolean citizenExist) {
         this.citizenExist = citizenExist;
     }
+
 }
