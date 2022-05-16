@@ -47,6 +47,20 @@ public class ResearchMenu {
             else if (researchInput.equals("show tree of technologies")) {
                 showTree(user, scanner);
             }
+            else if (researchInput.equals("pause current")) {
+                if (user.isResearching()) {
+                    user.setResearching(false);
+                }
+                else
+                    System.out.println("you are not researching right now!");
+            }
+            else if (researchInput.equals("resume current")) {
+                if (user.getCurrentTechnology() != null) {
+                    user.setResearching(true);
+                }
+                else
+                    System.out.println("you have not any research in queue");
+            }
             else
                 System.out.println("invalid command");
         }
