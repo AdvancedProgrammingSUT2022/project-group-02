@@ -266,7 +266,7 @@ public class PlayGame {
     }
 
 
-    private void selectedTile(Scanner scanner, Tile origin, int xOrigin, int yOrigin, User user) {
+    public void selectedTile(Scanner scanner, Tile origin, int xOrigin, int yOrigin, User user) {
         // TODO enable far working
         System.out.println("you have selected a tile with -x " + origin.getX() + " -y " + origin.getY());
         origin.setSelectedOne(false);
@@ -342,7 +342,7 @@ public class PlayGame {
                                     if (origin.getNeighbors().get(i).equals(des)) {
                                         found = true;
                                         attackCity(origin, des, des.getCity(), user, scanner);
-                                        i = 100;
+                                        break;
                                     }
                                 }
                             }
@@ -352,13 +352,13 @@ public class PlayGame {
                                     if (origin.getNeighbors().get(i).equals(des)) {
                                         found = true;
                                         attackCity(origin, des, des.getCity(), user, scanner);
-                                        i = 100;
+                                        break;
                                     }
                                     for (int j = 0; j < origin.getNeighbors().get(i).getNeighbors().size(); j++) {
                                         if (origin.getNeighbors().get(i).getNeighbors().get(j).equals(des)) {
                                             found = true;
                                             attackCity(origin, des, des.getCity(), user, scanner);
-                                            j = 100;
+                                            break;
                                         }
                                     }
                                 }
