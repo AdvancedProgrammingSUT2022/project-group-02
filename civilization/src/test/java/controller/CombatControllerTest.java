@@ -23,6 +23,8 @@ public class CombatControllerTest {
     @Mock
     City city;
 
+    User user1 = new User("AmirHossein", "AmirHossein", "AmirHossein12");
+
     @Test
     public void checkDefenderHill() {
         Terrain Hill = new Terrain("Hill", "purple", 2, 0, 0.25, 0, 2, true);
@@ -96,7 +98,7 @@ public class CombatControllerTest {
         militaryUnit.setHP(15);
         militaryUnit2.setHP(2);
         selectedTileForDefend.setMilitaryUnit(militaryUnit2);
-        City city = new City(" ",selectedTileForDefend,attackerUser,tileList,20,20,militaryUnit2,null,0,0,0,0,0,0,0,0,0,null,null,false,null,0);
+        City city = new City(" ", selectedTileForDefend, attackerUser, tileList, 20, 20, militaryUnit2, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, null, null, false, null, 0);
         selectedTileForDefend.setCity(city);
         selectedTileForDefend.setCivilianUnit(militaryUnit2);
         Assert.assertEquals("you got a victory in this attack", combatController.combatHandler(attackerUser, selectedTileForAttack, selectedTileForDefend));
@@ -123,7 +125,7 @@ public class CombatControllerTest {
         militaryUnit.setHP(15);
         militaryUnit2.setHP(7);
         selectedTileForDefend.setMilitaryUnit(militaryUnit2);
-        City city = new City(" ",selectedTileForDefend,attackerUser,tileList,20,20,militaryUnit2,null,0,0,0,0,0,0,0,0,0,null,null,false,null,0);
+        City city = new City(" ", selectedTileForDefend, attackerUser, tileList, 20, 20, militaryUnit2, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, null, null, false, null, 0);
         selectedTileForDefend.setCity(city);
         selectedTileForDefend.setCivilianUnit(militaryUnit2);
         Assert.assertEquals("you could not get this tile. but you destroyed the military unit of adversary", combatController.combatHandler(attackerUser, selectedTileForAttack, selectedTileForDefend));
@@ -150,7 +152,7 @@ public class CombatControllerTest {
         militaryUnit.setHP(15);
         militaryUnit2.setHP(20);
         selectedTileForDefend.setMilitaryUnit(militaryUnit2);
-        City city = new City(" ",selectedTileForDefend,attackerUser,tileList,20,20,militaryUnit2,null,0,0,0,0,0,0,0,0,0,null,null,false,null,0);
+        City city = new City(" ", selectedTileForDefend, attackerUser, tileList, 20, 20, militaryUnit2, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, null, null, false, null, 0);
         selectedTileForDefend.setCity(city);
         selectedTileForDefend.setCivilianUnit(militaryUnit2);
         Assert.assertEquals("you made a damage to adversary military unit but you could not destroy and get the tile", combatController.combatHandler(attackerUser, selectedTileForAttack, selectedTileForDefend));
@@ -177,7 +179,7 @@ public class CombatControllerTest {
         militaryUnit.setHP(15);
         militaryUnit2.setHP(2);
         selectedTileForDefend.setMilitaryUnit(militaryUnit2);
-        City city = new City(" ",selectedTileForDefend,attackerUser,tileList,20,20,militaryUnit2,null,0,0,0,0,0,0,0,0,0,null,null,false,null,0);
+        City city = new City(" ", selectedTileForDefend, attackerUser, tileList, 20, 20, militaryUnit2, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, null, null, false, null, 0);
         selectedTileForDefend.setCity(city);
         selectedTileForDefend.setCivilianUnit(militaryUnit2);
         Assert.assertEquals("you got a victory in this attack", combatController.combatHandler(attackerUser, selectedTileForAttack, selectedTileForDefend));
@@ -204,7 +206,7 @@ public class CombatControllerTest {
         militaryUnit.setHP(15);
         militaryUnit2.setHP(7);
         selectedTileForDefend.setMilitaryUnit(militaryUnit2);
-        City city = new City(" ",selectedTileForDefend,attackerUser,tileList,20,20,militaryUnit2,null,0,0,0,0,0,0,0,0,0,null,null,false,null,0);
+        City city = new City(" ", selectedTileForDefend, attackerUser, tileList, 20, 20, militaryUnit2, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, null, null, false, null, 0);
         selectedTileForDefend.setCity(city);
         selectedTileForDefend.setCivilianUnit(militaryUnit2);
         Assert.assertEquals("you missed your military unit but the unit of adversary is also killed", combatController.combatHandler(attackerUser, selectedTileForAttack, selectedTileForDefend));
@@ -231,7 +233,7 @@ public class CombatControllerTest {
         militaryUnit.setHP(15);
         militaryUnit2.setHP(20);
         selectedTileForDefend.setMilitaryUnit(militaryUnit2);
-        City city = new City(" ",selectedTileForDefend,attackerUser,tileList,20,20,militaryUnit2,null,0,0,0,0,0,0,0,0,0,null,null,false,null,0);
+        City city = new City(" ", selectedTileForDefend, attackerUser, tileList, 20, 20, militaryUnit2, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, null, null, false, null, 0);
         selectedTileForDefend.setCity(city);
         selectedTileForDefend.setCivilianUnit(militaryUnit2);
         Assert.assertEquals("you missed this attack and your military unit", combatController.combatHandler(attackerUser, selectedTileForAttack, selectedTileForDefend));
@@ -248,17 +250,32 @@ public class CombatControllerTest {
 
     @Test
     public void destroyCity() {
-        CombatController combatController = mock(CombatController.class);
-        doNothing().when(combatController).destroyCity(city);
+        ArrayList<Tile> ownerShipTiles = new ArrayList<>();
+        Tile tile = new Tile(0, 0, user1, null, 1, false, null, null, null);
+        ownerShipTiles.add(tile);
+        City city = new City("nameOfCity", tile, user1, ownerShipTiles, 100, 100, null, null,
+                50, 1, 1, 1, 1, 1, 1, 1, 1,
+                null, null, false, null, 20);
+        tile.setCity(city);
+        CombatController combatController = new CombatController();
+        city.setOwner(user1);
         combatController.destroyCity(city);
-        verify(combatController, times(1)).destroyCity(city);
+        Assert.assertEquals(null, city.getOwner());
     }
 
     @Test
     public void annexCity() {
-        CombatController combatController = mock(CombatController.class);
-        doNothing().when(combatController).annexCity(city, militaryUnit);
+        ArrayList<Tile> ownerShipTiles = new ArrayList<>();
+        Tile tile = new Tile(0, 0, user1, null, 1, false, null, null, null);
+        ownerShipTiles.add(tile);
+        City city = new City("nameOfCity", tile, user1, ownerShipTiles, 100, 100, null, null,
+                50, 1, 1, 1, 1, 1, 1, 1, 1,
+                null, null, false, null, 20);
+        tile.setCity(city);
+        Unit militaryUnit = new MilitaryUnit("settler", selectedTileForAttack, 0, 0, 0, 0, 0, 0, 0, user1, 0, 0);
+        CombatController combatController = new CombatController();
+        militaryUnit.setOwner(user1);
         combatController.annexCity(city, militaryUnit);
-        verify(combatController, times(1)).annexCity(city, militaryUnit);
+        Assert.assertEquals(user1, city.getOwner());
     }
 }
