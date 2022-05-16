@@ -226,7 +226,19 @@ public class User {
     }
 
     public void setUnits(ArrayList<Unit> units) {
-        units = units;
+        this.units = units;
+    }
+
+    public void addAnnexedCity(City city){
+        this.annexedCities.add(city);
+    }
+
+    public void addFoundResourced(Resource foundResource){
+        this.foundResources.add(foundResource);
+    }
+
+    public void addAvailableResource(Resource resource){
+        this.availableResources.add(resource);
     }
 
     public void addUnit(Unit unit) {

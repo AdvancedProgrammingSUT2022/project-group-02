@@ -177,25 +177,34 @@ public class GameController {
                     // if it is done
                     if (worker.getRemainingTurnsToComplete() <= 1) {
                         // delete jungle and jungle and forest and marsh
-                        if (worker.getImprovement().getName().equals("Farm") || worker.getImprovement().getName().equals("Mine"))
-                            afterBuildingFarmOrMine(worker.getOwner(), worker.getTile());
-
-                        // notification for improvement
-                        UserPanel.improvementDoneNotification(player, worker.getImprovement());
-                        worker.setWorkingStatus(false);
-                        worker.setRemainingTurnsToComplete(0);
-                        worker.getTile().setInProgress(false);
-                        worker.getTile().setImprovement(worker.getImprovement());
-                        worker.getImprovement().setTile(worker.getTile());
-                        if (worker.getImprovement().getGivenResources() != null) {
-                            for (Resource resource : worker.getImprovement().getGivenResources()) {
-                                if (worker.getTile().getResource() != null) {
-                                    if (resource.getName().equals(worker.getTile().getResource().getName()))
-                                        player.setAvailableResources(worker.getTile().getResource());
+                        if (worker.getImprovement() != null) {
+                            if (worker.getImprovement().getName().equals("Farm") || worker.getImprovement().getName().equals("Mine"))
+                                if (worker.getTile().getFeature() != null)
+                                    afterBuildingFarmOrMine(worker.getOwner(), worker.getTile());
+                            // notification for improvement
+                            UserPanel.improvementDoneNotification(player, worker.getImprovement());
+                            worker.setWorkingStatus(false);
+                            worker.setRemainingTurnsToComplete(0);
+                            worker.getTile().setInProgress(false);
+                            worker.getTile().setImprovement(worker.getImprovement());
+                            worker.getImprovement().setTile(worker.getTile());
+                            if (worker.getImprovement().getGivenResources() != null) {
+                                for (Resource resource : worker.getImprovement().getGivenResources()) {
+                                    if (worker.getTile().getResource() != null) {
+                                        if (resource.getName().equals(worker.getTile().getResource().getName()))
+                                            player.setAvailableResources(worker.getTile().getResource());
+                                    }
                                 }
                             }
+                            worker.setImprovement(null);
                         }
-                        worker.setImprovement(null);
+                        else {
+                            worker.setWorkingStatus(false);
+                            worker.setRemainingTurnsToComplete(0);
+                            worker.getTile().setInProgress(false);
+                            worker.getTile().setRoad(true);
+                            UserPanel.roadNotification(worker.getTile(), worker.getOwner());
+                        }
                     } else {
                         worker.setRemainingTurnsToComplete(worker.getRemainingTurnsToComplete() - 1);
                     }
@@ -205,7 +214,7 @@ public class GameController {
     }
 
     // find the unit based on production name
-    private void findProduction(City city, Product product) {
+    public void findProduction(City city, Product product) {
         Worker worker;
         Settler settler;
         Civilian scout;
@@ -324,7 +333,7 @@ public class GameController {
         }
     }
 
-    private Tile findTileForMilitary(Tile origin) {
+    public Tile findTileForMilitary(Tile origin) {
         if (origin.isMilitaryUnitExists()) {
             for (Tile neighbor : origin.getNeighbors()) {
                 if (!neighbor.isMilitaryUnitExists() && neighbor.getTerrain().isPassable())
@@ -339,7 +348,7 @@ public class GameController {
         }
         return origin;
     }
-    private Tile findTileForCivilian(Tile origin) {
+    public Tile findTileForCivilian(Tile origin) {
         if (origin.isCivilianUnitExists()) {
             for (Tile neighbor : origin.getNeighbors()) {
                 if (!neighbor.isCivilianUnitExists() && neighbor.getTerrain().isPassable())
@@ -347,8 +356,8 @@ public class GameController {
             }
             for (Tile neighbor : origin.getNeighbors()) {
                 for (Tile neighborNeighbor : neighbor.getNeighbors()) {
-                    if (!neighborNeighbor.isCivilianUnitExists() && neighbor.getTerrain().isPassable())
-                        return neighborNeighbor;
+                    if (!neighborNeighbor.isCivilianUnitExists() && neighbor.getTerrain().isPassable()){
+                        return neighborNeighbor;}
                 }
             }
         }
@@ -393,21 +402,8 @@ public class GameController {
     }
 
     private void afterBuildingFarmOrMine(User user, Tile tile) {
-        if (tile.getTerrain().getName().equals("Jungle")) {
-            tile.getTerrain().setFoodRate(0);
-            tile.getTerrain().setFightRate(0);
-            tile.getTerrain().setProductionRate(0);
-            tile.getTerrain().setGoldRate(0);
-            if (tile.getFeature().getName().equals("Marsh"))
-                tile.setFeature(null);
-        }
-        else if (tile.getTerrain().getName().equals("Forest")) {
-            tile.getTerrain().setFoodRate(0);
-            tile.getTerrain().setFightRate(0);
-            tile.getTerrain().setProductionRate(0);
-            tile.getTerrain().setGoldRate(0);
-            if (tile.getFeature().getName().equals("Marsh"))
-                tile.setFeature(null);
+        switch (tile.getFeature().getName()) {
+            case "Jungle", "Forest", "Marsh" -> tile.setFeature(null);
         }
     }
 

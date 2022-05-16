@@ -213,6 +213,15 @@ public class UserPanel {
         notification.add("Movement point : " + unit.getMP() + Colors.RESET);
     }
 
+    public static void roadNotification(Tile tile, User user) {
+        ArrayList<String> notification = new ArrayList<>();
+        System.out.println(Colors.RED + "NOTICE!!!" + Colors.RESET);
+        notification.add(Colors.RED + "NOTICE!!!" + Colors.RESET);
+        System.out.println("tile in coordinate : -x " + tile.getX() + " -y " + tile.getY() + " has a road on it right now!");
+        notification.add("tile in coordinate : -x " + tile.getX() + " -y " + tile.getY() + " has a road on it right now!");
+        user.addHistoryOfNotification(notification);
+    }
+
     public void citizensIncreased(User user, City city){
         ArrayList<String> notification = new ArrayList<>();
         System.out.println(Colors.RED + "NOTICE!!!" + Colors.RESET);
