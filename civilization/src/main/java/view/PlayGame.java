@@ -432,6 +432,22 @@ public class PlayGame {
                     }
                 }
             }
+            else if (tileInput.equals("pause improving")){
+                if (origin.isInProgress()) {
+                    Worker worker = (Worker) origin.getCivilianUnit();
+                    worker.setWorkingStatus(false);
+                }
+                else
+                    System.out.println("not producing anything right now!");
+            }
+            else if (tileInput.equals("resume improving")) {
+                if (origin.isCivilianUnitExists() && origin.getCivilianUnit().getName().equals("worker")) {
+                    Worker worker = (Worker) origin.getCivilianUnit();
+                    worker.setWorkingStatus(true);
+                }
+                else
+                    System.out.println("do not have any improvement in queue");
+            }
             else
                 System.out.println("invalid command");
         }
