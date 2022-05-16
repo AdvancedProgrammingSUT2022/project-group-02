@@ -44,7 +44,7 @@ public class MapController {
     }
 
     // find the distance between two hexagons
-    private int findDistance(Tile origin, Tile destination) {
+    public int findDistance(Tile origin, Tile destination) {
         int xOrigin = origin.getX();
         int yOrigin = origin.getY();
         int xDestination = destination.getX();
