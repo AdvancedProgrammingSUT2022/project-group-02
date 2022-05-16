@@ -381,8 +381,12 @@ public class PlayGame {
 
     private void showImprovements(Tile tile, User user, Scanner scanner) {
         ArrayList<Improvement> improvements = user.getImprovements();
-        if (tile.getImprovement() != null)
+        boolean deleted = true;
+        if (tile.getImprovement() != null) {
             System.out.println("your current improvement on this tile is :" + tile.getImprovement().getName());
+            System.out.println("you have to first remove the current improvement then you can build something else!");
+            deleted = false;
+        }
         int index = 1;
         // print possible improvements with detail
         for (Improvement improvement : improvements) {
@@ -390,26 +394,52 @@ public class PlayGame {
             index++;
         }
         System.out.println("choose an improvement by index to be applied on this tile");
+        System.out.println("press \"add (--improvement | -i) (index)\" to build the improvement immediately");
         System.out.println("press <improvement exit> to get out of here");
         String improvementInput;
         while (true) {
             improvementInput = scanner.nextLine();
             if (improvementInput.equals("improvement exit"))
                 return;
-            else if (Pattern.matches("[\\d+]", improvementInput)) {
-                index = Integer.parseInt(improvementInput);
-                if (index <= improvements.size() && index >= 1) {
-                    tile.setInProgress(true);
-                    Worker worker = (Worker)tile.getCivilianUnit();
-                    worker.setRemainingTurnsToComplete(improvements.get(index - 1).getPrice());
-                    worker.setWorkingStatus(true);
-                    worker.setImprovement(improvements.get(index - 1));
+            if (deleted) {
+                if (Pattern.matches("[\\d+]", improvementInput)) {
+                    index = Integer.parseInt(improvementInput);
+                    if (index <= improvements.size() && index >= 1) {
+                        tile.setInProgress(true);
+                        Worker worker = (Worker) tile.getCivilianUnit();
+                        worker.setRemainingTurnsToComplete(improvements.get(index - 1).getPrice());
+                        worker.setWorkingStatus(true);
+                        worker.setImprovement(improvements.get(index - 1));
+                        gameController.userTurnWorker(user);
+                        System.out.println("get back to tile page");
+                        return;
+                    } else
+                        System.out.println("invalid number");
+                } else if ((matcher = RegexEnums.getMatcher(improvementInput, RegexEnums.ADD_IMPROVEMENT1)) != null ||
+                        (matcher = RegexEnums.getMatcher(improvementInput, RegexEnums.ADD_IMPROVEMENT2)) != null) {
+                    index = Integer.parseInt(matcher.group("index"));
+                    if (index >= 1 && index <= improvements.size()) {
+                        tile.setInProgress(true);
+                        Worker worker = (Worker) tile.getCivilianUnit();
+                        worker.setRemainingTurnsToComplete(1);
+                        worker.setWorkingStatus(true);
+                        worker.setImprovement(improvements.get(index - 1));
+                        gameController.userTurnWorker(user);
+                        System.out.println("get back to tile page");
+                        return;
+                    } else
+                        System.out.println("invalid number");
                 }
                 else
-                    System.out.println("invalid number");
+                    System.out.println("invalid command");
+            }
+            else if (improvementInput.equals("delete the current")) {
+                tile.setImprovement(null);
+                System.out.println("improvement deleted successfully!");
+                deleted = true;
             }
             else
-                System.out.println("invalid command");
+                System.out.println("delete the current");
         }
 
     }
@@ -577,6 +607,7 @@ public class PlayGame {
         Unit unit = origin.getMilitaryUnit();
         System.out.println("use cheat code -destroy city-");
         System.out.println("press -city war exit- to get out");
+        System.out.println("press -ordinary attack- to just attack the city");
         boolean cheat = true;
         String cityCombatInput;
         while (cheat) {
@@ -586,32 +617,47 @@ public class PlayGame {
                 cheat = false;
             }
             else if (cityCombatInput.equals("destroy city")) {
-                System.out.println("which one do you choose?");
-                System.out.println("1- completely destroy city");
-                System.out.println("2- annex city");
-                System.out.println("please press one of this numbers");
-                boolean decide = true;
-                while(decide) {
-                    cityCombatInput = scanner.nextLine();
-                    if (Pattern.matches("\\d+", cityCombatInput)) {
-                        int index = Integer.parseInt(cityCombatInput);
-                        if (index == 1) {
-                            combatController.destroyCity(city);
-                            decide = false;
-                        }
-                        else if (index == 2) {
-                            combatController.annexCity(city, unit);
-                            decide = false;
-                        }
-                        else
-                            System.out.println("invalid number");
-                    }
-                    else
-                        System.out.println("invalid command");
+                cheat = decideOnWhatToDoWithCity(city, scanner, unit);
+            }
+            else if (cityCombatInput.equals("ordinary attack")){
+                if (city.getHP() < unit.getAttackPoint()) {
+                    System.out.println("you won, congratulation " + user.getUsername());
+                    cheat = decideOnWhatToDoWithCity(city, scanner, unit);
+                }
+                else {
+                    combatController.attackCity(city, unit);
                 }
             }
         }
 
+    }
+
+    private boolean decideOnWhatToDoWithCity(City city, Scanner scanner, Unit unit) {
+        String cityCombatInput;
+        System.out.println("which one do you choose?");
+        System.out.println("1- completely destroy city");
+        System.out.println("2- annex city");
+        System.out.println("please press one of this numbers");
+        boolean decide = true;
+        while(decide) {
+            cityCombatInput = scanner.nextLine();
+            if (Pattern.matches("\\d+", cityCombatInput)) {
+                int index = Integer.parseInt(cityCombatInput);
+                if (index == 1) {
+                    combatController.destroyCity(city);
+                    decide = false;
+                }
+                else if (index == 2) {
+                    combatController.annexCity(city, unit);
+                    decide = false;
+                }
+                else
+                    System.out.println("invalid number");
+            }
+            else
+                System.out.println("invalid command");
+        }
+        return false;
     }
 
     public void showMap(User user) {

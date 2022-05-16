@@ -40,6 +40,7 @@ public class User {
     private Technology currentTechnology;
     private boolean researching;
     private int researchTurnLeft;
+    private ArrayList<String> specialWorking;
 
     public User(String username, String nickname, String password) {
         this.username = username;
@@ -69,6 +70,7 @@ public class User {
         improvements = new ArrayList<>();
         technologies = new ArrayList<>();
         availableResources = new ArrayList<>();
+        specialWorking = new ArrayList<>();
     }
 
     public void setColor(String color) {
@@ -411,5 +413,17 @@ public class User {
 
     public void removeCity(City city) {
         cities.remove(city);
+    }
+
+    public ArrayList<String> getSpecialWorking() {
+        return specialWorking;
+    }
+
+    public void setSpecialWorking(ArrayList<String> specialWorking) {
+        this.specialWorking = specialWorking;
+    }
+
+    public void addSpecialWorking(String specialWorking) {
+        this.specialWorking.add(specialWorking);
     }
 }

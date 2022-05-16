@@ -135,31 +135,35 @@ public class CombatController extends UnitController {
     }
 
     public void destroyCity(City city) {
-        ArrayList<City> cities = city.getOwner().getCities();
-        cities.remove(city);
-        city.getOwner().setCities(cities);
-        for (int i = 0; i < city.getOwnerShipTiles().size(); i++) {
-            if (city.getOwnerShipTiles().get(i).getCity().getName().equals(city.getName())) {
-                city.getOwnerShipTiles().get(i).setCity(null);
-                city.getOwnerShipTiles().get(i).setOwner(null);
-            }
+        User previous = city.getOwner();
+        previous.removeCity(city);
+        for (Tile ownerShipTile : city.getOwnerShipTiles()) {
+            ownerShipTile.setOwner(null);
+            ownerShipTile.setCity(null);
+            previous.removeTerritory(ownerShipTile);
         }
-        city.setOwner(null);
+        city = null;
     }
 
     public void annexCity(City city, Unit unit) {
-        ArrayList<City> cities = city.getOwner().getCities();
-        cities.remove(city);
-        city.getOwner().setCities(cities);
-        for (int i = 0; i < city.getOwnerShipTiles().size(); i++) {
-            if (city.getOwnerShipTiles().get(i).getCity().getName().equals(city.getName())) {
-                city.getOwnerShipTiles().get(i).setOwner(unit.getOwner());
-            }
-        }
+        User previous = city.getOwner();
+
+        previous.removeCity(city);
         city.setOwner(unit.getOwner());
-        unit.getOwner().setHappiness(unit.getOwner().getHappiness() - 5);
-        cities = unit.getOwner().getCities();
-        cities.add(city);
-        unit.getOwner().setCities(cities);
+        for (Tile ownerShipTile : city.getOwnerShipTiles()) {
+            ownerShipTile.setOwner(unit.getOwner());
+            unit.getOwner().addTerritory(ownerShipTile);
+            previous.removeTerritory(ownerShipTile);
+        }
+        unit.getOwner().addCity(city);
+    }
+
+    public void attackCity(City city, Unit unit) {
+        if (city.getTile().getTerrain().getName().equals("Hill")) {
+            city.setHP(city.getHP() - (unit.getAttackPoint() / 2));
+        }
+        else {
+            city.setHP(city.getHP() - unit.getAttackPoint());
+        }
     }
 }

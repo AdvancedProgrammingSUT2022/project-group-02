@@ -24,11 +24,14 @@ public class SettlerController extends UnitController{
         removeUnit(unit, user);
         addBasicProducts(city);
         addBasicUnits(city);
+        user.addTerritory(tile);
         // add neighbors to the city for free
         for (Tile neighbor : tile.getNeighbors()) {
             new ResourceController().addFoundResource(user, neighbor);
             neighbor.setCity(city);
             neighbor.setOwner(user);
+            city.addOwnerShipTiles(neighbor);
+            user.addTerritory(neighbor);
         }
     }
 

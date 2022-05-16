@@ -176,15 +176,24 @@ public class GameController {
                     Worker worker = (Worker) unit;
                     // if it is done
                     if (worker.getRemainingTurnsToComplete() <= 1) {
+                        // delete jungle and jungle and forest and marsh
+                        if (worker.getImprovement().getName().equals("Farm") || worker.getImprovement().getName().equals("Mine"))
+                            afterBuildingFarmOrMine(worker.getOwner(), worker.getTile());
+
                         // notification for improvement
                         UserPanel.improvementDoneNotification(player, worker.getImprovement());
                         worker.setWorkingStatus(false);
                         worker.setRemainingTurnsToComplete(0);
                         worker.getTile().setInProgress(false);
                         worker.getTile().setImprovement(worker.getImprovement());
-                        for (Resource resource : worker.getImprovement().getGivenResources()) {
-                            if (resource.getName().equals(worker.getTile().getResource().getName()))
-                                 player.setAvailableResources(worker.getTile().getResource());
+                        worker.getImprovement().setTile(worker.getTile());
+                        if (worker.getImprovement().getGivenResources() != null) {
+                            for (Resource resource : worker.getImprovement().getGivenResources()) {
+                                if (worker.getTile().getResource() != null) {
+                                    if (resource.getName().equals(worker.getTile().getResource().getName()))
+                                        player.setAvailableResources(worker.getTile().getResource());
+                                }
+                            }
                         }
                         worker.setImprovement(null);
                     } else {
@@ -360,16 +369,6 @@ public class GameController {
         }
     }
 
-    public void setCitizen(Scanner scanner, City city, CityMenu cityMenu){
-        cityMenu.setCitizenInterface(1, city);
-        int citizenIndex = Integer.parseInt(scanner.nextLine());
-        cityMenu.setCitizenInterface(2, city);
-        int tileIndex = Integer.parseInt(scanner.nextLine());
-        city.getCitizens().get(citizenIndex - 1).setTile(city.getOwnerShipTiles().get(tileIndex - 1));
-        city.getOwnerShipTiles().get(tileIndex - 1).setCitizenExist(true);
-        city.getCitizens().get(citizenIndex - 1).setTile(city.getOwnerShipTiles().get(tileIndex - 1));
-        cityMenu.setCitizenInterface(3, city);
-    }
 
     public void citiesIncome(User user){
         for (City city : user.getCities()) {
@@ -390,6 +389,25 @@ public class GameController {
                 city.setProduction(city.getProduction() + 1);
                 city.setFood(city.getFood() - 1);
             }
+        }
+    }
+
+    private void afterBuildingFarmOrMine(User user, Tile tile) {
+        if (tile.getTerrain().getName().equals("Jungle")) {
+            tile.getTerrain().setFoodRate(0);
+            tile.getTerrain().setFightRate(0);
+            tile.getTerrain().setProductionRate(0);
+            tile.getTerrain().setGoldRate(0);
+            if (tile.getFeature().getName().equals("Marsh"))
+                tile.setFeature(null);
+        }
+        else if (tile.getTerrain().getName().equals("Forest")) {
+            tile.getTerrain().setFoodRate(0);
+            tile.getTerrain().setFightRate(0);
+            tile.getTerrain().setProductionRate(0);
+            tile.getTerrain().setGoldRate(0);
+            if (tile.getFeature().getName().equals("Marsh"))
+                tile.setFeature(null);
         }
     }
 
