@@ -146,13 +146,6 @@ public class GameControllerTest {
     }
 
     @Test
-<<<<<<< HEAD
-    public void cityTurnProducts() {
-        Tile tile = new Tile(0, 0, user1, null, 1, false, null, null, null);
-        City city1 = new City("nameOfCity", tile, user1, null, 100, 100, null, null,
-                50, 1, 1, 1, 1, 1, 1, 1, 1,
-                null, null, false, null, 20);
-=======
     public void checkFindProduct(){
         UsersController usersController = new UsersController();
         Maps maps = usersController.readFromJsonMap();
@@ -193,7 +186,6 @@ public class GameControllerTest {
         City city1 = new City("nameOfCity", tile, user1, null, 100, 100, null, null,
                 50, 1, 1, 1, 1, 1, 1, 1, 1,
                 null, null, false, null, 20);
->>>>>>> main
         City city2 = new City("nameOfCity", tile, user1, null, 100, 100, null, null,
                 50, 1, 1, 1, 1, 1, 1, 1, 1,
                 null, null, false, null, 20);
@@ -226,37 +218,6 @@ public class GameControllerTest {
         user1.setResearchTurnLeft(1);
         user1.setColor("blue");
         Tile tile1 = new Tile(0, 0, user1, null, 1, false, null, null, null);
-<<<<<<< HEAD
-        Tile tile2 = new Tile(0, 0, user1, null, 1, false, null, null, null);
-        Tile tile3 = new Tile(0, 0, user1, null, 1, false, null, null, null);
-        Tile tile4 = new Tile(0, 0, user1, null, 1, false, null, null, null);
-
-        Improvement improvement1 = new Improvement("name", 2, 2, 2, 2, null, null);
-        Improvement improvement2 = new Improvement("name", 2, 2, 2, 2, null, null);
-        Improvement improvement3 = new Improvement("name", 2, 2, 2, 2, null, null);
-        Improvement improvement4 = new Improvement("name", 2, 2, 2, 2, null, null);
-
-        ArrayList<Improvement> improvements = new ArrayList<>();
-        improvements.add(improvement1);
-        improvements.add(improvement2);
-        improvements.add(improvement3);
-        improvements.add(improvement4);
-        improvement1.setTile(tile1);
-        improvement2.setTile(tile2);
-        improvement3.setTile(tile3);
-        improvement4.setTile(tile4);
-        Unit militaryUnit1 = new MilitaryUnit("settler", tile1, 0, 0, 0, 0, 0, 0, 0, user1, 0, 0);
-        Unit militaryUnit2 = new MilitaryUnit("settler", tile1, 0, 0, 0, 0, 0, 0, 0, user1, 0, 0);
-        Unit militaryUnit3 = new MilitaryUnit("settler", tile1, 0, 0, 0, 0, 0, 0, 0, user1, 0, 0);
-        Unit militaryUnit4 = new MilitaryUnit("settler", tile1, 0, 0, 0, 0, 0, 0, 0, user1, 0, 0);
-        ArrayList<Unit> units = new ArrayList<>();
-        units.add(militaryUnit1);
-        units.add(militaryUnit2);
-        units.add(militaryUnit3);
-        units.add(militaryUnit4);
-        Technology technology = new Technology("name", improvements, 0, 0, units);
-
-=======
         Improvement improvement1 = new Improvement("name", 2, 2, 2, 2, null, null);
         City city1 = new City("nameOfCity", tile1, user1, null, 100, 100, null, null,
                 50, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -274,7 +235,6 @@ public class GameControllerTest {
         units.add(militaryUnit1);
         units.add(militaryUnit3);
         Technology technology = new Technology("name", improvements, 0, 0, units);
->>>>>>> main
         user1.setCurrentTechnology(technology);
         gameController.userTurnResearch(user1);
         Assert.assertNull(user1.getCurrentTechnology());
@@ -285,21 +245,6 @@ public class GameControllerTest {
 
     @Test
     public void userTurnWorker() {
-<<<<<<< HEAD
-        Unit worker = new Worker("worker", origin, 2, 2, 2, 2, 2, 2, 2, true, user1, 0, 0);
-        Unit militaryUnit1 = new MilitaryUnit("settler", origin, 0, 0, 0, 0, 0, 0, 0, user1, 0, 0);
-        Unit militaryUnit2 = new MilitaryUnit("settler", origin, 0, 0, 0, 0, 0, 0, 0, user1, 0, 0);
-        Unit militaryUnit3 = new MilitaryUnit("settler", origin, 0, 0, 0, 0, 0, 0, 0, user1, 0, 0);
-        Unit militaryUnit4 = new MilitaryUnit("settler", origin, 0, 0, 0, 0, 0, 0, 0, user1, 0, 0);
-
-        Tile tile = new Tile(0, 0, user1, null, 1, false, null, null, null);
-        ArrayList<Unit> units = new ArrayList<>();
-
-        units.add(militaryUnit1);
-        units.add(militaryUnit2);
-        units.add(militaryUnit3);
-        units.add(militaryUnit4);
-=======
         Worker worker = new Worker("worker", origin, 2, 2, 2, 2, 2, 2, 2, true, user1, 0, 0);
         ArrayList<Unit> units = new ArrayList<>();
         Feature Jungle = new Feature("Jungle", 2, 1, 0.25, 0, 1);
@@ -308,7 +253,6 @@ public class GameControllerTest {
         resources.add(resource);
         Tile tile = new Tile(0, 0, user1, null, 1, false, null, resource, Jungle);
         Improvement improvement1 = new Improvement("Farm", 2, 2, 2, 2, resources, null);
->>>>>>> main
         units.add(worker);
         worker.setWorkingStatus(true);
         worker.setRemainingTurnsToComplete(1);
@@ -326,20 +270,6 @@ public class GameControllerTest {
     @Test
     public void increaseCitizens() {
         Tile tile = new Tile(0, 0, user1, null, 1, false, null, null, null);
-<<<<<<< HEAD
-        City city1 = new City("nameOfCity", tile, user1, null, 100, 100, null, null,
-                50, 1, 1, 1, 1, 1, 1, 1, 1,
-                null, null, false, null, 20);
-        City city2 = new City("nameOfCity", tile, user1, null, 100, 100, null, null,
-                50, 1, 1, 1, 1, 1, 1, 1, 1,
-                null, null, false, null, 20);
-        City city3 = new City("nameOfCity", tile, user1, null, 100, 100, null, null,
-                50, 1, 1, 1, 1, 1, 1, 1, 1,
-                null, null, false, null, 20);
-        City city4 = new City("nameOfCity", tile, user1, null, 100, 100, null, null,
-                50, 1, 1, 1, 1, 1, 1, 1, 1,
-                null, null, false, null, 20);
-=======
         Citizen citizen = new Citizen(tile);
         ArrayList<Citizen> citizens = new ArrayList<>();
         citizens.add(citizen);
@@ -349,27 +279,13 @@ public class GameControllerTest {
         City city2 = new City("nameOfCity", tile, user1, null, 100, 100, null, null,
                 50, 1, 1, 1, 1, 1, 1, 1, 1,
                 null, null, false, citizens, 20);
->>>>>>> main
         city1.setTurnNumber(15);
         city1.setCitizensNumber(15);
         city2.setTurnNumber(15);
         city2.setCitizensNumber(15);
-<<<<<<< HEAD
-        city3.setTurnNumber(15);
-        city3.setCitizensNumber(15);
-        city4.setTurnNumber(15);
-        city4.setCitizensNumber(15);
-        ArrayList<City> cities = new ArrayList<>();
-        cities.add(city1);
-        cities.add(city2);
-        cities.add(city3);
-        cities.add(city4);
-
-=======
         user1.addCity(city2);
         user1.addCity(city1);
         user1.setColor("blue");
->>>>>>> main
         int result1 = user1.getUnhappiness();
         gameController.increaseCitizens(user1);
         int result2 = user1.getUnhappiness();
@@ -378,75 +294,6 @@ public class GameControllerTest {
 
     @Test
     public void usersIncomeHandling() {
-<<<<<<< HEAD
-        Maps map = new Maps(1, 1);
-        user1.setGoldPerTurn(0);
-        user1.setFoodPerTurn(0);
-        user1.setProductPerTurn(0);
-        user1.setSciencePerTurn(0);
-
-        Tile tile1 = new Tile(0, 0, user1, null, 1, false, null, null, null);
-        Tile tile2 = new Tile(0, 0, user1, null, 1, false, null, null, null);
-        Tile tile3 = new Tile(0, 0, user1, null, 1, false, null, null, null);
-        Tile tile4 = new Tile(0, 0, user1, null, 1, false, null, null, null);
-
-        City city1 = new City("nameOfCity", tile1, user1, null, 100, 100, null, null,
-                50, 1, 1, 1, 1, 1, 1, 1, 1,
-                null, null, false, null, 20);
-        City city2 = new City("nameOfCity", tile2, user1, null, 100, 100, null, null,
-                50, 1, 1, 1, 1, 1, 1, 1, 1,
-                null, null, false, null, 20);
-        City city3 = new City("nameOfCity", tile3, user1, null, 100, 100, null, null,
-                50, 1, 1, 1, 1, 1, 1, 1, 1,
-                null, null, false, null, 20);
-        City city4 = new City("nameOfCity", tile4, user1, null, 100, 100, null, null,
-                50, 1, 1, 1, 1, 1, 1, 1, 1,
-                null, null, false, null, 20);
-
-        ArrayList<City> cities = new ArrayList<>();
-        cities.add(city1);
-        cities.add(city2);
-        cities.add(city3);
-        cities.add(city4);
-
-        Improvement improvement1 = new Improvement("name", 2, 2, 2, 2, null, null);
-        Improvement improvement2 = new Improvement("name", 2, 2, 2, 2, null, null);
-        Improvement improvement3 = new Improvement("name", 2, 2, 2, 2, null, null);
-        Improvement improvement4 = new Improvement("name", 2, 2, 2, 2, null, null);
-
-        ArrayList<Improvement> improvements = new ArrayList<>();
-        improvements.add(improvement1);
-        improvements.add(improvement2);
-        improvements.add(improvement3);
-        improvements.add(improvement4);
-        improvement1.setTile(tile1);
-        improvement2.setTile(tile2);
-        improvement3.setTile(tile3);
-        improvement4.setTile(tile4);
-
-        Unit militaryUnit1 = new MilitaryUnit("settler", tile1, 0, 0, 0, 0, 0, 0, 0, user1, 0, 0);
-        Unit militaryUnit2 = new MilitaryUnit("settler", tile1, 0, 0, 0, 0, 0, 0, 0, user1, 0, 0);
-        Unit militaryUnit3 = new MilitaryUnit("settler", tile1, 0, 0, 0, 0, 0, 0, 0, user1, 0, 0);
-        Unit militaryUnit4 = new MilitaryUnit("settler", tile1, 0, 0, 0, 0, 0, 0, 0, user1, 0, 0);
-
-
-        ArrayList<Tile> tiles = new ArrayList<>();
-        tiles.add(tile1);
-        tiles.add(tile2);
-        tiles.add(tile3);
-        tiles.add(tile4);
-        ArrayList<Unit> units = new ArrayList<>();
-        units.add(militaryUnit1);
-        units.add(militaryUnit2);
-        units.add(militaryUnit3);
-        units.add(militaryUnit4);
-
-        user1.setImprovements(improvements);
-        user1.setCities(cities);
-        user1.setTerritory(tiles);
-        user1.setGold(-2);
-        user1.setUnits(units);
-=======
         Maps map = new Maps(25, 80);
         Tile tile1 = new Tile(0, 0, user1, null, 1, false, null, null, null);
         City city1 = new City("nameOfCity", tile1, user1, null, 100, 100, null, null,
@@ -461,7 +308,6 @@ public class GameControllerTest {
         user1.addUnit(militaryUnit1);
         user1.setGold(-15);
         tile1.setRoad(true);
->>>>>>> main
         int result1 = user1.getScience();
         gameController.usersIncomeHandling(user1, map);
         int result2 = user1.getScience();
@@ -470,57 +316,6 @@ public class GameControllerTest {
 
     @Test
     public void userHappiness() {
-<<<<<<< HEAD
-        Tile tile = new Tile(0, 0, user1, null, 1, false, null, null, null);
-        City city1 = new City("nameOfCity", tile, user1, null, 100, 100, null, null,
-                50, 1, 1, 1, 1, 1, 1, 1, 1,
-                null, null, false, null, 20);
-        City city2 = new City("nameOfCity", tile, user1, null, 100, 100, null, null,
-                50, 1, 1, 1, 1, 1, 1, 1, 1,
-                null, null, false, null, 20);
-        City city3 = new City("nameOfCity", tile, user1, null, 100, 100, null, null,
-                50, 1, 1, 1, 1, 1, 1, 1, 1,
-                null, null, false, null, 20);
-        City city4 = new City("nameOfCity", tile, user1, null, 100, 100, null, null,
-                50, 1, 1, 1, 1, 1, 1, 1, 1,
-                null, null, false, null, 20);
-        City city5 = new City("nameOfCity", tile, user1, null, 100, 100, null, null,
-                50, 1, 1, 1, 1, 1, 1, 1, 1,
-                null, null, false, null, 20);
-        Resource resource1 = new Resource("name","type","improvment",2,2,2,2);
-        Resource resource2 = new Resource("name","type","improvment",2,2,2,2);
-        Resource resource3 = new Resource("name","type","improvment",2,2,2,2);
-        Resource resource4 = new Resource("name","type","improvment",2,2,2,2);
-        Resource resource5 = new Resource("name","type","improvment",2,2,2,2);
-
-        ArrayList<Resource> resources = new ArrayList<>();
-        resources.add(resource1);
-        resources.add(resource2);
-        resources.add(resource3);
-        resources.add(resource4);
-        resources.add(resource5);
-        user1.setFoundResources(resources);
-
-        city1.setUnhappinessEffect(false);
-        city2.setUnhappinessEffect(false);
-        city3.setUnhappinessEffect(false);
-        city4.setUnhappinessEffect(false);
-        city5.setUnhappinessEffect(false);
-
-        ArrayList<City> cities = new ArrayList<>();
-        cities.add(city1);
-        cities.add(city2);
-        cities.add(city3);
-        cities.add(city4);
-        cities.add(city5);
-
-        user1.setCities(cities);
-        user1.setAnnexedCities(cities);
-        int result1 = user1.getUnhappiness();
-        gameController.userHappiness(user1);
-        int result2 = user1.getUnhappiness();
-        Assert.assertEquals(result1 + 5*7, result2);
-=======
         Feature Jungle = new Feature("Jungle", 2, 1, 0.25, 0, 1);
         Tile tile = new Tile(0, 0, user1, null, 1, false, null, null, Jungle);
         ArrayList<Citizen> citizens = new ArrayList<>();
@@ -538,61 +333,11 @@ public class GameControllerTest {
         gameController.userHappiness(user1);
         int result2 = user1.getUnhappiness();
         Assert.assertNotEquals(result1 + 5*7, result2);
->>>>>>> main
     }
 
     @Test
     public void citiesIncome() {
         Terrain Hill = new Terrain("Hill", "purple", 2, 0, 0.25, 0, 2, true);
-<<<<<<< HEAD
-        Tile tile = new Tile(0, 0, user1, Hill, 1, false, null, null, null);
-        City city1 = new City("nameOfCity", tile, user1, null, 100, 100, null, null,
-                50, 1, 1, 1, 1, 1, 1, 1, 1,
-                null, null, false, null, 20);
-        City city2 = new City("nameOfCity", tile, user1, null, 100, 100, null, null,
-                50, 1, 1, 1, 1, 1, 1, 1, 1,
-                null, null, false, null, 20);
-        City city3 = new City("nameOfCity", tile, user1, null, 100, 100, null, null,
-                50, 1, 1, 1, 1, 1, 1, 1, 1,
-                null, null, false, null, 20);
-        city1.setUnhappinessEffect(false);
-        city2.setUnhappinessEffect(false);
-        city3.setUnhappinessEffect(false);
-
-        ArrayList<City> cities = new ArrayList<>();
-        cities.add(city1);
-        cities.add(city2);
-        cities.add(city3);
-        Citizen citizen1 = new Citizen(tile);
-        Citizen citizen2 = new Citizen(tile);
-        Citizen citizen3 = new Citizen(tile);
-        Citizen citizen4 = new Citizen(tile);
-        Citizen citizen5 = new Citizen(tile);
-        Citizen citizen6 = new Citizen(tile);
-        Citizen citizen7 = new Citizen(tile);
-
-        ArrayList<Citizen> citizens = new ArrayList<>();
-        citizens.add(citizen1);
-        citizens.add(citizen2);
-        citizens.add(citizen3);
-        citizens.add(citizen4);
-        citizens.add(citizen5);
-        citizens.add(citizen6);
-        citizens.add(citizen7);
-        city1.setCitizens(citizens);
-        city1.setProduction(0);
-        city1.setFood(0);
-        city1.setGold(0);
-        city2.setCitizens(citizens);
-        city2.setProduction(0);
-        city2.setFood(0);
-        city2.setGold(0);
-        city3.setCitizens(citizens);
-        city3.setProduction(0);
-        city3.setFood(0);
-        city3.setGold(0);
-        user1.setCities(cities);
-=======
         Feature Jungle = new Feature("Jungle", 2, 1, 0.25, 0, 1);
         Tile tile = new Tile(0, 0, user1, Hill, 1, false, null, null, Jungle);
         Citizen citizen1 = new Citizen(tile);
@@ -602,7 +347,6 @@ public class GameControllerTest {
                 50, 1, 1, 1, 1, 1, 1, 1, 1,
                 null, null, false, citizens, 20);
         user1.addCity(city1);
->>>>>>> main
         int result1 = user1.getFood();
         gameController.citiesIncome(user1);
         int result2 = user1.getFood();
