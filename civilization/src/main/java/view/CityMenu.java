@@ -194,7 +194,7 @@ public class CityMenu {
         }
     }
 
-    private void setProduction(City city, User user, Scanner scanner) {
+    void setProduction(City city, User user, Scanner scanner) {
         int index = 1;
         for (Product product : city.getProducts()) {
             System.out.println(index + "- " + product.getName() + " cost : " + product.getTurnCost());
