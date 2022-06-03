@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="view.ProfileMenu"
+            styleClass="profile-menu-background">
+
+    <center>
+        <VBox alignment="CENTER" maxWidth="350">
+            <TextField fx:id="currentPassword" promptText="OLDPASSWORD"/>
+            <TextField fx:id="newPassword" promptText="NEWPASSWORD"/>
+            <Button text="CHANGE PASSWORD" onMouseClicked="#changePasswordClicked"/>
+            <TextField fx:id="newNickName" promptText="NEWNICKNAME"/>
+            <Button text="CHANGE NICKNAME" onMouseClicked="#changeNickNameClicked"/>
+        </VBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER">
+            <Button text="EXIT" onMouseClicked="#exitClicked"/>
+        </HBox>
+    </bottom>
+
+    <stylesheets>
+        <URL value="@../CSS/Style.css"/>
+    </stylesheets>
+
+</BorderPane>

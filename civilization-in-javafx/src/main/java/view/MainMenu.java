@@ -43,7 +43,7 @@ public class MainMenu {
                     new GameMenu().run(users, user, scanner);
                 }
                 else if (menu.equals("Profile")) {
-                    new ProfileMenu().run(users, user, scanner);
+                    //new ProfileMenu().run(users, user, scanner);
                 }
                 else
                     System.out.println("invalid command");

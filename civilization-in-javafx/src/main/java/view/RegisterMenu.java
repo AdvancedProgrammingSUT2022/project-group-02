@@ -287,7 +287,7 @@ public class RegisterMenu {
 
     }
 
-    private void graphicLoginController(String username, String password, Label label){
+    private void graphicLoginController(String username, String password, Label label) throws IOException {
         label.setLayoutX(650);
         label.setLayoutY(140);
         label.getStyleClass().add("register-signup-and-login-error");
@@ -297,6 +297,13 @@ public class RegisterMenu {
         //check if username exists and the password is correct
         if (users.sameUsernameExists(username) && (user = users.getUserByUsername(username)).getPassword().equals(password)) {
             label.setText("user logged in successfully!");
+            ProfileMenu profileMenu = new ProfileMenu();
+            profileMenu.setStage(stage);
+            profileMenu.setUser(user);
+            profileMenu.setMediaPlayer(mediaPlayer);
+            profileMenu.setScene(scene);
+            profileMenu.setUsers(users);
+            profileMenu.start(stage);
         } else{
             label.setLayoutX(588);
             label.setText("Username and password didn't match!");
@@ -439,6 +446,10 @@ public class RegisterMenu {
         graphicSubmitEffect(submit, button1, button2, button3, username, nickname, password, root);
     }
 
+    public void submitClicked(MouseEvent mouseEvent){
+
+    }
+
     private void graphicInitialiseSignUpBoxes(TextField username, TextField nickname, TextField password,
                                               Label usernameLabel, Label nicknameLabel, Label passwordLabel, Button submit,
                                               ImageView button1, ImageView button2, ImageView button3){
@@ -503,7 +514,13 @@ public class RegisterMenu {
             AudioClip clickSound = new AudioClip(Objects.requireNonNull(getClass().getResource("/Media/sounds/click.mp3")).toExternalForm());
             clickSound.play();
             if (whichMenu.equals("signup"))graphicSignupController(username.getText(), nickname.getText(), password.getText(), label);
-            else if (whichMenu.equals("login"))graphicLoginController(username.getText(), password.getText(), label);
+            else if (whichMenu.equals("login")) {
+                try {
+                    graphicLoginController(username.getText(), password.getText(), label);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
         });
     }
 
