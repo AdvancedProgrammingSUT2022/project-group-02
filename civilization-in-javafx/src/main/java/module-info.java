@@ -11,6 +11,7 @@ module com.example.civilizationinjavafx {
     requires eu.hansolo.tilesfx;
     requires gson;
     requires java.sql;
+    requires javafx.media;
 
     opens controller to javafx.fxml, gson;
     exports controller;

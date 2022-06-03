@@ -1,0 +1,81 @@
+/* these are public styles so if in any object you don't want them, delete the first style on that object */
+.button{
+    -fx-background-radius: 4px;
+    -fx-cursor: hand;
+    -fx-background-color: transparent;
+}
+/* end of public styles */
+
+/* background images */
+.register-menu-background{
+    -fx-background-size: cover;
+    -fx-background-image: url("register-menu-background.png");
+}
+/* end of background images */
+
+/* text styles */
+
+.register-menu-notice-Style{
+    -fx-text-fill: #8d1001;
+    -fx-font-size: 18px;
+}
+
+.register-menu-tip-Style{
+    -fx-text-fill: #833802;
+    -fx-font-size: 18px;
+}
+
+.register-signup-and-login-text{
+    -fx-font-size: 16px;
+    -fx-text-fill: #ff4d00;
+}
+
+.register-signup-and-login-error{
+    -fx-font-size: 20px;
+    -fx-text-fill: red;
+    -fx-font-family: serif;
+}
+
+.register-signup-and-login-successfully{
+    -fx-font-size: 22px;
+    -fx-text-fill: #fc0061;
+}
+
+/* end of text styles */
+
+/* text field styles */
+
+.register-text-field{
+    -fx-background-color: #2962b8;
+    -fx-text-fill: #00ff95;
+    -fx-font-size: 15px;
+}
+.register-text-field:hover{
+    -fx-border-color: #0015ff;
+    -fx-border-radius: 3px;
+}
+
+/* end of text field styles */
+
+
+/* buttons style */
+.register-signup-and-login-button{
+    -fx-text-fill: #000000;
+    -fx-font-size: 18px;
+}
+.register-signup-and-login-button:hover{
+    -fx-text-fill: #590800;
+    -fx-font-weight: bold;
+    -fx-border-color: #ffd700;
+    -fx-border-radius: 7;
+    -fx-border-width: 1.5;
+    -fx-border-style: solid;
+}
+
+.register-signup-and-login-submit{
+    -fx-text-fill: #5d4900;
+    -fx-font-size: 18px;
+    -fx-background-radius: 8px;
+}
+
+/* end of buttons style */
