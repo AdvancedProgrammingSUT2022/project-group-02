@@ -71,7 +71,7 @@ public class ProfileMenu extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        //stage = new Stage();
+        stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(ProfileMenu.class.getResource("/FXML/profile-menu.fxml"));
         BorderPane root = fxmlLoader.load();
         Scene scene = new Scene(root);
@@ -81,7 +81,7 @@ public class ProfileMenu extends Application {
         stage.setMaximized(true);
         stage.setFullScreen(true);
         graphicPlayBackgroundMusic();
-        //stage.show();
+        stage.show();
     }
     /*end of graphic part*/
     //provide some information for user
