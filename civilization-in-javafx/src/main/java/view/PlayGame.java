@@ -69,14 +69,6 @@ public class PlayGame {
         System.out.println(color + "place city here" + Colors.RESET);
     }
 
-    private void assignNeighbor() {
-
-        // assign all the neighbors to each tile
-        for (int i = 0; i < map.getHeight(); i++)
-            for (int j = 0; j < map.getWidth(); j++)
-                mapController.setNeighbor(map.getTileBoard()[i][j]);
-    }
-
     public void run(Scanner scanner) {
         cityMenu = new CityMenu(mapController, techController, settlerController, gameController, players);
         researchMenu = new ResearchMenu(techController, gameController);
@@ -86,7 +78,7 @@ public class PlayGame {
         int role = 0;
         firstTurnsSettlers = mapController.firstSetOfSettlers(players);
         int turn = 1;
-        assignNeighbor();
+        gameController.assignNeighbor(mapController);
         boolean nextTurn = true;
         while (true) {
             User user = players.get(role);
@@ -94,6 +86,7 @@ public class PlayGame {
             String color = new ColorsController().getColorOfUser(user);
             System.out.println("it's " + color + user.getNickname() + Colors.RESET + " turn");
             // handle production turn in cities and research turn of user
+            //pre turn actions
             gameController.cityTurnProducts(user);
             gameController.userTurnResearch(user);
             gameController.userTurnWorker(user);
@@ -103,6 +96,8 @@ public class PlayGame {
             gameController.userHappiness(user);
             gameController.makeAllUnOrdered(user);
             gameController.foundCity(user);
+            gameController.moveTravelingUnits(user, this);
+
             while (nextTurn) {
 
                 input = scanner.nextLine();
@@ -138,12 +133,14 @@ public class PlayGame {
                 else if (input.trim().equals("user panel")) {
                     userPanel.run(scanner, user);
                 }
-                    //cheat codes
+                //cheat codes
                 else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_TURN1)) != null ||
                         (matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_TURN2)) != null) {
                     int amount = Integer.parseInt(matcher.group("amount"));
                     if (amount > 0) {
                         gameController.increaseTurn(amount, user);
+                        gameController.makeAllUnOrdered(user);
+                        unitController.repairMovementPoint(user);
                         System.out.println("turn increased successfully!");
                         showMap(user);
                     } else
@@ -278,7 +275,7 @@ public class PlayGame {
 
 
     public void selectedTile(Scanner scanner, Tile origin, int xOrigin, int yOrigin, User user) {
-        // TODO enable far working
+
         System.out.println("you have selected a tile with -x " + origin.getX() + " -y " + origin.getY());
         origin.setSelectedOne(false);
         origin.setSelectedTwo(false);
@@ -312,7 +309,7 @@ public class PlayGame {
             // order settler to place city
             else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.CITY1)) != null ||
                     (matcher = RegexEnums.getMatcher(tileInput, RegexEnums.CITY2)) != null) {
-                if (conditionsForPlaceCity(tileInput, origin)) {
+                if (conditionsForPlaceCity(tileInput, origin, user)) {
                     String nameOfCity = matcher.group("city");
                     createCity(origin, user, nameOfCity);
                 }
@@ -323,8 +320,12 @@ public class PlayGame {
             else if (tileInput.trim().equals("show possible improvements")) {
                 if (origin.isCivilianUnitExists() &&
                         origin.getCivilianUnit().getOwner().equals(user) &&
-                        origin.getCivilianUnit().getName().equals("worker"))
-                    showImprovements(origin, user, scanner);
+                        origin.getCivilianUnit().getName().equals("worker")) {
+                    if (!origin.isLooted())
+                        showImprovements(origin, user, scanner);
+                    else
+                        System.out.println("looted!");
+                }
                 else
                     System.out.println("there is no worker in this tile");
             }
@@ -346,7 +347,7 @@ public class PlayGame {
                 if (x >= 0 && x < map.getHeight() && y >= 0 && y < map.getWidth()) {
                     Tile des = map.getSpecificTile(x, y);
                     if (des.getCity() != null && des.getCity().getTile().equals(des)) {
-                        if (origin.isMilitaryUnitExists()) {
+                        if (origin.isMilitaryUnitExists() && origin.getMilitaryUnit().getOwner().equals(user)) {
                             // melee
                             if (origin.getMilitaryUnit().getRangeCombatStrength() == 0) {
                                 for (int i = 0; i < origin.getNeighbors().size(); i++) {
@@ -386,55 +387,141 @@ public class PlayGame {
                     System.out.println("invalid coordinates");
             }
             else if (tileInput.equals("delete unit")) {
-                if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
+                if (origin.isMilitaryUnitExists() && origin.isSelectedOne() && origin.getMilitaryUnit().getOwner().equals(user)) {
                     origin.setMilitaryUnitExists(false);
+                    origin.getMilitaryUnit().getOwner().removeUnit(origin.getMilitaryUnit());
                     origin.setMilitaryUnit(null);
                     origin.setSelectedOne(false);
                     if (origin.isCivilianUnitExists())
                         origin.setSelectedTwo(true);
+                    System.out.println("unit deleted successfully!");
                 }
-                else if (origin.isCivilianUnitExists() && origin.isSelectedTwo()) {
+                else if (origin.isCivilianUnitExists() && origin.isSelectedTwo() && origin.getCivilianUnit().getOwner().equals(user)) {
                     origin.setCivilianUnitExists(false);
+                    origin.getCivilianUnit().getOwner().removeUnit(origin.getCivilianUnit());
                     origin.setCivilianUnit(null);
                     origin.setSelectedTwo(false);
                     if (origin.isMilitaryUnitExists())
                         origin.setSelectedOne(true);
+                    System.out.println("unit deleted successfully!");
                 }
             }
             else if (tileInput.equals("sleep unit")) {
-                if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
+                if (origin.isMilitaryUnitExists() && origin.isSelectedOne() && origin.getMilitaryUnit().getOwner().equals(user)) {
                     origin.getMilitaryUnit().setSleep(true);
                     if (origin.isCivilianUnitExists()) {
                         origin.setSelectedOne(false);
                         origin.setSelectedTwo(true);
                     }
+                    System.out.println("unit sleep successfully!");
                 }
-                else if (origin.isCivilianUnitExists() && origin.isSelectedTwo()) {
+                else if (origin.isCivilianUnitExists() && origin.isSelectedTwo() && origin.getCivilianUnit().getOwner().equals(user)) {
                     origin.getCivilianUnit().setSleep(true);
                     if (origin.isMilitaryUnitExists()) {
                         origin.setSelectedOne(true);
                         origin.setSelectedTwo(false);
                     }
+                    System.out.println("unit sleep successfully!");
                 }
             }
             else if (tileInput.equals("alert unit")) {
-                if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
+                if (origin.isMilitaryUnitExists() && origin.isSelectedOne() && origin.getMilitaryUnit().getOwner().equals(user)) {
                     origin.getMilitaryUnit().setAlert(true);
                     if (origin.isCivilianUnitExists()) {
                         origin.setSelectedOne(false);
                         origin.setSelectedTwo(true);
                     }
+                    System.out.println("unit alerted successfully!");
                 }
-                else if (origin.isCivilianUnitExists() && origin.isSelectedTwo()) {
+                else if (origin.isCivilianUnitExists() && origin.isSelectedTwo() && origin.getCivilianUnit().getOwner().equals(user)) {
                     origin.getCivilianUnit().setAlert(true);
                     if (origin.isMilitaryUnitExists()) {
                         origin.setSelectedOne(true);
                         origin.setSelectedTwo(false);
                     }
+                    System.out.println("unit alerted successfully!");
                 }
             }
+            else if (tileInput.equals("garrison unit")) {
+                if (origin.getCity() != null) {
+                    if (origin.getCity().getTile().equals(origin)) {
+                        if (origin.isMilitaryUnitExists() && origin.isSelectedOne() && origin.getMilitaryUnit().getOwner().equals(user)) {
+                            Unit unit = origin.getMilitaryUnit();
+                            unit.setAlert(true);
+                            unit.setOrdered(true);
+                            origin.getCity().setHP(origin.getCity().getHP() * 2);
+                            System.out.println("assigned to defend city successfully!");
+                        }
+                        else if (origin.isCivilianUnitExists() && origin.isSelectedTwo() && origin.getCivilianUnit().getOwner().equals(user)) {
+                            Unit unit = origin.getCivilianUnit();
+                            unit.setAlert(true);
+                            unit.setOrdered(true);
+                            origin.getCity().setHP(origin.getCity().getHP() * 2);
+                            System.out.println("assigned to defend city successfully!");
+                        }
+                        else
+                            System.out.println("no unit here");
+                    }
+                    else
+                        System.out.println("there is no city on this tile");
+                }
+                else
+                    System.out.println("this tile do not belong to any user");
+            }
+            else if (tileInput.equals("fortify unit")) {
+                if (origin.isMilitaryUnitExists() && origin.isSelectedOne() && origin.getMilitaryUnit().getOwner().equals(user)) {
+                    if (origin.getMilitaryUnit().getHP() != origin.getMilitaryUnit().getTotalHealth()) {
+                        origin.getMilitaryUnit().setFortify(true);
+                        System.out.println("assigned to fortify successfully!");
+                    }
+                    else
+                        System.out.println("no need to fortify");
+                }
+                else if (origin.isCivilianUnitExists() && origin.isSelectedTwo() && origin.getCivilianUnit().getOwner().equals(user)) {
+                    if (origin.getCivilianUnit().getHP() != origin.getCivilianUnit().getTotalHealth()) {
+                        origin.getCivilianUnit().setFortify(true);
+                        System.out.println("assigned to fortify successfully!");
+                    }
+                    else
+                        System.out.println("no need to fortify");
+                }
+                else
+                    System.out.println("no unit here");
+            }
+            else if (tileInput.equals("pillage unit")) {
+                if (origin.isMilitaryUnitExists() && origin.isSelectedOne() && origin.getMilitaryUnit().getOwner().equals(user)) {
+                    if (origin.getOwner() != null && !origin.getOwner().equals(user) && origin.getImprovement() != null) {
+                        origin.setLooted(true);
+                        System.out.println("pillaged successfully!");
+                    }
+                    else
+                        System.out.println("it is not proper for pillaging");
+                }
+                else
+                    System.out.println("none of your military units are here!");
+            }
+            else if (tileInput.equals("repair improvement")) {
+                if (origin.isCivilianUnitExists() && origin.getCivilianUnit().getName().equals("worker") && origin.getOwner().equals(user) && origin.getImprovement() != null && origin.isLooted()) {
+                    origin.setInProgress(true);
+                    Worker worker = (Worker) origin.getCivilianUnit();
+                    worker.setWorkingStatus(true);
+                    worker.setRemainingTurnsToComplete(origin.getImprovement().getPrice());
+                    worker.setImprovement(origin.getImprovement());
+                    origin.setImprovement(null);
+                    System.out.println("will be repaired as soon as possible!");
+                }
+                System.out.println("impossible to repair");
+            }
+            else if (tileInput.equals("repair improvement cheat")) {
+                if (origin.isCivilianUnitExists() && origin.getCivilianUnit().getName().equals("worker") && origin.getOwner().equals(user) && origin.getImprovement() != null && origin.isLooted()) {
+                    origin.setLooted(false);
+                    System.out.println("repaired successfully!");
+                }
+                else
+                    System.out.println("impossible to repair");
+            }
             else if (tileInput.equals("pause improving")){
-                if (origin.isInProgress()) {
+                if (origin.isInProgress() && origin.getCivilianUnit().getOwner().equals(user)) {
                     Worker worker = (Worker) origin.getCivilianUnit();
                     worker.setWorkingStatus(false);
                 }
@@ -442,7 +529,7 @@ public class PlayGame {
                     System.out.println("not producing anything right now!");
             }
             else if (tileInput.equals("resume improving")) {
-                if (origin.isCivilianUnitExists() && origin.getCivilianUnit().getName().equals("worker")) {
+                if (origin.isCivilianUnitExists() && origin.getCivilianUnit().getName().equals("worker") && origin.getCivilianUnit().getOwner().equals(user)) {
                     Worker worker = (Worker) origin.getCivilianUnit();
                     worker.setWorkingStatus(true);
                 }
@@ -609,7 +696,7 @@ public class PlayGame {
         return null;
     }
 
-    private Tile moveUnit(Tile origin, Tile destination, Unit unit, User user, boolean isMilitary) {
+    public Tile moveUnit(Tile origin, Tile destination, Unit unit, User user, boolean isMilitary) {
         // create an array list to store all the tiles to destination
         int i = 0;
         ArrayList<Tile> tilesInTheWay = new ArrayList<>();
@@ -626,22 +713,32 @@ public class PlayGame {
         int mp = 0;
         unit.setOrdered(true);
         tile = origin;
-        for (Tile value : tilesInTheWay) {
-            tileInformation(value);
-            if (value.getTerrain().getMovementPrice() > unit.getMP()) {
-                gameController.moveUnit(origin, value, unit, isMilitary);
-                System.out.println(mp + " movement by unit to get to the destination");
-                return tile;
+
+        for (Tile thing : tilesInTheWay) {
+            tileInformation(thing);
+            boolean good = (isMilitary && !thing.isMilitaryUnitExists()) || (!isMilitary && thing.isCivilianUnitExists());
+            if (unit.getMP() < thing.getTerrain().getMovementPrice()) {
+                unit.setMoving(true);
+                unit.setDestination(destination);
+                if (good) {
+                    gameController.moveUnit(origin, thing, unit, isMilitary);
+                    System.out.println(mp + " movement by unit to get to the destination");
+                    return thing;
+                }
+                else {
+                    gameController.moveUnit(origin, tile, unit, isMilitary);
+                    System.out.println(mp + " movement by unit to get to the destination");
+                    return tile;
+                }
             }
-            if (!tile.isRoad())
-                mp += value.getTerrain().getMovementPrice();
-            unit.setMP(unit.getMP() - value.getTerrain().getMovementPrice());
-            tile = value;
+            if (!thing.isRoad())
+                mp += thing.getTerrain().getMovementPrice();
+            unit.setMP(unit.getMP() - thing.getTerrain().getMovementPrice());
+            tile = thing;
         }
-        System.out.println("hello");
-        gameController.moveUnit(origin, destination, unit, isMilitary);
+        gameController.moveUnit(origin, tile, unit, isMilitary);
         System.out.println(mp + " movement by unit to get to the destination");
-        return destination;
+        return tile;
     }
 
     private void showPlayers() {
@@ -668,7 +765,7 @@ public class PlayGame {
     }
 
     //check if tile is valid
-    private boolean conditionsForPlaceCity(String input, Tile tile) {
+    private boolean conditionsForPlaceCity(String input, Tile tile, User user) {
         // neighbors of the tile should be neutral
         for (Tile neighbor : tile.getNeighbors()) {
             if (neighbor.getOwner() != null) {
@@ -676,7 +773,7 @@ public class PlayGame {
                 return false;
             }
         }
-        if (tile.isCivilianUnitExists() && tile.getCivilianUnit().getName().equals("settler")) {
+        if (tile.isCivilianUnitExists() && tile.getCivilianUnit().getName().equals("settler") && tile.getCivilianUnit().getOwner().equals(user)) {
             if (tile.getCity() == null) {
                 if (tile.getOwner() == null) {
                     return true;
@@ -753,6 +850,7 @@ public class PlayGame {
                 if (index == 1) {
                     combatController.destroyCity(city);
                     decide = false;
+                    unit.getOwner().setHappiness(unit.getOwner().getHappiness() - 10);
                 }
                 else if (index == 2) {
                     combatController.annexCity(city, unit);
@@ -798,7 +896,7 @@ public class PlayGame {
             if (i != 0) {
                 if (j != 0)
                     System.out.print(mapController.getColorOfTile(map.getTileBoard()[2 * i - 1][j - 1])
-                        + "  " + Colors.RESET);
+                            + "  " + Colors.RESET);
                 else System.out.print("  ");
                 System.out.print(mapController.riverFinder(map.getTileBoard()[2 * i][j], 5)
                         + mapController.getColorOfTile(map.getTileBoard()[2 * i][j]) + leftCoordination(i , j)
@@ -957,7 +1055,7 @@ public class PlayGame {
         }
         if (i != map.getHeight() / 2 - 1)
             System.out.println(mapController.getColorOfTile(map.getTileBoard()[2 * i + 1][map.getWidth() - 1])
-                + "  " + Colors.RESET + mapController.riverFinder(map.getTileBoard()[2 * i + 1][map.getWidth() - 1], 1));
+                    + "  " + Colors.RESET + mapController.riverFinder(map.getTileBoard()[2 * i + 1][map.getWidth() - 1], 1));
         else System.out.println();
 
     }
