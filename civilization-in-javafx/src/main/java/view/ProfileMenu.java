@@ -36,14 +36,14 @@ public class ProfileMenu extends Application {
     private static Images images = new Images();
     private User user;
 
-//    public ProfileMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene, Images images, UsersController users,User user) {
-//        this.users = users;
-//        ProfileMenu.images = images;
-//        this.scene = scene;
-//        this.mediaPlayer = mediaPlayer;
-//        this.stage = stage;
-//        this.user = user;
-//    }
+    public ProfileMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene, Images images, UsersController users,User user) {
+        this.users = users;
+        ProfileMenu.images = images;
+        this.scene = scene;
+        this.mediaPlayer = mediaPlayer;
+        this.stage = stage;
+        this.user = user;
+    }
 /*graphic part*/
     public void setUsers(UsersController users) {
         this.users = users;

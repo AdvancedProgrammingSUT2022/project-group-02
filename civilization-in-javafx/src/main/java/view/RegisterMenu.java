@@ -14,20 +14,16 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.User;
 import view.enums.Colors;
 import view.enums.Images;
-import view.enums.RegexEnums;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class RegisterMenu {
 
@@ -75,6 +71,7 @@ public class RegisterMenu {
     public void run(Scanner scanner) {
         /* graphic part */
         //TODO : user Color
+        //TODO : user Avatar
         URL fxmlAddress = getClass().getResource("/Fxml/register-menu.fxml");
         assert fxmlAddress != null;
         AnchorPane root = null;
@@ -90,7 +87,6 @@ public class RegisterMenu {
         stage.setMaximized(true);
         stage.setFullScreen(true);
         graphicShowNoticeAndTips(root);
-        graphicPlayBackgroundMusic();
         graphicRegisterButtons(root);
 
 //        String input;
@@ -297,13 +293,14 @@ public class RegisterMenu {
         //check if username exists and the password is correct
         if (users.sameUsernameExists(username) && (user = users.getUserByUsername(username)).getPassword().equals(password)) {
             label.setText("user logged in successfully!");
-            ProfileMenu profileMenu = new ProfileMenu();
-            profileMenu.setStage(stage);
-            profileMenu.setUser(user);
-            profileMenu.setMediaPlayer(mediaPlayer);
-            profileMenu.setScene(scene);
-            profileMenu.setUsers(users);
-            profileMenu.start(stage);
+//            ProfileMenu profileMenu = new ProfileMenu(mediaPlayer, stage, scene, images, users, user);
+//            profileMenu.setStage(stage);
+//            profileMenu.setUser(user);
+//            profileMenu.setMediaPlayer(mediaPlayer);
+//            profileMenu.setScene(scene);
+//            profileMenu.setUsers(users);
+//            profileMenu.start(stage);
+            new MainMenu(mediaPlayer, stage, scene, images, users).run(user, new Scanner(System.in));
         } else{
             label.setLayoutX(588);
             label.setText("Username and password didn't match!");
@@ -428,6 +425,9 @@ public class RegisterMenu {
         ImageView button1 = new ImageView(images.submitMenuButton);
         ImageView button2 = new ImageView(images.selectedMenuButton);
         ImageView button3 = new ImageView(images.normalMenuButton);
+        ImageView back1 = new ImageView(images.submitMenuButton);
+        ImageView back2 = new ImageView(images.selectedMenuButton);
+        ImageView back3 = new ImageView(images.normalMenuButton);
         TextField username = new TextField();
         TextField nickname = new TextField();
         TextField password = new TextField();
@@ -435,6 +435,7 @@ public class RegisterMenu {
         Label nicknameLabel = new Label("nickname : ");
         Label passwordLabel = new Label("password : ");
         Button submit = new Button("Submit", button1);
+        Button back = new Button("Back", back1);
         root.getChildren().add(username);
         root.getChildren().add(nickname);
         root.getChildren().add(password);
@@ -442,17 +443,16 @@ public class RegisterMenu {
         root.getChildren().add(nicknameLabel);
         root.getChildren().add(passwordLabel);
         root.getChildren().add(submit);
-        graphicInitialiseSignUpBoxes(username, nickname, password, usernameLabel, nicknameLabel, passwordLabel, submit, button1, button2, button3);
-        graphicSubmitEffect(submit, button1, button2, button3, username, nickname, password, root);
-    }
-
-    public void submitClicked(MouseEvent mouseEvent){
-
+        root.getChildren().add(back);
+        graphicInitialiseSignUpBoxes(username, nickname, password, usernameLabel, nicknameLabel, passwordLabel, submit,
+                button1, button2, button3, back1, back2, back3, back);
+        graphicSubmitEffect(submit, button1, button2, button3, username, nickname, password, root, back1, back2, back3, back);
     }
 
     private void graphicInitialiseSignUpBoxes(TextField username, TextField nickname, TextField password,
                                               Label usernameLabel, Label nicknameLabel, Label passwordLabel, Button submit,
-                                              ImageView button1, ImageView button2, ImageView button3){
+                                              ImageView button1, ImageView button2, ImageView button3, ImageView back1,
+                                              ImageView back2, ImageView back3, Button back){
         username.setLayoutX(635);
         username.setLayoutY(280);
         username.setPrefHeight(40);
@@ -491,10 +491,21 @@ public class RegisterMenu {
         button2.setFitWidth(355);
         button3.setFitHeight(50);
         button3.setFitWidth(355);
+        back1.setFitHeight(70);
+        back1.setFitWidth(170);
+        back2.setFitHeight(70);
+        back2.setFitWidth(170);
+        back3.setFitHeight(70);
+        back3.setFitWidth(170);
+        back.setPrefSize(170, 70);
+        back.setLayoutY(775);
+        back.setContentDisplay(ContentDisplay.CENTER);
+        back.getStyleClass().add("back-button");
     }
 
     private void graphicSubmitEffect(Button submit, ImageView button1, ImageView button2, ImageView button3,
-                                     TextField username, TextField nickname, TextField password, AnchorPane root){
+                                     TextField username, TextField nickname, TextField password, AnchorPane root,
+                                     ImageView back1, ImageView back2, ImageView back3, Button back){
         Label label = new Label();
         root.getChildren().add(label);
         DropShadow dropShadow = new DropShadow();
@@ -522,15 +533,26 @@ public class RegisterMenu {
                 }
             }
         });
+        back.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
+            back.setGraphic(back2);
+            back.setEffect(dropShadow);
+            AudioClip clickSound = new AudioClip(Objects.requireNonNull(getClass().getResource("/Media/sounds/click.mp3")).toExternalForm());
+            clickSound.play();
+        });
+        back.addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
+            back.setGraphic(back1);
+            back.setEffect(null);
+        });
+        back.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            back.setGraphic(back3);
+            back.setEffect(null);
+            AudioClip clickSound = new AudioClip(Objects.requireNonNull(getClass().getResource("/Media/sounds/click.mp3")).toExternalForm());
+            clickSound.play();
+            run(new Scanner(System.in));
+        });
     }
 
-    public void graphicPlayBackgroundMusic(){
-        String path = String.valueOf(this.getClass().getResource("/Media/background themes/background-music.mp3"));
-        Media media = new Media(path);
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
-        mediaPlayer.setCycleCount(100);
-    }
+
 
     public void graphicLogin(){
         URL fxmlAddress = getClass().getResource("/Fxml/register-menu.fxml");
@@ -546,23 +568,29 @@ public class RegisterMenu {
         ImageView button1 = new ImageView(images.submitMenuButton);
         ImageView button2 = new ImageView(images.selectedMenuButton);
         ImageView button3 = new ImageView(images.normalMenuButton);
+        ImageView back1 = new ImageView(images.submitMenuButton);
+        ImageView back2 = new ImageView(images.selectedMenuButton);
+        ImageView back3 = new ImageView(images.normalMenuButton);
         TextField username = new TextField();
         TextField password = new TextField();
         Label usernameLabel = new Label("username : ");
         Label passwordLabel = new Label("password : ");
         Button submit = new Button("Submit", button1);
+        Button back = new Button("Back", back1);
         root.getChildren().add(username);
         root.getChildren().add(password);
         root.getChildren().add(usernameLabel);
         root.getChildren().add(passwordLabel);
         root.getChildren().add(submit);
-        graphicInitialiseLoginBoxes(username,password, usernameLabel, passwordLabel, submit, button1, button2, button3);
-        graphicSubmitEffect(submit, button1, button2, button3, username, null, password, root);
+        root.getChildren().add(back);
+        graphicInitialiseLoginBoxes(username,password, usernameLabel, passwordLabel, submit, button1, button2, button3, back1, back2, back3, back);
+        graphicSubmitEffect(submit, button1, button2, button3, username, null, password, root, back1, back2, back3, back);
     }
 
     private void graphicInitialiseLoginBoxes(TextField username, TextField password,
                                              Label usernameLabel, Label passwordLabel, Button submit,
-                                             ImageView button1, ImageView button2, ImageView button3){
+                                             ImageView button1, ImageView button2, ImageView button3,
+                                             ImageView back1, ImageView back2, ImageView back3, Button back){
         username.setLayoutX(635);
         username.setLayoutY(280);
         username.setPrefHeight(40);
@@ -592,5 +620,15 @@ public class RegisterMenu {
         button2.setFitWidth(355);
         button3.setFitHeight(50);
         button3.setFitWidth(355);
+        back1.setFitHeight(70);
+        back1.setFitWidth(170);
+        back2.setFitHeight(70);
+        back2.setFitWidth(170);
+        back3.setFitHeight(70);
+        back3.setFitWidth(170);
+        back.setPrefSize(170, 70);
+        back.setLayoutY(775);
+        back.setContentDisplay(ContentDisplay.CENTER);
+        back.getStyleClass().add("back-button");
     }
 }

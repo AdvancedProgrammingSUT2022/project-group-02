@@ -41,6 +41,7 @@ public class Main extends Application {
                 startGame.set(true);
                 mediaPlayer.stop();
                 Scanner scanner = new Scanner(System.in);
+                graphicPlayRegisterBackgroundMusic();
                 new RegisterMenu(mediaPlayer, stage, scene, images, new UsersController()).run(scanner);
             }
         });
@@ -61,5 +62,13 @@ public class Main extends Application {
         width.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
         height.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
         mediaView.setPreserveRatio(true);
+    }
+
+    public void graphicPlayRegisterBackgroundMusic(){
+        String path = String.valueOf(this.getClass().getResource("/Media/background themes/background-music.mp3"));
+        Media media = new Media(path);
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
+        mediaPlayer.setCycleCount(100);
     }
 }
