@@ -18,6 +18,10 @@ public class Unit extends PhysicalObject{
     private boolean ordered;
     private boolean sleep;
     private boolean alert;
+    private boolean fortify;
+    private boolean moving;
+    private int totalHealth;
+    private Tile destination;
 
     public Unit(String name, Tile tile, int HP, int goldPrice, int productionPrice, int level, int MP, int combatStrength, int rangeCombatStrength,
                 User owner, int attackPoint, int maintainGold) {
@@ -37,6 +41,10 @@ public class Unit extends PhysicalObject{
         ordered = false;
         sleep = false;
         alert = false;
+        fortify = false;
+        totalHealth = HP;
+        moving = false;
+        destination = null;
     }
 
     public String getStatus() {
@@ -161,5 +169,37 @@ public class Unit extends PhysicalObject{
 
     public void setOrdered(boolean ordered) {
         this.ordered = ordered;
+    }
+
+    public void setFortify(boolean fortify) {
+        this.fortify = fortify;
+    }
+
+    public void setDestination(Tile destination) {
+        this.destination = destination;
+    }
+
+    public Tile getDestination() {
+        return destination;
+    }
+
+    public boolean isMoving() {
+        return moving;
+    }
+
+    public void setMoving(boolean moving) {
+        this.moving = moving;
+    }
+
+    public boolean isFortify() {
+        return fortify;
+    }
+
+    public int getTotalHealth() {
+        return totalHealth;
+    }
+
+    public void setTotalHealth(int totalHealth) {
+        this.totalHealth = totalHealth;
     }
 }

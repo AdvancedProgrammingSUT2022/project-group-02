@@ -224,10 +224,6 @@ public class Tile {
         return riverBorder;
     }
 
-    public boolean LootedStatus() {
-        return looted;
-    }
-
     public void setLooted(boolean looted) {
         this.looted = looted;
     }
@@ -248,4 +244,7 @@ public class Tile {
         this.citizenExist = citizenExist;
     }
 
+    public boolean isLooted() {
+        return looted;
+    }
 }

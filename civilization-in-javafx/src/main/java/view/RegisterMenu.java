@@ -22,6 +22,8 @@ import view.enums.Images;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -34,6 +36,7 @@ public class RegisterMenu {
     private Scene scene;
     private static Images images;
     private final HashMap<String , Boolean> availableColors = new HashMap<>();
+    private boolean readFromGson = false;
 
     public RegisterMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene, Images images, UsersController users){
         this.users = users;
@@ -81,6 +84,11 @@ public class RegisterMenu {
             e.printStackTrace();
         }
         assert root != null;
+        if (!readFromGson) {
+            readFromGson = true;
+            ArrayList<User> usersFromJson = users.readFromJson();
+            if (usersFromJson != null) users.setUsers(usersFromJson);
+        }
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         scene.setRoot(root);
         stage.setScene(scene);
@@ -271,7 +279,9 @@ public class RegisterMenu {
             if (!users.sameNicknameExists(nickname)) {
                 User user = new User(username, nickname, password);
                 //TODO : delete next line after add last time win
-                user.setLastWinTime();
+                LocalTime lastWinTime = LocalTime.now();
+                String lastWinTimeString = lastWinTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+                user.setLastWinTime(lastWinTimeString);
                 users.addUser(user);
                 label.setText("user created successfully!");
             } else {
@@ -294,14 +304,8 @@ public class RegisterMenu {
         User user;
         //check if username exists and the password is correct
         if (users.sameUsernameExists(username) && (user = users.getUserByUsername(username)).getPassword().equals(password)) {
+            user.setActiveUser(true);
             label.setText("user logged in successfully!");
-//            ProfileMenu profileMenu = new ProfileMenu(mediaPlayer, stage, scene, images, users, user);
-//            profileMenu.setStage(stage);
-//            profileMenu.setUser(user);
-//            profileMenu.setMediaPlayer(mediaPlayer);
-//            profileMenu.setScene(scene);
-//            profileMenu.setUsers(users);
-//            profileMenu.start(stage);
             new MainMenu(mediaPlayer, stage, scene, images, users).run(user, new Scanner(System.in));
         } else{
             label.setLayoutX(588);

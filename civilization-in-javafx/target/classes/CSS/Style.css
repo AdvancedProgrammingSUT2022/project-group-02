@@ -75,6 +75,11 @@
     -fx-border-color: #0015ff;
     -fx-border-radius: 3px;
 }
+.profile-text-field{
+    -fx-background-color: #b85b29;
+    -fx-text-fill: #3f3a3a;
+    -fx-font-size: 15px;
+}
 
 /* end of text field styles */
 
@@ -130,7 +135,7 @@
 .leaderboard{
     -fx-background-color: transparent;
     -fx-background-radius: 10;
-    -fx-text-fill: rgba(140, 38, 11, 0.89);
+
 }
 .leaderboard .column-header-background .filler {
     -fx-background-color: transparent;
@@ -172,5 +177,22 @@
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
 }
-.table-row-cell:
+.table-row-cell:Rank1 {
+    -fx-text-background-color: #fde76e;
+    -fx-font-size: 20;
+    -fx-font-family: Serif Nazanin;
+}
+.table-row-cell:Rank2 {
+    -fx-text-background-color: #f84402;
+    -fx-font-size: 19;
+    -fx-font-family: Serif Nazanin;
+}
+.table-row-cell:Rank3 {
+    -fx-text-background-color: #f89602;
+    -fx-font-size: 18;
+    -fx-font-family: Serif Nazanin;
+}
+.table-row-cell:current-user{
+    -fx-background-color: rgba(255, 0, 77, 0.22);
+}
 /* end of table of content */

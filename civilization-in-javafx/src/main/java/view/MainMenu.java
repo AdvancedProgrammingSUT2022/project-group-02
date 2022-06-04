@@ -20,6 +20,8 @@ import model.User;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,6 +33,7 @@ public class MainMenu {
     private Stage stage;
     private Scene scene;
     private static Images images;
+    private User user;
 
     public MainMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene, Images images, UsersController users){
         this.users = users;
@@ -48,6 +51,7 @@ public class MainMenu {
     }
     public void run(User user, Scanner scanner) {
         /* graphic part */
+        this.user = user;
 
         URL fxmlAddress = getClass().getResource("/Fxml/main-menu.fxml");
         assert fxmlAddress != null;
@@ -170,19 +174,32 @@ public class MainMenu {
     private void graphicButtonsAction(Button startGame, Button profileMenu, Button leaderboard, Button chatMenu,
                                       Button mapSetting, Button logout, Button exit){
         exit.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            users.writeToJson();
             System.exit(0);
         });
         logout.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            LocalTime localTime = LocalTime.now();
+            String lastOnline = localTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+            user.setLastOnline(lastOnline);
+            users.writeToJson();
+            user.setActiveUser(false);
             new RegisterMenu(mediaPlayer, stage, scene, images, users).run(new Scanner(System.in));
         });
         profileMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-
+//            ProfileMenu profileMenu = new ProfileMenu();
+//            profileMenu.setStage(stage);
+//            profileMenu.setUser(user);
+//            profileMenu.setMediaPlayer(mediaPlayer);
+//            profileMenu.setScene(scene);
+//            profileMenu.setUsers(users);
+//            profileMenu.start(stage);
+            new ProfileMenu(mediaPlayer,stage,scene,images,users,user).start();
         });
         startGame.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 
         });
         leaderboard.addEventHandler(MouseEvent.MOUSE_CLICKED, e-> {
-            new Leaderboard(mediaPlayer, stage, scene, images, users).run();
+            new Leaderboard(mediaPlayer, stage, scene, images, users, user).run();
         });
         mapSetting.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 

@@ -1,9 +1,6 @@
 package model;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 
 public class User {
@@ -38,9 +35,10 @@ public class User {
     private ArrayList<Improvement> improvements;
     private int turnNumber;
     private int winsCount;
-    private LocalTime lastWinTime;
-    private String lastWinTimeString;
+    private String lastWinTime;
     private int rankInLeaderboard;
+    private boolean isActiveUser;
+    private String lastOnline;
 
     private ArrayList<Tile> visited;
     private ArrayList<Tile> visible;
@@ -81,6 +79,7 @@ public class User {
         availableResources = new ArrayList<>();
         specialWorking = new ArrayList<>();
         foundCities = new ArrayList<>();
+        this.isActiveUser = false;
     }
 
     public void setColor(String color) {
@@ -463,17 +462,12 @@ public class User {
         this.winsCount = winsCount;
     }
 
-    public LocalTime getLastWinTime() {
+    public String getLastWinTime() {
         return lastWinTime;
     }
 
-    public String getLastWinTimeString(){
-        return lastWinTimeString;
-    }
-
-    public void setLastWinTime() {
-        this.lastWinTime = LocalTime.now();
-        this.lastWinTimeString = lastWinTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+    public void setLastWinTime(String lastWinTimeString) {
+        this.lastWinTime = lastWinTimeString;
     }
 
     public int getRankInLeaderboard() {
@@ -483,4 +477,25 @@ public class User {
     public void setRankInLeaderboard(int rankInLeaderboard) {
         this.rankInLeaderboard = rankInLeaderboard;
     }
+
+    public boolean isActiveUser() {
+        return isActiveUser;
+    }
+
+    public void setActiveUser(boolean activeUser) {
+        isActiveUser = activeUser;
+    }
+
+    public String getLastOnline() {
+        if (lastOnline == null){
+            return "long time ago!";
+        }
+        return lastOnline;
+    }
+
+    public void setLastOnline(String lastOnline) {
+        this.lastOnline = lastOnline;
+    }
+
+
 }

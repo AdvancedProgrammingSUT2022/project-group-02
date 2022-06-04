@@ -2,6 +2,7 @@ package controller;
 
 import model.*;
 import view.CityMenu;
+import view.PlayGame;
 import view.UserPanel;
 
 import java.util.ArrayList;
@@ -99,6 +100,10 @@ public class GameController {
 
     public int getTurnForEachPlayer() {
         return turnForEachPlayer;
+    }
+
+    public void setTurnForEachPlayer(int turnForEachPlayer) {
+        this.turnForEachPlayer = turnForEachPlayer;
     }
 
     public void cityTurnProducts(User user) {
@@ -296,10 +301,11 @@ public class GameController {
         user.setSciencePerTurn(0);
         new ResourceController().userResource(user, map);
         if (user.getImprovements() != null && user.getImprovements().size() > 0) {
-            for (Improvement improvement : user.getImprovements()) {
-                if (!improvement.getTile().LootedStatus()) {
-                    user.setGoldPerTurn(user.getGoldPerTurn() + improvement.getGoldRate());
-                    user.setFoodPerTurn(user.getFoodPerTurn() + improvement.getFoodRate());
+            for (Tile tile : user.getTerritory()) {
+                if (tile.getImprovement() != null && !tile.isLooted()) {
+                    user.setGoldPerTurn(user.getGoldPerTurn() + tile.getImprovement().getGoldRate());
+                    user.setFoodPerTurn(user.getFoodPerTurn() + tile.getImprovement().getFoodRate());
+                    user.setProductPerTurn(user.getProductPerTurn() + tile.getImprovement().getProductionRate());
                 }
             }
         }
@@ -406,7 +412,7 @@ public class GameController {
     public void makeAllUnOrdered(User user) {
         if (user.getUnits() != null) {
             for (Unit unit : user.getUnits()) {
-                if (!unit.isAlert() && !unit.isSleep())
+                if (!unit.isAlert() && !unit.isSleep() && !unit.isFortify())
                     unit.setOrdered(false);
                 if (unit.isAlert()) {
                     for (Tile neighbor : unit.getTile().getNeighbors()) {
@@ -414,6 +420,15 @@ public class GameController {
                             unit.setAlert(false);
                             unit.setOrdered(false);
                         }
+                    }
+                }
+                //check fortify units
+                if (unit.isFortify()) {
+                    if (unit.getHP() < unit.getTotalHealth())
+                        unit.setHP(unit.getHP() + 10);
+                    if (unit.getHP() > unit.getTotalHealth()) {
+                        unit.setHP(unit.getTotalHealth());
+                        unit.setFortify(false);
                     }
                 }
             }
@@ -432,6 +447,37 @@ public class GameController {
                 }
             }
         }
+    }
+
+    public void moveTravelingUnits(User user, PlayGame playGame) {
+        for (Unit unit : user.getUnits()) {
+            if (unit.isMoving()) {
+                if (unit.getTile().isMilitaryUnitExists() && unit.getTile().isSelectedOne()) {
+                    playGame.moveUnit(unit.getTile(), unit.getDestination(), unit, user, true);
+                    unit.setOrdered(true);
+                    if (unit.getTile().equals(unit.getDestination())) {
+                        unit.setMoving(false);
+                        unit.setDestination(null);
+                    }
+                }
+                else if (unit.getTile().isCivilianUnitExists() && unit.getTile().isSelectedTwo()) {
+                    playGame.moveUnit(unit.getTile(), unit.getDestination(), unit, user, false);
+                    unit.setOrdered(true);
+                    if (unit.getTile().equals(unit.getDestination())) {
+                        unit.setMoving(false);
+                        unit.setDestination(null);
+                    }
+                }
+            }
+        }
+    }
+
+    public void assignNeighbor(MapController mapController) {
+
+        // assign all the neighbors to each tile
+        for (int i = 0; i < map.getHeight(); i++)
+            for (int j = 0; j < map.getWidth(); j++)
+                mapController.setNeighbor(map.getTileBoard()[i][j]);
     }
 
 }

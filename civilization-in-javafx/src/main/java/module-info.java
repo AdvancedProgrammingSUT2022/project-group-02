@@ -12,6 +12,7 @@ module com.example.civilizationinjavafx {
     requires gson;
     requires java.sql;
     requires javafx.media;
+    requires java.base;
 
     opens controller to javafx.fxml, gson;
     exports controller;
@@ -21,5 +22,4 @@ module com.example.civilizationinjavafx {
     exports view.enums;
     opens model to javafx.fxml, gson;
     exports model;
-
 }
