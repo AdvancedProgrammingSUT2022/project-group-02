@@ -11,6 +11,16 @@
     -fx-background-size: cover;
     -fx-background-image: url("register-menu-background.png");
 }
+
+.all-menus-background{
+    -fx-background-size: cover;
+    -fx-background-image: url("main-menu-background.jpg");
+}
+
+.profile-menu-background{
+    -fx-background-size: cover;
+    -fx-background-image: url("profile-menu-background.png");
+}
 /* end of background images */
 
 /* text styles */
@@ -39,6 +49,17 @@
 .register-signup-and-login-successfully{
     -fx-font-size: 22px;
     -fx-text-fill: #fc0061;
+}
+
+.changePassword-and-changeNickname-text{
+    -fx-font-size: 16px;
+    -fx-text-fill: #ff4d00;
+}
+
+.changePassword-and-changeNickname-error{
+    -fx-font-size: 20px;
+    -fx-text-fill: red;
+    -fx-font-family: serif;
 }
 
 /* end of text styles */
@@ -77,22 +98,31 @@
     -fx-font-size: 18px;
     -fx-background-radius: 8px;
 }
-/*these are profileMenu styles*/
-.profile-menu-background{
-    -fx-background-size: cover;
-    -fx-background-image: url("profile-menu-background.png");
+
+.back-button{
+    -fx-text-fill: #5d4900;
+    -fx-font-size: 15px;
 }
 
-.changePassword-and-changeNickname-text{
-    -fx-font-size: 16px;
-    -fx-text-fill: #ff4d00;
+.back-button:hover{
+    -fx-border-color: #ff6200;
+    -fx-border-radius: 7px;
 }
 
-.changePassword-and-changeNickname-error{
+.main-menu-buttons{
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffe98f;
     -fx-font-size: 20px;
-    -fx-text-fill: red;
-    -fx-font-family: serif;
+    -fx-font-family: "2  Nazanin";
 }
-
-
+.main-menu-buttons:hover{
+    -fx-background-color: linear-gradient(to right, transparent 1%, #00FFFF70 50%, transparent 99%);
+}
 /* end of buttons style */
+
+/* Rectangles */
+.menu-background-rectangle{
+    -fx-background-color: rgba(0, 0, 0, 0.47);
+}
+/* end of rectangles */
+
