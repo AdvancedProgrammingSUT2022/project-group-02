@@ -272,6 +272,7 @@ public class RegisterMenu {
                 User user = new User(username, nickname, password);
                 users.addUser(user);
                 label.setText("user created successfully!");
+                new MainMenu(mediaPlayer, stage, scene, images, users).run(user, new Scanner(System.in));
             } else {
                 label.setLayoutX(555 - nickname.length());
                 label.setText("user with this nickname " + nickname + " already exists");

@@ -75,6 +75,11 @@
     -fx-border-color: #0015ff;
     -fx-border-radius: 3px;
 }
+.profile-text-field{
+    -fx-background-color: #b85b29;
+    -fx-text-fill: #3f3a3a;
+    -fx-font-size: 15px;
+}
 
 /* end of text field styles */
 
