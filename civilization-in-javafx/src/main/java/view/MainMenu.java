@@ -26,7 +26,6 @@ import java.util.regex.Pattern;
 
 public class MainMenu {
 
-    private String whichMenu;
     private UsersController users;
     private MediaPlayer mediaPlayer;
     private Stage stage;
@@ -51,21 +50,12 @@ public class MainMenu {
         /* graphic part */
 
         URL fxmlAddress = getClass().getResource("/Fxml/main-menu.fxml");
-        if (fxmlAddress == null)System.exit(0);
         assert fxmlAddress != null;
         AnchorPane root = null;
         try {
             root = FXMLLoader.load(fxmlAddress);
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        if (root == null){
-            System.out.println("root");
-            System.exit(0);
-        }
-        if (scene == null){
-            System.out.println("scene");
-            System.exit(0);
         }
         assert root != null;
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
@@ -74,6 +64,7 @@ public class MainMenu {
         stage.setMaximized(true);
         stage.setFullScreen(true);
         graphicButtons(root);
+
         /* end of graphic part */
 
 //        String input;
@@ -191,7 +182,7 @@ public class MainMenu {
 
         });
         leaderboard.addEventHandler(MouseEvent.MOUSE_CLICKED, e-> {
-
+            new Leaderboard(mediaPlayer, stage, scene, images, users).run();
         });
         mapSetting.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 

@@ -270,6 +270,8 @@ public class RegisterMenu {
 //          check if there is a same nickname
             if (!users.sameNicknameExists(nickname)) {
                 User user = new User(username, nickname, password);
+                //TODO : delete next line after add last time win
+                user.setLastWinTime();
                 users.addUser(user);
                 label.setText("user created successfully!");
             } else {

@@ -1,5 +1,9 @@
 package model;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 
 public class User {
@@ -33,6 +37,10 @@ public class User {
     private ArrayList<Technology> technologies;
     private ArrayList<Improvement> improvements;
     private int turnNumber;
+    private int winsCount;
+    private LocalTime lastWinTime;
+    private String lastWinTimeString;
+    private int rankInLeaderboard;
 
     private ArrayList<Tile> visited;
     private ArrayList<Tile> visible;
@@ -445,5 +453,34 @@ public class User {
     }
     public void addFoundCities(City city) {
         foundCities.add(city);
+    }
+
+    public int getWinsCount() {
+        return winsCount;
+    }
+
+    public void setWinsCount(int winsCount) {
+        this.winsCount = winsCount;
+    }
+
+    public LocalTime getLastWinTime() {
+        return lastWinTime;
+    }
+
+    public String getLastWinTimeString(){
+        return lastWinTimeString;
+    }
+
+    public void setLastWinTime() {
+        this.lastWinTime = LocalTime.now();
+        this.lastWinTimeString = lastWinTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+    }
+
+    public int getRankInLeaderboard() {
+        return rankInLeaderboard;
+    }
+
+    public void setRankInLeaderboard(int rankInLeaderboard) {
+        this.rankInLeaderboard = rankInLeaderboard;
     }
 }
