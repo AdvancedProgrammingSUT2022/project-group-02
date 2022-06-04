@@ -32,6 +32,7 @@ public class MainMenu {
     private Stage stage;
     private Scene scene;
     private static Images images;
+    private User user;
 
     public MainMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene, Images images, UsersController users){
         this.users = users;
@@ -49,6 +50,7 @@ public class MainMenu {
     }
     public void run(User user, Scanner scanner) {
         /* graphic part */
+        this.user = user;
 
         URL fxmlAddress = getClass().getResource("/Fxml/main-menu.fxml");
         if (fxmlAddress == null)System.exit(0);
@@ -185,7 +187,14 @@ public class MainMenu {
             new RegisterMenu(mediaPlayer, stage, scene, images, users).run(new Scanner(System.in));
         });
         profileMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-
+//            ProfileMenu profileMenu = new ProfileMenu();
+//            profileMenu.setStage(stage);
+//            profileMenu.setUser(user);
+//            profileMenu.setMediaPlayer(mediaPlayer);
+//            profileMenu.setScene(scene);
+//            profileMenu.setUsers(users);
+//            profileMenu.start(stage);
+            new ProfileMenu(mediaPlayer,stage,scene,images,users,user).start();
         });
         startGame.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 
