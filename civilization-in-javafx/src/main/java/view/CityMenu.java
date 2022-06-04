@@ -194,7 +194,7 @@ public class CityMenu {
         }
     }
 
-    void setProduction(City city, User user, Scanner scanner) {
+    private void setProduction(City city, User user, Scanner scanner) {
         int index = 1;
         for (Product product : city.getProducts()) {
             System.out.println(index + "- " + product.getName() + " cost : " + product.getTurnCost());
@@ -308,7 +308,7 @@ public class CityMenu {
                     index++;
                 }
             case 3:
-                    System.out.println("the citizen employed on the selected tile successfully");
+                System.out.println("the citizen employed on the selected tile successfully");
         }
     }
 

@@ -10,7 +10,7 @@ public class ResourceController {
         if (user.getFoundResources() != null) {
             for (Resource foundResource : user.getFoundResources()) {
                 if (user.getAvailableResources().contains(foundResource) &&
-                        !map.getSpecificTile(foundResource.getTileX(), foundResource.getTileY()).LootedStatus()) {
+                        !map.getSpecificTile(foundResource.getTileX(), foundResource.getTileY()).isLooted()) {
                     user.setGoldPerTurn(user.getGoldPerTurn() + foundResource.getGoldRate());
                     user.setHappiness(user.getHappiness() + foundResource.getHappiness());
                     user.setFoodPerTurn(user.getFoodPerTurn() + foundResource.getFoodRate());
