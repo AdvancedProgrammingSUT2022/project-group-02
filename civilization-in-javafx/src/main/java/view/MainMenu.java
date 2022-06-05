@@ -20,13 +20,14 @@ import model.User;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainMenu {
 
-    private String whichMenu;
     private UsersController users;
     private MediaPlayer mediaPlayer;
     private Stage stage;
@@ -53,21 +54,12 @@ public class MainMenu {
         this.user = user;
 
         URL fxmlAddress = getClass().getResource("/Fxml/main-menu.fxml");
-        if (fxmlAddress == null)System.exit(0);
         assert fxmlAddress != null;
         AnchorPane root = null;
         try {
             root = FXMLLoader.load(fxmlAddress);
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        if (root == null){
-            System.out.println("root");
-            System.exit(0);
-        }
-        if (scene == null){
-            System.out.println("scene");
-            System.exit(0);
         }
         assert root != null;
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
@@ -76,6 +68,7 @@ public class MainMenu {
         stage.setMaximized(true);
         stage.setFullScreen(true);
         graphicButtons(root);
+
         /* end of graphic part */
 
 //        String input;
@@ -181,9 +174,15 @@ public class MainMenu {
     private void graphicButtonsAction(Button startGame, Button profileMenu, Button leaderboard, Button chatMenu,
                                       Button mapSetting, Button logout, Button exit){
         exit.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            users.writeToJson();
             System.exit(0);
         });
         logout.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            LocalTime localTime = LocalTime.now();
+            String lastOnline = localTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+            user.setLastOnline(lastOnline);
+            users.writeToJson();
+            user.setActiveUser(false);
             new RegisterMenu(mediaPlayer, stage, scene, images, users).run(new Scanner(System.in));
         });
         profileMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
@@ -200,7 +199,7 @@ public class MainMenu {
 
         });
         leaderboard.addEventHandler(MouseEvent.MOUSE_CLICKED, e-> {
-
+            new Leaderboard(mediaPlayer, stage, scene, images, users, user).run();
         });
         mapSetting.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 
