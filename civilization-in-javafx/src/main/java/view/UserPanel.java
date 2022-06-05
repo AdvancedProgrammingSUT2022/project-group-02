@@ -241,4 +241,5 @@ public class UserPanel {
         notification.add("Citizens of your city: " + city.getName() + " increased");
         user.addHistoryOfNotification(notification);
     }
+
 }

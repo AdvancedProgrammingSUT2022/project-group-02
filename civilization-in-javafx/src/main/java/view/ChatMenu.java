@@ -1,15 +1,34 @@
 package view;
 
+import controller.ChatController;
 import controller.UsersController;
 import model.Message;
+import model.PrivateChat;
+import model.Room;
 import model.User;
 import view.enums.Colors;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class ChatMenu {
+
+    private static ChatMenu chatMenu;
+
+    private ChatController chatController;
+
+    private ChatMenu() {
+        this.chatController = new ChatController();
+    }
+
+    public static ChatMenu getInstance() {
+        if (chatMenu == null)
+            chatMenu = new ChatMenu();
+
+        return chatMenu;
+    }
 
     public void run(Scanner scanner, UsersController usersController, User you) {
         String chatInput;
@@ -28,6 +47,7 @@ public class ChatMenu {
                     System.out.println("enter the username or part of the username to find the user");
                     privateInput = scanner.nextLine();
                     if (privateInput.equals("exit searching users")) {
+                        System.out.println("exited from searching bar");
                         break;
                     }
                     else {
@@ -73,25 +93,83 @@ public class ChatMenu {
                 }
             }
             else if (chatInput.equals("rooms")) {
-                //todo enter or create a room
+                ArrayList<Room> userRooms = chatController.userRooms(you);
+                if (userRooms.size() >= 1) {
+                    int index = 1;
+                    for (Room room : userRooms) {
+                        System.out.println(index + "- " + room.getName());
+                        index++;
+                    }
+                    while (true) {
+                        chatInput = scanner.nextLine();
+                        if (chatInput.equals("exit room searching")) {
+                            System.out.println("exited from searching bar");
+                            break;
+                        } else if (Pattern.matches("\\d+", chatInput)) {
+                            index = Integer.parseInt(chatInput);
+                            if (index >= 1 && index <= userRooms.size()) {
+                                chatInRoom(you, userRooms.get(index - 1), scanner);
+                            }
+                        } else
+                            System.out.println("invalid command");
+                    }
+                }
+                else
+                    System.out.println("you aren't the member of any room");
             }
         }
 
     }
 
     public void chatPrivately(User you, User other, Scanner scanner) {
+        //todo show all the contents of the current chat
         String chatInput;
+        PrivateChat current = chatController.getChatByUser(you, other);
+        PrivateChat forOtherUser;
+        if (current == null) {
+            current = new PrivateChat(you, other);
+            chatController.addPrivateChats(current);
+            forOtherUser = new PrivateChat(other, you);
+            chatController.addPrivateChats(forOtherUser);
+        }
+        else {
+            forOtherUser = chatController.getChatByUser(other, you);
+        }
+        if (forOtherUser == null) {
+            System.out.println("an error occurred!");
+            return;
+        }
         System.out.println("Enter your message!");
         System.out.println("press -exit chat- to quit this chat");
         while (true) {
             chatInput = scanner.nextLine();
             if (chatInput.equals("exit chat")) {
+                System.out.println("exited from chat successfully!");
                 return;
             }
             else {
-                String time = "12";
+                String time = LocalTime.now().toString();
                 Message message = new Message(chatInput, you, other, time, false, false);
-                
+                current.addMessage(message);
+                //todo show all the contents with the new message again
+                forOtherUser.addMessage(message);
+                message.setSent(true);
+                //todo send a notification for the other user
+            }
+        }
+    }
+
+    public void chatInRoom(User you, Room room, Scanner scanner) {
+        //todo show all the contents of the current room
+        String roomInput;
+        while (true) {
+            roomInput = scanner.nextLine();
+            if (roomInput.equals("exit room")) {
+                System.out.println("exited from room successfully");
+                return;
+            }
+            else {
+
             }
         }
     }
