@@ -165,10 +165,7 @@ public class GameMenu {
         mediaPlayer.setAutoPlay(true);
         mediaPlayer.setCycleCount(100);
     }
-
-    public void startNewGameClicked(User user){
-        //new PlayGame();
-    }
+    
 
         /*end of graphic parts*/
 
