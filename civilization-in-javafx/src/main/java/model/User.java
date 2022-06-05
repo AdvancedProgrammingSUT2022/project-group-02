@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class User {
@@ -33,6 +34,11 @@ public class User {
     private ArrayList<Technology> technologies;
     private ArrayList<Improvement> improvements;
     private int turnNumber;
+    private int winsCount;
+    private String lastWinTime;
+    private int rankInLeaderboard;
+    private boolean isActiveUser;
+    private String lastOnline;
 
     private ArrayList<Tile> visited;
     private ArrayList<Tile> visible;
@@ -73,6 +79,7 @@ public class User {
         availableResources = new ArrayList<>();
         specialWorking = new ArrayList<>();
         foundCities = new ArrayList<>();
+        this.isActiveUser = false;
     }
 
     public void setColor(String color) {
@@ -446,4 +453,49 @@ public class User {
     public void addFoundCities(City city) {
         foundCities.add(city);
     }
+
+    public int getWinsCount() {
+        return winsCount;
+    }
+
+    public void setWinsCount(int winsCount) {
+        this.winsCount = winsCount;
+    }
+
+    public String getLastWinTime() {
+        return lastWinTime;
+    }
+
+    public void setLastWinTime(String lastWinTimeString) {
+        this.lastWinTime = lastWinTimeString;
+    }
+
+    public int getRankInLeaderboard() {
+        return rankInLeaderboard;
+    }
+
+    public void setRankInLeaderboard(int rankInLeaderboard) {
+        this.rankInLeaderboard = rankInLeaderboard;
+    }
+
+    public boolean isActiveUser() {
+        return isActiveUser;
+    }
+
+    public void setActiveUser(boolean activeUser) {
+        isActiveUser = activeUser;
+    }
+
+    public String getLastOnline() {
+        if (lastOnline == null){
+            return "long time ago!";
+        }
+        return lastOnline;
+    }
+
+    public void setLastOnline(String lastOnline) {
+        this.lastOnline = lastOnline;
+    }
+
+
 }
