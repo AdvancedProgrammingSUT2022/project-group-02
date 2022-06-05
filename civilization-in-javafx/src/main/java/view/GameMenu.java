@@ -2,14 +2,177 @@ package view;
 
 import controller.ColorsController;
 import controller.UsersController;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import view.enums.Colors;
 import model.*;
+import view.enums.Images;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class GameMenu {
+
+
+    /*graphic parts*/
+
+    private String whichMenu;
+    private UsersController users;
+    private MediaPlayer mediaPlayer;
+    private Stage stage;
+    private Scene scene;
+    private static Images images = new Images();
+    private User user;
+
+    public GameMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene, Images images, UsersController users, User user) {
+        this.users = users;
+        ProfileMenu.images = images;
+        this.scene = scene;
+        this.mediaPlayer = mediaPlayer;
+        this.stage = stage;
+        this.user = user;
+    }
+
+    public void start(){
+        URL fxmlAddress = getClass().getResource("/Fxml/main-menu.fxml");
+        if (fxmlAddress == null) System.exit(0);
+        assert fxmlAddress != null;
+        AnchorPane root = null;
+        try {
+            root = FXMLLoader.load(fxmlAddress);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (root == null) {
+            System.out.println("root");
+            System.exit(0);
+        }
+        if (scene == null) {
+            System.out.println("scene");
+            System.exit(0);
+        }
+        assert root != null;
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        scene.setRoot(root);
+        stage.setScene(scene);
+        stage.setMaximized(true);
+        stage.setFullScreen(true);
+        graphicPlayBackgroundMusic();
+        graphicButtons(root);
+    }
+
+    private void graphicButtons(AnchorPane root) {
+        ImageView buttonBackground = new ImageView(images.mainMenuButtonBackGround);
+        Button startNewGame = new Button("START NEW GAME");
+        Button continueGame = new Button("CONTINUE PREVIOUS GAME");
+        Button playWithFriends = new Button("PLAY WITH FRIENDS");
+        Button chooseMap = new Button("CHOOSE MAP");
+        Button chooseSpeed = new Button("CHOOSE SPEED");
+        Button exit = new Button("EXIT");
+        Rectangle background = new Rectangle(550, 165, 450, 550);
+        background.setFill(new Color(0, 0, 0, 0.5));
+        graphicInitialiseButtons(startNewGame,continueGame,playWithFriends,chooseMap,chooseSpeed,exit,buttonBackground);
+        root.getChildren().add(background);
+        root.getChildren().add(buttonBackground);
+        root.getChildren().add(startNewGame);
+        root.getChildren().add(continueGame);
+        root.getChildren().add(playWithFriends);
+        root.getChildren().add(chooseMap);
+        root.getChildren().add(chooseSpeed);
+        root.getChildren().add(exit);
+        graphicButtonsAction(startNewGame,continueGame,playWithFriends,chooseMap,chooseSpeed,exit);
+
+    }
+
+    private void graphicInitialiseButtons(Button startNewGame,Button continueGame,Button playWithFriends, Button chooseMap,
+                                          Button chooseSpeed,Button exit, ImageView buttonBackGround){
+
+        buttonBackGround.setFitWidth(630);
+        buttonBackGround.setFitHeight(780);
+        buttonBackGround.setLayoutX(445);
+        buttonBackGround.setLayoutY(15);
+
+        startNewGame.setLayoutX(614);
+        startNewGame.setLayoutY(215.7);
+        startNewGame.getStyleClass().add("main-menu-buttons");
+        startNewGame.setPrefSize(312, 38);
+
+        continueGame.setLayoutX(614);
+        continueGame.setLayoutY(275);
+        continueGame.getStyleClass().add("main-menu-buttons");
+        continueGame.setPrefSize(312, 38);
+
+        playWithFriends.setLayoutX(614);
+        playWithFriends.setLayoutY(332);
+        playWithFriends.getStyleClass().add("main-menu-buttons");
+        playWithFriends.setPrefSize(312, 38);
+
+        chooseMap.setLayoutX(614);
+        chooseMap.setLayoutY(389.5);
+        chooseMap.getStyleClass().add("main-menu-buttons");
+        chooseMap.setPrefSize(312, 38);
+
+        chooseSpeed.setLayoutX(614);
+        chooseSpeed.setLayoutY(447);
+        chooseSpeed.getStyleClass().add("main-menu-buttons");
+        chooseSpeed.setPrefSize(312, 38);
+
+        exit.setLayoutX(614);
+        exit.setLayoutY(648);
+        exit.getStyleClass().add("main-menu-buttons");
+        exit.setPrefSize(312, 38);
+    }
+
+    private void graphicButtonsAction(Button startNewGame,Button continueGame,Button playWithFriends, Button chooseMap,
+                                      Button chooseSpeed,Button exit){
+        exit.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            new MainMenu(mediaPlayer, stage, scene, images, users).run(user, new Scanner(System.in));
+        });
+        startNewGame.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            //todo : go to play game
+        });
+        continueGame.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            //todo : go to play special game
+        });
+        playWithFriends.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            //todo : go to a menu to choose friends
+        });
+        chooseMap.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            //todo : go to a menu to choose map
+        });
+        chooseSpeed.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            //todo : go to a menu to choose speed
+        });
+    }
+
+    public void graphicPlayBackgroundMusic() {
+        String path = String.valueOf(this.getClass().getResource("/Media/background themes/background-music.mp3"));
+        Media media = new Media(path);
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
+        mediaPlayer.setCycleCount(100);
+    }
+
+    public void startNewGameClicked(User user){
+        //new PlayGame();
+    }
+
+        /*end of graphic parts*/
+
+
     // provide some information for user
     private void manGameMenu(User user) {
         String userColor = new ColorsController().getColorOfUser(user);

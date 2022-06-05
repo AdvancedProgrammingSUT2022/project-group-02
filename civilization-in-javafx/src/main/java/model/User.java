@@ -39,6 +39,7 @@ public class User {
     private int rankInLeaderboard;
     private boolean isActiveUser;
     private String lastOnline;
+    private String avatarUrl;
 
     private ArrayList<Tile> visited;
     private ArrayList<Tile> visible;
@@ -497,5 +498,11 @@ public class User {
         this.lastOnline = lastOnline;
     }
 
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
 
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
 }
