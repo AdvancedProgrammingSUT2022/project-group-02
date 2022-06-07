@@ -1,17 +1,19 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Message {
     private String content;
     private final User sender;
-    private final User receiver;
+    private final ArrayList<User> receivers;
     private final String time;
     private boolean sent;
     private boolean seen;
 
-    public Message(String content, User sender, User receiver, String time, boolean sent, boolean seen) {
+    public Message(String content, User sender, ArrayList<User> receivers, String time, boolean sent, boolean seen) {
         this.content = content;
         this.sender = sender;
-        this.receiver = receiver;
+        this.receivers = receivers;
         this.time = time;
         this.sent = sent;
         this.seen = seen;
@@ -33,8 +35,8 @@ public class Message {
         return time;
     }
 
-    public User getReceiver() {
-        return receiver;
+    public ArrayList<User> getReceivers() {
+        return receivers;
     }
 
     public User getSender() {

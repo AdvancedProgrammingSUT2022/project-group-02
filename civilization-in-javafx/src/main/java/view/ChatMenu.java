@@ -149,7 +149,9 @@ public class ChatMenu {
             }
             else {
                 String time = LocalTime.now().toString();
-                Message message = new Message(chatInput, you, other, time, false, false);
+                ArrayList<User> receivers = new ArrayList<>();
+                receivers.add(other);
+                Message message = new Message(chatInput, you, receivers, time, false, false);
                 current.addMessage(message);
                 //todo show all the contents with the new message again
                 forOtherUser.addMessage(message);
@@ -169,6 +171,8 @@ public class ChatMenu {
                 return;
             }
             else {
+                String time = LocalTime.now().toString();
+                Message message = new Message(roomInput, you, null, time, false, false);
 
             }
         }
