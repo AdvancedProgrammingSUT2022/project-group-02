@@ -196,7 +196,7 @@ public class MainMenu {
             new ProfileMenu(mediaPlayer,stage,scene,images,users,user).start();
         });
         startGame.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-
+            new GameMenu(mediaPlayer,stage,scene,images,users,user).start();
         });
         leaderboard.addEventHandler(MouseEvent.MOUSE_CLICKED, e-> {
             new Leaderboard(mediaPlayer, stage, scene, images, users, user).run();

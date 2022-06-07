@@ -3,14 +3,18 @@ package view;
 import controller.ColorsController;
 import controller.UsersController;
 import javafx.application.Application;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
@@ -19,6 +23,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import view.enums.Colors;
@@ -33,12 +39,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ProfileMenu {
+    public static Images images = new Images();
     private String whichMenu;
     private UsersController users;
     private MediaPlayer mediaPlayer;
     private Stage stage;
     private Scene scene;
-    private static Images images = new Images();
     private User user;
 
     public ProfileMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene, Images images, UsersController users, User user) {
@@ -141,29 +147,31 @@ public class ProfileMenu {
 
     private void graphicButtons(AnchorPane root) {
         ImageView buttonBackground = new ImageView(images.mainMenuButtonBackGround);
-        Button changePassword = new Button("CHAMGEPASSWORD");
-        Button changeNickname = new Button("CHANGENICKNAME");
-        Button exit = new Button("EXIT");
+        Button changePassword = new Button("Change Password");
+        Button changeNickname = new Button("Change Nickname");
+        Button changeAvatar = new Button("Change Avatar");
+        Button exit = new Button("exit");
         TextField currentPassword = new TextField();
         TextField newPassword = new TextField();
         TextField newNickName = new TextField();
         Label message = new Label();
         Rectangle background = new Rectangle(550, 165, 450, 550);
         background.setFill(new Color(0, 0, 0, 0.5));
-        graphicInitialiseButtons(changePassword, changeNickname, exit, currentPassword, newPassword, newNickName, message, buttonBackground);
+        graphicInitialiseButtons(changePassword, changeNickname, changeAvatar,exit, currentPassword, newPassword, newNickName, message, buttonBackground);
         root.getChildren().add(background);
         root.getChildren().add(buttonBackground);
         root.getChildren().add(changePassword);
         root.getChildren().add(changeNickname);
+        root.getChildren().add(changeAvatar);
         root.getChildren().add(exit);
         root.getChildren().add(currentPassword);
         root.getChildren().add(newPassword);
         root.getChildren().add(newNickName);
         root.getChildren().add(message);
-        graphicButtonsAction(changePassword, changeNickname, exit, currentPassword, newPassword, newNickName, message);
+        graphicButtonsAction(changePassword, changeNickname, changeAvatar,exit, currentPassword, newPassword, newNickName, message);
     }
 
-    private void graphicInitialiseButtons(Button changePassword, Button changeNickname, Button exit,
+    private void graphicInitialiseButtons(Button changePassword, Button changeNickname, Button changeAvatar,Button exit,
                                           TextField currentPassword, TextField newPassword, TextField newNickName,
                                           Label message, ImageView buttonBackGround) {
         buttonBackGround.setFitWidth(630);
@@ -205,13 +213,18 @@ public class ProfileMenu {
         changeNickname.getStyleClass().add("main-menu-buttons");
         changeNickname.setPrefSize(312, 38);
 
+        changeAvatar.setLayoutX(614);
+        changeAvatar.setLayoutY(505);
+        changeAvatar.getStyleClass().add("main-menu-buttons");
+        changeAvatar.setPrefSize(312, 38);
+
         exit.setLayoutX(614);
-        exit.setLayoutY(505);
+        exit.setLayoutY(648);
         exit.getStyleClass().add("main-menu-buttons");
         exit.setPrefSize(312, 38);
     }
 
-    private void graphicButtonsAction(Button changePassword, Button changeNickname, Button exit,
+    private void graphicButtonsAction(Button changePassword, Button changeNickname, Button changeAvatar,Button exit,
                                       TextField currentPassword, TextField newPassword, TextField newNickName,
                                       Label message) {
         exit.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
@@ -223,6 +236,153 @@ public class ProfileMenu {
         changeNickname.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             changeNickNameClicked(newNickName, message);
         });
+        changeAvatar.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            //todo : make a menu to select avatar
+            selectAvatarView(user);
+        });
+    }
+
+    public void selectAvatarView(User user){
+        URL fxmlAddress = getClass().getResource("/Fxml/main-menu.fxml");
+        if (fxmlAddress == null) System.exit(0);
+        assert fxmlAddress != null;
+        AnchorPane root = null;
+        try {
+            root = FXMLLoader.load(fxmlAddress);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assert root != null;
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        scene.setRoot(root);
+        stage.setScene(scene);
+        stage.setMaximized(true);
+        stage.setFullScreen(true);
+        graphicPlayBackgroundMusic();
+        Rectangle background = new Rectangle(550, 165, 500, 504);
+        background.setFill(new Color(0, 0, 0, 0.5));
+        Rectangle avatar1 = new Rectangle(560,220,118,124);
+        ImagePattern avatar1Image = new ImagePattern(new Image(getClass().getResource("/Media/avatars/avatar1.png").toExternalForm()));
+        avatar1.setFill(avatar1Image);
+        avatar1.setCursor(Cursor.HAND);
+        avatar1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                user.setAvatarUrl("/Media/avatars/avatar1.png");
+            }
+        });
+        Rectangle avatar2 = new Rectangle(680,220,118,124);
+        ImagePattern avatar2Image = new ImagePattern(new Image(getClass().getResource("/Media/avatars/avatar2.png").toExternalForm()));
+        avatar2.setFill(avatar2Image);
+        avatar2.setCursor(Cursor.HAND);
+        avatar2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                user.setAvatarUrl("/Media/avatars/avatar2.png");
+            }
+        });
+        Rectangle avatar3 = new Rectangle(800,220,118,124);
+        ImagePattern avatar3Image = new ImagePattern(new Image(getClass().getResource("/Media/avatars/avatar3.png").toExternalForm()));
+        avatar3.setFill(avatar3Image);
+        avatar3.setCursor(Cursor.HAND);
+        avatar3.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                user.setAvatarUrl("/Media/avatars/avatar3.png");
+            }
+        });
+        Rectangle avatar4 = new Rectangle(920,220,118,124);
+        ImagePattern avatar4Image = new ImagePattern(new Image(getClass().getResource("/Media/avatars/avatar4.png").toExternalForm()));
+        avatar4.setFill(avatar4Image);
+        avatar4.setCursor(Cursor.HAND);
+        avatar4.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                user.setAvatarUrl("/Media/avatars/avatar4.png");
+            }
+        });
+        Rectangle avatar5 = new Rectangle(560,350,118,124);
+        ImagePattern avatar5Image = new ImagePattern(new Image(getClass().getResource("/Media/avatars/avatar5.png").toExternalForm()));
+        avatar5.setFill(avatar5Image);
+        avatar5.setCursor(Cursor.HAND);
+        avatar5.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                user.setAvatarUrl("/Media/avatars/avatar5.png");
+            }
+        });
+        Rectangle avatar6 = new Rectangle(680,350,118,124);
+        ImagePattern avatar6Image = new ImagePattern(new Image(getClass().getResource("/Media/avatars/avatar6.png").toExternalForm()));
+        avatar6.setFill(avatar6Image);
+        avatar6.setCursor(Cursor.HAND);
+        avatar6.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                user.setAvatarUrl("/Media/avatars/avatar6.png");
+            }
+        });
+        Rectangle avatar7 = new Rectangle(800,350,118,124);
+        ImagePattern avatar7Image = new ImagePattern(new Image(getClass().getResource("/Media/avatars/avatar7.png").toExternalForm()));
+        avatar7.setFill(avatar7Image);
+        avatar7.setCursor(Cursor.HAND);
+        avatar7.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                user.setAvatarUrl("/Media/avatars/avatar7.png");
+            }
+        });
+        Rectangle avatar8 = new Rectangle(920,350,118,124);
+        ImagePattern avatar8Image = new ImagePattern(new Image(getClass().getResource("/Media/avatars/avatar8.png").toExternalForm()));
+        avatar8.setFill(avatar8Image);
+        avatar8.setCursor(Cursor.HAND);
+        avatar8.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                user.setAvatarUrl("/Media/avatars/avatar8.png");
+            }
+        });
+        Rectangle avatar9 = new Rectangle(680,480,118,124);
+        ImagePattern avatar9Image = new ImagePattern(new Image(getClass().getResource("/Media/avatars/avatar9.png").toExternalForm()));
+        avatar9.setFill(avatar9Image);
+        avatar9.setCursor(Cursor.HAND);
+        avatar9.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                user.setAvatarUrl("/Media/avatars/avatar9.png");
+            }
+        });
+        Rectangle avatar10 = new Rectangle(800,480,118,124);
+        ImagePattern avatar10Image = new ImagePattern(new Image(getClass().getResource("/Media/avatars/avatar10.png").toExternalForm()));
+        avatar10.setFill(avatar10Image);
+        avatar10.setCursor(Cursor.HAND);
+        avatar10.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                user.setAvatarUrl("/Media/avatars/avatar10.png");
+                System.out.println("avatar10 selected");
+            }
+        });
+        Button back = new Button("BACK");
+        back.setLayoutX(614);
+        back.setLayoutY(800);
+        back.getStyleClass().add("main-menu-buttons");
+        back.setPrefSize(312, 38);
+        back.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+//            new ProfileMenu(mediaPlayer,stage,scene,images,users,user).start();
+            start();
+        });
+        root.getChildren().add(background);
+        root.getChildren().add(avatar1);
+        root.getChildren().add(avatar2);
+        root.getChildren().add(avatar3);
+        root.getChildren().add(avatar4);
+        root.getChildren().add(avatar5);
+        root.getChildren().add(avatar6);
+        root.getChildren().add(avatar7);
+        root.getChildren().add(avatar8);
+        root.getChildren().add(avatar9);
+        root.getChildren().add(avatar10);
+        root.getChildren().add(back);
     }
 
     /*end of graphic part*/
