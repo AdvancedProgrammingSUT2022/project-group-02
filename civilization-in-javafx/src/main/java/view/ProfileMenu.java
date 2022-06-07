@@ -147,10 +147,10 @@ public class ProfileMenu {
 
     private void graphicButtons(AnchorPane root) {
         ImageView buttonBackground = new ImageView(images.mainMenuButtonBackGround);
-        Button changePassword = new Button("CHAMGEPASSWORD");
-        Button changeNickname = new Button("CHANGENICKNAME");
-        Button changeAvatar = new Button("CHANGEAVATAR");
-        Button exit = new Button("EXIT");
+        Button changePassword = new Button("Change Password");
+        Button changeNickname = new Button("Change Nickname");
+        Button changeAvatar = new Button("Change Avatar");
+        Button exit = new Button("exit");
         TextField currentPassword = new TextField();
         TextField newPassword = new TextField();
         TextField newNickName = new TextField();
