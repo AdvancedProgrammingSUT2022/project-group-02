@@ -27,6 +27,7 @@ public class Tile {
     private int price;
     private boolean looted;
     private boolean citizenExist;
+    private Ruin ruin;
 
     public Tile (int x, int y, User owner, Terrain terrain, int fogOfWarLevel, boolean isNearRiver,
                  boolean[] riverBorder, Resource resource, Feature feature) {
@@ -246,5 +247,13 @@ public class Tile {
 
     public boolean isLooted() {
         return looted;
+    }
+
+    public Ruin getRuin() {
+        return ruin;
+    }
+
+    public void setRuin(Ruin ruin) {
+        this.ruin = ruin;
     }
 }
