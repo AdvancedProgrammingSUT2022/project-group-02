@@ -277,9 +277,11 @@ public class GameController {
             }
         }
 
-        for (int i = 0; i < city.getPossibleBuildings().size(); i++) {
-            if (city.getPossibleBuildings().get(i).getName().equals(product.getName())) {
-                UserPanel.productDoneNotification(city.getOwner(), city, city.getPossibleBuildings().get(i));
+        for (Building building : city.getPossibleBuildings()) {
+            if (building.getName().equals(product.getName())) {
+                Building building1 = new Building(building.getName(), building.getMaintainCost(), building.getCost(), building.getFoodRate(), building.getDefence(), building.getXP(), building.getScienceRate(), building.getHappiness(), building.getRequirement());
+                city.addBuildings(building1);
+                UserPanel.productDoneNotification(city.getOwner(), city, building);
                 return;
             }
         }
