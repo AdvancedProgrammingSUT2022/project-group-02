@@ -266,7 +266,6 @@ public class GameController {
                 // melee
                 else {
                     Tile tile = findTileForMilitary(city.getTile());
-                    System.out.println("i am here");
                     meleeMilitaryUnit = new MeleeMilitaryUnit(unit.getName(), tile, unit.getHP(), unit.getGoldPrice(), unit.getProductionPrice(), unit.getLevel(), unit.getMP(), unit.getCombatStrength(), unit.getRangeCombatStrength(), city.getOwner(), unit.getAttackPoint(), unit.getMaintainGold());
                     tile.setMilitaryUnit(meleeMilitaryUnit);
                     tile.setMilitaryUnitExists(true);
@@ -274,9 +273,17 @@ public class GameController {
                     city.getOwner().addUnit(meleeMilitaryUnit);
                     UserPanel.productDoneNotification(city.getOwner(), city, meleeMilitaryUnit, this);
                 }
-                i = city.getPossibleUnits().size();
+                return;
             }
         }
+
+        for (int i = 0; i < city.getPossibleBuildings().size(); i++) {
+            if (city.getPossibleBuildings().get(i).getName().equals(product.getName())) {
+                UserPanel.productDoneNotification(city.getOwner(), city, city.getPossibleBuildings().get(i));
+                return;
+            }
+        }
+
     }
 
     public void increaseCitizens(User user){

@@ -196,6 +196,17 @@ public class UserPanel {
         user.addHistoryOfNotification(notification);
     }
 
+    public static void productDoneNotification(User user, City city, Building building) {
+        ArrayList<String> notification = new ArrayList<>();
+        System.out.println(Colors.RED + "NOTICE!!!" + Colors.RESET);
+        notification.add(Colors.RED + "NOTICE!!!" + Colors.RESET);
+        System.out.println("Dear " + user.getColor() + user.getUsername() + Colors.RESET);
+        notification.add("Dear " + user.getColor() + user.getUsername() + Colors.RESET);
+        System.out.println("you have completed producing " + user.getColor() + building.getName() + Colors.RESET);
+        notification.add("you have completed producing " + user.getColor() + building.getName() + Colors.RESET);
+        user.addHistoryOfNotification(notification);
+    }
+
     private static void unitNotification(ArrayList<String> notification, Unit unit) {
         System.out.println(Colors.PURPLE + "Unit name : " + unit.getName());
         notification.add(Colors.PURPLE + "Unit name : " + unit.getName());
