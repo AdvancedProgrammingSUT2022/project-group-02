@@ -10,11 +10,6 @@ public class CombatController extends UnitController {
     public boolean checkDefenderHill(Tile tile) {
         return tile.getTerrain().getName().equals("Hill");
     }
-    
-    public void captureCity(City city, Unit unit, String command) {
-        if (command.equals("destroy")) destroyCity(city);
-        else annexCity(city, unit);
-    }
 
     public void destroyCity(City city) {
         User previous = city.getOwner();

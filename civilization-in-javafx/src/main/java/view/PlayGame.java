@@ -97,6 +97,7 @@ public class PlayGame {
             gameController.makeAllUnOrdered(user);
             gameController.foundCity(user);
             gameController.moveTravelingUnits(user, this);
+            gameController.foundRuin(user);
 
             while (nextTurn) {
 

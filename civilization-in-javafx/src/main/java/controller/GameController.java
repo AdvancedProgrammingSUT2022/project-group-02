@@ -508,13 +508,25 @@ public class GameController {
             if (unit.getTile().getRuin() != null) {
                 if (!user.getFoundRuins().contains(unit.getTile().getRuin())) {
                     UserPanel.foundRuin(unit.getTile().getRuin(), user);
+                    Ruin ruin = unit.getTile().getRuin();
+                    if (ruin.getGivenTechnologies() != null)
+                        addRuinEffectTech(ruin, user);
+                    if (ruin.getGold() > 0)
+                        addRuinEffectGold(ruin, user);
+                    addRuinEffectPopulation(user);
+                    if (ruin.isWorker())
+                        addRuinEffectWorker(user);
+                    if (ruin.isSettler())
+                        addRuinEffectSettler(user);
+                    if (ruin.getRemovedFogs() != null)
+                        addRuinEffectFogOfTile(ruin, user);
 
                 }
             }
         }
     }
 
-    public void addRuinEffectTech(Ruin ruin, User user) {
+    private void addRuinEffectTech(Ruin ruin, User user) {
         for (Technology givenTechnology : ruin.getGivenTechnologies()) {
             if (!user.getTechnologies().contains(givenTechnology)) {
                 user.setResearchTurnLeft(1);
@@ -525,31 +537,32 @@ public class GameController {
         }
     }
 
-    public void addRuinEffectGold(Ruin ruin, User user) {
+    private void addRuinEffectGold(Ruin ruin, User user) {
         user.setGold(ruin.getGold());
     }
 
-    public void addRuinEffectPopulation(User user) {
+    private void addRuinEffectPopulation(User user) {
         //todo add one citizen
     }
 
-    public void addRuinEffectWorker(User user) {
+    private void addRuinEffectWorker(User user) {
         user.getCapital().setProductStatus(true);
         user.getCapital().setCurrentProduction(user.getCapital().getProducts().get(0));
         user.getCapital().setProductTurnLeft(1);
         cityTurnProducts(user);
     }
 
-    public void addRuinEffectSettler(User user) {
+    private void addRuinEffectSettler(User user) {
         user.getCapital().setProductStatus(true);
         user.getCapital().setCurrentProduction(user.getCapital().getProducts().get(1));
         user.getCapital().setProductTurnLeft(1);
         cityTurnProducts(user);
     }
 
-    public void addRuinEffectFogOfTile(Ruin ruin, User user) {
+    private void addRuinEffectFogOfTile(Ruin ruin, User user) {
         for (Tile removedFog : ruin.getRemovedFogs()) {
-
+            if (!user.getVisited().contains(removedFog))
+                user.addVisited(removedFog);
         }
     }
 
