@@ -140,7 +140,7 @@ public class GameController {
                         user.addImprovement(improvement);
                     }
                 }
-                // add given units to all the cities products
+                // add given units to possible products of the city
                 if (user.getCurrentTechnology().getGivenUnits() != null) {
                     MeleeMilitaryUnit meleeMilitaryUnit;
                     RangeMilitaryUnit rangeMilitaryUnit;
@@ -158,6 +158,17 @@ public class GameController {
                                 city.addPossibleUnit(meleeMilitaryUnit);
                                 city.addProduct(new Product(meleeMilitaryUnit.getName(), meleeMilitaryUnit.getProductionPrice()));
                             }
+                        }
+                    }
+                }
+                //add given buildings to possible products of the city
+                if (user.getCurrentTechnology().getGivenBuildings() != null) {
+                    Building building;
+                    for (Building givenBuilding : user.getCurrentTechnology().getGivenBuildings()) {
+                        for (City city : user.getCities()) {
+                            building = new Building(givenBuilding.getName(), givenBuilding.getMaintainCost(), givenBuilding.getCost(), givenBuilding.getFoodRate(), givenBuilding.getDefence(), givenBuilding.getXP(), givenBuilding.getScienceRate(), givenBuilding.getHappiness(), givenBuilding.getRequirement());
+                            city.addPossibleBuildings(building);
+                            city.addProduct(new Product(building.getName(), building.getCost()));
                         }
                     }
                 }
