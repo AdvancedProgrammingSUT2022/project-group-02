@@ -701,7 +701,7 @@ public class PlayGame {
         int i = 0;
         ArrayList<Tile> tilesInTheWay = new ArrayList<>();
         Tile tile = origin;
-        while ((tile = mapController.bestChoiceAmongNeighbors(tile, destination, isMilitary)) != destination) {
+        while ((tile = mapController.bestChoiceAmongNeighbors(tile, destination)) != destination) {
             i++;
             if (tile == null || i > 50) {
                 System.out.println("sorry, moving is impossible");

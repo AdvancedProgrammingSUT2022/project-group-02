@@ -507,9 +507,49 @@ public class GameController {
         for (Unit unit : user.getUnits()) {
             if (unit.getTile().getRuin() != null) {
                 if (!user.getFoundRuins().contains(unit.getTile().getRuin())) {
+                    UserPanel.foundRuin(unit.getTile().getRuin(), user);
 
                 }
             }
+        }
+    }
+
+    public void addRuinEffectTech(Ruin ruin, User user) {
+        for (Technology givenTechnology : ruin.getGivenTechnologies()) {
+            if (!user.getTechnologies().contains(givenTechnology)) {
+                user.setResearchTurnLeft(1);
+                user.setResearching(true);
+                user.setCurrentTechnology(givenTechnology);
+                userTurnResearch(user);
+            }
+        }
+    }
+
+    public void addRuinEffectGold(Ruin ruin, User user) {
+        user.setGold(ruin.getGold());
+    }
+
+    public void addRuinEffectPopulation(User user) {
+        //todo add one citizen
+    }
+
+    public void addRuinEffectWorker(User user) {
+        user.getCapital().setProductStatus(true);
+        user.getCapital().setCurrentProduction(user.getCapital().getProducts().get(0));
+        user.getCapital().setProductTurnLeft(1);
+        cityTurnProducts(user);
+    }
+
+    public void addRuinEffectSettler(User user) {
+        user.getCapital().setProductStatus(true);
+        user.getCapital().setCurrentProduction(user.getCapital().getProducts().get(1));
+        user.getCapital().setProductTurnLeft(1);
+        cityTurnProducts(user);
+    }
+
+    public void addRuinEffectFogOfTile(Ruin ruin, User user) {
+        for (Tile removedFog : ruin.getRemovedFogs()) {
+
         }
     }
 

@@ -250,7 +250,7 @@ public class UserPanel {
         ArrayList<String> notification = new ArrayList<>();
         System.out.println(Colors.RED + "NOTICE!!!" + Colors.RESET);
         notification.add(Colors.RED + "NOTICE!!!" + Colors.RESET);
-        System.out.println("you found this ruin : ");
+        System.out.println("congratulation *** you found this ruin : ");
         notification.add("you found this ruin : ");
         if (ruin.getGold() > 0) {
             System.out.println("given gold : " + ruin.getGold());
@@ -260,10 +260,25 @@ public class UserPanel {
             System.out.println("given technologies");
             for (Technology givenTechnology : ruin.getGivenTechnologies()) {
                 if (!user.getTechnologies().contains(givenTechnology)) {
-                    ResearchMenu.techInformation(givenTechnology);
-
+                    System.out.println(givenTechnology.getName());
+                    notification.add(givenTechnology.getName());
                 }
             }
+        }
+        if (ruin.isAddToPopulation()) {
+            System.out.println("population increased!");
+            notification.add("population increased!");
+        }
+        if (ruin.isWorker()) {
+            System.out.println("you have a new worker now!");
+            notification.add("you have a new worker now!");
+        }
+        if (ruin.isSettler()) {
+            System.out.println("you have a new settler now!");
+            notification.add("you have a new settler now!");
+        }
+        if (ruin.getRemovedFogs() != null) {
+
         }
         user.addHistoryOfNotification(notification);
     }

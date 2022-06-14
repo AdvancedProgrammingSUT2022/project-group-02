@@ -80,7 +80,7 @@ public class MapController {
         return (deltaX + deltaY) / 2;
     }
 
-    public Tile bestChoiceAmongNeighbors(Tile tile, Tile destination, boolean isMilitary) {
+    public Tile bestChoiceAmongNeighbors(Tile tile, Tile destination) {
         if (tile.getNeighbors().contains(destination))
             return destination;
         Tile bestChoice = tile.getNeighbors().get(0);
@@ -102,12 +102,6 @@ public class MapController {
         if (tile.getNeighbors().get(0).equals(bestChoice) && !bestChoice.getTerrain().isPassable())
             return null;
         return bestChoice;
-    }
-
-    private boolean checkConditionOfAddingTheTile(Tile tile, boolean isMilitary) {
-        boolean militaryConflict = isMilitary && tile.isMilitaryUnitExists();
-        boolean civilianConflict = !isMilitary && tile.isCivilianUnitExists();
-        return militaryConflict || civilianConflict || !tile.getTerrain().isPassable();
     }
 
     public void addAllVisibleAndVisitedTiles(User user) {
