@@ -172,7 +172,9 @@ public class ChatMenu {
             }
             else {
                 String time = LocalTime.now().toString();
-                Message message = new Message(roomInput, you, null, time, false, false);
+                Message message = new Message(roomInput, you, room.getUsers(), time, false, false);
+                room.addMessage(message);
+
 
             }
         }
