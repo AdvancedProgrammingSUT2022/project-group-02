@@ -475,14 +475,14 @@ public class GameMenu {
         }
         //int[][] graph = techGraph2();
         //users.writeToJson(graph);
-        int[][] ancientGraph = users.readFromJsonGraph();
+        int[][] graph = users.readFromJsonGraph();
         //ArrayList<Technology> technologies = better();
         //users.writeToJson(technologies);
-        ArrayList<Technology> ancientTechnologies = users.readFromJsonTech();
+        ArrayList<Technology> technologies = users.readFromJsonTech();
         //Maps map = new MapMaker().myTiles();
         //users.writeToJson(map);
         Maps map = users.readFromJsonMap();
-        new PlayGame(players, map, ancientGraph, ancientTechnologies).run(scanner);
+        new PlayGame(players, map, graph, technologies).run(scanner);
     }
 
     // get the usernames from input

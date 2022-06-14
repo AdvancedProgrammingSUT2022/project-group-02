@@ -2,16 +2,19 @@ package controller;
 
 import model.Technology;
 import model.User;
+import view.ResearchMenu;
 
 import java.util.ArrayList;
 
 public class TechController {
     private final ArrayList<Technology> technologies;
     private final int[][] technologiesGraph;
+    private GameController gameController;
 
-    public TechController(int[][] ancientEraTechnologiesGraph, ArrayList<Technology> ancientTechnologies) {
-        this.technologiesGraph = ancientEraTechnologiesGraph;
-        this.technologies = ancientTechnologies;
+    public TechController(int[][] technologiesGraph, ArrayList<Technology> technologies, GameController gameController) {
+        this.technologiesGraph = technologiesGraph;
+        this.technologies = technologies;
+        this.gameController = gameController;
     }
 
     public ArrayList<Technology> getTechnologies() {
@@ -34,7 +37,6 @@ public class TechController {
     }
 
     public ArrayList<Technology> getUserResearches(User user) {
-        ArrayList<Technology> technologies = new ArrayList<>();
         ArrayList<Technology> userTechnologies = user.getTechnologies();
         ArrayList<Technology> prerequisites;
         boolean treeTech = true;
@@ -57,5 +59,12 @@ public class TechController {
             }
         }
         return technologies;
+    }
+
+    public void addTech(Technology technology, User user) {
+        user.setResearchTurnLeft(1);
+        user.setResearching(true);
+        user.setCurrentTechnology(technology);
+        gameController.userTurnResearch(user);
     }
 }

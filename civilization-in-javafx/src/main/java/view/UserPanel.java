@@ -236,9 +236,35 @@ public class UserPanel {
     public static void foundCity(City city, User user) {
         ArrayList<String> notification = new ArrayList<>();
         System.out.println(Colors.RED + "NOTICE!!!" + Colors.RESET);
+        notification.add(Colors.RED + "NOTICE!!!" + Colors.RESET);
         System.out.println("you found this city :");
+        notification.add("you found this city :");
         System.out.println("Name : " + city.getName());
+        notification.add("Name : " + city.getName());
         System.out.println("Owner : " + city.getOwner());
+        notification.add("Owner : " + city.getOwner());
+        user.addHistoryOfNotification(notification);
+    }
+
+    public static void foundRuin(Ruin ruin, User user) {
+        ArrayList<String> notification = new ArrayList<>();
+        System.out.println(Colors.RED + "NOTICE!!!" + Colors.RESET);
+        notification.add(Colors.RED + "NOTICE!!!" + Colors.RESET);
+        System.out.println("you found this ruin : ");
+        notification.add("you found this ruin : ");
+        if (ruin.getGold() > 0) {
+            System.out.println("given gold : " + ruin.getGold());
+            notification.add("given gold : " + ruin.getGold());
+        }
+        if (ruin.getGivenTechnologies() != null) {
+            System.out.println("given technologies");
+            for (Technology givenTechnology : ruin.getGivenTechnologies()) {
+                if (!user.getTechnologies().contains(givenTechnology)) {
+                    ResearchMenu.techInformation(givenTechnology);
+
+                }
+            }
+        }
         user.addHistoryOfNotification(notification);
     }
 

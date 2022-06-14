@@ -169,4 +169,26 @@ public class ResearchMenu {
             System.out.println("**********");
         }
     }
+
+    public static void techInformation(Technology technology) {
+        System.out.println(technology.getName() + " :");
+        if (technology.getGivenUnits() != null) {
+            System.out.println("given units :");
+            for (Unit givenUnit : technology.getGivenUnits())
+                System.out.println(givenUnit.getName());
+
+        }
+        if (technology.getGivenBuildings() != null) {
+            System.out.println("given buildings :");
+            for (Building building : technology.getGivenBuildings())
+                System.out.println(building.getName());
+
+        }
+        if (technology.getGivenImprovement() != null) {
+            System.out.println("given improvements :");
+            for (Improvement improvement : technology.getGivenImprovement())
+                System.out.println(improvement.getName());
+
+        }
+    }
 }

@@ -3,6 +3,7 @@ package controller;
 import model.*;
 import view.CityMenu;
 import view.PlayGame;
+import view.ResearchMenu;
 import view.UserPanel;
 
 import java.util.ArrayList;
@@ -462,8 +463,10 @@ public class GameController {
                     if (neighbor.getCity() != null &&
                             neighbor.getCity().getTile().equals(neighbor) &&
                             !neighbor.getOwner().equals(user) &&
-                            !user.getFoundCities().contains(neighbor.getCity()))
+                            !user.getFoundCities().contains(neighbor.getCity())) {
+                        user.addFoundCities(neighbor.getCity());
                         UserPanel.foundCity(neighbor.getCity(), user);
+                    }
                 }
             }
         }
@@ -498,6 +501,16 @@ public class GameController {
         for (int i = 0; i < map.getHeight(); i++)
             for (int j = 0; j < map.getWidth(); j++)
                 mapController.setNeighbor(map.getTileBoard()[i][j]);
+    }
+
+    public void foundRuin(User user) {
+        for (Unit unit : user.getUnits()) {
+            if (unit.getTile().getRuin() != null) {
+                if (!user.getFoundRuins().contains(unit.getTile().getRuin())) {
+
+                }
+            }
+        }
     }
 
 }

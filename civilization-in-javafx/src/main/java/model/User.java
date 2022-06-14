@@ -49,6 +49,7 @@ public class User {
     private int researchTurnLeft;
     private ArrayList<String> specialWorking;
     private ArrayList<City> foundCities;
+    private ArrayList<Ruin> foundRuins;
 
     public User(String username, String nickname, String password) {
         this.username = username;
@@ -81,6 +82,7 @@ public class User {
         specialWorking = new ArrayList<>();
         foundCities = new ArrayList<>();
         this.isActiveUser = false;
+        foundRuins = new ArrayList<>();
     }
 
     public void setColor(String color) {
@@ -504,5 +506,17 @@ public class User {
 
     public String getAvatarUrl() {
         return avatarUrl;
+    }
+
+    public ArrayList<Ruin> getFoundRuins() {
+        return foundRuins;
+    }
+
+    public void setFoundCities(ArrayList<City> foundCities) {
+        this.foundCities = foundCities;
+    }
+
+    public void setFoundRuins(ArrayList<Ruin> foundRuins) {
+        this.foundRuins = foundRuins;
     }
 }

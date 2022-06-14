@@ -8,8 +8,7 @@ public class CombatController extends UnitController {
 
     //combat handling : first version of code
     public boolean checkDefenderHill(Tile tile) {
-        if (tile.getTerrain().getName().equals("Hill")) return true;
-        return false;
+        return tile.getTerrain().getName().equals("Hill");
     }
 
     public String combatHandler(User attackerUser, Tile selectedTileForAttack, Tile selectedTileForDefend) {

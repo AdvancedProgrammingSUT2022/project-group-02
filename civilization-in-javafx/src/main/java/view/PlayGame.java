@@ -26,7 +26,7 @@ public class PlayGame {
     private ResearchMenu researchMenu;
 
 
-    public PlayGame(ArrayList<User> players, Maps map, int[][] ancientGraph, ArrayList<Technology> ancientTechnology) {
+    public PlayGame(ArrayList<User> players, Maps map, int[][] graph, ArrayList<Technology> technology) {
         this.players = players;
         this.map = map;
         this.height = 26;
@@ -35,7 +35,7 @@ public class PlayGame {
         this.mapController = new MapController(map);
         unitController = new UnitController();
         settlerController = new SettlerController();
-        techController = new TechController(ancientGraph, ancientTechnology);
+        techController = new TechController(graph, technology, gameController);
         combatController = new CombatController();
     }
 
