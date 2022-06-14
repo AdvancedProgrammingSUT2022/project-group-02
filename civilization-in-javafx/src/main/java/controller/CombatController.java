@@ -7,9 +7,6 @@ import java.util.ArrayList;
 public class CombatController extends UnitController {
 
     //combat handling : first version of code
-    public boolean checkDefenderHill(Tile tile) {
-        return tile.getTerrain().getName().equals("Hill");
-    }
 
     public void destroyCity(City city) {
         User previous = city.getOwner();
