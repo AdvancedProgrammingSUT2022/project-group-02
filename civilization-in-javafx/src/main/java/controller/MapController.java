@@ -12,7 +12,16 @@ public class MapController {
         this.map = map;
     }
 
+
     public void setNeighbor(Tile tile) {
+        ArrayList<Tile> neighbors = new ArrayList<>();
+        int x = tile.getX();
+        int y = tile.getY();
+        int z = tile.getZ();
+
+    }
+
+    /*public void setNeighbor(Tile tile) {
         ArrayList<Tile> neighbors = new ArrayList<>();
         int x = tile.getX();
         int y = tile.getY();
@@ -57,7 +66,7 @@ public class MapController {
             }
         }
         tile.setNeighbors(neighbors);
-    }
+    }*/
 
     // find the distance between two hexagons
     public int findDistance(Tile origin, Tile destination) {

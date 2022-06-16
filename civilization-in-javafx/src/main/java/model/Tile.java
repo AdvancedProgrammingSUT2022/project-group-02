@@ -7,6 +7,7 @@ public class Tile {
     private Unit civilianUnit;
     private final int x;
     private final int y;
+    private final int z;
     private ArrayList<PhysicalObject> physicalObjects;
     private User owner;
     private Terrain terrain;
@@ -34,6 +35,7 @@ public class Tile {
                  boolean[] riverBorder, Resource resource, Feature feature) {
         this.x = x;
         this.y = y;
+        this.z = -(x + y);
         this.owner = owner;
         this.terrain = terrain;
         this.fogOfWarLevel = fogOfWarLevel;
@@ -264,5 +266,9 @@ public class Tile {
 
     public void setBuilding(Building building) {
         this.building = building;
+    }
+
+    public int getZ() {
+        return z;
     }
 }
