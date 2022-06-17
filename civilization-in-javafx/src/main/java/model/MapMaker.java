@@ -43,6 +43,7 @@ public class MapMaker {
         Resource Silver = new Resource("Silver", "Luxury", "Mine", 2, 0, 0, 3);
         Resource Marble = new Resource("Marble", "Luxury", "Quarry", 2, 0, 0, 3);
         Tile tile;
+
         //1st row
 
         tile = new Tile(0, 0, null, Ocean, 3, false, null, null, Ice);
@@ -205,7 +206,7 @@ public class MapMaker {
         map.setTileBoard(tile);
         tile = new Tile(0, 79, null, Ocean, 3, false, null, null, Ice);
         map.setTileBoard(tile);
-        
+
         //2nd row
 
         tile = new Tile(1, 0, null, Ocean, 3, false, null, null, Ice);
@@ -351,8 +352,6 @@ public class MapMaker {
 
         //3rd row
 
-        tile = new Tile(2, 0, null, Ocean, 3, false, null, null, Ice);
-        map.setTileBoard(tile);
         tile = new Tile(2, 1, null, Ocean, 3, false, null, null, Ice);
         map.setTileBoard(tile);
         tile = new Tile(2, 2, null, Ocean, 3, false, null, null, Ice);
@@ -425,29 +424,29 @@ public class MapMaker {
         map.setTileBoard(tile);
         tile = new Tile(2, 36, null, Ocean, 3, false, null, null, Ice);
         map.setTileBoard(tile);
-        tile = new Tile(2, 37, null, Snow, 3, false, null, null, null);
+        tile = new Tile(2, 37, null, Ocean, 3, false, null, null, Ice);
         map.setTileBoard(tile);
         tile = new Tile(2, 38, null, Snow, 3, false, null, null, null);
         map.setTileBoard(tile);
         tile = new Tile(2, 39, null, Snow, 3, false, null, null, null);
         map.setTileBoard(tile);
-        tile = new Tile(2, 40, null, Hill, 3, false, null, null, null);
+        tile = new Tile(2, 40, null, Snow, 3, false, null, null, null);
         map.setTileBoard(tile);
-        tile = new Tile(2, 41, null, Mountain, 3, false, null, null, null);
+        tile = new Tile(2, 41, null, Hill, 3, false, null, null, null);
         map.setTileBoard(tile);
-        tile = new Tile(2, 42, null, Hill, 3, false, null, null, null);
+        tile = new Tile(2, 42, null, Mountain, 3, false, null, null, null);
         map.setTileBoard(tile);
-        tile = new Tile(2, 43, null, Mountain, 3, false, null, null, null);
+        tile = new Tile(2, 43, null, Hill, 3, false, null, null, null);
         map.setTileBoard(tile);
-        tile = new Tile(2, 44, null, Hill, 3, false, null, null, null);
+        tile = new Tile(2, 44, null, Mountain, 3, false, null, null, null);
         map.setTileBoard(tile);
-        tile = new Tile(2, 45, null, Mountain, 3, false, null, null, null);
+        tile = new Tile(2, 45, null, Hill, 3, false, null, null, null);
         map.setTileBoard(tile);
-        tile = new Tile(2, 46, null, GrassLand, 3, false, null, null, null);
+        tile = new Tile(2, 46, null, Mountain, 3, false, null, null, null);
         map.setTileBoard(tile);
-        tile = new Tile(2, 47, null, Snow, 3, false, null, null, null);
+        tile = new Tile(2, 47, null, GrassLand, 3, false, null, null, null);
         map.setTileBoard(tile);
-        tile = new Tile(2, 48, null, Ocean, 3, false, null, null, Ice);
+        tile = new Tile(2, 48, null, Snow, 3, false, null, null, null);
         map.setTileBoard(tile);
         tile = new Tile(2, 49, null, Ocean, 3, false, null, null, Ice);
         map.setTileBoard(tile);
@@ -511,11 +510,11 @@ public class MapMaker {
         map.setTileBoard(tile);
         tile = new Tile(2, 79, null, Ocean, 3, false, null, null, Ice);
         map.setTileBoard(tile);
+        tile = new Tile(2, 80, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
 
         //4th row
 
-        tile = new Tile(3, 0, null, Ocean, 3, false, null, null, Ice);
-        map.setTileBoard(tile);
         tile = new Tile(3, 1, null, Ocean, 3, false, null, null, Ice);
         map.setTileBoard(tile);
         tile = new Tile(3, 2, null, Ocean, 3, false, null, null, Ice);
@@ -588,30 +587,29 @@ public class MapMaker {
         map.setTileBoard(tile);
         tile = new Tile(3, 36, null, Ocean, 3, false, null, null, Ice);
         map.setTileBoard(tile);
-        tile = new Tile(3, 37, null, Snow, 3, false, null, null, null);
+        tile = new Tile(3, 37, null, Ocean, 3, false, null, null, Ice);
         map.setTileBoard(tile);
         tile = new Tile(3, 38, null, Snow, 3, false, null, null, null);
         map.setTileBoard(tile);
-        tile = new Tile(3, 39, null, Plain, 3, false, null, null, Jungle);
+        tile = new Tile(3, 39, null, Snow, 3, false, null, null, null);
         map.setTileBoard(tile);
-        tile = new Tile(3, 40, null, Mountain, 3, false, null, null, null);
+        tile = new Tile(3, 40, null, Plain, 3, false, null, null, Jungle);
         map.setTileBoard(tile);
         tile = new Tile(3, 41, null, Mountain, 3, false, null, null, null);
         map.setTileBoard(tile);
-        tile = new Tile(3, 42, null, Hill, 3, false, null, null, null);
+        tile = new Tile(3, 42, null, Mountain, 3, false, null, null, null);
         map.setTileBoard(tile);
         tile = new Tile(3, 43, null, Hill, 3, false, null, null, null);
         map.setTileBoard(tile);
-        tile = new Tile(3, 44, null, Mountain, 3, false, null, null, null);
+        tile = new Tile(3, 44, null, Hill, 3, false, null, null, null);
         map.setTileBoard(tile);
-        tile = new Tile(3, 45, null, Snow, 3, false, null, null, null);
+        tile = new Tile(3, 45, null, Mountain, 3, false, null, null, null);
         map.setTileBoard(tile);
         tile = new Tile(3, 46, null, Snow, 3, false, null, null, null);
         map.setTileBoard(tile);
         tile = new Tile(3, 47, null, Snow, 3, false, null, null, null);
         map.setTileBoard(tile);
-
-        tile = new Tile(3, 48, null, Ocean, 3, false, null, null, Ice);
+        tile = new Tile(3, 48, null, Snow, 3, false, null, null, null);
         map.setTileBoard(tile);
         tile = new Tile(3, 49, null, Ocean, 3, false, null, null, Ice);
         map.setTileBoard(tile);
@@ -674,6 +672,8 @@ public class MapMaker {
         tile = new Tile(3, 78, null, Ocean, 3, false, null, null, Ice);
         map.setTileBoard(tile);
         tile = new Tile(3, 79, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 80, null, Ocean, 3, false, null, null, Ice);
         map.setTileBoard(tile);
 
         //5th row
