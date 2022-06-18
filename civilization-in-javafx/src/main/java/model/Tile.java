@@ -38,7 +38,13 @@ public class Tile {
         this.indexX = x;
         this.indexY = y;
         this.x = x;
-        this.y = y + (int)(Math.ceil((double)x / 2)) - 1;
+        //this.y = y + (int)(Math.ceil((double)x / 2)) - 1;
+        if (x % 2 == 0)
+            this.y = x * 2;
+        
+        else
+            this.y = x * 2 + 1;
+
         this.z = -(x + y);
         this.owner = owner;
         this.terrain = terrain;
