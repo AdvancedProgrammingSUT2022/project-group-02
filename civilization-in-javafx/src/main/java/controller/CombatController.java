@@ -40,4 +40,11 @@ public class CombatController extends UnitController {
             city.setHP(city.getHP() - unit.getAttackPoint());
         }
     }
+
+    public void attackUnit(Unit first, Unit second) {
+        second.setHP(second.getHP() - first.getAttackPoint());
+        if (second.getHP() <= 0) {
+            //todo kill the second unit
+        }
+    }
 }

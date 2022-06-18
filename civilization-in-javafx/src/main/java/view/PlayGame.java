@@ -387,6 +387,28 @@ public class PlayGame {
                 else
                     System.out.println("invalid coordinates");
             }
+
+            else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.ATTACK_UNIT1)) != null ||
+                    (matcher = RegexEnums.getMatcher(tileInput, RegexEnums.ATTACK_UNIT2)) != null) {
+                int x = Integer.parseInt(matcher.group("x"));
+                int y = Integer.parseInt(matcher.group("y"));
+                if (x >= 0 && x < map.getWidth() && y >= 0 && y < map.getHeight()) {
+                    Tile des = map.getSpecificTile(x, y);
+                    if (des.isMilitaryUnitExists() && !des.getMilitaryUnit().getOwner().equals(user)) {
+                        //todo : first declare war against the owner of units then attack military units on the tile
+                        gameController.declareWar(user, des.getMilitaryUnit().getOwner());
+                    }
+                    else if (des.isCivilianUnitExists() && !des.getCivilianUnit().getOwner().equals(user)) {
+                        //todo : first declare war against the owner of units the attack and capture units on the tile
+                        gameController.declareWar(user, des.getCivilianUnit().getOwner());
+                    }
+                    else
+                        System.out.println("there is no unit on this tile");
+                }
+                else
+                    System.out.println("invalid coordinates");
+            }
+
             else if (tileInput.equals("delete unit")) {
                 if (origin.isMilitaryUnitExists() && origin.isSelectedOne() && origin.getMilitaryUnit().getOwner().equals(user)) {
                     origin.setMilitaryUnitExists(false);
