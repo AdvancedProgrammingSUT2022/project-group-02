@@ -8,6 +8,8 @@ public class Tile {
     private final int x;
     private final int y;
     private final int z;
+    private final int indexX;
+    private final int indexY;
     private ArrayList<PhysicalObject> physicalObjects;
     private User owner;
     private Terrain terrain;
@@ -33,8 +35,10 @@ public class Tile {
 
     public Tile (int x, int y, User owner, Terrain terrain, int fogOfWarLevel, boolean isNearRiver,
                  boolean[] riverBorder, Resource resource, Feature feature) {
+        this.indexX = x;
+        this.indexY = y;
         this.x = x;
-        this.y = y;
+        this.y = y + (int)(Math.ceil((double)x / 2)) - 1;
         this.z = -(x + y);
         this.owner = owner;
         this.terrain = terrain;
@@ -270,5 +274,13 @@ public class Tile {
 
     public int getZ() {
         return z;
+    }
+
+    public int getIndexX() {
+        return indexX;
+    }
+
+    public int getIndexY() {
+        return indexY;
     }
 }
