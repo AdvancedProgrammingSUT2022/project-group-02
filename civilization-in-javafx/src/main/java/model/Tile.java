@@ -7,8 +7,6 @@ public class Tile {
     private Unit civilianUnit;
     private final int x;
     private final int y;
-    private final int z;
-    private final int indexX;
     private final int indexY;
     private ArrayList<PhysicalObject> physicalObjects;
     private User owner;
@@ -41,11 +39,9 @@ public class Tile {
         //this.y = y + (int)(Math.ceil((double)x / 2)) - 1;
         if (x % 2 == 0)
             this.y = x * 2;
-        
+
         else
             this.y = x * 2 + 1;
-
-        this.z = -(x + y);
         this.owner = owner;
         this.terrain = terrain;
         this.fogOfWarLevel = fogOfWarLevel;
@@ -276,14 +272,6 @@ public class Tile {
 
     public void setBuilding(Building building) {
         this.building = building;
-    }
-
-    public int getZ() {
-        return z;
-    }
-
-    public int getIndexX() {
-        return indexX;
     }
 
     public int getIndexY() {

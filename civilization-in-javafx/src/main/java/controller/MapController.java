@@ -16,57 +16,29 @@ public class MapController {
     public void setNeighbor(Tile tile) {
         ArrayList<Tile> neighbors = new ArrayList<>();
         int x = tile.getX();
-        int y = tile.getY();
-        int z = tile.getZ();
+        int y = tile.getIndexY();
 
-    }
+        // right
+        if (y < 158)
+            neighbors.add(getTileInNewIndex(x, y + 2));
+        // left
+        if (y > 1)
+            neighbors.add(getTileInNewIndex(x, y - 2));
+        // up right
+        if (x > 0 && y < 159)
+            neighbors.add(getTileInNewIndex(x - 1, y + 1));
+        // up left
+        if (x > 0 && y > 0)
+            neighbors.add(getTileInNewIndex(x - 1, y - 1));
+        // down right
+        if (x < 25 && y < 159)
+            neighbors.add(getTileInNewIndex(x + 1, y + 1));
+        // down left
+        if (x < 25 && y > 0)
+            neighbors.add(getTileInNewIndex(x + 1, y - 1));
 
-    /*public void setNeighbor(Tile tile) {
-        ArrayList<Tile> neighbors = new ArrayList<>();
-        int x = tile.getX();
-        int y = tile.getY();
-        // up
-        if (x >= 2)
-            neighbors.add(map.getTileBoard()[x - 2][y]);
-
-        if (x >= 1) {
-            //up left
-            if (y >= 1) {
-                if (x % 2 == 0)
-                    neighbors.add(map.getTileBoard()[x - 1][y - 1]);
-                else
-                    neighbors.add(map.getTileBoard()[x - 1][y]);
-            }
-            //up right
-            if (y <= map.getWidth() - 2) {
-                if (x % 2 == 0)
-                    neighbors.add(map.getTileBoard()[x - 1][y]);
-                else
-                    neighbors.add(map.getTileBoard()[x - 1][y + 1]);
-            }
-        }
-        //down
-        if (x <= map.getHeight() - 3)
-            neighbors.add(map.getTileBoard()[x + 2][y]);
-
-        if (x <= map.getHeight() - 2) {
-            //down left
-            if (y >= 1) {
-                if (x % 2 == 0)
-                    neighbors.add(map.getTileBoard()[x + 1][y - 1]);
-                else
-                    neighbors.add(map.getTileBoard()[x + 1][y]);
-            }
-            //down right
-            if (y <= map.getWidth() - 2) {
-                if (x % 2 == 0)
-                    neighbors.add(map.getTileBoard()[x + 1][y]);
-                else
-                    neighbors.add(map.getTileBoard()[x + 1][y + 1]);
-            }
-        }
         tile.setNeighbors(neighbors);
-    }*/
+    }
 
     // find the distance between two hexagons
     public int findDistance(Tile origin, Tile destination) {
@@ -305,5 +277,14 @@ public class MapController {
         map.getSpecificTile(18, 32).setCivilianUnitExists(true);
         tiles.add(map.getSpecificTile(18, 32));
         return tiles;
+    }
+
+    private Tile getTileInNewIndex(int x, int y) {
+        if (x % 2 == 0) {
+            return map.getTileBoard()[x][y / 2];
+        }
+        else {
+            return map.getTileBoard()[x][(y - 1) / 2];
+        }
     }
 }
