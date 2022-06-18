@@ -33,7 +33,6 @@ public class Tile {
 
     public Tile (int x, int y, User owner, Terrain terrain, int fogOfWarLevel, boolean isNearRiver,
                  boolean[] riverBorder, Resource resource, Feature feature) {
-        this.indexX = x;
         this.indexY = y;
         this.x = x;
         //this.y = y + (int)(Math.ceil((double)x / 2)) - 1;
