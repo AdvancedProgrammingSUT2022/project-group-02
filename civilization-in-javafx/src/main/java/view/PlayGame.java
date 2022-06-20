@@ -18,7 +18,6 @@ public class PlayGame {
     private final SettlerController settlerController;
     private final TechController techController;
     private CombatController combatController;
-    private int role;
     private int height;
     private int width;
     private ArrayList<Tile> firstTurnsSettlers;
@@ -395,11 +394,15 @@ public class PlayGame {
                 if (x >= 0 && x < map.getWidth() && y >= 0 && y < map.getHeight()) {
                     Tile des = map.getSpecificTile(x, y);
                     if (des.isMilitaryUnitExists() && !des.getMilitaryUnit().getOwner().equals(user)) {
-                        //todo : first declare war against the owner of units then attack military units on the tile
+                        //todo : if user is not in war with the owner of unit , ask him if he want to start a war
+                        if (!user.getEnemies().contains(des.getMilitaryUnit().getOwner()))
+                            UserPanel.sendNotificationToInvader(user, des.getMilitaryUnit().getOwner());
                         gameController.declareWar(user, des.getMilitaryUnit().getOwner());
                     }
                     else if (des.isCivilianUnitExists() && !des.getCivilianUnit().getOwner().equals(user)) {
-                        //todo : first declare war against the owner of units the attack and capture units on the tile
+                        //todo : if user is not in war with the owner of unit , ask him if he want to start a war
+                        if (!user.getEnemies().contains(des.getCivilianUnit().getOwner()))
+                            UserPanel.sendNotificationToDefender(user, des.getCivilianUnit().getOwner());
                         gameController.declareWar(user, des.getCivilianUnit().getOwner());
                     }
                     else

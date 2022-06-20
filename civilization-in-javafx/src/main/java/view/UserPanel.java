@@ -2,6 +2,7 @@ package view;
 
 import controller.ColorsController;
 import controller.GameController;
+import javafx.scene.paint.Color;
 import view.enums.Colors;
 import model.*;
 
@@ -281,6 +282,28 @@ public class UserPanel {
 
         }
         user.addHistoryOfNotification(notification);
+    }
+
+    public static void sendNotificationToInvader(User first, User second) {
+        ArrayList<String> notification = new ArrayList<>();
+        System.out.println(Colors.RED + "NOTICE!!!" + Colors.RESET);
+        notification.add(Colors.RED + "NOTICE!!!" + Colors.RESET);
+        System.out.println(Colors.PURPLE + "Dear " + first.getUsername() + Colors.RESET);
+        notification.add(Colors.PURPLE + "Dear " + first.getUsername() + Colors.RESET);
+        System.out.println(Colors.YELLOW + "you have started a war with " + second.getUsername() + Colors.RESET);
+        notification.add(Colors.YELLOW + "you have started a war with " + second.getUsername() + Colors.RESET);
+        first.addHistoryOfNotification(notification);
+    }
+
+    public static void sendNotificationToDefender(User first, User second) {
+        ArrayList<String> notification = new ArrayList<>();
+        System.out.println(Colors.RED + "NOTICE!!!" + Colors.RESET);
+        notification.add(Colors.RED + "NOTICE!!!" + Colors.RESET);
+        System.out.println(Colors.PURPLE + "Dear " + second.getUsername() + Colors.RESET);
+        notification.add(Colors.PURPLE + "Dear " + second.getUsername() + Colors.RESET);
+        System.out.println(Colors.YELLOW + "User : " + first.getUsername() + " have attacked you!" + Colors.RESET);
+        notification.add(Colors.YELLOW + "User : " + first.getUsername() + " have attacked you!" + Colors.RESET);
+        second.addHistoryOfNotification(notification);
     }
 
     public void citizensIncreased(User user, City city){
