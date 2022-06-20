@@ -164,19 +164,61 @@ public class ChatMenu {
     public void chatInRoom(User you, Room room, Scanner scanner) {
         //todo show all the contents of the current room
         String roomInput;
+        System.out.println("press -exit room- to get out of this panel");
         while (true) {
             roomInput = scanner.nextLine();
             if (roomInput.equals("exit room")) {
                 System.out.println("exited from room successfully");
                 return;
             }
+            else if (roomInput.equals("room setting")) {
+                if (room.getOwner().equals(you)) {
+                    System.out.println("press -room setting exit- to get out of this panel");
+                    while (true) {
+                        roomInput = scanner.nextLine();
+                        if (roomInput.equals("room setting exit"))
+                            break;
+                        else if (roomInput.equals("remove users")) {
+                            int index = 1;
+                            for (User user : room.getUsers()) {
+                                System.out.println(index + "- " + user.getUsername());
+                                index++;
+                            }
+                            System.out.println("enter an index to delete");
+                            System.out.println("press -delete exit- to get out of this panel");
+                            while (true) {
+                                roomInput = scanner.nextLine();
+                                if (roomInput.equals("delete exit"))
+                                    break;
+                                else if (Pattern.matches("\\d+", roomInput)) {
+                                    User user = room.getUsers().get(index - 1);
+                                    if (user.equals(you)) {
+                                        //todo : warn the user of the consequences
+                                        chatController.removeRoom(room);
+                                        System.out.println("room deleted successfully! goodbye!");
+                                        return;
+                                    }
+                                    else {
+                                        room.removeUser(user);
+                                        System.out.println("you removed " + user.getUsername() + " successfully!");
+                                        break;
+                                    }
+                                }
+                                else
+                                    System.out.println("invalid command");
+                            }
+                        }
+                    }
+                }
+                else
+                    System.out.println("you don't have access to this panel");
+            }
             else {
                 String time = LocalTime.now().toString();
                 Message message = new Message(roomInput, you, room.getUsers(), time, false, false);
                 room.addMessage(message);
-                
-
             }
+
         }
     }
 
