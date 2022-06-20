@@ -566,11 +566,4 @@ public class GameController {
         }
     }
 
-    public void declareWar(User first, User second) {
-        //todo : warn the first user of consequences of starting war with second
-        first.addEnemy(second);
-        second.addEnemy(first);
-        //todo send notification to both of users
-    }
-
 }

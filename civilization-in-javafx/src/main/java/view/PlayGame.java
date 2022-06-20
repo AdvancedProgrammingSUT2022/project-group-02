@@ -396,14 +396,18 @@ public class PlayGame {
                     if (mapController.findDistance(origin, des) == 1 || (mapController.findDistance(origin, des) == 2 && origin.getMilitaryUnit().getRangeCombatStrength() > 0)) {
                         if (des.isMilitaryUnitExists() && !des.getMilitaryUnit().getOwner().equals(user)) {
                             //todo : if user is not in war with the owner of unit , ask him if he want to start a war
-                            if (!user.getEnemies().contains(des.getMilitaryUnit().getOwner()))
+                            if (!user.getEnemies().contains(des.getMilitaryUnit().getOwner())) {
                                 UserPanel.sendNotificationToInvader(user, des.getMilitaryUnit().getOwner());
-                            gameController.declareWar(user, des.getMilitaryUnit().getOwner());
+                            }
+                            combatController.attackUnit(origin.getMilitaryUnit(), des.getMilitaryUnit());
+
                         } else if (des.isCivilianUnitExists() && !des.getCivilianUnit().getOwner().equals(user)) {
                             //todo : if user is not in war with the owner of unit , ask him if he want to start a war
-                            if (!user.getEnemies().contains(des.getCivilianUnit().getOwner()))
+                            if (!user.getEnemies().contains(des.getCivilianUnit().getOwner())) {
                                 UserPanel.sendNotificationToDefender(user, des.getCivilianUnit().getOwner());
-                            gameController.declareWar(user, des.getCivilianUnit().getOwner());
+                            }
+                            combatController.annexCivilianUnit(user, des.getCivilianUnit());
+                            System.out.println("you own this unit now!");
                         } else
                             System.out.println("there is no unit on this tile");
                     }
