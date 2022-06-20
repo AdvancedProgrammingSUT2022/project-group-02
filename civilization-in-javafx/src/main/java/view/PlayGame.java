@@ -387,26 +387,28 @@ public class PlayGame {
                     System.out.println("invalid coordinates");
             }
 
-            else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.ATTACK_UNIT1)) != null ||
-                    (matcher = RegexEnums.getMatcher(tileInput, RegexEnums.ATTACK_UNIT2)) != null) {
+            else if (((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.ATTACK_UNIT1)) != null ||
+                    (matcher = RegexEnums.getMatcher(tileInput, RegexEnums.ATTACK_UNIT2)) != null) && origin.isMilitaryUnitExists()) {
                 int x = Integer.parseInt(matcher.group("x"));
                 int y = Integer.parseInt(matcher.group("y"));
                 if (x >= 0 && x < map.getWidth() && y >= 0 && y < map.getHeight()) {
                     Tile des = map.getSpecificTile(x, y);
-                    if (des.isMilitaryUnitExists() && !des.getMilitaryUnit().getOwner().equals(user)) {
-                        //todo : if user is not in war with the owner of unit , ask him if he want to start a war
-                        if (!user.getEnemies().contains(des.getMilitaryUnit().getOwner()))
-                            UserPanel.sendNotificationToInvader(user, des.getMilitaryUnit().getOwner());
-                        gameController.declareWar(user, des.getMilitaryUnit().getOwner());
-                    }
-                    else if (des.isCivilianUnitExists() && !des.getCivilianUnit().getOwner().equals(user)) {
-                        //todo : if user is not in war with the owner of unit , ask him if he want to start a war
-                        if (!user.getEnemies().contains(des.getCivilianUnit().getOwner()))
-                            UserPanel.sendNotificationToDefender(user, des.getCivilianUnit().getOwner());
-                        gameController.declareWar(user, des.getCivilianUnit().getOwner());
+                    if (mapController.findDistance(origin, des) == 1 || (mapController.findDistance(origin, des) == 2 && origin.getMilitaryUnit().getRangeCombatStrength() > 0)) {
+                        if (des.isMilitaryUnitExists() && !des.getMilitaryUnit().getOwner().equals(user)) {
+                            //todo : if user is not in war with the owner of unit , ask him if he want to start a war
+                            if (!user.getEnemies().contains(des.getMilitaryUnit().getOwner()))
+                                UserPanel.sendNotificationToInvader(user, des.getMilitaryUnit().getOwner());
+                            gameController.declareWar(user, des.getMilitaryUnit().getOwner());
+                        } else if (des.isCivilianUnitExists() && !des.getCivilianUnit().getOwner().equals(user)) {
+                            //todo : if user is not in war with the owner of unit , ask him if he want to start a war
+                            if (!user.getEnemies().contains(des.getCivilianUnit().getOwner()))
+                                UserPanel.sendNotificationToDefender(user, des.getCivilianUnit().getOwner());
+                            gameController.declareWar(user, des.getCivilianUnit().getOwner());
+                        } else
+                            System.out.println("there is no unit on this tile");
                     }
                     else
-                        System.out.println("there is no unit on this tile");
+                        System.out.println("this tile is not in your range");
                 }
                 else
                     System.out.println("invalid coordinates");
