@@ -52,6 +52,7 @@ public class User {
     private ArrayList<Ruin> foundRuins;
 
     private ArrayList<User> enemies;
+    private ArrayList<Message> seenMessages;
 
     public User(String username, String nickname, String password) {
         this.username = username;
@@ -86,6 +87,7 @@ public class User {
         this.isActiveUser = false;
         foundRuins = new ArrayList<>();
         enemies = new ArrayList<>();
+        seenMessages = new ArrayList<>();
     }
 
     public void setColor(String color) {
@@ -537,5 +539,17 @@ public class User {
 
     public void removeEnemy(User enemy) {
         enemies.remove(enemy);
+    }
+
+    public ArrayList<Message> getSeenMessages() {
+        return seenMessages;
+    }
+
+    public void setAvailableResources(ArrayList<Resource> availableResources) {
+        this.availableResources = availableResources;
+    }
+
+    public void setSeenMessages(ArrayList<Message> seenMessages) {
+        this.seenMessages = seenMessages;
     }
 }
