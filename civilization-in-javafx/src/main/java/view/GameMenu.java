@@ -210,24 +210,37 @@ public class GameMenu {
         submit.setLayoutY(215.7);
         submit.getStyleClass().add("main-menu-buttons");
         submit.setPrefSize(312, 38);
+        Button back = new Button("back");
+        back.setLayoutX(614);
+        back.setLayoutY(267.7);
+        back.getStyleClass().add("main-menu-buttons");
+        back.setPrefSize(312, 38);
         AnchorPane finalRoot = root;
         submit.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            searchNicknamesView(numberOfPlayers, finalRoot, submit, numberOfPlayers);
+            searchNicknamesView(numberOfPlayers, finalRoot, submit, back, numberOfPlayers);
         });
+        back.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            start();
+        });
+        root.getChildren().add(back);
         root.getChildren().add(submit);
     }
 
-    public void searchNicknamesView(TextField numberOfPlayers, AnchorPane root, Button removableButton, TextField removableTextField) {
+    public void searchNicknamesView(TextField numberOfPlayers, AnchorPane root, Button removableButton, Button removableButton2, TextField removableTextField) {
         root.getChildren().remove(removableButton);
         root.getChildren().remove(removableTextField);
-        int number = Integer.parseInt(numberOfPlayers.getText());
+        root.getChildren().remove(removableButton2);
+        int number = 0;
+        if (numberOfPlayers.getText().matches("\s*\\d+\s*")) {
+            number = Integer.parseInt(numberOfPlayers.getText());
+        }
         ArrayList<TextField> playersNickname = new ArrayList<>();
         for (int i = 0; i < number; i++) {
             int j = i + 1;
             TextField playerNickname = new TextField();
             playerNickname.setLayoutX(614);
             playerNickname.setLayoutY(215.7 + (i * 42));
-            playerNickname.setPromptText("put the player" + j + "nickname");
+            playerNickname.setPromptText("put the player " + j + " nickname");
             playerNickname.getStyleClass().add("profile-text-field");
             playerNickname.setPrefSize(312, 38);
             playersNickname.add(playerNickname);
