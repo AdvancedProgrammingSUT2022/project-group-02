@@ -252,6 +252,7 @@ public class GameMenu {
         submit.getStyleClass().add("main-menu-buttons");
         submit.setPrefSize(312, 38);
         submit.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            
             //todo : send request to play for friends
         });
         root.getChildren().add(submit);
