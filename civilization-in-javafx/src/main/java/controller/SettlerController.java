@@ -24,6 +24,7 @@ public class SettlerController extends UnitController{
         removeUnit(true, unit, user);
         addBasicProducts(city);
         addBasicUnits(city);
+        addBasicBuildings(city);
         user.addTerritory(tile);
         // add neighbors to the city for free
         for (Tile neighbor : tile.getNeighbors()) {
@@ -52,5 +53,11 @@ public class SettlerController extends UnitController{
         units.add(new MeleeMilitaryUnit("warrior", null, 100, 5, 1, 1, 2, 20, 0, city.getOwner(), 30, 1));
         units.add(new Civilian("scout", null, 100, 5, 1, 1, 2, 4, 0, city.getOwner(), 4, 0));
         city.setPossibleUnits(units);
+    }
+
+    public void addBasicBuildings(City city) {
+        ArrayList<Building> buildings = new ArrayList<>();
+        buildings.add(new Building("Monument", 1, 60, 0, 0, 0, 0, 0, null));
+        city.setPossibleBuildings(buildings);
     }
 }

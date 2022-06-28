@@ -42,895 +42,1949 @@ public class MapMaker {
         Resource Sugar = new Resource("Sugar", "Luxury", "Plantation", 2, 0, 0, 2);
         Resource Silver = new Resource("Silver", "Luxury", "Mine", 2, 0, 0, 3);
         Resource Marble = new Resource("Marble", "Luxury", "Quarry", 2, 0, 0, 3);
+        Tile tile;
+
         //1st row
-        for (int i = 0; i < 80; i++){
-            if (i > 38 && i < 43){
-                Tile tile = new Tile(0, i, null, Snow, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                continue;
-            }
-            Tile tile = new Tile(0, i, null, Ocean, 3, false, null, null, Ice);
-            map.setTileBoard(tile);
-        }
+
+        tile = new Tile(0, 0, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 1, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 2, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 3, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 4, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 5, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 6, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 7, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 8, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 9, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 10, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 11, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 12, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 13, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 14, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 15, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 16, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 17, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 18, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 19, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 20, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 21, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 22, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 23, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 24, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 25, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 26, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 27, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 28, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 29, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 30, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 31, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 32, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 33, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 34, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 35, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 36, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 37, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 38, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 39, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 40, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 41, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 42, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 43, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 44, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 45, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 46, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 47, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 48, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 49, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 50, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 51, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 52, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 53, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 54, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 55, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 56, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 57, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 58, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 59, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 60, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 61, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 62, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 63, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 64, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 65, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 66, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 67, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 68, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 69, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 70, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 71, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 72, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 73, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 74, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 75, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 76, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 77, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 78, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(0, 79, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+
         //2nd row
-        for (int i = 0; i < 80; i++){
-            if (i > 36 && i < 41){
-                Tile tile = new Tile(1, i, null, Snow, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                continue;
-            }
-            if (i > 40 && i < 45){
-                Tile tile = new Tile(1, i, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                continue;
-            }
-            if (i > 44 && i < 48){
-                Tile tile = new Tile(1, i, null, Snow, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                continue;
-            }
-            Tile tile = new Tile(1, i, null, Ocean, 3, false, null, null, Ice);
-            map.setTileBoard(tile);
-        }
+
+        tile = new Tile(1, 0, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 1, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 2, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 3, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 4, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 5, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 6, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 7, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 8, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 9, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 10, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 11, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 12, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 13, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 14, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 15, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 16, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 17, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 18, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 19, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 30, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 31, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 32, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 33, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 34, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 35, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 36, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 37, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 38, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 39, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 40, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 41, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 42, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 43, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 44, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 45, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 46, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 47, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 48, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 49, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 50, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 51, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 52, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 53, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 54, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 55, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 56, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 57, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 58, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 59, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 60, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 61, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 62, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 63, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 64, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 65, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 66, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 67, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 68, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 69, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 70, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 71, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 72, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 73, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 74, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 75, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 76, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 77, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 78, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(1, 79, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+
         //3rd row
-        for (int i = 0; i < 80; i++){
-            if (i == 37){
-                Tile tile = new Tile(2, 37, null, Snow, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(2, 38, null, Snow, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(2, 39, null, Snow, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(2, 40, null, Hill, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(2, 41, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(2, 42, null, Hill, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(2, 43, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(2, 44, null, Hill, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(2, 45, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(2, 46, null, GrassLand, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(2, 47, null, Snow, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                i = 47;
-                continue;
-            }
-            Tile tile = new Tile(2, i, null, Ocean, 3, false, null, null, Ice);
-            map.setTileBoard(tile);
-        }
+
+        tile = new Tile(2, 0, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 1, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 2, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 3, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 4, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 5, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 6, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 7, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 8, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 9, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 10, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 11, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 12, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 13, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 14, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 15, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 16, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 17, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 18, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 19, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 20, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 21, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 22, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 23, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 24, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 25, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 26, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 27, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 28, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 29, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 30, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 31, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 32, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 33, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 34, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 35, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 36, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 37, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 38, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 39, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 40, null, Hill, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 41, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 42, null, Hill, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 43, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 44, null, Hill, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 45, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 46, null, GrassLand, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 47, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 48, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 49, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 50, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 51, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 52, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 53, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 54, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 55, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 56, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 57, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 58, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 59, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 60, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 61, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 62, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 63, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 64, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 65, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 66, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 67, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 68, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 69, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 70, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 71, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 72, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 73, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 74, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 75, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 76, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 77, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 78, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(2, 79, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+
         //4th row
-        for (int i = 0; i < 80; i++){
-            if (i == 37){
-                Tile tile = new Tile(3, 37, null, Snow, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(3, 38, null, Snow, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(3, 39, null, Plain, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(3, 40, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(3, 41, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(3, 42, null, Hill, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(3, 43, null, Hill, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(3, 44, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(3, 45, null, Snow, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(3, 46, null, Snow, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(3, 47, null, Snow, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                i = 47;
-                continue;
-            }
-            Tile tile = new Tile(3, i, null, Ocean, 3, false, null, null, Ice);
-            map.setTileBoard(tile);
-        }
+
+        tile = new Tile(3, 0, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 1, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 2, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 3, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 4, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 5, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 6, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 7, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 8, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 9, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 10, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 11, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 12, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 13, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 14, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 15, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 16, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 17, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 18, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 19, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 20, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 21, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 22, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 23, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 24, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 25, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 26, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 27, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 28, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 29, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 30, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 31, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 32, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 33, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 34, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 35, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 36, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 37, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 38, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 39, null, Plain, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 40, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 41, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 42, null, Hill, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 43, null, Hill, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 44, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 45, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 46, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 47, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 48, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 49, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 50, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 51, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 52, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 53, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 54, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 55, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 56, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 57, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 58, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 59, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 60, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 61, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 62, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 63, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 64, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 65, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 66, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 67, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 68, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 69, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 70, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 71, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 72, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 73, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 74, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 75, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 76, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 77, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 78, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(3, 79, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+
         //5th row
-        for (int i = 0; i < 80; i++){
-            if (i > 1 && i < 22){
-                Tile tile = new Tile(4, i, null, Snow, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                continue;
-            }
-            if (i == 38){
-                Tile tile = new Tile(4, 38, null, Plain, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(4, 39, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(4, 40, null, GrassLand, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(4, 41, null, GrassLand, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(4, 42, null, Tundra, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(4, 43, null, Hill, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(4, 44, null, Hill, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(4, 45, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(4, 46, null, Hill, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                i = 46;
-                continue;
-            }
-            if (i > 49 && i < 78){
-                if (i > 59 && i < 64){
-                    Tile tile = new Tile(4, i, null, Tundra, 3, false, null, null, null);
-                    map.setTileBoard(tile);
-                    continue;
-                }
-                Tile tile = new Tile(4, i, null, Snow, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                continue;
-            }
-            Tile tile = new Tile(4, i, null, Ocean, 3, false, null, null, Ice);
-            map.setTileBoard(tile);
-        }
+
+        tile = new Tile(4, 0, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 1, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 2, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 3, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 4, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 5, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 6, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 7, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 8, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 9, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 10, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 11, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 12, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 13, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 14, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 15, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 16, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 17, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 18, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 19, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 20, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 21, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 22, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 23, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 24, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 25, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 26, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 27, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 28, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 29, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 30, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 31, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 32, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 33, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 34, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 35, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 36, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 37, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 38, null, Plain, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 39, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 40, null, GrassLand, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 41, null, GrassLand, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 42, null, Tundra, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 43, null, Hill, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 44, null, Hill, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 45, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 46, null, Hill, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 47, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 48, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 49, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 50, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 51, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 52, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 53, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 54, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 55, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 56, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 57, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 58, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 59, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 60, null, Tundra, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 61, null, Tundra, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 62, null, Tundra, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 63, null, Tundra, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 64, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 65, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 66, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 67, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 68, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 69, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 70, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 71, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 72, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 73, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 74, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 75, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 76, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 77, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 78, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(4, 79, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+
         //6th row
-        for (int i = 0; i < 80; i++){
-            if (i > 2 && i < 21){
-                Tile tile = new Tile(5, i, null, Snow, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                continue;
-            }
-            if (i == 33){
-                Tile tile = new Tile(5, 33, null, Hill, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(5, 34, null, Hill, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                i = 34;
-                continue;
-            }
-            if (i > 37 && i < 77){
-                if (i == 38){
-                    Tile tile = new Tile(5, 38, null, Hill, 3, false, null, null, null);
-                    map.setTileBoard(tile);
-                    tile = new Tile(5, 39, null, Mountain, 3, false, null, null, null);
-                    map.setTileBoard(tile);
-                    tile = new Tile(5, 40, null, Hill, 3, false, null, null, null);
-                    map.setTileBoard(tile);
-                    tile = new Tile(5, 41, null, GrassLand, 3, false, null, null, Forest);
-                    map.setTileBoard(tile);
-                    tile = new Tile(5, 42, null, GrassLand, 3, false, null, null, Forest);
-                    map.setTileBoard(tile);
-                    tile = new Tile(5, 43, null, GrassLand, 3, false, null, null, Forest);
-                    map.setTileBoard(tile);
-                    tile = new Tile(5, 44, null, GrassLand, 3, false, null, null, Forest);
-                    map.setTileBoard(tile);
-                    tile = new Tile(5, 45, null, GrassLand, 3, false, null, null, Forest);
-                    map.setTileBoard(tile);
-                    tile = new Tile(5, 46, null, GrassLand, 3, false, null, null, Jungle);
-                    map.setTileBoard(tile);
-                    tile = new Tile(5, 47, null, Mountain, 3, false, null, null, null);
-                    map.setTileBoard(tile);
-                    tile = new Tile(5, 48, null, Mountain, 3, false, null, null, null);
-                    map.setTileBoard(tile);
-                    tile = new Tile(5, 49, null, Mountain, 3, false, null, null, null);
-                    map.setTileBoard(tile);
-                    tile = new Tile(5, 50, null, Mountain, 3, false, null, null, null);
-                    map.setTileBoard(tile);
-                    i = 50;
-                    continue;
-                }
-                if (i == 57){
-                    Tile tile = new Tile(5, 57, null, Tundra, 3, false, null, null, null);
-                    map.setTileBoard(tile);
-                    tile = new Tile(5, 58, null, Snow, 3, false, null, null, null);
-                    map.setTileBoard(tile);
-                    tile = new Tile(5, 59, null, Tundra, 3, false, null, null, null);
-                    map.setTileBoard(tile);
-                    tile = new Tile(5, 60, null, Tundra, 3, false, null, null, null);
-                    map.setTileBoard(tile);
-                    tile = new Tile(5, 61, null, Hill, 3, false, null, null, null);
-                    map.setTileBoard(tile);
-                    tile = new Tile(5, 62, null, Hill, 3, false, null, null, null);
-                    map.setTileBoard(tile);
-                    tile = new Tile(5, 63, null, GrassLand, 3, false, null, null, FloodPlain);
-                    map.setTileBoard(tile);
-                    tile = new Tile(5, 64, null, GrassLand, 3, false, null, null, FloodPlain);
-                    map.setTileBoard(tile);
-                    tile = new Tile(5, 65, null, Snow, 3, false, null, null, null);
-                    map.setTileBoard(tile);
-                    tile = new Tile(5, 66, null, GrassLand, 3, false, null, null, FloodPlain);
-                    map.setTileBoard(tile);
-                    tile = new Tile(5, 67, null, GrassLand, 3, false, null, null, FloodPlain);
-                    map.setTileBoard(tile);
-                    tile = new Tile(5, 68, null, GrassLand, 3, false, null, null, FloodPlain);
-                    map.setTileBoard(tile);
-                    i = 68;
-                    continue;
-                }
-                Tile tile = new Tile(5, i, null, Snow, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                continue;
-            }
-            Tile tile = new Tile(5, i, null, Ocean, 3, false, null, null,null);
-            map.setTileBoard(tile);
-        }
+
+        tile = new Tile(5, 0, null, Ocean, 3, false, null, null,null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 1, null, Ocean, 3, false, null, null,null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 2, null, Ocean, 3, false, null, null,null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 3, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 4, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 5, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 6, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 7, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 8, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 9, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 10, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 11, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 12, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 13, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 14, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 15, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 16, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 17, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 18, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 19, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 20, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 21, null, Ocean, 3, false, null, null,null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 22, null, Ocean, 3, false, null, null,null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 23, null, Ocean, 3, false, null, null,null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 24, null, Ocean, 3, false, null, null,null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 25, null, Ocean, 3, false, null, null,null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 26, null, Ocean, 3, false, null, null,null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 27, null, Ocean, 3, false, null, null,null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 28, null, Ocean, 3, false, null, null,null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 29, null, Ocean, 3, false, null, null,null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 30, null, Ocean, 3, false, null, null,null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 31, null, Ocean, 3, false, null, null,null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 32, null, Ocean, 3, false, null, null,null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 33, null, Hill, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 34, null, Hill, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 35, null, Ocean, 3, false, null, null,null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 36, null, Ocean, 3, false, null, null,null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 37, null, Ocean, 3, false, null, null,null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 38, null, Hill, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 39, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 40, null, Hill, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 41, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 42, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 43, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 44, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 45, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 46, null, GrassLand, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 47, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 48, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 49, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 50, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 51, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 52, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 53, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 54, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 55, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 56, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 57, null, Tundra, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 58, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 59, null, Tundra, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 60, null, Tundra, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 61, null, Hill, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 62, null, Hill, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 63, null, GrassLand, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 64, null, GrassLand, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 65, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 66, null, GrassLand, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 67, null, GrassLand, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 68, null, GrassLand, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 69, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 70, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 71, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 72, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 73, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 74, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 75, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 76, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 77, null, Ocean, 3, false, null, null,null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 78, null, Ocean, 3, false, null, null,null);
+        map.setTileBoard(tile);
+        tile = new Tile(5, 79, null, Ocean, 3, false, null, null,null);
+        map.setTileBoard(tile);
+
         //7th row
-        for (int i = 0; i < 80; i++){
-            if (i > 1 && i < 22) {
-                if (i == 2) {
-                    Tile tile = new Tile(6, 2, null, GrassLand, 3, false, null, null, Jungle);
-                    map.setTileBoard(tile);
-                    tile = new Tile(6, 3, null, GrassLand, 3, false, null, null, Jungle);
-                    map.setTileBoard(tile);
-                    tile = new Tile(6, 4, null, GrassLand, 3, false, null, null, Jungle);
-                    map.setTileBoard(tile);
-                    tile = new Tile(6, 5, null, GrassLand, 3, false, null, null, Jungle);
-                    map.setTileBoard(tile);
-                    tile = new Tile(6, 6, null, Tundra, 3, false, null, null, FloodPlain);
-                    map.setTileBoard(tile);
-                    tile = new Tile(6, 7, null, Mountain, 3, false, null, null, null);
-                    map.setTileBoard(tile);
-                    tile = new Tile(6, 8, null, GrassLand, 3, false, null, null, FloodPlain);
-                    map.setTileBoard(tile);
-                    i = 8;
-                    continue;
-                }
-                Tile tile = new Tile(6, i, null, Snow, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                continue;
-            }
-            if (i == 32){
-                Tile tile = new Tile(6, 32, null, Hill, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-            }
-            if (i == 36){
-                Tile tile = new Tile(6, 36, null, Plain, 3, false, null, null, Marsh);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 37, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 38, null, GrassLand, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 39, null, GrassLand, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 40, null, GrassLand, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 41, null, Ocean, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 42, null, Ocean, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 43, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 44, null, Ocean, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 45, null, Plain, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 46, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 47, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 48, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 49, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 50, null, Plain, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 51, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 52, null, Tundra, 3, false, null, null, Marsh);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 53, null, Tundra, 3, false, null, null, Marsh);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 54, null, Tundra, 3, false, null, null, Marsh);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 55, null, Tundra, 3, false, null, null, Marsh);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 56, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 57, null, Tundra, 3, false, null, null, Marsh);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 58, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 59, null, Tundra, 3, false, null, null, Marsh);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 60, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 61, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 62, null, Tundra, 3, false, null, null, Marsh);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 63, null, Tundra, 3, false, null, null, Marsh);
-                map.setTileBoard(tile);
-                i = 63;
-                continue;
-            }
-            if (i > 63 && i < 71){
-                Tile tile = new Tile(6, i, null, Snow, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                continue;
-            }
-            if (i == 71){
-                Tile tile = new Tile(6, 71, null, Tundra, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 72, null, Tundra, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 73, null, Tundra, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 74, null, Tundra, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(6, 75, null, Tundra, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                i = 75;
-                continue;
-            }
-            Tile tile = new Tile(6, i, null, Ocean, 3, false, null, null, Ice);
-            map.setTileBoard(tile);
-        }
+
+        tile = new Tile(6, 0, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 1, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 2, null, GrassLand, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 3, null, GrassLand, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 4, null, GrassLand, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 5, null, GrassLand, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 6, null, Tundra, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 7, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 8, null, GrassLand, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 9, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 10, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 11, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 12, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 13, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 14, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 15, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 16, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 17, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 18, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 19, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 20, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 21, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 22, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 23, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 24, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 25, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 26, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 27, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 28, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 29, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 30, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 31, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 32, null, Hill, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 33, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 34, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 35, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 36, null, Plain, 3, false, null, null, Marsh);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 37, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 38, null, GrassLand, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 39, null, GrassLand, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 40, null, GrassLand, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 41, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 42, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 43, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 44, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 45, null, Plain, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 46, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 47, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 48, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 49, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 50, null, Plain, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 51, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 52, null, Tundra, 3, false, null, null, Marsh);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 53, null, Tundra, 3, false, null, null, Marsh);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 54, null, Tundra, 3, false, null, null, Marsh);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 55, null, Tundra, 3, false, null, null, Marsh);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 56, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 57, null, Tundra, 3, false, null, null, Marsh);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 58, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 59, null, Tundra, 3, false, null, null, Marsh);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 60, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 61, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 62, null, Tundra, 3, false, null, null, Marsh);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 63, null, Tundra, 3, false, null, null, Marsh);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 64, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 65, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 66, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 67, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 68, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 69, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 70, null, Snow, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 71, null, Tundra, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 72, null, Tundra, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 73, null, Tundra, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 74, null, Tundra, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 75, null, Tundra, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 76, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 77, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 78, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+        tile = new Tile(6, 79, null, Ocean, 3, false, null, null, Ice);
+        map.setTileBoard(tile);
+
         //8th row
-        for (int i = 0; i < 80; i++){
-            if (i == 2){
-                Tile tile = new Tile(7, 2, null, GrassLand, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 3, null, GrassLand, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 4, null, Hill, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 5, null, Hill, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 6, null, GrassLand, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 7, null, Tundra, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 8, null, Hill, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 9, null, Hill, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 10, null, Hill, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                i = 10;
-                continue;
-            }
-            if (i == 32){
-                Tile tile = new Tile(7, 32, null, Hill, 3, false, null, null,null );
-                map.setTileBoard(tile);
-                tile = new Tile(7, 33, null, Hill, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                i = 33;
-                continue;
-            }
-            if (i == 36){
-                Tile tile = new Tile(7, 36, null, Hill, 3, false, null, null, FloodPlain );
-                map.setTileBoard(tile);
-                tile = new Tile(7, 37, null, Hill, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 38, null, Ocean, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 39, null, Plain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                i = 39;
-                continue;
-            }
-            if (i == 42){
-                Tile tile = new Tile(7, 42, null, Plain, 3, false, null, null, Marsh);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 43, null, GrassLand, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 44, null, GrassLand, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 45, null, Plain, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 46, null, GrassLand, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 47, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 48, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 49, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 50, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 51, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 52, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 53, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 54, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 55, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 56, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 57, null, Hill, 3, false, null, null, Marsh);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 58, null, GrassLand, 3, false, null, null, Marsh);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 59, null, Hill, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 60, null, Hill, 3, false, null, null, Marsh);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 61, null, Hill, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 62, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 63, null, Plain, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 64, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 65, null, Plain, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 66, null, Plain, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 67, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 68, null, Plain, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 69, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 70, null, Plain, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 71, null, Tundra, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 72, null, Tundra, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 73, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 74, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 75, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(7, 76, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                i = 76;
-                continue;
-            }
-            Tile tile = new Tile(7, i, null, Ocean, 3, false, null, null, null);
-            map.setTileBoard(tile);
-        }
+
+        tile = new Tile(7, 0, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 1, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 2, null, GrassLand, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 3, null, GrassLand, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 4, null, Hill, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 5, null, Hill, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 6, null, GrassLand, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 7, null, Tundra, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 8, null, Hill, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 9, null, Hill, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 10, null, Hill, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 11, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 12, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 13, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 14, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 15, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 16, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 17, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 18, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 19, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 20, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 21, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 22, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 23, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 24, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 25, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 26, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 27, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 28, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 29, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 30, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 31, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 32, null, Hill, 3, false, null, null,null );
+        map.setTileBoard(tile);
+        tile = new Tile(7, 33, null, Hill, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 34, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 35, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 36, null, Hill, 3, false, null, null, FloodPlain );
+        map.setTileBoard(tile);
+        tile = new Tile(7, 37, null, Hill, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 38, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 39, null, Plain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 40, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 41, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 42, null, Plain, 3, false, null, null, Marsh);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 43, null, GrassLand, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 44, null, GrassLand, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 45, null, Plain, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 46, null, GrassLand, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 47, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 48, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 49, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 50, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 51, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 52, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 53, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 54, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 55, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 56, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 57, null, Hill, 3, false, null, null, Marsh);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 58, null, GrassLand, 3, false, null, null, Marsh);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 59, null, Hill, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 60, null, Hill, 3, false, null, null, Marsh);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 61, null, Hill, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 62, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 63, null, Plain, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 64, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 65, null, Plain, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 66, null, Plain, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 67, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 68, null, Plain, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 69, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 70, null, Plain, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 71, null, Tundra, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 72, null, Tundra, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 73, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 74, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 75, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 76, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 77, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 78, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(7, 79, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+
         //9th row
-        for (int i = 0; i < 80; i++){
-            if (i == 2){
-                Tile tile = new Tile(8, 2, null, Hill, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 3, null, Hill, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                i = 3;
-                continue;
-            }
-            if (i == 8){
-                Tile tile = new Tile(8, 8, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 9, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 10, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 11, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 12, null, GrassLand, 3, false, null, null, Marsh);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 13, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 14, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 15, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                i = 15;
-                continue;
-            }
-            if (i == 20){
-                Tile tile = new Tile(8, 20, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 21, null, GrassLand, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                i = 21;
-                continue;
-            }
-            if (i == 33){
-                Tile tile = new Tile(8, 33, null, Hill, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 34, null, Hill, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                i = 34;
-                continue;
-            }
-            if (i == 38){
-                Tile tile = new Tile(8, 38, null, Hill, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                continue;
-            }
-            if (i == 43){
-                Tile tile = new Tile(8, 43, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 44, null, Plain, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 45, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 46, null, Plain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 47, null, Plain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 48, null, Hill, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 49, null, GrassLand, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 50, null, GrassLand, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 51, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 52, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 53, null, Hill, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 54, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 55, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 56, null, Plain, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 57, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 58, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 59, null, Hill, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 60, null, Plain, 3, false, null, null, Marsh);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 61, null, Ocean, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 62, null, Plain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 63, null, Plain, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 64, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 65, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 66, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 67, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 68, null, Plain, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 69, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 70, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 71, null, Ocean, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 72, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 73, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(8, 74, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                i = 74;
-                continue;
-            }
-            Tile tile = new Tile(8, i, null, Ocean, 3, false, null, null, null);
-            map.setTileBoard(tile);
-        }
+
+        tile = new Tile(8, 0, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 1, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 2, null, Hill, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 3, null, Hill, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 4, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 5, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 6, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 7, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 8, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 9, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 10, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 11, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 12, null, GrassLand, 3, false, null, null, Marsh);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 13, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 14, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 15, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 16, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 17, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 18, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 19, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 20, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 21, null, GrassLand, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 22, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 23, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 24, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 25, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 26, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 27, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 28, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 29, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 30, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 31, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 32, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 33, null, Hill, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 34, null, Hill, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 35, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 36, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 37, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 38, null, Hill, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 39, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 40, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 41, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 42, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 43, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 44, null, Plain, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 45, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 46, null, Plain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 47, null, Plain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 48, null, Hill, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 49, null, GrassLand, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 50, null, GrassLand, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 51, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 52, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 53, null, Hill, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 54, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 55, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 56, null, Plain, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 57, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 58, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 59, null, Hill, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 60, null, Plain, 3, false, null, null, Marsh);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 61, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 62, null, Plain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 63, null, Plain, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 64, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 65, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 66, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 67, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 68, null, Plain, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 69, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 70, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 71, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 72, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 73, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 74, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 75, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 76, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 77, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 78, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(8, 79, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+
         //10th row
-        for (int i = 0; i < 80; i++){
-            if (i == 2){
-                Tile tile = new Tile(9, 2, null, Hill, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                continue;
-            }
-            if (i > 8 && i < 17){
-                Tile tile = new Tile(9, i, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                continue;
-            }
-            if (i > 19 && i < 23){
-                Tile tile = new Tile(9, i, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                continue;
-            }
-            if (i == 31){
-                Tile tile = new Tile(9, 31, null, Plain, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 32, null, Plain, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 33, null, Tundra, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 34, null, Plain, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 35, null, Plain, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                i = 35;
-                continue;
-            }
-            if (i == 40){
-                Tile tile = new Tile(9, 40, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                continue;
-            }
-            if (i == 44){
-                Tile tile = new Tile(9, 44, null, Plain, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 45, null, Plain, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 46, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 47, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 48, null, Plain, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 49, null, GrassLand, 3, false, null, null, Marsh);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 50, null, GrassLand, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 51, null, Plain, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 52, null, Plain, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 53, null, Plain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 54, null, Plain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 55, null, Plain, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 56, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 57, null, GrassLand, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 58, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 59, null, Plain, 3, false, null, null, Marsh);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 60, null, GrassLand, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 61, null, Hill, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 62, null, Plain, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 63, null, Hill, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 63, null, Hill, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 64, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 65, null, Hill, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 66, null, Hill, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 67, null, Plain, 3, false, null, null, Oasis);
-                map.setTileBoard(tile);
-                tile = new Tile(9, 68, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                i = 68;
-                continue;
-            }
-            if (i == 74){
-                Tile tile = new Tile(9, 74, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                continue;
-            }
-            Tile tile = new Tile(9, i, null, Ocean, 3, false, null, null, null);
-            map.setTileBoard(tile);
-        }
+
+        tile = new Tile(9, 0, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 1, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 2, null, Hill, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 3, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 4, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 5, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 6, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 7, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 8, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 9, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 10, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 11, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 12, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 13, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 14, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 15, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 16, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 17, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 18, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 19, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 20, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 21, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 22, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 23, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 24, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 25, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 26, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 27, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 28, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 29, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 30, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 31, null, Plain, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 32, null, Plain, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 33, null, Tundra, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 34, null, Plain, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 35, null, Plain, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 36, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 37, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 38, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 39, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 40, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 41, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 42, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 43, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 44, null, Plain, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 45, null, Plain, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 46, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 47, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 48, null, Plain, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 49, null, GrassLand, 3, false, null, null, Marsh);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 50, null, GrassLand, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 51, null, Plain, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 52, null, Plain, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 53, null, Plain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 54, null, Plain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 55, null, Plain, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 56, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 57, null, GrassLand, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 58, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 59, null, Plain, 3, false, null, null, Marsh);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 60, null, GrassLand, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 61, null, Hill, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 62, null, Plain, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 63, null, Hill, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 63, null, Hill, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 64, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 65, null, Hill, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 66, null, Hill, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 67, null, Plain, 3, false, null, null, Oasis);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 68, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 69, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 70, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 71, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 72, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 73, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 74, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 75, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 76, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 77, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 78, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(9, 79, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+
         //11th row
-        for (int i = 0; i < 80; i++){
-            if (i == 8){
-                Tile tile = new Tile(10, 8, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                continue;
-            }
-            if (i > 8 && i < 22){
-                if (i == 18){
-                    Tile tile = new Tile(10, i, null, Ocean, 3, false, null, null, null);
-                    map.setTileBoard(tile);
-                    continue;
-                }
-                Tile tile = new Tile(10, i, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                continue;
-            }
-            if (i == 30){
-                Tile tile = new Tile(10, 30, null, Hill, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 31, null, Hill, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 32, null, Tundra, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 33, null, Plain, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 34, null, Plain, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 35, null, Plain, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                i = 35;
-                continue;
-            }
-            if (i > 38 && i < 43){
-                Tile tile = new Tile(10, i, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                continue;
-            }
-            if (i == 43){
-                Tile tile = new Tile(10, 43, null, Plain, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 44, null, Plain, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 45, null, GrassLand, 3, false, null, null, Marsh);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 46, null, GrassLand, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 47, null, Plain, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 48, null, Hill, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 49, null, Hill, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 50, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 51, null, Hill, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 52, null, Plain, 3, false, null, null, Marsh);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 53, null, Plain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 54, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 55, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 56, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 57, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 58, null, Plain, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 59, null, Plain, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 60, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 61, null, Hill, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 62, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 63, null, Hill, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 64, null, Hill, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 65, null, Plain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 66, null, Hill, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 67, null, Plain, 3, false, null, null, Oasis);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 68, null, Plain, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(10, 69, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                i = 69;
-                continue;
-            }
-            if (i == 73){
-                Tile tile = new Tile(10, 73, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                continue;
-            }
-            Tile tile = new Tile(10, i, null, Ocean, 3, false, null, null, null);
-            map.setTileBoard(tile);
-        }
+
+        tile = new Tile(10, 0, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 1, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 2, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 3, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 4, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 5, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 6, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 7, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 8, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 9, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 10, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 11, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 12, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 13, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 14, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 15, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 16, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 17, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 18, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 19, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 20, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 21, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 22, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 23, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 24, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 25, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 26, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 27, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 28, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 29, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 30, null, Hill, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 31, null, Hill, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 32, null, Tundra, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 33, null, Plain, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 34, null, Plain, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 35, null, Plain, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 36, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 37, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 38, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 39, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 40, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 41, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 42, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 43, null, Plain, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 44, null, Plain, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 45, null, GrassLand, 3, false, null, null, Marsh);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 46, null, GrassLand, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 47, null, Plain, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 48, null, Hill, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 49, null, Hill, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 50, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 51, null, Hill, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 52, null, Plain, 3, false, null, null, Marsh);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 53, null, Plain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 54, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 55, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 56, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 57, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 58, null, Plain, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 59, null, Plain, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 60, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 61, null, Hill, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 62, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 63, null, Hill, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 64, null, Hill, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 65, null, Plain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 66, null, Hill, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 67, null, Plain, 3, false, null, null, Oasis);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 68, null, Plain, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 69, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 70, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 71, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 72, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 73, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 74, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 75, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 76, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 77, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 78, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(10, 79, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+
         //12th row
-        for (int i = 0; i < 80; i++) {
-            if (i > 8 && i < 22) {
-                if (i == 14) {
-                    Tile tile = new Tile(11, i, null, Ocean, 3, false, null, null, null);
-                    map.setTileBoard(tile);
-                    continue;
-                }
-                Tile tile = new Tile(11, i, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                continue;
-            }
-            if (i == 22) {
-                Tile tile = new Tile(11, 22, null, Hill, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 23, null, Hill, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                i = 23;
-                continue;
-            }
-            if (i == 34) {
-                Tile tile = new Tile(11, 34, null, Hill, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 35, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 36, null, Plain, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 37, null, Ocean, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 38, null, Plain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 39, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 40, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 41, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 42, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 43, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 44, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 45, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 46, null, Plain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 47, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 48, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 49, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 50, null, Plain, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 51, null, GrassLand, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 51, null, GrassLand, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 52, null, Plain, 3, false, null, null, FloodPlain);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 53, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 54, null, Plain, 3, false, null, null, Oasis);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 55, null, Plain, 3, false, null, null, Oasis);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 56, null, Plain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 57, null, GrassLand, 3, false, null, null, Forest);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 58, null, Plain, 3, false, null, null, Oasis);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 59, null, Hill, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 60, null, Hill, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 61, null, Hill, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 62, null, Hill, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 63, null, Plain, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 64, null, Plain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 65, null, Plain, 3, false, null, null, Oasis);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 66, null, Plain, 3, false, null, null, Oasis);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 67, null, Hill, 3, false, null, null, Jungle);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 68, null, Plain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 69, null, Ocean, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 70, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 71, null, Ocean, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 72, null, Ocean, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 73, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                tile = new Tile(11, 74, null, Mountain, 3, false, null, null, null);
-                map.setTileBoard(tile);
-                i = 74;
-                continue;
-            }
-            Tile tile = new Tile(11, i, null, Ocean, 3, false, null, null, null);
-            map.setTileBoard(tile);
-        }
 
-
+        tile = new Tile(11, 0, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 1, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 2, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 3, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 4, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 5, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 6, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 7, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 8, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 9, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 10, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 11, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 12, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 13, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 8, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 15, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 16, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 17, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 18, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 19, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 20, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 21, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 22, null, Hill, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 23, null, Hill, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 24, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 25, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 26, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 27, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 28, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 29, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 30, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 31, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 32, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 33, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 34, null, Hill, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 35, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 36, null, Plain, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 37, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 38, null, Plain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 39, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 40, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 41, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 42, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 43, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 44, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 45, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 46, null, Plain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 47, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 48, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 49, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 50, null, Plain, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 51, null, GrassLand, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 51, null, GrassLand, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 52, null, Plain, 3, false, null, null, FloodPlain);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 53, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 54, null, Plain, 3, false, null, null, Oasis);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 55, null, Plain, 3, false, null, null, Oasis);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 56, null, Plain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 57, null, GrassLand, 3, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 58, null, Plain, 3, false, null, null, Oasis);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 59, null, Hill, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 60, null, Hill, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 61, null, Hill, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 62, null, Hill, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 63, null, Plain, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 64, null, Plain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 65, null, Plain, 3, false, null, null, Oasis);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 66, null, Plain, 3, false, null, null, Oasis);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 67, null, Hill, 3, false, null, null, Jungle);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 68, null, Plain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 69, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 70, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 71, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 72, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 73, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 74, null, Mountain, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 75, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 76, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 77, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 78, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(11, 79, null, Ocean, 3, false, null, null, null);
+        map.setTileBoard(tile);
 
         //13th row
-        Tile tile;
         // between asia and america
         tile = new Tile(12, 0, null, Ocean, 0, false, null, null, null);
         map.setTileBoard(tile);
@@ -2137,21 +3191,28 @@ public class MapMaker {
         map.setTileBoard(tile);
 
         //20th row
-        /*
-        Tile tile20_1 = new Tile(19, 0, null, Ocean, 0, false, null, null, null);
-        Tile tile20_2 = new Tile(19, 1, null, Ocean, 0, false, null, null, null);
-        Tile tile20_3 = new Tile(19, 2, null, Ocean, 0, false, null, null, null);
-        Tile tile20_4 = new Tile(19, 3, null, Ocean, 0, false, null, null, null);
-        Tile tile20_5 = new Tile(19, 4, null, Ocean, 0, false, null, null, null);
-        Tile tile20_6 = new Tile(19, 5, null, Ocean, 0, false, null, null, null);
-        Tile tile20_7 = new Tile(19, 6, null, Ocean, 0, false, null, null, null);
-        Tile tile20_8 = new Tile(19, 7, null, Ocean, 0, false, null, null, null);
-        */
 
-        for (int j = 0; j < 8; j++) {
+        tile = new Tile(19, 0, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 1, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 2, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 3, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 4, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 5, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 6, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 7, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 0; j < 8; j++) {
             tile = new Tile(19, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         tile = new Tile(19, 8, null, Mountain, 0, false, null, null, null);
         map.setTileBoard(tile);
@@ -2174,27 +3235,41 @@ public class MapMaker {
         tile = new Tile(19, 17, null, Mountain, 0, false, null, null, null);
         map.setTileBoard(tile);
 
-        /*
-        Tile tile20_19 = new Tile(19, 18, null, Ocean, 0, false, null, null, null);
-        Tile tile20_20 = new Tile(19, 19, null, Ocean, 0, false, null, null, null);
-        Tile tile20_21 = new Tile(19, 20, null, Ocean, 0, false, null, null, null);
-        Tile tile20_22 = new Tile(19, 21, null, Ocean, 0, false, null, null, null);
-        Tile tile20_23 = new Tile(19, 22, null, Ocean, 0, false, null, null, null);
-        Tile tile20_24 = new Tile(19, 23, null, Ocean, 0, false, null, null, null);
-        Tile tile20_25 = new Tile(19, 24, null, Ocean, 0, false, null, null, null);
-        Tile tile20_26 = new Tile(19, 25, null, Ocean, 0, false, null, null, null);
-        Tile tile20_27 = new Tile(19, 26, null, Ocean, 0, false, null, null, null);
-        Tile tile20_28 = new Tile(19, 27, null, Ocean, 0, false, null, null, null);
-        Tile tile20_29 = new Tile(19, 28, null, Ocean, 0, false, null, null, null);
-        Tile tile20_30 = new Tile(19, 29, null, Ocean, 0, false, null, null, null);
-        Tile tile20_31 = new Tile(19, 30, null, Ocean, 0, false, null, null, null);
-        Tile tile20_32 = new Tile(19, 31, null, Ocean, 0, false, null, null, null);
-        */
 
-        for (int j = 18; j < 32; j++) {
+        tile = new Tile(19, 18, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 19, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 20, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 21, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 22, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 23, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 24, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 25, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 26, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 27, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 28, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 29, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 30, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 31, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+
+        /*for (int j = 18; j < 32; j++) {
             tile = new Tile(19, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         tile = new Tile(19, 32, null, Plain, 0, false, null, null, null);
         map.setTileBoard(tile);
@@ -2232,23 +3307,34 @@ public class MapMaker {
         map.setTileBoard(tile);
         tile = new Tile(19, 49, null, Mountain, 0, false, null, null, null);
         map.setTileBoard(tile);
-        /*
-        Tile tile20_51 = new Tile(19, 50, null, Desert, 0, false, null, null, null);
-        Tile tile20_52 = new Tile(19, 51, null, Desert, 0, false, null, null, null);
-        Tile tile20_53 = new Tile(19, 52, null, Desert, 0, false, null, null, null);
-        Tile tile20_54 = new Tile(19, 53, null, Desert, 0, false, null, null, null);
-        Tile tile20_55 = new Tile(19, 54, null, Desert, 0, false, null, null, null);
-        Tile tile20_56 = new Tile(19, 55, null, Desert, 0, false, null, null, null);
-        Tile tile20_57 = new Tile(19, 56, null, Desert, 0, false, null, null, null);
-        Tile tile20_58 = new Tile(19, 57, null, Desert, 0, false, null, null, null);
-        Tile tile20_59 = new Tile(19, 58, null, Desert, 0, false, null, null, null);
-        Tile tile20_60 = new Tile(19, 59, null, Desert, 0, false, null, null, null);
-        Tile tile20_61 = new Tile(19, 60, null, Desert, 0, false, null, null, null);
-        */
-        for (int j = 50; j < 61; j++) {
+
+        tile = new Tile(19, 50, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 51, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 52, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 53, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 54, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 55, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 56, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 57, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 58, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 59, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 60, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 50; j < 61; j++) {
             tile = new Tile(19, j, null, Desert, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         tile = new Tile(19, 61, null, Mountain, 0, false, null, null, null);
         map.setTileBoard(tile);
@@ -2272,36 +3358,52 @@ public class MapMaker {
         map.setTileBoard(tile);
         tile = new Tile(19, 71, null, Plain, 0, false, null, null, null);
         map.setTileBoard(tile);
-        /*
-        Tile tile20_73 = new Tile(19, 72, null, Ocean, 0, false, null, null, null);
-        Tile tile20_74 = new Tile(19, 73, null, Ocean, 0, false, null, null, null);
-        Tile tile20_75 = new Tile(19, 74, null, Ocean, 0, false, null, null, null);
-        Tile tile20_76 = new Tile(19, 75, null, Ocean, 0, false, null, null, null);
-        Tile tile20_77 = new Tile(19, 76, null, Ocean, 0, false, null, null, null);
-        Tile tile20_78 = new Tile(19, 77, null, Ocean, 0, false, null, null, null);
-        Tile tile20_79 = new Tile(19, 78, null, Ocean, 0, false, null, null, null);
-        Tile tile20_80 = new Tile(19, 79, null, Ocean, 0, false, null, null, null);
-        */
-        for (int j = 72; j < 80; j++) {
+
+        tile = new Tile(19, 72, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 73, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 74, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 75, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 76, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 77, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 78, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(19, 79, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 72; j < 80; j++) {
             tile = new Tile(19, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         //21th row
-        /*
-        Tile tile21_1 = new Tile(20, 0, null, Ocean, 0, false, null, null, null);
-        Tile tile21_2 = new Tile(20, 1, null, Ocean, 0, false, null, null, null);
-        Tile tile21_3 = new Tile(20, 2, null, Ocean, 0, false, null, null, null);
-        Tile tile21_4 = new Tile(20, 3, null, Ocean, 0, false, null, null, null);
-        Tile tile21_5 = new Tile(20, 4, null, Ocean, 0, false, null, null, null);
-        Tile tile21_6 = new Tile(20, 5, null, Ocean, 0, false, null, null, null);
-        Tile tile21_7 = new Tile(20, 6, null, Ocean, 0, false, null, null, null);
-        Tile tile21_8 = new Tile(20, 7, null, Ocean, 0, false, null, null, null);
-        */
-        for (int j = 0; j < 8; j++) {
+
+        tile = new Tile(20, 0, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 1, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 2, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 3, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 4, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 5, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 6, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 7, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 0; j < 8; j++) {
             tile = new Tile(20, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         tile = new Tile(20, 8, null, Plain, 0, false, null, null, null);
         map.setTileBoard(tile);
@@ -2323,26 +3425,40 @@ public class MapMaker {
         map.setTileBoard(tile);
         tile = new Tile(20, 17, null, GrassLand, 0, false, null, null, Forest);
         map.setTileBoard(tile);
-        /*
-        Tile tile21_19 = new Tile(20, 18, null, Ocean, 0, false, null, null, null);
-        Tile tile21_20 = new Tile(20, 19, null, Ocean, 0, false, null, null, null);
-        Tile tile21_21 = new Tile(20, 20, null, Ocean, 0, false, null, null, null);
-        Tile tile21_22 = new Tile(20, 21, null, Ocean, 0, false, null, null, null);
-        Tile tile21_23 = new Tile(20, 22, null, Ocean, 0, false, null, null, null);
-        Tile tile21_24 = new Tile(20, 23, null, Ocean, 0, false, null, null, null);
-        Tile tile21_25 = new Tile(20, 24, null, Ocean, 0, false, null, null, null);
-        Tile tile21_26 = new Tile(20, 25, null, Ocean, 0, false, null, null, null);
-        Tile tile21_27 = new Tile(20, 26, null, Ocean, 0, false, null, null, null);
-        Tile tile21_28 = new Tile(20, 27, null, Ocean, 0, false, null, null, null);
-        Tile tile21_29 = new Tile(20, 28, null, Ocean, 0, false, null, null, null);
-        Tile tile21_30 = new Tile(20, 29, null, Ocean, 0, false, null, null, null);
-        Tile tile21_31 = new Tile(20, 30, null, Ocean, 0, false, null, null, null);
-        Tile tile21_32 = new Tile(20, 31, null, Ocean, 0, false, null, null, null);
-        */
-        for (int j = 18; j < 32; j++) {
+
+        tile = new Tile(20, 18, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 19, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 20, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 21, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 22, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 23, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 24, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 25, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 26, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 27, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 28, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 29, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 30, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 31, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 18; j < 32; j++) {
             tile = new Tile(20, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         tile = new Tile(20, 32, null, GrassLand, 0, false, null, null, Forest);
         map.setTileBoard(tile);
@@ -2350,76 +3466,106 @@ public class MapMaker {
         map.setTileBoard(tile);
         tile = new Tile(20, 34, null, Mountain, 0, false, null, null, null);
         map.setTileBoard(tile);
-        /*
-        Tile tile21_36 = new Tile(20, 35, null, Ocean, 0, false, null, null, null);
-        Tile tile21_37 = new Tile(20, 36, null, Ocean, 0, false, null, null, null);
-        Tile tile21_38 = new Tile(20, 37, null, Ocean, 0, false, null, null, null);
-        Tile tile21_39 = new Tile(20, 38, null, Ocean, 0, false, null, null, null);
-        Tile tile21_40 = new Tile(20, 39, null, Ocean, 0, false, null, null, null);
-        */
-        for (int j = 35; j < 40; j++) {
+
+        tile = new Tile(20, 35, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 36, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 37, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 38, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 39, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 35; j < 40; j++) {
             tile = new Tile (20, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         tile = new Tile(20, 40, null, Mountain, 0, false, null, null, null);
         map.setTileBoard(tile);
-        /*
-        Tile tile21_42 = new Tile(20, 41, null, Ocean, 0, false, null, null, null);
-        Tile tile21_43 = new Tile(20, 42, null, Ocean, 0, false, null, null, null);
-        Tile tile21_44 = new Tile(20, 43, null, Ocean, 0, false, null, null, null);
-        Tile tile21_45 = new Tile(20, 44, null, Ocean, 0, false, null, null, null);
-        Tile tile21_46 = new Tile(20, 45, null, Ocean, 0, false, null, null, null);
-        */
-        for (int j = 41; j < 46; j++) {
+
+        tile = new Tile(20, 41, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 42, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 43, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 44, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 45, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 41; j < 46; j++) {
             tile = new Tile(20, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
-        /*
-        Tile tile21_47 = new Tile(20, 46, null, Desert, 0, false, null, null, null);
-        Tile tile21_48 = new Tile(20, 47, null, Desert, 0, false, null, null, null);
-        Tile tile21_49 = new Tile(20, 48, null, Desert, 0, false, null, null, null);
-        Tile tile21_50 = new Tile(20, 49, null, Desert, 0, false, null, null, null);
-        */
-        for (int j = 46; j < 50; j++) {
+        }*/
+
+        tile = new Tile(20, 46, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 47, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 48, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 49, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 46; j < 50; j++) {
             tile = new Tile (20, j, null, Desert, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
-        /*
-        Tile tile21_51 = new Tile(20, 50, null, Plain, 0, false, null, null, null);
-        Tile tile21_52 = new Tile(20, 51, null, Plain, 0, false, null, null, null);
-        Tile tile21_53 = new Tile(20, 52, null, Plain, 0, false, null, null, null);
-        */
-        for  (int j = 50; j < 53; j++) {
+        }*/
+
+        tile = new Tile(20, 50, null, Plain, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 51, null, Plain, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 52, null, Plain, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for  (int j = 50; j < 53; j++) {
             tile = new Tile (20, j, null, Plain, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
-        /*
-        Tile tile21_54 = new Tile(20, 53, null, Mountain, 0, false, null, null, null);
-        Tile tile21_55 = new Tile(20, 54, null, Mountain, 0, false, null, null, null);
-        Tile tile21_56 = new Tile(20, 55, null, Mountain, 0, false, null, null, null);
-        Tile tile21_57 = new Tile(20, 56, null, Mountain, 0, false, null, null, null);
-        Tile tile21_58 = new Tile(20, 57, null, Mountain, 0, false, null, null, null);
-        Tile tile21_59 = new Tile(20, 58, null, Mountain, 0, false, null, null, null);
-        */
-        for (int j = 53; j < 59; j++) {
+
+        tile = new Tile(20, 53, null, Mountain, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 54, null, Mountain, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 55, null, Mountain, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 56, null, Mountain, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 57, null, Mountain, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 58, null, Mountain, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 53; j < 59; j++) {
             tile = new Tile(20, j, null, Mountain, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
-        /*
-        Tile tile21_60 = new Tile(20, 59, null, GrassLand, 0, false, null, null, Forest);
-        Tile tile21_61 = new Tile(20, 60, null, GrassLand, 0, false, null, null, Forest);
-        Tile tile21_62 = new Tile(20, 61, null, GrassLand, 0, false, null, null, Forest);
-        Tile tile21_63 = new Tile(20, 62, null, GrassLand, 0, false, null, null, Forest);
-        Tile tile21_64 = new Tile(20, 63, null, GrassLand, 0, false, null, null, Forest);
-        Tile tile21_65 = new Tile(20, 64, null, GrassLand, 0, false, null, null, Forest);
-        Tile tile21_66 = new Tile(20, 65, null, GrassLand, 0, false, null, null, Forest);
-        */
-        for (int j = 59; j < 66; j++) {
+        }*/
+
+        tile = new Tile(20, 59, null, GrassLand, 0, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 60, null, GrassLand, 0, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 61, null, GrassLand, 0, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 62, null, GrassLand, 0, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 63, null, GrassLand, 0, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 64, null, GrassLand, 0, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 65, null, GrassLand, 0, false, null, null, Forest);
+        map.setTileBoard(tile);
+
+        /*for (int j = 59; j < 66; j++) {
             tile = new Tile(20, j, null, GrassLand, 0, false, null, null, Forest);
             map.setTileBoard(tile);
-        }
+        }*/
 
         tile = new Tile(20, 66, null, Ocean, 0, false, null, null, null);
         map.setTileBoard(tile);
@@ -2429,41 +3575,60 @@ public class MapMaker {
         map.setTileBoard(tile);
         tile = new Tile(20, 69, null, Mountain, 0, false, null, null, null);
         map.setTileBoard(tile);
-        /*
-        Tile tile21_71 = new Tile(20, 70, null, Ocean, 0, false, null, null, null);
-        Tile tile21_72 = new Tile(20, 71, null, Ocean, 0, false, null, null, null);
-        Tile tile21_73 = new Tile(20, 72, null, Ocean, 0, false, null, null, null);
-        Tile tile21_74 = new Tile(20, 73, null, Ocean, 0, false, null, null, null);
-        Tile tile21_75 = new Tile(20, 74, null, Ocean, 0, false, null, null, null);
-        Tile tile21_76 = new Tile(20, 75, null, Ocean, 0, false, null, null, null);
-        Tile tile21_77 = new Tile(20, 76, null, Ocean, 0, false, null, null, null);
-        Tile tile21_78 = new Tile(20, 77, null, Ocean, 0, false, null, null, null);
-        Tile tile21_79 = new Tile(20, 78, null, Ocean, 0, false, null, null, null);
-        Tile tile21_80 = new Tile(20, 79, null, Ocean, 0, false, null, null, null);
-        */
-        for (int j = 70; j < 80; j++) {
+
+        tile = new Tile(20, 70, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 71, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 72, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 73, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 74, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 75, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 76, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 77, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 78, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(20, 79, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 70; j < 80; j++) {
             tile = new Tile(20, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
 
 
         //22th row
-        /*
-        Tile tile22_1 = new Tile(21, 0, null, Ocean, 0, false, null, null, null);
-        Tile tile22_2 = new Tile(21, 1, null, Ocean, 0, false, null, null, null);
-        Tile tile22_3 = new Tile(21, 2, null, Ocean, 0, false, null, null, null);
-        Tile tile22_4 = new Tile(21, 3, null, Ocean, 0, false, null, null, null);
-        Tile tile22_5 = new Tile(21, 4, null, Ocean, 0, false, null, null, null);
-        Tile tile22_6 = new Tile(21, 5, null, Ocean, 0, false, null, null, null);
-        Tile tile22_7 = new Tile(21, 6, null, Ocean, 0, false, null, null, null);
-        Tile tile22_8 = new Tile(21, 7, null, Ocean, 0, false, null, null, null);
-        Tile tile22_9 = new Tile(21, 8, null, Ocean, 0, false, null, null, null);
-        */
-        for (int j = 0; j < 9; j++) {
+
+        tile = new Tile(21, 0, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 1, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 2, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 3, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 4, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 5, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 6, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 7, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 8, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 0; j < 9; j++) {
             tile = new Tile (21, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         tile = new Tile(21, 9, null, Mountain, 0, false, null, null, null);
         map.setTileBoard(tile);
@@ -2487,28 +3652,44 @@ public class MapMaker {
         map.setTileBoard(tile);
         tile = new Tile(21, 19, null, Ocean, 0, false, null, null, null);
         map.setTileBoard(tile);
-        /*
-        Tile tile22_21 = new Tile(21, 20, null, Ocean, 0, false, null, null, null);
-        Tile tile22_22 = new Tile(21, 21, null, Ocean, 0, false, null, null, null);
-        Tile tile22_23 = new Tile(21, 22, null, Ocean, 0, false, null, null, null);
-        Tile tile22_24 = new Tile(21, 23, null, Ocean, 0, false, null, null, null);
-        Tile tile22_25 = new Tile(21, 24, null, Ocean, 0, false, null, null, null);
-        Tile tile22_26 = new Tile(21, 25, null, Ocean, 0, false, null, null, null);
-        Tile tile22_27 = new Tile(21, 26, null, Ocean, 0, false, null, null, null);
-        Tile tile22_28 = new Tile(21, 27, null, Ocean, 0, false, null, null, null);
-        Tile tile22_29 = new Tile(21, 28, null, Ocean, 0, false, null, null, null);
-        Tile tile22_30 = new Tile(21, 29, null, Ocean, 0, false, null, null, null);
-        Tile tile22_31 = new Tile(21, 30, null, Ocean, 0, false, null, null, null);
-        Tile tile22_32 = new Tile(21, 31, null, Ocean, 0, false, null, null, null);
-        Tile tile22_33 = new Tile(21, 32, null, Ocean, 0, false, null, null, null);
-        Tile tile22_34 = new Tile(21, 33, null, Ocean, 0, false, null, null, null);
-        Tile tile22_35 = new Tile(21, 34, null, Ocean, 0, false, null, null, null);
-        Tile tile22_36 = new Tile(21, 35, null, Ocean, 0, false, null, null, null);
-        */
-        for (int j = 20; j < 36; j++) {
+
+        tile = new Tile(21, 20, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 21, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 22, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 23, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 24, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 25, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 26, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 27, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 28, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 29, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 30, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 31, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 32, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 33, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 34, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 35, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 20; j < 36; j++) {
             tile = new Tile(21, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         tile = new Tile(21, 36, null, GrassLand, 0, false, null, null, Forest);
         map.setTileBoard(tile);
@@ -2516,19 +3697,26 @@ public class MapMaker {
         map.setTileBoard(tile);
         tile = new Tile(21, 38, null, Mountain, 0, false, null, null, null);
         map.setTileBoard(tile);
-        /*
-        Tile tile22_40 = new Tile(21, 39, null, Ocean, 0, false, null, null, null);
-        Tile tile22_41 = new Tile(21, 40, null, Ocean, 0, false, null, null, null);
-        Tile tile22_42 = new Tile(21, 41, null, Ocean, 0, false, null, null, null);
-        Tile tile22_43 = new Tile(21, 42, null, Ocean, 0, false, null, null, null);
-        Tile tile22_44 = new Tile(21, 43, null, Ocean, 0, false, null, null, null);
-        Tile tile22_45 = new Tile(21, 44, null, Ocean, 0, false, null, null, null);
-        Tile tile22_46 = new Tile(21, 45, null, Ocean, 0, false, null, null, null);
-        */
-        for (int j = 39; j < 46; j++) {
+
+        tile = new Tile(21, 39, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 40, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 41, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 42, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 43, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 44, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 45, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 39; j < 46; j++) {
             tile = new Tile(21, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         tile = new Tile(21, 46, null, Hill, 0, false, null, null, Forest);
         map.setTileBoard(tile);
@@ -2548,17 +3736,22 @@ public class MapMaker {
         map.setTileBoard(tile);
         tile = new Tile(21, 54, null, Mountain, 0, false, null, null, null);
         map.setTileBoard(tile);
-        /*
-        Tile tile22_56 = new Tile(21, 55, null, GrassLand, 0, false, null, null, Forest);
-        Tile tile22_57 = new Tile(21, 56, null, GrassLand, 0, false, null, null, Forest);
-        Tile tile22_58 = new Tile(21, 57, null, GrassLand, 0, false, null, null, Forest);
-        Tile tile22_59 = new Tile(21, 58, null, GrassLand, 0, false, null, null, Forest);
-        Tile tile22_60 = new Tile(21, 59, null, GrassLand, 0, false, null, null, Forest);
-        */
-        for (int j = 55; j < 60; j++) {
+
+        tile = new Tile(21, 55, null, GrassLand, 0, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 56, null, GrassLand, 0, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 57, null, GrassLand, 0, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 58, null, GrassLand, 0, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 59, null, GrassLand, 0, false, null, null, Forest);
+        map.setTileBoard(tile);
+
+        /*for (int j = 55; j < 60; j++) {
             tile = new Tile(21, j, null, GrassLand, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         tile = new Tile(21, 60, null, Mountain, 0, false, null, null, null);
         map.setTileBoard(tile);
@@ -2576,49 +3769,69 @@ public class MapMaker {
         map.setTileBoard(tile);
         tile = new Tile(21, 67, null, GrassLand, 0, false, null, null, Forest);
         map.setTileBoard(tile);
-        /*
-        Tile tile22_69 = new Tile(21, 68, null, Ocean, 0, false, null, null, null);
-        Tile tile22_70 = new Tile(21, 69, null, Ocean, 0, false, null, null, null);
-        Tile tile22_71 = new Tile(21, 70, null, Ocean, 0, false, null, null, null);
-        Tile tile22_72 = new Tile(21, 71, null, Ocean, 0, false, null, null, null);
-        */
-        for (int j = 68; j < 72; j++) {
+
+        tile = new Tile(21, 68, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 69, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 70, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 71, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 68; j < 72; j++) {
             tile = new Tile (21, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         tile = new Tile(21, 72, null, Hill, 0, false, null, null, Forest);
         map.setTileBoard(tile);
-        /*
-        Tile tile22_74 = new Tile(21, 73, null, Ocean, 0, false, null, null, null);
-        Tile tile22_75 = new Tile(21, 74, null, Ocean, 0, false, null, null, null);
-        Tile tile22_76 = new Tile(21, 75, null, Ocean, 0, false, null, null, null);
-        Tile tile22_77 = new Tile(21, 76, null, Ocean, 0, false, null, null, null);
-        Tile tile22_78 = new Tile(21, 77, null, Ocean, 0, false, null, null, null);
-        Tile tile22_79 = new Tile(21, 78, null, Ocean, 0, false, null, null, null);
-        Tile tile22_80 = new Tile(21, 79, null, Ocean, 0, false, null, null, null);
-        */
-        for (int j = 73; j < 80; j++) {
+
+        tile = new Tile(21, 73, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 74, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 75, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 76, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 77, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 78, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(21, 79, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 73; j < 80; j++) {
             tile = new Tile (21, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         //23th row
-        /*
-        Tile tile23_1 = new Tile(22, 0, null, Ocean, 0, false, null, null, null);
-        Tile tile23_2 = new Tile(22, 1, null, Ocean, 0, false, null, null, null);
-        Tile tile23_3 = new Tile(22, 2, null, Ocean, 0, false, null, null, null);
-        Tile tile23_4 = new Tile(22, 3, null, Ocean, 0, false, null, null, null);
-        Tile tile23_5 = new Tile(22, 4, null, Ocean, 0, false, null, null, null);
-        Tile tile23_6 = new Tile(22, 5, null, Ocean, 0, false, null, null, null);
-        Tile tile23_7 = new Tile(22, 6, null, Ocean, 0, false, null, null, null);
-        Tile tile23_8 = new Tile(22, 7, null, Ocean, 0, false, null, null, null);
-        Tile tile23_9 = new Tile(22, 8, null, Ocean, 0, false, null, null, null);
-        */
-        for (int j = 0; j < 9; j++) {
+
+        tile = new Tile(22, 0, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 1, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 2, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 3, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 4, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 5, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 6, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 7, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 8, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 0; j < 9; j++) {
             tile = new Tile (22, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         tile = new Tile(22, 9, null, Plain, 0, false, null, null, null);
         map.setTileBoard(tile);
@@ -2630,30 +3843,48 @@ public class MapMaker {
         map.setTileBoard(tile);
         tile = new Tile(22, 13, null, GrassLand, 0, false, null, null, Forest);
         map.setTileBoard(tile);
-        /*
-        Tile tile23_15 = new Tile(22, 14, null, Ocean, 0, false, null, null, null);
-        Tile tile23_16 = new Tile(22, 15, null, Ocean, 0, false, null, null, null);
-        Tile tile23_17 = new Tile(22, 16, null, Ocean, 0, false, null, null, null);
-        Tile tile23_18 = new Tile(22, 17, null, Ocean, 0, false, null, null, null);
-        Tile tile23_19 = new Tile(22, 18, null, Ocean, 0, false, null, null, null);
-        Tile tile23_20 = new Tile(22, 19, null, Ocean, 0, false, null, null, null);
-        Tile tile23_21 = new Tile(22, 20, null, Ocean, 0, false, null, null, null);
-        Tile tile23_22 = new Tile(22, 21, null, Ocean, 0, false, null, null, null);
-        Tile tile23_23 = new Tile(22, 22, null, Ocean, 0, false, null, null, null);
-        Tile tile23_24 = new Tile(22, 23, null, Ocean, 0, false, null, null, null);
-        Tile tile23_25 = new Tile(22, 24, null, Ocean, 0, false, null, null, null);
-        Tile tile23_26 = new Tile(22, 25, null, Ocean, 0, false, null, null, null);
-        Tile tile23_27 = new Tile(22, 26, null, Ocean, 0, false, null, null, null);
-        Tile tile23_28 = new Tile(22, 27, null, Ocean, 0, false, null, null, null);
-        Tile tile23_29 = new Tile(22, 28, null, Ocean, 0, false, null, null, null);
-        Tile tile23_30 = new Tile(22, 29, null, Ocean, 0, false, null, null, null);
-        Tile tile23_31 = new Tile(22, 30, null, Ocean, 0, false, null, null, null);
-        Tile tile23_32 = new Tile(22, 31, null, Ocean, 0, false, null, null, null);
-        */
-        for (int j = 14; j < 32; j++) {
+
+        tile = new Tile(22, 14, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 15, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 16, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 17, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 18, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 19, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 20, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 21, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 22, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 23, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 24, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 25, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 26, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 27, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 28, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 29, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 30, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 31, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 14; j < 32; j++) {
             tile = new Tile(22, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         tile = new Tile(22, 32, null, GrassLand, 0, false, null, null, Forest);
         map.setTileBoard(tile);
@@ -2727,43 +3958,64 @@ public class MapMaker {
         map.setTileBoard(tile);
         tile = new Tile(22, 67, null, Hill, 0, false, null, null, Forest);
         map.setTileBoard(tile);
-        /*
-        Tile tile23_69 = new Tile(22, 68, null, Ocean, 0, false, null, null, null);
-        Tile tile23_70 = new Tile(22, 69, null, Ocean, 0, false, null, null, null);
-        Tile tile23_71 = new Tile(22, 70, null, Ocean, 0, false, null, null, null);
-        Tile tile23_72 = new Tile(22, 71, null, Ocean, 0, false, null, null, null);
-        Tile tile23_73 = new Tile(22, 72, null, Ocean, 0, false, null, null, null);
-        Tile tile23_74 = new Tile(22, 73, null, Ocean, 0, false, null, null, null);
-        Tile tile23_75 = new Tile(22, 74, null, Ocean, 0, false, null, null, null);
-        Tile tile23_76 = new Tile(22, 75, null, Ocean, 0, false, null, null, null);
-        Tile tile23_77 = new Tile(22, 76, null, Ocean, 0, false, null, null, null);
-        Tile tile23_78 = new Tile(22, 77, null, Ocean, 0, false, null, null, null);
-        Tile tile23_79 = new Tile(22, 78, null, Ocean, 0, false, null, null, null);
-        Tile tile23_80 = new Tile(22, 79, null, Ocean, 0, false, null, null, null);
-        */
-        for (int j = 68; j < 80; j++) {
+
+        tile = new Tile(22, 68, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 69, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 70, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 71, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 72, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 73, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 74, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 75, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 76, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 77, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 78, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(22, 79, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 68; j < 80; j++) {
             tile = new Tile (22, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         //24th row
         tile = new Tile(23, 0, null, Hill, 0, false, null, null, Forest);
         map.setTileBoard(tile);
-        /*
-        Tile tile24_2 = new Tile(23, 1, null, Ocean, 0, false, null, null, null);
-        Tile tile24_3 = new Tile(23, 2, null, Ocean, 0, false, null, null, null);
-        Tile tile24_4 = new Tile(23, 3, null, Ocean, 0, false, null, null, null);
-        Tile tile24_5 = new Tile(23, 4, null, Ocean, 0, false, null, null, null);
-        Tile tile24_6 = new Tile(23, 5, null, Ocean, 0, false, null, null, null);
-        Tile tile24_7 = new Tile(23, 6, null, Ocean, 0, false, null, null, null);
-        Tile tile24_8 = new Tile(23, 7, null, Ocean, 0, false, null, null, null);
-        Tile tile24_9 = new Tile(23, 8, null, Ocean, 0, false, null, null, null);
-        Tile tile24_10 = new Tile(23, 9, null, Ocean, 0, false, null, null, null);
-        */
-        for (int j = 1; j < 10; j++) {
+
+        tile = new Tile(23, 1, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 2, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 3, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 4, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 5, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 6, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 7, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 8, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 9, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 1; j < 10; j++) {
             tile = new Tile (23, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         tile = new Tile(23, 10, null, Mountain, 0, false, null, null, null);
         map.setTileBoard(tile);
@@ -2787,38 +4039,55 @@ public class MapMaker {
         map.setTileBoard(tile);
         tile = new Tile(23, 20, null, Hill, 0, false, null, null, Forest);
         map.setTileBoard(tile);
-        /*
-        Tile tile24_22 = new Tile(23, 21, null, Ocean, 0, false, null, null, null);
-        Tile tile24_23 = new Tile(23, 22, null, Ocean, 0, false, null, null, null);
-        Tile tile24_24 = new Tile(23, 23, null, Ocean, 0, false, null, null, null);
-        Tile tile24_25 = new Tile(23, 24, null, Ocean, 0, false, null, null, null);
-        Tile tile24_26 = new Tile(23, 25, null, Ocean, 0, false, null, null, null);
-        Tile tile24_27 = new Tile(23, 26, null, Ocean, 0, false, null, null, null);
-        Tile tile24_28 = new Tile(23, 27, null, Ocean, 0, false, null, null, null);
-        Tile tile24_29 = new Tile(23, 28, null, Ocean, 0, false, null, null, null);
-        Tile tile24_30 = new Tile(23, 29, null, Ocean, 0, false, null, null, null);
-        Tile tile24_31 = new Tile(23, 30, null, Ocean, 0, false, null, null, null);
-        */
-        for (int j = 21; j < 31; j++) {
+
+        tile = new Tile(23, 21, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 22, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 23, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 24, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 25, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 26, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 27, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 28, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 29, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 30, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 21; j < 31; j++) {
             tile = new Tile (23, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         tile = new Tile(23, 31, null, Plain, 0, false, null, null, null);
         map.setTileBoard(tile);
-        /*
-        Tile tile24_33 = new Tile(23, 32, null, Desert, 0, false, null, null, null);
-        Tile tile24_34 = new Tile(23, 33, null, Desert, 0, false, null, null, null);
-        Tile tile24_35 = new Tile(23, 34, null, Desert, 0, false, null, null, null);
-        Tile tile24_36 = new Tile(23, 35, null, Desert, 0, false, null, null, null);
-        Tile tile24_37 = new Tile(23, 36, null, Desert, 0, false, null, null, null);
-        Tile tile24_38 = new Tile(23, 37, null, Desert, 0, false, null, null, null);
-        Tile tile24_39 = new Tile(23, 38, null, Desert, 0, false, null, null, null);
-        */
-        for (int j = 32; j < 39; j++) {
+
+        tile = new Tile(23, 32, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 33, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 34, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 35, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 36, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 37, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 38, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 32; j < 39; j++) {
             tile = new Tile (23, j, null, Desert, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         tile = new Tile(23, 39, null, Plain, 0, false, null, null, null);
         map.setTileBoard(tile);
@@ -2856,62 +4125,96 @@ public class MapMaker {
         map.setTileBoard(tile);
         tile = new Tile(23, 56, null, Hill, 0, false, null, null, Jungle);
         map.setTileBoard(tile);
-        /*
-        Tile tile24_58 = new Tile(23, 57, null, GrassLand, 0, false, null, null, Forest);
-        Tile tile24_59 = new Tile(23, 58, null, GrassLand, 0, false, null, null, Forest);
-        Tile tile24_60 = new Tile(23, 59, null, GrassLand, 0, false, null, null, Forest);
-        Tile tile24_61 = new Tile(23, 60, null, GrassLand, 0, false, null, null, Forest);
-        Tile tile24_62 = new Tile(23, 61, null, GrassLand, 0, false, null, null, Forest);
-        Tile tile24_63 = new Tile(23, 62, null, GrassLand, 0, false, null, null, Forest);
-        Tile tile24_64 = new Tile(23, 63, null, GrassLand, 0, false, null, null, Forest);
-        Tile tile24_65 = new Tile(23, 64, null, GrassLand, 0, false, null, null, Forest);
-        Tile tile24_66 = new Tile(23, 65, null, GrassLand, 0, false, null, null, Forest);
-        Tile tile24_67 = new Tile(23, 66, null, GrassLand, 0, false, null, null, Forest);
-        */
-        for (int j = 57; j < 67; j++) {
+
+        tile = new Tile(23, 57, null, GrassLand, 0, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 58, null, GrassLand, 0, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 59, null, GrassLand, 0, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 60, null, GrassLand, 0, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 61, null, GrassLand, 0, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 62, null, GrassLand, 0, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 63, null, GrassLand, 0, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 64, null, GrassLand, 0, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 65, null, GrassLand, 0, false, null, null, Forest);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 66, null, GrassLand, 0, false, null, null, Forest);
+        map.setTileBoard(tile);
+
+        /*for (int j = 57; j < 67; j++) {
             tile = new Tile (23, j, null, GrassLand, 0, false, null, null, Forest);
             map.setTileBoard(tile);
-        }
-        /*
-        Tile tile24_68 = new Tile(23, 67, null, Ocean, 0, false, null, null, null);
-        Tile tile24_69 = new Tile(23, 68, null, Ocean, 0, false, null, null, null);
-        Tile tile24_70 = new Tile(23, 69, null, Ocean, 0, false, null, null, null);
-        Tile tile24_71 = new Tile(23, 70, null, Ocean, 0, false, null, null, null);
-        Tile tile24_72 = new Tile(23, 71, null, Ocean, 0, false, null, null, null);
-        Tile tile24_73 = new Tile(23, 72, null, Ocean, 0, false, null, null, null);
-        Tile tile24_74 = new Tile(23, 73, null, Ocean, 0, false, null, null, null);
-        Tile tile24_75 = new Tile(23, 74, null, Ocean, 0, false, null, null, null);
-        Tile tile24_76 = new Tile(23, 75, null, Ocean, 0, false, null, null, null);
-        Tile tile24_77 = new Tile(23, 76, null, Ocean, 0, false, null, null, null);
-        Tile tile24_78 = new Tile(23, 77, null, Ocean, 0, false, null, null, null);
-        Tile tile24_79 = new Tile(23, 78, null, Ocean, 0, false, null, null, null);
-        Tile tile24_80 = new Tile(23, 79, null, Ocean, 0, false, null, null, null);
-        */
-        for (int j = 67; j < 80; j++) {
+        }*/
+
+        tile = new Tile(23, 67, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 68, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 69, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 70, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 71, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 72, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 73, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 74, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 75, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 76, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 77, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 78, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(23, 79, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 67; j < 80; j++) {
             tile = new Tile (23, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         //25th row
         tile = new Tile(24, 0, null, Hill, 0, false, null, null, Forest);
         map.setTileBoard(tile);
-        /*
-        Tile tile25_2 = new Tile(24, 1, null, Ocean, 0, false, null, null, null);
-        Tile tile25_3 = new Tile(24, 2, null, Ocean, 0, false, null, null, null);
-        Tile tile25_4 = new Tile(24, 3, null, Ocean, 0, false, null, null, null);
-        Tile tile25_5 = new Tile(24, 4, null, Ocean, 0, false, null, null, null);
-        Tile tile25_6 = new Tile(24, 5, null, Ocean, 0, false, null, null, null);
-        Tile tile25_7 = new Tile(24, 6, null, Ocean, 0, false, null, null, null);
-        Tile tile25_8 = new Tile(24, 7, null, Ocean, 0, false, null, null, null);
-        Tile tile25_9 = new Tile(24, 8, null, Ocean, 0, false, null, null, null);
-        Tile tile25_10 = new Tile(24, 9, null, Ocean, 0, false, null, null, null);
-        Tile tile25_11 = new Tile(24, 10, null, Ocean, 0, false, null, null, null);
-        Tile tile25_12 = new Tile(24, 11, null, Ocean, 0, false, null, null, null);
-        */
-        for (int j = 1; j < 12; j++) {
+
+        tile = new Tile(24, 1, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 2, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 3, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 4, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 5, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 6, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 7, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 8, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 9, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 10, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 11, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 1; j < 12; j++) {
             tile = new Tile (24, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         tile = new Tile(24, 12, null, GrassLand, 0, false, null, null, Forest);
         map.setTileBoard(tile);
@@ -2929,42 +4232,63 @@ public class MapMaker {
         map.setTileBoard(tile);
         tile = new Tile(24, 19, null, Hill, 0, false, null, null, Forest);
         map.setTileBoard(tile);
-        /*
-        Tile tile25_21 = new Tile(24, 20, null, Ocean, 0, false, null, null, null);
-        Tile tile25_22 = new Tile(24, 21, null, Ocean, 0, false, null, null, null);
-        Tile tile25_23 = new Tile(24, 22, null, Ocean, 0, false, null, null, null);
-        Tile tile25_24 = new Tile(24, 23, null, Ocean, 0, false, null, null, null);
-        Tile tile25_25 = new Tile(24, 24, null, Ocean, 0, false, null, null, null);
-        Tile tile25_26 = new Tile(24, 25, null, Ocean, 0, false, null, null, null);
-        Tile tile25_27 = new Tile(24, 26, null, Ocean, 0, false, null, null, null);
-        Tile tile25_28 = new Tile(24, 27, null, Ocean, 0, false, null, null, null);
-        Tile tile25_29 = new Tile(24, 28, null, Ocean, 0, false, null, null, null);
-        Tile tile25_30 = new Tile(24, 29, null, Ocean, 0, false, null, null, null);
-        Tile tile25_31 = new Tile(24, 30, null, Ocean, 0, false, null, null, null);
-        */
-        for (int j = 20; j < 31; j++) {
+
+        tile = new Tile(24, 20, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 21, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 22, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 23, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 24, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 25, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 26, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 27, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 28, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 29, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 30, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 20; j < 31; j++) {
             tile = new Tile (24, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         tile = new Tile(24, 31, null, Plain, 0, false, null, null, null);
         map.setTileBoard(tile);
-        /*
-        Tile tile25_33 = new Tile(24, 32, null, Desert, 0, false, null, null, null);
-        Tile tile25_34 = new Tile(24, 33, null, Desert, 0, false, null, null, null);
-        Tile tile25_35 = new Tile(24, 34, null, Desert, 0, false, null, null, null);
-        Tile tile25_36 = new Tile(24, 35, null, Desert, 0, false, null, null, null);
-        Tile tile25_37 = new Tile(24, 36, null, Desert, 0, false, null, null, null);
-        Tile tile25_38 = new Tile(24, 37, null, Desert, 0, false, null, null, null);
-        Tile tile25_39 = new Tile(24, 38, null, Desert, 0, false, null, null, null);
-        Tile tile25_40 = new Tile(24, 39, null, Desert, 0, false, null, null, null);
-        Tile tile25_41 = new Tile(24, 40, null, Desert, 0, false, null, null, null);
-        Tile tile25_42 = new Tile(24, 41, null, Desert, 0, false, null, null, null);
-        */
-        for (int j = 32; j < 42; j++) {
+
+        tile = new Tile(24, 32, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 33, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 34, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 35, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 36, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 37, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 38, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 39, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 40, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 41, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 32; j < 42; j++) {
             tile = new Tile (24, j, null, Desert, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         tile = new Tile(24, 42, null, Hill, 0, false, null, null, Forest);
         map.setTileBoard(tile);
@@ -3022,23 +4346,34 @@ public class MapMaker {
         map.setTileBoard(tile);
         tile = new Tile(24, 68, null, GrassLand, 0, false, null, null, Forest);
         map.setTileBoard(tile);
-        /*
-        Tile tile25_70 = new Tile(24, 69, null, Ocean, 0, false, null, null, null);
-        Tile tile25_71 = new Tile(24, 70, null, Ocean, 0, false, null, null, null);
-        Tile tile25_72 = new Tile(24, 71, null, Ocean, 0, false, null, null, null);
-        Tile tile25_73 = new Tile(24, 72, null, Ocean, 0, false, null, null, null);
-        Tile tile25_74 = new Tile(24, 73, null, Ocean, 0, false, null, null, null);
-        Tile tile25_75 = new Tile(24, 74, null, Ocean, 0, false, null, null, null);
-        Tile tile25_76 = new Tile(24, 75, null, Ocean, 0, false, null, null, null);
-        Tile tile25_77 = new Tile(24, 76, null, Ocean, 0, false, null, null, null);
-        Tile tile25_78 = new Tile(24, 77, null, Ocean, 0, false, null, null, null);
-        Tile tile25_79 = new Tile(24, 78, null, Ocean, 0, false, null, null, null);
-        Tile tile25_80 = new Tile(24, 79, null, Ocean, 0, false, null, null, null);
-        */
-        for (int j = 69; j < 80; j++) {
+
+        tile = new Tile(24, 69, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 70, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 71, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 72, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 73, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 74, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 75, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 76, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 77, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 78, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(24, 79, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 69; j < 80; j++) {
             tile = new Tile (24, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         //26th row
         tile = new Tile(25, 0, null, Ocean, 0, false, null, null, null);
@@ -3047,22 +4382,32 @@ public class MapMaker {
         map.setTileBoard(tile);
         tile = new Tile(25, 2, null, Hill, 0, false, null, null, Forest);
         map.setTileBoard(tile);
-        /*
-        Tile tile26_4 = new Tile(25, 3, null, Ocean, 0, false, null, null, null);
-        Tile tile26_5 = new Tile(25, 4, null, Ocean, 0, false, null, null, null);
-        Tile tile26_6 = new Tile(25, 5, null, Ocean, 0, false, null, null, null);
-        Tile tile26_7 = new Tile(25, 6, null, Ocean, 0, false, null, null, null);
-        Tile tile26_8 = new Tile(25, 7, null, Ocean, 0, false, null, null, null);
-        Tile tile26_9 = new Tile(25, 8, null, Ocean, 0, false, null, null, null);
-        Tile tile26_10 = new Tile(25, 9, null, Ocean, 0, false, null, null, null);
-        Tile tile26_11 = new Tile(25, 10, null, Ocean, 0, false, null, null, null);
-        Tile tile26_12 = new Tile(25, 11, null, Ocean, 0, false, null, null, null);
-        Tile tile26_13 = new Tile(25, 12, null, Ocean, 0, false, null, null, null);
-        */
-        for (int j = 3; j < 13; j++) {
+
+        tile = new Tile(25, 3, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 4, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 5, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 6, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 7, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 8, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 9, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 10, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 11, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 12, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 3; j < 13; j++) {
             tile = new Tile (25, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         tile = new Tile(25, 13, null, GrassLand, 0, false, null, null, Forest);
         map.setTileBoard(tile);
@@ -3070,47 +4415,73 @@ public class MapMaker {
         map.setTileBoard(tile);
         tile = new Tile(25, 15, null, GrassLand, 0, false, null, null, Forest);
         map.setTileBoard(tile);
-        /*
-        Tile tile26_17 = new Tile(25, 16, null, Ocean, 0, false, null, null, null);
-        Tile tile26_18 = new Tile(25, 17, null, Ocean, 0, false, null, null, null);
-        Tile tile26_19 = new Tile(25, 18, null, Ocean, 0, false, null, null, null);
-        Tile tile26_20 = new Tile(25, 19, null, Ocean, 0, false, null, null, null);
-        Tile tile26_21 = new Tile(25, 20, null, Ocean, 0, false, null, null, null);
-        Tile tile26_22 = new Tile(25, 21, null, Ocean, 0, false, null, null, null);
-        Tile tile26_23 = new Tile(25, 22, null, Ocean, 0, false, null, null, null);
-        Tile tile26_24 = new Tile(25, 23, null, Ocean, 0, false, null, null, null);
-        Tile tile26_25 = new Tile(25, 24, null, Ocean, 0, false, null, null, null);
-        Tile tile26_26 = new Tile(25, 25, null, Ocean, 0, false, null, null, null);
-        Tile tile26_27 = new Tile(25, 26, null, Ocean, 0, false, null, null, null);
-        Tile tile26_28 = new Tile(25, 27, null, Ocean, 0, false, null, null, null);
-        Tile tile26_29 = new Tile(25, 28, null, Ocean, 0, false, null, null, null);
-        Tile tile26_30 = new Tile(25, 29, null, Ocean, 0, false, null, null, null);
-        Tile tile26_31 = new Tile(25, 30, null, Ocean, 0, false, null, null, null);
-        */
-        for (int j = 16; j < 31; j++) {
+
+        tile = new Tile(25, 16, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 17, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 18, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 19, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 20, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 21, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 22, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 23, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 24, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 25, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 26, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 27, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 28, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 29, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 30, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 16; j < 31; j++) {
             tile = new Tile (25, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         tile = new Tile(25, 31, null, GrassLand, 0, false, null, null, Forest);
         map.setTileBoard(tile);
-        /*
-        Tile tile26_33 = new Tile(25, 32, null, Desert, 0, false, null, null, null);
-        Tile tile26_34 = new Tile(25, 33, null, Desert, 0, false, null, null, null);
-        Tile tile26_35 = new Tile(25, 34, null, Desert, 0, false, null, null, null);
-        Tile tile26_36 = new Tile(25, 35, null, Desert, 0, false, null, null, null);
-        Tile tile26_37 = new Tile(25, 36, null, Desert, 0, false, null, null, null);
-        Tile tile26_38 = new Tile(25, 37, null, Desert, 0, false, null, null, null);
-        Tile tile26_39 = new Tile(25, 38, null, Desert, 0, false, null, null, null);
-        Tile tile26_40 = new Tile(25, 39, null, Desert, 0, false, null, null, null);
-        Tile tile26_41 = new Tile(25, 40, null, Desert, 0, false, null, null, null);
-        Tile tile26_42 = new Tile(25, 41, null, Desert, 0, false, null, null, null);
-        Tile tile26_43 = new Tile(25, 42, null, Desert, 0, false, null, null, null);
-        */
-        for (int j = 32; j < 43; j++) {
+
+        tile = new Tile(25, 32, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 33, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 34, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 35, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 36, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 37, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 38, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 39, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 40, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 41, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 42, null, Desert, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 32; j < 43; j++) {
             tile = new Tile (25, j, null, Desert, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         tile = new Tile(25, 43, null, Mountain, 0, false, null, null, null);
         map.setTileBoard(tile);
@@ -3158,26 +4529,40 @@ public class MapMaker {
         map.setTileBoard(tile);
         tile = new Tile(25, 65, null, GrassLand, 0, false, null, null, Forest);
         map.setTileBoard(tile);
-        /*
-        Tile tile26_67 = new Tile(25, 66, null, Ocean, 0, false, null, null, null);
-        Tile tile26_68 = new Tile(25, 67, null, Ocean, 0, false, null, null, null);
-        Tile tile26_69 = new Tile(25, 68, null, Ocean, 0, false, null, null, null);
-        Tile tile26_70 = new Tile(25, 69, null, Ocean, 0, false, null, null, null);
-        Tile tile26_71 = new Tile(25, 70, null, Ocean, 0, false, null, null, null);
-        Tile tile26_72 = new Tile(25, 71, null, Ocean, 0, false, null, null, null);
-        Tile tile26_73 = new Tile(25, 72, null, Ocean, 0, false, null, null, null);
-        Tile tile26_74 = new Tile(25, 73, null, Ocean, 0, false, null, null, null);
-        Tile tile26_75 = new Tile(25, 74, null, Ocean, 0, false, null, null, null);
-        Tile tile26_76 = new Tile(25, 75, null, Ocean, 0, false, null, null, null);
-        Tile tile26_77 = new Tile(25, 76, null, Ocean, 0, false, null, null, null);
-        Tile tile26_78 = new Tile(25, 77, null, Ocean, 0, false, null, null, null);
-        Tile tile26_79 = new Tile(25, 78, null, Ocean, 0, false, null, null, null);
-        Tile tile26_80 = new Tile(25, 79, null, Ocean, 0, false, null, null, null);
-        */
-        for (int j = 66; j < 80; j++) {
+
+        tile = new Tile(25, 66, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 67, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 68, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 69, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 70, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 71, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 72, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 73, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 74, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 75, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 76, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 77, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 78, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+        tile = new Tile(25, 79, null, Ocean, 0, false, null, null, null);
+        map.setTileBoard(tile);
+
+        /*for (int j = 66; j < 80; j++) {
             tile = new Tile (25, j, null, Ocean, 0, false, null, null, null);
             map.setTileBoard(tile);
-        }
+        }*/
 
         for (int i = 0; i < 26; i++) {
             for (int j = 0; j < 80; j++) {

@@ -6,14 +6,16 @@ public class Technology {
     private final String name;
     private final ArrayList<Improvement> givenImprovement;
     private final ArrayList<Unit> givenUnits;
+    private final ArrayList<Building> givenBuildings;
     private final int index;
     private int sciencePrice;
-    public Technology(String name, ArrayList<Improvement> givenImprovement, int index, int sciencePrice, ArrayList<Unit> givenUnits) {
+    public Technology(String name, ArrayList<Improvement> givenImprovement, int index, int sciencePrice, ArrayList<Unit> givenUnits, ArrayList<Building> givenBuildings) {
         this.name = name;
         this.givenImprovement = givenImprovement;
         this.index = index;
         this.sciencePrice = sciencePrice;
         this.givenUnits = givenUnits;
+        this.givenBuildings = givenBuildings;
     }
 
     public String getName() {
@@ -40,4 +42,7 @@ public class Technology {
         return givenUnits;
     }
 
+    public ArrayList<Building> getGivenBuildings() {
+        return givenBuildings;
+    }
 }

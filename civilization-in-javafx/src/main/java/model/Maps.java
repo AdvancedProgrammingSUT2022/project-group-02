@@ -38,6 +38,6 @@ public class Maps {
     }
 
     public void setTileBoard(Tile tileBoard) {
-        this.tileBoard[tileBoard.getX()][tileBoard.getY()] = tileBoard;
+        this.tileBoard[tileBoard.getX()][tileBoard.getIndexY()] = tileBoard;
     }
 }

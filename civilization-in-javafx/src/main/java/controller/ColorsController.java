@@ -36,7 +36,7 @@ public class ColorsController {
     }
 
     public String getColorOfTile(Tile tile) {
-        String BACKGROUND_COLOR = switch (tile.getTerrain().getColor()) {
+        return switch (tile.getTerrain().getColor()) {
             case "red" -> Colors.RED_BACKGROUND;
             case "yellow" -> Colors.YELLOW_BACKGROUND;
             case "purple" -> Colors.PURPLE_BACKGROUND;
@@ -47,6 +47,5 @@ public class ColorsController {
             case "white" -> Colors.WHITE_BACKGROUND_BRIGHT;
             default -> Colors.GREEN_BACKGROUND_BRIGHT;
         };
-        return BACKGROUND_COLOR;
     }
 }

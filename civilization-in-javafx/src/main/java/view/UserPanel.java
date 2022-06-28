@@ -2,6 +2,7 @@ package view;
 
 import controller.ColorsController;
 import controller.GameController;
+import javafx.scene.paint.Color;
 import view.enums.Colors;
 import model.*;
 
@@ -196,6 +197,17 @@ public class UserPanel {
         user.addHistoryOfNotification(notification);
     }
 
+    public static void productDoneNotification(User user, City city, Building building) {
+        ArrayList<String> notification = new ArrayList<>();
+        System.out.println(Colors.RED + "NOTICE!!!" + Colors.RESET);
+        notification.add(Colors.RED + "NOTICE!!!" + Colors.RESET);
+        System.out.println("Dear " + user.getColor() + user.getUsername() + Colors.RESET);
+        notification.add("Dear " + user.getColor() + user.getUsername() + Colors.RESET);
+        System.out.println("you have completed producing " + user.getColor() + building.getName() + Colors.RESET);
+        notification.add("you have completed producing " + user.getColor() + building.getName() + Colors.RESET);
+        user.addHistoryOfNotification(notification);
+    }
+
     private static void unitNotification(ArrayList<String> notification, Unit unit) {
         System.out.println(Colors.PURPLE + "Unit name : " + unit.getName());
         notification.add(Colors.PURPLE + "Unit name : " + unit.getName());
@@ -225,10 +237,73 @@ public class UserPanel {
     public static void foundCity(City city, User user) {
         ArrayList<String> notification = new ArrayList<>();
         System.out.println(Colors.RED + "NOTICE!!!" + Colors.RESET);
+        notification.add(Colors.RED + "NOTICE!!!" + Colors.RESET);
         System.out.println("you found this city :");
+        notification.add("you found this city :");
         System.out.println("Name : " + city.getName());
+        notification.add("Name : " + city.getName());
         System.out.println("Owner : " + city.getOwner());
+        notification.add("Owner : " + city.getOwner());
         user.addHistoryOfNotification(notification);
+    }
+
+    public static void foundRuin(Ruin ruin, User user) {
+        ArrayList<String> notification = new ArrayList<>();
+        System.out.println(Colors.RED + "NOTICE!!!" + Colors.RESET);
+        notification.add(Colors.RED + "NOTICE!!!" + Colors.RESET);
+        System.out.println("congratulation *** you found this ruin : ");
+        notification.add("you found this ruin : ");
+        if (ruin.getGold() > 0) {
+            System.out.println("given gold : " + ruin.getGold());
+            notification.add("given gold : " + ruin.getGold());
+        }
+        if (ruin.getGivenTechnologies() != null) {
+            System.out.println("given technologies");
+            for (Technology givenTechnology : ruin.getGivenTechnologies()) {
+                if (!user.getTechnologies().contains(givenTechnology)) {
+                    System.out.println(givenTechnology.getName());
+                    notification.add(givenTechnology.getName());
+                }
+            }
+        }
+        if (ruin.isAddToPopulation()) {
+            System.out.println("population increased!");
+            notification.add("population increased!");
+        }
+        if (ruin.isWorker()) {
+            System.out.println("you have a new worker now!");
+            notification.add("you have a new worker now!");
+        }
+        if (ruin.isSettler()) {
+            System.out.println("you have a new settler now!");
+            notification.add("you have a new settler now!");
+        }
+        if (ruin.getRemovedFogs() != null) {
+
+        }
+        user.addHistoryOfNotification(notification);
+    }
+
+    public static void sendNotificationToInvader(User first, User second) {
+        ArrayList<String> notification = new ArrayList<>();
+        System.out.println(Colors.RED + "NOTICE!!!" + Colors.RESET);
+        notification.add(Colors.RED + "NOTICE!!!" + Colors.RESET);
+        System.out.println(Colors.PURPLE + "Dear " + first.getUsername() + Colors.RESET);
+        notification.add(Colors.PURPLE + "Dear " + first.getUsername() + Colors.RESET);
+        System.out.println(Colors.YELLOW + "you have started a war with " + second.getUsername() + Colors.RESET);
+        notification.add(Colors.YELLOW + "you have started a war with " + second.getUsername() + Colors.RESET);
+        first.addHistoryOfNotification(notification);
+    }
+
+    public static void sendNotificationToDefender(User first, User second) {
+        ArrayList<String> notification = new ArrayList<>();
+        System.out.println(Colors.RED + "NOTICE!!!" + Colors.RESET);
+        notification.add(Colors.RED + "NOTICE!!!" + Colors.RESET);
+        System.out.println(Colors.PURPLE + "Dear " + second.getUsername() + Colors.RESET);
+        notification.add(Colors.PURPLE + "Dear " + second.getUsername() + Colors.RESET);
+        System.out.println(Colors.YELLOW + "User : " + first.getUsername() + " have attacked you!" + Colors.RESET);
+        notification.add(Colors.YELLOW + "User : " + first.getUsername() + " have attacked you!" + Colors.RESET);
+        second.addHistoryOfNotification(notification);
     }
 
     public void citizensIncreased(User user, City city){

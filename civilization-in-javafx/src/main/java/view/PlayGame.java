@@ -18,7 +18,6 @@ public class PlayGame {
     private final SettlerController settlerController;
     private final TechController techController;
     private CombatController combatController;
-    private int role;
     private int height;
     private int width;
     private ArrayList<Tile> firstTurnsSettlers;
@@ -26,7 +25,7 @@ public class PlayGame {
     private ResearchMenu researchMenu;
 
 
-    public PlayGame(ArrayList<User> players, Maps map, int[][] ancientGraph, ArrayList<Technology> ancientTechnology) {
+    public PlayGame(ArrayList<User> players, Maps map, int[][] graph, ArrayList<Technology> technology) {
         this.players = players;
         this.map = map;
         this.height = 26;
@@ -35,7 +34,7 @@ public class PlayGame {
         this.mapController = new MapController(map);
         unitController = new UnitController();
         settlerController = new SettlerController();
-        techController = new TechController(ancientGraph, ancientTechnology);
+        techController = new TechController(graph, technology, gameController);
         combatController = new CombatController();
     }
 
@@ -97,6 +96,7 @@ public class PlayGame {
             gameController.makeAllUnOrdered(user);
             gameController.foundCity(user);
             gameController.moveTravelingUnits(user, this);
+            gameController.foundRuin(user);
 
             while (nextTurn) {
 
@@ -386,6 +386,38 @@ public class PlayGame {
                 else
                     System.out.println("invalid coordinates");
             }
+
+            else if (((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.ATTACK_UNIT1)) != null ||
+                    (matcher = RegexEnums.getMatcher(tileInput, RegexEnums.ATTACK_UNIT2)) != null) && origin.isMilitaryUnitExists()) {
+                int x = Integer.parseInt(matcher.group("x"));
+                int y = Integer.parseInt(matcher.group("y"));
+                if (x >= 0 && x < map.getWidth() && y >= 0 && y < map.getHeight()) {
+                    Tile des = map.getSpecificTile(x, y);
+                    if (mapController.findDistance(origin, des) == 1 || (mapController.findDistance(origin, des) == 2 && origin.getMilitaryUnit().getRangeCombatStrength() > 0)) {
+                        if (des.isMilitaryUnitExists() && !des.getMilitaryUnit().getOwner().equals(user)) {
+                            //todo : if user is not in war with the owner of unit , ask him if he want to start a war
+                            if (!user.getEnemies().contains(des.getMilitaryUnit().getOwner())) {
+                                UserPanel.sendNotificationToInvader(user, des.getMilitaryUnit().getOwner());
+                            }
+                            combatController.attackUnit(origin.getMilitaryUnit(), des.getMilitaryUnit());
+
+                        } else if (des.isCivilianUnitExists() && !des.getCivilianUnit().getOwner().equals(user)) {
+                            //todo : if user is not in war with the owner of unit , ask him if he want to start a war
+                            if (!user.getEnemies().contains(des.getCivilianUnit().getOwner())) {
+                                UserPanel.sendNotificationToDefender(user, des.getCivilianUnit().getOwner());
+                            }
+                            combatController.annexCivilianUnit(user, des.getCivilianUnit());
+                            System.out.println("you own this unit now!");
+                        } else
+                            System.out.println("there is no unit on this tile");
+                    }
+                    else
+                        System.out.println("this tile is not in your range");
+                }
+                else
+                    System.out.println("invalid coordinates");
+            }
+
             else if (tileInput.equals("delete unit")) {
                 if (origin.isMilitaryUnitExists() && origin.isSelectedOne() && origin.getMilitaryUnit().getOwner().equals(user)) {
                     origin.setMilitaryUnitExists(false);
@@ -701,7 +733,7 @@ public class PlayGame {
         int i = 0;
         ArrayList<Tile> tilesInTheWay = new ArrayList<>();
         Tile tile = origin;
-        while ((tile = mapController.bestChoiceAmongNeighbors(tile, destination, isMilitary)) != destination) {
+        while ((tile = mapController.bestChoiceAmongNeighbors(tile, destination)) != destination) {
             i++;
             if (tile == null || i > 50) {
                 System.out.println("sorry, moving is impossible");

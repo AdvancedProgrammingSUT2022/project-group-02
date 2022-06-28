@@ -7,6 +7,7 @@ public class Tile {
     private Unit civilianUnit;
     private final int x;
     private final int y;
+    private final int indexY;
     private ArrayList<PhysicalObject> physicalObjects;
     private User owner;
     private Terrain terrain;
@@ -27,11 +28,19 @@ public class Tile {
     private int price;
     private boolean looted;
     private boolean citizenExist;
+    private Ruin ruin;
+    private Building building;
 
     public Tile (int x, int y, User owner, Terrain terrain, int fogOfWarLevel, boolean isNearRiver,
                  boolean[] riverBorder, Resource resource, Feature feature) {
+        this.indexY = y;
         this.x = x;
-        this.y = y;
+        //this.y = y + (int)(Math.ceil((double)x / 2)) - 1;
+        if (x % 2 == 0)
+            this.y = x * 2;
+
+        else
+            this.y = x * 2 + 1;
         this.owner = owner;
         this.terrain = terrain;
         this.fogOfWarLevel = fogOfWarLevel;
@@ -246,5 +255,25 @@ public class Tile {
 
     public boolean isLooted() {
         return looted;
+    }
+
+    public Ruin getRuin() {
+        return ruin;
+    }
+
+    public void setRuin(Ruin ruin) {
+        this.ruin = ruin;
+    }
+
+    public Building getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(Building building) {
+        this.building = building;
+    }
+
+    public int getIndexY() {
+        return indexY;
     }
 }

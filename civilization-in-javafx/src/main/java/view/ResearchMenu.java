@@ -2,11 +2,8 @@ package view;
 
 import controller.GameController;
 import controller.TechController;
+import model.*;
 import view.enums.RegexEnums;
-import model.Improvement;
-import model.Technology;
-import model.Unit;
-import model.User;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -45,7 +42,7 @@ public class ResearchMenu {
                 selectTech(user, scanner);
             }
             else if (researchInput.equals("show tree of technologies")) {
-                showTree(user, scanner);
+                showTree();
             }
             else if (researchInput.equals("pause current")) {
                 if (user.isResearching()) {
@@ -72,6 +69,21 @@ public class ResearchMenu {
         int index = 1;
         for (Technology technology : technologies) {
             System.out.println(index + "- " + technology.getName());
+            //given units by this tech
+            if (technology.getGivenUnits() != null) {
+                System.out.println("given units :");
+                for (Unit givenUnit : technology.getGivenUnits())
+                    System.out.println(givenUnit.getName());
+
+            }
+            //given buildings by this tech
+            if (technology.getGivenBuildings() != null) {
+                System.out.println("given buildings :");
+                for (Building building : technology.getGivenBuildings())
+                    System.out.println(building.getName());
+
+            }
+            //given improvements by this tech
             if (technology.getGivenImprovement() != null) {
                 System.out.println("given improvements : ");
                 for (Improvement improvement : technology.getGivenImprovement())
@@ -80,6 +92,7 @@ public class ResearchMenu {
             }
             index++;
         }
+        //selecting a tech to research on
         System.out.println("choose an index | <tech exit> to get out");
         String techInput;
         boolean researchBar = true;
@@ -87,6 +100,7 @@ public class ResearchMenu {
             techInput = scanner.nextLine();
             if (techInput.trim().equals("bar exit"))
                 researchBar = false;
+            //standard code
             else if (Pattern.matches("[\\d+]", techInput)) {
                 index = Integer.parseInt(techInput);
                 if (index >= 1 && index <= technologies.size()) {
@@ -120,24 +134,30 @@ public class ResearchMenu {
         }
     }
 
-    private void showTree(User user, Scanner scanner) {
+    private void showTree() {
         ArrayList<Technology> prerequisites;
         System.out.println("**********");
-        for (Technology ancientTechnology : techController.getAncientTechnologies()) {
-            System.out.println(ancientTechnology.getName() + " :");
-            if (ancientTechnology.getGivenUnits() != null) {
+        for (Technology technology : techController.getTechnologies()) {
+            System.out.println(technology.getName() + " :");
+            if (technology.getGivenUnits() != null) {
                 System.out.println("given units :");
-                for (Unit givenUnit : ancientTechnology.getGivenUnits())
+                for (Unit givenUnit : technology.getGivenUnits())
                     System.out.println(givenUnit.getName());
 
             }
-            if (ancientTechnology.getGivenImprovement() != null) {
+            if (technology.getGivenBuildings() != null) {
+                System.out.println("given buildings :");
+                for (Building building : technology.getGivenBuildings())
+                    System.out.println(building.getName());
+
+            }
+            if (technology.getGivenImprovement() != null) {
                 System.out.println("given improvements :");
-                for (Improvement improvement : ancientTechnology.getGivenImprovement())
+                for (Improvement improvement : technology.getGivenImprovement())
                     System.out.println(improvement.getName());
 
             }
-            prerequisites = techController.getPrerequisitesAncientTech(ancientTechnology);
+            prerequisites = techController.getPrerequisitesTech(technology);
             if (prerequisites.size() >= 1) {
                 System.out.println("prerequisites :");
                 for (Technology prerequisite : prerequisites)
@@ -147,6 +167,28 @@ public class ResearchMenu {
             else
                 System.out.println("this technology do not have any prerequisites");
             System.out.println("**********");
+        }
+    }
+
+    public static void techInformation(Technology technology) {
+        System.out.println(technology.getName() + " :");
+        if (technology.getGivenUnits() != null) {
+            System.out.println("given units :");
+            for (Unit givenUnit : technology.getGivenUnits())
+                System.out.println(givenUnit.getName());
+
+        }
+        if (technology.getGivenBuildings() != null) {
+            System.out.println("given buildings :");
+            for (Building building : technology.getGivenBuildings())
+                System.out.println(building.getName());
+
+        }
+        if (technology.getGivenImprovement() != null) {
+            System.out.println("given improvements :");
+            for (Improvement improvement : technology.getGivenImprovement())
+                System.out.println(improvement.getName());
+
         }
     }
 }

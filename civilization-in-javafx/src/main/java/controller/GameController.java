@@ -3,6 +3,7 @@ package controller;
 import model.*;
 import view.CityMenu;
 import view.PlayGame;
+import view.ResearchMenu;
 import view.UserPanel;
 
 import java.util.ArrayList;
@@ -140,7 +141,7 @@ public class GameController {
                         user.addImprovement(improvement);
                     }
                 }
-                // add given units to all the cities products
+                // add given units to possible products of the city
                 if (user.getCurrentTechnology().getGivenUnits() != null) {
                     MeleeMilitaryUnit meleeMilitaryUnit;
                     RangeMilitaryUnit rangeMilitaryUnit;
@@ -158,6 +159,17 @@ public class GameController {
                                 city.addPossibleUnit(meleeMilitaryUnit);
                                 city.addProduct(new Product(meleeMilitaryUnit.getName(), meleeMilitaryUnit.getProductionPrice()));
                             }
+                        }
+                    }
+                }
+                //add given buildings to possible products of the city
+                if (user.getCurrentTechnology().getGivenBuildings() != null) {
+                    Building building;
+                    for (Building givenBuilding : user.getCurrentTechnology().getGivenBuildings()) {
+                        for (City city : user.getCities()) {
+                            building = new Building(givenBuilding.getName(), givenBuilding.getMaintainCost(), givenBuilding.getCost(), givenBuilding.getFoodRate(), givenBuilding.getDefence(), givenBuilding.getXP(), givenBuilding.getScienceRate(), givenBuilding.getHappiness(), givenBuilding.getRequirement());
+                            city.addPossibleBuildings(building);
+                            city.addProduct(new Product(building.getName(), building.getCost()));
                         }
                     }
                 }
@@ -266,7 +278,6 @@ public class GameController {
                 // melee
                 else {
                     Tile tile = findTileForMilitary(city.getTile());
-                    System.out.println("i am here");
                     meleeMilitaryUnit = new MeleeMilitaryUnit(unit.getName(), tile, unit.getHP(), unit.getGoldPrice(), unit.getProductionPrice(), unit.getLevel(), unit.getMP(), unit.getCombatStrength(), unit.getRangeCombatStrength(), city.getOwner(), unit.getAttackPoint(), unit.getMaintainGold());
                     tile.setMilitaryUnit(meleeMilitaryUnit);
                     tile.setMilitaryUnitExists(true);
@@ -274,9 +285,19 @@ public class GameController {
                     city.getOwner().addUnit(meleeMilitaryUnit);
                     UserPanel.productDoneNotification(city.getOwner(), city, meleeMilitaryUnit, this);
                 }
-                i = city.getPossibleUnits().size();
+                return;
             }
         }
+
+        for (Building building : city.getPossibleBuildings()) {
+            if (building.getName().equals(product.getName())) {
+                Building building1 = new Building(building.getName(), building.getMaintainCost(), building.getCost(), building.getFoodRate(), building.getDefence(), building.getXP(), building.getScienceRate(), building.getHappiness(), building.getRequirement());
+                city.addBuildings(building1);
+                UserPanel.productDoneNotification(city.getOwner(), city, building);
+                return;
+            }
+        }
+
     }
 
     public void increaseCitizens(User user){
@@ -442,8 +463,10 @@ public class GameController {
                     if (neighbor.getCity() != null &&
                             neighbor.getCity().getTile().equals(neighbor) &&
                             !neighbor.getOwner().equals(user) &&
-                            !user.getFoundCities().contains(neighbor.getCity()))
+                            !user.getFoundCities().contains(neighbor.getCity())) {
+                        user.addFoundCities(neighbor.getCity());
                         UserPanel.foundCity(neighbor.getCity(), user);
+                    }
                 }
             }
         }
@@ -478,6 +501,69 @@ public class GameController {
         for (int i = 0; i < map.getHeight(); i++)
             for (int j = 0; j < map.getWidth(); j++)
                 mapController.setNeighbor(map.getTileBoard()[i][j]);
+    }
+
+    public void foundRuin(User user) {
+        for (Unit unit : user.getUnits()) {
+            if (unit.getTile().getRuin() != null) {
+                if (!user.getFoundRuins().contains(unit.getTile().getRuin())) {
+                    UserPanel.foundRuin(unit.getTile().getRuin(), user);
+                    Ruin ruin = unit.getTile().getRuin();
+                    if (ruin.getGivenTechnologies() != null)
+                        addRuinEffectTech(ruin, user);
+                    if (ruin.getGold() > 0)
+                        addRuinEffectGold(ruin, user);
+                    addRuinEffectPopulation(user);
+                    if (ruin.isWorker())
+                        addRuinEffectWorker(user);
+                    if (ruin.isSettler())
+                        addRuinEffectSettler(user);
+                    if (ruin.getRemovedFogs() != null)
+                        addRuinEffectFogOfTile(ruin, user);
+
+                }
+            }
+        }
+    }
+
+    private void addRuinEffectTech(Ruin ruin, User user) {
+        for (Technology givenTechnology : ruin.getGivenTechnologies()) {
+            if (!user.getTechnologies().contains(givenTechnology)) {
+                user.setResearchTurnLeft(1);
+                user.setResearching(true);
+                user.setCurrentTechnology(givenTechnology);
+                userTurnResearch(user);
+            }
+        }
+    }
+
+    private void addRuinEffectGold(Ruin ruin, User user) {
+        user.setGold(ruin.getGold());
+    }
+
+    private void addRuinEffectPopulation(User user) {
+        //todo add one citizen
+    }
+
+    private void addRuinEffectWorker(User user) {
+        user.getCapital().setProductStatus(true);
+        user.getCapital().setCurrentProduction(user.getCapital().getProducts().get(0));
+        user.getCapital().setProductTurnLeft(1);
+        cityTurnProducts(user);
+    }
+
+    private void addRuinEffectSettler(User user) {
+        user.getCapital().setProductStatus(true);
+        user.getCapital().setCurrentProduction(user.getCapital().getProducts().get(1));
+        user.getCapital().setProductTurnLeft(1);
+        cityTurnProducts(user);
+    }
+
+    private void addRuinEffectFogOfTile(Ruin ruin, User user) {
+        for (Tile removedFog : ruin.getRemovedFogs()) {
+            if (!user.getVisited().contains(removedFog))
+                user.addVisited(removedFog);
+        }
     }
 
 }
