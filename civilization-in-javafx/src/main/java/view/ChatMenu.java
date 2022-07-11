@@ -17,12 +17,6 @@ public class ChatMenu {
 
     private static ChatMenu chatMenu;
 
-    private ChatController chatController;
-
-    private ChatMenu() {
-        this.chatController = new ChatController();
-    }
-
     public static ChatMenu getInstance() {
         if (chatMenu == null)
             chatMenu = new ChatMenu();
@@ -93,7 +87,7 @@ public class ChatMenu {
                 }
             }
             else if (chatInput.equals("rooms")) {
-                ArrayList<Room> userRooms = chatController.userRooms(you);
+                ArrayList<Room> userRooms = ChatController.getInstance().userRooms(you);
                 if (userRooms.size() >= 1) {
                     int index = 1;
                     for (Room room : userRooms) {
@@ -124,16 +118,16 @@ public class ChatMenu {
     public void chatPrivately(User you, User other, Scanner scanner) {
         //todo show all the contents of the current chat
         String chatInput;
-        PrivateChat current = chatController.getChatByUser(you, other);
+        PrivateChat current = ChatController.getInstance().getChatByUser(you, other);
         PrivateChat forOtherUser;
         if (current == null) {
             current = new PrivateChat(you, other);
-            chatController.addPrivateChats(current);
+            ChatController.getInstance().addPrivateChats(current);
             forOtherUser = new PrivateChat(other, you);
-            chatController.addPrivateChats(forOtherUser);
+            ChatController.getInstance().addPrivateChats(forOtherUser);
         }
         else {
-            forOtherUser = chatController.getChatByUser(other, you);
+            forOtherUser = ChatController.getInstance().getChatByUser(other, you);
         }
         if (forOtherUser == null) {
             System.out.println("an error occurred!");
@@ -194,7 +188,7 @@ public class ChatMenu {
                                     User user = room.getUsers().get(index - 1);
                                     if (user.equals(you)) {
                                         //todo : warn the user of the consequences
-                                        chatController.removeRoom(room);
+                                        ChatController.getInstance().removeRoom(room);
                                         System.out.println("room deleted successfully! goodbye!");
                                         return;
                                     }

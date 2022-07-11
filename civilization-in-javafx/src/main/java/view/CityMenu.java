@@ -16,19 +16,17 @@ import java.util.regex.Pattern;
 
 public class CityMenu {
 
-    private MapController mapController;
-    private TechController techController;
-    private SettlerController settlerController;
-    private GameController gameController;
     private ArrayList<User> players;
     private Matcher matcher;
+    private CityController cityController;
+    private MapController mapController;
+    private GameController gameController;
 
-    public CityMenu (MapController mapController, TechController techController, SettlerController settlerController, GameController gameController, ArrayList<User> players) {
-        this.mapController = mapController;
-        this.techController = techController;
-        this.settlerController = settlerController;
-        this.gameController = gameController;
+    public CityMenu (ArrayList<User> players, MapController mapController, GameController gameController) {
+        cityController = CityController.getInstance();
         this.players = players;
+        this.mapController = mapController;
+        this.gameController = gameController;
     }
 
     public void run(Scanner scanner, User user) {

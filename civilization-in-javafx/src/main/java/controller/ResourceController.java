@@ -4,7 +4,13 @@ import model.*;
 
 public class ResourceController {
 
-    public ResourceController(){}
+    private static ResourceController resourceController;
+
+    public static ResourceController getInstance() {
+        if (resourceController == null)
+            resourceController = new ResourceController();
+        return resourceController;
+    }
 
     public void userResource(User user, Maps map){
         if (user.getFoundResources() != null) {

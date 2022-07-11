@@ -10,22 +10,31 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameController {
+
+    private static GameController gameController;
+
     private ArrayList<User> players;
     private final Maps map;
-    private int turnForEachPlayer;
     private final int height;
     private final int width;
 
-    public GameController(ArrayList<User> players, int turnForEachPlayer, Maps map, int height, int width) {
+
+    private GameController(ArrayList<User> players, Maps map) {
         this.players = players;
         this.map = map;
         for (User player : players) {
-            player.setTurns(turnForEachPlayer);
             player.setGold(0);
         }
-        this.turnForEachPlayer = turnForEachPlayer;
-        this.height = height;
-        this.width = width;
+        this.height = 26;
+        this.width = 80;
+
+
+    }
+
+    public static GameController getInstance(ArrayList<User> players, Maps map) {
+        if (gameController == null)
+            gameController = new GameController(players, map);
+        return gameController;
     }
 
     // cheat codes
@@ -97,14 +106,6 @@ public class GameController {
         origin.setCivilianUnitExists(false);
         destination.setCivilianUnit(civilian);
         destination.setCivilianUnitExists(true);
-    }
-
-    public int getTurnForEachPlayer() {
-        return turnForEachPlayer;
-    }
-
-    public void setTurnForEachPlayer(int turnForEachPlayer) {
-        this.turnForEachPlayer = turnForEachPlayer;
     }
 
     public void cityTurnProducts(User user) {
@@ -564,6 +565,13 @@ public class GameController {
             if (!user.getVisited().contains(removedFog))
                 user.addVisited(removedFog);
         }
+    }
+
+    public void addTech(Technology technology, User user) {
+        user.setResearchTurnLeft(1);
+        user.setResearching(true);
+        user.setCurrentTechnology(technology);
+        userTurnResearch(user);
     }
 
 }

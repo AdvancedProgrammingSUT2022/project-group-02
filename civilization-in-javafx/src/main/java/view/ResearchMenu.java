@@ -12,8 +12,8 @@ import java.util.regex.Pattern;
 
 public class ResearchMenu {
 
-    private TechController techController;
     private GameController gameController;
+    private TechController techController;
     private Matcher matcher;
 
     public ResearchMenu(TechController techController, GameController gameController) {
@@ -117,10 +117,7 @@ public class ResearchMenu {
             else if ((matcher = RegexEnums.getMatcher(techInput, RegexEnums.ADD_RESEARCH1)) != null || (matcher = RegexEnums.getMatcher(techInput, RegexEnums.ADD_RESEARCH2)) != null) {
                 index = Integer.parseInt(matcher.group("index"));
                 if (index >= 1 && index <= technologies.size()) {
-                    user.setResearchTurnLeft(1);
-                    user.setResearching(true);
-                    user.setCurrentTechnology(technologies.get(index - 1));
-                    gameController.userTurnResearch(user);
+                    gameController.addTech(technologies.get(index - 1), user);
                     researchBar = false;
                 }
                 else

@@ -6,7 +6,12 @@ import model.User;
 
 public class ColorsController {
 
-    public ColorsController() {
+    private static ColorsController colorsController;
+
+    public static ColorsController getInstance() {
+        if (colorsController == null)
+            colorsController = new ColorsController();
+        return colorsController;
     }
 
     public String getColorOfString(String color){

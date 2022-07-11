@@ -4,12 +4,22 @@ import model.*;
 import view.enums.Colors;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class MapController {
     private final Maps map;
 
-    public MapController(Maps map) {
+
+    private static MapController mapController;
+
+    private MapController(Maps map) {
         this.map = map;
+    }
+
+    public static MapController getInstance(Maps map) {
+        if (mapController == null)
+            mapController = new MapController(map);
+        return mapController;
     }
 
 

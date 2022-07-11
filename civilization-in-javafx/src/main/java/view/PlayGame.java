@@ -10,32 +10,39 @@ import java.util.regex.*;
 
 public class PlayGame {
     private final ArrayList<User> players;
-    private final GameController gameController;
     private Maps map;
     private Matcher matcher;
-    private final MapController mapController;
-    private UnitController unitController;
-    private final SettlerController settlerController;
-    private final TechController techController;
-    private CombatController combatController;
     private int height;
     private int width;
     private ArrayList<Tile> firstTurnsSettlers;
     private CityMenu cityMenu;
     private ResearchMenu researchMenu;
+    private int[][] graph;
+    private ArrayList<Technology> technologies;
+
+    private GameController gameController;
+    private MapController mapController;
+    private TechController techController;
+    private UnitController unitController;
+    private UsersController usersController;
+    private SettlerController settlerController;
+    private CombatController combatController;
 
 
-    public PlayGame(ArrayList<User> players, Maps map, int[][] graph, ArrayList<Technology> technology) {
+    public PlayGame(ArrayList<User> players, Maps map, int[][] graph, ArrayList<Technology> technologies) {
         this.players = players;
         this.map = map;
         this.height = 26;
         this.width = 80;
-        gameController = new GameController(players, 1, map, height, width);
-        this.mapController = new MapController(map);
-        unitController = new UnitController();
-        settlerController = new SettlerController();
-        techController = new TechController(graph, technology, gameController);
-        combatController = new CombatController();
+        this.graph = graph;
+        this.technologies = technologies;
+        gameController = GameController.getInstance(players, map);
+        mapController = MapController.getInstance(map);
+        techController = TechController.getInstance(graph, technologies);
+        unitController = UnitController.getInstance();
+        usersController = UsersController.getInstance();
+        settlerController = SettlerController.getInstance();
+        combatController = CombatController.getInstance();
     }
 
     // provide some information for players
@@ -69,7 +76,7 @@ public class PlayGame {
     }
 
     public void run(Scanner scanner) {
-        cityMenu = new CityMenu(mapController, techController, settlerController, gameController, players);
+        cityMenu = new CityMenu(players, mapController, gameController);
         researchMenu = new ResearchMenu(techController, gameController);
         UserPanel userPanel = new UserPanel(gameController);
         manPlayGame();
@@ -266,7 +273,7 @@ public class PlayGame {
                     System.out.println("invalid command");
             }
             role++;
-            user.setTurns(gameController.getTurnForEachPlayer());
+            user.setTurns(turn);
             if (role >= players.size())
                 role = 0;
             nextTurn = true;
@@ -399,14 +406,14 @@ public class PlayGame {
                             if (!user.getEnemies().contains(des.getMilitaryUnit().getOwner())) {
                                 UserPanel.sendNotificationToInvader(user, des.getMilitaryUnit().getOwner());
                             }
-                            combatController.attackUnit(origin.getMilitaryUnit(), des.getMilitaryUnit());
+                            CombatController.getInstance().attackUnit(origin.getMilitaryUnit(), des.getMilitaryUnit());
 
                         } else if (des.isCivilianUnitExists() && !des.getCivilianUnit().getOwner().equals(user)) {
                             //todo : if user is not in war with the owner of unit , ask him if he want to start a war
                             if (!user.getEnemies().contains(des.getCivilianUnit().getOwner())) {
                                 UserPanel.sendNotificationToDefender(user, des.getCivilianUnit().getOwner());
                             }
-                            combatController.annexCivilianUnit(user, des.getCivilianUnit());
+                            CombatController.getInstance().annexCivilianUnit(user, des.getCivilianUnit());
                             System.out.println("you own this unit now!");
                         } else
                             System.out.println("there is no unit on this tile");
@@ -861,7 +868,7 @@ public class PlayGame {
                     cheat = decideOnWhatToDoWithCity(city, scanner, unit);
                 }
                 else {
-                    combatController.attackCity(city, unit);
+                    CombatController.getInstance().attackCity(city, unit);
                 }
             }
         }
@@ -880,12 +887,12 @@ public class PlayGame {
             if (Pattern.matches("\\d+", cityCombatInput)) {
                 int index = Integer.parseInt(cityCombatInput);
                 if (index == 1) {
-                    combatController.destroyCity(city);
+                    CombatController.getInstance().destroyCity(city);
                     decide = false;
                     unit.getOwner().setHappiness(unit.getOwner().getHappiness() - 10);
                 }
                 else if (index == 2) {
-                    combatController.annexCity(city, unit);
+                    CombatController.getInstance().annexCity(city, unit);
                     decide = false;
                 }
                 else

@@ -6,6 +6,14 @@ import java.util.ArrayList;
 
 public class CombatController extends UnitController {
 
+    private static CombatController combatController;
+
+    public static CombatController getInstance() {
+        if (combatController == null)
+            combatController = new CombatController();
+        return combatController;
+    }
+
     //combat handling : first version of code
 
     public void destroyCity(City city) {

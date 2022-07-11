@@ -7,6 +7,14 @@ import java.util.HashMap;
 
 public class SettlerController extends UnitController{
 
+    private static SettlerController settlerController;
+
+    public static SettlerController getInstance() {
+        if (settlerController == null)
+            settlerController = new SettlerController();
+        return settlerController;
+    }
+
     public void createNewCity(Unit unit, User user, Tile tile, String nameOfCity) {
         ArrayList<Tile> ownerShipTiles = new ArrayList<>();
         ownerShipTiles.add(tile);
