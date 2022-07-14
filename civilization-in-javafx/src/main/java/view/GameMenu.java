@@ -33,14 +33,12 @@ public class GameMenu {
     /*graphic parts*/
 
     private String whichMenu;
-    private UsersController users;
+    private final UsersController users;
     private MediaPlayer mediaPlayer;
-    private Stage stage;
-    private Scene scene;
+    private final Stage stage;
+    private final Scene scene;
     private static Images images = new Images();
-    private User user;
-    private String gameMapSize;
-    private int gameSpeed;
+    private final User user;
 
     public GameMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene, Images images, UsersController users, User user) {
         this.users = users;
@@ -83,28 +81,25 @@ public class GameMenu {
         ImageView buttonBackground = new ImageView(images.mainMenuButtonBackGround);
         Button startNewGame = new Button("Start New Game");
         Button continueGame = new Button("Continue Previous Game");
-        Button playWithFriends = new Button("Play With Friends");
         Button chooseMap = new Button("Choose Map");
         Button chooseSpeed = new Button("Choose Speed");
         Button exit = new Button("exit");
         Rectangle background = new Rectangle(550, 165, 450, 550);
         background.setFill(new Color(0, 0, 0, 0.5));
-        graphicInitialiseButtons(startNewGame, continueGame, playWithFriends, chooseMap, chooseSpeed, exit, buttonBackground);
+        graphicInitialiseButtons(startNewGame, continueGame, chooseMap, chooseSpeed, exit, buttonBackground);
         root.getChildren().add(background);
         root.getChildren().add(buttonBackground);
         root.getChildren().add(startNewGame);
         root.getChildren().add(continueGame);
-        root.getChildren().add(playWithFriends);
         root.getChildren().add(chooseMap);
         root.getChildren().add(chooseSpeed);
         root.getChildren().add(exit);
-        graphicButtonsAction(startNewGame, continueGame, playWithFriends, chooseMap, chooseSpeed, exit);
+        graphicButtonsAction(startNewGame, continueGame, chooseMap, chooseSpeed, exit);
 
     }
 
-    private void graphicInitialiseButtons(Button startNewGame, Button continueGame, Button playWithFriends, Button chooseMap,
+    private void graphicInitialiseButtons(Button startNewGame, Button continueGame, Button chooseMap,
                                           Button chooseSpeed, Button exit, ImageView buttonBackGround) {
-
         buttonBackGround.setFitWidth(630);
         buttonBackGround.setFitHeight(780);
         buttonBackGround.setLayoutX(445);
@@ -118,12 +113,7 @@ public class GameMenu {
         continueGame.setLayoutX(614);
         continueGame.setLayoutY(275);
         continueGame.getStyleClass().add("main-menu-buttons");
-        continueGame.setPrefSize(312, 38);
-
-        playWithFriends.setLayoutX(614);
-        playWithFriends.setLayoutY(332);
-        playWithFriends.getStyleClass().add("main-menu-buttons");
-        playWithFriends.setPrefSize(312, 38);
+        continueGame.setPrefSize(312, 38);;
 
         chooseMap.setLayoutX(614);
         chooseMap.setLayoutY(389.5);
@@ -141,20 +131,16 @@ public class GameMenu {
         exit.setPrefSize(312, 38);
     }
 
-    private void graphicButtonsAction(Button startNewGame, Button continueGame, Button playWithFriends, Button chooseMap,
+    private void graphicButtonsAction(Button startNewGame, Button continueGame, Button chooseMap,
                                       Button chooseSpeed, Button exit) {
         exit.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             new MainMenu(mediaPlayer, stage, scene, images, users).run(user, new Scanner(System.in));
         });
         startNewGame.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            //todo : go to play game
+
         });
         continueGame.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             //todo : go to play special game
-        });
-        playWithFriends.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            //todo : go to a menu to choose friends
-            chooseFriendsView();
         });
         chooseMap.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             chooseMapView();
@@ -298,7 +284,6 @@ public class GameMenu {
         speed1.getStyleClass().add("main-menu-buttons");
         speed1.setPrefSize(312, 38);
         speed1.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            gameSpeed = 1;
             message.setText("the speed 1 selected for this game");
         });
         Button speed2 = new Button("speed 2");
@@ -307,7 +292,6 @@ public class GameMenu {
         speed2.getStyleClass().add("main-menu-buttons");
         speed2.setPrefSize(312, 38);
         speed2.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            gameSpeed = 2;
             message.setText("the speed 2 selected for this game");
         });
         Button speed3 = new Button("speed 3");
@@ -316,7 +300,6 @@ public class GameMenu {
         speed3.getStyleClass().add("main-menu-buttons");
         speed3.setPrefSize(312, 38);
         speed3.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            gameSpeed = 3;
             message.setText("the speed 3 selected for this game");
         });
         Button back = new Button("back");
@@ -381,7 +364,6 @@ public class GameMenu {
         map1.getStyleClass().add("main-menu-buttons");
         map1.setPrefSize(312, 38);
         map1.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            gameMapSize = "10*10";
             message.setText("the map 1 selected for this game");
         });
         Button map2 = new Button("map 2");
@@ -390,7 +372,6 @@ public class GameMenu {
         map2.getStyleClass().add("main-menu-buttons");
         map2.setPrefSize(312, 38);
         map2.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            gameMapSize = "20*20";
             message.setText("the map 2 selected for this game");
         });
         Button map3 = new Button("map 3");
@@ -399,7 +380,6 @@ public class GameMenu {
         map3.getStyleClass().add("main-menu-buttons");
         map3.setPrefSize(312, 38);
         map3.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            gameMapSize = "30*30";
             message.setText("the map 3 selected for this game");
         });
         Button back = new Button("back");
