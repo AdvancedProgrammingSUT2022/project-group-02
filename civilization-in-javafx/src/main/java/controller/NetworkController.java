@@ -36,5 +36,6 @@ public class NetworkController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 }
