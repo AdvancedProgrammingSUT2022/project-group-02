@@ -3,15 +3,26 @@ package controller;
 import model.PrivateChat;
 import model.Room;
 import model.User;
+import view.ChatMenu;
 
 import java.util.ArrayList;
 
 public class ChatController {
+
+    private static ChatController chatController;
+
+
     private ArrayList<PrivateChat> privateChats;
     private ArrayList<Room> rooms;
-    public ChatController() {
+    private ChatController() {
         privateChats = new ArrayList<>();
         rooms = new ArrayList<>();
+    }
+
+    public static ChatController getInstance() {
+        if (chatController == null)
+            chatController = new ChatController();
+        return chatController;
     }
 
     public ArrayList<PrivateChat> getPrivateChats() {

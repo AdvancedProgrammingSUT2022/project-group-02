@@ -9,12 +9,19 @@ import java.util.ArrayList;
 public class TechController {
     private final ArrayList<Technology> technologies;
     private final int[][] technologiesGraph;
-    private GameController gameController;
 
-    public TechController(int[][] technologiesGraph, ArrayList<Technology> technologies, GameController gameController) {
+    private static TechController techController;
+
+    private TechController(int[][] technologiesGraph, ArrayList<Technology> technologies) {
         this.technologiesGraph = technologiesGraph;
         this.technologies = technologies;
-        this.gameController = gameController;
+
+    }
+
+    public static TechController getInstance(int[][] technologiesGraph, ArrayList<Technology> technologies) {
+        if (techController == null)
+            techController = new TechController(technologiesGraph, technologies);
+        return techController;
     }
 
     public ArrayList<Technology> getTechnologies() {
@@ -61,10 +68,4 @@ public class TechController {
         return technologies;
     }
 
-    public void addTech(Technology technology, User user) {
-        user.setResearchTurnLeft(1);
-        user.setResearching(true);
-        user.setCurrentTechnology(technology);
-        gameController.userTurnResearch(user);
-    }
 }

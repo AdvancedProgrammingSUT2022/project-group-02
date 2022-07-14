@@ -15,9 +15,16 @@ public class UsersController {
     //arraylist of registered users;
     private ArrayList<User> users;
 
+    private static UsersController usersController;
 
-    public UsersController() {
+    private UsersController() {
         users = new ArrayList<>();
+    }
+
+    public static UsersController getInstance() {
+        if (usersController == null)
+            usersController = new UsersController();
+        return usersController;
     }
 
     public ArrayList<User> getUsers() {
