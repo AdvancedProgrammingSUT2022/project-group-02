@@ -22,7 +22,7 @@ public class Response {
         this.message = message;
     }
 
-    public String toJson(Response response) {
-        return new Gson().toJson(response);
+    public String toJson() {
+        return new Gson().toJson(this);
     }
 }

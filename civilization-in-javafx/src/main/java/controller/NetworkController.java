@@ -1,5 +1,8 @@
 package controller;
 
+import model.Request;
+import model.Response;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -28,11 +31,13 @@ public class NetworkController {
         }
     }
 
-    public String sendRequest(String request) {
+    public Response sendRequest(Request request) {
         try {
-            dataOutputStream.writeUTF(request);
+            String output = request.toJson();
+            dataOutputStream.writeUTF(output);
             dataOutputStream.flush();
-            return dataInputStream.readUTF();
+            String input = dataInputStream.readUTF();
+            return Response.fromJson(input);
         } catch (IOException e) {
             e.printStackTrace();
         }

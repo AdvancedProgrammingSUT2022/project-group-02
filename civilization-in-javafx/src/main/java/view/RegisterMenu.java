@@ -273,6 +273,9 @@ public class RegisterMenu {
         label.setLayoutY(140);
         label.getStyleClass().add("register-signup-and-login-error");
         label.setEffect(new DropShadow());
+
+        // send signup information to server and get response;
+
 //      check if there is a same username
         if (!users.sameUsernameExists(username)) {
 //          check if there is a same nickname

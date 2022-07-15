@@ -52,7 +52,7 @@ public class Request {
         this.parameters = parameters;
     }
 
-    public String toJson(Request request) {
-        return new Gson().toJson(request);
+    public String toJson() {
+        return new Gson().toJson(this);
     }
 }
