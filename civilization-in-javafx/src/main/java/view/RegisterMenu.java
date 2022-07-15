@@ -1,5 +1,6 @@
 package view;
 import controller.ColorsController;
+import controller.NetworkController;
 import controller.UsersController;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -16,6 +17,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import model.Request;
+import model.Response;
 import model.User;
 import view.enums.Colors;
 import view.enums.Images;
@@ -39,7 +42,6 @@ public class RegisterMenu {
     private boolean readFromGson = false;
 
     public RegisterMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene, Images images){
-        this.users = users;
         RegisterMenu.images = images;
         this.scene = scene;
         this.mediaPlayer = mediaPlayer;
@@ -275,7 +277,19 @@ public class RegisterMenu {
         label.setEffect(new DropShadow());
 
         // send signup information to server and get response;
+        Request request = new Request();
+        request.setAction("signup");
+        request.setMenu("register menu");
+        HashMap<String, String> parameters = new HashMap<>();
+        parameters.put("username", username);
+        parameters.put("nickname", nickname);
+        parameters.put("password", password);
+        request.setParameters(parameters);
+        Response response = NetworkController.getInstance().sendRequest(request);
 
+        label.setText(response.getMessage());
+
+        /*
 //      check if there is a same username
         if (!users.sameUsernameExists(username)) {
 //          check if there is a same nickname
@@ -295,7 +309,7 @@ public class RegisterMenu {
             label.setLayoutX(555 - username.length());
             label.setText("user with this username " + username + " already exists");
         }
-
+        */
     }
 
     private void graphicLoginController(String username, String password, Label label) throws IOException {
