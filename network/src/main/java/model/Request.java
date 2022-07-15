@@ -7,8 +7,7 @@ public class Request {
     private String message;
     private String menu;
 
-
-    public String toJson(Request request) {
-        return new Gson().toJson(request);
+    public static Request fromJson(String json) {
+        return new Gson().fromJson(json, Request.class);
     }
 }
