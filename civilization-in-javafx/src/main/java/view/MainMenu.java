@@ -183,7 +183,7 @@ public class MainMenu {
             user.setLastOnline(lastOnline);
             users.writeToJson();
             user.setActiveUser(false);
-            new RegisterMenu(mediaPlayer, stage, scene, images, users).run(new Scanner(System.in));
+            new RegisterMenu(mediaPlayer, stage, scene, images).run(new Scanner(System.in));
         });
         profileMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 //            ProfileMenu profileMenu = new ProfileMenu();

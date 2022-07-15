@@ -30,7 +30,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class RegisterMenu {
 
     private String whichMenu;
-    private UsersController users;
+    private UsersController users = UsersController.getInstance();
     private MediaPlayer mediaPlayer;
     private Stage stage;
     private Scene scene;
@@ -38,7 +38,7 @@ public class RegisterMenu {
     private final HashMap<String , Boolean> availableColors = new HashMap<>();
     private boolean readFromGson = false;
 
-    public RegisterMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene, Images images, UsersController users){
+    public RegisterMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene, Images images){
         this.users = users;
         RegisterMenu.images = images;
         this.scene = scene;

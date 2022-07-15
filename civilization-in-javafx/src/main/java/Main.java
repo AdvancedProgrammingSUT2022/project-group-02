@@ -1,5 +1,6 @@
-package view;
 
+
+import controller.NetworkController;
 import controller.UsersController;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
@@ -11,6 +12,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import view.RegisterMenu;
 import view.enums.Images;
 
 import java.util.Scanner;
@@ -42,13 +44,14 @@ public class Main extends Application {
                 mediaPlayer.stop();
                 Scanner scanner = new Scanner(System.in);
                 graphicPlayRegisterBackgroundMusic();
-                new RegisterMenu(mediaPlayer, stage, scene, images, new UsersController()).run(scanner);
+                new RegisterMenu(mediaPlayer, stage, scene, images).run(scanner);
             }
         });
         stage.show();
     }
 
     public static void main(String[] args) {
+
         launch();
     }
 
