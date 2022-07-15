@@ -6,6 +6,22 @@ public class Response {
     private String statusCode;
     private String message;
 
+    public String getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(String statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public static Response fromJson(String json) {
         return new Gson().fromJson(json, Response.class);
     }
