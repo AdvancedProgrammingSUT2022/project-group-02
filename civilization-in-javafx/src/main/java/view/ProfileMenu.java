@@ -476,7 +476,7 @@ public class ProfileMenu {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("old password", currentPassword.getText());
         parameters.put("new password", newPassword.getText());
-        parameters.put("user", user);
+        parameters.put("username", user.getUsername());
         request.setParameters(parameters);
         Response response = NetworkController.getInstance().sendRequest(request);
         message.setText(response.getMessage());
@@ -495,7 +495,7 @@ public class ProfileMenu {
         request.setAction("change nickname");
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("new nickname", newNickName.getText());
-        parameters.put("user", user);
+        parameters.put("username", user.getUsername());
         request.setParameters(parameters);
         Response response = NetworkController.getInstance().sendRequest(request);
         message.setText(response.getMessage());

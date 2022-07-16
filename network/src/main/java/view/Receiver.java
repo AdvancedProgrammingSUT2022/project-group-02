@@ -118,7 +118,8 @@ public class Receiver {
         Response response = new Response();
         String oldPassword = (String)request.getParameters().get("old password");
         String newPassword = (String)request.getParameters().get("new password");
-        User user = (User) request.getParameters().get("user");
+        String username = (String)request.getParameters().get("username");
+        User user = UsersController.getInstance().getUserByUsername(username);
         if (user.getPassword().equals(oldPassword)) {
             if (!oldPassword.equals(newPassword)) {
                 user.setPassword(newPassword);
@@ -146,7 +147,8 @@ public class Receiver {
     private Response changeNickname(Request request) {
         Response response = new Response();
         String newNickname = (String)request.getParameters().get("new nickname");
-        User user = (User)request.getParameters().get("user");
+        String username = (String)request.getParameters().get("username");
+        User user = UsersController.getInstance().getUserByUsername(username);
         if (!UsersController.getInstance().sameNicknameExists(newNickname)) {
             user.setNickname(newNickname);
             response.setStatusCode("200");
