@@ -318,6 +318,24 @@ public class RegisterMenu {
         label.getStyleClass().add("register-signup-and-login-error");
         label.setEffect(new DropShadow());
         //TODO : enter MainMenu
+
+
+        Request request = new Request();
+        request.setAction("login");
+        request.setMenu("register menu");
+        HashMap<String, String> parameters = new HashMap<>();
+        parameters.put("username", username);
+        parameters.put("password", password);
+        request.setParameters(parameters);
+        Response response = NetworkController.getInstance().sendRequest(request);
+        label.setText(response.getMessage());
+        if (response.getStatusCode().equals("200")) {
+            User user = (User)response.getParameters().get("user");
+            new MainMenu(mediaPlayer, stage, scene, images, users).run(user, new Scanner(System.in));
+        }
+        else
+            label.setLayoutX(588);
+        /*
         User user;
         //check if username exists and the password is correct
         if (users.sameUsernameExists(username) && (user = users.getUserByUsername(username)).getPassword().equals(password)) {
@@ -328,6 +346,7 @@ public class RegisterMenu {
             label.setLayoutX(588);
             label.setText("Username and password didn't match!");
         }
+        */
 
 
     }

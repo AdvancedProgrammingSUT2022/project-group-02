@@ -10,6 +10,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
 
 public class Receiver {
 
@@ -89,6 +90,23 @@ public class Receiver {
     }
 
     private Response login(Request request) {
-        return null;
+        Response response = new Response();
+        String username = request.getParameters().get("username");
+        String password = request.getParameters().get("password");
+        User user;
+        if ((user = UsersController.getInstance().getUserByUsername(username)) != null) {
+            if (user.getPassword().equals(password)) {
+                response.setStatusCode("200");
+                response.setMessage("user logged in successfully!");
+                HashMap<String, Object> parameters = new HashMap<>();
+                parameters.put("user", user);
+                response.setParameters(parameters);
+                return response;
+            }
+        }
+        response.setStatusCode("404");
+        response.setMessage("Username and password didn't match!");
+
+        return response;
     }
 }
