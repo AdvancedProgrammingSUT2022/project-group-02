@@ -280,7 +280,7 @@ public class RegisterMenu {
         Request request = new Request();
         request.setAction("signup");
         request.setMenu("register menu");
-        HashMap<String, String> parameters = new HashMap<>();
+        HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("username", username);
         parameters.put("nickname", nickname);
         parameters.put("password", password);
@@ -323,7 +323,7 @@ public class RegisterMenu {
         Request request = new Request();
         request.setAction("login");
         request.setMenu("register menu");
-        HashMap<String, String> parameters = new HashMap<>();
+        HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("username", username);
         parameters.put("password", password);
         request.setParameters(parameters);

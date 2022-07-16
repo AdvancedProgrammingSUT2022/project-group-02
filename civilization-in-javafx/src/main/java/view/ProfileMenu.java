@@ -1,6 +1,7 @@
 package view;
 
 import controller.ColorsController;
+import controller.NetworkController;
 import controller.UsersController;
 import javafx.application.Application;
 import javafx.event.Event;
@@ -27,6 +28,8 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import model.Request;
+import model.Response;
 import view.enums.Colors;
 import view.enums.Images;
 import view.enums.RegexEnums;
@@ -34,6 +37,7 @@ import model.User;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -465,8 +469,23 @@ public class ProfileMenu {
 //    }
 //
     public void changePasswordClicked(TextField currentPassword, TextField newPassword, Label message) {
+
+        Request request = new Request();
+        request.setMenu("profile menu");
+        request.setAction("change password");
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("old password", currentPassword.getText());
+        parameters.put("new password", newPassword.getText());
+        parameters.put("user", user);
+        request.setParameters(parameters);
+        Response response = NetworkController.getInstance().sendRequest(request);
+        message.setText(response.getMessage());
+
+
+        /*
         String status = run("profile change -p -c " + currentPassword.getText() + " -n " + newPassword.getText());
         message.setText(status);
+        */
     }
 
     public void changeNickNameClicked(TextField newNickName, Label message) {
