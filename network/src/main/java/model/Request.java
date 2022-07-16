@@ -9,7 +9,7 @@ public class Request {
     private String action;
     private String message;
     private String menu;
-    private HashMap<String, String> parameters = new HashMap<>();
+    private HashMap<String, Object> parameters = new HashMap<>();
 
     public User getUser() {
         return user;
@@ -43,11 +43,11 @@ public class Request {
         this.menu = menu;
     }
 
-    public HashMap<String, String> getParameters() {
+    public HashMap<String, Object> getParameters() {
         return parameters;
     }
 
-    public void setParameters(HashMap<String, String> parameters) {
+    public void setParameters(HashMap<String, Object> parameters) {
         this.parameters = parameters;
     }
 

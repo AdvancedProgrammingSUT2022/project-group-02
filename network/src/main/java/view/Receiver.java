@@ -50,6 +50,8 @@ public class Receiver {
             case "main menu" :
 
             case "profile menu":
+                if (request.getAction().equals("change password"))
+                    return changePassword(request);
 
             case "game menu" :
 
@@ -68,9 +70,9 @@ public class Receiver {
 
     private Response signup(Request request) {
         Response response = new Response();
-        String username = request.getParameters().get("username");
-        String nickname = request.getParameters().get("nickname");
-        String password = request.getParameters().get("password");
+        String username = (String)request.getParameters().get("username");
+        String nickname = (String)request.getParameters().get("nickname");
+        String password = (String)request.getParameters().get("password");
         if (!UsersController.getInstance().sameUsernameExists(username)) {
             if (!UsersController.getInstance().sameNicknameExists(nickname)) {
                 User user = new User(username, nickname, password);
@@ -91,8 +93,8 @@ public class Receiver {
 
     private Response login(Request request) {
         Response response = new Response();
-        String username = request.getParameters().get("username");
-        String password = request.getParameters().get("password");
+        String username = (String)request.getParameters().get("username");
+        String password = (String)request.getParameters().get("password");
         User user;
         if ((user = UsersController.getInstance().getUserByUsername(username)) != null) {
             if (user.getPassword().equals(password)) {
@@ -107,6 +109,35 @@ public class Receiver {
         response.setStatusCode("404");
         response.setMessage("Username and password didn't match!");
 
+        return response;
+    }
+
+    private Response changePassword(Request request) {
+        Response response = new Response();
+        String oldPassword = (String)request.getParameters().get("old password");
+        String newPassword = (String)request.getParameters().get("new password");
+        User user = (User) request.getParameters().get("user");
+        if (user.getPassword().equals(oldPassword)) {
+            if (!oldPassword.equals(newPassword)) {
+                user.setPassword(newPassword);
+                response.setMessage("password changed successfully!");
+                response.setStatusCode("200");
+                HashMap<String, Object> parameters = new HashMap<>();
+                parameters.put("user", user);
+                response.setParameters(parameters);
+                return response;
+            }
+            else {
+                //old and new are the same;
+                response.setStatusCode("401");
+                response.setMessage("please enter a new password");
+            }
+        }
+        else {
+            //old password is not correct;
+            response.setStatusCode("404");
+            response.setMessage("current password is invalid");
+        }
         return response;
     }
 }
