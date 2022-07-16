@@ -52,6 +52,8 @@ public class Receiver {
             case "profile menu":
                 if (request.getAction().equals("change password"))
                     return changePassword(request);
+                else
+                    return changeNickname(request);
 
             case "game menu" :
 
@@ -140,4 +142,21 @@ public class Receiver {
         }
         return response;
     }
+
+    private Response changeNickname(Request request) {
+        Response response = new Response();
+        String newNickname = (String)request.getParameters().get("new nickname");
+        User user = (User)request.getParameters().get("user");
+        if (!UsersController.getInstance().sameNicknameExists(newNickname)) {
+            user.setNickname(newNickname);
+            response.setStatusCode("200");
+            response.setMessage("nickname changed successfully!");
+        }
+        else {
+            response.setStatusCode("401");
+            response.setMessage("user with nickname " + newNickname + " already exists");
+        }
+        return response;
+    }
+
 }

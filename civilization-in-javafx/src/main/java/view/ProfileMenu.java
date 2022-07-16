@@ -489,8 +489,22 @@ public class ProfileMenu {
     }
 
     public void changeNickNameClicked(TextField newNickName, Label message) {
+
+        Request request = new Request();
+        request.setMenu("profile menu");
+        request.setAction("change nickname");
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("new nickname", newNickName.getText());
+        parameters.put("user", user);
+        request.setParameters(parameters);
+        Response response = NetworkController.getInstance().sendRequest(request);
+        message.setText(response.getMessage());
+
+
+        /*
         String status = run("profile change -n " + newNickName.getText());
         message.setText(status);
+        */
     }
 
     public void graphicPlayBackgroundMusic() {
