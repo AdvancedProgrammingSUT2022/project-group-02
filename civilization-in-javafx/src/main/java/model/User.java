@@ -56,6 +56,7 @@ public class User {
     private ArrayList<Message> seenMessages;
 
     HashMap<User, Integer> relations;
+    HashMap<User, String> tradings;
 
     public User(String username, String nickname, String password) {
         this.username = username;

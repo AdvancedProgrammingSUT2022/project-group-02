@@ -405,22 +405,24 @@ public class GameController {
 
     public void citiesIncome(User user){
         for (City city : user.getCities()) {
-            city.setProduction(0);
-            city.setFood(0);
-            city.setGold(0);
-            for (Citizen citizen : city.getCitizens()) {
-                if (citizen.getTile() != null){
-                    if (citizen.getTile().getFeature() != null){
-                        city.setGold(citizen.getTile().getFeature().getGoldRate());
-                        city.setFood(citizen.getTile().getFeature().getFoodRate());
-                        city.setProduction(citizen.getTile().getFeature().getProductionRate());
+            city.setProductionPerTurn(0);
+            city.setFoodPerTurn(0);
+            city.setGoldPerTurn(0);
+            if (city.getCitizens() != null) {
+                for (Citizen citizen : city.getCitizens()) {
+                    if (citizen.isWorking()) {
+                        if (citizen.getTile().getFeature() != null) {
+                            city.setGoldPerTurn(city.getGoldPerTurn() + citizen.getTile().getFeature().getGoldRate());
+                            city.setFoodPerTurn(city.getFoodPerTurn() + citizen.getTile().getFeature().getFoodRate());
+                            city.setProductionPerTurn(city.getProductionPerTurn() + citizen.getTile().getFeature().getProductionRate());
+                        }
+                        city.setGoldPerTurn(city.getGoldPerTurn() + citizen.getTile().getTerrain().getGoldRate());
+                        city.setFoodPerTurn(city.getFoodPerTurn() + citizen.getTile().getTerrain().getFoodRate());
+                        city.setProductionPerTurn(city.getProductionPerTurn() + citizen.getTile().getTerrain().getProductionRate());
                     }
-                    city.setGold(city.getGold() + citizen.getTile().getTerrain().getGoldRate());
-                    city.setFood(city.getFood() + citizen.getTile().getTerrain().getFoodRate());
-                    city.setProduction(city.getProduction() + citizen.getTile().getTerrain().getProductionRate());
+                    city.setProductionPerTurn(city.getProduction() + 1);
+                    city.setFoodPerTurn(city.getFood() - 1);
                 }
-                city.setProduction(city.getProduction() + 1);
-                city.setFood(city.getFood() - 1);
             }
         }
     }

@@ -29,6 +29,10 @@ public class City extends PhysicalObject {
     private ArrayList<Unit> possibleUnits;
     private ArrayList<Building> possibleBuildings;
 
+    private int productionPerTurn;
+    private int goldPerTurn;
+    private int foodPerTurn;
+
     public City(String name, Tile cityLocation, User ownerShip, ArrayList<Tile> ownerShipTiles, int HP, int defence,
                 Unit garrison, ArrayList<Product> products, int productTurnLeft, int citizensNumber, int food, int production,
                 int gold, int science, int faith, int tourism, int culture, ArrayList<Building> buildings,
@@ -55,6 +59,9 @@ public class City extends PhysicalObject {
         this.Citizens = Citizens;
         this.currentProduction = null;
         this.cityLocation = cityLocation;
+        productionPerTurn = 0;
+        goldPerTurn = 0;
+        foodPerTurn = 0;
     }
 
     public void setDefence(int amount) {
@@ -267,5 +274,33 @@ public class City extends PhysicalObject {
 
     public void setTurnNumber(int turnNumber) {
         this.turnNumber = turnNumber;
+    }
+
+    public void setOwnerShipTiles(ArrayList<Tile> ownerShipTiles) {
+        this.ownerShipTiles = ownerShipTiles;
+    }
+
+    public int getProductionPerTurn() {
+        return productionPerTurn;
+    }
+
+    public void setProductionPerTurn(int productionPerTurn) {
+        this.productionPerTurn = productionPerTurn;
+    }
+
+    public int getGoldPerTurn() {
+        return goldPerTurn;
+    }
+
+    public void setGoldPerTurn(int goldPerTurn) {
+        this.goldPerTurn = goldPerTurn;
+    }
+
+    public int getFoodPerTurn() {
+        return foodPerTurn;
+    }
+
+    public void setFoodPerTurn(int foodPerTurn) {
+        this.foodPerTurn = foodPerTurn;
     }
 }

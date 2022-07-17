@@ -108,7 +108,8 @@ public class UserPanel {
         System.out.println("Dear " + colorsController.getColorOfUser(user) + user.getUsername() + Colors.RESET);
         System.out.println(Colors.GREEN + "Gold per turn : " + user.getGoldPerTurn());
         System.out.println("Production per turn : " + user.getProductPerTurn());
-        System.out.println("Food per turn : " + user.getFoodPerTurn() + Colors.RESET);
+        System.out.println("Food per turn : " + user.getFoodPerTurn());
+        System.out.println("total Golds : " + user.getGold());
     }
 
     private void unitPanel(User user) {

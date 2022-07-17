@@ -182,7 +182,7 @@ public class CityMenu {
                     System.out.println("you don't produce anything");
             }
             else if (cityInput.trim().equals("set citizens")){
-                setCitizen(scanner, city);
+                alternativeFunction(scanner, city);
             }
             else if (cityInput.trim().equals("city information")) {
                 cityInformation(city);
@@ -231,84 +231,89 @@ public class CityMenu {
         }
     }
 
-    public void setCitizen(Scanner scanner, City city){
-        boolean loop = true;
-        boolean loop2 = false;
-        int citizenIndex = 0;
-        String citizenInput;
-        setCitizenInterface(1, city);
-        while (loop) {
-            citizenInput = scanner.nextLine();
-            if (Pattern.matches("\\d+", citizenInput)) {
-                citizenIndex = Integer.parseInt(citizenInput);
-                if (citizenIndex >= 1 && citizenIndex <= city.getCitizens().size()) {
-                    setCitizenInterface(2, city);
-                    loop2 = true;
-                    loop = false;
-                }
-                else
-                    System.out.println("invalid number");
-            }
-            else
-                System.out.println("invalid command");
-        }
-        while (loop2) {
-            citizenInput = scanner.nextLine();
-            if (Pattern.matches("\\d+", citizenInput)) {
-                int tileIndex = Integer.parseInt(citizenInput);
-                if (tileIndex >= 1 && tileIndex <= city.getOwnerShipTiles().size()) {
-                    city.getCitizens().get(citizenIndex - 1).setTile(city.getOwnerShipTiles().get(tileIndex - 1));
-                    city.getOwnerShipTiles().get(tileIndex - 1).setCitizenExist(true);
-                    city.getCitizens().get(citizenIndex - 1).setTile(city.getOwnerShipTiles().get(tileIndex - 1));
-                    setCitizenInterface(3, city);
-                    loop2 = false;
-                }
-                else
-                    System.out.println("invalid number");
-            }
-            else
-                System.out.println("invalid command");
-        }
-    }
-
-    public void setCitizenInterface(int which, City city){
+    public void alternativeFunction(Scanner scanner, City city) {
         int index = 1;
-        switch (which){
-            case 1:
-                System.out.println("choose one the citizens number");
+        System.out.println("choose one of the citizens number");
 
-                for (Citizen citizen : city.getCitizens()) {
-                    if (citizen.getTile() != null){
-                        System.out.println(index + ": working on Tile -> x " + citizen.getTile().getX() + " y " + citizen.getTile().getY());
-                    } else {
-                        System.out.println(index + ": unemployed");
-                    }
-                    index++;
-                }
-                break;
-            case 2:
-                System.out.println("choose one tile number to employ the citizen on the tile");
-                for (Tile ownerShipTile : city.getOwnerShipTiles()) {
-                    System.out.println(Colors.PURPLE + index + "- Tile coordination : x " + ownerShipTile.getX()
-                            + " y " + ownerShipTile.getY() + Colors.RESET);
-                    if (ownerShipTile.getFeature() != null) {
-                        System.out.println("tile information -> foodRate : "
-                                + (ownerShipTile.getTerrain().getFoodRate() + ownerShipTile.getFeature().getFoodRate())
-                                + " *** goldRate : "
-                                + (ownerShipTile.getTerrain().getGoldRate() + ownerShipTile.getFeature().getGoldRate())
-                                + " *** productionRate : "
-                                + (ownerShipTile.getTerrain().getProductionRate() + ownerShipTile.getFeature().getProductionRate()));
-                    } else
-                        System.out.println("tile information -> foodRate : "
-                                + ownerShipTile.getTerrain().getFoodRate() + " *** goldRate : "
-                                + ownerShipTile.getTerrain().getGoldRate() + " *** productionRate : "
-                                + ownerShipTile.getTerrain().getProductionRate());
-                    index++;
-                }
-            case 3:
-                System.out.println("the citizen employed on the selected tile successfully");
+        for (Citizen citizen : city.getCitizens()) {
+            if (citizen.isWorking()){
+                System.out.println(index + ": working on Tile -> x " + citizen.getTile().getX() + " y " + citizen.getTile().getY());
+            } else {
+                System.out.println(index + ": unemployed");
+            }
+            index++;
         }
+        String input;
+        System.out.println("just numbers, back to return to city panel");
+        Citizen citizen;
+        while (true) {
+            input = scanner.nextLine();
+            if (input.equals("back")) {
+                System.out.println("back to city panel");
+                return;
+            }
+            else if (Pattern.matches("\\d+", input)) {
+                index = Integer.parseInt(input);
+                if (index >= 1 && index <= city.getCitizens().size()) {
+                    citizen = city.getCitizens().get(index - 1);
+                    break;
+                }
+                else
+                    System.out.println("invalid index");
+            }
+            else
+                System.out.println("invalid command, just put numbers");
+        }
+
+        index = 1;
+
+        System.out.println("choose one tile number to employ the citizen on the tile");
+        for (Tile ownerShipTile : city.getOwnerShipTiles()) {
+            if (!ownerShipTile.isCitizenExist()) {
+                System.out.println(Colors.PURPLE + index + "- Tile coordination : x " + ownerShipTile.getX()
+                        + " y " + ownerShipTile.getY() + Colors.RESET);
+                if (ownerShipTile.getFeature() != null) {
+                    System.out.println("tile information -> foodRate : "
+                            + (ownerShipTile.getTerrain().getFoodRate() + ownerShipTile.getFeature().getFoodRate())
+                            + " *** goldRate : "
+                            + (ownerShipTile.getTerrain().getGoldRate() + ownerShipTile.getFeature().getGoldRate())
+                            + " *** productionRate : "
+                            + (ownerShipTile.getTerrain().getProductionRate() + ownerShipTile.getFeature().getProductionRate()));
+                } else
+                    System.out.println("tile information -> foodRate : "
+                            + ownerShipTile.getTerrain().getFoodRate() + " *** goldRate : "
+                            + ownerShipTile.getTerrain().getGoldRate() + " *** productionRate : "
+                            + ownerShipTile.getTerrain().getProductionRate());
+                index++;
+            }
+        }
+
+        while (true) {
+            input = scanner.nextLine();
+            if (input.equals("back")) {
+                System.out.println("back to city panel");
+                return;
+            }
+            else if (Pattern.matches("\\d+", input)) {
+                index = Integer.parseInt(input);
+                if (index >= 1 && index <= city.getOwnerShipTiles().size()) {
+                    Tile tile = city.getOwnerShipTiles().get(index - 1);
+                    tile.setCitizenExist(true);
+                    citizen.setWorking(true);
+                    citizen.setTile(tile);
+                    System.out.println("the citizen employed on the selected tile successfully");
+                    return;
+                }
+                else
+                    System.out.println("invalid index");
+            }
+        }
+
+
+
+
     }
+
 
     private void cityInformation(City city) {
         System.out.println(Colors.YELLOW + "Name : " + city.getName());
