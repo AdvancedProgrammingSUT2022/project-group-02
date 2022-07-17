@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class User {
     private final String username;
@@ -54,6 +55,8 @@ public class User {
     private ArrayList<User> enemies;
     private ArrayList<Message> seenMessages;
 
+    HashMap<User, Integer> relations;
+
     public User(String username, String nickname, String password) {
         this.username = username;
         this.nickname = nickname;
@@ -88,6 +91,7 @@ public class User {
         foundRuins = new ArrayList<>();
         enemies = new ArrayList<>();
         seenMessages = new ArrayList<>();
+        relations = new HashMap<>();
     }
 
     public void setColor(String color) {
@@ -551,5 +555,13 @@ public class User {
 
     public void setSeenMessages(ArrayList<Message> seenMessages) {
         this.seenMessages = seenMessages;
+    }
+
+    public HashMap<User, Integer> getRelations() {
+        return relations;
+    }
+
+    public void setRelations(HashMap<User, Integer> relations) {
+        this.relations = relations;
     }
 }

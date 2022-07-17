@@ -52,6 +52,35 @@ public class UserPanel {
         }
     }
 
+    public static void everyInformationAboutUser(User user) {
+        System.out.println("Dear " + ColorsController.getInstance().getColorOfUser(user) + user.getUsername() + Colors.RESET);
+        System.out.println(Colors.GREEN + "Gold per turn : " + user.getGoldPerTurn());
+        System.out.println("Production per turn : " + user.getProductPerTurn());
+        System.out.println("Food per turn : " + user.getFoodPerTurn() + Colors.RESET);
+
+        System.out.println(user.getUsername() + " have " + user.getUnits().size() + " units");
+        if (user.getUnits() != null && user.getUnits().size() > 0) {
+            int numberOfWorkers = 0;
+            int numberOfSettlers = 0;
+            int numberOfScout = 0;
+            for (Unit unit : user.getUnits()) {
+                switch (unit.getName()) {
+                    case "worker" -> numberOfWorkers++;
+                    case "settler" -> numberOfSettlers++;
+                    case "scout" -> numberOfScout++;
+                }
+            }
+            int numberOfMilitary = user.getUnits().size() - (numberOfSettlers + numberOfWorkers + numberOfScout);
+            System.out.println(numberOfMilitary + " of this units are military units");
+            System.out.println(numberOfWorkers + " of this units are workers");
+            System.out.println(numberOfSettlers + " of this units are settlers");
+            System.out.println(numberOfScout + " of this units are scout");
+        }
+        else
+            System.out.println("user do not have any unit");
+
+    }
+
     private void militaryOverview(User user) {
         System.out.println(user.getUsername() + " have " + user.getUnits().size() + " units");
         if (user.getUnits() != null && user.getUnits().size() > 0) {

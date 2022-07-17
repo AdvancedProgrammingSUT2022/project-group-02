@@ -1,5 +1,6 @@
 package view;
 
+import controller.UsersController;
 import model.User;
 
 import java.util.Scanner;
@@ -10,8 +11,16 @@ public class DemocracyPanel {
 
     private Matcher matcher;
 
-    public void run(Scanner scanner) {
+    public void run(Scanner scanner, User user) {
         String input;
+        UserPanel.everyInformationAboutUser(user);
+        System.out.println("**********");
+        System.out.println("all of the users are as follows :");
+        for (User user1 : UsersController.getInstance().getUsers()) {
+            UserPanel.everyInformationAboutUser(user1);
+            System.out.println("**********");
+        }
+
         while (true) {
             input = scanner.nextLine();
             if (input.equals("back")) {
@@ -19,13 +28,19 @@ public class DemocracyPanel {
                 return;
             }
             else if ((matcher = getMatcher(input, "declare war against -u (?<username>[\\s\\S]+)")) != null) {
-
+                String username = matcher.group("username");
+                User other = UsersController.getInstance().getUserByUsername(username);
+                declareWar(user, other);
             }
             else if ((matcher = getMatcher(input, "make peace with -u (?<username>[\\s\\S]+)")) != null) {
-
+                String username = matcher.group("username");
+                User other = UsersController.getInstance().getUserByUsername(username);
+                makePeace(user, other);
             }
             else if ((matcher = getMatcher(input, "trade with -u (?<username>[\\s\\S]+)")) != null) {
-
+                String username = matcher.group("username");
+                User other = UsersController.getInstance().getUserByUsername(username);
+                trade(user, other);
             }
             else
                 System.out.println("invalid command!");
@@ -52,7 +67,7 @@ public class DemocracyPanel {
         else
             you.getEnemies().remove(other);
     }
-    private void trade(User user, User other) {
+    private void trade(User you, User other) {
 
     }
 }
