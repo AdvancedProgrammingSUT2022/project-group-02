@@ -47,31 +47,42 @@ public class GameEnvironment {
     }
 
     private void createMap(){
-        ImageView leftUpCorner = null;
-        ImageView rightDownCorner;
         int i = 1;
         for (Tile[] tiles : map.getTileBoard()) {
             for (Tile tile : tiles) {
-                Image image = findCell(tile);
-                if (image == images.mountainCell && tile.getY() % 2 == 0) {
-                    image = images.mountainCell2;
-                }
-                if (image !=  null) {
-                    ImageView imageView = new ImageView(image);
+                Image TileResourceImage = findResource(tile);
+                Image TileTerrainImage = findCell(tile);
+                Image TileFeatureImage = findFeature(tile);
+                if (TileTerrainImage == images.mountainCell && tile.getY() % 2 == 0) TileTerrainImage = images.mountainCell2;
+                if (TileTerrainImage !=  null) {
+                    ImageView imageView = new ImageView(TileTerrainImage);
                     imageView.setLayoutX(tile.getY() * 250 - tile.getX() % 2 * 125);
                     imageView.setFitWidth(250);
                     imageView.setLayoutY(tile.getX() * 360 - tile.getX() * 120);
                     imageView.setFitHeight(360);
-                    if (tile.getX() == 0 && tile.getY() == 0) leftUpCorner = imageView;
-                    if (tile.getX() == 25 && tile.getY() == 79) rightDownCorner = imageView;
                     root.getChildren().add(imageView);
+                    if(TileResourceImage != null) {
+                        ImageView resourceView = new ImageView(TileResourceImage);
+                        resourceView.setLayoutX(imageView.getLayoutX() + 25);
+                        resourceView.setLayoutY(imageView.getLayoutY() + 60);
+                        resourceView.setFitWidth(90);
+                        resourceView.setFitHeight(90);
+                        root.getChildren().add(resourceView);
+                    }
+//                    if (TileFeatureImage != null) {
+//                        ImageView featureView = new ImageView(TileFeatureImage);
+//                        featureView.setLayoutX(imageView.getLayoutX() + 135);
+//                        featureView.setLayoutY(imageView.getLayoutY() + 60);
+//                        featureView.setFitWidth(90);
+//                        featureView.setFitHeight(90);
+//                        root.getChildren().add(featureView);
+//                    }
                 } else {
                     System.out.println( i + " : An error happened! -> GameEnvironment -> createMap : " + tile.getTerrain().getName());
                     i++;
                 }
             }
         }
-        ImageView finalLeftUpCorner = leftUpCorner;
         root.setOnScroll(event -> {
             if (event.isControlDown()) {
                 if (root.getScaleX() + event.getDeltaY() / 1000 > 0.165 && root.getScaleX() + event.getDeltaY() / 1000 <= 1)
@@ -79,9 +90,7 @@ public class GameEnvironment {
                 if (root.getScaleY() + event.getDeltaY() / 1000 > 0.165 && root.getScaleY() + event.getDeltaY() / 1000 <= 1)
                     root.setScaleY(root.getScaleY() + event.getDeltaY() / 1000);
             } else {
-                assert finalLeftUpCorner != null;
-                if (root.getTranslateX() + event.getDeltaX() <= finalLeftUpCorner.getLayoutX())
-                    root.setTranslateX(root.getTranslateX() + event.getDeltaX());
+                root.setTranslateX(root.getTranslateX() + event.getDeltaX());
                 root.setTranslateY(root.getTranslateY() + event.getDeltaY());
             }
         });
@@ -114,9 +123,12 @@ public class GameEnvironment {
     }
 
     private Image findCell(Tile tile) {
-        if (tile.getFeature() != null && tile.getFeature().getName().equals("Jungle")){
-            return images.jungleCell;
-        }
+        if (tile.getFeature() != null && tile.getFeature().getName().equals("Jungle")) return images.jungleCell;
+        if (tile.getFeature() != null && tile.getFeature().getName().equals("Forest")) return images.forestCell;
+        if (tile.getFeature() != null && tile.getFeature().getName().equals("Ice")) return images.iceCell;
+        if (tile.getFeature() != null && tile.getFeature().getName().equals("Marsh")) return images.marshCell;
+        if (tile.getFeature() != null && tile.getFeature().getName().equals("FloodPlain")) return images.floodPlainCell;
+        if (tile.getFeature() != null && tile.getFeature().getName().equals("Oasis")) return images.oasisCell;
         return switch (tile.getTerrain().getName()) {
             case "Desert" -> images.desertCell;
             case "Grassland" -> images.grasslandCell;
@@ -130,5 +142,43 @@ public class GameEnvironment {
         };
     }
 
+    private Image findResource(Tile tile) {
+        if (tile.getResource() == null)return null;
+        return switch (tile.getResource().getName()) {
+            case "Banana" -> images.banana;
+            case "Cow" -> images.cow;
+            case "Gazelle" -> images.deer;
+            case "Wheat" -> images.wheat;
+            case "Sheep" -> images.sheep;
+            case "Coal" -> images.coal;
+            case "Horse" -> images.horse;
+            case "Iron" -> images.iron;
+            case "Cotton" -> images.cotton;
+            case "Color" -> images.color;
+            case "Fur" -> images.fur;
+            case "Gemstones" -> images.gemStone;
+            case "Gold" -> images.gold;
+            case "Fumigation" -> images.fumigation;
+            case "Silk" -> images.silk;
+            case "Sugar" -> images.sugar;
+            case "Silver" -> images.silver;
+            case "Marble" -> images.marble;
+            case "Ivory" -> images.ivory;
+            default -> null;
+        };
+    }
+
+    private Image findFeature(Tile tile) {
+        if (tile.getFeature() == null)return null;
+        return switch (tile.getFeature().getName()) {
+            case "Marsh" -> images.marsh;
+            case "FloodPlain" -> images.floodPlain;
+            case "Oasis" -> images.oasis;
+            case "Ice" -> images.ice;
+            case "Jungle" -> images.jungle;
+            case "forest" -> images.forest;
+            default -> null;
+        };
+    }
 
 }
