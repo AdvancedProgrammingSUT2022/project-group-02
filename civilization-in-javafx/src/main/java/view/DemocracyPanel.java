@@ -73,7 +73,7 @@ public class DemocracyPanel {
     private void trade(User you, User other, Scanner scanner) {
 
         Trade trade = new Trade();
-
+        trade.setUser(other);
 
         System.out.println("Gold : " + other.getGold());
         System.out.println("*********");
@@ -143,6 +143,7 @@ public class DemocracyPanel {
                     Resource resource = you.getFoundResources().get(index - 1);
                     trade.setTypeOfExport("resource");
                     trade.setExportingObject(resource);
+                    you.addTrade(trade);
                 }
                 else
                     System.out.println("invalid index you idiot");
@@ -172,5 +173,9 @@ public class DemocracyPanel {
                 System.out.println("invalid command you idiot");
 
         }
+    }
+
+    private void makeTrade(User you, Trade trade) {
+        //fuck
     }
 }

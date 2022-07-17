@@ -574,4 +574,8 @@ public class User {
     public void setTrades(ArrayList<Trade> trades) {
         this.trades = trades;
     }
+
+    public void addTrade(Trade trade) {
+        trades.add(trade);
+    }
 }
