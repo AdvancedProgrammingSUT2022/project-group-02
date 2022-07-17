@@ -2,6 +2,7 @@ package model;
 
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 import java.time.LocalTime;
@@ -44,6 +45,7 @@ public class User {
     private boolean isActiveUser;
     private String lastOnline;
     private String avatarUrl;
+    //private Circle avatar;
 
     private ArrayList<Tile> visited;
     private ArrayList<Tile> visible;
@@ -557,4 +559,12 @@ public class User {
         this.seenMessages = seenMessages;
     }
 
+//    public void setAvatar() {
+//        this.avatar = new Circle();
+//        this.avatar.setFill(new ImagePattern(new Image(this.avatarUrl)));
+//    }
+//
+//    public Circle getAvatar() {
+//        return avatar;
+//    }
 }
