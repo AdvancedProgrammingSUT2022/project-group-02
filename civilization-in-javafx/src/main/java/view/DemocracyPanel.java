@@ -2,6 +2,7 @@ package view;
 
 import controller.UsersController;
 import model.Resource;
+import model.Trade;
 import model.User;
 
 import java.util.Scanner;
@@ -70,6 +71,10 @@ public class DemocracyPanel {
             you.getEnemies().remove(other);
     }
     private void trade(User you, User other, Scanner scanner) {
+
+        Trade trade = new Trade();
+
+
         System.out.println("Gold : " + other.getGold());
         System.out.println("*********");
         int index = 1;
@@ -81,6 +86,7 @@ public class DemocracyPanel {
 
         String input;
 
+
         while (true) {
             input = scanner.nextLine();
             if (input.equals("back")) {
@@ -89,36 +95,18 @@ public class DemocracyPanel {
             }
             else if (input.equals("gold")) {
                 //todo trade gold
+                trade.setTypeOfImport("gold");
+                trade.setImportingObject(howMuchOrMany(scanner, other.getGold()));
+                break;
             }
             else if (Pattern.matches("\\d+", input)) {
                 index = Integer.parseInt(input);
                 if (index >= 1 && index <= other.getFoundResources().size()) {
                     //now you have your desired resource lets see what you wanna do in return
-
-                    System.out.println("Gold : " + you.getGold());
-                    System.out.println("**********");
-                    index = 1;
-                    System.out.println("you have these resources");
-                    for (Resource foundResource : you.getFoundResources()) {
-                        System.out.println(index + "- " + foundResource.getName());
-                        index++;
-                    }
-
-                    while (true) {
-                        input = scanner.nextLine();
-                        if (input.equals("back")) {
-                            System.out.println("back to choose other resource");
-                            break;
-                        }
-                        else if (input.equals("gold")) {
-                            //todo trade gold
-                        }
-                        else if (Pattern.matches("\\d+", input)) {
-                            //lets trade
-                        }
-                        else
-                            System.out.println("invalid command");
-                    }
+                    Resource resource = other.getFoundResources().get(index - 1);
+                    trade.setTypeOfImport("resource");
+                    trade.setImportingObject(resource);
+                    break;
                 }
                 else
                     System.out.println("invalid index");
@@ -127,6 +115,62 @@ public class DemocracyPanel {
                 System.out.println("invalid command");
         }
 
+        index = 1;
+        System.out.println("Gold : " + you.getGold());
+        System.out.println("**********");
 
+        System.out.println("you have these resources");
+        for (Resource foundResource : you.getFoundResources()) {
+            System.out.println(index + "- " + foundResource.getName());
+            index++;
+        }
+
+        while (true) {
+            input = scanner.nextLine();
+            if (input.equals("back")) {
+                System.out.println("back to choose other resource");
+                break;
+            }
+            else if (input.equals("gold")) {
+                //todo trade gold
+                trade.setTypeOfExport("gold");
+                trade.setExportingObject(howMuchOrMany(scanner, you.getGold()));
+            }
+            else if (Pattern.matches("\\d+", input)) {
+                //lets trade
+                index = Integer.parseInt(input);
+                if (index >= 1 && index <= you.getFoundResources().size()) {
+                    Resource resource = you.getFoundResources().get(index - 1);
+                    trade.setTypeOfExport("resource");
+                    trade.setExportingObject(resource);
+                }
+                else
+                    System.out.println("invalid index you idiot");
+            }
+            else
+                System.out.println("invalid command");
+        }
+    }
+
+    private int howMuchOrMany(Scanner scanner, int limit) {
+        String input;
+        System.out.println("there is no escaping, just enter numbers");
+        System.out.println("not bigger than : " + limit);
+        while (true) {
+            input = scanner.nextLine();
+
+            if (Pattern.matches("\\d+", input)) {
+                int numberOfExpected = Integer.parseInt(input);
+                if (numberOfExpected >= 0 && numberOfExpected <= limit) {
+                    System.out.println("accepted : " + numberOfExpected);
+                    return numberOfExpected;
+                }
+                else
+                    System.out.println("fucking invalid number you idiot");
+            }
+            else
+                System.out.println("invalid command you idiot");
+
+        }
     }
 }

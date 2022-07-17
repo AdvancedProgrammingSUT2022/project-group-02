@@ -55,8 +55,8 @@ public class User {
     private ArrayList<User> enemies;
     private ArrayList<Message> seenMessages;
 
-    HashMap<User, Integer> relations;
-    HashMap<User, String> tradings;
+    private HashMap<User, Integer> relations;
+    private ArrayList<Trade> trades;
 
     public User(String username, String nickname, String password) {
         this.username = username;
@@ -93,6 +93,7 @@ public class User {
         enemies = new ArrayList<>();
         seenMessages = new ArrayList<>();
         relations = new HashMap<>();
+        trades = new ArrayList<>();
     }
 
     public void setColor(String color) {
@@ -564,5 +565,13 @@ public class User {
 
     public void setRelations(HashMap<User, Integer> relations) {
         this.relations = relations;
+    }
+
+    public ArrayList<Trade> getTrades() {
+        return trades;
+    }
+
+    public void setTrades(ArrayList<Trade> trades) {
+        this.trades = trades;
     }
 }

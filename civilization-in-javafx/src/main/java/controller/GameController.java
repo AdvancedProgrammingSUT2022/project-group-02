@@ -7,6 +7,8 @@ import view.ResearchMenu;
 import view.UserPanel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class GameController {
@@ -575,5 +577,24 @@ public class GameController {
         user.setCurrentTechnology(technology);
         userTurnResearch(user);
     }
+
+
+    public void tradingController(User user) {
+        User other;
+        for (Map.Entry<User, HashMap<String, Object>> userHashMapEntry : user.getTradings().entrySet()) {
+            other = userHashMapEntry.getKey();
+            if (userHashMapEntry.getValue().containsKey("gold")) {
+                //trade is based on gold
+                int gold = (Integer)userHashMapEntry.getValue().get("gold");
+                //lets trade
+            }
+            else {
+                //trade is based on resource
+                Resource resource = (Resource) userHashMapEntry.getValue().get("resource");
+                
+            }
+        }
+    }
+
 
 }
