@@ -17,7 +17,7 @@ public class UsersController {
 
     private static UsersController usersController;
 
-    private UsersController() {
+    public UsersController() {
         users = new ArrayList<>();
     }
 
@@ -150,5 +150,15 @@ public class UsersController {
     public void setUserColor(String color , User user, HashMap<String, Boolean> availableColors){
         user.setColor(color);
         availableColors.replace(color , false);
+    }
+
+    public static String findPlayers(String username, ArrayList<User> players, ArrayList<User> users) {
+        for (User user : users) {
+            if (user.getUsername().equals(username)){
+                players.add(user);
+                return user.getNickname();
+            }
+        }
+        return "there is no player with this username!";
     }
 }

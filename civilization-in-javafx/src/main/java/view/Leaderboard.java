@@ -37,7 +37,7 @@ public class Leaderboard {
     private MediaPlayer mediaPlayer;
     private Stage stage;
     private Scene scene;
-    private static Images images;
+    static Images images;
     private User user;
 
     public Leaderboard(MediaPlayer mediaPlayer, Stage stage, Scene scene, Images images, UsersController users, User user){

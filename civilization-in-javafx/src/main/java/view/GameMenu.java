@@ -3,6 +3,7 @@ package view;
 import controller.ColorsController;
 import controller.UsersController;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -25,19 +26,17 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Pattern;
 
 public class GameMenu {
-
-
     /*graphic parts*/
 
-    private String whichMenu;
     private final UsersController users;
     private MediaPlayer mediaPlayer;
     private final Stage stage;
     private final Scene scene;
-    private static Images images = new Images();
+    private static final Images images = new Images();
     private final User user;
 
     public GameMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene, Images images, UsersController users, User user) {
@@ -52,28 +51,19 @@ public class GameMenu {
     public void start() {
         URL fxmlAddress = getClass().getResource("/Fxml/main-menu.fxml");
         if (fxmlAddress == null) System.exit(0);
-        assert fxmlAddress != null;
         AnchorPane root = null;
         try {
             root = FXMLLoader.load(fxmlAddress);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (root == null) {
-            System.out.println("root");
-            System.exit(0);
-        }
-        if (scene == null) {
-            System.out.println("scene");
-            System.exit(0);
-        }
-        assert root != null;
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         scene.setRoot(root);
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.setFullScreen(true);
         graphicPlayBackgroundMusic();
+        assert root != null;
         graphicButtons(root);
     }
 
@@ -86,7 +76,7 @@ public class GameMenu {
         Button exit = new Button("exit");
         Rectangle background = new Rectangle(550, 165, 450, 550);
         background.setFill(new Color(0, 0, 0, 0.5));
-        graphicInitialiseButtons(startNewGame, continueGame, chooseMap, chooseSpeed, exit, buttonBackground);
+        graphicInitialiseMenuButtons(startNewGame, continueGame, chooseMap, chooseSpeed, exit, buttonBackground);
         root.getChildren().add(background);
         root.getChildren().add(buttonBackground);
         root.getChildren().add(startNewGame);
@@ -94,11 +84,10 @@ public class GameMenu {
         root.getChildren().add(chooseMap);
         root.getChildren().add(chooseSpeed);
         root.getChildren().add(exit);
-        graphicButtonsAction(startNewGame, continueGame, chooseMap, chooseSpeed, exit);
-
+        graphicButtonsAction(startNewGame, continueGame, chooseMap, chooseSpeed, exit, buttonBackground, root);
     }
 
-    private void graphicInitialiseButtons(Button startNewGame, Button continueGame, Button chooseMap,
+    private void graphicInitialiseMenuButtons(Button startNewGame, Button continueGame, Button chooseMap,
                                           Button chooseSpeed, Button exit, ImageView buttonBackGround) {
         buttonBackGround.setFitWidth(630);
         buttonBackGround.setFitHeight(780);
@@ -113,15 +102,15 @@ public class GameMenu {
         continueGame.setLayoutX(614);
         continueGame.setLayoutY(275);
         continueGame.getStyleClass().add("main-menu-buttons");
-        continueGame.setPrefSize(312, 38);;
+        continueGame.setPrefSize(312, 38);
 
         chooseMap.setLayoutX(614);
-        chooseMap.setLayoutY(389.5);
+        chooseMap.setLayoutY(334.3);
         chooseMap.getStyleClass().add("main-menu-buttons");
         chooseMap.setPrefSize(312, 38);
 
         chooseSpeed.setLayoutX(614);
-        chooseSpeed.setLayoutY(447);
+        chooseSpeed.setLayoutY(389.5);
         chooseSpeed.getStyleClass().add("main-menu-buttons");
         chooseSpeed.setPrefSize(312, 38);
 
@@ -132,28 +121,21 @@ public class GameMenu {
     }
 
     private void graphicButtonsAction(Button startNewGame, Button continueGame, Button chooseMap,
-                                      Button chooseSpeed, Button exit) {
-        exit.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            new MainMenu(mediaPlayer, stage, scene, images, users).run(user, new Scanner(System.in));
-        });
-        startNewGame.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-
-        });
+                                      Button chooseSpeed, Button exit, ImageView background, AnchorPane root) {
+        exit.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->
+                new MainMenu(mediaPlayer, stage, scene, images, users).run(user, new Scanner(System.in)));
+        startNewGame.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->
+                chooseFriendsView(background));
         continueGame.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             //todo : go to play special game
         });
-        chooseMap.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            chooseMapView();
-        });
-        chooseSpeed.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            chooseSpeedView();
-        });
+        chooseMap.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> chooseMapView());
+        chooseSpeed.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> chooseSpeedView());
     }
 
-    public void chooseFriendsView() {
+    public void chooseFriendsView(ImageView menuBackground) {
         URL fxmlAddress = getClass().getResource("/Fxml/main-menu.fxml");
         if (fxmlAddress == null) System.exit(0);
-        assert fxmlAddress != null;
         AnchorPane root = null;
         try {
             root = FXMLLoader.load(fxmlAddress);
@@ -168,89 +150,92 @@ public class GameMenu {
             System.out.println("scene");
             System.exit(0);
         }
-        assert root != null;
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         scene.setRoot(root);
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.setFullScreen(true);
         graphicPlayBackgroundMusic();
-        ImageView buttonBackground = new ImageView(images.mainMenuButtonBackGround);
-        buttonBackground.setFitWidth(630);
-        buttonBackground.setFitHeight(780);
-        buttonBackground.setLayoutX(445);
-        buttonBackground.setLayoutY(15);
         Rectangle background = new Rectangle(550, 165, 450, 550);
         background.setFill(new Color(0, 0, 0, 0.5));
-        TextField numberOfPlayers = new TextField();
-        numberOfPlayers.setLayoutX(614);
-        numberOfPlayers.setLayoutY(180);
-        numberOfPlayers.setPromptText("put the number of players");
-        numberOfPlayers.getStyleClass().add("profile-text-field");
-        numberOfPlayers.setPrefSize(312, 38);
-        root.getChildren().add(background);
-        root.getChildren().add(buttonBackground);
-        root.getChildren().add(numberOfPlayers);
+        ArrayList<User> players = new ArrayList<>();
+        players.add(user);
+        TextField playerSearchTextField = new TextField("enter your friend username");
+        Button addFriend = new Button("Add Friend");
         Button submit = new Button("submit");
-        submit.setLayoutX(614);
-        submit.setLayoutY(215.7);
-        submit.getStyleClass().add("main-menu-buttons");
-        submit.setPrefSize(312, 38);
         Button back = new Button("back");
-        back.setLayoutX(614);
-        back.setLayoutY(267.7);
-        back.getStyleClass().add("main-menu-buttons");
-        back.setPrefSize(312, 38);
-        AnchorPane finalRoot = root;
+        Label label = new Label();
+        Label errorLabel = new Label();
+        graphicInitialiseSearchButtons(playerSearchTextField, addFriend, submit, back, label, errorLabel);
+        AtomicReference<String> playersNickname = new AtomicReference<>("player 1 : " + user.getNickname());
+        label.setText(playersNickname.get());
+        AnchorPane Root = root;
+        addFriend.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            if (!playerSearchTextField.getText().equals(user.getUsername()))
+            playersNickname.set(searchNicknamesView(playerSearchTextField, Root, label, players, playersNickname.get(), errorLabel));
+            else errorLabel.setText(" Enter a name other than your own!");
+                });
+        back.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> start());
         submit.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            searchNicknamesView(numberOfPlayers, finalRoot, submit, back, numberOfPlayers);
+            if (players.size() > 1) {
+                GameEnvironment gameEnvironment = new GameEnvironment(mediaPlayer, stage, images, users, user);
+                gameEnvironment.run();
+            } else {
+                errorLabel.setText("you need more player to start the game!");
+            }
         });
-        back.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            start();
-        });
+        root.getChildren().add(background);
+        root.getChildren().add(menuBackground);
+        root.getChildren().add(playerSearchTextField);
         root.getChildren().add(back);
+        root.getChildren().add(addFriend);
         root.getChildren().add(submit);
+        root.getChildren().add(label);
+        root.getChildren().add(errorLabel);
     }
 
-    public void searchNicknamesView(TextField numberOfPlayers, AnchorPane root, Button removableButton, Button removableButton2, TextField removableTextField) {
-        root.getChildren().remove(removableButton);
-        root.getChildren().remove(removableTextField);
-        root.getChildren().remove(removableButton2);
-        int number = 0;
-        if (numberOfPlayers.getText().matches("\s*\\d+\s*")) {
-            number = Integer.parseInt(numberOfPlayers.getText());
-        }
-        ArrayList<TextField> playersNickname = new ArrayList<>();
-        for (int i = 0; i < number; i++) {
-            int j = i + 1;
-            TextField playerNickname = new TextField();
-            playerNickname.setLayoutX(614);
-            playerNickname.setLayoutY(215.7 + (i * 42));
-            playerNickname.setPromptText("put the player " + j + " nickname");
-            playerNickname.getStyleClass().add("profile-text-field");
-            playerNickname.setPrefSize(312, 38);
-            playersNickname.add(playerNickname);
-            root.getChildren().add(playerNickname);
-        }
-        Button submit = new Button("submit");
+    private void graphicInitialiseSearchButtons(TextField playerSearchTextField, Button addFriend, Button submit,
+                                                Button back, Label label, Label errorLabel) {
+        playerSearchTextField.setAlignment(Pos.CENTER);
+        playerSearchTextField.setLayoutX(609.5);
+        playerSearchTextField.setLayoutY(218);
+        playerSearchTextField.getStyleClass().add("search-friend-text-field");
+        playerSearchTextField.setPrefSize(312, 38);
+
+        addFriend.setLayoutX(614);
+        addFriend.setLayoutY(274);
+        addFriend.getStyleClass().add("main-menu-buttons");
+        addFriend.setPrefSize(312, 38);
+
         submit.setLayoutX(614);
-        submit.setLayoutY(605);
+        submit.setLayoutY(332);
         submit.getStyleClass().add("main-menu-buttons");
         submit.setPrefSize(312, 38);
-        submit.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            
-            //todo : send request to play for friends
-        });
-        root.getChildren().add(submit);
-        Button back = new Button("back");
+
         back.setLayoutX(614);
         back.setLayoutY(648);
         back.getStyleClass().add("main-menu-buttons");
         back.setPrefSize(312, 38);
-        back.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            start();
-        });
-        root.getChildren().add(back);
+
+        label.setLayoutX(200);
+        label.setLayoutY(230);
+        label.getStyleClass().add("players-nickname-label");
+
+        errorLabel.setLayoutX(614);
+        errorLabel.setLayoutY(401.5);
+        errorLabel.getStyleClass().add("register-signup-and-login-error");
+    }
+
+    private String searchNicknamesView(TextField playerSearchTextField, AnchorPane root, Label label, ArrayList<User> players, String playersNickname, Label errorLabel) {
+        String nickname = UsersController.findPlayers(playerSearchTextField.getText(), players, users.getUsers());
+        if (!nickname.equals("there is no player with this username!")) {
+            playersNickname += "\nplayer " + players.size() + " : " + nickname;
+            errorLabel.setText("");
+        } else {
+            errorLabel.setText("there is no player with this username!");
+        }
+        label.setText(playersNickname);
+        return playersNickname;
     }
 
     public void chooseSpeedView() {

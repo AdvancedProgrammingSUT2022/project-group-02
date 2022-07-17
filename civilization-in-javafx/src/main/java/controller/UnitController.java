@@ -9,7 +9,7 @@ public class UnitController {
 
     private final ArrayList<Unit> units;
 
-    private UnitController() {
+    UnitController() {
         units = new ArrayList<>();
     }
 
