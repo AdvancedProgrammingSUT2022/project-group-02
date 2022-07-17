@@ -1,5 +1,9 @@
 package model;
 
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
+
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -552,4 +556,5 @@ public class User {
     public void setSeenMessages(ArrayList<Message> seenMessages) {
         this.seenMessages = seenMessages;
     }
+
 }

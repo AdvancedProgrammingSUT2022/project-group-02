@@ -47,12 +47,22 @@ public class Images {
     public Image ice;
     public Image marsh;
     public Image oasis;
+    public Image avatar1;
+    public Image avatar2;
+    public Image avatar3;
+    public Image avatar4;
+    public Image avatar5;
+    public Image avatar6;
+    public Image avatar7;
+    public Image avatar8;
+    public Image avatar9;
+    public Image avatar10;
 
     public Images(){
         normalMenuButton = new Image(String.valueOf(getClass().getResource("/Media/buttons/Button_Down.png")));
         selectedMenuButton = new Image(String.valueOf(getClass().getResource("/Media/buttons/Button_Selected.png")));
         submitMenuButton = new Image(String.valueOf(getClass().getResource("/Media/buttons/Button_Normal.png")));
-        mainMenuButtonBackGround = new Image(String.valueOf(getClass().getResource("/Media/buttons/Menu-buttons-pic.png")));
+        //mainMenuButtonBackGround = new Image(String.valueOf(getClass().getResource("/Media/buttons/Menu-buttons-pic.png")));
         desertCell = new Image(String.valueOf(getClass().getResource("/Media/tiles/DesertCell.png")));
         hillCell = new Image(String.valueOf(getClass().getResource("/Media/tiles/HillCell.png")));
         plainCell = new Image(String.valueOf(getClass().getResource("/Media/tiles/PlainCell.png")));
@@ -93,5 +103,16 @@ public class Images {
         ice = new Image(String.valueOf(getClass().getResource("/Media/tiles/ice.png")));
         marsh = new Image(String.valueOf(getClass().getResource("/Media/tiles/marsh.png")));
         oasis = new Image(String.valueOf(getClass().getResource("/Media/tiles/oasis.png")));
+        avatar1 = new Image(getClass().getResource("/Media/avatars/avatar1.png").toExternalForm());
+        avatar2 = new Image(getClass().getResource("/Media/avatars/avatar2.png").toExternalForm());
+        avatar3 = new Image(getClass().getResource("/Media/avatars/avatar3.png").toExternalForm());
+        avatar4 = new Image(getClass().getResource("/Media/avatars/avatar4.png").toExternalForm());
+        avatar5 = new Image(getClass().getResource("/Media/avatars/avatar5.png").toExternalForm());
+        avatar6 = new Image(getClass().getResource("/Media/avatars/avatar6.png").toExternalForm());
+        avatar7 = new Image(getClass().getResource("/Media/avatars/avatar7.png").toExternalForm());
+        avatar8 = new Image(getClass().getResource("/Media/avatars/avatar8.png").toExternalForm());
+        avatar9 = new Image(getClass().getResource("/Media/avatars/avatar9.png").toExternalForm());
+        avatar10 = new Image(getClass().getResource("/Media/avatars/avatar10.png").toExternalForm());
+
     }
 }
