@@ -621,9 +621,9 @@ public class GameController {
             makeAllUnOrdered(user);
             UnitController.getInstance().repairMovementPoint(user);
             response.setMessage("turn increased successfully!");
-        } else {
+        } else
             response.setMessage("invalid number");
-        }
+
         return response;
     }
 
@@ -638,6 +638,7 @@ public class GameController {
             response.setMessage("gold increased successfully!");
         } else
             response.setMessage("invalid command");
+
         return response;
     }
 
@@ -653,6 +654,7 @@ public class GameController {
             response.setMessage("food increased successfully!");
         } else
             response.setMessage("invalid command");
+
         return response;
     }
 
@@ -685,6 +687,7 @@ public class GameController {
 
         } else
             response.setMessage("invalid command");
+
         return response;
     }
 
@@ -704,8 +707,80 @@ public class GameController {
                 response.setMessage("user doesn't have capital right now!");
         } else
             response.setMessage("invalid command");
+
         return response;
     }
 
+    public Response increaseCapitalDefenceRequest(Request request) {
+        Response response = new Response();
+
+        String username = (String) request.getParameters().get("username");
+        User user = UsersController.getInstance().getUserByUsername(username);
+        int amount = (Integer) request.getParameters().get("amount");
+
+        if (amount > 0) {
+            if (user.getCapital() != null) {
+                increaseCapitalDefence(amount, user);
+                response.setMessage("capitalDefence increased successfully!");
+            }
+            else
+                response.setMessage("user doesn't have capital right now!");
+        } else
+            response.setMessage("invalid command");
+
+        return response;
+    }
+
+    public Response increaseCultureRequest(Request request) {
+        Response response = new Response();
+
+        String username = (String) request.getParameters().get("username");
+        User user = UsersController.getInstance().getUserByUsername(username);
+        int amount = (Integer) request.getParameters().get("amount");
+
+        if (amount > 0) {
+            increaseCulture(amount, user);
+            response.setMessage("culture increased successfully!");
+        } else
+            response.setMessage("invalid command");
+
+        return response;
+    }
+
+    public Response increaseHappinessRequest(Request request) {
+        Response response = new Response();
+
+        String username = (String) request.getParameters().get("username");
+        User user = UsersController.getInstance().getUserByUsername(username);
+        int amount = (Integer) request.getParameters().get("amount");
+
+        if (amount > 0) {
+            increaseHappiness(amount, user);
+            response.setMessage("happiness increased successfully!");
+        } else
+            response.setMessage("invalid command");
+
+        return response;
+    }
+
+    public Response decreaseResearchTurnRequest(Request request) {
+        Response response = new Response();
+
+        String username = (String) request.getParameters().get("username");
+        User user = UsersController.getInstance().getUserByUsername(username);
+        int amount = (Integer) request.getParameters().get("amount");
+
+        if (amount > 0) {
+            if (user.getCurrentTechnology() != null) {
+                decreaseResearchTurnLeft(amount, user);
+                response.setMessage("researches increased successfully!");
+            }
+            else
+                response.setMessage("user don't research on anything right now!");
+        } else
+            response.setMessage("invalid number");
+
+        return response;
+    }
 
 }

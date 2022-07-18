@@ -93,6 +93,14 @@ public class Receiver {
                         return GameController.getInstance().increaseScienceRequest(request);
                     case "increase capital citizens":
                         return GameController.getInstance().increaseCapitalCitizensRequest(request);
+                    case "increase capital defence":
+                        return GameController.getInstance().increaseCapitalDefenceRequest(request);
+                    case "increase culture":
+                        return GameController.getInstance().increaseCultureRequest(request);
+                    case "increase happiness":
+                        return GameController.getInstance().increaseHappinessRequest(request);
+                    case "decrease research turn":
+                        return GameController.getInstance().decreaseResearchTurnRequest(request);
                 }
         }
         return null;
