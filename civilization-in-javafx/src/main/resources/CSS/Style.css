@@ -69,6 +69,12 @@
     -fx-font-family: serif;
 }
 
+.popup-info-text{
+    -fx-background-color: transparent;
+    -fx-text-fill: orange;
+    -fx-font-size: 16px;
+}
+
 /* end of text styles */
 
 /* text field styles */
@@ -91,13 +97,12 @@
     -fx-border-color: #0096ff;
     -fx-border-radius: 3px;
 }
+
 .profile-text-field{
     -fx-background-color: #b85b29;
     -fx-text-fill: #3f3a3a;
     -fx-font-size: 15px;
 }
-
-
 
 /* end of text field styles */
 
@@ -146,6 +151,9 @@
 /* shapes styles */
 .menu-background-rectangle{
     -fx-background-color: rgba(0, 0, 0, 0.47);
+}
+.tile-click-popup{
+    -fx-radius: 10px;
 }
 /* end of shapes styles */
 

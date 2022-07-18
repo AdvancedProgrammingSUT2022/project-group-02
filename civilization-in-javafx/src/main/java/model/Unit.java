@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.image.ImageView;
+
 public class Unit extends PhysicalObject{
 
     private String name;
@@ -22,6 +24,7 @@ public class Unit extends PhysicalObject{
     private boolean moving;
     private int totalHealth;
     private Tile destination;
+//    private ImageView imageView;
 
     public Unit(String name, Tile tile, int HP, int goldPrice, int productionPrice, int level, int MP, int combatStrength, int rangeCombatStrength,
                 User owner, int attackPoint, int maintainGold) {
@@ -202,4 +205,12 @@ public class Unit extends PhysicalObject{
     public void setTotalHealth(int totalHealth) {
         this.totalHealth = totalHealth;
     }
+
+//    public ImageView getImageView() {
+//        return imageView;
+//    }
+//
+//    public void setImageView(ImageView imageView) {
+//        this.imageView = imageView;
+//    }
 }
