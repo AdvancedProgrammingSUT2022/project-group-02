@@ -565,7 +565,6 @@ public class User {
         this.seenMessages = seenMessages;
     }
 
-<<<<<<< HEAD
     public HashMap<User, Integer> getRelations() {
         return relations;
     }
@@ -585,7 +584,6 @@ public class User {
     public void addTrade(Trade trade) {
         trades.add(trade);
     }
-=======
 //    public void setAvatar() {
 //        this.avatar = new Circle();
 //        this.avatar.setFill(new ImagePattern(new Image(this.avatarUrl)));
@@ -594,5 +592,4 @@ public class User {
 //    public Circle getAvatar() {
 //        return avatar;
 //    }
->>>>>>> 7f916ad60376acb11edd507b8f9e5a5d3048a0c1
 }

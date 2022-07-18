@@ -569,9 +569,6 @@ public class GameMenu {
         return true;
     }
 
-<<<<<<< HEAD
-    
-=======
     private ArrayList<Technology> better() {
         ArrayList<Technology> technologies = new ArrayList<>();
         ArrayList<Improvement> improvements = new ArrayList<>();
@@ -1145,5 +1142,4 @@ public class GameMenu {
         }
         return graph;
     }
->>>>>>> 7f916ad60376acb11edd507b8f9e5a5d3048a0c1
 }
