@@ -6,6 +6,10 @@ import java.util.ArrayList;
 
 public class CombatController extends UnitController {
 
+    public CombatController() {
+        super();
+    }
+
     private static CombatController combatController;
 
     public static CombatController getInstance() {

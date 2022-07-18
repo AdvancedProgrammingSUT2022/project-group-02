@@ -17,6 +17,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import model.User;
 import view.enums.Images;
@@ -37,7 +39,7 @@ public class Leaderboard {
     private MediaPlayer mediaPlayer;
     private Stage stage;
     private Scene scene;
-    private static Images images;
+    static Images images;
     private User user;
 
     public Leaderboard(MediaPlayer mediaPlayer, Stage stage, Scene scene, Images images, UsersController users, User user){
@@ -81,10 +83,12 @@ public class Leaderboard {
     }
 
     private void tableInitialise(TableView<User> table, VBox vBox){
+        TableColumn<User, String> avatarColumn = new TableColumn<>("avatar");
         TableColumn<User, String> nameColumn = new TableColumn<>("nickname");
         TableColumn<User, Integer> scoreColumn = new TableColumn<>("Score");
         TableColumn<User, String> lastWinTimeColumn = new TableColumn<>("lastWinTime");
         TableColumn<User, String> lastOnline = new TableColumn<>("lastOnline");
+        table.getColumns().add(avatarColumn);
         table.getColumns().add(nameColumn);
         table.getColumns().add(scoreColumn);
         table.getColumns().add(lastWinTimeColumn);
@@ -95,10 +99,12 @@ public class Leaderboard {
         for (User user : leaderboardUsers) {
             table.getItems().add(user);
         }
+        avatarColumn.setPrefWidth(100);
         scoreColumn.setPrefWidth(100);
         nameColumn.setPrefWidth(200);
         lastWinTimeColumn.setPrefWidth(150);
         lastOnline.setPrefWidth(150);
+        avatarColumn.setCellValueFactory(new PropertyValueFactory<>("avatarUrl"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("nickname"));
         scoreColumn.setCellValueFactory(new PropertyValueFactory<>("winsCount"));
         lastWinTimeColumn.setCellValueFactory(new PropertyValueFactory<>("lastWinTime"));

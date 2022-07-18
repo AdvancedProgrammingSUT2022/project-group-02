@@ -1,5 +1,10 @@
 package model;
 
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,6 +46,7 @@ public class User {
     private boolean isActiveUser;
     private String lastOnline;
     private String avatarUrl;
+    //private Circle avatar;
 
     private ArrayList<Tile> visited;
     private ArrayList<Tile> visible;
@@ -559,6 +565,7 @@ public class User {
         this.seenMessages = seenMessages;
     }
 
+<<<<<<< HEAD
     public HashMap<User, Integer> getRelations() {
         return relations;
     }
@@ -578,4 +585,14 @@ public class User {
     public void addTrade(Trade trade) {
         trades.add(trade);
     }
+=======
+//    public void setAvatar() {
+//        this.avatar = new Circle();
+//        this.avatar.setFill(new ImagePattern(new Image(this.avatarUrl)));
+//    }
+//
+//    public Circle getAvatar() {
+//        return avatar;
+//    }
+>>>>>>> 7f916ad60376acb11edd507b8f9e5a5d3048a0c1
 }

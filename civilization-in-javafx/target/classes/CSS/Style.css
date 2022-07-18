@@ -21,6 +21,7 @@
     -fx-background-size: cover;
     -fx-background-image: url("profile-menu-background.png");
 }
+
 /* end of background images */
 
 /* text styles */
@@ -62,6 +63,18 @@
     -fx-font-family: serif;
 }
 
+.players-nickname-label{
+    -fx-font-size: 18px;
+    -fx-text-fill: #ce4313;
+    -fx-font-family: serif;
+}
+
+.popup-info-text{
+    -fx-background-color: transparent;
+    -fx-text-fill: orange;
+    -fx-font-size: 16px;
+}
+
 /* end of text styles */
 
 /* text field styles */
@@ -75,6 +88,16 @@
     -fx-border-color: #0015ff;
     -fx-border-radius: 3px;
 }
+.search-friend-text-field{
+    -fx-background-color: rgba(72, 71, 71, 0.68);
+    -fx-text-fill: #08bfe8;
+    -fx-font-size: 15px;
+}
+.search-friend-text-field:hover{
+    -fx-border-color: #0096ff;
+    -fx-border-radius: 3px;
+}
+
 .profile-text-field{
     -fx-background-color: #b85b29;
     -fx-text-fill: #3f3a3a;
@@ -128,6 +151,9 @@
 /* shapes styles */
 .menu-background-rectangle{
     -fx-background-color: rgba(0, 0, 0, 0.47);
+}
+.tile-click-popup{
+    -fx-radius: 10px;
 }
 /* end of shapes styles */
 
@@ -196,3 +222,14 @@
     -fx-background-color: rgba(255, 0, 77, 0.22);
 }
 /* end of table of content */
+
+/* tiles of map */
+.tiles-of-map{
+    -fx-border-color: red;
+    -fx-border-width: 2px;
+}
+.tiles-of-map:hover{
+    -fx-cursor: hand;
+}
+
+/* end of tiles of map */

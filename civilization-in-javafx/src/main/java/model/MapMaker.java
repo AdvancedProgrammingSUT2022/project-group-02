@@ -47,7 +47,6 @@ public class MapMaker {
         Tile tile;
 
         //1st row
-
         tile = new Tile(0, 0, null, Ocean, 3, false, null, null, Ice);
         map.setTileBoard(tile);
         tile = new Tile(0, 1, null, Ocean, 3, false, null, null, Ice);

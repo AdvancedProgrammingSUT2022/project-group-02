@@ -43,7 +43,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ProfileMenu {
-    public static Images images = new Images();
+    public static Images images;
     private String whichMenu;
     private UsersController users;
     private MediaPlayer mediaPlayer;
@@ -266,7 +266,7 @@ public class ProfileMenu {
         Rectangle background = new Rectangle(550, 165, 500, 504);
         background.setFill(new Color(0, 0, 0, 0.5));
         Rectangle avatar1 = new Rectangle(560,220,118,124);
-        ImagePattern avatar1Image = new ImagePattern(new Image(getClass().getResource("/Media/avatars/avatar1.png").toExternalForm()));
+        ImagePattern avatar1Image = new ImagePattern(images.avatar1);
         avatar1.setFill(avatar1Image);
         avatar1.setCursor(Cursor.HAND);
         avatar1.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -276,7 +276,7 @@ public class ProfileMenu {
             }
         });
         Rectangle avatar2 = new Rectangle(680,220,118,124);
-        ImagePattern avatar2Image = new ImagePattern(new Image(getClass().getResource("/Media/avatars/avatar2.png").toExternalForm()));
+        ImagePattern avatar2Image = new ImagePattern(images.avatar2);
         avatar2.setFill(avatar2Image);
         avatar2.setCursor(Cursor.HAND);
         avatar2.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -286,7 +286,7 @@ public class ProfileMenu {
             }
         });
         Rectangle avatar3 = new Rectangle(800,220,118,124);
-        ImagePattern avatar3Image = new ImagePattern(new Image(getClass().getResource("/Media/avatars/avatar3.png").toExternalForm()));
+        ImagePattern avatar3Image = new ImagePattern(images.avatar3);
         avatar3.setFill(avatar3Image);
         avatar3.setCursor(Cursor.HAND);
         avatar3.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -296,7 +296,7 @@ public class ProfileMenu {
             }
         });
         Rectangle avatar4 = new Rectangle(920,220,118,124);
-        ImagePattern avatar4Image = new ImagePattern(new Image(getClass().getResource("/Media/avatars/avatar4.png").toExternalForm()));
+        ImagePattern avatar4Image = new ImagePattern(images.avatar4);
         avatar4.setFill(avatar4Image);
         avatar4.setCursor(Cursor.HAND);
         avatar4.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -306,7 +306,7 @@ public class ProfileMenu {
             }
         });
         Rectangle avatar5 = new Rectangle(560,350,118,124);
-        ImagePattern avatar5Image = new ImagePattern(new Image(getClass().getResource("/Media/avatars/avatar5.png").toExternalForm()));
+        ImagePattern avatar5Image = new ImagePattern(images.avatar5);
         avatar5.setFill(avatar5Image);
         avatar5.setCursor(Cursor.HAND);
         avatar5.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -316,7 +316,7 @@ public class ProfileMenu {
             }
         });
         Rectangle avatar6 = new Rectangle(680,350,118,124);
-        ImagePattern avatar6Image = new ImagePattern(new Image(getClass().getResource("/Media/avatars/avatar6.png").toExternalForm()));
+        ImagePattern avatar6Image = new ImagePattern(images.avatar6);
         avatar6.setFill(avatar6Image);
         avatar6.setCursor(Cursor.HAND);
         avatar6.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -326,7 +326,7 @@ public class ProfileMenu {
             }
         });
         Rectangle avatar7 = new Rectangle(800,350,118,124);
-        ImagePattern avatar7Image = new ImagePattern(new Image(getClass().getResource("/Media/avatars/avatar7.png").toExternalForm()));
+        ImagePattern avatar7Image = new ImagePattern(images.avatar7);
         avatar7.setFill(avatar7Image);
         avatar7.setCursor(Cursor.HAND);
         avatar7.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -336,7 +336,7 @@ public class ProfileMenu {
             }
         });
         Rectangle avatar8 = new Rectangle(920,350,118,124);
-        ImagePattern avatar8Image = new ImagePattern(new Image(getClass().getResource("/Media/avatars/avatar8.png").toExternalForm()));
+        ImagePattern avatar8Image = new ImagePattern(images.avatar8);
         avatar8.setFill(avatar8Image);
         avatar8.setCursor(Cursor.HAND);
         avatar8.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -346,7 +346,7 @@ public class ProfileMenu {
             }
         });
         Rectangle avatar9 = new Rectangle(680,480,118,124);
-        ImagePattern avatar9Image = new ImagePattern(new Image(getClass().getResource("/Media/avatars/avatar9.png").toExternalForm()));
+        ImagePattern avatar9Image = new ImagePattern(images.avatar9);
         avatar9.setFill(avatar9Image);
         avatar9.setCursor(Cursor.HAND);
         avatar9.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -356,14 +356,13 @@ public class ProfileMenu {
             }
         });
         Rectangle avatar10 = new Rectangle(800,480,118,124);
-        ImagePattern avatar10Image = new ImagePattern(new Image(getClass().getResource("/Media/avatars/avatar10.png").toExternalForm()));
+        ImagePattern avatar10Image = new ImagePattern(images.avatar10);
         avatar10.setFill(avatar10Image);
         avatar10.setCursor(Cursor.HAND);
         avatar10.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 user.setAvatarUrl("/Media/avatars/avatar10.png");
-                System.out.println("avatar10 selected");
             }
         });
         Button back = new Button("BACK");
@@ -372,7 +371,6 @@ public class ProfileMenu {
         back.getStyleClass().add("main-menu-buttons");
         back.setPrefSize(312, 38);
         back.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-//            new ProfileMenu(mediaPlayer,stage,scene,images,users,user).start();
             start();
         });
         root.getChildren().add(background);
