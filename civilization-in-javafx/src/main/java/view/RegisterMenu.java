@@ -330,7 +330,7 @@ public class RegisterMenu {
         Response response = NetworkController.getInstance().sendRequest(request);
         label.setText(response.getMessage());
         if (response.getStatusCode().equals("200")) {
-            User user = (User)response.getParameters().get("user");
+            User user = response.getUser();
             new MainMenu(mediaPlayer, stage, scene, images, users).run(user, new Scanner(System.in));
         }
         else
@@ -540,7 +540,7 @@ public class RegisterMenu {
         back3.setFitHeight(70);
         back3.setFitWidth(170);
         back.setPrefSize(170, 70);
-        back.setLayoutY(775);
+        back.setLayoutY(600);
         back.setContentDisplay(ContentDisplay.CENTER);
         back.getStyleClass().add("back-button");
     }
@@ -669,7 +669,7 @@ public class RegisterMenu {
         back3.setFitHeight(70);
         back3.setFitWidth(170);
         back.setPrefSize(170, 70);
-        back.setLayoutY(775);
+        back.setLayoutY(600);
         back.setContentDisplay(ContentDisplay.CENTER);
         back.getStyleClass().add("back-button");
     }

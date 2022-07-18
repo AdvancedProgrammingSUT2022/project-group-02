@@ -451,7 +451,7 @@ public class GameMenu {
         String boldColor = Colors.YELLOW_BOLD;
         String color = Colors.CYAN;
         System.out.println("welcome to Game Menu dear " + userColor + user.getUsername() + Colors.RESET + "!");
-        System.out.println(color + "press \"menu exit\" to get back to view.Main Menu" + Colors.RESET);
+        System.out.println(color + "press \"menu exit\" to get back to view.view.Main Menu" + Colors.RESET);
         System.out.println(boldColor + "to Play Game :" + Colors.RESET);
         System.out.println(color + "play game --player1 <username> ... --player(k) <username>");
         System.out.println("play game -p1 <username> ... -p(k) <username>");

@@ -233,7 +233,7 @@ public class UsersController {
                 response.setStatusCode("200");
                 response.setMessage("user logged in successfully!");
                 HashMap<String, Object> parameters = new HashMap<>();
-                parameters.put("user", user);
+                response.setUser(user);
                 response.setParameters(parameters);
                 return response;
             }

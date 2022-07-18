@@ -86,7 +86,7 @@ public class MainMenu {
 //            }
 //            //show current menu
 //            else if (Pattern.matches("\\s*menu\\s+show-current\\s*", input))
-//                System.out.println("view.Main Menu");
+//                System.out.println("view.view.Main Menu");
 //                //change the menu to Profile or Play game
 //            else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.CHANGE_MENU)) != null) {
 //                String menu = matcher.group("menu");

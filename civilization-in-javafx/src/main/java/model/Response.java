@@ -8,6 +8,7 @@ public class Response {
     private String statusCode;
     private String message;
     private HashMap<String, Object> parameters = new HashMap<>();
+    private User user;
 
     public HashMap<String, Object> getParameters() {
         return parameters;
@@ -35,5 +36,13 @@ public class Response {
 
     public static Response fromJson(String json) {
         return new Gson().fromJson(json, Response.class);
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

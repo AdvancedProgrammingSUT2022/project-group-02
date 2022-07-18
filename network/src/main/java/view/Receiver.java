@@ -13,11 +13,15 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Receiver {
 
     public void run(int SERVER_PORT) {
+
+        readFromJson();
+
         try {
             ServerSocket serverSocket = new ServerSocket(SERVER_PORT);
             while (true) {
@@ -34,6 +38,7 @@ public class Receiver {
                         }
 
                     } catch (IOException e) {
+                        UsersController.getInstance().writeToJson();
                         System.out.println("client disconnected!");
                     }
                 }).start();
@@ -107,6 +112,11 @@ public class Receiver {
         }
         return null;
 
+    }
+
+    private void readFromJson() {
+        ArrayList<User> users = UsersController.getInstance().readFromJson();
+        UsersController.getInstance().setUsers(users);
     }
 
 }

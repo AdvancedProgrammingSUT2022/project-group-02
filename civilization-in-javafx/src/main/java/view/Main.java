@@ -1,4 +1,4 @@
-
+package view;
 
 import controller.NetworkController;
 import controller.UsersController;
@@ -51,7 +51,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-
+        NetworkController.getInstance().initialize();
         launch();
     }
 
