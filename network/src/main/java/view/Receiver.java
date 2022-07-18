@@ -101,6 +101,8 @@ public class Receiver {
                         return GameController.getInstance().increaseHappinessRequest(request);
                     case "decrease research turn":
                         return GameController.getInstance().decreaseResearchTurnRequest(request);
+                    case "select tile":
+                        return GameController.getInstance().selectTileRequest(request);
                 }
         }
         return null;

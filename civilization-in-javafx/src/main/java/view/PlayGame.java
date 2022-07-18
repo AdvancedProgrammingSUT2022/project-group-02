@@ -129,29 +129,6 @@ public class PlayGame {
                     if ((Boolean)response.getParameters().get("next turn"))
                         nextTurn = false;
                 }
-                /*
-                else if (input.trim().equals("next turn")) {
-                    boolean did = true;
-                    if (user.getUnits() != null) {
-                        for (Unit unit : user.getUnits()) {
-                            if (!unit.isOrdered() && !unit.isAlert() && !unit.isSleep()) {
-                                did = false;
-                                break;
-                            }
-                        }
-                    }
-                    if (did) {
-                        nextTurn = false;
-                        user.setTurns(turn);
-                    }
-                    else
-                        System.out.println("you didn't play all your turns");
-                }
-                else if (input.trim().equals("next turn --force")) {
-                    nextTurn = false;
-                    user.setTurns(turn);
-                }
-                */
                 else if (input.trim().equals("city menu")) {
                     cityMenu.run(scanner, user);
                 }
@@ -297,12 +274,20 @@ public class PlayGame {
                         (matcher = RegexEnums.getMatcher(input, RegexEnums.SELECT_TILE2)) != null) {
                     int xOrigin = Integer.parseInt(matcher.group("x"));
                     int yOrigin = Integer.parseInt(matcher.group("y"));
-                    // valid coordinates
-                    if (xOrigin >= 0 && yOrigin >= 0 && xOrigin < map.getHeight() && yOrigin < map.getWidth()) {
+
+                    Request request = new Request();
+                    request.setMenu("play game");
+                    request.setAction("select tile");
+                    HashMap<String, Object> parameters = new HashMap<>();
+                    parameters.put("x", xOrigin);
+                    parameters.put("y", yOrigin);
+                    request.setParameters(parameters);
+                    Response response = NetworkController.getInstance().sendRequest(request);
+                    System.out.println(response.getMessage());
+                    if (response.getStatusCode().equals("200")) {
                         Tile origin = map.getSpecificTile(xOrigin, yOrigin);
-                        selectedTile(scanner, origin, xOrigin, yOrigin, user);
-                    } else
-                        System.out.println("invalid coordinates");
+                        selectedTile(scanner, origin, user);
+                    }
                 }
 
                 else if (input.trim().equals("choose technology")) {
@@ -332,7 +317,7 @@ public class PlayGame {
     }
 
 
-    public void selectedTile(Scanner scanner, Tile origin, int xOrigin, int yOrigin, User user) {
+    public void selectedTile(Scanner scanner, Tile origin, User user) {
 
         System.out.println("you have selected a tile with -x " + origin.getX() + " -y " + origin.getY());
         origin.setSelectedOne(false);
@@ -352,7 +337,7 @@ public class PlayGame {
 
             else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.SELECT_TILE1)) != null ||
                     (matcher = RegexEnums.getMatcher(tileInput, RegexEnums.SELECT_TILE2)) != null) {
-                if (selectAnotherTile(origin, scanner, user, xOrigin, yOrigin))
+                if (selectAnotherTile(origin, scanner, user))
                     return;
             }
             // move the unit in this tile to destination
@@ -360,7 +345,7 @@ public class PlayGame {
                     (matcher = RegexEnums.getMatcher(tileInput, RegexEnums.MOVE2)) != null) {
                 Tile tile = moveUnitConditions(origin, user, matcher);
                 if (tile != null && !tile.equals(origin)) {
-                    selectedTile(scanner, tile, tile.getX(), tile.getY(), user);
+                    selectedTile(scanner, tile, user);
                     return;
                 }
             }
@@ -722,7 +707,9 @@ public class PlayGame {
 
     }
 
-    private boolean selectAnotherTile(Tile origin, Scanner scanner, User user, int xOrigin, int yOrigin) {
+    private boolean selectAnotherTile(Tile origin, Scanner scanner, User user) {
+        int xOrigin = origin.getX();
+        int yOrigin = origin.getY();
         int anotherXOrigin = Integer.parseInt(matcher.group("x"));
         int anotherYOrigin = Integer.parseInt(matcher.group("y"));
         if (anotherXOrigin >= 0 && anotherYOrigin >= 0) {
@@ -739,7 +726,7 @@ public class PlayGame {
             } else {
                 Tile destination = gameController.findTile(anotherXOrigin, anotherYOrigin);
                 if (destination != null) {
-                    selectedTile(scanner, destination, anotherXOrigin, anotherYOrigin, user);
+                    selectedTile(scanner, destination, user);
                     origin.setSelectedOne(false);
                     origin.setSelectedTwo(false);
                     return true;

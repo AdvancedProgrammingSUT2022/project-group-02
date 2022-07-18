@@ -783,4 +783,20 @@ public class GameController {
         return response;
     }
 
+    public Response selectTileRequest(Request request) {
+        Response response = new Response();
+
+        int xOrigin = (Integer)request.getParameters().get("x");
+        int yOrigin = (Integer)request.getParameters().get("y");
+        if (xOrigin >= 0 && yOrigin >= 0 && xOrigin <= width && yOrigin <= height) {
+            response.setStatusCode("200");
+            response.setMessage("valid coordinates!");
+        }
+        else {
+            response.setStatusCode("404");
+            response.setMessage("invalid coordinates!");
+        }
+        return response;
+    }
+
 }
