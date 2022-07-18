@@ -5154,7 +5154,9 @@ public class MapMaker {
         buildings.add(new Building("Strap's Court", 0, 220, 0, 0, 0, 0, 0, requirements));
         technologies.add(new Technology("Banking", null, 28, 650, null, buildings));
         //chemistry
-        technologies.add(new Technology("Chemistry", null, 29, 900, null, null));
+        units = new ArrayList<>();
+        units.add(new RangeMilitaryUnit("Canon", null, 100, 250, 0, 1, 2, 10, 26, null, 0, 1));
+        technologies.add(new Technology("Chemistry", null, 29, 900, units, null));
         //economics
         buildings = new ArrayList<>();
         buildings.add(new Building("Windmill", 2, 180, 0, 0, 0, 0, 0, null));
@@ -5185,7 +5187,7 @@ public class MapMaker {
         technologies.add(new Technology("Printing Press", null, 35, 650, null, buildings));
         // rifling
         units = new ArrayList<>();
-        units.add(new Unit("Rifleman", null, 100, 1320, 330, 1, 2, 70, 0, null, 70, 5));
+        units.add(new MeleeMilitaryUnit("Rifleman", null, 100, 1320, 330, 1, 2, 70, 0, null, 70, 5));
         technologies.add(new Technology("Rifling", null, 36, 1425, units, null));
         // scientific theory
         buildings = new ArrayList<>();

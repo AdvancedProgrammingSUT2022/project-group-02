@@ -2,7 +2,7 @@ package controller;
 
 import model.Technology;
 import model.User;
-import view.ResearchMenu;
+
 
 import java.util.ArrayList;
 

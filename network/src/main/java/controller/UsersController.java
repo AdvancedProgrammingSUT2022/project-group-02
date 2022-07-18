@@ -151,4 +151,97 @@ public class UsersController {
         user.setColor(color);
         availableColors.replace(color , false);
     }
+
+
+    public Response changePassword(Request request) {
+        Response response = new Response();
+        String oldPassword = (String)request.getParameters().get("old password");
+        String newPassword = (String)request.getParameters().get("new password");
+        String username = (String)request.getParameters().get("username");
+        User user = getUserByUsername(username);
+        if (user.getPassword().equals(oldPassword)) {
+            if (!oldPassword.equals(newPassword)) {
+                user.setPassword(newPassword);
+                response.setMessage("password changed successfully!");
+                response.setStatusCode("200");
+                HashMap<String, Object> parameters = new HashMap<>();
+                parameters.put("user", user);
+                response.setParameters(parameters);
+                return response;
+            }
+            else {
+                //old and new are the same;
+                response.setStatusCode("401");
+                response.setMessage("please enter a new password");
+            }
+        }
+        else {
+            //old password is not correct;
+            response.setStatusCode("404");
+            response.setMessage("current password is invalid");
+        }
+        return response;
+    }
+
+    public Response changeNickname(Request request) {
+        Response response = new Response();
+        String newNickname = (String)request.getParameters().get("new nickname");
+        String username = (String)request.getParameters().get("username");
+        User user = getUserByUsername(username);
+        if (!sameNicknameExists(newNickname)) {
+            user.setNickname(newNickname);
+            response.setStatusCode("200");
+            response.setMessage("nickname changed successfully!");
+        }
+        else {
+            response.setStatusCode("401");
+            response.setMessage("user with nickname " + newNickname + " already exists");
+        }
+        return response;
+    }
+
+    public Response signup(Request request) {
+        Response response = new Response();
+        String username = (String)request.getParameters().get("username");
+        String nickname = (String)request.getParameters().get("nickname");
+        String password = (String)request.getParameters().get("password");
+        if (!sameUsernameExists(username)) {
+            if (!sameNicknameExists(nickname)) {
+                User user = new User(username, nickname, password);
+                addUser(user);
+
+                response.setMessage("user created successfully!");
+            }
+            else {
+
+                response.setMessage("user with this nickname " + nickname + " already exists");
+            }
+        }
+        else {
+            response.setMessage("user with this username " + username + " already exists");
+        }
+        return response;
+    }
+
+    public Response login(Request request) {
+        Response response = new Response();
+        String username = (String)request.getParameters().get("username");
+        String password = (String)request.getParameters().get("password");
+        User user;
+        if ((user = getUserByUsername(username)) != null) {
+            if (user.getPassword().equals(password)) {
+                response.setStatusCode("200");
+                response.setMessage("user logged in successfully!");
+                HashMap<String, Object> parameters = new HashMap<>();
+                parameters.put("user", user);
+                response.setParameters(parameters);
+                return response;
+            }
+        }
+        response.setStatusCode("404");
+        response.setMessage("Username and password didn't match!");
+
+        return response;
+    }
+
 }

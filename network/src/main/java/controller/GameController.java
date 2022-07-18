@@ -1,39 +1,27 @@
 package controller;
 
 import model.*;
-import view.CityMenu;
-import view.PlayGame;
-import view.ResearchMenu;
-import view.UserPanel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class GameController {
 
     private static GameController gameController;
 
-    private ArrayList<User> players;
-    private final Maps map;
     private final int height;
     private final int width;
 
 
-    private GameController(ArrayList<User> players, Maps map) {
-        this.players = players;
-        this.map = map;
-        for (User player : players) {
-            player.setGold(0);
-        }
+    private GameController() {
         this.height = 26;
         this.width = 80;
-
-
     }
 
-    public static GameController getInstance(ArrayList<User> players, Maps map) {
+    public static GameController getInstance() {
         if (gameController == null)
-            gameController = new GameController(players, map);
+            gameController = new GameController();
         return gameController;
     }
 
@@ -572,6 +560,53 @@ public class GameController {
         user.setResearching(true);
         user.setCurrentTechnology(technology);
         userTurnResearch(user);
+    }
+
+    public Response nextTurn(Request request) {
+
+        Response response = new Response();
+
+        Boolean cheat = (Boolean) request.getParameters().get("cheat");
+        String username = (String) request.getParameters().get("username");
+        User user = UsersController.getInstance().getUserByUsername(username);
+        if (cheat.equals(false)) {
+            //next turn raw
+            boolean did = true;
+            if (user.getUnits() != null) {
+                for (Unit unit : user.getUnits()) {
+                    if (!unit.isOrdered() && !unit.isAlert() && !unit.isSleep()) {
+                        did = false;
+                        break;
+                    }
+                }
+            }
+            if (did) {
+                //next turn
+                acceptNextTurn(response, user);
+            }
+            else {
+                //next turn is not possible
+                response.setStatusCode("401");
+                response.setMessage("you didn't play all your turns");
+                HashMap<String, Object> parameters = new HashMap<>();
+                parameters.put("next turn", Boolean.FALSE);
+                response.setParameters(parameters);
+            }
+        }
+        else {
+            //next turn --force
+            acceptNextTurn(response, user);
+        }
+        return response;
+    }
+
+    private void acceptNextTurn(Response response, User user) {
+        response.setStatusCode("200");
+        response.setMessage("next turn");
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("next turn", Boolean.TRUE);
+        response.setParameters(parameters);
+        user.setTurns(1);
     }
 
 }

@@ -1,8 +1,10 @@
 package view;
 
+import controller.GameController;
 import controller.UsersController;
 import model.Request;
 import model.Response;
+import model.Unit;
 import model.User;
 
 import java.io.DataInputStream;
@@ -41,124 +43,47 @@ public class Receiver {
     }
 
     private Response process(Request request) {
+        /*
+        if (request.getMenu().equals("register menu")) {
+            if (request.getAction().equals("signup"))
+                return UsersController.getInstance().signup(request);
+            else
+                return UsersController.getInstance().login(request);
+        }
+        else if (request.getMenu().equals("profile menu")) {
+            if (request.getAction().equals("change password"))
+                return UsersController.getInstance().changePassword(request);
+            else
+                return UsersController.getInstance().changeNickname(request);
+        }
+        else {
+            return null;
+        }
+        */
+
         switch (request.getMenu()) {
             case "register menu" :
                 if (request.getAction().equals("signup"))
-                    return signup(request);
+                    return UsersController.getInstance().signup(request);
                 else
-                    return login(request);
-            case "main menu" :
+                    return UsersController.getInstance().login(request);
+
 
             case "profile menu":
                 if (request.getAction().equals("change password"))
-                    return changePassword(request);
+                    return UsersController.getInstance().changePassword(request);
                 else
-                    return changeNickname(request);
+                    return UsersController.getInstance().changeNickname(request);
 
-            case "game menu" :
 
-            case "city menu" :
-
-            case "research menu" :
-
-            case "play game menu" :
-
-            case "chat menu" :
-
-            default:
-                return null;
+            case "play game" :
+                if (request.getAction().equals("next turn"))
+                    return GameController.getInstance().nextTurn(request);
         }
+        return null;
+
     }
 
-    private Response signup(Request request) {
-        Response response = new Response();
-        String username = (String)request.getParameters().get("username");
-        String nickname = (String)request.getParameters().get("nickname");
-        String password = (String)request.getParameters().get("password");
-        if (!UsersController.getInstance().sameUsernameExists(username)) {
-            if (!UsersController.getInstance().sameNicknameExists(nickname)) {
-                User user = new User(username, nickname, password);
-                UsersController.getInstance().addUser(user);
 
-                response.setMessage("user created successfully!");
-            }
-            else {
-
-                response.setMessage("user with this nickname " + nickname + " already exists");
-            }
-        }
-        else {
-            response.setMessage("user with this username " + username + " already exists");
-        }
-        return response;
-    }
-
-    private Response login(Request request) {
-        Response response = new Response();
-        String username = (String)request.getParameters().get("username");
-        String password = (String)request.getParameters().get("password");
-        User user;
-        if ((user = UsersController.getInstance().getUserByUsername(username)) != null) {
-            if (user.getPassword().equals(password)) {
-                response.setStatusCode("200");
-                response.setMessage("user logged in successfully!");
-                HashMap<String, Object> parameters = new HashMap<>();
-                parameters.put("user", user);
-                response.setParameters(parameters);
-                return response;
-            }
-        }
-        response.setStatusCode("404");
-        response.setMessage("Username and password didn't match!");
-
-        return response;
-    }
-
-    private Response changePassword(Request request) {
-        Response response = new Response();
-        String oldPassword = (String)request.getParameters().get("old password");
-        String newPassword = (String)request.getParameters().get("new password");
-        String username = (String)request.getParameters().get("username");
-        User user = UsersController.getInstance().getUserByUsername(username);
-        if (user.getPassword().equals(oldPassword)) {
-            if (!oldPassword.equals(newPassword)) {
-                user.setPassword(newPassword);
-                response.setMessage("password changed successfully!");
-                response.setStatusCode("200");
-                HashMap<String, Object> parameters = new HashMap<>();
-                parameters.put("user", user);
-                response.setParameters(parameters);
-                return response;
-            }
-            else {
-                //old and new are the same;
-                response.setStatusCode("401");
-                response.setMessage("please enter a new password");
-            }
-        }
-        else {
-            //old password is not correct;
-            response.setStatusCode("404");
-            response.setMessage("current password is invalid");
-        }
-        return response;
-    }
-
-    private Response changeNickname(Request request) {
-        Response response = new Response();
-        String newNickname = (String)request.getParameters().get("new nickname");
-        String username = (String)request.getParameters().get("username");
-        User user = UsersController.getInstance().getUserByUsername(username);
-        if (!UsersController.getInstance().sameNicknameExists(newNickname)) {
-            user.setNickname(newNickname);
-            response.setStatusCode("200");
-            response.setMessage("nickname changed successfully!");
-        }
-        else {
-            response.setStatusCode("401");
-            response.setMessage("user with nickname " + newNickname + " already exists");
-        }
-        return response;
-    }
 
 }

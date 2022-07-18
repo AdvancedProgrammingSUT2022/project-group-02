@@ -110,6 +110,26 @@ public class PlayGame {
                 input = scanner.nextLine();
                 if (input.equals("game exit"))
                     return;
+
+                else if (input.trim().startsWith("next turn")) {
+                    Request request = new Request();
+                    request.setMenu("play game");
+                    request.setAction("next turn");
+                    HashMap<String, Object> parameters = new HashMap<>();
+                    parameters.put("username", user.getUsername());
+                    if (input.trim().equals("next turn")) {
+                        parameters.put("cheat", Boolean.FALSE);
+                    }
+                    else if (input.trim().equals("next turn --force")) {
+                        parameters.put("cheat", Boolean.TRUE);
+                    }
+                    request.setParameters(parameters);
+                    Response response = NetworkController.getInstance().sendRequest(request);
+                    System.out.println(response.getMessage());
+                    if ((Boolean)response.getParameters().get("next turn"))
+                        nextTurn = false;
+                }
+                /*
                 else if (input.trim().equals("next turn")) {
                     boolean did = true;
                     if (user.getUnits() != null) {
@@ -131,6 +151,7 @@ public class PlayGame {
                     nextTurn = false;
                     user.setTurns(turn);
                 }
+                */
                 else if (input.trim().equals("city menu")) {
                     cityMenu.run(scanner, user);
                 }
