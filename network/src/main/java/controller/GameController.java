@@ -65,14 +65,14 @@ public class GameController {
     public void decreaseResearchTurnLeft(int extraResearch, User specificPlayer) {
         specificPlayer.setResearchTurnLeft(specificPlayer.getResearchTurnLeft()- extraResearch);
     }
-
+/*
     // find the tile by given x and y coordinates
     public Tile findTile(int x, int y) {
         if (x < height && y < width)
             return map.getTileBoard()[x][y];
         return null;
     }
-
+*/
     public void moveUnit(Tile origin, Tile destination, Unit unit, boolean isMilitary) {
         if (isMilitary)
             moveMilitary(origin, destination, (MilitaryUnit) unit);
@@ -95,7 +95,7 @@ public class GameController {
         destination.setCivilianUnit(civilian);
         destination.setCivilianUnitExists(true);
     }
-
+/*
     public void cityTurnProducts(User user) {
         // for each on user's cities
         if (user.getCities() != null) {
@@ -113,8 +113,8 @@ public class GameController {
                 }
             }
         }
-    }
-
+    }*/
+/*
     public void userTurnResearch(User user) {
         if (user.isResearching()) {
             // if research is done
@@ -344,7 +344,7 @@ public class GameController {
             user.setGold(0);
         }
     }
-
+*/
     public Tile findTileForMilitary(Tile origin) {
         if (origin.isMilitaryUnitExists()) {
             for (Tile neighbor : origin.getNeighbors()) {
@@ -444,7 +444,7 @@ public class GameController {
             }
         }
     }
-
+/*
     public void foundCity(User user) {
         if (user.getUnits() != null) {
             for (Unit unit : user.getUnits()) {
@@ -460,7 +460,8 @@ public class GameController {
             }
         }
     }
-
+    */
+    /*
     public void moveTravelingUnits(User user, PlayGame playGame) {
         for (Unit unit : user.getUnits()) {
             if (unit.isMoving()) {
@@ -483,15 +484,15 @@ public class GameController {
             }
         }
     }
-
-    public void assignNeighbor(MapController mapController) {
+       */
+    public void assignNeighbor(MapController mapController, Maps map) {
 
         // assign all the neighbors to each tile
         for (int i = 0; i < map.getHeight(); i++)
             for (int j = 0; j < map.getWidth(); j++)
                 mapController.setNeighbor(map.getTileBoard()[i][j]);
     }
-
+    /*
     public void foundRuin(User user) {
         for (Unit unit : user.getUnits()) {
             if (unit.getTile().getRuin() != null) {
@@ -515,6 +516,8 @@ public class GameController {
         }
     }
 
+     */
+/*
     private void addRuinEffectTech(Ruin ruin, User user) {
         for (Technology givenTechnology : ruin.getGivenTechnologies()) {
             if (!user.getTechnologies().contains(givenTechnology)) {
@@ -561,7 +564,7 @@ public class GameController {
         user.setCurrentTechnology(technology);
         userTurnResearch(user);
     }
-
+*/
     public Response nextTurn(Request request) {
 
         Response response = new Response();
