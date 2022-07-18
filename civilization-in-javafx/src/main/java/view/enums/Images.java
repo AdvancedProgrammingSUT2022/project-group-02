@@ -72,12 +72,22 @@ public class Images {
     public Image panzer;
     public Image tank;
     public Image city;
+    public Image avatar1;
+    public Image avatar2;
+    public Image avatar3;
+    public Image avatar4;
+    public Image avatar5;
+    public Image avatar6;
+    public Image avatar7;
+    public Image avatar8;
+    public Image avatar9;
+    public Image avatar10;
 
     public Images(){
         normalMenuButton = new Image(String.valueOf(getClass().getResource("/Media/buttons/Button_Down.png")));
         selectedMenuButton = new Image(String.valueOf(getClass().getResource("/Media/buttons/Button_Selected.png")));
         submitMenuButton = new Image(String.valueOf(getClass().getResource("/Media/buttons/Button_Normal.png")));
-        mainMenuButtonBackGround = new Image(String.valueOf(getClass().getResource("/Media/buttons/Menu-buttons-pic.png")));
+        //mainMenuButtonBackGround = new Image(String.valueOf(getClass().getResource("/Media/buttons/Menu-buttons-pic.png")));
         desertCell = new Image(String.valueOf(getClass().getResource("/Media/tiles/DesertCell.png")));
         hillCell = new Image(String.valueOf(getClass().getResource("/Media/tiles/HillCell.png")));
         plainCell = new Image(String.valueOf(getClass().getResource("/Media/tiles/PlainCell.png")));
@@ -143,5 +153,15 @@ public class Images {
         panzer = new Image(String.valueOf(getClass().getResource("/Media/Units/Panzer.png")));
         tank = new Image(String.valueOf(getClass().getResource("/Media/Units/Tank.png")));
         city = new Image(String.valueOf(getClass().getResource("/Media/city/City.png")));
+        avatar1 = new Image(String.valueOf(getClass().getResource("/Media/avatars/avatar1.png")));
+        avatar2 = new Image(String.valueOf(getClass().getResource("/Media/avatars/avatar2.png")));
+        avatar3 = new Image(String.valueOf(getClass().getResource("/Media/avatars/avatar3.png")));
+        avatar4 = new Image(String.valueOf(getClass().getResource("/Media/avatars/avatar4.png")));
+        avatar5 = new Image(String.valueOf(getClass().getResource("/Media/avatars/avatar5.png")));
+        avatar6 = new Image(String.valueOf(getClass().getResource("/Media/avatars/avatar6.png")));
+        avatar7 = new Image(String.valueOf(getClass().getResource("/Media/avatars/avatar7.png")));
+        avatar8 = new Image(String.valueOf(getClass().getResource("/Media/avatars/avatar8.png")));
+        avatar9 = new Image(String.valueOf(getClass().getResource("/Media/avatars/avatar9.png")));
+        avatar10 = new Image(String.valueOf(getClass().getResource("/Media/avatars/avatar10.png")));
     }
 }
