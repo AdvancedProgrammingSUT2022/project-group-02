@@ -1,6 +1,7 @@
 package view;
 
 import controller.GameController;
+import controller.UnitController;
 import controller.UsersController;
 import model.Request;
 import model.Response;
@@ -77,13 +78,25 @@ public class Receiver {
 
 
             case "play game" :
-                if (request.getAction().equals("next turn"))
-                    return GameController.getInstance().nextTurn(request);
+                switch (request.getAction()) {
+                    case "next turn":
+                        return GameController.getInstance().nextTurn(request);
+                    case "increase turn":
+                        return GameController.getInstance().increaseTurnRequest(request);
+                    case "increase gold":
+                        return GameController.getInstance().increaseGoldRequest(request);
+                    case "increase food":
+                        return GameController.getInstance().increaseFoodRequest(request);
+                    case "increase faith":
+                        return GameController.getInstance().increaseFaithRequest(request);
+                    case "increase science":
+                        return GameController.getInstance().increaseScienceRequest(request);
+                    case "increase capital citizens":
+                        return GameController.getInstance().increaseCapitalCitizensRequest(request);
+                }
         }
         return null;
 
     }
-
-
 
 }

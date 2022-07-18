@@ -609,4 +609,103 @@ public class GameController {
         user.setTurns(1);
     }
 
+    public Response increaseTurnRequest(Request request) {
+        Response response = new Response();
+
+        String username = (String)request.getParameters().get("username");
+        User user = UsersController.getInstance().getUserByUsername(username);
+        int amount = (Integer)request.getParameters().get("amount");
+
+        if (amount > 0) {
+            increaseTurn(amount, user);
+            makeAllUnOrdered(user);
+            UnitController.getInstance().repairMovementPoint(user);
+            response.setMessage("turn increased successfully!");
+        } else {
+            response.setMessage("invalid number");
+        }
+        return response;
+    }
+
+    public Response increaseGoldRequest(Request request) {
+        Response response = new Response();
+
+        String username = (String) request.getParameters().get("username");
+        User user = UsersController.getInstance().getUserByUsername(username);
+        int amount = (Integer) request.getParameters().get("amount");
+        if (amount > 0) {
+            increaseGold(amount, user);
+            response.setMessage("gold increased successfully!");
+        } else
+            response.setMessage("invalid command");
+        return response;
+    }
+
+    public Response increaseFoodRequest(Request request) {
+        Response response = new Response();
+
+        String username = (String) request.getParameters().get("username");
+        User user = UsersController.getInstance().getUserByUsername(username);
+
+        int amount = (Integer) request.getParameters().get("amount");
+        if (amount > 0) {
+            gameController.increaseFood(amount, user);
+            response.setMessage("food increased successfully!");
+        } else
+            response.setMessage("invalid command");
+        return response;
+    }
+
+    public Response increaseFaithRequest(Request request) {
+        Response response = new Response();
+
+        String username = (String) request.getParameters().get("username");
+        User user = UsersController.getInstance().getUserByUsername(username);
+
+        int amount = (Integer) request.getParameters().get("amount");
+        if (amount > 0) {
+            increaseFaith(amount, user);
+            response.setMessage("faith increased successfully!");
+        } else
+            response.setMessage("invalid command");
+
+        return response;
+    }
+
+    public Response increaseScienceRequest(Request request) {
+        Response response = new Response();
+
+        String username = (String) request.getParameters().get("username");
+        User user = UsersController.getInstance().getUserByUsername(username);
+        int amount = (Integer) request.getParameters().get("amount");
+
+        if (amount > 0) {
+            increaseScience(amount, user);
+            response.setMessage("science increased successfully!");
+
+        } else
+            response.setMessage("invalid command");
+        return response;
+    }
+
+    public Response increaseCapitalCitizensRequest(Request request) {
+        Response response = new Response();
+
+        String username = (String) request.getParameters().get("username");
+        User user = UsersController.getInstance().getUserByUsername(username);
+        int amount = (Integer) request.getParameters().get("amount");
+
+        if (amount > 0) {
+            if (user.getCapital() != null) {
+                increaseCapitalCitizens(amount, user);
+                response.setMessage("capitalCitizens increased successfully!");
+            }
+            else
+                response.setMessage("user doesn't have capital right now!");
+        } else
+            response.setMessage("invalid command");
+        return response;
+    }
+
+
 }

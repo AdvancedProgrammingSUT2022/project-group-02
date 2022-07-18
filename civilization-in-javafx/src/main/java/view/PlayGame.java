@@ -165,62 +165,81 @@ public class PlayGame {
                 else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_TURN1)) != null ||
                         (matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_TURN2)) != null) {
                     int amount = Integer.parseInt(matcher.group("amount"));
-                    if (amount > 0) {
-                        gameController.increaseTurn(amount, user);
-                        gameController.makeAllUnOrdered(user);
-                        unitController.repairMovementPoint(user);
-                        System.out.println("turn increased successfully!");
-                        showMap(user);
-                    } else
-                        System.out.println("invalid number");
-
+                    Request request = new Request();
+                    request.setMenu("play game");
+                    request.setAction("increase turn");
+                    HashMap<String, Object> parameters = new HashMap<>();
+                    parameters.put("username", user.getUsername());
+                    parameters.put("amount", amount);
+                    request.setParameters(parameters);
+                    Response response = NetworkController.getInstance().sendRequest(request);
+                    System.out.println(response.getMessage());
                 }
                 else if ((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_GOLD1)) != null ||
                         (matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_GOLD2)) != null) {
                     int amount = Integer.parseInt(matcher.group("amount"));
-                    if (amount > 0) {
-                        gameController.increaseGold(amount, user);
-                        System.out.println("gold increased successfully!");
-                        showMap(user);
-                    } else
-                        System.out.println("invalid command");
+                    Request request = new Request();
+                    request.setMenu("play game");
+                    request.setAction("increase gold");
+                    HashMap<String, Object> parameters = new HashMap<>();
+                    parameters.put("username", user.getUsername());
+                    parameters.put("amount", amount);
+                    request.setParameters(parameters);
+                    Response response = NetworkController.getInstance().sendRequest(request);
+                    System.out.println(response.getMessage());
                 }
-                else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_FOOD)) != null){
+                else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_FOOD)) != null) {
+
                     int amount = Integer.parseInt(matcher.group("amount"));
-                    if (amount > 0) {
-                        gameController.increaseFood(amount, user);
-                        System.out.println("food increased successfully!");
-                        showMap(user);
-                    } else
-                        System.out.println("invalid command");
+                    Request request = new Request();
+                    request.setMenu("play game");
+                    request.setAction("increase food");
+                    HashMap<String, Object> parameters = new HashMap<>();
+                    parameters.put("username", user.getUsername());
+                    parameters.put("amount", amount);
+                    request.setParameters(parameters);
+                    Response response = NetworkController.getInstance().sendRequest(request);
+                    System.out.println(response.getMessage());
+
                 }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_FAITH)) != null){
+
                     int amount = Integer.parseInt(matcher.group("amount"));
-                    if (amount > 0) {
-                        gameController.increaseFaith(amount, user);
-                        System.out.println("faith increased successfully!");
-                        showMap(user);
-                    } else
-                        System.out.println("invalid command");
+                    Request request = new Request();
+                    request.setMenu("play game");
+                    request.setAction("increase faith");
+                    HashMap<String, Object> parameters = new HashMap<>();
+                    parameters.put("username", user.getUsername());
+                    parameters.put("amount", amount);
+                    request.setParameters(parameters);
+                    Response response = NetworkController.getInstance().sendRequest(request);
+                    System.out.println(response.getMessage());
+
                 }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_SCIENCE)) != null){
+
                     int amount = Integer.parseInt(matcher.group("amount"));
-                    if (amount > 0) {
-                        gameController.increaseScience(amount, user);
-                        System.out.println("science increased successfully!");
-                        showMap(user);
-                    } else
-                        System.out.println("invalid command");
+                    Request request = new Request();
+                    request.setMenu("play game");
+                    request.setAction("increase science");
+                    HashMap<String, Object> parameters = new HashMap<>();
+                    parameters.put("username", user.getUsername());
+                    parameters.put("amount", amount);
+                    request.setParameters(parameters);
+                    Response response = NetworkController.getInstance().sendRequest(request);
+                    System.out.println(response.getMessage());
+
                 }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_CAPITAL_CITIZENS)) != null){
+
                     int amount = Integer.parseInt(matcher.group("amount"));
-                    if (amount > 0) {
-                        if (user.getCapital() != null) {
-                            gameController.increaseCapitalCitizens(amount, user);
-                            System.out.println("capitalCitizens increased successfully!");
-                            showMap(user);
-                        }
-                        else
-                            System.out.println("user doesn't have capital right now!");
-                    } else
-                        System.out.println("invalid command");
+                    Request request = new Request();
+                    request.setMenu("play game");
+                    request.setAction("increase capital citizens");
+                    HashMap<String, Object> parameters = new HashMap<>();
+                    parameters.put("username", user.getUsername());
+                    parameters.put("amount", amount);
+                    request.setParameters(parameters);
+                    Response response = NetworkController.getInstance().sendRequest(request);
+                    System.out.println(response.getMessage());
+
                 }else if((matcher = RegexEnums.getMatcher(input, RegexEnums.INCREASE_CAPITAL_DEFENCE)) != null){
                     int amount = Integer.parseInt(matcher.group("amount"));
                     if (amount > 0) {
