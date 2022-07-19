@@ -120,7 +120,6 @@ public class ProfileMenu {
 //        graphicButtons(root);
         URL fxmlAddress = getClass().getResource("/Fxml/main-menu.fxml");
         if (fxmlAddress == null) System.exit(0);
-        assert fxmlAddress != null;
         AnchorPane root = null;
         try {
             root = FXMLLoader.load(fxmlAddress);
@@ -135,7 +134,6 @@ public class ProfileMenu {
             System.out.println("scene");
             System.exit(0);
         }
-        assert root != null;
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         scene.setRoot(root);
         stage.setScene(scene);
