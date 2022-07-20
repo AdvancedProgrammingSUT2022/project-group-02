@@ -326,9 +326,13 @@ public class PlayGame {
             origin.setSelectedOne(true);
         else if (origin.isCivilianUnitExists())
             origin.setSelectedTwo(true);
-
+        Request request;
         String tileInput;
         while (true) {
+
+            request = new Request();
+            request.setMenu("tile menu");
+
             tileInput = scanner.nextLine();
             if (tileInput.equals("tile exit")) {
                 System.out.println("get out of tile");
@@ -343,11 +347,29 @@ public class PlayGame {
             // move the unit in this tile to destination
             else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.MOVE1)) != null ||
                     (matcher = RegexEnums.getMatcher(tileInput, RegexEnums.MOVE2)) != null) {
+
+                request.setAction("move unit");
+                HashMap<String, Object> parameters = new HashMap<>();
+                int xDestination = Integer.parseInt(matcher.group("x"));
+                int yDestination = Integer.parseInt(matcher.group("y"));
+                parameters.put("xDestination", xDestination);
+                parameters.put("yDestination", yDestination);
+                request.setParameters(parameters);
+                Response response = NetworkController.getInstance().sendRequest(request);
+                System.out.println(response.getMessage());
+                if ((Boolean)response.getParameters().get("arrived")) {
+                    //over
+                }
+                else {
+                    //not over, wait till next turn to move unit again
+                }
+                /*
                 Tile tile = moveUnitConditions(origin, user, matcher);
                 if (tile != null && !tile.equals(origin)) {
                     selectedTile(scanner, tile, user);
                     return;
                 }
+                */
             }
             // order settler to place city
             else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.CITY1)) != null ||
@@ -737,7 +759,7 @@ public class PlayGame {
             System.out.println("invalid coordinates");
         return false;
     }
-
+    /*
     // check everything about moving the unit
     private Tile moveUnitConditions(Tile origin, User user, Matcher matcher) {
         if ((origin.getCivilianUnit() != null && origin.getCivilianUnit().getOwner().equals(user)) ||
@@ -817,7 +839,7 @@ public class PlayGame {
         System.out.println(mp + " movement by unit to get to the destination");
         return tile;
     }
-
+    */
     private void showPlayers() {
         int index = 1;
         String color;

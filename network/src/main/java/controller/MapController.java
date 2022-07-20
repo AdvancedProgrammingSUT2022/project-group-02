@@ -4,7 +4,9 @@ import model.*;
 import view.enums.Colors;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
 
 public class MapController {
     private final Maps map;
@@ -296,5 +298,113 @@ public class MapController {
         else {
             return map.getTileBoard()[x][(y - 1) / 2];
         }
+    }
+
+    private Response moveUnitConditions(Tile origin, User user, Matcher matcher, Maps map, Request request) {
+
+        Response response = new Response();
+
+        int xDestination = (Integer)request.getParameters().get("xDestination");
+        int yDestination = (Integer)request.getParameters().get("yDestination");
+
+        HashMap<String, Object> parameters = new HashMap<>();
+
+        parameters.put("xDestination", xDestination);
+        parameters.put("yDestination", yDestination);
+        if ((origin.getCivilianUnit() != null && origin.getCivilianUnit().getOwner().equals(user)) ||
+                (origin.getMilitaryUnit() != null && origin.getMilitaryUnit().getOwner().equals(user))) {
+
+            if (xDestination >= 0 && yDestination >= 0 && xDestination < map.getHeight() && yDestination < map.getWidth()) {
+                Tile destination = map.getSpecificTile(xDestination, yDestination);
+                if (destination.getTerrain().isPassable()) {
+                    if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
+                        if (!destination.isMilitaryUnitExists() && destination.getTerrain().isPassable()) {
+                            //current place of unit
+                            Tile newDestination = moveUnit(origin, destination, origin.getMilitaryUnit(), true, response, parameters);
+
+                            parameters.put("xNewDestination", newDestination.getX());
+                            parameters.put("yNewDestination", newDestination.getY());
+                            response.setParameters(parameters);
+                        }
+                        else
+                            response.setMessage("can't move a unit to this tile");
+                    }
+                    else if (origin.isCivilianUnitExists() && origin.isSelectedTwo()) {
+                        if (!destination.isCivilianUnitExists() && destination.getTerrain().isPassable()) {
+                            //current place of unit
+                            Tile newDestination = moveUnit(origin, destination, origin.getCivilianUnit(), false, response, parameters);
+
+                            parameters.put("xNewDestination", newDestination.getX());
+                            parameters.put("yNewDestination", newDestination.getY());
+                            response.setParameters(parameters);
+                        }
+                        else
+                            response.setMessage("can't move a unit to this tile");
+                    }
+                    else
+                        response.setMessage("there is no unit in this tile!");
+                }
+                else
+                    response.setMessage("invalid destination");
+            }
+            else
+                response.setMessage("invalid coordinates");
+        }
+        else
+            response.setMessage("there is no unit here or you are not the owner of this unit");
+
+        return response;
+    }
+
+    public Tile moveUnit(Tile origin, Tile destination, Unit unit, boolean isMilitary, Response response, HashMap<String, Object> parameters) {
+        // create an array list to store all the tiles to destination
+        int i = 0;
+        ArrayList<Tile> tilesInTheWay = new ArrayList<>();
+        Tile tile = origin;
+        while ((tile = bestChoiceAmongNeighbors(tile, destination)) != destination) {
+            i++;
+            if (tile == null || i > 50) {
+                response.setMessage("no way found!");
+                return origin;
+            }
+            tilesInTheWay.add(tile);
+        }
+        tilesInTheWay.add(tile);
+        int mp = 0;
+        unit.setOrdered(true);
+        tile = origin;
+
+        for (Tile thing : tilesInTheWay) {
+            //tileInformation(thing);
+            boolean good = (isMilitary && !thing.isMilitaryUnitExists()) || (!isMilitary && thing.isCivilianUnitExists());
+            if (unit.getMP() < thing.getTerrain().getMovementPrice()) {
+
+                unit.setMoving(true);
+                unit.setDestination(destination);
+                if (good) {
+                    if (thing.equals(destination))
+                        parameters.put("arrived", true);
+                    else
+                        parameters.put("arrived", false);
+                    GameController.getInstance().moveUnit(origin, thing, unit, isMilitary);
+                    response.setMessage(mp + " movement by unit to get to the destination");
+                    return thing;
+                }
+                else {
+                    parameters.put("arrived", false);
+                    GameController.getInstance().moveUnit(origin, tile, unit, isMilitary);
+                    response.setMessage(mp + " movement by unit to get to the destination");
+                    return tile;
+                }
+            }
+            if (!thing.isRoad())
+                mp += thing.getTerrain().getMovementPrice();
+            unit.setMP(unit.getMP() - thing.getTerrain().getMovementPrice());
+            tile = thing;
+        }
+        parameters.put("arrived", true);
+        GameController.getInstance().moveUnit(origin, tile, unit, isMilitary);
+        response.setMessage(mp + " movement by unit to get to the destination");
+        return tile;
     }
 }
