@@ -330,11 +330,13 @@ public class GameEnvironment {
     }
 
     private void mouseClickHandler() {
-        UnitClickAction unitClickAction = new UnitClickAction(finalRoot, images);
+        UnitClickAction unitClickAction = new UnitClickAction(finalRoot, images,root);
+        unitClickAction.setPlayers(players);
         imageViewObjects.forEach((imageView, object) -> {
             if (imageView.getId().equals("settler")) imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
                 unitClickAction.setUnit((Settler) object);
                 unitClickAction.settlerClickAction();
+                unitClickAction.setUnitView(imageView);
             });
         });
     }

@@ -1,14 +1,20 @@
 package view;
 
+import controller.GameController;
+import controller.SettlerController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
+import model.Maps;
+import model.Tile;
 import model.Unit;
+import model.User;
 import view.enums.Images;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -16,14 +22,31 @@ public class UnitClickAction {
 
     private Unit unit;
     private final AnchorPane finalRoot;
+    private final AnchorPane root;
     private static Images images;
+    private ImageView unitView;
     private final HashMap<String, Button> buttons = new HashMap<>();
     private final HashMap<String, ImageView> imageViews = new HashMap<>();
     private final Button alertAndWakeButton = new Button();
+    private ArrayList<User> players;
+    private Maps map;
 
-    public UnitClickAction(AnchorPane finalRoot, Images images){
+    public UnitClickAction(AnchorPane finalRoot, Images images,AnchorPane root){
         this.finalRoot = finalRoot;
         UnitClickAction.images = images;
+        this.root = root;
+    }
+
+    public void setPlayers(ArrayList<User> players){
+        this.players = players;
+    }
+
+    public void setMap(Maps map){
+        this.map = map;
+    }
+
+    public void setUnitView(ImageView unitView){
+        this.unitView = unitView;
     }
 
     public void setUnit(Unit unit) {
@@ -65,7 +88,11 @@ public class UnitClickAction {
                             imageViews.remove("workerMoreActionBackground");
                         } else initialiseMoreActionBackground();
                     }
-                    case "foundCityButton" -> {}
+                    case "foundCityButton" -> {
+                        SettlerController settlerController = SettlerController.getInstance();
+                        settlerController.createNewCity(unit,unit.getOwner(),unit.getTile(),unit.getOwner().getNickname()+" City");
+                        createCity(unit.getTile(), unitView);
+                    }
                     case "alertAndWakeButton" -> {
                         //TODO : -GRAPHIC- SHOW SOMETHING ON UNIT TO SHOW THIS
                         //TODO : -LOGIC- WHAT HAPPENED WHEN WE CLICK THIS
@@ -79,6 +106,18 @@ public class UnitClickAction {
 
             });
         });
+    }
+
+    private void createCity(Tile tile, ImageView imageView) {
+        if (tile.getCity() != null) {
+            ImageView cityView = new ImageView(images.city);
+            cityView.setLayoutX(imageView.getLayoutX() - 100);
+            cityView.setLayoutY(imageView.getLayoutY() - 85);
+            cityView.setFitWidth(200);
+            cityView.setFitHeight(200);
+            root.getChildren().add(cityView);
+            root.getChildren().remove(imageView);
+        }
     }
 
     private void initialiseMoreActionBackground() {

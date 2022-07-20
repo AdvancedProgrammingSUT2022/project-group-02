@@ -35,12 +35,14 @@ public class SettlerController extends UnitController{
         addBasicBuildings(city);
         user.addTerritory(tile);
         // add neighbors to the city for free
-        for (Tile neighbor : tile.getNeighbors()) {
-            new ResourceController().addFoundResource(user, neighbor);
-            neighbor.setCity(city);
-            neighbor.setOwner(user);
-            city.addOwnerShipTiles(neighbor);
-            user.addTerritory(neighbor);
+        if(tile.getNeighbors() != null) {
+            for (Tile neighbor : tile.getNeighbors()) {
+                new ResourceController().addFoundResource(user, neighbor);
+                neighbor.setCity(city);
+                neighbor.setOwner(user);
+                city.addOwnerShipTiles(neighbor);
+                user.addTerritory(neighbor);
+            }
         }
     }
 

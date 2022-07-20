@@ -75,7 +75,7 @@ public class GameController {
     }
 
     public void decreaseResearchTurnLeft(int extraResearch, User specificPlayer) {
-        specificPlayer.setResearchTurnLeft(specificPlayer.getResearchTurnLeft()- extraResearch);
+        specificPlayer.setResearchTurnLeft(specificPlayer.getResearchTurnLeft() - extraResearch);
     }
 
     // find the tile by given x and y coordinates
@@ -211,8 +211,7 @@ public class GameController {
                                 }
                             }
                             worker.setImprovement(null);
-                        }
-                        else {
+                        } else {
                             worker.setWorkingStatus(false);
                             worker.setRemainingTurnsToComplete(0);
                             worker.getTile().setInProgress(false);
@@ -256,8 +255,7 @@ public class GameController {
                     settler.setTile(tile);
                     city.getOwner().addUnit(settler);
                     UserPanel.productDoneNotification(city.getOwner(), city, settler, this);
-                }
-                else if (unit.getName().equals("scout")) {
+                } else if (unit.getName().equals("scout")) {
                     Tile tile = findTileForCivilian(city.getTile());
                     scout = new Civilian("scout", tile, unit.getHP(), unit.getGoldPrice(), unit.getProductionPrice(), unit.getLevel(), unit.getMP(), unit.getCombatStrength(), unit.getRangeCombatStrength(), city.getOwner(), unit.getAttackPoint(), unit.getMaintainGold());
                     tile.setCivilianUnit(scout);
@@ -301,15 +299,15 @@ public class GameController {
 
     }
 
-    public void increaseCitizens(User user){
+    public void increaseCitizens(User user) {
         for (City city : user.getCities()) {
-            if (city.getTurnNumber() >= 10){
+            if (city.getTurnNumber() >= 10) {
                 city.setTurnNumber(0);
                 city.setCitizensNumber(city.getCitizensNumber() + 1);
                 Citizen citizen = new Citizen(null);
                 city.addCitizen(citizen);
                 new UserPanel(this).citizensIncreased(user, city);
-                if (city.getCitizensNumber() % 5 == 0){
+                if (city.getCitizensNumber() % 5 == 0) {
                     user.setUnhappiness(user.getUnhappiness() + 1);
                 }
             } else city.setTurnNumber(city.getTurnNumber() + 1);
@@ -331,7 +329,7 @@ public class GameController {
                 }
             }
         }
-        if (user.getCities() != null){
+        if (user.getCities() != null) {
             for (City city : user.getCities()) {
                 user.setGoldPerTurn(user.getGoldPerTurn() + city.getGold());
                 user.setFood(user.getFoodPerTurn() + city.getFood());
@@ -341,17 +339,17 @@ public class GameController {
         user.setGold(user.getGold() + user.getGoldPerTurn());
         user.setFood(user.getFood() + user.getFoodPerTurn());
         user.setScience(user.getScience() + user.getSciencePerTurn());
-        if (user.getUnits() != null){
+        if (user.getUnits() != null) {
             for (Unit unit : user.getUnits()) {
                 user.setGold(user.getGold() - unit.getMaintenance());
             }
         }
         for (Tile tile : user.getTerritory()) {
-            if (tile.isRoad()){
-                if(user.getTurns() % 3 == 0) user.setGold(user.getGold() - 1);
+            if (tile.isRoad()) {
+                if (user.getTurns() % 3 == 0) user.setGold(user.getGold() - 1);
             }
         }
-        if (user.getGold() < 0){
+        if (user.getGold() < 0) {
             user.setScience(user.getScience() + user.getGold());
             user.setGold(0);
         }
@@ -372,6 +370,7 @@ public class GameController {
         }
         return origin;
     }
+
     public Tile findTileForCivilian(Tile origin) {
         if (origin.isCivilianUnitExists()) {
             for (Tile neighbor : origin.getNeighbors()) {
@@ -380,14 +379,16 @@ public class GameController {
             }
             for (Tile neighbor : origin.getNeighbors()) {
                 for (Tile neighborNeighbor : neighbor.getNeighbors()) {
-                    if (!neighborNeighbor.isCivilianUnitExists() && neighbor.getTerrain().isPassable()){
-                        return neighborNeighbor;}
+                    if (!neighborNeighbor.isCivilianUnitExists() && neighbor.getTerrain().isPassable()) {
+                        return neighborNeighbor;
+                    }
                 }
             }
         }
         return origin;
     }
-    public void userHappiness(User user){
+
+    public void userHappiness(User user) {
         for (City city : user.getCities()) {
             if (!city.isUnhappinessEffect())
                 user.setUnhappiness(user.getUnhappiness() + 3);
@@ -403,14 +404,14 @@ public class GameController {
     }
 
 
-    public void citiesIncome(User user){
+    public void citiesIncome(User user) {
         for (City city : user.getCities()) {
             city.setProduction(0);
             city.setFood(0);
             city.setGold(0);
             for (Citizen citizen : city.getCitizens()) {
-                if (citizen.getTile() != null){
-                    if (citizen.getTile().getFeature() != null){
+                if (citizen.getTile() != null) {
+                    if (citizen.getTile().getFeature() != null) {
                         city.setGold(citizen.getTile().getFeature().getGoldRate());
                         city.setFood(citizen.getTile().getFeature().getFoodRate());
                         city.setProduction(citizen.getTile().getFeature().getProductionRate());
@@ -459,6 +460,7 @@ public class GameController {
 
     public void foundCity(User user) {
         if (user.getUnits() != null) {
+            System.out.println(user.getUnits());
             for (Unit unit : user.getUnits()) {
                 for (Tile neighbor : unit.getTile().getNeighbors()) {
                     if (neighbor.getCity() != null &&
@@ -483,8 +485,7 @@ public class GameController {
                         unit.setMoving(false);
                         unit.setDestination(null);
                     }
-                }
-                else if (unit.getTile().isCivilianUnitExists() && unit.getTile().isSelectedTwo()) {
+                } else if (unit.getTile().isCivilianUnitExists() && unit.getTile().isSelectedTwo()) {
                     playGame.moveUnit(unit.getTile(), unit.getDestination(), unit, user, false);
                     unit.setOrdered(true);
                     if (unit.getTile().equals(unit.getDestination())) {
