@@ -69,4 +69,8 @@ public class TechController {
     public void setTechnologiesGraph(int[][] technologiesGraph) {
         this.technologiesGraph = technologiesGraph;
     }
+
+    public int[][] getTechnologiesGraph() {
+        return technologiesGraph;
+    }
 }
