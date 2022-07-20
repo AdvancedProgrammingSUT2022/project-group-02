@@ -252,7 +252,7 @@ public class GameEnvironment {
         });
     }
 
-    //TODO : DEBUG
+    //TODO : -GRAPHIC- DEBUG
     private void showUnits(Tile tile, ImageView imageView) {
         if (tile.getMilitaryUnit() != null) {
             Image MUnit = findMUnit(tile);
@@ -316,8 +316,8 @@ public class GameEnvironment {
         };
     }
 
-    //TODO : DEBUG
-    //TODO : ADD THIS TO CREATE MAP
+    //TODO : -GRAPHIC-LOGIC- DEBUG
+    //TODO : -LOGIC- ADD THIS TO CREATE MAP
     private void createCity(Tile tile, ImageView imageView) {
         if (tile.getCity() != null) {
             ImageView cityView = new ImageView(images.city);
@@ -334,7 +334,7 @@ public class GameEnvironment {
         imageViewObjects.forEach((imageView, object) -> {
             if (imageView.getId().equals("settler")) imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
                 unitClickAction.setUnit((Settler) object);
-                unitClickAction.settlerClickAction((Settler) object);
+                unitClickAction.settlerClickAction();
             });
         });
     }

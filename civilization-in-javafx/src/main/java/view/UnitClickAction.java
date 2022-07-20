@@ -1,28 +1,25 @@
 package view;
 
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
-import model.Settler;
 import model.Unit;
 import view.enums.Images;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
 public class UnitClickAction {
+
     private Unit unit;
-    private AnchorPane finalRoot;
+    private final AnchorPane finalRoot;
     private static Images images;
-    private HashMap<String, Button> buttons = new HashMap<>();
-    private HashMap<String, ImageView> imageViews = new HashMap<>();
+    private final HashMap<String, Button> buttons = new HashMap<>();
+    private final HashMap<String, ImageView> imageViews = new HashMap<>();
+    private final Button alertAndWakeButton = new Button();
 
     public UnitClickAction(AnchorPane finalRoot, Images images){
         this.finalRoot = finalRoot;
@@ -33,7 +30,7 @@ public class UnitClickAction {
         this.unit = unit;
     }
 
-    public void settlerClickAction(Settler settler) {
+    public void settlerClickAction() {
         ImageView unitIconView = new ImageView(images.settlerIcon);
         ImageView infoView = new ImageView(images.unitInfoBackground);
         ImageView moreActionView = new ImageView(images.otherActionIcon);
@@ -43,34 +40,46 @@ public class UnitClickAction {
         ImageView foundCityView = new ImageView(images.foundCityIcon);
         ImageView doNothingView = new ImageView(images.doNothingIcon);
         initialiseUnitInfo(infoView);
-        initialiseUnitSameButtons(moreActionView, alertView, wakeView, movingView, doNothingView);
+        initialiseUnitSameButtons(moreActionView, alertView, movingView, doNothingView);
         Button foundCityButton = new Button();
         initialiseFoundCity(foundCityView, foundCityButton);
         initialiseUnitSameInfo(unitIconView);
-        mouseClickHandler();
+        mouseClickHandler(alertView, wakeView);
     }
 
-    private void mouseClickHandler() {
+    private void mouseClickHandler(ImageView alertView, ImageView wakeView) {
         buttons.forEach((key, value) -> {
             value.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseEvent -> {
                 AudioClip clickSound = new AudioClip(Objects.requireNonNull(getClass().getResource("/Media/sounds/click.mp3")).toExternalForm());
                 clickSound.play();
             });
             value.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-                if (key.equals("moreActionButton")) {
-                    if (imageViews.containsKey("workerMoreActionBackground")) {
-                        finalRoot.getChildren().remove(buttons.get("deleteUnitButton"));
-                        finalRoot.getChildren().remove(buttons.get("autoPlayingButton"));
-                        finalRoot.getChildren().remove(imageViews.get("workerMoreActionBackground"));
-                        buttons.remove("deleteUnitButton");
-                        buttons.remove("autoPlayingButton");
-                        imageViews.remove("workerMoreActionBackground");
-                    } else initialiseMoreActionBackground();
+                switch (key) {
+                    case "moreActionButton" -> {
+                        if (imageViews.containsKey("workerMoreActionBackground")) {
+                            finalRoot.getChildren().remove(buttons.get("deleteUnitButton"));
+                            finalRoot.getChildren().remove(buttons.get("autoPlayingButton"));
+                            finalRoot.getChildren().remove(imageViews.get("workerMoreActionBackground"));
+                            buttons.remove("deleteUnitButton");
+                            buttons.remove("autoPlayingButton");
+                            imageViews.remove("workerMoreActionBackground");
+                        } else initialiseMoreActionBackground();
+                    }
+                    case "foundCityButton" -> {}
+                    case "alertAndWakeButton" -> {
+                        //TODO : -GRAPHIC- SHOW SOMETHING ON UNIT TO SHOW THIS
+                        //TODO : -LOGIC- WHAT HAPPENED WHEN WE CLICK THIS
+                        if (value.getId().equals("alertMode")) {
+                            initialiseWake(wakeView);
+                        } else {
+                            initialiseAlert(alertView);
+                        }
+                    }
                 }
 
             });
         });
-    };
+    }
 
     private void initialiseMoreActionBackground() {
         if (unit.getName().equals("settler") || unit.getName().equals("scout") || unit.getName().equals("worker")) {
@@ -136,19 +145,18 @@ public class UnitClickAction {
         }
     }
 
-    private void initialiseUnitSameButtons(ImageView moreActionView, ImageView alertView, ImageView wakeView, ImageView movingView,
+    private void initialiseUnitSameButtons(ImageView moreActionView, ImageView alertView, ImageView movingView,
                                            ImageView doNothingView){
-        Button moreActionButton = new Button();
-        initialiseMoreAction(moreActionView, moreActionButton);
-        Button alertButton = new Button();
-        initialiseAlert(alertView, alertButton);
-        Button doNothingButton = new Button();
-        initialiseDoNothing(doNothingView, doNothingButton);
-        Button movingViewButton = new Button();
-        initialiseMoving(movingView, movingViewButton);
+        initialiseMoreAction(moreActionView);
+        initialiseAlert(alertView);
+        buttons.put("alertAndWakeButton" , alertAndWakeButton);
+        finalRoot.getChildren().add(alertAndWakeButton);
+        initialiseDoNothing(doNothingView);
+        initialiseMoving(movingView);
     }
 
-    private void initialiseMoreAction(ImageView moreActionView, Button moreActionButton){
+    private void initialiseMoreAction(ImageView moreActionView){
+        Button moreActionButton = new Button();
         moreActionButton.setId("moreActionButton");
         buttons.put("moreActionButton", moreActionButton);
         moreActionButton.getStyleClass().add("unit-action-buttons");
@@ -161,20 +169,30 @@ public class UnitClickAction {
         finalRoot.getChildren().add(moreActionButton);
     }
 
-    private void initialiseAlert(ImageView alertView, Button alertButton) {
-        alertButton.setId("alertButton");
-        buttons.put("alertButton", alertButton);
-        alertButton.getStyleClass().add("unit-action-buttons");
-        alertButton.setGraphic(alertView);
+    private void initialiseAlert(ImageView alertView) {
+        alertAndWakeButton.setId("alertMode");
+        alertAndWakeButton.getStyleClass().add("unit-action-buttons");
+        alertAndWakeButton.setGraphic(alertView);
         alertView.setFitHeight(50);
         alertView.setFitWidth(50);
-        alertButton.setLayoutX(3);
-        alertButton.setLayoutY(509);
-        alertButton.setPrefSize(50, 50);
-        finalRoot.getChildren().add(alertButton);
+        alertAndWakeButton.setLayoutX(3);
+        alertAndWakeButton.setLayoutY(509);
+        alertAndWakeButton.setPrefSize(50, 50);
     }
 
-    private void initialiseDoNothing(ImageView doNothingView, Button doNothingButton) {
+    private void initialiseWake(ImageView WakeView) {
+        alertAndWakeButton.setId("wakeMode");
+        alertAndWakeButton.getStyleClass().add("unit-action-buttons");
+        alertAndWakeButton.setGraphic(WakeView);
+        WakeView.setFitHeight(50);
+        WakeView.setFitWidth(50);
+        alertAndWakeButton.setLayoutX(3);
+        alertAndWakeButton.setLayoutY(509);
+        alertAndWakeButton.setPrefSize(50, 50);
+    }
+
+    private void initialiseDoNothing(ImageView doNothingView) {
+        Button doNothingButton = new Button();
         doNothingButton.setId("doNothingButton");
         buttons.put("doNothingButton", doNothingButton);
         doNothingButton.getStyleClass().add("unit-action-buttons");
@@ -187,7 +205,8 @@ public class UnitClickAction {
         finalRoot.getChildren().add(doNothingButton);
     }
 
-    private void initialiseMoving(ImageView movingView, Button movingButton) {
+    private void initialiseMoving(ImageView movingView) {
+        Button movingButton = new Button();
         movingButton.setId("movingButton");
         buttons.put("movingButton", movingButton);
         movingButton.getStyleClass().add("unit-action-buttons");
@@ -249,7 +268,6 @@ public class UnitClickAction {
         finalRoot.getChildren().add(unitIconView);
     }
 
-    //TODO : MP OR LASTING MP??
     private void initialiseUnitMovement() {
         Label label = new Label("MOVEMENT  :  " + unit.getMP() + "/" + unit.getLastingMP());
         label.setLayoutX(185);
