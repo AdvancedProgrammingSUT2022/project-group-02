@@ -111,6 +111,12 @@ public class Receiver {
                         return MapController.getInstance().moveUnitConditions(map, request);
                     case "place city":
                         return CityController.getInstance().conditionsForPlaceCity(request, map);
+                    case "attack city":
+                        return CityController.getInstance().conditionForAttackCity(request, map);
+                    case "decision on what to do with city":
+                        return CombatController.getInstance().decisionOnWhatDoDo(request, map);
+                    case "attack unit":
+                        return CombatController.getInstance().conditionForAttackUnit(request, map);
                 }
         }
         return null;

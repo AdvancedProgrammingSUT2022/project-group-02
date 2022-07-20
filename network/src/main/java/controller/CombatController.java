@@ -1,8 +1,10 @@
 package controller;
 
 import model.*;
+import view.Notifications;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CombatController extends UnitController {
 
@@ -17,7 +19,7 @@ public class CombatController extends UnitController {
 
     //combat handling : first version of code
 
-    public void destroyCity(City city) {
+    private void destroyCity(City city) {
         User previous = city.getOwner();
         previous.removeCity(city);
         for (Tile ownerShipTile : city.getOwnerShipTiles()) {
@@ -28,7 +30,7 @@ public class CombatController extends UnitController {
         city = null;
     }
 
-    public void annexCity(City city, Unit unit) {
+    private void annexCity(City city, Unit unit) {
         User previous = city.getOwner();
 
         previous.removeCity(city);
@@ -73,5 +75,82 @@ public class CombatController extends UnitController {
     public void annexCivilianUnit(User user, Unit unit) {
         unit.setOwner(user);
         user.addUnit(unit);
+    }
+
+    public Response decisionOnWhatDoDo(Request request, Maps map) {
+        Response response = new Response();
+        int index = (int) request.getParameters().get("index");
+
+        int xOrigin = (int) request.getParameters().get("xOrigin");
+        int yOrigin = (int) request.getParameters().get("yOrigin");
+        int xDestination = (int) request.getParameters().get("xDestination");
+        int yDestination = (int) request.getParameters().get("yDestination");
+        Tile origin = map.getSpecificTile(xOrigin, yOrigin);
+        Tile destination = map.getSpecificTile(xDestination, yDestination);
+
+
+        if (index == 1) {
+            //destroy city
+            destroyCity(destination.getCity());
+            origin.getMilitaryUnit().getOwner().setHappiness(origin.getMilitaryUnit().getOwner().getHappiness() - 10);
+            response.setMessage("city destroyed successfully!");
+        }
+        else if (index == 2) {
+            //annex city
+            annexCity(destination.getCity(), origin.getMilitaryUnit());
+            response.setMessage("city annexed successfully!");
+        }
+        return response;
+    }
+
+    public Response conditionForAttackUnit(Request request, Maps map) {
+        Response response = new Response();
+        HashMap<String, Object> parameters = new HashMap<>();
+        int xOrigin = (int) request.getParameters().get("xOrigin");
+        String username = (String) request.getParameters().get("username");
+        int yOrigin = (int) request.getParameters().get("yOrigin");
+        int xDestination = (int) request.getParameters().get("xDestination");
+        User user = UsersController.getInstance().getUserByUsername(username);
+        int yDestination = (int) request.getParameters().get("yDestination");
+        Tile origin = map.getSpecificTile(xOrigin, yOrigin);
+        Tile destination = map.getSpecificTile(xDestination, yDestination);
+
+
+        if (MapController.getInstance().findDistance(origin, destination) == 1 ||
+                (MapController.getInstance().findDistance(origin, destination) == 2 && origin.getMilitaryUnit().getRangeCombatStrength() > 0)) {
+            if (destination.isMilitaryUnitExists() && !destination.getMilitaryUnit().getOwner().equals(user)) {
+                if (!user.getEnemies().contains(destination.getMilitaryUnit().getOwner())) {
+                    user.addEnemy(destination.getMilitaryUnit().getOwner());
+                    response.setNotifications(Notifications.sendNotificationToInvader(user, destination.getMilitaryUnit().getOwner()));
+                    response.setNotifications(Notifications.sendNotificationToDefender(user, destination.getMilitaryUnit().getOwner()));
+                    parameters.put("notification", true);
+                }
+                else
+                    parameters.put("notification", false);
+                attackUnit(origin.getMilitaryUnit(), destination.getMilitaryUnit());
+
+            } else if (destination.isCivilianUnitExists() && !destination.getCivilianUnit().getOwner().equals(user)) {
+                if (!user.getEnemies().contains(destination.getCivilianUnit().getOwner())) {
+                    user.addEnemy(destination.getCivilianUnit().getOwner());
+                    response.setNotifications(Notifications.sendNotificationToInvader(user, destination.getCivilianUnit().getOwner()));
+                    response.setNotifications(Notifications.sendNotificationToDefender(user, destination.getCivilianUnit().getOwner()));
+                    parameters.put("notification", true);
+                }
+                else
+                    parameters.put("notification", false);
+                annexCivilianUnit(user, destination.getCivilianUnit());
+
+                response.setMessage("you own this unit now!");
+            } else {
+                response.setMessage("there is no unit on this tile");
+                parameters.put("notification", false);
+            }
+        }
+        else {
+            response.setMessage("this tile is not in your range");
+            parameters.put("notification", false);
+        }
+        response.setParameters(parameters);
+        return response;
     }
 }

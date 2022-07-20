@@ -415,79 +415,53 @@ public class PlayGame {
                     (matcher = RegexEnums.getMatcher(tileInput, RegexEnums.ATTACK_CITY2)) != null) {
                 int x = Integer.parseInt(matcher.group("x"));
                 int y = Integer.parseInt(matcher.group("y"));
-                boolean found = false;
-                if (x >= 0 && x < map.getHeight() && y >= 0 && y < map.getWidth()) {
-                    Tile des = map.getSpecificTile(x, y);
-                    if (des.getCity() != null && des.getCity().getTile().equals(des)) {
-                        if (origin.isMilitaryUnitExists() && origin.getMilitaryUnit().getOwner().equals(user)) {
-                            // melee
-                            if (origin.getMilitaryUnit().getRangeCombatStrength() == 0) {
-                                for (int i = 0; i < origin.getNeighbors().size(); i++) {
-                                    if (origin.getNeighbors().get(i).equals(des)) {
-                                        found = true;
-                                        attackCity(origin, des, des.getCity(), user, scanner);
-                                        break;
-                                    }
-                                }
-                            }
-                            // ranged
-                            else {
-                                for (int i = 0; i < origin.getNeighbors().size(); i++) {
-                                    if (origin.getNeighbors().get(i).equals(des)) {
-                                        found = true;
-                                        attackCity(origin, des, des.getCity(), user, scanner);
-                                        break;
-                                    }
-                                    for (int j = 0; j < origin.getNeighbors().get(i).getNeighbors().size(); j++) {
-                                        if (origin.getNeighbors().get(i).getNeighbors().get(j).equals(des)) {
-                                            found = true;
-                                            attackCity(origin, des, des.getCity(), user, scanner);
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                            if (!found)
-                                System.out.println("this city is not in the range of your unit");
-                        } else
-                            System.out.println("there is no military unit on this tile");
-                    }
-                    else
-                        System.out.println("there is no city on this tile");
+
+                request.setAction("attack city");
+                HashMap<String, Object> parameters = new HashMap<>();
+                parameters.put("username", user.getUsername());
+                parameters.put("xOrigin", origin.getX());
+                parameters.put("yOrigin", origin.getY());
+                parameters.put("xDestination", x);
+                parameters.put("yDestination", y);
+                request.setParameters(parameters);
+                Response response = NetworkController.getInstance().sendRequest(request);
+                System.out.println(response.getMessage());
+                if ((boolean)response.getParameters().get("ruined")) {
+                    //the city has been destroyed , decision on what to do
+                    parameters = new HashMap<>();
+                    request = new Request();
+                    request.setMenu("tile menu");
+                    request.setAction("decision on what to do with city");
+                    decisionOnWhatToDoWithCity(scanner, parameters);
+                    parameters.put("xOrigin", origin.getX());
+                    parameters.put("yOrigin", origin.getY());
+                    parameters.put("xDestination", x);
+                    parameters.put("yDestination", y);
+                    request.setParameters(parameters);
+
+                    response = NetworkController.getInstance().sendRequest(request);
+                    System.out.println(response.getMessage());
+
                 }
-                else
-                    System.out.println("invalid coordinates");
             }
 
             else if (((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.ATTACK_UNIT1)) != null ||
                     (matcher = RegexEnums.getMatcher(tileInput, RegexEnums.ATTACK_UNIT2)) != null) && origin.isMilitaryUnitExists()) {
-                int x = Integer.parseInt(matcher.group("x"));
-                int y = Integer.parseInt(matcher.group("y"));
-                if (x >= 0 && x < map.getWidth() && y >= 0 && y < map.getHeight()) {
-                    Tile des = map.getSpecificTile(x, y);
-                    if (mapController.findDistance(origin, des) == 1 || (mapController.findDistance(origin, des) == 2 && origin.getMilitaryUnit().getRangeCombatStrength() > 0)) {
-                        if (des.isMilitaryUnitExists() && !des.getMilitaryUnit().getOwner().equals(user)) {
-                            //todo : if user is not in war with the owner of unit , ask him if he want to start a war
-                            if (!user.getEnemies().contains(des.getMilitaryUnit().getOwner())) {
-                                UserPanel.sendNotificationToInvader(user, des.getMilitaryUnit().getOwner());
-                            }
-                            CombatController.getInstance().attackUnit(origin.getMilitaryUnit(), des.getMilitaryUnit());
-
-                        } else if (des.isCivilianUnitExists() && !des.getCivilianUnit().getOwner().equals(user)) {
-                            //todo : if user is not in war with the owner of unit , ask him if he want to start a war
-                            if (!user.getEnemies().contains(des.getCivilianUnit().getOwner())) {
-                                UserPanel.sendNotificationToDefender(user, des.getCivilianUnit().getOwner());
-                            }
-                            CombatController.getInstance().annexCivilianUnit(user, des.getCivilianUnit());
-                            System.out.println("you own this unit now!");
-                        } else
-                            System.out.println("there is no unit on this tile");
+                request.setAction("attack unit");
+                HashMap<String, Object> parameters = new HashMap<>();
+                parameters.put("username", user.getUsername());
+                parameters.put("xOrigin", origin.getX());
+                parameters.put("yOrigin", origin.getY());
+                parameters.put("xDestination", matcher.group("x"));
+                parameters.put("yDestination", matcher.group("y"));
+                request.setParameters(parameters);
+                Response response = NetworkController.getInstance().sendRequest(request);
+                System.out.println(response.getMessage());
+                if ((boolean)response.getParameters().get("notification")) {
+                    for (String notification : response.getNotifications()) {
+                        System.out.println(notification);
                     }
-                    else
-                        System.out.println("this tile is not in your range");
                 }
-                else
-                    System.out.println("invalid coordinates");
             }
 
             else if (tileInput.equals("delete unit")) {
@@ -767,6 +741,39 @@ public class PlayGame {
         return false;
     }
 
+    private void decisionOnWhatToDoWithCity(Scanner scanner, HashMap<String, Object> parameters) {
+        System.out.println("which one do you choose?");
+        System.out.println("1- completely destroy city");
+        System.out.println("2- annex city");
+        System.out.println("please press one of this numbers");
+        Request request = new Request();
+        request.setMenu("tile menu");
+        request.setAction("what to do with city");
+        String input;
+        while (true) {
+            input = scanner.nextLine();
+            if (Pattern.matches("\\d+", input)) {
+                int index = Integer.parseInt(input);
+                switch (index) {
+                    case 1 -> {
+                        parameters.put("index", 1);
+                        System.out.println();
+                        return;
+                    }
+                    case 2 -> {
+                        parameters.put("index", 2);
+                        return;
+                    }
+                    default -> System.out.println("invalid number");
+                }
+            }
+            else
+                System.out.println("invalid command");
+        }
+    }
+
+    //bullshit
+
     private void showPlayers() {
         int index = 1;
         String color;
@@ -788,67 +795,6 @@ public class PlayGame {
         System.out.println("faith: " + user.getFaith());
         System.out.println("happiness: " + user.getHappiness());
         System.out.println("food: " + user.getFood());
-    }
-
-    private void attackCity(Tile origin, Tile destination, City city, User user, Scanner scanner) {
-        System.out.println("war panel with city");
-        Unit unit = origin.getMilitaryUnit();
-        System.out.println("use cheat code -destroy city-");
-        System.out.println("press -city war exit- to get out");
-        System.out.println("press -ordinary attack- to just attack the city");
-        boolean cheat = true;
-        String cityCombatInput;
-        while (cheat) {
-            cityCombatInput = scanner.nextLine();
-            if (cityCombatInput.equals("city war exit")) {
-                System.out.println("get out of war panel with city");
-                cheat = false;
-            }
-            else if (cityCombatInput.equals("destroy city")) {
-                cheat = decideOnWhatToDoWithCity(city, scanner, unit);
-                unit.setOrdered(true);
-            }
-            else if (cityCombatInput.equals("ordinary attack")){
-                unit.setOrdered(true);
-                if (city.getHP() < unit.getAttackPoint()) {
-                    System.out.println("you won, congratulation " + user.getUsername());
-                    cheat = decideOnWhatToDoWithCity(city, scanner, unit);
-                }
-                else {
-                    CombatController.getInstance().attackCity(city, unit);
-                }
-            }
-        }
-
-    }
-
-    private boolean decideOnWhatToDoWithCity(City city, Scanner scanner, Unit unit) {
-        String cityCombatInput;
-        System.out.println("which one do you choose?");
-        System.out.println("1- completely destroy city");
-        System.out.println("2- annex city");
-        System.out.println("please press one of this numbers");
-        boolean decide = true;
-        while(decide) {
-            cityCombatInput = scanner.nextLine();
-            if (Pattern.matches("\\d+", cityCombatInput)) {
-                int index = Integer.parseInt(cityCombatInput);
-                if (index == 1) {
-                    CombatController.getInstance().destroyCity(city);
-                    decide = false;
-                    unit.getOwner().setHappiness(unit.getOwner().getHappiness() - 10);
-                }
-                else if (index == 2) {
-                    CombatController.getInstance().annexCity(city, unit);
-                    decide = false;
-                }
-                else
-                    System.out.println("invalid number");
-            }
-            else
-                System.out.println("invalid command");
-        }
-        return false;
     }
 
     public void showMap(User user) {
