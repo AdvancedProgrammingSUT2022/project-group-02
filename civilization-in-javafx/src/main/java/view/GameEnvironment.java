@@ -92,9 +92,7 @@ public class GameEnvironment {
                 }
             }
         }
-        new Thread(() -> {
-            mouseClickHandler();
-        }).start();
+        new Thread(this::mouseClickHandler).start();
         scrollHandler();
     }
 

@@ -6,6 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
+import model.Tile;
 import model.Unit;
 import view.enums.Images;
 
@@ -65,7 +66,9 @@ public class UnitClickAction {
                             imageViews.remove("workerMoreActionBackground");
                         } else initialiseMoreActionBackground();
                     }
-                    case "foundCityButton" -> {}
+                    case "foundCityButton" -> {
+
+                    }
                     case "alertAndWakeButton" -> {
                         //TODO : -GRAPHIC- SHOW SOMETHING ON UNIT TO SHOW THIS
                         //TODO : -LOGIC- WHAT HAPPENED WHEN WE CLICK THIS
