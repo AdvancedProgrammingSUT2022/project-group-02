@@ -1,6 +1,7 @@
 package view;
 
 import controller.MapController;
+import controller.TechController;
 import controller.UsersController;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -21,6 +22,7 @@ import model.User;
 import view.enums.Images;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class GameEnvironment {

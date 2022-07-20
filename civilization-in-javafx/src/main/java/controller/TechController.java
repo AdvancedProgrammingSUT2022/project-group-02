@@ -23,7 +23,7 @@ public class TechController {
     }
 
 //    public int[][] getAncientEraTechnologiesGraph() {
-//        return ancientEraTechnologiesGraph;
+//        return technologiesGraph;
 //    }
 
     public ArrayList<Technology> getPrerequisitesTech(Technology technology) {
