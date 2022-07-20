@@ -7,20 +7,14 @@ import view.ResearchMenu;
 import java.util.ArrayList;
 
 public class TechController {
-    private final ArrayList<Technology> technologies;
-    private final int[][] technologiesGraph;
+    private ArrayList<Technology> technologies;
+    private int[][] technologiesGraph;
 
     private static TechController techController;
 
-    private TechController(int[][] technologiesGraph, ArrayList<Technology> technologies) {
-        this.technologiesGraph = technologiesGraph;
-        this.technologies = technologies;
-
-    }
-
-    public static TechController getInstance(int[][] technologiesGraph, ArrayList<Technology> technologies) {
+    public static TechController getInstance() {
         if (techController == null)
-            techController = new TechController(technologiesGraph, technologies);
+            techController = new TechController();
         return techController;
     }
 
@@ -68,4 +62,11 @@ public class TechController {
         return technologies;
     }
 
+    public void setTechnologies(ArrayList<Technology> technologies) {
+        this.technologies = technologies;
+    }
+
+    public void setTechnologiesGraph(int[][] technologiesGraph) {
+        this.technologiesGraph = technologiesGraph;
+    }
 }

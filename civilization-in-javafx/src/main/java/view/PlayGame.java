@@ -38,7 +38,9 @@ public class PlayGame {
         this.technologies = technologies;
         gameController = GameController.getInstance(players, map);
         mapController = MapController.getInstance(map);
-        techController = TechController.getInstance(graph, technologies);
+        techController = TechController.getInstance();
+        TechController.getInstance().setTechnologies(technologies);
+        TechController.getInstance().setTechnologiesGraph(graph);
         unitController = UnitController.getInstance();
         usersController = UsersController.getInstance();
         settlerController = SettlerController.getInstance();
@@ -326,9 +328,13 @@ public class PlayGame {
             origin.setSelectedOne(true);
         else if (origin.isCivilianUnitExists())
             origin.setSelectedTwo(true);
-
+        Request request;
         String tileInput;
         while (true) {
+
+            request = new Request();
+            request.setMenu("tile menu");
+
             tileInput = scanner.nextLine();
             if (tileInput.equals("tile exit")) {
                 System.out.println("get out of tile");
@@ -343,21 +349,44 @@ public class PlayGame {
             // move the unit in this tile to destination
             else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.MOVE1)) != null ||
                     (matcher = RegexEnums.getMatcher(tileInput, RegexEnums.MOVE2)) != null) {
+
+                request.setAction("move unit");
+                HashMap<String, Object> parameters = new HashMap<>();
+                int xDestination = Integer.parseInt(matcher.group("x"));
+                int yDestination = Integer.parseInt(matcher.group("y"));
+                parameters.put("xDestination", xDestination);
+                parameters.put("yDestination", yDestination);
+                request.setParameters(parameters);
+                Response response = NetworkController.getInstance().sendRequest(request);
+                System.out.println(response.getMessage());
+                if (!(Boolean)response.getParameters().get("arrived")) {
+                    //it's not over, wait till next turn to move to destination
+                }
+                /*
                 Tile tile = moveUnitConditions(origin, user, matcher);
                 if (tile != null && !tile.equals(origin)) {
                     selectedTile(scanner, tile, user);
                     return;
                 }
+                */
             }
             // order settler to place city
             else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.CITY1)) != null ||
                     (matcher = RegexEnums.getMatcher(tileInput, RegexEnums.CITY2)) != null) {
-                if (conditionsForPlaceCity(tileInput, origin, user)) {
-                    String nameOfCity = matcher.group("city");
-                    createCity(origin, user, nameOfCity);
-                }
-                else
-                    System.out.println("");
+
+                int xDestination = origin.getX();
+                int yDestination = origin.getY();
+
+                request.setAction("place city");
+                HashMap<String, Object> parameters = new HashMap<>();
+                parameters.put("xDestination", xDestination);
+                parameters.put("yDestination", yDestination);
+                parameters.put("username", user.getUsername());
+                parameters.put("name", matcher.group("city"));
+
+                request.setParameters(parameters);
+                Response response = NetworkController.getInstance().sendRequest(request);
+                System.out.println(response.getMessage());
             }
             // order worker to improve the tile
             else if (tileInput.trim().equals("show possible improvements")) {
@@ -738,86 +767,6 @@ public class PlayGame {
         return false;
     }
 
-    // check everything about moving the unit
-    private Tile moveUnitConditions(Tile origin, User user, Matcher matcher) {
-        if ((origin.getCivilianUnit() != null && origin.getCivilianUnit().getOwner().equals(user)) ||
-                (origin.getMilitaryUnit() != null && origin.getMilitaryUnit().getOwner().equals(user))) {
-            int xDestination = Integer.parseInt(matcher.group("x"));
-            int yDestination = Integer.parseInt(matcher.group("y"));
-            if (xDestination >= 0 && yDestination >= 0 && xDestination < map.getHeight() && yDestination < map.getWidth()) {
-                Tile destination = map.getSpecificTile(xDestination, yDestination);
-                if (destination.getTerrain().isPassable()) {
-                    if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
-                        if (!destination.isMilitaryUnitExists() && destination.getTerrain().isPassable())
-                            return moveUnit(origin, destination, origin.getMilitaryUnit(), user, true);
-                        else
-                            System.out.println("can't move a unit to this tile");
-                    }
-                    else if (origin.isCivilianUnitExists() && origin.isSelectedTwo()) {
-                        if (!destination.isCivilianUnitExists())
-                            return moveUnit(origin, destination, origin.getCivilianUnit(), user, false);
-                        else
-                            System.out.println("can't move a unit to this tile");
-                    }
-                    else
-                        System.out.println("there is no unit in this tile!");
-                }
-                else
-                    System.out.println("invalid destination");
-            }
-            else
-                System.out.println("invalid coordinates");
-        }
-        else
-            System.out.println("there is no unit here or you are not the owner of this unit");
-        return null;
-    }
-
-    public Tile moveUnit(Tile origin, Tile destination, Unit unit, User user, boolean isMilitary) {
-        // create an array list to store all the tiles to destination
-        int i = 0;
-        ArrayList<Tile> tilesInTheWay = new ArrayList<>();
-        Tile tile = origin;
-        while ((tile = mapController.bestChoiceAmongNeighbors(tile, destination)) != destination) {
-            i++;
-            if (tile == null || i > 50) {
-                System.out.println("sorry, moving is impossible");
-                return origin;
-            }
-            tilesInTheWay.add(tile);
-        }
-        tilesInTheWay.add(tile);
-        int mp = 0;
-        unit.setOrdered(true);
-        tile = origin;
-
-        for (Tile thing : tilesInTheWay) {
-            tileInformation(thing);
-            boolean good = (isMilitary && !thing.isMilitaryUnitExists()) || (!isMilitary && thing.isCivilianUnitExists());
-            if (unit.getMP() < thing.getTerrain().getMovementPrice()) {
-                unit.setMoving(true);
-                unit.setDestination(destination);
-                if (good) {
-                    gameController.moveUnit(origin, thing, unit, isMilitary);
-                    System.out.println(mp + " movement by unit to get to the destination");
-                    return thing;
-                }
-                else {
-                    gameController.moveUnit(origin, tile, unit, isMilitary);
-                    System.out.println(mp + " movement by unit to get to the destination");
-                    return tile;
-                }
-            }
-            if (!thing.isRoad())
-                mp += thing.getTerrain().getMovementPrice();
-            unit.setMP(unit.getMP() - thing.getTerrain().getMovementPrice());
-            tile = thing;
-        }
-        gameController.moveUnit(origin, tile, unit, isMilitary);
-        System.out.println(mp + " movement by unit to get to the destination");
-        return tile;
-    }
-
     private void showPlayers() {
         int index = 1;
         String color;
@@ -839,46 +788,6 @@ public class PlayGame {
         System.out.println("faith: " + user.getFaith());
         System.out.println("happiness: " + user.getHappiness());
         System.out.println("food: " + user.getFood());
-    }
-
-    //check if tile is valid
-    private boolean conditionsForPlaceCity(String input, Tile tile, User user) {
-        // neighbors of the tile should be neutral
-        for (Tile neighbor : tile.getNeighbors()) {
-            if (neighbor.getOwner() != null) {
-                System.out.println("a tile has owner here");
-                return false;
-            }
-        }
-        if (tile.isCivilianUnitExists() && tile.getCivilianUnit().getName().equals("settler") && tile.getCivilianUnit().getOwner().equals(user)) {
-            if (tile.getCity() == null) {
-                if (tile.getOwner() == null) {
-                    return true;
-                }
-                System.out.println("you are in someone's territory");
-            } else
-                System.out.println("there is already a city here");
-        } else
-            System.out.println("no settler");
-        return false;
-    }
-
-    // create city
-    private void createCity(Tile tile, User user, String nameOfCity) {
-        // completely delete settler
-        settlerController.createNewCity(tile.getCivilianUnit(), user, tile, nameOfCity);
-        for (Resource foundResource : user.getFoundResources()) {
-            if (!foundResource.isAnnounce()){
-                System.out.println("You found" + foundResource.getName() + "in this tile.");
-                if (!user.getAvailableResources().contains(foundResource)){
-                    System.out.println("You should first build" + foundResource.getRequiredImprovement()
-                            + "on this tile to use this resource benefits!");
-                }
-            }
-        }
-        // remove settler from tile
-        mapController.deleteCivilian(tile);
-        System.out.println("city located successfully!");
     }
 
     private void attackCity(Tile origin, Tile destination, City city, User user, Scanner scanner) {
