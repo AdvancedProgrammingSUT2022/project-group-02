@@ -371,12 +371,20 @@ public class PlayGame {
             // order settler to place city
             else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.CITY1)) != null ||
                     (matcher = RegexEnums.getMatcher(tileInput, RegexEnums.CITY2)) != null) {
-                if (conditionsForPlaceCity(tileInput, origin, user)) {
-                    String nameOfCity = matcher.group("city");
-                    createCity(origin, user, nameOfCity);
-                }
-                else
-                    System.out.println("");
+
+                int xDestination = origin.getX();
+                int yDestination = origin.getY();
+
+                request.setAction("place city");
+                HashMap<String, Object> parameters = new HashMap<>();
+                parameters.put("xDestination", xDestination);
+                parameters.put("yDestination", yDestination);
+                parameters.put("username", user.getUsername());
+                parameters.put("name", matcher.group("city"));
+
+                request.setParameters(parameters);
+                Response response = NetworkController.getInstance().sendRequest(request);
+                System.out.println(response.getMessage());
             }
             // order worker to improve the tile
             else if (tileInput.trim().equals("show possible improvements")) {
@@ -778,46 +786,6 @@ public class PlayGame {
         System.out.println("faith: " + user.getFaith());
         System.out.println("happiness: " + user.getHappiness());
         System.out.println("food: " + user.getFood());
-    }
-
-    //check if tile is valid
-    private boolean conditionsForPlaceCity(String input, Tile tile, User user) {
-        // neighbors of the tile should be neutral
-        for (Tile neighbor : tile.getNeighbors()) {
-            if (neighbor.getOwner() != null) {
-                System.out.println("a tile has owner here");
-                return false;
-            }
-        }
-        if (tile.isCivilianUnitExists() && tile.getCivilianUnit().getName().equals("settler") && tile.getCivilianUnit().getOwner().equals(user)) {
-            if (tile.getCity() == null) {
-                if (tile.getOwner() == null) {
-                    return true;
-                }
-                System.out.println("you are in someone's territory");
-            } else
-                System.out.println("there is already a city here");
-        } else
-            System.out.println("no settler");
-        return false;
-    }
-
-    // create city
-    private void createCity(Tile tile, User user, String nameOfCity) {
-        // completely delete settler
-        settlerController.createNewCity(tile.getCivilianUnit(), user, tile, nameOfCity);
-        for (Resource foundResource : user.getFoundResources()) {
-            if (!foundResource.isAnnounce()){
-                System.out.println("You found" + foundResource.getName() + "in this tile.");
-                if (!user.getAvailableResources().contains(foundResource)){
-                    System.out.println("You should first build" + foundResource.getRequiredImprovement()
-                            + "on this tile to use this resource benefits!");
-                }
-            }
-        }
-        // remove settler from tile
-        mapController.deleteCivilian(tile);
-        System.out.println("city located successfully!");
     }
 
     private void attackCity(Tile origin, Tile destination, City city, User user, Scanner scanner) {

@@ -1,12 +1,7 @@
 package view;
 
-import controller.GameController;
-import controller.UnitController;
-import controller.UsersController;
-import model.Request;
-import model.Response;
-import model.Unit;
-import model.User;
+import controller.*;
+import model.*;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -17,9 +12,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Receiver {
-
+    private Maps map;
     public void run(int SERVER_PORT) {
-
+        Maps map = new MapMaker().myTiles();
+        this.map = map;
         readFromJson();
 
         try {
@@ -108,6 +104,13 @@ public class Receiver {
                         return GameController.getInstance().decreaseResearchTurnRequest(request);
                     case "select tile":
                         return GameController.getInstance().selectTileRequest(request);
+                }
+            case "tile menu":
+                switch(request.getAction()) {
+                    case "move unit":
+                        return MapController.getInstance().moveUnitConditions(map, request);
+                    case "place city":
+                        return CityController.getInstance().conditionsForPlaceCity(request, map);
                 }
         }
         return null;

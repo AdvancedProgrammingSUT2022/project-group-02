@@ -490,7 +490,7 @@ public class GameController {
         // assign all the neighbors to each tile
         for (int i = 0; i < map.getHeight(); i++)
             for (int j = 0; j < map.getWidth(); j++)
-                mapController.setNeighbor(map.getTileBoard()[i][j]);
+                mapController.setNeighbor(map.getTileBoard()[i][j], map);
     }
     /*
     public void foundRuin(User user) {

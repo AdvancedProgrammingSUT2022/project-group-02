@@ -295,12 +295,16 @@ public class MapController {
         }
     }
 
-    private Response moveUnitConditions(Tile origin, User user, Matcher matcher, Maps map, Request request) {
+    public Response moveUnitConditions(Maps map, Request request) {
 
         Response response = new Response();
-
-        int xDestination = (Integer)request.getParameters().get("xDestination");
-        int yDestination = (Integer)request.getParameters().get("yDestination");
+        String username = (String) request.getParameters().get("username");
+        User user = UsersController.getInstance().getUserByUsername(username);
+        int xOrigin = (int) request.getParameters().get("xOrigin");
+        int yOrigin = (int) request.getParameters().get("yOrigin");
+        Tile origin = map.getSpecificTile(xOrigin, yOrigin);
+        int xDestination = (int)request.getParameters().get("xDestination");
+        int yDestination = (int)request.getParameters().get("yDestination");
 
         HashMap<String, Object> parameters = new HashMap<>();
 
