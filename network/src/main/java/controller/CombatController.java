@@ -17,7 +17,7 @@ public class CombatController extends UnitController {
 
     //combat handling : first version of code
 
-    public void destroyCity(City city) {
+    private void destroyCity(City city) {
         User previous = city.getOwner();
         previous.removeCity(city);
         for (Tile ownerShipTile : city.getOwnerShipTiles()) {
@@ -28,7 +28,7 @@ public class CombatController extends UnitController {
         city = null;
     }
 
-    public void annexCity(City city, Unit unit) {
+    private void annexCity(City city, Unit unit) {
         User previous = city.getOwner();
 
         previous.removeCity(city);
@@ -73,5 +73,31 @@ public class CombatController extends UnitController {
     public void annexCivilianUnit(User user, Unit unit) {
         unit.setOwner(user);
         user.addUnit(unit);
+    }
+
+    public Response decisionOnWhatDoDo(Request request, Maps map) {
+        Response response = new Response();
+        int index = (int) request.getParameters().get("index");
+
+        int xOrigin = (int) request.getParameters().get("xOrigin");
+        int yOrigin = (int) request.getParameters().get("yOrigin");
+        int xDestination = (int) request.getParameters().get("xDestination");
+        int yDestination = (int) request.getParameters().get("yDestination");
+        Tile origin = map.getSpecificTile(xOrigin, yOrigin);
+        Tile destination = map.getSpecificTile(xDestination, yDestination);
+
+
+        if (index == 1) {
+            //destroy city
+            destroyCity(destination.getCity());
+            origin.getMilitaryUnit().getOwner().setHappiness(origin.getMilitaryUnit().getOwner().getHappiness() - 10);
+            response.setMessage("city destroyed successfully!");
+        }
+        else if (index == 2) {
+            //annex city
+            annexCity(destination.getCity(), origin.getMilitaryUnit());
+            response.setMessage("city annexed successfully!");
+        }
+        return response;
     }
 }

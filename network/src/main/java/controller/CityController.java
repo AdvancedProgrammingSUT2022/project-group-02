@@ -3,6 +3,8 @@ package controller;
 
 import model.*;
 
+import java.util.HashMap;
+
 public class CityController {
     private static CityController cityController;
 
@@ -61,5 +63,79 @@ public class CityController {
         // remove settler from tile
         MapController.getInstance().deleteCivilian(tile);
         response.setMessage("city located successfully!");
+    }
+
+    public Response conditionForAttackCity(Request request, Maps map) {
+
+        Response response = new Response();
+        HashMap<String, Object> parameters = new HashMap<>();
+        String username = (String) request.getParameters().get("username");
+        User user = UsersController.getInstance().getUserByUsername(username);
+        //destination
+        int xDestination = (int) request.getParameters().get("xDestination");
+        int yDestination = (int) request.getParameters().get("yDestination");
+        Tile destination = map.getSpecificTile(xDestination, yDestination);
+
+        //origin
+        int xOrigin = (int) request.getParameters().get("xOrigin");
+        int yOrigin = (int) request.getParameters().get("yOrigin");
+        Tile origin = map.getSpecificTile(xOrigin, yOrigin);
+
+        boolean found = false;
+
+        if (destination.getCity() != null && destination.getCity().getTile().equals(destination)) {
+            if (origin.isMilitaryUnitExists() && origin.getMilitaryUnit().getOwner().equals(user)) {
+                // melee
+                if (origin.getMilitaryUnit().getRangeCombatStrength() == 0) {
+                    for (int i = 0; i < origin.getNeighbors().size(); i++) {
+                        if (origin.getNeighbors().get(i).equals(destination)) {
+                            found = true;
+                            CombatController.getInstance().attackCity(destination.getCity(), origin.getMilitaryUnit());
+                            if (destination.getCity().getHP() <= 0)
+                                parameters.put("ruined", true);
+
+                            else
+                                parameters.put("ruined", false);
+                            break;
+                        }
+                    }
+                }
+                // ranged
+                else {
+                    for (int i = 0; i < origin.getNeighbors().size(); i++) {
+                        if (origin.getNeighbors().get(i).equals(destination)) {
+                            found = true;
+                            CombatController.getInstance().attackCity(destination.getCity(), origin.getMilitaryUnit());
+                            if (destination.getCity().getHP() <= 0)
+                                parameters.put("ruined", true);
+                            else
+                                parameters.put("ruined", false);
+
+                            break;
+                        }
+                        for (int j = 0; j < origin.getNeighbors().get(i).getNeighbors().size(); j++) {
+                            if (origin.getNeighbors().get(i).getNeighbors().get(j).equals(destination)) {
+                                found = true;
+                                CombatController.getInstance().attackCity(destination.getCity(), origin.getMilitaryUnit());
+                                if (destination.getCity().getHP() <= 0)
+                                    parameters.put("ruined", true);
+                                else
+                                    parameters.put("ruined", false);
+
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (!found)
+                    response.setMessage("this city is not in the range of your unit");
+            } else
+                response.setMessage("there is no military unit on this tile");
+        }
+        else
+            response.setMessage("there is no city on this tile");
+
+        response.setParameters(parameters);
+        return response;
     }
 }
