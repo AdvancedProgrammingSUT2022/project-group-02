@@ -2,6 +2,7 @@ package view;
 
 import controller.MapController;
 import controller.UsersController;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -14,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import model.Maps;
+import model.Settler;
 import model.Tile;
 import model.User;
 import view.enums.Images;
@@ -31,6 +33,7 @@ public class GameEnvironment {
     private User user;
     private Maps map;
     private ArrayList<User> players;
+    private HashMap<ImageView, Object> imageViewObjects;
 
     public GameEnvironment(MediaPlayer mediaPlayer, Stage stage, Images images, UsersController users, User user, ArrayList<User> players){
         this.users = users;
@@ -41,6 +44,7 @@ public class GameEnvironment {
         map = users.readFromJsonMap();
         finalRoot = new AnchorPane();
         this.players = players;
+        imageViewObjects = new HashMap<>();
     }
 
     public GameEnvironment(){}
@@ -73,13 +77,14 @@ public class GameEnvironment {
                     imageView.setFitWidth(285);
                     imageView.setLayoutY(tile.getX() * 360 - tile.getX() * 95);
                     imageView.setFitHeight(360);
+                    imageView.setId("Tile");
+                    imageViewObjects.put(imageView, tile);
                     canPopup.put(imageView, true);
                     root.getChildren().add(imageView);
 
                     resourceHandler(tile, imageView);
                     showUnits(tile, imageView);
-                    mouseClickHandle(tile, imageView, canPopup);
-
+                    tileMouseClickHandle(tile, imageView, canPopup);
 
                 } else {
                     System.out.println( i + " : An error happened! -> GameEnvironment -> createMap : " + tile.getTerrain().getName());
@@ -87,6 +92,9 @@ public class GameEnvironment {
                 }
             }
         }
+        new Thread(() -> {
+            mouseClickHandler();
+        }).start();
         scrollHandler();
     }
 
@@ -191,11 +199,13 @@ public class GameEnvironment {
             resourceView.setLayoutY(imageView.getLayoutY() + 60);
             resourceView.setFitWidth(90);
             resourceView.setFitHeight(90);
+            resourceView.setId("Resource");
+            imageViewObjects.put(resourceView, tile.getResource());
             root.getChildren().add(resourceView);
         }
     }
 
-    private void mouseClickHandle(Tile tile, ImageView imageView, HashMap<ImageView, Boolean> canPopup) {
+    private void tileMouseClickHandle(Tile tile, ImageView imageView, HashMap<ImageView, Boolean> canPopup) {
         imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             double popupX;
             double popupY;
@@ -215,7 +225,6 @@ public class GameEnvironment {
                 showPopupInfo(rectangle, tile, label, foodView, goldView, productionView);
             }
             if (tile.getCivilianUnit() != null && tile.getCivilianUnit().getName().equals("settler")){
-                System.out.println("#############");
                 createCity(tile, imageView);
             }
             imageView.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
@@ -243,7 +252,7 @@ public class GameEnvironment {
         });
     }
 
-    //TODO : DEBUG
+    //TODO : -GRAPHIC- DEBUG
     private void showUnits(Tile tile, ImageView imageView) {
         if (tile.getMilitaryUnit() != null) {
             Image MUnit = findMUnit(tile);
@@ -252,6 +261,8 @@ public class GameEnvironment {
             MUitView.setLayoutY(imageView.getLayoutY() + 300);
             MUitView.setFitHeight(90);
             MUitView.setFitWidth(90);
+            MUitView.setId(tile.getMilitaryUnit().getName());
+            imageViewObjects.put(MUitView, tile.getMilitaryUnit());
             root.getChildren().add(MUitView);
         }
 
@@ -262,6 +273,8 @@ public class GameEnvironment {
             CUnitView.setLayoutY(imageView.getLayoutY() + 155);
             CUnitView.setFitHeight(150);
             CUnitView.setFitWidth(150);
+            CUnitView.setId(tile.getCivilianUnit().getName());
+            imageViewObjects.put(CUnitView, tile.getCivilianUnit());
             root.getChildren().add(CUnitView);
         }
     }
@@ -303,8 +316,8 @@ public class GameEnvironment {
         };
     }
 
-    //TODO : DEBUG
-    //TODO : ADD THIS TO CREATE MAP
+    //TODO : -GRAPHIC-LOGIC- DEBUG
+    //TODO : -LOGIC- ADD THIS TO CREATE MAP
     private void createCity(Tile tile, ImageView imageView) {
         if (tile.getCity() != null) {
             ImageView cityView = new ImageView(images.city);
@@ -314,6 +327,16 @@ public class GameEnvironment {
             cityView.setFitHeight(200);
             root.getChildren().add(cityView);
         }
+    }
+
+    private void mouseClickHandler() {
+        UnitClickAction unitClickAction = new UnitClickAction(finalRoot, images);
+        imageViewObjects.forEach((imageView, object) -> {
+            if (imageView.getId().equals("settler")) imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+                unitClickAction.setUnit((Settler) object);
+                unitClickAction.settlerClickAction();
+            });
+        });
     }
 
 }

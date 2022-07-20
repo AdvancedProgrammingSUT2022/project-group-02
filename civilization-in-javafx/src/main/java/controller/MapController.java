@@ -205,11 +205,11 @@ public class MapController {
     public ArrayList<Tile> firstSetOfSettlers(ArrayList<User> users) {
         ArrayList<Tile> tiles = new ArrayList<>();
         //user0
-        Settler settler = new Settler("settler", map.getSpecificTile(8, 15), 100, 1, 1, 1, 2, 0, 0, null, users.get(0), 0, 0);
+        Settler settler = new Settler("settler", map.getSpecificTile(3, 5), 100, 1, 1, 1, 2, 0, 0, null, users.get(0), 0, 0);
         users.get(0).addUnit(settler);
-        map.getSpecificTile(8, 15).setCivilianUnit(settler);
-        map.getSpecificTile(8, 15).setCivilianUnitExists(true);
-        tiles.add(map.getSpecificTile(8, 15));
+        map.getSpecificTile(3, 5).setCivilianUnit(settler);
+        map.getSpecificTile(3, 5).setCivilianUnitExists(true);
+        tiles.add(map.getSpecificTile(3, 5));
         //user1
         settler = new Settler("settler", map.getSpecificTile(17, 13), 100, 1, 1, 1, 2, 0, 0, null, users.get(1), 0, 0);
         users.get(1).addUnit(settler);

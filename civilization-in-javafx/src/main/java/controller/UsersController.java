@@ -2,6 +2,7 @@ package controller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import javafx.scene.control.Label;
 import model.*;
 
 import java.io.FileWriter;
@@ -154,9 +155,11 @@ public class UsersController {
 
     public static String findPlayers(String username, ArrayList<User> players, ArrayList<User> users) {
         for (User user : users) {
-            if (user.getUsername().equals(username)){
+            if (user.getUsername().equals(username) && !players.contains(user)){
                 players.add(user);
                 return user.getNickname();
+            } else if (user.getUsername().equals(username) && players.contains(user)) {
+                return "   This user is already a player now!";
             }
         }
         return "there is no player with this username!";

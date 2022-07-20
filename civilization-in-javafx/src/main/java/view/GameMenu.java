@@ -169,10 +169,9 @@ public class GameMenu {
         graphicInitialiseSearchButtons(playerSearchTextField, addFriend, submit, back, label, errorLabel);
         AtomicReference<String> playersNickname = new AtomicReference<>("player 1 : " + user.getNickname());
         label.setText(playersNickname.get());
-        AnchorPane Root = root;
         addFriend.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            if (!playerSearchTextField.getText().equals(user.getUsername()))
-            playersNickname.set(searchNicknamesView(playerSearchTextField, Root, label, players, playersNickname.get(), errorLabel));
+            if (!playerSearchTextField.getText().equals(user.getUsername()) && players.contains(user))
+            playersNickname.set(searchNicknamesView(playerSearchTextField, label, players, playersNickname.get(), errorLabel));
             else errorLabel.setText(" Enter a name other than your own!");
                 });
         back.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> start());
@@ -226,13 +225,15 @@ public class GameMenu {
         errorLabel.getStyleClass().add("register-signup-and-login-error");
     }
 
-    private String searchNicknamesView(TextField playerSearchTextField, AnchorPane root, Label label, ArrayList<User> players, String playersNickname, Label errorLabel) {
+    private String searchNicknamesView(TextField playerSearchTextField, Label label, ArrayList<User> players, String playersNickname, Label errorLabel) {
         String nickname = UsersController.findPlayers(playerSearchTextField.getText(), players, users.getUsers());
-        if (!nickname.equals("there is no player with this username!")) {
+        if (nickname.equals("there is no player with this username!")) {
+            errorLabel.setText(nickname);
+        } else if (nickname.equals("   This user is already a player now!")){
+            errorLabel.setText(nickname);
+        } else {
             playersNickname += "\nplayer " + players.size() + " : " + nickname;
             errorLabel.setText("");
-        } else {
-            errorLabel.setText("there is no player with this username!");
         }
         label.setText(playersNickname);
         return playersNickname;
