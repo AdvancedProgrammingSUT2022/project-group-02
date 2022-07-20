@@ -115,6 +115,8 @@ public class Receiver {
                         return CityController.getInstance().conditionForAttackCity(request, map);
                     case "decision on what to do with city":
                         return CombatController.getInstance().decisionOnWhatDoDo(request, map);
+                    case "attack unit":
+                        return CombatController.getInstance().conditionForAttackUnit(request, map);
                 }
         }
         return null;

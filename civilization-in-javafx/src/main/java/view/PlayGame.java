@@ -447,33 +447,21 @@ public class PlayGame {
 
             else if (((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.ATTACK_UNIT1)) != null ||
                     (matcher = RegexEnums.getMatcher(tileInput, RegexEnums.ATTACK_UNIT2)) != null) && origin.isMilitaryUnitExists()) {
-                int x = Integer.parseInt(matcher.group("x"));
-                int y = Integer.parseInt(matcher.group("y"));
-                if (x >= 0 && x < map.getWidth() && y >= 0 && y < map.getHeight()) {
-                    Tile des = map.getSpecificTile(x, y);
-                    if (mapController.findDistance(origin, des) == 1 || (mapController.findDistance(origin, des) == 2 && origin.getMilitaryUnit().getRangeCombatStrength() > 0)) {
-                        if (des.isMilitaryUnitExists() && !des.getMilitaryUnit().getOwner().equals(user)) {
-                            //todo : if user is not in war with the owner of unit , ask him if he want to start a war
-                            if (!user.getEnemies().contains(des.getMilitaryUnit().getOwner())) {
-                                UserPanel.sendNotificationToInvader(user, des.getMilitaryUnit().getOwner());
-                            }
-                            CombatController.getInstance().attackUnit(origin.getMilitaryUnit(), des.getMilitaryUnit());
-
-                        } else if (des.isCivilianUnitExists() && !des.getCivilianUnit().getOwner().equals(user)) {
-                            //todo : if user is not in war with the owner of unit , ask him if he want to start a war
-                            if (!user.getEnemies().contains(des.getCivilianUnit().getOwner())) {
-                                UserPanel.sendNotificationToDefender(user, des.getCivilianUnit().getOwner());
-                            }
-                            CombatController.getInstance().annexCivilianUnit(user, des.getCivilianUnit());
-                            System.out.println("you own this unit now!");
-                        } else
-                            System.out.println("there is no unit on this tile");
+                request.setAction("attack unit");
+                HashMap<String, Object> parameters = new HashMap<>();
+                parameters.put("username", user.getUsername());
+                parameters.put("xOrigin", origin.getX());
+                parameters.put("yOrigin", origin.getY());
+                parameters.put("xDestination", matcher.group("x"));
+                parameters.put("yDestination", matcher.group("y"));
+                request.setParameters(parameters);
+                Response response = NetworkController.getInstance().sendRequest(request);
+                System.out.println(response.getMessage());
+                if ((boolean)response.getParameters().get("notification")) {
+                    for (String notification : response.getNotifications()) {
+                        System.out.println(notification);
                     }
-                    else
-                        System.out.println("this tile is not in your range");
                 }
-                else
-                    System.out.println("invalid coordinates");
             }
 
             else if (tileInput.equals("delete unit")) {
@@ -753,29 +741,6 @@ public class PlayGame {
         return false;
     }
 
-    private void showPlayers() {
-        int index = 1;
-        String color;
-        ColorsController colorsController = new ColorsController();
-        for (User player : players) {
-            color = colorsController.getColorOfUser(player);
-            System.out.println(index + "- username: " + player.getUsername() + " nickname: " + color + player.getNickname() + Colors.RESET);
-            index++;
-        }
-    }
-
-    private void showInformation(User user) {
-        //temporary
-        System.out.println("username: " + user.getUsername());
-        System.out.println("nickname: " + user.getNickname());
-        System.out.println("remained movements: " + user.getTurns());
-        System.out.println("gold: " + user.getGold());
-        System.out.println("culture: " + user.getCulture());
-        System.out.println("faith: " + user.getFaith());
-        System.out.println("happiness: " + user.getHappiness());
-        System.out.println("food: " + user.getFood());
-    }
-
     private void decisionOnWhatToDoWithCity(Scanner scanner, HashMap<String, Object> parameters) {
         System.out.println("which one do you choose?");
         System.out.println("1- completely destroy city");
@@ -805,6 +770,31 @@ public class PlayGame {
             else
                 System.out.println("invalid command");
         }
+    }
+
+    //bullshit
+
+    private void showPlayers() {
+        int index = 1;
+        String color;
+        ColorsController colorsController = new ColorsController();
+        for (User player : players) {
+            color = colorsController.getColorOfUser(player);
+            System.out.println(index + "- username: " + player.getUsername() + " nickname: " + color + player.getNickname() + Colors.RESET);
+            index++;
+        }
+    }
+
+    private void showInformation(User user) {
+        //temporary
+        System.out.println("username: " + user.getUsername());
+        System.out.println("nickname: " + user.getNickname());
+        System.out.println("remained movements: " + user.getTurns());
+        System.out.println("gold: " + user.getGold());
+        System.out.println("culture: " + user.getCulture());
+        System.out.println("faith: " + user.getFaith());
+        System.out.println("happiness: " + user.getHappiness());
+        System.out.println("food: " + user.getFood());
     }
 
     public void showMap(User user) {

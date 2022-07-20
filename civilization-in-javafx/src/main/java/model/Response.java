@@ -2,6 +2,7 @@ package model;
 
 import com.google.gson.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Response {
@@ -9,6 +10,7 @@ public class Response {
     private String message;
     private HashMap<String, Object> parameters = new HashMap<>();
     private User user;
+    private ArrayList<String> notifications = new ArrayList<>();
 
     public HashMap<String, Object> getParameters() {
         return parameters;
@@ -44,5 +46,13 @@ public class Response {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public ArrayList<String> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(ArrayList<String> notifications) {
+        this.notifications = notifications;
     }
 }
