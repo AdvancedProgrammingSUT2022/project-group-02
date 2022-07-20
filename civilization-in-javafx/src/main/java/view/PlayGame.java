@@ -38,7 +38,9 @@ public class PlayGame {
         this.technologies = technologies;
         gameController = GameController.getInstance(players, map);
         mapController = MapController.getInstance(map);
-        techController = TechController.getInstance(graph, technologies);
+        techController = TechController.getInstance();
+        TechController.getInstance().setTechnologies(technologies);
+        TechController.getInstance().setTechnologiesGraph(graph);
         unitController = UnitController.getInstance();
         usersController = UsersController.getInstance();
         settlerController = SettlerController.getInstance();
