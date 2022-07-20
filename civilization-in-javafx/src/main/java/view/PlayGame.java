@@ -357,11 +357,8 @@ public class PlayGame {
                 request.setParameters(parameters);
                 Response response = NetworkController.getInstance().sendRequest(request);
                 System.out.println(response.getMessage());
-                if ((Boolean)response.getParameters().get("arrived")) {
-                    //over
-                }
-                else {
-                    //not over, wait till next turn to move unit again
+                if (!(Boolean)response.getParameters().get("arrived")) {
+                    //it's not over, wait till next turn to move to destination
                 }
                 /*
                 Tile tile = moveUnitConditions(origin, user, matcher);
@@ -759,87 +756,7 @@ public class PlayGame {
             System.out.println("invalid coordinates");
         return false;
     }
-    /*
-    // check everything about moving the unit
-    private Tile moveUnitConditions(Tile origin, User user, Matcher matcher) {
-        if ((origin.getCivilianUnit() != null && origin.getCivilianUnit().getOwner().equals(user)) ||
-                (origin.getMilitaryUnit() != null && origin.getMilitaryUnit().getOwner().equals(user))) {
-            int xDestination = Integer.parseInt(matcher.group("x"));
-            int yDestination = Integer.parseInt(matcher.group("y"));
-            if (xDestination >= 0 && yDestination >= 0 && xDestination < map.getHeight() && yDestination < map.getWidth()) {
-                Tile destination = map.getSpecificTile(xDestination, yDestination);
-                if (destination.getTerrain().isPassable()) {
-                    if (origin.isMilitaryUnitExists() && origin.isSelectedOne()) {
-                        if (!destination.isMilitaryUnitExists() && destination.getTerrain().isPassable())
-                            return moveUnit(origin, destination, origin.getMilitaryUnit(), user, true);
-                        else
-                            System.out.println("can't move a unit to this tile");
-                    }
-                    else if (origin.isCivilianUnitExists() && origin.isSelectedTwo()) {
-                        if (!destination.isCivilianUnitExists())
-                            return moveUnit(origin, destination, origin.getCivilianUnit(), user, false);
-                        else
-                            System.out.println("can't move a unit to this tile");
-                    }
-                    else
-                        System.out.println("there is no unit in this tile!");
-                }
-                else
-                    System.out.println("invalid destination");
-            }
-            else
-                System.out.println("invalid coordinates");
-        }
-        else
-            System.out.println("there is no unit here or you are not the owner of this unit");
-        return null;
-    }
 
-    public Tile moveUnit(Tile origin, Tile destination, Unit unit, User user, boolean isMilitary) {
-        // create an array list to store all the tiles to destination
-        int i = 0;
-        ArrayList<Tile> tilesInTheWay = new ArrayList<>();
-        Tile tile = origin;
-        while ((tile = mapController.bestChoiceAmongNeighbors(tile, destination)) != destination) {
-            i++;
-            if (tile == null || i > 50) {
-                System.out.println("sorry, moving is impossible");
-                return origin;
-            }
-            tilesInTheWay.add(tile);
-        }
-        tilesInTheWay.add(tile);
-        int mp = 0;
-        unit.setOrdered(true);
-        tile = origin;
-
-        for (Tile thing : tilesInTheWay) {
-            tileInformation(thing);
-            boolean good = (isMilitary && !thing.isMilitaryUnitExists()) || (!isMilitary && thing.isCivilianUnitExists());
-            if (unit.getMP() < thing.getTerrain().getMovementPrice()) {
-                unit.setMoving(true);
-                unit.setDestination(destination);
-                if (good) {
-                    gameController.moveUnit(origin, thing, unit, isMilitary);
-                    System.out.println(mp + " movement by unit to get to the destination");
-                    return thing;
-                }
-                else {
-                    gameController.moveUnit(origin, tile, unit, isMilitary);
-                    System.out.println(mp + " movement by unit to get to the destination");
-                    return tile;
-                }
-            }
-            if (!thing.isRoad())
-                mp += thing.getTerrain().getMovementPrice();
-            unit.setMP(unit.getMP() - thing.getTerrain().getMovementPrice());
-            tile = thing;
-        }
-        gameController.moveUnit(origin, tile, unit, isMilitary);
-        System.out.println(mp + " movement by unit to get to the destination");
-        return tile;
-    }
-    */
     private void showPlayers() {
         int index = 1;
         String color;

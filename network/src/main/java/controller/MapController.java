@@ -9,45 +9,40 @@ import java.util.Map;
 import java.util.regex.Matcher;
 
 public class MapController {
-    private final Maps map;
 
 
     private static MapController mapController;
 
-    private MapController(Maps map) {
-        this.map = map;
-    }
-
-    public static MapController getInstance(Maps map) {
+    public static MapController getInstance() {
         if (mapController == null)
-            mapController = new MapController(map);
+            mapController = new MapController();
         return mapController;
     }
 
 
-    public void setNeighbor(Tile tile) {
+    public void setNeighbor(Tile tile, Maps map) {
         ArrayList<Tile> neighbors = new ArrayList<>();
         int x = tile.getX();
         int y = tile.getIndexY();
 
         // right
         if (y < 158)
-            neighbors.add(getTileInNewIndex(x, y + 2));
+            neighbors.add(getTileInNewIndex(x, y + 2, map));
         // left
         if (y > 1)
-            neighbors.add(getTileInNewIndex(x, y - 2));
+            neighbors.add(getTileInNewIndex(x, y - 2, map));
         // up right
         if (x > 0 && y < 159)
-            neighbors.add(getTileInNewIndex(x - 1, y + 1));
+            neighbors.add(getTileInNewIndex(x - 1, y + 1, map));
         // up left
         if (x > 0 && y > 0)
-            neighbors.add(getTileInNewIndex(x - 1, y - 1));
+            neighbors.add(getTileInNewIndex(x - 1, y - 1, map));
         // down right
         if (x < 25 && y < 159)
-            neighbors.add(getTileInNewIndex(x + 1, y + 1));
+            neighbors.add(getTileInNewIndex(x + 1, y + 1, map));
         // down left
         if (x < 25 && y > 0)
-            neighbors.add(getTileInNewIndex(x + 1, y - 1));
+            neighbors.add(getTileInNewIndex(x + 1, y - 1, map));
 
         tile.setNeighbors(neighbors);
     }
@@ -97,7 +92,7 @@ public class MapController {
         return bestChoice;
     }
 
-    public void addAllVisibleAndVisitedTiles(User user) {
+    public void addAllVisibleAndVisitedTiles(User user, Maps map) {
         user.setVisible(new ArrayList<>());
         // add tiles that are completely visible
         for (int i = 0; i < map.getHeight(); i++) {
@@ -204,7 +199,7 @@ public class MapController {
     }
 
 
-    public ArrayList<Tile> firstSetOfSettlers(ArrayList<User> users) {
+    public ArrayList<Tile> firstSetOfSettlers(ArrayList<User> users, Maps map) {
         ArrayList<Tile> tiles = new ArrayList<>();
         //user0
         Settler settler = new Settler("settler", map.getSpecificTile(8, 15), 100, 1, 1, 1, 2, 0, 0, null, users.get(0), 0, 0);
@@ -291,7 +286,7 @@ public class MapController {
         return tiles;
     }
 
-    private Tile getTileInNewIndex(int x, int y) {
+    private Tile getTileInNewIndex(int x, int y, Maps map) {
         if (x % 2 == 0) {
             return map.getTileBoard()[x][y / 2];
         }
