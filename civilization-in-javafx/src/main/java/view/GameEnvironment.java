@@ -1,9 +1,9 @@
 package view;
 
+import controller.GameController;
 import controller.MapController;
 import controller.TechController;
 import controller.UsersController;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -20,9 +20,7 @@ import model.Settler;
 import model.Tile;
 import model.User;
 import view.enums.Images;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class GameEnvironment {
@@ -63,7 +61,106 @@ public class GameEnvironment {
         stage.setMaximized(true);
         stage.setFullScreen(true);
         MapController.getInstance(map).firstSetOfSettlers(players);
+        showAllInfo();
         createMap();
+        new Thread(this::mouseClickHandler).start();
+    }
+
+    private void showAllInfo() {
+        ImageView science = new ImageView(images.science);
+        ImageView gold = new ImageView(images.gold);
+        ImageView food = new ImageView(images.food);
+        ImageView happiness = new ImageView(images.happiness);
+        ImageView unhappiness = new ImageView(images.unhappiness);
+        Rectangle topBarBackground = new Rectangle(0, 0, 1550, 50);
+        topBarBackground.setFill(new Color(0, 0, 0, .87));
+        finalRoot.getChildren().add(topBarBackground);
+        initialiseIcons(science, gold, food, happiness, unhappiness);
+    }
+
+    private void initialiseIcons(ImageView science, ImageView gold, ImageView food, ImageView happiness, ImageView unhappiness) {
+
+        science.setLayoutX(5);
+        science.setLayoutY(5);
+        science.setFitWidth(35);
+        science.setFitHeight(35);
+        science.getStyleClass().add("top-bar-info-icon");
+        science.setId("scienceTopBarInfo");
+        imageViewObjects.put(science, null);
+        String scienceValueString = positiveOrNegative(user.getSciencePerTurn()) + user.getSciencePerTurn();
+        Label scienceValue = new Label(scienceValueString);
+        scienceValue.setLayoutX(45);
+        scienceValue.setLayoutY(5);
+        scienceValue.setTextFill(new Color(0.027, 0.66, 0.93, 1));
+        scienceValue.getStyleClass().add("top-bar-info");
+        finalRoot.getChildren().add(science);
+        finalRoot.getChildren().add(scienceValue);
+
+        gold.setLayoutY(5);
+        gold.setLayoutX(85);
+        gold.setFitHeight(35);
+        gold.setFitWidth(35);
+        gold.getStyleClass().add("top-bar-info-icon");
+        gold.setId("goldTopBarInfo");
+        String goldValueString = user.getGold() + "(" + positiveOrNegative(user.getGoldPerTurn()) + user.getGoldPerTurn() + ")";
+        Label goldValue = new Label(goldValueString);
+        goldValue.setLayoutX(125);
+        goldValue.setLayoutY(5);
+        goldValue.setTextFill(new Color(0.97, 0.87, 0.23, 1));
+        goldValue.getStyleClass().add("top-bar-info");
+        finalRoot.getChildren().add(gold);
+        finalRoot.getChildren().add(goldValue);
+
+        food.setLayoutY(5);
+        food.setLayoutX(185);
+        food.setFitHeight(35);
+        food.setFitWidth(35);
+        food.getStyleClass().add("top-bar-info-icon");
+        food.setId("foodTopBarInfo");
+        String foodValueString = user.getFood() + "(" + positiveOrNegative(user.getFoodPerTurn()) + user.getFoodPerTurn() + ")";
+        Label foodValue = new Label(foodValueString);
+        foodValue.setLayoutX(223);
+        foodValue.setLayoutY(5);
+        foodValue.setTextFill(new Color(0.66, 0.835, 0.125, 1));
+        foodValue.getStyleClass().add("top-bar-info");
+        finalRoot.getChildren().add(food);
+        finalRoot.getChildren().add(foodValue);
+
+        happiness.setLayoutY(7);
+        happiness.setLayoutX(287);
+        happiness.setFitHeight(32);
+        happiness.setFitWidth(32);
+        happiness.getStyleClass().add("top-bar-info-icon");
+        happiness.setId("happinessTopBarInfo");
+        String happinessValueString = positiveOrNegative(user.getHappiness()) + user.getHappiness();
+        Label happinessValue = new Label(happinessValueString);
+        happinessValue.setLayoutX(325);
+        happinessValue.setLayoutY(5);
+        happinessValue.setTextFill(new Color(0.96, 0.95, .043, 1  ));
+        happinessValue.getStyleClass().add("top-bar-info");
+        finalRoot.getChildren().add(happiness);
+        finalRoot.getChildren().add(happinessValue);
+
+        unhappiness.setLayoutY(5);
+        unhappiness.setLayoutX(385);
+        unhappiness.setFitHeight(35);
+        unhappiness.setFitWidth(35);
+        unhappiness.getStyleClass().add("top-bar-info-icon");
+        unhappiness.setId("unhappinessTopBarInfo");
+        String unhappinessValueString = positiveOrNegative(user.getUnhappiness()) + user.getUnhappiness();
+        Label unhappinessValue = new Label(unhappinessValueString);
+        unhappinessValue.setLayoutX(425);
+        unhappinessValue.setLayoutY(5);
+        unhappinessValue.setTextFill(new Color(0.97, 0.38, 0, 1));
+        unhappinessValue.getStyleClass().add("top-bar-info");
+        finalRoot.getChildren().add(unhappiness);
+        finalRoot.getChildren().add(unhappinessValue);
+    }
+
+    private String positiveOrNegative(int value) {
+        if (value > 0) return "+";
+        else if (value == 0)return "";
+        else return "-";
     }
 
     private void createMap(){
@@ -94,7 +191,6 @@ public class GameEnvironment {
                 }
             }
         }
-        new Thread(this::mouseClickHandler).start();
         scrollHandler();
     }
 
@@ -332,10 +428,24 @@ public class GameEnvironment {
     private void mouseClickHandler() {
         UnitClickAction unitClickAction = new UnitClickAction(finalRoot, images);
         imageViewObjects.forEach((imageView, object) -> {
-            if (imageView.getId().equals("settler")) imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-                unitClickAction.setUnit((Settler) object);
-                unitClickAction.settlerClickAction();
+            imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+                if (imageView.getId().equals("settler")) {
+                    unitClickAction.setUnit((Settler) object);
+                    unitClickAction.settlerClickAction();
+                } else if (imageView.getId().equals("scienceTopBarInfo")) {
+                    ResearchMenu researchMenu = new ResearchMenu(TechController.getInstance(), GameController.getInstance(players, map));
+                    researchMenu.setImages(images);
+                    for (int[] ints : TechController.getInstance().getTechnologiesGraph()) {
+                        for (int anInt : ints) {
+                            System.out.print(anInt + " ");
+                        }
+                        System.out.println();
+                    }
+                    researchMenu.showTree();
+                    researchMenu.showGraphicTree(finalRoot);
+                }
             });
+
         });
     }
 

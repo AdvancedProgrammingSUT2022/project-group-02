@@ -2,7 +2,15 @@ package view;
 
 import controller.GameController;
 import controller.TechController;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import model.*;
+import view.enums.Images;
 import view.enums.RegexEnums;
 
 import java.util.ArrayList;
@@ -15,10 +23,20 @@ public class ResearchMenu {
     private GameController gameController;
     private TechController techController;
     private Matcher matcher;
+    private User user;
+    private static Images images;
 
     public ResearchMenu(TechController techController, GameController gameController) {
         this.techController = techController;
         this.gameController = gameController;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setImages(Images images) {
+        ResearchMenu.images = images;
     }
 
     public void run(Scanner scanner, User user) {
@@ -131,7 +149,7 @@ public class ResearchMenu {
         }
     }
 
-    private void showTree() {
+    public void showTree() {
         ArrayList<Technology> prerequisites;
         System.out.println("**********");
         for (Technology technology : techController.getTechnologies()) {
@@ -187,5 +205,22 @@ public class ResearchMenu {
                 System.out.println(improvement.getName());
 
         }
+    }
+
+    public void showGraphicTree(AnchorPane finalRoot) {
+        ImageView X_Button = new ImageView(images.X_button);
+        X_Button.setLayoutX(1465);
+        X_Button.setLayoutY(8);
+        X_Button.setFitWidth(60);
+        X_Button.setFitHeight(60);
+        X_Button.getStyleClass().add("top-bar-info-icon");
+        Rectangle background = new Rectangle(0, 0, 1550, 1000);
+        background.setFill(new Color(0, 0, 0, 0.9));
+        finalRoot.getChildren().add(background);
+        finalRoot.getChildren().add(X_Button);
+        X_Button.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            finalRoot.getChildren().remove(X_Button);
+            finalRoot.getChildren().remove(background);
+        });
     }
 }

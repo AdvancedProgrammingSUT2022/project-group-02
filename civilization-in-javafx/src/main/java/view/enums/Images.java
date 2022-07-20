@@ -122,6 +122,7 @@ public class Images {
     public Image unitMoreActionInfoBackground;
     public Image workerMoreActionInfoBackground;
     public Image goldenRing;
+    public Image X_button;
 
     public Images(){
         normalMenuButton = new Image(String.valueOf(getClass().getResource("/Media/buttons/Button_Down.png")));
@@ -243,5 +244,6 @@ public class Images {
         workerMoreActionInfoBackground = new Image(String.valueOf(getClass().getResource("/Media/buttons/WorkerMoreActionBackground.png")));
         unitMoreActionInfoBackground = new Image(String.valueOf(getClass().getResource("/Media/buttons/UnitMoreActionBackground.png")));
         goldenRing = new Image(String.valueOf(getClass().getResource("/Media/background and videos/goldenRing.png")));
+        X_button = new Image(String.valueOf(getClass().getResource("/Media/icons/X_button.png")));
     }
 }

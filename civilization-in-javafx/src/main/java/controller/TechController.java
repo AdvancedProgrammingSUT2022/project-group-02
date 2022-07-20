@@ -7,8 +7,8 @@ import view.ResearchMenu;
 import java.util.ArrayList;
 
 public class TechController {
-    private ArrayList<Technology> technologies;
-    private int[][] technologiesGraph;
+    private ArrayList<Technology> technologies = UsersController.getInstance().readFromJsonTech();
+    private int[][] technologiesGraph = UsersController.getInstance().readFromJsonGraph();
 
     private static TechController techController;
 
