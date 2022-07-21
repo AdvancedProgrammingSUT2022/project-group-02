@@ -88,6 +88,7 @@ public class UnitClickAction {
                             buttons.remove("deleteUnitButton");
                             buttons.remove("autoPlayingButton");
                             imageViews.remove("workerMoreActionBackground");
+
                         } else {
                             initialiseMoreActionBackground();
                             buttons.forEach((key2, value2) -> {
@@ -95,9 +96,14 @@ public class UnitClickAction {
                                     AudioClip clickSound = new AudioClip(Objects.requireNonNull(getClass().getResource("/Media/sounds/click.mp3")).toExternalForm());
                                     clickSound.play();
                                 });
-                                value2.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent2 -> {
-                                    if (key2.equals("deleteUnitButton")) {
 
+                                value2.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent2 -> {
+
+                                    if (key2.equals("deleteUnitButton")) {
+                                        UnitController unitController = UnitController.getInstance();
+                                        //todo : send a request to server to delete this unit
+                                        unitController.removeUnit(true, unit, unit.getOwner());
+                                        removeUnit(unitView);
                                     }
                                 });
                             });
@@ -141,8 +147,8 @@ public class UnitClickAction {
     private void createCity(Tile tile, ImageView imageView) {
         if (tile.getCity() != null) {
             ImageView cityView = new ImageView(images.city);
-            cityView.setLayoutX(imageView.getLayoutX() - 150);
-            cityView.setLayoutY(imageView.getLayoutY() - 105);
+            cityView.setLayoutX(imageView.getLayoutX() - 100);
+            cityView.setLayoutY(imageView.getLayoutY() - 85);
             cityView.setFitWidth(200);
             cityView.setFitHeight(200);
             root.getChildren().add(cityView);
@@ -159,6 +165,7 @@ public class UnitClickAction {
         finalRoot.getChildren().remove(buttons.get("alertAndWakeButton"));
         finalRoot.getChildren().remove(buttons.get("c"));
         finalRoot.getChildren().remove(buttons.get("foundCityButton"));
+
     }
 
     private void initialiseMoreActionBackground() {
