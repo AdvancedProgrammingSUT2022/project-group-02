@@ -465,118 +465,59 @@ public class PlayGame {
             }
 
             else if (tileInput.equals("delete unit")) {
-                if (origin.isMilitaryUnitExists() && origin.isSelectedOne() && origin.getMilitaryUnit().getOwner().equals(user)) {
-                    origin.setMilitaryUnitExists(false);
-                    origin.getMilitaryUnit().getOwner().removeUnit(origin.getMilitaryUnit());
-                    origin.setMilitaryUnit(null);
-                    origin.setSelectedOne(false);
-                    if (origin.isCivilianUnitExists())
-                        origin.setSelectedTwo(true);
-                    System.out.println("unit deleted successfully!");
-                }
-                else if (origin.isCivilianUnitExists() && origin.isSelectedTwo() && origin.getCivilianUnit().getOwner().equals(user)) {
-                    origin.setCivilianUnitExists(false);
-                    origin.getCivilianUnit().getOwner().removeUnit(origin.getCivilianUnit());
-                    origin.setCivilianUnit(null);
-                    origin.setSelectedTwo(false);
-                    if (origin.isMilitaryUnitExists())
-                        origin.setSelectedOne(true);
-                    System.out.println("unit deleted successfully!");
-                }
+
+                request.setAction("delete unit");
+                HashMap<String, Object> parameters = new HashMap<>();
+                parameters.put("xOrigin", origin.getX());
+                parameters.put("yOrigin", origin.getY());
+                request.setParameters(parameters);
+                Response response = NetworkController.getInstance().sendRequest(request);
+                System.out.println(response.getMessage());
             }
             else if (tileInput.equals("sleep unit")) {
-                if (origin.isMilitaryUnitExists() && origin.isSelectedOne() && origin.getMilitaryUnit().getOwner().equals(user)) {
-                    origin.getMilitaryUnit().setSleep(true);
-                    if (origin.isCivilianUnitExists()) {
-                        origin.setSelectedOne(false);
-                        origin.setSelectedTwo(true);
-                    }
-                    System.out.println("unit sleep successfully!");
-                }
-                else if (origin.isCivilianUnitExists() && origin.isSelectedTwo() && origin.getCivilianUnit().getOwner().equals(user)) {
-                    origin.getCivilianUnit().setSleep(true);
-                    if (origin.isMilitaryUnitExists()) {
-                        origin.setSelectedOne(true);
-                        origin.setSelectedTwo(false);
-                    }
-                    System.out.println("unit sleep successfully!");
-                }
+                request.setAction("sleep unit");
+                HashMap<String, Object> parameters = new HashMap<>();
+                parameters.put("xOrigin", origin.getX());
+                parameters.put("yOrigin", origin.getY());
+                request.setParameters(parameters);
+                Response response = NetworkController.getInstance().sendRequest(request);
+                System.out.println(response.getMessage());
             }
             else if (tileInput.equals("alert unit")) {
-                if (origin.isMilitaryUnitExists() && origin.isSelectedOne() && origin.getMilitaryUnit().getOwner().equals(user)) {
-                    origin.getMilitaryUnit().setAlert(true);
-                    if (origin.isCivilianUnitExists()) {
-                        origin.setSelectedOne(false);
-                        origin.setSelectedTwo(true);
-                    }
-                    System.out.println("unit alerted successfully!");
-                }
-                else if (origin.isCivilianUnitExists() && origin.isSelectedTwo() && origin.getCivilianUnit().getOwner().equals(user)) {
-                    origin.getCivilianUnit().setAlert(true);
-                    if (origin.isMilitaryUnitExists()) {
-                        origin.setSelectedOne(true);
-                        origin.setSelectedTwo(false);
-                    }
-                    System.out.println("unit alerted successfully!");
-                }
+                request.setAction("alert unit");
+                HashMap<String, Object> parameters = new HashMap<>();
+                parameters.put("xOrigin", origin.getX());
+                parameters.put("yOrigin", origin.getY());
+                request.setParameters(parameters);
+                Response response = NetworkController.getInstance().sendRequest(request);
+                System.out.println(response.getMessage());
             }
             else if (tileInput.equals("garrison unit")) {
-                if (origin.getCity() != null) {
-                    if (origin.getCity().getTile().equals(origin)) {
-                        if (origin.isMilitaryUnitExists() && origin.isSelectedOne() && origin.getMilitaryUnit().getOwner().equals(user)) {
-                            Unit unit = origin.getMilitaryUnit();
-                            unit.setAlert(true);
-                            unit.setOrdered(true);
-                            origin.getCity().setHP(origin.getCity().getHP() * 2);
-                            System.out.println("assigned to defend city successfully!");
-                        }
-                        else if (origin.isCivilianUnitExists() && origin.isSelectedTwo() && origin.getCivilianUnit().getOwner().equals(user)) {
-                            Unit unit = origin.getCivilianUnit();
-                            unit.setAlert(true);
-                            unit.setOrdered(true);
-                            origin.getCity().setHP(origin.getCity().getHP() * 2);
-                            System.out.println("assigned to defend city successfully!");
-                        }
-                        else
-                            System.out.println("no unit here");
-                    }
-                    else
-                        System.out.println("there is no city on this tile");
-                }
-                else
-                    System.out.println("this tile do not belong to any user");
+                request.setAction("garrison unit");
+                HashMap<String, Object> parameters = new HashMap<>();
+                parameters.put("xOrigin", origin.getX());
+                parameters.put("yOrigin", origin.getY());
+                request.setParameters(parameters);
+                Response response = NetworkController.getInstance().sendRequest(request);
+                System.out.println(response.getMessage());
             }
             else if (tileInput.equals("fortify unit")) {
-                if (origin.isMilitaryUnitExists() && origin.isSelectedOne() && origin.getMilitaryUnit().getOwner().equals(user)) {
-                    if (origin.getMilitaryUnit().getHP() != origin.getMilitaryUnit().getTotalHealth()) {
-                        origin.getMilitaryUnit().setFortify(true);
-                        System.out.println("assigned to fortify successfully!");
-                    }
-                    else
-                        System.out.println("no need to fortify");
-                }
-                else if (origin.isCivilianUnitExists() && origin.isSelectedTwo() && origin.getCivilianUnit().getOwner().equals(user)) {
-                    if (origin.getCivilianUnit().getHP() != origin.getCivilianUnit().getTotalHealth()) {
-                        origin.getCivilianUnit().setFortify(true);
-                        System.out.println("assigned to fortify successfully!");
-                    }
-                    else
-                        System.out.println("no need to fortify");
-                }
-                else
-                    System.out.println("no unit here");
+                request.setAction("fortify unit");
+                HashMap<String, Object> parameters = new HashMap<>();
+                parameters.put("xOrigin", origin.getX());
+                parameters.put("yOrigin", origin.getY());
+                request.setParameters(parameters);
+                Response response = NetworkController.getInstance().sendRequest(request);
+                System.out.println(response.getMessage());
             }
             else if (tileInput.equals("pillage unit")) {
-                if (origin.isMilitaryUnitExists() && origin.isSelectedOne() && origin.getMilitaryUnit().getOwner().equals(user)) {
-                    if (origin.getOwner() != null && !origin.getOwner().equals(user) && origin.getImprovement() != null) {
-                        origin.setLooted(true);
-                        System.out.println("pillaged successfully!");
-                    }
-                    else
-                        System.out.println("it is not proper for pillaging");
-                }
-                else
-                    System.out.println("none of your military units are here!");
+                request.setAction("pillage unit");
+                HashMap<String, Object> parameters = new HashMap<>();
+                parameters.put("xOrigin", origin.getX());
+                parameters.put("yOrigin", origin.getY());
+                request.setParameters(parameters);
+                Response response = NetworkController.getInstance().sendRequest(request);
+                System.out.println(response.getMessage());
             }
             else if (tileInput.equals("repair improvement")) {
                 if (origin.isCivilianUnitExists() && origin.getCivilianUnit().getName().equals("worker") && origin.getOwner().equals(user) && origin.getImprovement() != null && origin.isLooted()) {
