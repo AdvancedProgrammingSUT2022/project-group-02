@@ -104,7 +104,7 @@ public class PlayGame {
             gameController.userHappiness(user);
             gameController.makeAllUnOrdered(user);
             gameController.foundCity(user);
-            gameController.moveTravelingUnits(user, this);
+//            gameController.moveTravelingUnits(user, this);
             gameController.foundRuin(user);
 
             while (nextTurn) {

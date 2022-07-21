@@ -24,7 +24,6 @@ public class Unit extends PhysicalObject{
     private boolean moving;
     private int totalHealth;
     private Tile destination;
-//    private ImageView imageView;
 
     public Unit(String name, Tile tile, int HP, int goldPrice, int productionPrice, int level, int MP, int combatStrength, int rangeCombatStrength,
                 User owner, int attackPoint, int maintainGold) {

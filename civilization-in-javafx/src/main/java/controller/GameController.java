@@ -477,28 +477,28 @@ public class GameController {
         }
     }
 
-    public void moveTravelingUnits(User user, PlayGame playGame) {
-        for (Unit unit : user.getUnits()) {
-            if (unit.isMoving()) {
-                if (unit.getTile().isMilitaryUnitExists() && unit.getTile().isSelectedOne()) {
-                    playGame.moveUnit(unit.getTile(), unit.getDestination(), unit, user, true);
-                    unit.setOrdered(true);
-                    if (unit.getTile().equals(unit.getDestination())) {
-                        unit.setMoving(false);
-                        unit.setDestination(null);
-                    }
-                }
-                else if (unit.getTile().isCivilianUnitExists() && unit.getTile().isSelectedTwo()) {
-                    playGame.moveUnit(unit.getTile(), unit.getDestination(), unit, user, false);
-                    unit.setOrdered(true);
-                    if (unit.getTile().equals(unit.getDestination())) {
-                        unit.setMoving(false);
-                        unit.setDestination(null);
-                    }
-                }
-            }
-        }
-    }
+//    public void moveTravelingUnits(User user, PlayGame playGame) {
+//        for (Unit unit : user.getUnits()) {
+//            if (unit.isMoving()) {
+//                if (unit.getTile().isMilitaryUnitExists() && unit.getTile().isSelectedOne()) {
+//                    playGame.moveUnit(unit.getTile(), unit.getDestination(), unit, user, true);
+//                    unit.setOrdered(true);
+//                    if (unit.getTile().equals(unit.getDestination())) {
+//                        unit.setMoving(false);
+//                        unit.setDestination(null);
+//                    }
+//                }
+//                else if (unit.getTile().isCivilianUnitExists() && unit.getTile().isSelectedTwo()) {
+//                    playGame.moveUnit(unit.getTile(), unit.getDestination(), unit, user, false);
+//                    unit.setOrdered(true);
+//                    if (unit.getTile().equals(unit.getDestination())) {
+//                        unit.setMoving(false);
+//                        unit.setDestination(null);
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     public void assignNeighbor(MapController mapController) {
 

@@ -23,7 +23,7 @@ public class NetworkController {
 
     public void initialize() {
         try {
-            socket = new Socket("localhost", 7777);
+            socket = new Socket("localhost", 3333);
             dataInputStream = new DataInputStream(socket.getInputStream());
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
         } catch (IOException e) {

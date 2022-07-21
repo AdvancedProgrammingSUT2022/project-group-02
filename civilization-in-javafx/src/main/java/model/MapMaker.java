@@ -4927,10 +4927,10 @@ public class MapMaker {
         land.add("Desert");
         land.add("Grassland");
         improvements.add(new Improvement("Farm", 0, 1, 0, 5, resources, land));
-        technologies.add(new Technology("Agriculture", improvements, 0, 20, null, null));
+        technologies.add(new Technology("Agriculture", improvements, 0, 20, null, null, 0));
         //pottery
         buildings.add(new Building("Granary", 1, 100, 2, 0, 0, 0, 0, null));
-        technologies.add(new Technology("Pottery", null, 1, 35, null, buildings));
+        technologies.add(new Technology("Pottery", null, 1, 35, null, buildings, 1));
         //animal husbandry
         improvements = new ArrayList<>();
         resources = new ArrayList<>();
@@ -4944,10 +4944,10 @@ public class MapMaker {
         land.add("Tundra");
         land.add("Hill");
         improvements.add(new Improvement("Pasture", 1, 0, 0, 5, resources, land));
-        technologies.add(new Technology("Animal Husbandry", improvements, 2, 35, null, null));
+        technologies.add(new Technology("Animal Husbandry", improvements, 2, 35, null, null, 1));
         //archery
         units.add(new RangeMilitaryUnit("archer", null, 100, 240, 60, 1, 2, 15, 25, null, 20, 1));
-        technologies.add(new Technology("Archery", null, 3, 35, units, null));
+        technologies.add(new Technology("Archery", null, 3, 35, units, null, 1));
         //mining
         improvements = new ArrayList<>();
         resources = new ArrayList<>();
@@ -4967,7 +4967,7 @@ public class MapMaker {
         land.add("Jungle");
         land.add("Marsh");
         improvements.add(new Improvement("Mine", 1, 0, 0, 5, resources, land));
-        technologies.add(new Technology("Mining", improvements, 4, 35, null, null));
+        technologies.add(new Technology("Mining", improvements, 4, 35, null, null, 1));
         // calendar
         improvements = new ArrayList<>();
         resources = new ArrayList<>();
@@ -4986,11 +4986,11 @@ public class MapMaker {
         land.add("Marsh");
         land.add("FloodPlain");
         improvements.add(new Improvement("Plantation", 0, 0, 2, 5, resources, land));
-        technologies.add(new Technology("Calendar", improvements, 5, 70, null, null));
+        technologies.add(new Technology("Calendar", improvements, 5, 70, null, null, 2));
         //writing
         buildings = new ArrayList<>();
         buildings.add(new Building("Library", 1, 80, 0, 0, 0, 1, 0, null));
-        technologies.add(new Technology("Writing", null, 6, 55, null, buildings));
+        technologies.add(new Technology("Writing", null, 6, 55, null, buildings, 2));
         //trapping
         improvements = new ArrayList<>();
         resources = new ArrayList<>();
@@ -5009,19 +5009,19 @@ public class MapMaker {
         land.add("Grassland");
         land.add("Tundra");
         improvements.add(new Improvement("Trading Post", 0, 0, 1, 5, null, land));
-        technologies.add(new Technology("Trapping", improvements, 7, 55, null, null));
+        technologies.add(new Technology("Trapping", improvements, 7, 55, null, null, 2));
         //the wheel
         units = new ArrayList<>();
         units.add(new RangeMilitaryUnit("Chariot Archer", null, 100, 260, 65, 1, 2, 28, 0, null, 28, 1));
         buildings = new ArrayList<>();
         buildings.add(new Building("Water Mill", 2, 120, 2, 0, 0, 0, 0, null));
-        technologies.add(new Technology("The Wheel", null, 8, 55, units, buildings));
+        technologies.add(new Technology("The Wheel", null, 8, 55, units, buildings, 2));
         //bronze working
         units = new ArrayList<>();
         units.add(new MeleeMilitaryUnit("Spearman", null, 100, 260, 65, 1, 2, 25, 0, null, 25, 1));
         buildings = new ArrayList<>();
         buildings.add(new Building("Barracks", 1, 80, 0, 0, 15, 0, 0, null));
-        technologies.add(new Technology("Bronze Working", null, 9, 80, units, buildings));
+        technologies.add(new Technology("Bronze Working", null, 9, 80, units, buildings, 2));
         //masonry
         improvements = new ArrayList<>();
         resources = new ArrayList<>();
@@ -5035,7 +5035,7 @@ public class MapMaker {
         improvements.add(new Improvement("Quarry", 1, 0, 0, 5, resources, land));
         buildings = new ArrayList<>();
         buildings.add(new Building("Walls", 1, 100, 0, 5, 0, 0, 0, null));
-        technologies.add(new Technology("Masonry", improvements, 10, 55, null, buildings));
+        technologies.add(new Technology("Masonry", improvements, 10, 55, null, buildings, 2));
 
         //classical era
         // construction
@@ -5045,34 +5045,34 @@ public class MapMaker {
         improvements.add(new Improvement("Lumber Mill", 1, 0, 0, 5, null, land));
         buildings = new ArrayList<>();
         buildings.add(new Building("Colosseum", 3, 150, 0, 0, 0, 0, 4, null));
-        technologies.add(new Technology("Construction", improvements, 11, 100, null, buildings));
+        technologies.add(new Technology("Construction", improvements, 11, 100, null, buildings, 3));
         //horseback riding
         units = new ArrayList<>();
         units.add(new MeleeMilitaryUnit("Horseman", null, 100, 320, 80, 1, 4, 36, 0, null, 36, 2));
         buildings = new ArrayList<>();
         buildings.add(new Building("Circus", 3, 150, 0, 0, 0, 0, 3, null));
         buildings.add(new Building("Stable", 1, 100, 0, 0, 0, 0, 0, null));
-        technologies.add(new Technology("Horseback Riding", null, 12, 100, units, buildings));
+        technologies.add(new Technology("Horseback Riding", null, 12, 100, units, buildings, 3));
         //iron working
         units = new ArrayList<>();
         units.add(new MeleeMilitaryUnit("Swordsman", null, 100, 360, 90, 1, 2, 35, 0, null, 35, 2));
         buildings = new ArrayList<>();
         requirements.add("Barracks");
         buildings.add(new Building("Armory", 3, 130, 0, 0, 15, 0, 0, requirements));
-        technologies.add(new Technology("Iron Working", null, 13, 150, units, buildings));
+        technologies.add(new Technology("Iron Working", null, 13, 150, units, buildings, 3));
         //mathematics
         units = new ArrayList<>();
         units.add(new RangeMilitaryUnit("Catapult", null, 100, 480, 120, 1, 2, 25, 35, null, 25, 2));
         buildings = new ArrayList<>();
         buildings.add(new Building("Courthouse", 5, 200, 0, 0, 0, 0, 0, null));
-        technologies.add(new Technology("Mathematics", null, 14, 100, units, buildings));
+        technologies.add(new Technology("Mathematics", null, 14, 100, units, buildings, 3));
         //philosophy
         buildings = new ArrayList<>();
         buildings.add(new Building("Burial Tomb", 0, 120, 0, 0, 0, 0, 2, null));
         requirements = new ArrayList<>();
         requirements.add("Monument");
         buildings.add(new Building("Temple", 2, 120, 0, 0, 0, 0, 0, requirements));
-        technologies.add(new Technology("Philosophy", null, 15, 100, null, buildings));
+        technologies.add(new Technology("Philosophy", null, 15, 100, null, buildings, 3));
 
         //medieval era
         //chivalry
@@ -5082,22 +5082,22 @@ public class MapMaker {
         requirements = new ArrayList<>();
         requirements.add("Walls");
         buildings.add(new Building("Castle", 3, 200, 0, 8, 0, 0, 0, requirements));
-        technologies.add(new Technology("Chivalry", null, 16, 440, units, buildings));
+        technologies.add(new Technology("Chivalry", null, 16, 440, units, buildings, 5));
         //civil service
         units = new ArrayList<>();
         units.add(new MeleeMilitaryUnit("Pikeman", null, 100, 800, 200, 1, 2, 45, 0, null, 45, 3));
-        technologies.add(new Technology("Civil Service", null, 17, 400, units, null));
+        technologies.add(new Technology("Civil Service", null, 17, 400, units, null, 4));
         //currency
         buildings = new ArrayList<>();
         buildings.add(new Building("Market", 0, 120, 0, 0, 0, 0, 0, null));
         buildings.add(new Building("Mint", 0, 120, 0, 0, 0, 0, 0, null));
-        technologies.add(new Technology("Currency", null, 18, 250, null, buildings));
+        technologies.add(new Technology("Currency", null, 18, 250, null, buildings, 4));
         //education
         buildings = new ArrayList<>();
         requirements = new ArrayList<>();
         requirements.add("Library");
         buildings.add(new Building("University", 3, 200, 0, 0, 0, 0, 0, requirements));
-        technologies.add(new Technology("Education", null, 19, 440, null, buildings));
+        technologies.add(new Technology("Education", null, 19, 440, null, buildings, 5));
         //engineering
         improvements = new ArrayList<>();
         land = new ArrayList<>();
@@ -5107,29 +5107,29 @@ public class MapMaker {
         land.add("Tundra");
         land.add("Snow");
         improvements.add(new Improvement("Factory", 2, 0, 0, 5, null, land));
-        technologies.add(new Technology("Engineering", improvements, 20, 250, null, null));
+        technologies.add(new Technology("Engineering", improvements, 20, 250, null, null, 4));
         // machinery
         units = new ArrayList<>();
         units.add(new RangeMilitaryUnit("Crossbowman", null, 100, 720, 180, 1, 2, 30, 40, null, 30, 3));
-        technologies.add(new Technology("Machinery", null, 21, 440, units, null));
+        technologies.add(new Technology("Machinery", null, 21, 440, units, null, 5));
         //metal casting
         buildings = new ArrayList<>();
         buildings.add(new Building("Forge", 2, 150, 0, 0, 0, 0, 0, null));
         buildings.add(new Building("Workshop", 2, 100, 0, 0, 0, 0, 0, null));
-        technologies.add(new Technology("Metal Casting", null, 22, 240, null, buildings));
+        technologies.add(new Technology("Metal Casting", null, 22, 240, null, buildings, 4));
         //physics
         units = new ArrayList<>();
         units.add(new RangeMilitaryUnit("Trebuchet", null, 100, 800, 200, 1, 2, 35, 45, null, 35, 3));
-        technologies.add(new Technology("Physics", null, 23, 440, units, null));
+        technologies.add(new Technology("Physics", null, 23, 440, units, null, 5));
         //steel
         units = new ArrayList<>();
         units.add(new MeleeMilitaryUnit("Longswordsman", null, 100, 360, 90, 1, 2, 50, 0, null, 50, 3));
-        technologies.add(new Technology("Steel", null, 24, 440, units, null));
+        technologies.add(new Technology("Steel", null, 24, 440, units, null, 5));
         //theology
         buildings = new ArrayList<>();
         buildings.add(new Building("Garden", 2, 120, 0, 0, 0, 0, 0, null));
         buildings.add(new Building("Monastery", 2, 120, 0, 0, 0, 0, 0, null));
-        technologies.add(new Technology("Theology", null, 25, 250, null, buildings));
+        technologies.add(new Technology("Theology", null, 25, 250, null, buildings, 4));
 
         //renaissance era
         //acoustics
@@ -5138,38 +5138,39 @@ public class MapMaker {
         requirements.add("Temple");
         requirements.add("Burial Tomb");
         buildings.add(new Building("Opera House", 3, 220, 0, 0, 0, 0, 0, requirements));
-        technologies.add(new Technology("Acoustics", null, 26, 650, null, buildings));
+        technologies.add(new Technology("Acoustics", null, 26, 650, null, buildings, 6));
         //archaeology
         buildings = new ArrayList<>();
         requirements = new ArrayList<>();
         requirements.add("Opera House");
         buildings.add(new Building("Museum", 3, 350, 0, 0, 0, 0, 0, requirements));
-        technologies.add(new Technology("Archaeology", null, 27, 1300, null, buildings));
+        technologies.add(new Technology("Archaeology", null, 27, 1300, null, buildings, 7));
         //banking
         buildings = new ArrayList<>();
         requirements = new ArrayList<>();
         requirements.add("Market");
         buildings.add(new Building("Bank", 0, 220, 0, 0, 0, 0, 0, requirements));
         buildings.add(new Building("Strap's Court", 0, 220, 0, 0, 0, 0, 0, requirements));
-        technologies.add(new Technology("Banking", null, 28, 650, null, buildings));
+        technologies.add(new Technology("Banking", null, 28, 650, null, buildings, 6));
         //chemistry
+
         units = new ArrayList<>();
-        units.add(new RangeMilitaryUnit("Canon", null, 100, 250, 0, 1, 2, 10, 26, null, 0, 1));
-        technologies.add(new Technology("Chemistry", null, 29, 900, units, null));
+        units.add(new RangeMilitaryUnit("Canon", null, 100, 260, 0, 1, 2, 10, 26, null, 0, 1));
+        technologies.add(new Technology("Chemistry", null, 29, 900, units, null, 7));
         //economics
         buildings = new ArrayList<>();
         buildings.add(new Building("Windmill", 2, 180, 0, 0, 0, 0, 0, null));
-        technologies.add(new Technology("Economics", null, 30, 900, null, buildings));
+        technologies.add(new Technology("Economics", null, 30, 900, null, buildings, 7));
         //fertilizer
-        technologies.add(new Technology("Fertilizer", null, 31, 1300, null, null));
+        technologies.add(new Technology("Fertilizer", null, 31, 1300, null, null, 8));
         // gunpowder
         units = new ArrayList<>();
         units.add(new MeleeMilitaryUnit("Musketman", null, 100, 960, 240, 1, 2, 55, 0, null, 55, 4));
-        technologies.add(new Technology("Gunpowder", null, 32, 680, units, null));
+        technologies.add(new Technology("Gunpowder", null, 32, 680, units, null, 6));
         //metallurgy
         units = new ArrayList<>();
         units.add(new MeleeMilitaryUnit("Lancer", null, 100, 1000, 270, 1, 4, 58, 0, null, 58, 4));
-        technologies.add(new Technology("Metallurgy", null, 33, 900, units, null));
+        technologies.add(new Technology("Metallurgy", null, 33, 900, units, null, 7));
         // military science
         units = new ArrayList<>();
         units.add(new MeleeMilitaryUnit("Cavalry", null, 100, 1320, 330, 1, 5, 62, 0, null, 62, 5));
@@ -5177,72 +5178,72 @@ public class MapMaker {
         requirements = new ArrayList<>();
         requirements.add("Barracks");
         buildings.add(new Building("Military Academy", 3, 350, 0, 0, 0, 0, 0, requirements));
-        technologies.add(new Technology("Military Science", null, 34, 1300, units, buildings));
+        technologies.add(new Technology("Military Science", null, 34, 1300, units, buildings, 8));
         // printing press
         buildings = new ArrayList<>();
         requirements = new ArrayList<>();
         requirements.add("Colosseum");
         buildings.add(new Building("Theater", 5, 300, 0, 0, 0, 0, 4, requirements));
-        technologies.add(new Technology("Printing Press", null, 35, 650, null, buildings));
+        technologies.add(new Technology("Printing Press", null, 35, 650, null, buildings, 6));
         // rifling
         units = new ArrayList<>();
         units.add(new MeleeMilitaryUnit("Rifleman", null, 100, 1320, 330, 1, 2, 70, 0, null, 70, 5));
-        technologies.add(new Technology("Rifling", null, 36, 1425, units, null));
+        technologies.add(new Technology("Rifling", null, 36, 1425, units, null, 8));
         // scientific theory
         buildings = new ArrayList<>();
         requirements = new ArrayList<>();
         requirements.add("University");
         buildings.add(new Building("Public School", 3, 350, 0, 0, 0, 0, 0, requirements));
-        technologies.add(new Technology("Scientific Theory", null, 37, 1300, null, buildings));
+        technologies.add(new Technology("Scientific Theory", null, 37, 1300, null, buildings, 7));
 
         //industrial era
         //biology
         buildings = new ArrayList<>();
         buildings.add(new Building("Hospital", 2, 400, 0, 0, 0, 0, 0, null));
-        technologies.add(new Technology("Biology", null, 38, 1680, null, buildings));
+        technologies.add(new Technology("Biology", null, 38, 1680, null, buildings, 8));
         // combustion
         units = new ArrayList<>();
         units.add(new MeleeMilitaryUnit("Tank", null, 100, 1920, 480, 1, 4, 85, 0, null, 85, 6));
         units.add(new MeleeMilitaryUnit("Panzer", null, 100, 1820, 380, 1, 5, 60, 0, null, 60, 5));
-        technologies.add(new Technology("Combustion", null, 39, 1250, units, null));
+        technologies.add(new Technology("Combustion", null, 39, 1250, units, null, 11));
         //dynamite
         units = new ArrayList<>();
         units.add(new RangeMilitaryUnit("Artillery", null, 100, 1720, 430, 1, 2, 60, 80, null, 60, 6));
-        technologies.add(new Technology("Dynamite", null, 40, 1900, units, null));
+        technologies.add(new Technology("Dynamite", null, 40, 1900, units, null, 9));
         //electricity
         buildings = new ArrayList<>();
         requirements = new ArrayList<>();
         requirements.add("Bank");
         requirements.add("Strap's Court");
         buildings.add(new Building("Stock Exchange", 0,  650, 0, 0, 0, 0, 0, requirements));
-        technologies.add(new Technology("Electricity", null, 41, 1900, null, buildings));
+        technologies.add(new Technology("Electricity", null, 41, 1900, null, buildings, 10));
         //radio
         buildings = new ArrayList<>();
         requirements = new ArrayList<>();
         requirements.add("Museum");
         buildings.add(new Building("Broadcast Tower", 3, 600, 0, 0, 0, 0, 0, requirements));
-        technologies.add(new Technology("Radio", null, 42, 2200, null, buildings));
+        technologies.add(new Technology("Radio", null, 42, 2200, null, buildings, 11));
         //railroad
         buildings = new ArrayList<>();
         requirements = new ArrayList<>();
         requirements.add("Military Academy");
         buildings.add(new Building("Arsenal", 3, 350, 0, 0, 0, 0, 0, requirements));
-        technologies.add(new Technology("Railroad", null, 43, 1900, null, buildings));
+        technologies.add(new Technology("Railroad", null, 43, 1900, null, buildings, 10));
         //replaceable parts
         units = new ArrayList<>();
         units.add(new MeleeMilitaryUnit("Infantry", null, 100, 1720, 430, 1, 2, 75, 0, null, 75, 6));
         units.add(new MeleeMilitaryUnit("Anti-Tank Gun", null, 100, 1720, 430, 1, 2, 75, 0, null, 75, 6));
-        technologies.add(new Technology("Replaceable Parts", null, 44, 1900, units, null));
+        technologies.add(new Technology("Replaceable Parts", null, 44, 1900, units, null, 10));
         //steam power
         buildings = new ArrayList<>();
         buildings.add(new Building("Factory", 3, 300, 0, 0, 0, 0, 0, null));
-        technologies.add(new Technology("Steam Power", null, 45, 1680, null, buildings));
+        technologies.add(new Technology("Steam Power", null, 45, 1680, null, buildings, 9));
         //telegraph
         buildings = new ArrayList<>();
         requirements = new ArrayList<>();
         requirements.add("Castle");
         buildings.add(new Building("Military Base", 4, 450, 0, 0, 0, 0, 0, requirements));
-        technologies.add(new Technology("Telegraph", null, 46, 2200, null, buildings));
+        technologies.add(new Technology("Telegraph", null, 46, 2200, null, buildings, 11));
 
         return technologies;
     }

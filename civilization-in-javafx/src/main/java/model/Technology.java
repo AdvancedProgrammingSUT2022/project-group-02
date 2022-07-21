@@ -9,13 +9,15 @@ public class Technology {
     private final ArrayList<Building> givenBuildings;
     private final int index;
     private int sciencePrice;
-    public Technology(String name, ArrayList<Improvement> givenImprovement, int index, int sciencePrice, ArrayList<Unit> givenUnits, ArrayList<Building> givenBuildings) {
+    private int level;
+    public Technology(String name, ArrayList<Improvement> givenImprovement, int index, int sciencePrice, ArrayList<Unit> givenUnits, ArrayList<Building> givenBuildings, int level) {
         this.name = name;
         this.givenImprovement = givenImprovement;
         this.index = index;
         this.sciencePrice = sciencePrice;
         this.givenUnits = givenUnits;
         this.givenBuildings = givenBuildings;
+        this.level = level;
     }
 
     public String getName() {

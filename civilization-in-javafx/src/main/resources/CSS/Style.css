@@ -75,6 +75,20 @@
     -fx-font-size: 16px;
 }
 
+.unit-info-name {
+    -fx-font-size: 25px;
+    -fx-text-fill: #f8b1b1;
+}
+
+.unit-info-movement {
+    -fx-font-size: 25px;
+    -fx-text-fill: white;
+}
+
+.top-bar-info {
+    -fx-font-size: 25px;
+}
+
 /* end of text styles */
 
 /* text field styles */
@@ -145,6 +159,10 @@
 }
 .main-menu-buttons:hover{
     -fx-background-color: linear-gradient(to right, transparent 1%, #00FFFF70 50%, transparent 99%);
+}
+
+.unit-action-buttons:hover{
+    -fx-border-color: rgba(246, 119, 22, 0);
 }
 /* end of buttons style */
 
@@ -223,7 +241,8 @@
 }
 /* end of table of content */
 
-/* tiles of map */
+/* map */
+
 .tiles-of-map{
     -fx-border-color: red;
     -fx-border-width: 2px;
@@ -232,4 +251,7 @@
     -fx-cursor: hand;
 }
 
-/* end of tiles of map */
+.top-bar-info-icon:hover{
+    -fx-cursor: hand;
+}
+/* end of map */
