@@ -18,7 +18,7 @@ public class CityController {
         Request request = new Request();
         int xDestination = origin.getX();
         int yDestination = origin.getY();
-        request.setMenu("tile menu ");
+        request.setMenu("tile menu");
         request.setAction("place city");
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("xDestination", xDestination);

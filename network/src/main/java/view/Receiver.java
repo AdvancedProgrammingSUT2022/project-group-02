@@ -119,6 +119,11 @@ public class Receiver {
                     case "resume improvement":
                         return UnitController.getInstance().resumeImprovement(request, map);
                 }
+            case "city menu":
+                switch(request.getAction()) {
+                    case "set production":
+
+                }
         }
         return null;
 

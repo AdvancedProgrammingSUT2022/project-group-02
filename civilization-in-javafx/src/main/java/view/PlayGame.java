@@ -511,40 +511,40 @@ public class PlayGame {
                 System.out.println(response.getMessage());
             }
             else if (tileInput.equals("repair improvement")) {
-                if (origin.isCivilianUnitExists() && origin.getCivilianUnit().getName().equals("worker") && origin.getOwner().equals(user) && origin.getImprovement() != null && origin.isLooted()) {
-                    origin.setInProgress(true);
-                    Worker worker = (Worker) origin.getCivilianUnit();
-                    worker.setWorkingStatus(true);
-                    worker.setRemainingTurnsToComplete(origin.getImprovement().getPrice());
-                    worker.setImprovement(origin.getImprovement());
-                    origin.setImprovement(null);
-                    System.out.println("will be repaired as soon as possible!");
-                }
-                System.out.println("impossible to repair");
+                request.setAction("pillage unit");
+                HashMap<String, Object> parameters = new HashMap<>();
+                parameters.put("xOrigin", origin.getX());
+                parameters.put("yOrigin", origin.getY());
+                request.setParameters(parameters);
+                Response response = NetworkController.getInstance().sendRequest(request);
+                System.out.println(response.getMessage());
             }
             else if (tileInput.equals("repair improvement cheat")) {
-                if (origin.isCivilianUnitExists() && origin.getCivilianUnit().getName().equals("worker") && origin.getOwner().equals(user) && origin.getImprovement() != null && origin.isLooted()) {
-                    origin.setLooted(false);
-                    System.out.println("repaired successfully!");
-                }
-                else
-                    System.out.println("impossible to repair");
+                request.setAction("repair improvement");
+                HashMap<String, Object> parameters = new HashMap<>();
+                parameters.put("xOrigin", origin.getX());
+                parameters.put("yOrigin", origin.getY());
+                request.setParameters(parameters);
+                Response response = NetworkController.getInstance().sendRequest(request);
+                System.out.println(response.getMessage());
             }
             else if (tileInput.equals("pause improving")){
-                if (origin.isInProgress() && origin.getCivilianUnit().getOwner().equals(user)) {
-                    Worker worker = (Worker) origin.getCivilianUnit();
-                    worker.setWorkingStatus(false);
-                }
-                else
-                    System.out.println("not producing anything right now!");
+                request.setAction("pause improvement");
+                HashMap<String, Object> parameters = new HashMap<>();
+                parameters.put("xOrigin", origin.getX());
+                parameters.put("yOrigin", origin.getY());
+                request.setParameters(parameters);
+                Response response = NetworkController.getInstance().sendRequest(request);
+                System.out.println(response.getMessage());
             }
             else if (tileInput.equals("resume improving")) {
-                if (origin.isCivilianUnitExists() && origin.getCivilianUnit().getName().equals("worker") && origin.getCivilianUnit().getOwner().equals(user)) {
-                    Worker worker = (Worker) origin.getCivilianUnit();
-                    worker.setWorkingStatus(true);
-                }
-                else
-                    System.out.println("do not have any improvement in queue");
+                request.setAction("resume improvement");
+                HashMap<String, Object> parameters = new HashMap<>();
+                parameters.put("xOrigin", origin.getX());
+                parameters.put("yOrigin", origin.getY());
+                request.setParameters(parameters);
+                Response response = NetworkController.getInstance().sendRequest(request);
+                System.out.println(response.getMessage());
             }
             else
                 System.out.println("invalid command");

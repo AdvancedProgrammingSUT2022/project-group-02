@@ -10,6 +10,7 @@ import model.Tile;
 import model.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,6 +42,13 @@ public class CityMenu {
             }
             // show player cities
             else if (cityInput.equals("user cities")) {
+                //get user from server
+                Request request = new Request();
+                request.setMenu("city menu");
+                request.setAction("get user");
+                Response response = NetworkController.getInstance().sendRequest(request);
+                user = response.getUser();
+
                 if (user.getCities() != null && user.getCities().size() > 0) {
                     int index = 1;
                     for (City city : user.getCities()) {
@@ -207,6 +215,18 @@ public class CityMenu {
             else if (Pattern.matches("\\d+", productInput)) {
                 int numberOfProduct = Integer.parseInt(productInput);
                 if (numberOfProduct <= city.getProducts().size() && numberOfProduct >= 1) {
+
+                    Request request = new Request();
+                    request.setMenu("city menu");
+                    request.setAction("set production");
+                    HashMap<String, Object> parameters = new HashMap<>();
+                    parameters.put("index", numberOfProduct);
+                    parameters.put("cheat", false);
+                    request.setParameters(parameters);
+
+                    Response response = NetworkController.getInstance().sendRequest(request);
+                    System.out.println(response.getMessage());
+
                     city.setCurrentProduction(city.getProducts().get(numberOfProduct - 1));
                     city.setProductStatus(true);
                     city.setProductTurnLeft(city.getCurrentProduction().getTurnCost());
@@ -218,6 +238,18 @@ public class CityMenu {
                     (matcher = RegexEnums.getMatcher(productInput, RegexEnums.ADD_PRODUCT2)) != null) {
                 index = Integer.parseInt(matcher.group("index"));
                 if (index >= 1 && index <= city.getProducts().size()) {
+
+                    Request request = new Request();
+                    request.setMenu("city menu");
+                    request.setAction("set production");
+                    HashMap<String, Object> parameters = new HashMap<>();
+                    parameters.put("index", index);
+                    parameters.put("cheat", true);
+                    request.setParameters(parameters);
+
+                    Response response = NetworkController.getInstance().sendRequest(request);
+                    System.out.println(response.getMessage());
+
                     city.setProductStatus(true);
                     city.setCurrentProduction(city.getProducts().get(index - 1));
                     city.setProductTurnLeft(1);
