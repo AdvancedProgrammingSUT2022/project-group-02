@@ -320,8 +320,6 @@ public class PlayGame {
 
 
     public void selectedTile(Scanner scanner, Tile origin, User user) {
-
-        System.out.println("you have selected a tile with -x " + origin.getX() + " -y " + origin.getY());
         origin.setSelectedOne(false);
         origin.setSelectedTwo(false);
         if (origin.isMilitaryUnitExists())

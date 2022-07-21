@@ -1,5 +1,6 @@
 package view;
 
+import controller.CityController;
 import controller.GameController;
 import controller.SettlerController;
 import controller.UnitController;
@@ -35,12 +36,14 @@ public class UnitClickAction {
     private ArrayList<User> players;
     private Maps map;
     private boolean isUnitOrderedClicked = false;
+    private User user;
 
-    public UnitClickAction(AnchorPane finalRoot, Images images, AnchorPane root, ArrayList<User> players) {
+    public UnitClickAction(AnchorPane finalRoot, Images images, AnchorPane root, ArrayList<User> players, User user) {
         this.finalRoot = finalRoot;
         UnitClickAction.images = images;
         this.root = root;
         this.players = players;
+        this.user = user;
     }
 
     public void setMap(Maps map) {
@@ -105,8 +108,7 @@ public class UnitClickAction {
                     }
                     case "foundCityButton" -> {
                         if (!isUnitOrderedClicked) {
-                            SettlerController settlerController = SettlerController.getInstance();
-                            settlerController.createNewCity(unit, unit.getOwner(), unit.getTile(), unit.getOwner().getNickname() + " City");
+                            CityController.getInstance().createCity(unit.getTile(), user);
                             createCity(unit.getTile(), unitView);
                         }
                     }
@@ -136,6 +138,10 @@ public class UnitClickAction {
 
             });
         });
+    }
+
+    private void deleteUnit() {
+
     }
 
     private void createCity(Tile tile, ImageView imageView) {

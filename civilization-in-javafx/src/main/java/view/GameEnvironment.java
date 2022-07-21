@@ -427,7 +427,7 @@ public class GameEnvironment {
     }
 
     private void mouseClickHandler() {
-        UnitClickAction unitClickAction = new UnitClickAction(finalRoot, images, root, players);
+        UnitClickAction unitClickAction = new UnitClickAction(finalRoot, images, root, players, user);
         imageViewObjects.forEach((imageView, object) -> {
             imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
                 if (imageView.getId().equals("settler")) {
