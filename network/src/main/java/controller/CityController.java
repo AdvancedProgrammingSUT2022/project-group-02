@@ -74,8 +74,8 @@ public class CityController {
         String username = (String) request.getParameters().get("username");
         User user = UsersController.getInstance().getUserByUsername(username);
         //destination
-        int xDestination = (int) request.getParameters().get("xDestination");
-        int yDestination = (int) request.getParameters().get("yDestination");
+        int xDestination = Math.(Double) request.getParameters().get("xDestination");
+        int yDestination = (Double) request.getParameters().get("yDestination");
         Tile destination = map.getSpecificTile(xDestination, yDestination);
 
         //origin

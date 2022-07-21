@@ -485,12 +485,12 @@ public class GameController {
         }
     }
        */
-    public void assignNeighbor(MapController mapController, Maps map) {
+    public void assignNeighbor(Maps map) {
 
         // assign all the neighbors to each tile
         for (int i = 0; i < map.getHeight(); i++)
             for (int j = 0; j < map.getWidth(); j++)
-                mapController.setNeighbor(map.getTileBoard()[i][j], map);
+                MapController.getInstance().setNeighbor(map.getTileBoard()[i][j], map);
     }
     /*
     public void foundRuin(User user) {
