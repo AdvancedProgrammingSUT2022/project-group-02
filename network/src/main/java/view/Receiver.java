@@ -15,6 +15,7 @@ public class Receiver {
     private Maps map;
     public void run(int SERVER_PORT) {
         Maps map = UsersController.getInstance().readFromJsonMap();
+        GameController.getInstance().assignNeighbor(map);
         this.map = map;
         readFromJson();
 
