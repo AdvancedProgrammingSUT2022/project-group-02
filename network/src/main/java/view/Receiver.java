@@ -112,6 +112,12 @@ public class Receiver {
                         return UnitController.getInstance().fortifyUnit(request, map);
                     case "pillage unit":
                         return UnitController.getInstance().pillageUnit(request, map);
+                    case "repair improvement":
+                        return UnitController.getInstance().repairImprovement(request, map);
+                    case "pause improvement":
+                        return UnitController.getInstance().pauseImprovement(request, map);
+                    case "resume improvement":
+                        return UnitController.getInstance().resumeImprovement(request, map);
                 }
         }
         return null;

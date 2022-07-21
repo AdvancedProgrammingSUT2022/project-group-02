@@ -203,4 +203,68 @@ public class UnitController {
         return response;
     }
 
+    public Response repairImprovement(Request request, Maps map) {
+
+        Response response = new Response();
+        int xOrigin = (int) request.getParameters().get("xOrigin");
+        int yOrigin = (int) request.getParameters().get("yOrigin");
+        String username = (String) request.getParameters().get("username");
+        User user = UsersController.getInstance().getUserByUsername(username);
+
+        Tile origin = map.getSpecificTile(xOrigin, yOrigin);
+
+        if (origin.isCivilianUnitExists() && origin.getCivilianUnit().getName().equals("worker") && origin.getOwner().equals(user) && origin.getImprovement() != null && origin.isLooted()) {
+            origin.setInProgress(true);
+            Worker worker = (Worker) origin.getCivilianUnit();
+            worker.setWorkingStatus(true);
+            worker.setRemainingTurnsToComplete(origin.getImprovement().getPrice());
+            worker.setImprovement(origin.getImprovement());
+            origin.setImprovement(null);
+            response.setMessage("will be repaired as soon as possible!");
+        }
+        else
+            response.setMessage("impossible to repair");
+        return response;
+    }
+
+    public Response pauseImprovement(Request request, Maps map) {
+
+        Response response = new Response();
+        int xOrigin = (int) request.getParameters().get("xOrigin");
+        int yOrigin = (int) request.getParameters().get("yOrigin");
+        String username = (String) request.getParameters().get("username");
+        User user = UsersController.getInstance().getUserByUsername(username);
+
+        Tile origin = map.getSpecificTile(xOrigin, yOrigin);
+
+        if (origin.isInProgress() && origin.getCivilianUnit().getOwner().equals(user)) {
+            Worker worker = (Worker) origin.getCivilianUnit();
+            worker.setWorkingStatus(false);
+            response.setMessage("pause working...!");
+        }
+        else
+            response.setMessage("not producing anything right now!");
+
+        return response;
+    }
+
+    public Response resumeImprovement(Request request, Maps map) {
+        Response response = new Response();
+        int xOrigin = (int) request.getParameters().get("xOrigin");
+        int yOrigin = (int) request.getParameters().get("yOrigin");
+        String username = (String) request.getParameters().get("username");
+        User user = UsersController.getInstance().getUserByUsername(username);
+
+        Tile origin = map.getSpecificTile(xOrigin, yOrigin);
+
+        if (origin.isCivilianUnitExists() && origin.getCivilianUnit().getName().equals("worker") && origin.getCivilianUnit().getOwner().equals(user)) {
+            Worker worker = (Worker) origin.getCivilianUnit();
+            worker.setWorkingStatus(true);
+            response.setMessage("resume working...!");
+        }
+        else
+            response.setMessage("do not have any improvement in queue");
+        return response;
+    }
+
 }

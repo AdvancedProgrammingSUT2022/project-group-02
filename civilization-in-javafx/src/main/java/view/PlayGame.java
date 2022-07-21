@@ -362,13 +362,6 @@ public class PlayGame {
                 if (!(Boolean)response.getParameters().get("arrived")) {
                     //it's not over, wait till next turn to move to destination
                 }
-                /*
-                Tile tile = moveUnitConditions(origin, user, matcher);
-                if (tile != null && !tile.equals(origin)) {
-                    selectedTile(scanner, tile, user);
-                    return;
-                }
-                */
             }
             // order settler to place city
             else if ((matcher = RegexEnums.getMatcher(tileInput, RegexEnums.CITY1)) != null ||
