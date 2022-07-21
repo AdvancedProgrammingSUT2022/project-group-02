@@ -24,6 +24,7 @@ public class UnitController {
         user.removeUnit(unit);
         units.remove(unit);
     }
+
     public void repairMovementPoint(User user) {
         for (Unit unit : user.getUnits())
             unit.setMP(unit.getLastingMP());

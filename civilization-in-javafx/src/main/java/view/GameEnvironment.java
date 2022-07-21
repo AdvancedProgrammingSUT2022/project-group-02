@@ -435,13 +435,14 @@ public class GameEnvironment {
                 } else if (imageView.getId().equals("scienceTopBarInfo")) {
                     ResearchMenu researchMenu = new ResearchMenu(TechController.getInstance(), GameController.getInstance(players, map));
                     researchMenu.setImages(images);
-                    for (int[] ints : TechController.getInstance().getTechnologiesGraph()) {
-                        for (int anInt : ints) {
-                            System.out.print(anInt + " ");
-                        }
-                        System.out.println();
-                    }
-                    researchMenu.showTree();
+                    researchMenu.setUser(user);
+//                    for (int[] ints : TechController.getInstance().getTechnologiesGraph()) {
+//                        for (int anInt : ints) {
+//                            System.out.print(anInt + " ");
+//                        }
+//                        System.out.println();
+//                    }
+//                    researchMenu.showTree();
                     researchMenu.showGraphicTree(finalRoot);
                 }
             });
