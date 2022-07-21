@@ -121,6 +121,7 @@ public class Receiver {
                 }
             case "city menu":
                 switch(request.getAction()) {
+                    case "set production":
 
                 }
         }

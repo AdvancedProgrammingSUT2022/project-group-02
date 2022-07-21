@@ -20,25 +20,27 @@ public class CityController {
 
     public Response conditionsForPlaceCity(Request request, Maps map) {
         Response response = new Response();
-        String nameOfCity = (String) request.getParameters().get("name");
         int xDestination = (int) request.getParameters().get("xDestination");
         int yDestination = (int) request.getParameters().get("yDestination");
         String username = (String) request.getParameters().get("username");
         User user = UsersController.getInstance().getUserByUsername(username);
+        String nameOfCity = "city" + (user.getCities().size() + 1);
         Tile tile = map.getSpecificTile(xDestination, yDestination);
         // neighbors of the tile should be neutral
         for (Tile neighbor : tile.getNeighbors()) {
             if (neighbor.getOwner() != null) {
                 response.setMessage("a tile has owner here");
+                return response;
                 //return false;
             }
         }
         if (tile.isCivilianUnitExists() && tile.getCivilianUnit().getName().equals("settler") && tile.getCivilianUnit().getOwner().equals(user)) {
             if (tile.getCity() == null) {
-                if (tile.getOwner() == null) {
+                if (tile.getOwner() == null || tile.getOwner().equals(user)) {
                     //return true;
                     createCity(tile, user, nameOfCity, response);
                 }
+                else
                 response.setMessage("you are in someone else's territory");
             } else
                 response.setMessage("there is already a city here");
@@ -136,6 +138,23 @@ public class CityController {
             response.setMessage("there is no city on this tile");
 
         response.setParameters(parameters);
+        return response;
+    }
+
+    public Response setProduction(Request request) {
+
+        Response response = new Response();
+
+        String username = (String) request.getParameters().get("username");
+        User user = UsersController.getInstance().getUserByUsername(username);
+        int index = (int) request.getParameters().get("index of city");
+        City city = user.getCities().get(index);
+
+        city.setCurrentProduction(city.getProducts().get(index - 1));
+        city.setProductStatus(true);
+        city.setProductTurnLeft(city.getCurrentProduction().getTurnCost());
+
+        response.setMessage("product is being produced...!");
         return response;
     }
 }
