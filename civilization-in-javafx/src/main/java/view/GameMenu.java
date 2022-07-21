@@ -453,11 +453,11 @@ public class GameMenu {
         for (String username : usernames) {
             players.add(users.getUserByUsername(username));
         }
-        //int[][] graph = techGraph2();
-        //users.writeToJson(graph);
+//        int[][] graph = techGraph2();
+//        users.writeToJson(graph);
         int[][] graph = users.readFromJsonGraph();
-        //ArrayList<Technology> technologies = better();
-        //users.writeToJson(technologies);
+//        ArrayList<Technology> technologies = better();
+//        users.writeToJson(technologies);
         ArrayList<Technology> technologies = users.readFromJsonTech();
         //Maps map = new MapMaker().myTiles();
         //users.writeToJson(map);

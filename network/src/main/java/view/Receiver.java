@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class Receiver {
     private Maps map;
     public void run(int SERVER_PORT) {
-        Maps map = new MapMaker().myTiles();
+        Maps map = UsersController.getInstance().readFromJsonMap();
         this.map = map;
         readFromJson();
 

@@ -34,6 +34,8 @@ public class GameEnvironment {
     private Maps map;
     private ArrayList<User> players;
     private HashMap<ImageView, Object> imageViewObjects;
+    private MapController mapController;
+    private GameController gameController;
 
     public GameEnvironment(MediaPlayer mediaPlayer, Stage stage, Images images, UsersController users, User user, ArrayList<User> players){
         this.users = users;
@@ -45,6 +47,8 @@ public class GameEnvironment {
         finalRoot = new AnchorPane();
         this.players = players;
         imageViewObjects = new HashMap<>();
+        mapController = MapController.getInstance(map);
+        gameController = GameController.getInstance(players, map);
     }
 
     public GameEnvironment(){}
@@ -60,7 +64,8 @@ public class GameEnvironment {
         root.getStylesheets().add(String.valueOf(getClass().getResource("/CSS/Style.css")));
         stage.setMaximized(true);
         stage.setFullScreen(true);
-        MapController.getInstance(map).firstSetOfSettlers(players);
+        mapController.firstSetOfSettlers(players);
+        gameController.assignNeighbor(mapController);
         showAllInfo();
         createMap();
         new Thread(this::mouseClickHandler).start();
@@ -69,7 +74,7 @@ public class GameEnvironment {
     private void showAllInfo() {
         ImageView science = new ImageView(images.science);
         ImageView gold = new ImageView(images.gold);
-        ImageView food = new ImageView(images.food);
+        ImageView food =  new ImageView(images.food);
         ImageView happiness = new ImageView(images.happiness);
         ImageView unhappiness = new ImageView(images.unhappiness);
         Rectangle topBarBackground = new Rectangle(0, 0, 1550, 50);
@@ -79,7 +84,6 @@ public class GameEnvironment {
     }
 
     private void initialiseIcons(ImageView science, ImageView gold, ImageView food, ImageView happiness, ImageView unhappiness) {
-
         science.setLayoutX(5);
         science.setLayoutY(5);
         science.setFitWidth(35);
@@ -95,7 +99,6 @@ public class GameEnvironment {
         scienceValue.getStyleClass().add("top-bar-info");
         finalRoot.getChildren().add(science);
         finalRoot.getChildren().add(scienceValue);
-
         gold.setLayoutY(5);
         gold.setLayoutX(85);
         gold.setFitHeight(35);
@@ -125,7 +128,6 @@ public class GameEnvironment {
         foodValue.getStyleClass().add("top-bar-info");
         finalRoot.getChildren().add(food);
         finalRoot.getChildren().add(foodValue);
-
         happiness.setLayoutY(7);
         happiness.setLayoutX(287);
         happiness.setFitHeight(32);
@@ -140,7 +142,6 @@ public class GameEnvironment {
         happinessValue.getStyleClass().add("top-bar-info");
         finalRoot.getChildren().add(happiness);
         finalRoot.getChildren().add(happinessValue);
-
         unhappiness.setLayoutY(5);
         unhappiness.setLayoutX(385);
         unhappiness.setFitHeight(35);
@@ -426,27 +427,21 @@ public class GameEnvironment {
     }
 
     private void mouseClickHandler() {
-        UnitClickAction unitClickAction = new UnitClickAction(finalRoot, images);
+        UnitClickAction unitClickAction = new UnitClickAction(finalRoot, images, root, players);
         imageViewObjects.forEach((imageView, object) -> {
             imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
                 if (imageView.getId().equals("settler")) {
                     unitClickAction.setUnit((Settler) object);
+                    unitClickAction.setUnitView(imageView);
                     unitClickAction.settlerClickAction();
                 } else if (imageView.getId().equals("scienceTopBarInfo")) {
                     ResearchMenu researchMenu = new ResearchMenu(TechController.getInstance(), GameController.getInstance(players, map));
                     researchMenu.setImages(images);
-                    for (int[] ints : TechController.getInstance().getTechnologiesGraph()) {
-                        for (int anInt : ints) {
-                            System.out.print(anInt + " ");
-                        }
-                        System.out.println();
-                    }
-                    researchMenu.showTree();
+                    researchMenu.setUser(user);
                     researchMenu.showGraphicTree(finalRoot);
                 }
             });
 
         });
     }
-
 }

@@ -5150,7 +5150,7 @@ public class MapMaker {
         requirements = new ArrayList<>();
         requirements.add("Market");
         buildings.add(new Building("Bank", 0, 220, 0, 0, 0, 0, 0, requirements));
-        buildings.add(new Building("Strap's Court", 0, 220, 0, 0, 0, 0, 0, requirements));
+        buildings.add(new Building("Satrap's Court", 0, 220, 0, 0, 0, 0, 0, requirements));
         technologies.add(new Technology("Banking", null, 28, 650, null, buildings, 6));
         //chemistry
 

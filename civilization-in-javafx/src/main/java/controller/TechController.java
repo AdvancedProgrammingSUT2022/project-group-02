@@ -37,6 +37,13 @@ public class TechController {
         return prerequisites;
     }
 
+    public boolean isTechAvailable(User user, Technology technology) {
+        ArrayList<Technology> prerequisitesTechs = getPrerequisitesTech(technology);
+        for (Technology prerequisitesTech : prerequisitesTechs)
+            if (!user.getTechnologies().contains(prerequisitesTech)) return false;
+        return true;
+    }
+
     public ArrayList<Technology> getUserResearches(User user) {
         ArrayList<Technology> userTechnologies = user.getTechnologies();
         ArrayList<Technology> prerequisites;

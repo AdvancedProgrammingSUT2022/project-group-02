@@ -4,6 +4,10 @@
     -fx-cursor: hand;
     -fx-background-color: transparent;
 }
+.line{
+    -fx-fill: white;
+    -fx-text-fill: white;
+}
 /* end of public styles */
 
 /* background images */
@@ -89,6 +93,15 @@
     -fx-font-size: 25px;
 }
 
+.research-tree{
+    -fx-text-fill: #de5a5a;
+    -fx-font-size: 15px;
+}
+
+.research-tree-text{
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+}
 /* end of text styles */
 
 /* text field styles */

@@ -1,7 +1,6 @@
 package view;
 
 import controller.NetworkController;
-import controller.UsersController;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
@@ -12,7 +11,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
-import view.RegisterMenu;
 import view.enums.Images;
 
 import java.util.Scanner;

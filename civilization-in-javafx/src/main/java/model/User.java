@@ -87,6 +87,7 @@ public class User {
         historyOfNotification = new ArrayList<>();
         food = 0;
         product = 0;
+        sciencePerTurn = 1;
         territory = new ArrayList<>();
         historyOfNotification = new ArrayList<>();
         improvements = new ArrayList<>();

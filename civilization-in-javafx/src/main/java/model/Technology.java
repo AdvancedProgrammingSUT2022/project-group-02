@@ -20,6 +20,10 @@ public class Technology {
         this.level = level;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
     public String getName() {
         return name;
     }
