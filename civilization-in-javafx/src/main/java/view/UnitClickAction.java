@@ -33,7 +33,7 @@ public class UnitClickAction {
     private final Button alertAndWakeButton = new Button();
     private ArrayList<User> players;
     private Maps map;
-    private int HMCOMUA = 0;
+    private boolean isUnitOrderedClicked = false;
 
     public UnitClickAction(AnchorPane finalRoot, Images images, AnchorPane root) {
         this.finalRoot = finalRoot;
@@ -103,6 +103,7 @@ public class UnitClickAction {
 
                                     if (key2.equals("deleteUnitButton")) {
                                         UnitController unitController = UnitController.getInstance();
+                                        //todo : send a request to server to delete this unit
                                         unitController.removeUnit(true, unit, unit.getOwner());
                                         removeUnit(unitView);
                                     }
@@ -111,17 +112,20 @@ public class UnitClickAction {
                         }
                     }
                     case "foundCityButton" -> {
-                        SettlerController settlerController = SettlerController.getInstance();
-                        settlerController.createNewCity(unit, unit.getOwner(), unit.getTile(), unit.getOwner().getNickname() + " City");
-                        createCity(unit.getTile(), unitView);
+                        if (!isUnitOrderedClicked) {
+                            SettlerController settlerController = SettlerController.getInstance();
+                            settlerController.createNewCity(unit, unit.getOwner(), unit.getTile(), unit.getOwner().getNickname() + " City");
+                            createCity(unit.getTile(), unitView);
+                        }
                     }
 
 //                    case "fortifyButton" -> {
 //
 //                    }
-//                    case "doNothingButton" -> {
-//
-//                    }
+                    case "doNothingButton" -> {
+                        unit.setOrdered(true);
+                        isUnitOrderedClicked = true;
+                    }
 //                    case "movingButton" -> {
 //
 //                    }
@@ -154,6 +158,14 @@ public class UnitClickAction {
 
     private void removeUnit(ImageView imageView) {
         root.getChildren().remove(imageView);
+        finalRoot.getChildren().remove(buttons.get("deleteUnitButton"));
+        finalRoot.getChildren().remove(imageViews.get("workerMoreActionBackground"));
+        finalRoot.getChildren().remove(buttons.get("autoPlayingButton"));
+        finalRoot.getChildren().remove(buttons.get("fortifyButton"));
+        finalRoot.getChildren().remove(buttons.get("alertAndWakeButton"));
+        finalRoot.getChildren().remove(buttons.get("c"));
+        finalRoot.getChildren().remove(buttons.get("foundCityButton"));
+
     }
 
     private void initialiseMoreActionBackground() {
@@ -224,7 +236,7 @@ public class UnitClickAction {
                                            ImageView doNothingView) {
         initialiseMoreAction(moreActionView);
         initialiseAlert(alertView);
-        buttons.put("alertAndWakeButton", alertAndWakeButton);
+        buttons.put("c", alertAndWakeButton);
         finalRoot.getChildren().add(alertAndWakeButton);
         initialiseDoNothing(doNothingView);
         initialiseMoving(movingView);
