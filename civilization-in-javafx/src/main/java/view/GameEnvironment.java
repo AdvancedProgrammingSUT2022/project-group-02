@@ -426,7 +426,7 @@ public class GameEnvironment {
     }
 
     private void mouseClickHandler() {
-        UnitClickAction unitClickAction = new UnitClickAction(finalRoot, images);
+        UnitClickAction unitClickAction = new UnitClickAction(finalRoot, images, root);
         imageViewObjects.forEach((imageView, object) -> {
             imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
                 if (imageView.getId().equals("settler")) {
@@ -448,5 +448,4 @@ public class GameEnvironment {
 
         });
     }
-
 }
