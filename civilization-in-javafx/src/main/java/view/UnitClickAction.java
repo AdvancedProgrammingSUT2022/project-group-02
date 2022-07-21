@@ -1,30 +1,54 @@
 package view;
 
+import controller.GameController;
+import controller.SettlerController;
+import controller.UnitController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
+import model.Maps;
+
 import model.Tile;
 import model.Unit;
+import model.User;
 import view.enums.Images;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
+
+import static java.lang.Thread.sleep;
 
 public class UnitClickAction {
 
     private Unit unit;
     private final AnchorPane finalRoot;
+    private final AnchorPane root;
     private static Images images;
+    private ImageView unitView;
     private final HashMap<String, Button> buttons = new HashMap<>();
     private final HashMap<String, ImageView> imageViews = new HashMap<>();
     private final Button alertAndWakeButton = new Button();
+    private ArrayList<User> players;
+    private Maps map;
+    private boolean isUnitOrderedClicked = false;
 
-    public UnitClickAction(AnchorPane finalRoot, Images images){
+    public UnitClickAction(AnchorPane finalRoot, Images images, AnchorPane root, ArrayList<User> players) {
         this.finalRoot = finalRoot;
         UnitClickAction.images = images;
+        this.root = root;
+        this.players = players;
+    }
+
+    public void setMap(Maps map) {
+        this.map = map;
+    }
+
+    public void setUnitView(ImageView unitView) {
+        this.unitView = unitView;
     }
 
     public void setUnit(Unit unit) {
@@ -64,11 +88,41 @@ public class UnitClickAction {
                             buttons.remove("deleteUnitButton");
                             buttons.remove("autoPlayingButton");
                             imageViews.remove("workerMoreActionBackground");
-                        } else initialiseMoreActionBackground();
+                        } else {
+                            initialiseMoreActionBackground();
+                            buttons.forEach((key2, value2) -> {
+                                value2.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseEvent2 -> {
+                                    AudioClip clickSound = new AudioClip(Objects.requireNonNull(getClass().getResource("/Media/sounds/click.mp3")).toExternalForm());
+                                    clickSound.play();
+                                });
+                                value2.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent2 -> {
+                                    if (key2.equals("deleteUnitButton")) {
+
+                                    }
+                                });
+                            });
+                        }
                     }
                     case "foundCityButton" -> {
-
+                        if (!isUnitOrderedClicked) {
+                            SettlerController settlerController = SettlerController.getInstance();
+                            settlerController.createNewCity(unit, unit.getOwner(), unit.getTile(), unit.getOwner().getNickname() + " City");
+                            createCity(unit.getTile(), unitView);
+                        }
                     }
+
+//                    case "fortifyButton" -> {
+//
+//                    }
+                    case "doNothingButton" -> {
+                        unit.setOrdered(true);
+                        isUnitOrderedClicked = true;
+                    }
+//                    case "movingButton" -> {
+//
+//                    }
+
+
                     case "alertAndWakeButton" -> {
                         //TODO : -GRAPHIC- SHOW SOMETHING ON UNIT TO SHOW THIS
                         //TODO : -LOGIC- WHAT HAPPENED WHEN WE CLICK THIS
@@ -82,6 +136,29 @@ public class UnitClickAction {
 
             });
         });
+    }
+
+    private void createCity(Tile tile, ImageView imageView) {
+        if (tile.getCity() != null) {
+            ImageView cityView = new ImageView(images.city);
+            cityView.setLayoutX(imageView.getLayoutX() - 150);
+            cityView.setLayoutY(imageView.getLayoutY() - 105);
+            cityView.setFitWidth(200);
+            cityView.setFitHeight(200);
+            root.getChildren().add(cityView);
+            root.getChildren().remove(imageView);
+        }
+    }
+
+    private void removeUnit(ImageView imageView) {
+        root.getChildren().remove(imageView);
+        finalRoot.getChildren().remove(buttons.get("deleteUnitButton"));
+        finalRoot.getChildren().remove(imageViews.get("workerMoreActionBackground"));
+        finalRoot.getChildren().remove(buttons.get("autoPlayingButton"));
+        finalRoot.getChildren().remove(buttons.get("fortifyButton"));
+        finalRoot.getChildren().remove(buttons.get("alertAndWakeButton"));
+        finalRoot.getChildren().remove(buttons.get("c"));
+        finalRoot.getChildren().remove(buttons.get("foundCityButton"));
     }
 
     private void initialiseMoreActionBackground() {
@@ -132,7 +209,7 @@ public class UnitClickAction {
         autoPlatingView.setFitHeight(50);
         autoPlayingButton.setPrefSize(50, 50);
         finalRoot.getChildren().add(autoPlayingButton);
-        if (isMilitary){
+        if (isMilitary) {
             ImageView fortifyView = new ImageView(images.fortifyIcon);
             Button fortifyButton = new Button();
             fortifyButton.setId("fortifyButton");
@@ -149,16 +226,16 @@ public class UnitClickAction {
     }
 
     private void initialiseUnitSameButtons(ImageView moreActionView, ImageView alertView, ImageView movingView,
-                                           ImageView doNothingView){
+                                           ImageView doNothingView) {
         initialiseMoreAction(moreActionView);
         initialiseAlert(alertView);
-        buttons.put("alertAndWakeButton" , alertAndWakeButton);
+        buttons.put("c", alertAndWakeButton);
         finalRoot.getChildren().add(alertAndWakeButton);
         initialiseDoNothing(doNothingView);
         initialiseMoving(movingView);
     }
 
-    private void initialiseMoreAction(ImageView moreActionView){
+    private void initialiseMoreAction(ImageView moreActionView) {
         Button moreActionButton = new Button();
         moreActionButton.setId("moreActionButton");
         buttons.put("moreActionButton", moreActionButton);

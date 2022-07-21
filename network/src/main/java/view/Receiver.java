@@ -45,23 +45,6 @@ public class Receiver {
     }
 
     private Response process(Request request) {
-        /*
-        if (request.getMenu().equals("register menu")) {
-            if (request.getAction().equals("signup"))
-                return UsersController.getInstance().signup(request);
-            else
-                return UsersController.getInstance().login(request);
-        }
-        else if (request.getMenu().equals("profile menu")) {
-            if (request.getAction().equals("change password"))
-                return UsersController.getInstance().changePassword(request);
-            else
-                return UsersController.getInstance().changeNickname(request);
-        }
-        else {
-            return null;
-        }
-        */
 
         switch (request.getMenu()) {
             case "register menu" :
@@ -117,6 +100,24 @@ public class Receiver {
                         return CombatController.getInstance().decisionOnWhatDoDo(request, map);
                     case "attack unit":
                         return CombatController.getInstance().conditionForAttackUnit(request, map);
+                    case "delete unit":
+                        return UnitController.getInstance().deleteUnit(request, map);
+                    case "sleep unit":
+                        return UnitController.getInstance().sleepUnit(request, map);
+                    case "alert unit":
+                        return UnitController.getInstance().alertUnit(request, map);
+                    case "garrison unit":
+                        return UnitController.getInstance().garrisonUnit(request, map);
+                    case "fortify unit":
+                        return UnitController.getInstance().fortifyUnit(request, map);
+                    case "pillage unit":
+                        return UnitController.getInstance().pillageUnit(request, map);
+                    case "repair improvement":
+                        return UnitController.getInstance().repairImprovement(request, map);
+                    case "pause improvement":
+                        return UnitController.getInstance().pauseImprovement(request, map);
+                    case "resume improvement":
+                        return UnitController.getInstance().resumeImprovement(request, map);
                 }
         }
         return null;

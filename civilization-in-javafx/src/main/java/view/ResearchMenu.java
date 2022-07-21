@@ -232,10 +232,6 @@ public class ResearchMenu {
         for (Technology technology : technologies) {
             technologyHashMap.put(technology, technology.getLevel());
         }
-        X_Button.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-            finalRoot.getChildren().remove(X_Button);
-            finalRoot.getChildren().remove(background);
-        });
         AnchorPane techRoot = new AnchorPane();
         VBox vBox = new VBox();
         for (int i = 0; i < 12; i++) {
@@ -268,7 +264,8 @@ public class ResearchMenu {
                         givenImprovementIcon.setId("improvementIcon");
                         techPane.getChildren().add(givenImprovementIcon);
                     }
-                    int turnLeft = technology.getSciencePrice()/3;
+                    if (user.getSciencePerTurn() == 0)user.setSciencePerTurn(1);
+                    int turnLeft = technology.getSciencePrice()/user.getSciencePerTurn();
                     Label turnLeftLabel = new Label(turnLeft + " turn");
                     turnLeftLabel.setId("turnLeft");
                     Label name = new Label(technology.getName());
@@ -285,18 +282,16 @@ public class ResearchMenu {
         }
         techRoot.getChildren().add(vBox);
         techRoot.setOnScroll(event -> {
-//            if (event.isControlDown()) {
-//                if (techRoot.getScaleX() + event.getDeltaY() / 10000 > 0.7 && techRoot.getScaleX() + event.getDeltaY() / 10000 <= 1)
-//                    techRoot.setScaleX(techRoot.getScaleX() + event.getDeltaY() / 10000);
-//                if (techRoot.getScaleY() + event.getDeltaY() / 10000 > 0.7 && techRoot.getScaleY() + event.getDeltaY() / 10000 <= 1)
-//                    techRoot.setScaleY(techRoot.getScaleY() + event.getDeltaY() / 10000);
-//            } else {
-                techRoot.setTranslateX(techRoot.getTranslateX() + event.getDeltaX());
-                techRoot.setTranslateY(techRoot.getTranslateY() + event.getDeltaY());
-//            }
+            techRoot.setTranslateX(techRoot.getTranslateX() + event.getDeltaX() / 3);
+            techRoot.setTranslateY(techRoot.getTranslateY() + event.getDeltaY() / 3);
         });
         lineOfTree(techRoot);
         finalRoot.getChildren().add(techRoot);
+        X_Button.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            finalRoot.getChildren().remove(X_Button);
+            finalRoot.getChildren().remove(background);
+            finalRoot.getChildren().remove(techRoot);
+        });
     }
 
     private void lineOfTree(AnchorPane techRoot) {
