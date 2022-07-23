@@ -17,7 +17,6 @@ import model.City;
 import model.Product;
 import model.Unit;
 import view.enums.Images;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -27,7 +26,7 @@ public class CityClickAction {
     private final AnchorPane finalRoot;
     private final ArrayList<Node> cityPagePanes = new ArrayList<>();
     private final ArrayList<Button> buttons = new ArrayList<>();
-    private HashMap<Button, Boolean> clickButtons = new HashMap();
+    private final HashMap<Button, Boolean> clickButtons = new HashMap();
 
     public CityClickAction(AnchorPane finalRoot) {
         Product product = new Product("worker", 10);
@@ -55,7 +54,21 @@ public class CityClickAction {
             System.out.println("city turn left is negative!");
         }
         initialiseExitCityPanel();
+        initialiseBuyTile();
         buttonsAction();
+    }
+
+    private void initialiseBuyTile() {
+        Button buyTile = new Button("Buy tiles");
+        buyTile.setId("buy tile");
+        buyTile.setAlignment(Pos.CENTER);
+        buyTile.setLayoutX(615);
+        buyTile.setLayoutY(750);
+        buyTile.setPrefSize(250, 25);
+        buyTile.getStyleClass().add("exit-city-panel");
+        cityPagePanes.add(buyTile);
+        buttons.add(buyTile);
+        finalRoot.getChildren().add(buyTile);
     }
 
     private void initialiseExitCityPanel() {
@@ -73,6 +86,7 @@ public class CityClickAction {
 
     private void cityInfo() {
         AnchorPane cityInfo = new AnchorPane();
+        cityInfo.getStylesheets().add(String.valueOf(getClass().getResource("/CSS/Style.css")));
         cityInfo.relocate(0, 0);
         cityPagePanes.add(cityInfo);
         Rectangle cityInfoBackground = new Rectangle(0, 0, 122, 200);

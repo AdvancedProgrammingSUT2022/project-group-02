@@ -14,8 +14,15 @@ public class CityController {
         return cityController;
     }
 
-    public void buyingTile(City city) {
-
+    public void buyingTile(City city, User user, Tile tile) {
+            if (user.getGold() >= tile.getPrice()) {
+                new ResourceController().addFoundResource(user, tile);
+                user.setGold(user.getGold() - tile.getPrice());
+                city.addOwnerShipTiles(tile);
+                user.addTerritory(tile);
+                tile.setCity(city);
+                tile.setOwner(user);
+            }
     }
 
     public Response conditionsForPlaceCity(Request request, Maps map) {
