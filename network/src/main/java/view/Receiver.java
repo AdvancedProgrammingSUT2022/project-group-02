@@ -123,7 +123,11 @@ public class Receiver {
             case "city menu":
                 switch(request.getAction()) {
                     case "set production":
-
+                        return CityController.getInstance().setProduction(request);
+                    case "buy tile":
+                        return CityController.getInstance().buyTile(request);
+                    case "set citizen":
+                        return CityController.getInstance().setCitizen(request);
                 }
         }
         return null;

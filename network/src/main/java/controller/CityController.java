@@ -3,6 +3,7 @@ package controller;
 
 import model.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CityController {
@@ -165,4 +166,44 @@ public class CityController {
         response.setMessage("product is being produced...!");
         return response;
     }
+
+    public Response buyTile(Request request) {
+        Response response = new Response();
+
+        String username = (String) request.getParameters().get("username");
+        int indexOfCity = Integer.parseInt((String) request.getParameters().get("index of city"));
+        User user = UsersController.getInstance().getUserByUsername(username);
+        City city = user.getCities().get(indexOfCity);
+        ArrayList<Tile> neighborOfCity = MapController.getInstance().neighborOfCity(city);
+        int index = Integer.parseInt((String) request.getParameters().get("index of tile"));
+        boolean cheat = (boolean) request.getParameters().get("cheat");
+        if (!cheat)
+            user.setGold(user.getGold() - neighborOfCity.get(index - 1).getPrice());
+        city.addOwnerShipTiles(neighborOfCity.get(index - 1));
+        user.addTerritory(neighborOfCity.get(index - 1));
+        neighborOfCity.get(index - 1).setCity(city);
+        neighborOfCity.get(index - 1).setOwner(user);
+        response.setMessage("you bought tile with index " + index + " successfully!");
+        return response;
+    }
+
+    public Response setCitizen(Request request) {
+        Response response = new Response();
+        String username = (String) request.getParameters().get("username");
+        User user = UsersController.getInstance().getUserByUsername(username);
+        int indexOfCity = Integer.parseInt((String) request.getParameters().get("index of city"));
+        City city = user.getCities().get(indexOfCity);
+        int indexOfTile = Integer.parseInt((String) request.getParameters().get("index of tile"));
+        Tile tile = city.getOwnerShipTiles().get(indexOfTile);
+        int indexOfCitizen = Integer.parseInt((String) request.getParameters().get("index of citizen"));
+        Citizen citizen = city.getCitizens().get(indexOfCitizen);
+
+        tile.setCitizenExist(true);
+        citizen.setWorking(true);
+        citizen.setTile(tile);
+        response.setMessage("the citizen employed on the selected tile successfully");
+        return response;
+    }
+
+
 }
