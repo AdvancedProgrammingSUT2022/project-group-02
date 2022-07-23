@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Receiver {
     private Maps map;
@@ -18,7 +17,6 @@ public class Receiver {
         GameController.getInstance().assignNeighbor(map);
         this.map = map;
         readFromJson();
-
         try {
             ServerSocket serverSocket = new ServerSocket(SERVER_PORT);
             while (true) {
@@ -64,6 +62,8 @@ public class Receiver {
 
             case "play game" :
                 switch (request.getAction()) {
+                    case "set players" :
+                        return GameController.getInstance().setPlayers(request, map);
                     case "next turn":
                         return GameController.getInstance().nextTurn(request);
                     case "increase turn":
@@ -127,7 +127,6 @@ public class Receiver {
                 }
         }
         return null;
-
     }
 
     private void readFromJson() {

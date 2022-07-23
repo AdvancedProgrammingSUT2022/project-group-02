@@ -46,6 +46,7 @@ public class CityController {
                 response.setMessage("there is already a city here");
         } else
             response.setMessage("no settler");
+        response.setTile(tile);
 
         return response;
     }
@@ -74,8 +75,8 @@ public class CityController {
         String username = (String) request.getParameters().get("username");
         User user = UsersController.getInstance().getUserByUsername(username);
         //destination
-        int xDestination = Math.(Double) request.getParameters().get("xDestination");
-        int yDestination = (Double) request.getParameters().get("yDestination");
+        int xDestination = (int) Math.floor((double) request.getParameters().get("xDestination"));
+        int yDestination = (int) Math.floor((double) request.getParameters().get("yDestination"));
         Tile destination = map.getSpecificTile(xDestination, yDestination);
 
         //origin

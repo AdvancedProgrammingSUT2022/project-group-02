@@ -33,7 +33,7 @@ public class ResearchMenu {
     private TechController techController;
     private Matcher matcher;
     private User user;
-    private static Images images;
+    private static final Images images = Images.getInstance();
 
     public ResearchMenu(TechController techController, GameController gameController) {
         this.techController = techController;
@@ -42,10 +42,6 @@ public class ResearchMenu {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public void setImages(Images images) {
-        ResearchMenu.images = images;
     }
 
     public void run(Scanner scanner, User user) {
@@ -248,13 +244,13 @@ public class ResearchMenu {
                     techPane.getChildren().add(techIcon);
                     if (technology.getGivenBuildings() != null)
                     for (Building givenBuilding : technology.getGivenBuildings()) {
-                        ImageView givenBuildingIcon = findBuildingIcon(givenBuilding);
+                        ImageView givenBuildingIcon = findBuildingIcon(givenBuilding.getName());
                         givenBuildingIcon.setId("buildingIcon");
                         techPane.getChildren().add(givenBuildingIcon);
                     }
                     if (technology.getGivenUnits() != null)
                     for (Unit givenUnit : technology.getGivenUnits()) {
-                        ImageView givenUnitIcon = findUnitIcon(givenUnit);
+                        ImageView givenUnitIcon = findUnitIcon(givenUnit.getName());
                         givenUnitIcon.setId("unitIcon");
                         techPane.getChildren().add(givenUnitIcon);
                     }
@@ -427,8 +423,8 @@ public class ResearchMenu {
         };
     }
 
-    private ImageView findBuildingIcon(Building building) {
-        return switch (building.getName()) {
+    public static ImageView findBuildingIcon(String buildingName) {
+        return switch (buildingName) {
             case "Granary" -> new ImageView(images.Granary);
             case "Library" -> new ImageView(images.Library);
             case "Water Mill" -> new ImageView(images.Watermill);
@@ -467,8 +463,8 @@ public class ResearchMenu {
         };
     }
 
-    private ImageView findUnitIcon(Unit unit) {
-        return switch (unit.getName()) {
+    public static ImageView findUnitIcon(String unitName) {
+        return switch (unitName) {
             case "Chariot Archer", "archer" ->  new ImageView(images.chariotArcherIcon);
             case "Spearman" -> new ImageView(images.spearmanIcon);
             case "Horseman" -> new ImageView(images.horsemanIcon);

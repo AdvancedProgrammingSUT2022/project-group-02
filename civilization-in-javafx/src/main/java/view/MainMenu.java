@@ -183,7 +183,7 @@ public class MainMenu {
             user.setLastOnline(lastOnline);
             users.writeToJson();
             user.setActiveUser(false);
-            new RegisterMenu(mediaPlayer, stage, scene, images).run(new Scanner(System.in));
+            new RegisterMenu(mediaPlayer, stage, scene).run(new Scanner(System.in));
         });
         profileMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 //            ProfileMenu profileMenu = new ProfileMenu();
@@ -193,13 +193,13 @@ public class MainMenu {
 //            profileMenu.setScene(scene);
 //            profileMenu.setUsers(users);
 //            profileMenu.start(stage);
-            new ProfileMenu(mediaPlayer,stage,scene,images,users,user).start();
+            new ProfileMenu(mediaPlayer, stage, scene, users, user).start();
         });
         startGame.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            new GameMenu(mediaPlayer,stage,scene,images,users,user).start();
+            new GameMenu(mediaPlayer, stage, scene, users, user).start();
         });
         leaderboard.addEventHandler(MouseEvent.MOUSE_CLICKED, e-> {
-            new Leaderboard(mediaPlayer, stage, scene, images, users, user).run();
+            new Leaderboard(mediaPlayer, stage, scene, users, user).run();
         });
         mapSetting.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 

@@ -28,7 +28,7 @@ public class UnitClickAction {
     private Unit unit;
     private final AnchorPane finalRoot;
     private final AnchorPane root;
-    private static Images images;
+    private final Images images = Images.getInstance();;
     private ImageView unitView;
     private final HashMap<String, Button> buttons = new HashMap<>();
     private final HashMap<String, ImageView> imageViews = new HashMap<>();
@@ -38,9 +38,8 @@ public class UnitClickAction {
     private boolean isUnitOrderedClicked = false;
     private User user;
 
-    public UnitClickAction(AnchorPane finalRoot, Images images, AnchorPane root, ArrayList<User> players, User user) {
+    public UnitClickAction(AnchorPane finalRoot, AnchorPane root, ArrayList<User> players, User user) {
         this.finalRoot = finalRoot;
-        UnitClickAction.images = images;
         this.root = root;
         this.players = players;
         this.user = user;
@@ -108,7 +107,7 @@ public class UnitClickAction {
                     }
                     case "foundCityButton" -> {
                         if (!isUnitOrderedClicked) {
-                            CityController.getInstance().createCity(unit.getTile(), user);
+                            CityController.getInstance().createCity(unit.getTile(), user, map);
                             createCity(unit.getTile(), unitView);
                         }
                     }
@@ -146,6 +145,7 @@ public class UnitClickAction {
 
     private void createCity(Tile tile, ImageView imageView) {
         if (tile.getCity() != null) {
+            System.out.println("###");
             ImageView cityView = new ImageView(images.city);
             cityView.setLayoutX(imageView.getLayoutX() - 150);
             cityView.setLayoutY(imageView.getLayoutY() - 105);

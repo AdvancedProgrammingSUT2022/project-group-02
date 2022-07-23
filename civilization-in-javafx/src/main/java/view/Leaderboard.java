@@ -3,8 +3,6 @@ package view;
 import controller.UsersController;
 import javafx.css.PseudoClass;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -15,19 +13,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import model.User;
 import view.enums.Images;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Objects;
@@ -39,12 +31,11 @@ public class Leaderboard {
     private MediaPlayer mediaPlayer;
     private Stage stage;
     private Scene scene;
-    static Images images;
+    private final Images images = Images.getInstance();
     private User user;
 
-    public Leaderboard(MediaPlayer mediaPlayer, Stage stage, Scene scene, Images images, UsersController users, User user){
+    public Leaderboard(MediaPlayer mediaPlayer, Stage stage, Scene scene, UsersController users, User user){
         this.users = users;
-        Leaderboard.images = images;
         this.scene = scene;
         this.mediaPlayer = mediaPlayer;
         this.stage = stage;

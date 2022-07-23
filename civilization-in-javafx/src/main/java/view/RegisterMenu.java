@@ -37,12 +37,11 @@ public class RegisterMenu {
     private MediaPlayer mediaPlayer;
     private Stage stage;
     private Scene scene;
-    private static Images images;
+    private Images images = Images.getInstance();
     private final HashMap<String , Boolean> availableColors = new HashMap<>();
     private boolean readFromGson = false;
 
-    public RegisterMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene, Images images){
-        RegisterMenu.images = images;
+    public RegisterMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene){
         this.scene = scene;
         this.mediaPlayer = mediaPlayer;
         this.stage = stage;

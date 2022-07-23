@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class City extends PhysicalObject {
+    //TODO : SET CITY PRODUCT TURN LEFT WITH PRODUCT TURN LEFT
     private final String name;
     private Tile cityLocation;
     private boolean unhappinessEffect;
@@ -59,7 +60,9 @@ public class City extends PhysicalObject {
         this.Citizens = Citizens;
         this.currentProduction = null;
         this.cityLocation = cityLocation;
-        productionPerTurn = 0;
+        this.possibleBuildings = new ArrayList<>();
+        this.possibleUnits = new ArrayList<>();
+        productionPerTurn = 1;
         goldPerTurn = 0;
         foodPerTurn = 0;
     }

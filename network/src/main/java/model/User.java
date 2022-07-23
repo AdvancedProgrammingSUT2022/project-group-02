@@ -39,7 +39,6 @@ public class User {
     private boolean isActiveUser;
     private String lastOnline;
     private String avatarUrl;
-
     private ArrayList<Tile> visited;
     private ArrayList<Tile> visible;
     private ArrayList<ArrayList<String>> historyOfNotification;
@@ -60,11 +59,7 @@ public class User {
         gold = 0;
         turns = 1;
         visited = new ArrayList<>();
-        territory = new ArrayList<>();
         foundResources = new ArrayList<>();
-        availableResources = new ArrayList<>();
-        technologies = new ArrayList<>();
-        improvements = new ArrayList<>();
         units = new ArrayList<>();
         cities = new ArrayList<>();
         annexedCities = new ArrayList<>();
@@ -73,7 +68,6 @@ public class User {
         researchTurnLeft = 0;
         happiness = 15;
         unhappiness = 0;
-        historyOfNotification = new ArrayList<>();
         food = 0;
         product = 0;
         territory = new ArrayList<>();

@@ -14,7 +14,9 @@ public class CityController {
         return cityController;
     }
 
-    public void createCity(Tile origin, User user) {
+    public void createCity(Tile origin, User user, Maps map) {
+        System.out.println(map);
+        System.out.println(origin.getX());
         Request request = new Request();
         int xDestination = origin.getX();
         int yDestination = origin.getY();
@@ -24,9 +26,9 @@ public class CityController {
         parameters.put("xDestination", xDestination);
         parameters.put("yDestination", yDestination);
         parameters.put("username", user.getUsername());
-
         request.setParameters(parameters);
         Response response = NetworkController.getInstance().sendRequest(request);
+
         System.out.println(response.getMessage());
     }
 }

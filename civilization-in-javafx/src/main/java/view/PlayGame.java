@@ -84,7 +84,7 @@ public class PlayGame {
         manPlayGame();
         String input;
         int role = 0;
-        firstTurnsSettlers = mapController.firstSetOfSettlers(players);
+        mapController.firstSetOfSettlers(players);
         int turn = 1;
         gameController.assignNeighbor(mapController);
         boolean nextTurn = true;
