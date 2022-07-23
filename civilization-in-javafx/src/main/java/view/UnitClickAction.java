@@ -1,5 +1,6 @@
 package view;
 
+import controller.CityController;
 import controller.GameController;
 import controller.SettlerController;
 import controller.UnitController;
@@ -27,7 +28,7 @@ public class UnitClickAction {
     private Unit unit;
     private final AnchorPane finalRoot;
     private final AnchorPane root;
-    private static Images images;
+    private final Images images = Images.getInstance();;
     private ImageView unitView;
     private final HashMap<String, Button> buttons = new HashMap<>();
     private final HashMap<String, ImageView> imageViews = new HashMap<>();
@@ -35,12 +36,13 @@ public class UnitClickAction {
     private ArrayList<User> players;
     private Maps map;
     private boolean isUnitOrderedClicked = false;
+    private User user;
 
-    public UnitClickAction(AnchorPane finalRoot, Images images, AnchorPane root, ArrayList<User> players) {
+    public UnitClickAction(AnchorPane finalRoot, AnchorPane root, ArrayList<User> players, User user) {
         this.finalRoot = finalRoot;
-        UnitClickAction.images = images;
         this.root = root;
         this.players = players;
+        this.user = user;
     }
 
     public void setMap(Maps map) {
@@ -105,8 +107,7 @@ public class UnitClickAction {
                     }
                     case "foundCityButton" -> {
                         if (!isUnitOrderedClicked) {
-                            SettlerController settlerController = SettlerController.getInstance();
-                            settlerController.createNewCity(unit, unit.getOwner(), unit.getTile(), unit.getOwner().getNickname() + " City");
+                            CityController.getInstance().createCity(unit.getTile(), user, map);
                             createCity(unit.getTile(), unitView);
                         }
                     }
@@ -138,8 +139,13 @@ public class UnitClickAction {
         });
     }
 
+    private void deleteUnit() {
+
+    }
+
     private void createCity(Tile tile, ImageView imageView) {
         if (tile.getCity() != null) {
+            System.out.println("###");
             ImageView cityView = new ImageView(images.city);
             cityView.setLayoutX(imageView.getLayoutX() - 150);
             cityView.setLayoutY(imageView.getLayoutY() - 105);

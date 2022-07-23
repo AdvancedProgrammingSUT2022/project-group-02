@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class Building {
+public class Building{
     private final String name;
     private int maintainCost;
     private final int cost;

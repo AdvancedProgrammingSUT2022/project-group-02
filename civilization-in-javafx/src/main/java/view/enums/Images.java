@@ -3,6 +3,13 @@ package view.enums;
 import javafx.scene.image.Image;
 
 public class Images {
+
+    private static Images images;
+
+    public static Images getInstance() {
+        if (images == null) images = new Images();
+        return images;
+    }
     public Image normalMenuButton;
     public Image selectedMenuButton;
     public Image submitMenuButton;
@@ -195,6 +202,7 @@ public class Images {
     public Image MilitaryBase;
     public Image Mint;
     public Image Monastery;
+    public Image Monument;
     public Image Museum;
     public Image OperaHouse;
     public Image PublicSchool;
@@ -413,6 +421,7 @@ public class Images {
         MilitaryBase = new Image(String.valueOf(getClass().getResource("/Media/Buildings/Militarybase.png")));
         Mint = new Image(String.valueOf(getClass().getResource("/Media/Buildings/Mint.png")));
         Monastery = new Image(String.valueOf(getClass().getResource("/Media/Buildings/Monastery.png")));
+        Monument = new Image(String.valueOf(getClass().getResource("/Media/Buildings/Monument.png")));
         Museum = new Image(String.valueOf(getClass().getResource("/Media/Buildings/Museum.png")));
         OperaHouse = new Image(String.valueOf(getClass().getResource("/Media/Buildings/Operahouse.png")));
         PublicSchool = new Image(String.valueOf(getClass().getResource("/Media/Buildings/Publicschool.png")));

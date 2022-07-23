@@ -1,6 +1,7 @@
 package view;
 
 import controller.ColorsController;
+import controller.GameController;
 import controller.UsersController;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -36,12 +37,11 @@ public class GameMenu {
     private MediaPlayer mediaPlayer;
     private final Stage stage;
     private final Scene scene;
-    private static final Images images = new Images();
+    private final Images images = Images.getInstance();
     private final User user;
 
-    public GameMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene, Images images, UsersController users, User user) {
+    public GameMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene, UsersController users, User user) {
         this.users = users;
-        ProfileMenu.images = images;
         this.scene = scene;
         this.mediaPlayer = mediaPlayer;
         this.stage = stage;
@@ -177,7 +177,8 @@ public class GameMenu {
         back.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> start());
         submit.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             if (players.size() > 1) {
-                GameEnvironment gameEnvironment = new GameEnvironment(mediaPlayer, stage, images, users, user, players);
+                GameEnvironment gameEnvironment = new GameEnvironment(mediaPlayer, stage, users, user, players);
+                GameController.setPlayers(players);
                 gameEnvironment.run();
             } else {
                 errorLabel.setText("you need more player to start the game!");

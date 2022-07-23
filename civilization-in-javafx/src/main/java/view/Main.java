@@ -42,7 +42,7 @@ public class Main extends Application {
                 mediaPlayer.stop();
                 Scanner scanner = new Scanner(System.in);
                 graphicPlayRegisterBackgroundMusic();
-                new RegisterMenu(mediaPlayer, stage, scene, images).run(scanner);
+                new RegisterMenu(mediaPlayer, stage, scene).run(scanner);
             }
         });
         stage.show();

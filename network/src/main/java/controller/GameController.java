@@ -12,17 +12,23 @@ public class GameController {
 
     private final int height;
     private final int width;
+    private ArrayList<User> players;
 
 
     private GameController() {
         this.height = 26;
         this.width = 80;
+        players = new ArrayList<>();
     }
 
     public static GameController getInstance() {
         if (gameController == null)
             gameController = new GameController();
         return gameController;
+    }
+
+    public ArrayList<User> getPlayers() {
+        return players;
     }
 
     // cheat codes
@@ -799,6 +805,19 @@ public class GameController {
             response.setStatusCode("404");
             response.setMessage("invalid coordinates!");
         }
+        return response;
+    }
+
+    public Response setPlayers(Request request, Maps map) {
+        Response response = new Response();
+        ArrayList<User> users = UsersController.getInstance().getUsers();
+        request.getParameters().forEach((username, playerUsername) -> {
+            for (User user : users) {
+                if (user.getUsername().equals(playerUsername)) players.add(user);
+            }
+        });
+        MapController.getInstance().firstSetOfSettlers(GameController.getInstance().getPlayers(), map);
+        System.out.println(GameController.getInstance().getPlayers());
         return response;
     }
 

@@ -143,7 +143,7 @@ public class DemocracyPanel {
                     Resource resource = you.getFoundResources().get(index - 1);
                     trade.setTypeOfExport("resource");
                     trade.setExportingObject(resource);
-                    you.addTrade(trade);
+//                    you.addTrade(trade);
                 }
                 else
                     System.out.println("invalid index you idiot");

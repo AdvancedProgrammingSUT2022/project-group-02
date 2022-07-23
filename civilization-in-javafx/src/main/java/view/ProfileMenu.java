@@ -43,7 +43,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ProfileMenu {
-    public static Images images;
+    public final Images images = Images.getInstance();
     private String whichMenu;
     private UsersController users;
     private MediaPlayer mediaPlayer;
@@ -51,9 +51,8 @@ public class ProfileMenu {
     private Scene scene;
     private User user;
 
-    public ProfileMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene, Images images, UsersController users, User user) {
+    public ProfileMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene, UsersController users, User user) {
         this.users = users;
-        ProfileMenu.images = images;
         this.scene = scene;
         this.mediaPlayer = mediaPlayer;
         this.stage = stage;
