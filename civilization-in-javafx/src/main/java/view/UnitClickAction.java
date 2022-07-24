@@ -1,16 +1,14 @@
 package view;
 
 import controller.CityController;
-import controller.GameController;
-import controller.SettlerController;
 import controller.UnitController;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
-import model.Maps;
 
 import model.Tile;
 import model.Unit;
@@ -20,8 +18,6 @@ import view.enums.Images;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
-
-import static java.lang.Thread.sleep;
 
 public class UnitClickAction {
 
@@ -33,31 +29,26 @@ public class UnitClickAction {
     private final HashMap<String, Button> buttons = new HashMap<>();
     private final HashMap<String, ImageView> imageViews = new HashMap<>();
     private final Button alertAndWakeButton = new Button();
-    private ArrayList<User> players;
-    private Maps map;
     private boolean isUnitOrderedClicked = false;
+    private AnchorPane unitPanel;
     private User user;
 
     public UnitClickAction(AnchorPane finalRoot, AnchorPane root, ArrayList<User> players, User user) {
         this.finalRoot = finalRoot;
         this.root = root;
-        this.players = players;
         this.user = user;
     }
-
-    public void setMap(Maps map) {
-        this.map = map;
-    }
-
     public void setUnitView(ImageView unitView) {
         this.unitView = unitView;
     }
 
     public void setUnit(Unit unit) {
+
         this.unit = unit;
     }
 
     public void settlerClickAction() {
+        unitPanel = new AnchorPane();
         ImageView unitIconView = new ImageView(images.settlerIcon);
         ImageView infoView = new ImageView(images.unitInfoBackground);
         ImageView moreActionView = new ImageView(images.otherActionIcon);
@@ -72,9 +63,27 @@ public class UnitClickAction {
         initialiseFoundCity(foundCityView, foundCityButton);
         initialiseUnitSameInfo(unitIconView);
         mouseClickHandler(alertView, wakeView);
+        exitPanel();
+    }
+
+    private void exitPanel() {
+        Button exitPanel = new Button("Exit from Unit Panel");
+        exitPanel.setId("exit panel");
+        exitPanel.setAlignment(Pos.CENTER);
+        exitPanel.setLayoutX(615);
+        exitPanel.setLayoutY(700);
+        exitPanel.setPrefSize(250, 25);
+        exitPanel.getStyleClass().add("exit-city-panel");
+        unitPanel.getChildren().add(exitPanel);
+//        unitPanel.getChildren().removeAll();
+        exitPanel.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            finalRoot.getChildren().remove(unitPanel);
+            GameEnvironment.hashMap.replace(1, true);
+        });
     }
 
     private void mouseClickHandler(ImageView alertView, ImageView wakeView) {
+        finalRoot.getChildren().add(unitPanel);
         buttons.forEach((key, value) -> {
             value.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseEvent -> {
                 AudioClip clickSound = new AudioClip(Objects.requireNonNull(getClass().getResource("/Media/sounds/click.mp3")).toExternalForm());
@@ -84,9 +93,9 @@ public class UnitClickAction {
                 switch (key) {
                     case "moreActionButton" -> {
                         if (imageViews.containsKey("workerMoreActionBackground")) {
-                            finalRoot.getChildren().remove(buttons.get("deleteUnitButton"));
-                            finalRoot.getChildren().remove(buttons.get("autoPlayingButton"));
-                            finalRoot.getChildren().remove(imageViews.get("workerMoreActionBackground"));
+                            unitPanel.getChildren().remove(buttons.get("deleteUnitButton"));
+                            unitPanel.getChildren().remove(buttons.get("autoPlayingButton"));
+                            unitPanel.getChildren().remove(imageViews.get("workerMoreActionBackground"));
                             buttons.remove("deleteUnitButton");
                             buttons.remove("autoPlayingButton");
                             imageViews.remove("workerMoreActionBackground");
@@ -99,7 +108,7 @@ public class UnitClickAction {
                                 });
                                 value2.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent2 -> {
                                     if (key2.equals("deleteUnitButton")) {
-
+//                                        removeUnit();///give me a task
                                     }
                                 });
                             });
@@ -107,8 +116,9 @@ public class UnitClickAction {
                     }
                     case "foundCityButton" -> {
                         if (!isUnitOrderedClicked) {
-                            CityController.getInstance().createCity(unit.getTile(), user, map);
-                            createCity(unit.getTile(), unitView);
+                            if (CityController.getInstance().createCity(unit.getTile(), user, unit).getMessage().equals("city created successfully")) {
+                                createCity(unit.getTile(), unitView);
+                            }
                         }
                     }
 
@@ -128,8 +138,10 @@ public class UnitClickAction {
                         //TODO : -GRAPHIC- SHOW SOMETHING ON UNIT TO SHOW THIS
                         //TODO : -LOGIC- WHAT HAPPENED WHEN WE CLICK THIS
                         if (value.getId().equals("alertMode")) {
+                            System.out.println("##");
                             initialiseWake(wakeView);
                         } else {
+                            System.out.println("@@");
                             initialiseAlert(alertView);
                         }
                     }
@@ -139,32 +151,28 @@ public class UnitClickAction {
         });
     }
 
-    private void deleteUnit() {
-
-    }
-
     private void createCity(Tile tile, ImageView imageView) {
         if (tile.getCity() != null) {
-            System.out.println("###");
             ImageView cityView = new ImageView(images.city);
             cityView.setLayoutX(imageView.getLayoutX() - 150);
             cityView.setLayoutY(imageView.getLayoutY() - 105);
             cityView.setFitWidth(200);
             cityView.setFitHeight(200);
+            cityView.setId("city");
             root.getChildren().add(cityView);
             root.getChildren().remove(imageView);
+            finalRoot.getChildren().remove(unitPanel);
+            GameEnvironment.imageViewObjects.put(cityView, tile.getCity());
+            GameEnvironment.imageViews.add(cityView);
+            GameEnvironment.imageViewObjects.remove(imageView);
+            GameEnvironment.imageViews.remove(imageView);
         }
     }
 
     private void removeUnit(ImageView imageView) {
         root.getChildren().remove(imageView);
-        finalRoot.getChildren().remove(buttons.get("deleteUnitButton"));
-        finalRoot.getChildren().remove(imageViews.get("workerMoreActionBackground"));
-        finalRoot.getChildren().remove(buttons.get("autoPlayingButton"));
-        finalRoot.getChildren().remove(buttons.get("fortifyButton"));
-        finalRoot.getChildren().remove(buttons.get("alertAndWakeButton"));
-        finalRoot.getChildren().remove(buttons.get("c"));
-        finalRoot.getChildren().remove(buttons.get("foundCityButton"));
+        UnitController.removeUnit(unit, user);
+        finalRoot.getChildren().remove(unitPanel);
     }
 
     private void initialiseMoreActionBackground() {
@@ -175,7 +183,7 @@ public class UnitClickAction {
             workerMoreActionBackground.setLayoutY(500);
             workerMoreActionBackground.setFitHeight(130);
             workerMoreActionBackground.setFitWidth(80);
-            finalRoot.getChildren().add(workerMoreActionBackground);
+            unitPanel.getChildren().add(workerMoreActionBackground);
             initialiseMoreActionButtons(false);
         } else {
             ImageView unitMoreActionBackground = new ImageView(images.unitMoreActionInfoBackground);
@@ -184,7 +192,7 @@ public class UnitClickAction {
             unitMoreActionBackground.setLayoutY(440);
             unitMoreActionBackground.setFitHeight(185);
             unitMoreActionBackground.setFitWidth(80);
-            finalRoot.getChildren().add(unitMoreActionBackground);
+            unitPanel.getChildren().add(unitMoreActionBackground);
             initialiseMoreActionButtons(true);
         }
     }
@@ -201,7 +209,7 @@ public class UnitClickAction {
         deleteUnitView.setFitWidth(50);
         deleteUnitView.setFitHeight(50);
         deleteUnitButton.setPrefSize(50, 50);
-        finalRoot.getChildren().add(deleteUnitButton);
+        unitPanel.getChildren().add(deleteUnitButton);
 
         ImageView autoPlatingView = new ImageView(images.autoPlayingIcon);
         Button autoPlayingButton = new Button();
@@ -214,7 +222,7 @@ public class UnitClickAction {
         autoPlatingView.setFitWidth(50);
         autoPlatingView.setFitHeight(50);
         autoPlayingButton.setPrefSize(50, 50);
-        finalRoot.getChildren().add(autoPlayingButton);
+        unitPanel.getChildren().add(autoPlayingButton);
         if (isMilitary) {
             ImageView fortifyView = new ImageView(images.fortifyIcon);
             Button fortifyButton = new Button();
@@ -227,7 +235,7 @@ public class UnitClickAction {
             fortifyView.setFitWidth(56);
             fortifyView.setFitHeight(56);
             fortifyButton.setPrefSize(56, 56);
-            finalRoot.getChildren().add(fortifyButton);
+            unitPanel.getChildren().add(fortifyButton);
         }
     }
 
@@ -235,8 +243,8 @@ public class UnitClickAction {
                                            ImageView doNothingView) {
         initialiseMoreAction(moreActionView);
         initialiseAlert(alertView);
-        buttons.put("c", alertAndWakeButton);
-        finalRoot.getChildren().add(alertAndWakeButton);
+        buttons.put("alertAndWakeButton", alertAndWakeButton);
+        unitPanel.getChildren().add(alertAndWakeButton);
         initialiseDoNothing(doNothingView);
         initialiseMoving(movingView);
     }
@@ -252,7 +260,7 @@ public class UnitClickAction {
         moreActionButton.setLayoutX(3);
         moreActionButton.setLayoutY(564);
         moreActionButton.setPrefSize(50, 50);
-        finalRoot.getChildren().add(moreActionButton);
+        unitPanel.getChildren().add(moreActionButton);
     }
 
     private void initialiseAlert(ImageView alertView) {
@@ -288,7 +296,7 @@ public class UnitClickAction {
         doNothingButton.setLayoutX(3);
         doNothingButton.setLayoutY(454);
         doNothingButton.setPrefSize(50, 50);
-        finalRoot.getChildren().add(doNothingButton);
+        unitPanel.getChildren().add(doNothingButton);
     }
 
     private void initialiseMoving(ImageView movingView) {
@@ -302,7 +310,7 @@ public class UnitClickAction {
         movingButton.setLayoutX(2);
         movingButton.setLayoutY(397);
         movingButton.setPrefSize(52, 52);
-        finalRoot.getChildren().add(movingButton);
+        unitPanel.getChildren().add(movingButton);
     }
 
     private void initialiseFoundCity(ImageView foundCityView, Button foundCityButton) {
@@ -315,7 +323,7 @@ public class UnitClickAction {
         foundCityButton.setLayoutX(3);
         foundCityButton.setLayoutY(344);
         foundCityButton.setPrefSize(51, 51);
-        finalRoot.getChildren().add(foundCityButton);
+        unitPanel.getChildren().add(foundCityButton);
     }
 
     private void initialiseUnitInfo(ImageView imageView) {
@@ -323,7 +331,7 @@ public class UnitClickAction {
         imageView.setLayoutY(335);
         imageView.setFitHeight(530);
         imageView.setFitWidth(530);
-        finalRoot.getChildren().add(imageView);
+        unitPanel.getChildren().add(imageView);
     }
 
     private void initialiseUnitSameInfo(ImageView unitIconView) {
@@ -337,7 +345,7 @@ public class UnitClickAction {
         label.setLayoutY(639);
         label.setLayoutX(300 - 17 * unit.getName().length());
         label.getStyleClass().add("unit-info-name");
-        finalRoot.getChildren().add(label);
+        unitPanel.getChildren().add(label);
     }
 
     private void initialiseUnitIcon(ImageView unitIconView) {
@@ -350,8 +358,8 @@ public class UnitClickAction {
         unitIconView.setLayoutY(700);
         unitIconView.setFitWidth(140);
         unitIconView.setFitHeight(140);
-        finalRoot.getChildren().add(goldenRing);
-        finalRoot.getChildren().add(unitIconView);
+        unitPanel.getChildren().add(goldenRing);
+        unitPanel.getChildren().add(unitIconView);
     }
 
     private void initialiseUnitMovement() {
@@ -359,6 +367,6 @@ public class UnitClickAction {
         label.setLayoutX(185);
         label.setLayoutY(700);
         label.getStyleClass().add("unit-info-movement");
-        finalRoot.getChildren().add(label);
+        unitPanel.getChildren().add(label);
     }
 }

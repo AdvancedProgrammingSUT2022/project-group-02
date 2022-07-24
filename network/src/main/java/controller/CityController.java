@@ -47,6 +47,7 @@ public class CityController {
                 if (tile.getOwner() == null || tile.getOwner().equals(user)) {
                     //return true;
                     createCity(tile, user, nameOfCity, response);
+                    response.setMessage("city created successfully");
                 }
                 else
                 response.setMessage("you are in someone else's territory");
@@ -54,7 +55,6 @@ public class CityController {
                 response.setMessage("there is already a city here");
         } else
             response.setMessage("no settler");
-        response.setTile(tile);
 
         return response;
     }

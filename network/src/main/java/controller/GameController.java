@@ -817,7 +817,7 @@ public class GameController {
             }
         });
         MapController.getInstance().firstSetOfSettlers(GameController.getInstance().getPlayers(), map);
-        System.out.println(GameController.getInstance().getPlayers());
+        response.setMessage("start the game");
         return response;
     }
 

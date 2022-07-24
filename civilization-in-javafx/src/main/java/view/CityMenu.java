@@ -138,7 +138,7 @@ public class CityMenu {
                                     }
                                 }
                                 //buy tile without cheat
-                                buyTile(user.getUsername(), user.getCities().indexOf(city), index, false);
+//                                buyTile(user.getUsername(), user.getCities().indexOf(city), index, false);
                             }
                             else
                                 System.out.println("not enough gold!");
@@ -151,7 +151,7 @@ public class CityMenu {
                         index = Integer.parseInt(matcher.group("index"));
                         if (index >= 1 && index <= neighborOfCity.size()) {
                             //buy tile with cheat
-                            buyTile(user.getUsername(), user.getCities().indexOf(city), index, true);
+//                            buyTile(user.getUsername(), user.getCities().indexOf(city), index, true);
                         }
                         else
                             System.out.println("invalid number");
@@ -358,7 +358,7 @@ public class CityMenu {
         System.out.println(Colors.RESET);
     }
 
-    private void buyTile(String username, int indexOfCity, int indexOfTileInNeighborsOfCity, boolean cheat) {
+    private void buyTile(String username, int indexOfCity, int indexOfTileInNeighborsOfCity, boolean cheat, Tile tile) {
         Request request = new Request();
         request.setMenu("city menu");
         request.setAction("buy tile");

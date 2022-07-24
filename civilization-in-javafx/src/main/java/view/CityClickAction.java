@@ -1,5 +1,6 @@
 package view;
 
+import controller.MapController;
 import controller.SettlerController;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -12,10 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import model.Building;
-import model.City;
-import model.Product;
-import model.Unit;
+import model.*;
 import view.enums.Images;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,21 +25,18 @@ public class CityClickAction {
     private final ArrayList<Node> cityPagePanes = new ArrayList<>();
     private final ArrayList<Button> buttons = new ArrayList<>();
     private final HashMap<Button, Boolean> clickButtons = new HashMap();
+    private final MapController mapController;
 
-    public CityClickAction(AnchorPane finalRoot) {
-        Product product = new Product("worker", 10);
+    public CityClickAction(AnchorPane finalRoot, MapController mapController) {
         this.finalRoot = finalRoot;
-        this.city = new City("nameOfCity", null, null, null, 100, 100, null, null,
-                0, 1, 1, 1, 1, 1, 1, 1, 1,
-                null, null, false, null, 20);
-        city.setCurrentProduction(product);
-        city.setProductTurnLeft(product.getTurnCost());
-        SettlerController.addBasicUnits(city);
-        SettlerController.addBasicBuildings(city);
+        this.mapController = mapController;
     }
 
     public void setCity(City city) {
         this.city = city;
+        Product product = new Product("worker", 10);
+        this.city.setCurrentProduction(product);
+        this.city.setProductTurnLeft(product.getTurnCost());
     }
 
     public void cityClickHandler(){
@@ -67,6 +62,7 @@ public class CityClickAction {
         buyTile.setPrefSize(250, 25);
         buyTile.getStyleClass().add("exit-city-panel");
         cityPagePanes.add(buyTile);
+        clickButtons.put(buyTile, false);
         buttons.add(buyTile);
         finalRoot.getChildren().add(buyTile);
     }
@@ -465,7 +461,10 @@ public class CityClickAction {
                 } else if (button.getId().equals("exit panel")) {
                     for (Node cityPagePane : cityPagePanes) {
                         finalRoot.getChildren().remove(cityPagePane);
+                        GameEnvironment.hashMap.replace(3, true);
                     }
+                } else if (button.getId().equals("buy tile") && !clickButtons.get(button)) {
+                    ArrayList<Tile> neighborOfCity = mapController.neighborOfCity(city);
                 }
             });
         }

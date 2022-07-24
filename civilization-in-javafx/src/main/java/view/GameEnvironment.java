@@ -15,9 +15,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import model.Maps;
-import model.Tile;
-import model.User;
+import model.*;
 import view.enums.Images;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,12 +30,14 @@ public class GameEnvironment {
     private User user;
     private Maps map;
     private ArrayList<User> players;
-    private HashMap<ImageView, Object> imageViewObjects;
+    public static final HashMap<ImageView, Object> imageViewObjects = new HashMap<>();
+    public static final ArrayList<ImageView> imageViews =  new ArrayList<>();
     private MapController mapController;
     private GameController gameController;
     private ArrayList<ImageView> topBarImageViews;
     private ArrayList<Label> topBarLabels;
     private Rectangle topBarBackground;
+    public static final HashMap<Integer, Boolean> hashMap = new HashMap<>();
 
     public GameEnvironment(MediaPlayer mediaPlayer, Stage stage, UsersController users, User user, ArrayList<User> players){
         this.users = users;
@@ -47,7 +47,6 @@ public class GameEnvironment {
         map = users.readFromJsonMap();
         finalRoot = new AnchorPane();
         this.players = players;
-        imageViewObjects = new HashMap<>();
         mapController = MapController.getInstance(map);
         gameController = GameController.getInstance(players, map);
     }
@@ -95,6 +94,7 @@ public class GameEnvironment {
         science.setId("scienceTopBarInfo");
         topBarImageViews.add(science);
         imageViewObjects.put(science, null);
+        imageViews.add(science);
         String scienceValueString = positiveOrNegative(user.getSciencePerTurn()) + user.getSciencePerTurn();
         Label scienceValue = new Label(scienceValueString);
         scienceValue.setLayoutX(45);
@@ -196,6 +196,7 @@ public class GameEnvironment {
                     imageView.setFitHeight(360);
                     imageView.setId("Tile");
                     imageViewObjects.put(imageView, tile);
+                    imageViews.add(imageView);
                     canPopup.put(imageView, true);
                     root.getChildren().add(imageView);
                     resourceHandler(tile, imageView);
@@ -314,6 +315,7 @@ public class GameEnvironment {
             resourceView.setFitHeight(90);
             resourceView.setId("Resource");
             imageViewObjects.put(resourceView, tile.getResource());
+            imageViews.add(resourceView);
             root.getChildren().add(resourceView);
         }
     }
@@ -376,6 +378,7 @@ public class GameEnvironment {
             MUitView.setFitWidth(90);
             MUitView.setId(tile.getMilitaryUnit().getName());
             imageViewObjects.put(MUitView, tile.getMilitaryUnit());
+            imageViews.add(MUitView);
             root.getChildren().add(MUitView);
         }
 
@@ -388,6 +391,7 @@ public class GameEnvironment {
             CUnitView.setFitWidth(150);
             CUnitView.setId(tile.getCivilianUnit().getName());
             imageViewObjects.put(CUnitView, tile.getCivilianUnit());
+            imageViews.add(CUnitView);
             root.getChildren().add(CUnitView);
         }
     }
@@ -443,26 +447,45 @@ public class GameEnvironment {
     }
 
     private void mouseClickHandler() {
-//        UnitClickAction unitClickAction = new UnitClickAction(finalRoot, images, root, players, user);
-        CityClickAction cityClickAction = new CityClickAction(finalRoot);
-        imageViewObjects.forEach((imageView, object) -> {
-            imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-                if (imageView.getId().equals("settler")) {
-                    for (ImageView topBarImageView : topBarImageViews) finalRoot.getChildren().remove(topBarImageView);
-                    for (Label topBarLabel : topBarLabels) finalRoot.getChildren().remove(topBarLabel);
-                    finalRoot.getChildren().remove(topBarBackground);
-                    cityClickAction.cityClickHandler();
-//                    unitClickAction.setUnit((Settler) object);
-//                    unitClickAction.setUnitView(imageView);
-//                    unitClickAction.setMap(map);
-//                    unitClickAction.settlerClickAction();
-                } else if (imageView.getId().equals("scienceTopBarInfo")) {
-                    ResearchMenu researchMenu = new ResearchMenu(TechController.getInstance(), GameController.getInstance(players, map));
-                    researchMenu.setUser(user);
-                    researchMenu.showGraphicTree(finalRoot);
-                }
-            });
-
-        });
+        CityClickAction cityClickAction = new CityClickAction(finalRoot, MapController.getInstance(map));
+        ResearchMenu researchMenu = new ResearchMenu(TechController.getInstance(), GameController.getInstance(players, map));
+        UnitClickAction unitClickAction = new UnitClickAction(finalRoot, root, players, user);
+        hashMap.put(1, true);
+        hashMap.put(2, true);
+        hashMap.put(3, true);
+        while (true) {
+            for (int i = 0; i < imageViews.size(); i++) {
+                int finalI = i;
+                imageViews.get(i).addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+                    if (imageViews.get(finalI).getId().equals("settler") && hashMap.get(1)) {
+                        hashMap.replace(1, false);
+                        hashMap.forEach((key1, value2) -> {
+                            if (key1 != 1) hashMap.replace(key1, true);
+                        });
+                        for (ImageView topBarImageView : topBarImageViews)
+                            finalRoot.getChildren().remove(topBarImageView);
+                        for (Label topBarLabel : topBarLabels) finalRoot.getChildren().remove(topBarLabel);
+                        finalRoot.getChildren().remove(topBarBackground);
+                        unitClickAction.setUnit((Settler) imageViewObjects.get(imageViews.get(finalI)));
+                        unitClickAction.setUnitView(imageViews.get(finalI));
+                        unitClickAction.settlerClickAction();
+                    } else if (imageViews.get(finalI).getId().equals("scienceTopBarInfo") && hashMap.get(2)) {
+                        hashMap.replace(2, false);
+                        hashMap.forEach((key1, value2) -> {
+                            if (key1 != 2) hashMap.replace(key1, true);
+                        });
+                        researchMenu.setUser(user);
+                        researchMenu.showGraphicTree(finalRoot);
+                    } else if (imageViews.get(finalI).getId().equals("city") && hashMap.get(3)) {
+                        hashMap.replace(3, false);
+                        hashMap.forEach((key1, value2) -> {
+                            if (key1 != 3) hashMap.replace(key1, true);
+                        });
+                        cityClickAction.setCity((City) imageViewObjects.get(imageViews.get(finalI)));
+                        cityClickAction.cityClickHandler();
+                    }
+                });
+            }
+        }
     }
 }

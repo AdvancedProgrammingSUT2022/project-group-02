@@ -29,7 +29,7 @@ public class SettlerController extends UnitController{
         if (user.getCapital() == null)
             user.setCapital(city);
         user.addCity(city);
-        removeUnit(true, unit, user);
+        removeUnit(unit, user);
         addBasicProducts(city);
         addBasicUnits(city);
         addBasicBuildings(city);

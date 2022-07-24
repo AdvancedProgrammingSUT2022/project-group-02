@@ -1,12 +1,12 @@
 package model;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.*;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.graph.GraphAdapterBuilder;
 
-import java.lang.reflect.Type;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -18,6 +18,7 @@ public class Response {
     private ArrayList<String> notifications = new ArrayList<>();
     private Tile tile;
     private Maps maps;
+    private Object object;
 
     public HashMap<String, Object> getParameters() {
         return parameters;
@@ -25,6 +26,18 @@ public class Response {
 
     public void setParameters(HashMap<String, Object> parameters) {
         this.parameters = parameters;
+    }
+
+    public Object getObject() {
+        return object;
+    }
+
+    public void setObject(Object object) {
+        this.object = object;
+    }
+
+    public void addParameters(String action, Object object) {
+        this.parameters.put(action, object);
     }
 
     public String getStatusCode() {
@@ -47,24 +60,8 @@ public class Response {
         return new Gson().toJson(this);
     }
 
-    public String toJson2() {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        GraphAdapterBuilder graphAdapterBuilder = new GraphAdapterBuilder();
-        graphAdapterBuilder.registerOn(gsonBuilder);
-        graphAdapterBuilder.addType(Tile.class);
-        graphAdapterBuilder.addType(Citizen.class);
-        graphAdapterBuilder.addType(City.class);
-        graphAdapterBuilder.addType(Improvement.class);
-        graphAdapterBuilder.addType(Message.class);
-        graphAdapterBuilder.addType(Technology.class);
-        graphAdapterBuilder.addType(Terrain.class);
-        graphAdapterBuilder.addType(Unit.class);
-        graphAdapterBuilder.addType(User.class);
-        graphAdapterBuilder.addType(Ruin.class);
-        graphAdapterBuilder.addType(PhysicalObject.class);
-        Gson gson = gsonBuilder.create();
-        System.out.println(gson.toJson(this));
-        return gson.toJson(this);
+    public void XML() throws IOException {
+
     }
 
     public User getUser() {

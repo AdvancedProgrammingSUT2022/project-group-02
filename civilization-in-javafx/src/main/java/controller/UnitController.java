@@ -7,10 +7,7 @@ public class UnitController {
 
     private static UnitController unitController;
 
-    private final ArrayList<Unit> units;
-
     UnitController() {
-        units = new ArrayList<>();
     }
 
     public static UnitController getInstance() {
@@ -19,10 +16,10 @@ public class UnitController {
         return unitController;
     }
 
-    public void removeUnit (boolean isSettler, Unit unit, User user) {
-        if (!isSettler) user.setGold(user.getGold() + unit.getGoldPrice()/5);
+    public static void removeUnit (Unit unit, User user) {
+        user.setGold(user.getGold() + unit.getGoldPrice()/5);
         user.removeUnit(unit);
-        units.remove(unit);
+        unit.getTile().setCivilianUnit(null);
     }
 
     public void repairMovementPoint(User user) {
