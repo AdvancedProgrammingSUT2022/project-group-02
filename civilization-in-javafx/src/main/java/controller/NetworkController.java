@@ -37,7 +37,7 @@ public class NetworkController {
             dataOutputStream.writeUTF(output);
             dataOutputStream.flush();
             String input = dataInputStream.readUTF();
-            return Response.fromJson(input);
+            return new Response().fromJson(input);
         } catch (IOException e) {
             e.printStackTrace();
         }

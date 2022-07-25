@@ -33,7 +33,7 @@ public class ResearchMenu {
     private TechController techController;
     private Matcher matcher;
     private User user;
-    private static Images images;
+    private static final Images images = Images.getInstance();
 
     public ResearchMenu(TechController techController, GameController gameController) {
         this.techController = techController;
@@ -42,10 +42,6 @@ public class ResearchMenu {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public void setImages(Images images) {
-        ResearchMenu.images = images;
     }
 
     public void run(Scanner scanner, User user) {
@@ -236,6 +232,7 @@ public class ResearchMenu {
                     techIcon.setId("techIcon");
                     techPane.getChildren().add(techIcon);
                     if (technology.getGivenBuildings() != null)
+<<<<<<< HEAD
                         for (Building givenBuilding : technology.getGivenBuildings()) {
                             ImageView givenBuildingIcon = findBuildingIcon(givenBuilding);
                             givenBuildingIcon.setId("buildingIcon");
@@ -247,6 +244,19 @@ public class ResearchMenu {
                             givenUnitIcon.setId("unitIcon");
                             techPane.getChildren().add(givenUnitIcon);
                         }
+=======
+                    for (Building givenBuilding : technology.getGivenBuildings()) {
+                        ImageView givenBuildingIcon = findBuildingIcon(givenBuilding.getName());
+                        givenBuildingIcon.setId("buildingIcon");
+                        techPane.getChildren().add(givenBuildingIcon);
+                    }
+                    if (technology.getGivenUnits() != null)
+                    for (Unit givenUnit : technology.getGivenUnits()) {
+                        ImageView givenUnitIcon = findUnitIcon(givenUnit.getName());
+                        givenUnitIcon.setId("unitIcon");
+                        techPane.getChildren().add(givenUnitIcon);
+                    }
+>>>>>>> e76136f83b2969e7ac64890d2e3276503c5d9d9b
                     if (technology.getGivenImprovement() != null)
                         for (Improvement givenImprovement : technology.getGivenImprovement()) {
                             ImageView givenImprovementIcon = findImprovement(givenImprovement);
@@ -520,8 +530,8 @@ public class ResearchMenu {
         };
     }
 
-    private ImageView findBuildingIcon(Building building) {
-        return switch (building.getName()) {
+    public static ImageView findBuildingIcon(String buildingName) {
+        return switch (buildingName) {
             case "Granary" -> new ImageView(images.Granary);
             case "Library" -> new ImageView(images.Library);
             case "Water Mill" -> new ImageView(images.Watermill);
@@ -560,9 +570,15 @@ public class ResearchMenu {
         };
     }
 
+<<<<<<< HEAD
     private ImageView findUnitIcon(Unit unit) {
         return switch (unit.getName()) {
             case "Chariot Archer", "archer" -> new ImageView(images.chariotArcherIcon);
+=======
+    public static ImageView findUnitIcon(String unitName) {
+        return switch (unitName) {
+            case "Chariot Archer", "archer" ->  new ImageView(images.chariotArcherIcon);
+>>>>>>> e76136f83b2969e7ac64890d2e3276503c5d9d9b
             case "Spearman" -> new ImageView(images.spearmanIcon);
             case "Horseman" -> new ImageView(images.horsemanIcon);
             case "Swordsman" -> new ImageView(images.swordManIcon);

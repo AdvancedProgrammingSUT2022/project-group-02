@@ -1,13 +1,6 @@
 package model;
 
-import javafx.scene.image.Image;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
-
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class User {
     private final String username;
@@ -46,7 +39,6 @@ public class User {
     private boolean isActiveUser;
     private String lastOnline;
     private String avatarUrl;
-    //private Circle avatar;
 
     private ArrayList<Tile> visited;
     private ArrayList<Tile> visible;
@@ -61,9 +53,6 @@ public class User {
     private ArrayList<User> enemies;
     private ArrayList<Message> seenMessages;
 
-    private HashMap<User, Integer> relations;
-    private ArrayList<Trade> trades;
-
     public User(String username, String nickname, String password) {
         this.username = username;
         this.nickname = nickname;
@@ -71,11 +60,7 @@ public class User {
         gold = 0;
         turns = 1;
         visited = new ArrayList<>();
-        territory = new ArrayList<>();
         foundResources = new ArrayList<>();
-        availableResources = new ArrayList<>();
-        technologies = new ArrayList<>();
-        improvements = new ArrayList<>();
         units = new ArrayList<>();
         cities = new ArrayList<>();
         annexedCities = new ArrayList<>();
@@ -84,10 +69,8 @@ public class User {
         researchTurnLeft = 0;
         happiness = 15;
         unhappiness = 0;
-        historyOfNotification = new ArrayList<>();
         food = 0;
         product = 0;
-        sciencePerTurn = 1;
         territory = new ArrayList<>();
         historyOfNotification = new ArrayList<>();
         improvements = new ArrayList<>();
@@ -99,8 +82,6 @@ public class User {
         foundRuins = new ArrayList<>();
         enemies = new ArrayList<>();
         seenMessages = new ArrayList<>();
-        relations = new HashMap<>();
-        trades = new ArrayList<>();
     }
 
     public void setColor(String color) {
@@ -565,32 +546,4 @@ public class User {
     public void setSeenMessages(ArrayList<Message> seenMessages) {
         this.seenMessages = seenMessages;
     }
-
-    public HashMap<User, Integer> getRelations() {
-        return relations;
-    }
-
-    public void setRelations(HashMap<User, Integer> relations) {
-        this.relations = relations;
-    }
-
-    public ArrayList<Trade> getTrades() {
-        return trades;
-    }
-
-    public void setTrades(ArrayList<Trade> trades) {
-        this.trades = trades;
-    }
-
-    public void addTrade(Trade trade) {
-        trades.add(trade);
-    }
-//    public void setAvatar() {
-//        this.avatar = new Circle();
-//        this.avatar.setFill(new ImagePattern(new Image(this.avatarUrl)));
-//    }
-//
-//    public Circle getAvatar() {
-//        return avatar;
-//    }
 }

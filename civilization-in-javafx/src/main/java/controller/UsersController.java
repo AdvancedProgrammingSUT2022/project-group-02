@@ -67,7 +67,7 @@ public class UsersController {
     // read the information of users from .json file
     public ArrayList<User> readFromJson() {
         try {
-            String usersJson = new String(Files.readAllBytes(Paths.get("usersInformation.json")));
+            String usersJson = new String(Files.readAllBytes(Paths.get("../network/usersInformation.json")));
             ArrayList<User> usersFromJson = new Gson().fromJson(usersJson, new TypeToken<List<User>>(){}.getType());
             if (usersFromJson != null)
                 return usersFromJson;
@@ -154,14 +154,14 @@ public class UsersController {
     }
 
     public static String findPlayers(String username, ArrayList<User> players, ArrayList<User> users) {
+        Request request = new Request();
+        request.setAction("search friend");
+        request.addParameters("username", username);
+        request.setMenu("play game");
+        for (User player : players) if (username.equals(player.getUsername())) return "   This user is already a player now!";
         for (User user : users) {
-            if (user.getUsername().equals(username) && !players.contains(user)){
-                players.add(user);
-                return user.getNickname();
-            } else if (user.getUsername().equals(username) && players.contains(user)) {
-                return "   This user is already a player now!";
-            }
+            if (user.getUsername().equals(username))players.add(user);
         }
-        return "there is no player with this username!";
+        return NetworkController.getInstance().sendRequest(request).getMessage();
     }
 }

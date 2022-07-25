@@ -9,17 +9,18 @@ module com.example.civilizationinjavafx {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
-    requires gson;
     requires java.sql;
     requires javafx.media;
     requires java.base;
+    requires gson;
+    requires gson.extras;
 
-    opens controller to javafx.fxml, gson;
+    opens controller to javafx.fxml, gson, gson.extras;
     exports controller;
-    opens view to javafx.fxml, gson;
+    opens view to javafx.fxml, gson, gson.extras;
     exports view;
-    opens view.enums to javafx.fxml, gson;
+    opens view.enums to javafx.fxml, gson, gson.extras;
     exports view.enums;
-    opens model to javafx.fxml, gson;
+    opens model to javafx.fxml, gson, gson.extras;
     exports model;
 }

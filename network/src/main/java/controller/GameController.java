@@ -12,17 +12,23 @@ public class GameController {
 
     private final int height;
     private final int width;
+    private ArrayList<User> players;
 
 
     private GameController() {
         this.height = 26;
         this.width = 80;
+        players = new ArrayList<>();
     }
 
     public static GameController getInstance() {
         if (gameController == null)
             gameController = new GameController();
         return gameController;
+    }
+
+    public ArrayList<User> getPlayers() {
+        return players;
     }
 
     // cheat codes
@@ -485,12 +491,12 @@ public class GameController {
         }
     }
        */
-    public void assignNeighbor(MapController mapController, Maps map) {
+    public void assignNeighbor(Maps map) {
 
         // assign all the neighbors to each tile
         for (int i = 0; i < map.getHeight(); i++)
             for (int j = 0; j < map.getWidth(); j++)
-                mapController.setNeighbor(map.getTileBoard()[i][j], map);
+                MapController.getInstance().setNeighbor(map.getTileBoard()[i][j], map);
     }
     /*
     public void foundRuin(User user) {
@@ -799,6 +805,40 @@ public class GameController {
             response.setStatusCode("404");
             response.setMessage("invalid coordinates!");
         }
+        return response;
+    }
+
+    public Response setPlayers(Request request, Maps map) {
+        Response response = new Response();
+        ArrayList<User> users = UsersController.getInstance().getUsers();
+        request.getParameters().forEach((username, playerUsername) -> {
+            for (User user : users) {
+                if (user.getUsername().equals(playerUsername)) players.add(user);
+            }
+        });
+        ArrayList<User> truePlayers = new ArrayList<>(players);
+        players.clear();
+        for (int i = truePlayers.size() - 1; i >= 0; i--) {
+            players.add(truePlayers.get(i));
+        }
+        for (User player : GameController.getInstance().getPlayers()) {
+            System.out.println(player.getUsername());
+        }
+        MapController.getInstance().firstSetOfSettlers(GameController.getInstance().getPlayers(), map);
+        response.setMessage("start the game");
+        return response;
+    }
+
+    public Response searchFriend(Request request) {
+        Response response = new Response();
+        String username = (String) request.getParameters().get("username");
+        for (User user : UsersController.getInstance().getUsers()) {
+            if (user.getUsername().equals(username)) {
+                response.setMessage(username);
+                return response;
+            }
+        }
+        response.setMessage("there is no player with this username!");
         return response;
     }
 

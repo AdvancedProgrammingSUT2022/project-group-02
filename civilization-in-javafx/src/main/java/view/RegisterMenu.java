@@ -37,12 +37,11 @@ public class RegisterMenu {
     private MediaPlayer mediaPlayer;
     private Stage stage;
     private Scene scene;
-    private static Images images;
+    private Images images = Images.getInstance();
     private final HashMap<String , Boolean> availableColors = new HashMap<>();
     private boolean readFromGson = false;
 
-    public RegisterMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene, Images images){
-        RegisterMenu.images = images;
+    public RegisterMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene){
         this.scene = scene;
         this.mediaPlayer = mediaPlayer;
         this.stage = stage;
@@ -311,15 +310,11 @@ public class RegisterMenu {
         }
         */
     }
-
     private void graphicLoginController(String username, String password, Label label) throws IOException {
         label.setLayoutX(650);
         label.setLayoutY(140);
         label.getStyleClass().add("register-signup-and-login-error");
         label.setEffect(new DropShadow());
-        //TODO : enter MainMenu
-
-
         Request request = new Request();
         request.setAction("login");
         request.setMenu("register menu");

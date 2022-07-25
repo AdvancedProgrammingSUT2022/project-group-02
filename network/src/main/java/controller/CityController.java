@@ -3,6 +3,7 @@ package controller;
 
 import model.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CityController {
@@ -14,31 +15,41 @@ public class CityController {
         return cityController;
     }
 
-    public void buyingTile(City city) {
-
+    public void buyingTile(City city, User user, Tile tile) {
+            if (user.getGold() >= tile.getPrice()) {
+                new ResourceController().addFoundResource(user, tile);
+                user.setGold(user.getGold() - tile.getPrice());
+                city.addOwnerShipTiles(tile);
+                user.addTerritory(tile);
+                tile.setCity(city);
+                tile.setOwner(user);
+            }
     }
 
     public Response conditionsForPlaceCity(Request request, Maps map) {
         Response response = new Response();
-        String nameOfCity = (String) request.getParameters().get("name");
-        int xDestination = (int) request.getParameters().get("xDestination");
-        int yDestination = (int) request.getParameters().get("yDestination");
+        int xDestination = (int)Math.floor((double)request.getParameters().get("xDestination"));
+        int yDestination = (int)Math.floor((double)request.getParameters().get("yDestination"));
         String username = (String) request.getParameters().get("username");
         User user = UsersController.getInstance().getUserByUsername(username);
+        String nameOfCity = "city" + (user.getCities().size() + 1);
         Tile tile = map.getSpecificTile(xDestination, yDestination);
         // neighbors of the tile should be neutral
         for (Tile neighbor : tile.getNeighbors()) {
             if (neighbor.getOwner() != null) {
                 response.setMessage("a tile has owner here");
+                return response;
                 //return false;
             }
         }
         if (tile.isCivilianUnitExists() && tile.getCivilianUnit().getName().equals("settler") && tile.getCivilianUnit().getOwner().equals(user)) {
             if (tile.getCity() == null) {
-                if (tile.getOwner() == null) {
+                if (tile.getOwner() == null || tile.getOwner().equals(user)) {
                     //return true;
                     createCity(tile, user, nameOfCity, response);
+                    response.setMessage("city created successfully");
                 }
+                else
                 response.setMessage("you are in someone else's territory");
             } else
                 response.setMessage("there is already a city here");
@@ -72,8 +83,8 @@ public class CityController {
         String username = (String) request.getParameters().get("username");
         User user = UsersController.getInstance().getUserByUsername(username);
         //destination
-        int xDestination = (int) request.getParameters().get("xDestination");
-        int yDestination = (int) request.getParameters().get("yDestination");
+        int xDestination = (int) Math.floor((double) request.getParameters().get("xDestination"));
+        int yDestination = (int) Math.floor((double) request.getParameters().get("yDestination"));
         Tile destination = map.getSpecificTile(xDestination, yDestination);
 
         //origin
@@ -138,4 +149,61 @@ public class CityController {
         response.setParameters(parameters);
         return response;
     }
+
+    public Response setProduction(Request request) {
+
+        Response response = new Response();
+
+        String username = (String) request.getParameters().get("username");
+        User user = UsersController.getInstance().getUserByUsername(username);
+        int index = (int) request.getParameters().get("index of city");
+        City city = user.getCities().get(index);
+
+        city.setCurrentProduction(city.getProducts().get(index - 1));
+        city.setProductStatus(true);
+        city.setProductTurnLeft(city.getCurrentProduction().getTurnCost());
+
+        response.setMessage("product is being produced...!");
+        return response;
+    }
+
+    public Response buyTile(Request request) {
+        Response response = new Response();
+
+        String username = (String) request.getParameters().get("username");
+        int indexOfCity = Integer.parseInt((String) request.getParameters().get("index of city"));
+        User user = UsersController.getInstance().getUserByUsername(username);
+        City city = user.getCities().get(indexOfCity);
+        ArrayList<Tile> neighborOfCity = MapController.getInstance().neighborOfCity(city);
+        int index = Integer.parseInt((String) request.getParameters().get("index of tile"));
+        boolean cheat = (boolean) request.getParameters().get("cheat");
+        if (!cheat)
+            user.setGold(user.getGold() - neighborOfCity.get(index - 1).getPrice());
+        city.addOwnerShipTiles(neighborOfCity.get(index - 1));
+        user.addTerritory(neighborOfCity.get(index - 1));
+        neighborOfCity.get(index - 1).setCity(city);
+        neighborOfCity.get(index - 1).setOwner(user);
+        response.setMessage("you bought tile with index " + index + " successfully!");
+        return response;
+    }
+
+    public Response setCitizen(Request request) {
+        Response response = new Response();
+        String username = (String) request.getParameters().get("username");
+        User user = UsersController.getInstance().getUserByUsername(username);
+        int indexOfCity = Integer.parseInt((String) request.getParameters().get("index of city"));
+        City city = user.getCities().get(indexOfCity);
+        int indexOfTile = Integer.parseInt((String) request.getParameters().get("index of tile"));
+        Tile tile = city.getOwnerShipTiles().get(indexOfTile);
+        int indexOfCitizen = Integer.parseInt((String) request.getParameters().get("index of citizen"));
+        Citizen citizen = city.getCitizens().get(indexOfCitizen);
+
+        tile.setCitizenExist(true);
+        citizen.setWorking(true);
+        citizen.setTile(tile);
+        response.setMessage("the citizen employed on the selected tile successfully");
+        return response;
+    }
+
+
 }

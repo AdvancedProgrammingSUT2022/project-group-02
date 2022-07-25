@@ -577,4 +577,16 @@ public class GameController {
         user.setCurrentTechnology(technology);
         userTurnResearch(user);
     }
+
+    public static void setPlayers(ArrayList<User> players) {
+        Request request = new Request();
+        request.setMenu("play game");
+        request.setAction("set players");
+        HashMap<String, Object> parameters = new HashMap<>();
+        for (int i = players.size() - 1; 0 <= i; i--) {
+            parameters.put("username" + i, players.get(i).getUsername());
+        }
+        request.setParameters(parameters);
+        NetworkController.getInstance().sendRequest(request);
+    }
 }

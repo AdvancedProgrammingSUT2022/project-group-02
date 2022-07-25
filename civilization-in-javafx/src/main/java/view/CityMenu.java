@@ -10,6 +10,7 @@ import model.Tile;
 import model.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,6 +42,13 @@ public class CityMenu {
             }
             // show player cities
             else if (cityInput.equals("user cities")) {
+                //get user from server
+                Request request = new Request();
+                request.setMenu("city menu");
+                request.setAction("get user");
+                Response response = NetworkController.getInstance().sendRequest(request);
+                user = response.getUser();
+
                 if (user.getCities() != null && user.getCities().size() > 0) {
                     int index = 1;
                     for (City city : user.getCities()) {
@@ -129,12 +137,8 @@ public class CityMenu {
                                         }
                                     }
                                 }
-                                user.setGold(user.getGold() - neighborOfCity.get(index - 1).getPrice());
-                                city.addOwnerShipTiles(neighborOfCity.get(index - 1));
-                                user.addTerritory(neighborOfCity.get(index - 1));
-                                neighborOfCity.get(index - 1).setCity(city);
-                                neighborOfCity.get(index - 1).setOwner(user);
-                                System.out.println("you bought tile with index " + index + " successfully!");
+                                //buy tile without cheat
+//                                buyTile(user.getUsername(), user.getCities().indexOf(city), index, false);
                             }
                             else
                                 System.out.println("not enough gold!");
@@ -146,11 +150,8 @@ public class CityMenu {
                             (matcher = RegexEnums.getMatcher(buyTileInput, RegexEnums.BUY_TILE2)) != null) {
                         index = Integer.parseInt(matcher.group("index"));
                         if (index >= 1 && index <= neighborOfCity.size()) {
-                            city.addOwnerShipTiles(neighborOfCity.get(index - 1));
-                            user.addTerritory(neighborOfCity.get(index - 1));
-                            neighborOfCity.get(index - 1).setCity(city);
-                            neighborOfCity.get(index - 1).setOwner(user);
-                            System.out.println("you bought tile with index " + index + " successfully!");
+                            //buy tile with cheat
+//                            buyTile(user.getUsername(), user.getCities().indexOf(city), index, true);
                         }
                         else
                             System.out.println("invalid number");
@@ -207,9 +208,17 @@ public class CityMenu {
             else if (Pattern.matches("\\d+", productInput)) {
                 int numberOfProduct = Integer.parseInt(productInput);
                 if (numberOfProduct <= city.getProducts().size() && numberOfProduct >= 1) {
-                    city.setCurrentProduction(city.getProducts().get(numberOfProduct - 1));
-                    city.setProductStatus(true);
-                    city.setProductTurnLeft(city.getCurrentProduction().getTurnCost());
+
+                    Request request = new Request();
+                    request.setMenu("city menu");
+                    request.setAction("set production");
+                    HashMap<String, Object> parameters = new HashMap<>();
+                    parameters.put("index", numberOfProduct);
+                    parameters.put("cheat", false);
+                    request.setParameters(parameters);
+
+                    Response response = NetworkController.getInstance().sendRequest(request);
+                    System.out.println(response.getMessage());
                 }
                 else
                     System.out.println("invalid number");
@@ -218,10 +227,17 @@ public class CityMenu {
                     (matcher = RegexEnums.getMatcher(productInput, RegexEnums.ADD_PRODUCT2)) != null) {
                 index = Integer.parseInt(matcher.group("index"));
                 if (index >= 1 && index <= city.getProducts().size()) {
-                    city.setProductStatus(true);
-                    city.setCurrentProduction(city.getProducts().get(index - 1));
-                    city.setProductTurnLeft(1);
-                    gameController.cityTurnProducts(user);
+
+                    Request request = new Request();
+                    request.setMenu("city menu");
+                    request.setAction("set production");
+                    HashMap<String, Object> parameters = new HashMap<>();
+                    parameters.put("index", index);
+                    parameters.put("cheat", true);
+                    request.setParameters(parameters);
+
+                    Response response = NetworkController.getInstance().sendRequest(request);
+                    System.out.println(response.getMessage());
                 }
                 else
                     System.out.println("invalid number");
@@ -297,21 +313,28 @@ public class CityMenu {
             else if (Pattern.matches("\\d+", input)) {
                 index = Integer.parseInt(input);
                 if (index >= 1 && index <= city.getOwnerShipTiles().size()) {
-                    Tile tile = city.getOwnerShipTiles().get(index - 1);
-                    tile.setCitizenExist(true);
-                    citizen.setWorking(true);
-                    citizen.setTile(tile);
-                    System.out.println("the citizen employed on the selected tile successfully");
+                    //the function that should be called to set citizen on tile --> amir hossein
+                    setCitizen(city.getOwner().getUsername(), city.getOwner().getCities().indexOf(city), index - 1, city.getCitizens().indexOf(citizen));
                     return;
                 }
                 else
                     System.out.println("invalid index");
             }
         }
+    }
 
-
-
-
+    private void setCitizen(String username, int indexOfCity, int indexOfTileInOwnerShips, int indexOfCitizen) {
+        Request request = new Request();
+        request.setMenu("city menu");
+        request.setAction("set citizen");
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("username", username);
+        parameters.put("index of city", String.valueOf(indexOfCity));
+        parameters.put("index of tile", String.valueOf(indexOfTileInOwnerShips));
+        parameters.put("index of citizen", String.valueOf(indexOfCitizen));
+        request.setParameters(parameters);
+        Response response = NetworkController.getInstance().sendRequest(request);
+        System.out.println(response.getMessage());
     }
 
 
@@ -333,5 +356,19 @@ public class CityMenu {
             index++;
         }
         System.out.println(Colors.RESET);
+    }
+
+    private void buyTile(String username, int indexOfCity, int indexOfTileInNeighborsOfCity, boolean cheat, Tile tile) {
+        Request request = new Request();
+        request.setMenu("city menu");
+        request.setAction("buy tile");
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("cheat", cheat);
+        parameters.put("username", username);
+        parameters.put("index of city", String.valueOf(indexOfCity));
+        parameters.put("index of tile", String.valueOf(indexOfTileInNeighborsOfCity));
+        request.setParameters(parameters);
+        Response response = NetworkController.getInstance().sendRequest(request);
+        System.out.println(response.getMessage());
     }
 }

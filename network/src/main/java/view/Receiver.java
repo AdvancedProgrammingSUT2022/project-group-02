@@ -9,15 +9,14 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Receiver {
     private Maps map;
     public void run(int SERVER_PORT) {
         Maps map = UsersController.getInstance().readFromJsonMap();
+        GameController.getInstance().assignNeighbor(map);
         this.map = map;
         readFromJson();
-
         try {
             ServerSocket serverSocket = new ServerSocket(SERVER_PORT);
             while (true) {
@@ -63,6 +62,8 @@ public class Receiver {
 
             case "play game" :
                 switch (request.getAction()) {
+                    case "set players" :
+                        return GameController.getInstance().setPlayers(request, map);
                     case "next turn":
                         return GameController.getInstance().nextTurn(request);
                     case "increase turn":
@@ -87,6 +88,8 @@ public class Receiver {
                         return GameController.getInstance().decreaseResearchTurnRequest(request);
                     case "select tile":
                         return GameController.getInstance().selectTileRequest(request);
+                    case "search friend":
+                        return GameController.getInstance().searchFriend(request);
                 }
             case "tile menu":
                 switch(request.getAction()) {
@@ -119,9 +122,17 @@ public class Receiver {
                     case "resume improvement":
                         return UnitController.getInstance().resumeImprovement(request, map);
                 }
+            case "city menu":
+                switch(request.getAction()) {
+                    case "set production":
+                        return CityController.getInstance().setProduction(request);
+                    case "buy tile":
+                        return CityController.getInstance().buyTile(request);
+                    case "set citizen":
+                        return CityController.getInstance().setCitizen(request);
+                }
         }
         return null;
-
     }
 
     private void readFromJson() {
