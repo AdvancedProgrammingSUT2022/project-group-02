@@ -421,7 +421,7 @@ public class Images {
         MilitaryBase = new Image(String.valueOf(getClass().getResource("/Media/Buildings/Militarybase.png")));
         Mint = new Image(String.valueOf(getClass().getResource("/Media/Buildings/Mint.png")));
         Monastery = new Image(String.valueOf(getClass().getResource("/Media/Buildings/Monastery.png")));
-        Monument = new Image(String.valueOf(getClass().getResource("/Media/Buildings/Monument.png")));
+//        Monument = new Image(String.valueOf(getClass().getResource("/Media/Buildings/Monument.png")));
         Museum = new Image(String.valueOf(getClass().getResource("/Media/Buildings/Museum.png")));
         OperaHouse = new Image(String.valueOf(getClass().getResource("/Media/Buildings/Operahouse.png")));
         PublicSchool = new Image(String.valueOf(getClass().getResource("/Media/Buildings/Publicschool.png")));

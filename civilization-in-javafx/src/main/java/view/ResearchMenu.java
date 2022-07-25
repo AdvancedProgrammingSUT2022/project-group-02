@@ -232,31 +232,18 @@ public class ResearchMenu {
                     techIcon.setId("techIcon");
                     techPane.getChildren().add(techIcon);
                     if (technology.getGivenBuildings() != null)
-<<<<<<< HEAD
                         for (Building givenBuilding : technology.getGivenBuildings()) {
-                            ImageView givenBuildingIcon = findBuildingIcon(givenBuilding);
+                            ImageView givenBuildingIcon = findBuildingIcon(givenBuilding.getName());
                             givenBuildingIcon.setId("buildingIcon");
                             techPane.getChildren().add(givenBuildingIcon);
                         }
                     if (technology.getGivenUnits() != null)
                         for (Unit givenUnit : technology.getGivenUnits()) {
-                            ImageView givenUnitIcon = findUnitIcon(givenUnit);
+                            ImageView givenUnitIcon = findUnitIcon(givenUnit.getName());
                             givenUnitIcon.setId("unitIcon");
                             techPane.getChildren().add(givenUnitIcon);
                         }
-=======
-                    for (Building givenBuilding : technology.getGivenBuildings()) {
-                        ImageView givenBuildingIcon = findBuildingIcon(givenBuilding.getName());
-                        givenBuildingIcon.setId("buildingIcon");
-                        techPane.getChildren().add(givenBuildingIcon);
-                    }
-                    if (technology.getGivenUnits() != null)
-                    for (Unit givenUnit : technology.getGivenUnits()) {
-                        ImageView givenUnitIcon = findUnitIcon(givenUnit.getName());
-                        givenUnitIcon.setId("unitIcon");
-                        techPane.getChildren().add(givenUnitIcon);
-                    }
->>>>>>> e76136f83b2969e7ac64890d2e3276503c5d9d9b
+
                     if (technology.getGivenImprovement() != null)
                         for (Improvement givenImprovement : technology.getGivenImprovement()) {
                             ImageView givenImprovementIcon = findImprovement(givenImprovement);
@@ -570,15 +557,10 @@ public class ResearchMenu {
         };
     }
 
-<<<<<<< HEAD
-    private ImageView findUnitIcon(Unit unit) {
-        return switch (unit.getName()) {
-            case "Chariot Archer", "archer" -> new ImageView(images.chariotArcherIcon);
-=======
+
     public static ImageView findUnitIcon(String unitName) {
         return switch (unitName) {
             case "Chariot Archer", "archer" ->  new ImageView(images.chariotArcherIcon);
->>>>>>> e76136f83b2969e7ac64890d2e3276503c5d9d9b
             case "Spearman" -> new ImageView(images.spearmanIcon);
             case "Horseman" -> new ImageView(images.horsemanIcon);
             case "Swordsman" -> new ImageView(images.swordManIcon);

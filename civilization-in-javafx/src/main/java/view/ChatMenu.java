@@ -40,7 +40,7 @@ public class ChatMenu {
 
     public ChatMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene, Images images, UsersController users, User user){
         this.users = users;
-        ProfileMenu.images = images;
+        ChatMenu.images = images;
         this.scene = scene;
         this.mediaPlayer = mediaPlayer;
         this.stage = stage;
