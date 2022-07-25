@@ -1,8 +1,6 @@
 package controller;
 
-import model.PrivateChat;
-import model.Room;
-import model.User;
+import model.*;
 
 import java.util.ArrayList;
 
@@ -71,5 +69,11 @@ public class ChatController {
                 userRooms.add(room);
         }
         return userRooms;
+    }
+
+    public Response addMessageToHistory(Request request){
+        Response response = new Response();
+
+        return response;
     }
 }

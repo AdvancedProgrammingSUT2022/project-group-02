@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class Receiver {
     private Maps map;
+
     public void run(int SERVER_PORT) {
         Maps map = UsersController.getInstance().readFromJsonMap();
         GameController.getInstance().assignNeighbor(map);
@@ -27,8 +28,8 @@ public class Receiver {
                         DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
                         while (true) {
                             String input = dataInputStream.readUTF();
-                             dataOutputStream.writeUTF(process(Request.fromJson(input)).toJson());
-                             dataOutputStream.flush();
+                            dataOutputStream.writeUTF(process(Request.fromJson(input)).toJson());
+                            dataOutputStream.flush();
                             //process input then call dataOutputStream.writeUTF();
                         }
 
@@ -46,7 +47,7 @@ public class Receiver {
     private Response process(Request request) {
 
         switch (request.getMenu()) {
-            case "register menu" :
+            case "register menu":
                 if (request.getAction().equals("signup"))
                     return UsersController.getInstance().signup(request);
                 else
@@ -60,9 +61,9 @@ public class Receiver {
                     return UsersController.getInstance().changeNickname(request);
 
 
-            case "play game" :
+            case "play game":
                 switch (request.getAction()) {
-                    case "set players" :
+                    case "set players":
                         return GameController.getInstance().setPlayers(request, map);
                     case "next turn":
                         return GameController.getInstance().nextTurn(request);
@@ -92,7 +93,7 @@ public class Receiver {
                         return GameController.getInstance().searchFriend(request);
                 }
             case "tile menu":
-                switch(request.getAction()) {
+                switch (request.getAction()) {
                     case "move unit":
                         return MapController.getInstance().moveUnitConditions(map, request);
                     case "place city":
@@ -123,13 +124,21 @@ public class Receiver {
                         return UnitController.getInstance().resumeImprovement(request, map);
                 }
             case "city menu":
-                switch(request.getAction()) {
+                switch (request.getAction()) {
                     case "set production":
                         return CityController.getInstance().setProduction(request);
                     case "buy tile":
                         return CityController.getInstance().buyTile(request);
                     case "set citizen":
                         return CityController.getInstance().setCitizen(request);
+                }
+            case "chat menu":
+                switch (request.getAction()) {
+                    case "send message":
+
+                    case "delete message":
+
+                    case "edit message":
                 }
         }
         return null;

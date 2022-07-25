@@ -170,9 +170,12 @@ public class GameMenu {
         AtomicReference<String> playersNickname = new AtomicReference<>("player 1 : " + user.getNickname());
         label.setText(playersNickname.get());
         addFriend.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            if (!playerSearchTextField.getText().equals(user.getUsername()) && players.contains(user))
-            playersNickname.set(searchNicknamesView(playerSearchTextField, label, players, playersNickname.get(), errorLabel));
-            else errorLabel.setText(" Enter a name other than your own!");
+            if (!playerSearchTextField.getText().equals(user.getUsername()) && players.contains(user)) {
+                playersNickname.set(searchNicknamesView(playerSearchTextField, label, players, playersNickname.get(), errorLabel));
+                for (User player : players) {
+                    user.addFriend(player);
+                }
+            }else errorLabel.setText(" Enter a name other than your own!");
                 });
         back.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> start());
         submit.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
