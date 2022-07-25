@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Message {
@@ -54,4 +55,31 @@ public class Message {
     public void setSent(boolean sent) {
         this.sent = sent;
     }
+//private int senderId;
+//    private LocalDateTime sentAt;
+//    private String text;
+//
+//    public int getSenderId() {
+//        return senderId;
+//    }
+//
+//    public LocalDateTime getSentAt() {
+//        return sentAt;
+//    }
+//
+//    public String getText() {
+//        return text;
+//    }
+//
+//    public void setSenderId(int senderId) {
+//        this.senderId = senderId;
+//    }
+//
+//    public void setSentAt(LocalDateTime sentAt) {
+//        this.sentAt = sentAt;
+//    }
+//
+//    public void setText(String text) {
+//        this.text = text;
+//    }
 }

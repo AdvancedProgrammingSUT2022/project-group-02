@@ -1,27 +1,124 @@
 package view;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import controller.ChatController;
+import controller.NetworkController;
 import controller.UsersController;
-import model.Message;
-import model.PrivateChat;
-import model.Room;
-import model.User;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
+import model.*;
 import view.enums.Colors;
+import view.enums.Images;
 
+import java.io.IOException;
+import java.net.URL;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class ChatMenu {
+    public static Images images;
+    private String whichMenu;
+    private UsersController users;
+    private MediaPlayer mediaPlayer;
+    private Stage stage;
+    private Scene scene;
+    private User user;
 
-    private static ChatMenu chatMenu;
 
-    public static ChatMenu getInstance() {
-        if (chatMenu == null)
-            chatMenu = new ChatMenu();
+    public ChatMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene, Images images, UsersController users, User user){
+        this.users = users;
+        ChatMenu.images = images;
+        this.scene = scene;
+        this.mediaPlayer = mediaPlayer;
+        this.stage = stage;
+        this.user = user;
+    }
 
-        return chatMenu;
+    public void start(){
+        URL fxmlAddress = getClass().getResource("/Fxml/main-menu.fxml");
+        if (fxmlAddress == null) System.exit(0);
+        AnchorPane root = null;
+        try {
+            root = FXMLLoader.load(fxmlAddress);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (root == null) {
+            System.out.println("root");
+            System.exit(0);
+        }
+        if (scene == null) {
+            System.out.println("scene");
+            System.exit(0);
+        }
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        scene.setRoot(root);
+        stage.setScene(scene);
+        stage.setMaximized(true);
+        stage.setFullScreen(true);
+        initialize();
+    }
+
+//    public void graphicRectBackground(AnchorPane root){
+//        ImageView buttonBackGround = new ImageView(images.mainMenuButtonBackGround);
+//        buttonBackGround.setFitWidth(630);
+//        buttonBackGround.setFitHeight(780);
+//        buttonBackGround.setLayoutX(445);
+//        buttonBackGround.setLayoutY(15);
+//        root.getChildren().add(buttonBackGround);
+//
+//    }
+
+    public VBox usersList;
+
+    public void initialize() {
+        showUsers();
+    }
+
+    public void refreshUsers(ActionEvent actionEvent) {
+        Request request = new Request();
+        request.setAction("get_chats");
+        Response response = NetworkController.getInstance().sendRequest(request);
+        String chatsJson = new Gson().toJson(response.getMessage());
+        ArrayList<Chat> chats = new Gson().fromJson(chatsJson, new TypeToken<ArrayList<Chat>>(){}.getType());
+        Database.getInstance().setChats(chats);
+        showUsers();
+    }
+
+    private void showUsers() {
+        usersList.getChildren().clear();
+        ArrayList<Chat> chats = Database.getInstance().getChats();
+        for (Chat chat : chats) {
+            HBox holder = new HBox();
+            Label text = new Label();
+            text.setText(chat.getName());
+            text.setStyle("-fx-start-margin: 8;");
+            holder.setAlignment(Pos.CENTER_LEFT);
+            holder.setStyle("-fx-padding: 16; -fx-border-color: #000000; -fx-border-width: 0 1 1 1;");
+            holder.setMinHeight(24);
+            holder.getChildren().add(text);
+            usersList.getChildren().add(holder);
+            holder.setOnMouseClicked(mouseEvent -> {
+                try {
+                    ChatPage.run(chat.getId());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
     }
 
     public void run(Scanner scanner, UsersController usersController, User you) {
