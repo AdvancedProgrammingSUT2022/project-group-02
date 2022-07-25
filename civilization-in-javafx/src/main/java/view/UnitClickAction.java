@@ -79,6 +79,10 @@ public class UnitClickAction {
         exitPanel.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             finalRoot.getChildren().remove(unitPanel);
             GameEnvironment.hashMap.replace(1, true);
+            finalRoot.getChildren().add(GameEnvironment.topBarBackground);
+            for (ImageView topBarImageView : GameEnvironment.topBarImageViews)
+                finalRoot.getChildren().add(topBarImageView);
+            for (Label topBarLabel : GameEnvironment.topBarLabels) finalRoot.getChildren().add(topBarLabel);
         });
     }
 
@@ -118,6 +122,11 @@ public class UnitClickAction {
                         if (!isUnitOrderedClicked) {
                             if (CityController.getInstance().createCity(unit.getTile(), user, unit).getMessage().equals("city created successfully")) {
                                 createCity(unit.getTile(), unitView);
+                                GameEnvironment.hashMap.replace(3, true);
+                                finalRoot.getChildren().add(GameEnvironment.topBarBackground);
+                                for (ImageView topBarImageView : GameEnvironment.topBarImageViews)
+                                    finalRoot.getChildren().add(topBarImageView);
+                                for (Label topBarLabel : GameEnvironment.topBarLabels) finalRoot.getChildren().add(topBarLabel);
                             }
                         }
                     }

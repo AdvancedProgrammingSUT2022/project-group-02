@@ -42,7 +42,7 @@ public class CityClickAction {
     }
 
     public void cityClickHandler(){
-        cityInfo();
+
         if (city.getProductTurnLeft() == 0) {
             initialiseBuyingProductPane();
             buyProduct();
@@ -51,6 +51,7 @@ public class CityClickAction {
         } else {
             System.out.println("city turn left is negative!");
         }
+        cityInfo();
         initialiseExitCityPanel();
         initialiseBuyTile();
         buttonsAction();
@@ -297,6 +298,7 @@ public class CityClickAction {
 
     private void cityHasProduct() {
         AnchorPane cityCurrentProductPane = new AnchorPane();
+        cityCurrentProductPane.getStylesheets().add(String.valueOf(getClass().getResource("/CSS/Style.css")));
         cityPagePanes.add(cityCurrentProductPane);
         Rectangle productionBackground = new Rectangle(0, 745, 200, 122);
         productionBackground.setFill(new Color(0, 0, 0, 0.8));
@@ -472,10 +474,17 @@ public class CityClickAction {
                 } else if (buttons.get(finalI).getId().equals("exit panel")) {
                     for (Node cityPagePane : cityPagePanes) {
                         finalRoot.getChildren().remove(cityPagePane);
+                        root.getChildren().remove(cityPagePane);
                     }
                     GameEnvironment.hashMap.replace(3, true);
+                    finalRoot.getChildren().add(GameEnvironment.topBarBackground);
+                    for (ImageView topBarImageView : GameEnvironment.topBarImageViews)
+                        finalRoot.getChildren().add(topBarImageView);
+                    for (Label topBarLabel : GameEnvironment.topBarLabels) finalRoot.getChildren().add(topBarLabel);
+                    GameEnvironment.hashMap.replace(3, true);
                 } else if (buttons.get(finalI).getId().equals("buy tile") && !clickButtons.get(buttons.get(finalI))) {
-                    buyTileAction();
+                    clickButtons.put(buttons.get(finalI), true);
+                    buyTileAction(finalI);
                 }
             });
         }
@@ -507,11 +516,15 @@ public class CityClickAction {
                 buyUnitButtons.clear();
                 buyBuildingButtons.clear();
                 GameEnvironment.hashMap.replace(3, true);
+                finalRoot.getChildren().add(GameEnvironment.topBarBackground);
+                for (ImageView topBarImageView : GameEnvironment.topBarImageViews)
+                    finalRoot.getChildren().add(topBarImageView);
+                for (Label topBarLabel : GameEnvironment.topBarLabels) finalRoot.getChildren().add(topBarLabel);
             });
         }
     }
 
-    private void buyTileAction() {
+    private void buyTileAction(int finalI) {
         AnchorPane buyTilePane = new AnchorPane();
         cityPagePanes.add(buyTilePane);
         root.getChildren().add(buyTilePane);
@@ -542,8 +555,10 @@ public class CityClickAction {
                     });
                     coin.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent1 -> {
                         System.out.println(city.getOwner().getGold());
-                        if (CityController.buyTile(neighbor, city, city.getOwner()))
+                        if (CityController.buyTile(neighbor, city, city.getOwner())) {
                             root.getChildren().remove(buyTilePane);
+                            clickButtons.put(buttons.get(finalI), false);
+                        }
                     });
                     buyTilePane.getChildren().add(coin);
                     buyTilePane.getChildren().add(price);

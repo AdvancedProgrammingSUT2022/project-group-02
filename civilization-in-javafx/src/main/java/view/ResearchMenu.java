@@ -5,7 +5,9 @@ import controller.TechController;
 import controller.UsersController;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -13,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polyline;
@@ -23,6 +26,7 @@ import view.enums.RegexEnums;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -213,16 +217,26 @@ public class ResearchMenu {
     }
 
     public void showGraphicTree(AnchorPane finalRoot) {
-        ImageView X_Button = new ImageView(images.X_button);
+        ImageView X_ButtonView = new ImageView(images.X_button);
+        Button X_Button = new Button();
         X_Button.setLayoutX(1465);
         X_Button.setLayoutY(8);
-        X_Button.setFitWidth(60);
-        X_Button.setFitHeight(60);
+        X_Button.setGraphic(X_ButtonView);
+        X_ButtonView.setFitWidth(60);
+        X_ButtonView.setFitHeight(60);
+        X_Button.setPrefSize(60, 60);
         X_Button.getStyleClass().add("top-bar-info-icon");
+        X_Button.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseEvent -> {
+            AudioClip clickSound = new AudioClip(Objects.requireNonNull(getClass().getResource("/Media/sounds/click.mp3")).toExternalForm());
+            clickSound.play();
+            X_Button.setEffect(new DropShadow());
+        });
+        X_Button.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> {
+            X_Button.setEffect(null);
+        });
         Rectangle background = new Rectangle(0, 0, 1550, 1000);
         background.setFill(new Color(0.38, 0.83, .84, 0.9));
         finalRoot.getChildren().add(background);
-        finalRoot.getChildren().add(X_Button);
         ArrayList<Technology> technologies = UsersController.getInstance().readFromJsonTech();
         HashMap<Technology, Integer> technologyHashMap = new HashMap<>();
         for (Technology technology : technologies) {
@@ -283,10 +297,16 @@ public class ResearchMenu {
         });
         lineOfTree(techRoot);
         finalRoot.getChildren().add(techRoot);
+        finalRoot.getChildren().add(X_Button);
         X_Button.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-            finalRoot.getChildren().remove(X_Button);
             finalRoot.getChildren().remove(background);
             finalRoot.getChildren().remove(techRoot);
+            finalRoot.getChildren().remove(X_Button);
+            GameEnvironment.hashMap.replace(2, true);
+            finalRoot.getChildren().add(GameEnvironment.topBarBackground);
+            for (ImageView topBarImageView : GameEnvironment.topBarImageViews)
+                finalRoot.getChildren().add(topBarImageView);
+            for (Label topBarLabel : GameEnvironment.topBarLabels) finalRoot.getChildren().add(topBarLabel);
         });
     }
 

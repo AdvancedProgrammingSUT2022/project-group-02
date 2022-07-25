@@ -227,6 +227,8 @@ public class Images {
     public Image Railroads;
     public Image Roads;
     public Image TradingPost;
+    public Image cantNextTurn;
+    public Image nextTurn;
 
     public Images(){
         normalMenuButton = new Image(String.valueOf(getClass().getResource("/Media/buttons/Button_Down.png")));
@@ -348,7 +350,7 @@ public class Images {
         workerMoreActionInfoBackground = new Image(String.valueOf(getClass().getResource("/Media/buttons/WorkerMoreActionBackground.png")));
         unitMoreActionInfoBackground = new Image(String.valueOf(getClass().getResource("/Media/buttons/UnitMoreActionBackground.png")));
         goldenRing = new Image(String.valueOf(getClass().getResource("/Media/background and videos/goldenRing.png")));
-        X_button = new Image(String.valueOf(getClass().getResource("/Media/icons/X_button.png")));
+        X_button = new Image(String.valueOf(getClass().getResource("/Media/icons/X_button2.png")));
         acoustics = new Image(String.valueOf(getClass().getResource("/Media/Technologies/Acoustics.png")));
         agriculture = new Image(String.valueOf(getClass().getResource("/Media/Technologies/Agriculture.png")));
         animalHusbandry = new Image(String.valueOf(getClass().getResource("/Media/Technologies/Animal_Husbandry.png")));
@@ -446,5 +448,7 @@ public class Images {
         Railroads = new Image(String.valueOf(getClass().getResource("/Media/Improvements/Railroads.png")));
         Roads = new Image(String.valueOf(getClass().getResource("/Media/Improvements/Roads.png")));
         TradingPost = new Image(String.valueOf(getClass().getResource("/Media/Improvements/Trading_Post.png")));
+        cantNextTurn = new Image(String.valueOf(getClass().getResource("/Media/icons/X_button.png")));
+        nextTurn = new Image(String.valueOf(getClass().getResource("/Media/icons/V_button.png")));
     }
 }

@@ -34,9 +34,9 @@ public class GameEnvironment {
     public static final ArrayList<ImageView> imageViews =  new ArrayList<>();
     private MapController mapController;
     private GameController gameController;
-    private ArrayList<ImageView> topBarImageViews;
-    private ArrayList<Label> topBarLabels;
-    private Rectangle topBarBackground;
+    public static ArrayList<ImageView> topBarImageViews;
+    public static ArrayList<Label> topBarLabels;
+    public static Rectangle topBarBackground;
     public static final HashMap<Integer, Boolean> hashMap = new HashMap<>();
 
     public GameEnvironment(MediaPlayer mediaPlayer, Stage stage, UsersController users, User user, ArrayList<User> players){
@@ -82,6 +82,10 @@ public class GameEnvironment {
         topBarBackground.setFill(new Color(0, 0, 0, .87));
         finalRoot.getChildren().add(topBarBackground);
         initialiseIcons(science, gold, food, happiness, unhappiness);
+    }
+
+    private void nextTurnIcon() {
+
     }
 
     private void initialiseIcons(ImageView science, ImageView gold, ImageView food, ImageView happiness, ImageView unhappiness) {
@@ -458,7 +462,6 @@ public class GameEnvironment {
             for (int i = 0; i < imageViews.size(); i++) {
                 int finalI = i;
                 imageViews.get(i).addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-
                     if (imageViews.get(finalI).getId().equals("settler") && hashMap.get(1) &&
                             ((Settler) imageViewObjects.get(imageViews.get(finalI))).getOwner().equals(user)) {
                         hashMap.replace(1, false);
@@ -473,6 +476,10 @@ public class GameEnvironment {
                         unitClickAction.setUnitView(imageViews.get(finalI));
                         unitClickAction.settlerClickAction();
                     } else if (imageViews.get(finalI).getId().equals("scienceTopBarInfo") && hashMap.get(2)) {
+                        for (ImageView topBarImageView : topBarImageViews)
+                            finalRoot.getChildren().remove(topBarImageView);
+                        for (Label topBarLabel : topBarLabels) finalRoot.getChildren().remove(topBarLabel);
+                        finalRoot.getChildren().remove(topBarBackground);
                         hashMap.replace(2, false);
                         hashMap.forEach((key1, value2) -> {
                             if (key1 != 2) hashMap.replace(key1, true);
@@ -480,6 +487,10 @@ public class GameEnvironment {
                         researchMenu.setUser(user);
                         researchMenu.showGraphicTree(finalRoot);
                     } else if (imageViews.get(finalI).getId().equals("city") && hashMap.get(3)) {
+                        for (ImageView topBarImageView : topBarImageViews)
+                            finalRoot.getChildren().remove(topBarImageView);
+                        for (Label topBarLabel : topBarLabels) finalRoot.getChildren().remove(topBarLabel);
+                        finalRoot.getChildren().remove(topBarBackground);
                         hashMap.replace(3, false);
                         hashMap.forEach((key1, value2) -> {
                             if (key1 != 3) hashMap.replace(key1, true);
