@@ -205,7 +205,7 @@ public class MainMenu {
 
         });
         chatMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-
+            new ChatMenu(mediaPlayer, stage, scene, images, users, user).start();
         });
     }
 }
