@@ -39,6 +39,7 @@ public class GameController {
         return gameController;
     }
 
+
     // cheat codes
     public void increaseTurn(int extraTurn, User specificPlayer) {
         specificPlayer.setTurns(specificPlayer.getTurns() + extraTurn);
@@ -589,4 +590,23 @@ public class GameController {
         request.setParameters(parameters);
         NetworkController.getInstance().sendRequest(request);
     }
+
+    public static boolean CanNextTurn(User user) {
+        if (user.getUnits() != null) {
+            for (Unit unit : user.getUnits()) {
+                if (!unit.isOrdered() && !unit.isSleep()) {
+                    return false;
+                }
+            }
+        }
+        if (user.getCities() != null) {
+            for (City city : user.getCities()) {
+                if (city.getProductTurnLeft() == 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 }

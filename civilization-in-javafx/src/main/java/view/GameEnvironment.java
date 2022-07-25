@@ -5,7 +5,9 @@ import controller.MapController;
 import controller.TechController;
 import controller.UsersController;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
@@ -28,6 +30,9 @@ public class GameEnvironment {
     private AnchorPane finalRoot;
     private final Images images = Images.getInstance();
     private User user;
+    public User getUser(){
+        return user;
+    }
     private Maps map;
     private ArrayList<User> players;
     public static final HashMap<ImageView, Object> imageViewObjects = new HashMap<>();
@@ -38,6 +43,15 @@ public class GameEnvironment {
     public static ArrayList<Label> topBarLabels;
     public static Rectangle topBarBackground;
     public static final HashMap<Integer, Boolean> hashMap = new HashMap<>();
+    private int playerNumber;
+    private ImageView nextTurnView;
+
+    private ClickRunnable clickRunnable;
+    private TurnRunnable turnRunnable;
+    private Thread clickThread;
+    private Thread nextTurnThread;
+
+
 
     public GameEnvironment(MediaPlayer mediaPlayer, Stage stage, UsersController users, User user, ArrayList<User> players){
         this.users = users;
@@ -49,6 +63,7 @@ public class GameEnvironment {
         this.players = players;
         mapController = MapController.getInstance(map);
         gameController = GameController.getInstance(players, map);
+        playerNumber = 0;
     }
 
     public GameEnvironment(){}
@@ -69,7 +84,9 @@ public class GameEnvironment {
         MapMaker.setPrice(map);
         showAllInfo();
         createMap();
-        new Thread(this::mouseClickHandler).start();
+        clickRunnable = new ClickRunnable(this);
+        clickThread = new Thread(clickRunnable);
+        clickThread.start();
     }
 
     private void showAllInfo() {
@@ -80,12 +97,58 @@ public class GameEnvironment {
         ImageView unhappiness = new ImageView(images.unhappiness);
         topBarBackground = new Rectangle(0, 0, 1550, 50);
         topBarBackground.setFill(new Color(0, 0, 0, .87));
+        if (!finalRoot.getChildren().contains(GameEnvironment.topBarBackground))
         finalRoot.getChildren().add(topBarBackground);
         initialiseIcons(science, gold, food, happiness, unhappiness);
+        nextTurnIcon();
     }
 
     private void nextTurnIcon() {
+        nextTurnView = new ImageView();
+        Button nextTurn = new Button();
+        nextTurn.setGraphic(nextTurnView);
+        nextTurn.setLayoutX(1305);
+        nextTurn.setLayoutY(640);
+        nextTurnView.setFitHeight(210);
+        nextTurnView.setFitWidth(210);
+        nextTurn.setPrefSize(210, 210);
+        nextTurn.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseEvent -> nextTurn.setEffect(new DropShadow()));
+        nextTurn.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> nextTurn.setEffect(null));
+        finalRoot.getChildren().add(nextTurn);
+        turnRunnable = new TurnRunnable(this);
+        nextTurnThread = new Thread(turnRunnable);
+        nextTurnThread.start();
+        nextTurn.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+        if (GameController.CanNextTurn(user)){
+            clickThread.stop();
+            nextTurnThread.stop();
+            playerNumber++;
+            if (playerNumber == players.size())playerNumber = 0;
+            user = players.get(playerNumber);
+            System.out.println(this.user);
+            clickRunnable = new ClickRunnable(this);
+            clickThread = new Thread(clickRunnable);
+            clickThread.start();
+            turnRunnable = new TurnRunnable(this);
+            nextTurnThread = new Thread(turnRunnable);
+            nextTurnThread.start();
+            for (ImageView topBarImageView : topBarImageViews)
+                finalRoot.getChildren().remove(topBarImageView);
+            for (Label topBarLabel : topBarLabels) finalRoot.getChildren().remove(topBarLabel);
+            finalRoot.getChildren().remove(topBarBackground);
+            showAllInfo();
+            finalRoot.getChildren().remove(nextTurn);
+        }
+        });
+    }
 
+    public void checkNextTurn() {
+        boolean canNextTurn;
+        while (true) {
+            canNextTurn = GameController.CanNextTurn(user);
+            if (canNextTurn) nextTurnView.setImage(images.nextTurn);
+            else nextTurnView.setImage(images.cantNextTurn);
+        }
     }
 
     private void initialiseIcons(ImageView science, ImageView gold, ImageView food, ImageView happiness, ImageView unhappiness) {
@@ -451,7 +514,7 @@ public class GameEnvironment {
         }
     }
 
-    private void mouseClickHandler() {
+    public void mouseClickHandler() {
         CityClickAction cityClickAction = new CityClickAction(finalRoot, root, MapController.getInstance(map));
         ResearchMenu researchMenu = new ResearchMenu(TechController.getInstance(), GameController.getInstance(players, map));
         UnitClickAction unitClickAction = new UnitClickAction(finalRoot, root, players, user);
@@ -474,6 +537,7 @@ public class GameEnvironment {
                         finalRoot.getChildren().remove(topBarBackground);
                         unitClickAction.setUnit((Settler) imageViewObjects.get(imageViews.get(finalI)));
                         unitClickAction.setUnitView(imageViews.get(finalI));
+                        unitClickAction.setUser(user);
                         unitClickAction.settlerClickAction();
                     } else if (imageViews.get(finalI).getId().equals("scienceTopBarInfo") && hashMap.get(2)) {
                         for (ImageView topBarImageView : topBarImageViews)

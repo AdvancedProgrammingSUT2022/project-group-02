@@ -44,7 +44,7 @@ public class SettlerController extends UnitController{
         }
     }
 
-    public void addBasicProducts(City city) {
+    public static void addBasicProducts(City city) {
         ArrayList<Product> products = new ArrayList<>();
         products.add(new Product("worker", 5));
         products.add(new Product("settler", 5));

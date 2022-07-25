@@ -47,32 +47,52 @@ public class CityController {
         return false;
     }
 
-//    public void createNewCity(Unit unit, User user, Tile tile, String nameOfCity) {
-//        ArrayList<Tile> ownerShipTiles = new ArrayList<>();
-//        ownerShipTiles.add(tile);
-//        Citizen citizen = new Citizen(tile);
-//        ArrayList<Citizen> citizens = new ArrayList<>();
-//        citizens.add(citizen);
-//        City city = new City(nameOfCity, tile, user, ownerShipTiles, 100, 100, null, null,
-//                50, 1, 1, 1, 1, 1, 1, 1, 1,
-//                null, null, false, citizens, 20);
-//        tile.setCity(city);
-//        tile.setOwner(user);
-//        if (user.getCapital() == null)
-//            user.setCapital(city);
-//        user.addCity(city);
-//        removeUnit(true, unit, user);
-//        addBasicProducts(city);
-//        addBasicUnits(city);
-//        addBasicBuildings(city);
-//        user.addTerritory(tile);
-//        // add neighbors to the city for free
-//        for (Tile neighbor : tile.getNeighbors()) {
-//            new ResourceController().addFoundResource(user, neighbor);
-//            neighbor.setCity(city);
-//            neighbor.setOwner(user);
-//            city.addOwnerShipTiles(neighbor);
-//            user.addTerritory(neighbor);
-//        }
-//    }
+    public void createNewCity(Unit unit, User user, Tile tile, String nameOfCity) {
+        ArrayList<Tile> ownerShipTiles = new ArrayList<>();
+        ownerShipTiles.add(tile);
+        Citizen citizen = new Citizen(tile);
+        ArrayList<Citizen> citizens = new ArrayList<>();
+        citizens.add(citizen);
+        City city = new City(nameOfCity, tile, user, ownerShipTiles, 100, 100, null, null,
+                0, 1, 1, 1, 1, 1, 1, 1, 1,
+                null, null, false, citizens, 20);
+        tile.setCity(city);
+        tile.setOwner(user);
+        if (user.getCapital() == null)
+            user.setCapital(city);
+        user.addCity(city);
+        removeUnit(true, unit, user);
+        SettlerController.addBasicProducts(city);
+        SettlerController.addBasicUnits(city);
+        SettlerController.addBasicBuildings(city);
+        user.addTerritory(tile);
+        // add neighbors to the city for free
+        for (Tile neighbor : tile.getNeighbors()) {
+            new ResourceController().addFoundResource(user, neighbor);
+            neighbor.setCity(city);
+            neighbor.setOwner(user);
+            city.addOwnerShipTiles(neighbor);
+            user.addTerritory(neighbor);
+        }
+    }
+
+    public boolean conditionsForPlaceCity(Tile tile, User user, Unit unit) {
+        for (Tile neighbor : tile.getNeighbors())
+            if (neighbor.getOwner() != null)
+                return false;
+        if (tile.isCivilianUnitExists() && tile.getCivilianUnit().getName().equals("settler") && tile.getCivilianUnit().getOwner().equals(user)) {
+            if (tile.getCity() == null) {
+                if (tile.getOwner() == null || tile.getOwner().equals(user)) {
+                    createNewCity(unit, user, tile, user.getNickname());
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static void removeUnit (boolean isSettler, Unit unit, User user) {
+        if (!isSettler) user.setGold(user.getGold() + unit.getGoldPrice()/5);
+        user.removeUnit(unit);
+    }
 }

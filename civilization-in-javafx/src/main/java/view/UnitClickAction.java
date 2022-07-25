@@ -43,11 +43,15 @@ public class UnitClickAction {
     }
 
     public void setUnit(Unit unit) {
-
         this.unit = unit;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public void settlerClickAction() {
+        System.out.println(user.getNickname() + "unitClickAction");
         unitPanel = new AnchorPane();
         ImageView unitIconView = new ImageView(images.settlerIcon);
         ImageView infoView = new ImageView(images.unitInfoBackground);
@@ -79,7 +83,8 @@ public class UnitClickAction {
         exitPanel.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             finalRoot.getChildren().remove(unitPanel);
             GameEnvironment.hashMap.replace(1, true);
-            finalRoot.getChildren().add(GameEnvironment.topBarBackground);
+                if (!finalRoot.getChildren().contains(GameEnvironment.topBarBackground))
+                    finalRoot.getChildren().add(GameEnvironment.topBarBackground);
             for (ImageView topBarImageView : GameEnvironment.topBarImageViews)
                 finalRoot.getChildren().add(topBarImageView);
             for (Label topBarLabel : GameEnvironment.topBarLabels) finalRoot.getChildren().add(topBarLabel);
@@ -120,9 +125,10 @@ public class UnitClickAction {
                     }
                     case "foundCityButton" -> {
                         if (!isUnitOrderedClicked) {
-                            if (CityController.getInstance().createCity(unit.getTile(), user, unit).getMessage().equals("city created successfully")) {
+                            if (new CityController().conditionsForPlaceCity(unit.getTile(), user, unit)) {
                                 createCity(unit.getTile(), unitView);
                                 GameEnvironment.hashMap.replace(3, true);
+                                if (!finalRoot.getChildren().contains(GameEnvironment.topBarBackground))
                                 finalRoot.getChildren().add(GameEnvironment.topBarBackground);
                                 for (ImageView topBarImageView : GameEnvironment.topBarImageViews)
                                     finalRoot.getChildren().add(topBarImageView);

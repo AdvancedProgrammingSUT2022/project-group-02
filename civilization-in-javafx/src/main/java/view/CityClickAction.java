@@ -477,6 +477,7 @@ public class CityClickAction {
                         root.getChildren().remove(cityPagePane);
                     }
                     GameEnvironment.hashMap.replace(3, true);
+                    if (!finalRoot.getChildren().contains(GameEnvironment.topBarBackground))
                     finalRoot.getChildren().add(GameEnvironment.topBarBackground);
                     for (ImageView topBarImageView : GameEnvironment.topBarImageViews)
                         finalRoot.getChildren().add(topBarImageView);
@@ -516,6 +517,7 @@ public class CityClickAction {
                 buyUnitButtons.clear();
                 buyBuildingButtons.clear();
                 GameEnvironment.hashMap.replace(3, true);
+                if (!finalRoot.getChildren().contains(GameEnvironment.topBarBackground))
                 finalRoot.getChildren().add(GameEnvironment.topBarBackground);
                 for (ImageView topBarImageView : GameEnvironment.topBarImageViews)
                     finalRoot.getChildren().add(topBarImageView);

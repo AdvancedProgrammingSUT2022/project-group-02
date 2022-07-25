@@ -293,6 +293,7 @@ public class ResearchMenu {
             finalRoot.getChildren().remove(techRoot);
             finalRoot.getChildren().remove(X_Button);
             GameEnvironment.hashMap.replace(2, true);
+            if (!finalRoot.getChildren().contains(GameEnvironment.topBarBackground))
             finalRoot.getChildren().add(GameEnvironment.topBarBackground);
             for (ImageView topBarImageView : GameEnvironment.topBarImageViews)
                 finalRoot.getChildren().add(topBarImageView);
