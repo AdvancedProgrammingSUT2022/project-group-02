@@ -34,6 +34,19 @@ public class CityController {
         return response;
     }
 
+    public static boolean buyTile(Tile tile, City city, User user) {
+        System.out.println(user.getGold());
+        System.out.println(tile.getPrice());
+        if (user.getGold() >= tile.getPrice()){
+            user.setGold(user.getGold() - tile.getPrice());
+            user.addTerritory(tile);
+            city.addOwnerShipTiles(tile);
+            tile.setOwner(user);
+            return true;
+        }
+        return false;
+    }
+
 //    public void createNewCity(Unit unit, User user, Tile tile, String nameOfCity) {
 //        ArrayList<Tile> ownerShipTiles = new ArrayList<>();
 //        ownerShipTiles.add(tile);

@@ -4905,7 +4905,7 @@ public class MapMaker {
         }
     }
 
-    public void setPrice(Maps map) {
+    public static void setPrice(Maps map) {
         for (int i = 0; i < 25; i++)
             for (int j = 0; j < 80; j++)
                 map.getSpecificTile(i, j).setPrice();

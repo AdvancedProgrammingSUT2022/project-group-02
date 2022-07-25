@@ -64,11 +64,9 @@ public class GameEnvironment {
         root.getStylesheets().add(String.valueOf(getClass().getResource("/CSS/Style.css")));
         stage.setMaximized(true);
         stage.setFullScreen(true);
-        for (User player : players) {
-            System.out.println(player.getUsername());
-        }
         mapController.firstSetOfSettlers(players);
         gameController.assignNeighbor(mapController);
+        MapMaker.setPrice(map);
         showAllInfo();
         createMap();
         new Thread(this::mouseClickHandler).start();
@@ -450,7 +448,7 @@ public class GameEnvironment {
     }
 
     private void mouseClickHandler() {
-        CityClickAction cityClickAction = new CityClickAction(finalRoot, MapController.getInstance(map));
+        CityClickAction cityClickAction = new CityClickAction(finalRoot, root, MapController.getInstance(map));
         ResearchMenu researchMenu = new ResearchMenu(TechController.getInstance(), GameController.getInstance(players, map));
         UnitClickAction unitClickAction = new UnitClickAction(finalRoot, root, players, user);
         hashMap.put(1, true);

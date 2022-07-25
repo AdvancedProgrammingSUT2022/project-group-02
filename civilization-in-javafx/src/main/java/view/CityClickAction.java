@@ -1,5 +1,6 @@
 package view;
 
+import controller.CityController;
 import controller.MapController;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -21,6 +22,7 @@ public class CityClickAction {
     private City city;
     private final Images images = Images.getInstance();
     private final AnchorPane finalRoot;
+    private final AnchorPane root;
     private final ArrayList<Node> cityPagePanes = new ArrayList<>();
     private final ArrayList<Button> buttons = new ArrayList<>();
     private final ArrayList<Button> productButtons = new ArrayList<>();
@@ -29,8 +31,9 @@ public class CityClickAction {
     private final HashMap<Button, Building> buyBuildingButtons = new HashMap<>();
     private final HashMap<Button, Unit> buyUnitButtons = new HashMap<>();
 
-    public CityClickAction(AnchorPane finalRoot, MapController mapController) {
+    public CityClickAction(AnchorPane finalRoot, AnchorPane root, MapController mapController) {
         this.finalRoot = finalRoot;
+        this.root = root;
         this.mapController = mapController;
     }
 
@@ -472,7 +475,7 @@ public class CityClickAction {
                     }
                     GameEnvironment.hashMap.replace(3, true);
                 } else if (buttons.get(finalI).getId().equals("buy tile") && !clickButtons.get(buttons.get(finalI))) {
-                    
+                    buyTileAction();
                 }
             });
         }
@@ -504,6 +507,47 @@ public class CityClickAction {
                 buyUnitButtons.clear();
                 buyBuildingButtons.clear();
                 GameEnvironment.hashMap.replace(3, true);
+            });
+        }
+    }
+
+    private void buyTileAction() {
+        AnchorPane buyTilePane = new AnchorPane();
+        cityPagePanes.add(buyTilePane);
+        root.getChildren().add(buyTilePane);
+        ArrayList<Tile> neighborsOfCity = mapController.neighborOfCity(city);
+        for (Tile neighbor : neighborsOfCity) {
+            GameEnvironment.imageViewObjects.forEach((key, value) -> {
+                if (value == neighbor) {
+                    ImageView coinView = new ImageView(images.gold);
+                    Button coin = new Button();
+                    Label price = new Label(String.valueOf(neighbor.getPrice()));
+                    coin.setGraphic(coinView);
+                    coin.setLayoutY(key.getLayoutY() + 55);
+                    coin.setLayoutX(key.getLayoutX() + 55);
+                    price.setLayoutX(coin.getLayoutX() + 85);
+                    price.setLayoutY(coin.getLayoutY() + 25);
+                    price.setTextFill(new Color(0.97, 0.87, 0.23, 1));
+                    price.setStyle("-fx-font-size: 35px");
+                    coinView.setFitHeight(60);
+                    coinView.setFitWidth(60);
+                    coin.setPrefSize(60, 60);
+                    coin.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseEvent1 -> {
+                        coinView.setFitWidth(80);
+                        coinView.setFitHeight(80);
+                    });
+                    coin.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent1 -> {
+                        coinView.setFitHeight(60);
+                        coinView.setFitWidth(60);
+                    });
+                    coin.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent1 -> {
+                        System.out.println(city.getOwner().getGold());
+                        if (CityController.buyTile(neighbor, city, city.getOwner()))
+                            root.getChildren().remove(buyTilePane);
+                    });
+                    buyTilePane.getChildren().add(coin);
+                    buyTilePane.getChildren().add(price);
+                }
             });
         }
     }

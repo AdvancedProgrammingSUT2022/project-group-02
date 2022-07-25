@@ -22,29 +22,57 @@ public class MapController {
     }
 
 
+//    public void setNeighbor(Tile tile) {
+//        ArrayList<Tile> neighbors = new ArrayList<>();
+//        int x = tile.getX();
+//        int y = tile.getIndexY();
+//
+//        // right
+//        if (y < 158)
+//            neighbors.add(getTileInNewIndex(x, y + 2));
+//        // left
+//        if (y > 1)
+//            neighbors.add(getTileInNewIndex(x, y - 2));
+//        // up right
+//        if (x > 0 && y < 159)
+//            neighbors.add(getTileInNewIndex(x - 1, y + 1));
+//        // up left
+//        if (x > 0 && y > 0)
+//            neighbors.add(getTileInNewIndex(x - 1, y - 1));
+//        // down right
+//        if (x < 25 && y < 159)
+//            neighbors.add(getTileInNewIndex(x + 1, y + 1));
+//        // down left
+//        if (x < 25 && y > 0)
+//            neighbors.add(getTileInNewIndex(x + 1, y - 1));
+//
+//        tile.setNeighbors(neighbors);
+//    }
+
     public void setNeighbor(Tile tile) {
         ArrayList<Tile> neighbors = new ArrayList<>();
         int x = tile.getX();
-        int y = tile.getIndexY();
+        int y = tile.getY();
 
-        // right
-        if (y < 158)
-            neighbors.add(getTileInNewIndex(x, y + 2));
-        // left
-        if (y > 1)
-            neighbors.add(getTileInNewIndex(x, y - 2));
-        // up right
-        if (x > 0 && y < 159)
-            neighbors.add(getTileInNewIndex(x - 1, y + 1));
-        // up left
-        if (x > 0 && y > 0)
-            neighbors.add(getTileInNewIndex(x - 1, y - 1));
-        // down right
-        if (x < 25 && y < 159)
-            neighbors.add(getTileInNewIndex(x + 1, y + 1));
-        // down left
-        if (x < 25 && y > 0)
-            neighbors.add(getTileInNewIndex(x + 1, y - 1));
+        if (y < 79) neighbors.add(map.getTileBoard()[x][y + 1]);
+        if (y > 0) neighbors.add(map.getTileBoard()[x][y - 1]);
+        if (x % 2 == 0) {
+            if (x < 25) {
+                neighbors.add(map.getTileBoard()[x + 1][y]);
+                if (y < 79)neighbors.add(map.getTileBoard()[x + 1][y + 1]);
+            }
+            if (x > 0) {
+                neighbors.add(map.getTileBoard()[x - 1][y]);
+                if (y < 79)neighbors.add(map.getTileBoard()[x - 1][y + 1]);
+            }
+        } else {
+            if (x < 25) {
+                if (y > 0)neighbors.add(map.getTileBoard()[x + 1][y - 1]);
+                neighbors.add(map.getTileBoard()[x + 1][y]);
+            }
+            if (y > 0)neighbors.add(map.getTileBoard()[x - 1][y - 1]);
+            neighbors.add(map.getTileBoard()[x - 1][y]);
+        }
 
         tile.setNeighbors(neighbors);
     }
