@@ -22,7 +22,7 @@ public class SettlerController extends UnitController{
         ArrayList<Citizen> citizens = new ArrayList<>();
         citizens.add(citizen);
         City city = new City(nameOfCity, tile, user, ownerShipTiles, 100, 100, null, null,
-                50, 1, 1, 1, 1, 1, 1, 1, 1,
+                0, 1, 1, 1, 1, 1, 1, 1, 1,
                 null, null, false, citizens, 20);
         tile.setCity(city);
         tile.setOwner(user);

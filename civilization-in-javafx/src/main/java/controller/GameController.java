@@ -582,11 +582,9 @@ public class GameController {
         Request request = new Request();
         request.setMenu("play game");
         request.setAction("set players");
-        int i = 1;
         HashMap<String, Object> parameters = new HashMap<>();
-        for (User player : players) {
-            parameters.put("username" + i, player.getUsername());
-            i++;
+        for (int i = players.size() - 1; 0 <= i; i--) {
+            parameters.put("username" + i, players.get(i).getUsername());
         }
         request.setParameters(parameters);
         NetworkController.getInstance().sendRequest(request);

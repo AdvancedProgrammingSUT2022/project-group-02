@@ -42,7 +42,7 @@ public class Unit extends PhysicalObject{
         lastingMP = MP;
         ordered = false;
         sleep = false;
-        alert = false;
+        alert = true;
         fortify = false;
         totalHealth = HP;
         moving = false;

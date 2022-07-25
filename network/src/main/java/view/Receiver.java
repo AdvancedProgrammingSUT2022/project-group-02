@@ -88,6 +88,8 @@ public class Receiver {
                         return GameController.getInstance().decreaseResearchTurnRequest(request);
                     case "select tile":
                         return GameController.getInstance().selectTileRequest(request);
+                    case "search friend":
+                        return GameController.getInstance().searchFriend(request);
                 }
             case "tile menu":
                 switch(request.getAction()) {

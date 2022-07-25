@@ -58,7 +58,7 @@ public class UnitClickAction {
         ImageView foundCityView = new ImageView(images.foundCityIcon);
         ImageView doNothingView = new ImageView(images.doNothingIcon);
         initialiseUnitInfo(infoView);
-        initialiseUnitSameButtons(moreActionView, alertView, movingView, doNothingView);
+        initialiseUnitSameButtons(moreActionView, alertView, wakeView, movingView, doNothingView);
         Button foundCityButton = new Button();
         initialiseFoundCity(foundCityView, foundCityButton);
         initialiseUnitSameInfo(unitIconView);
@@ -108,7 +108,7 @@ public class UnitClickAction {
                                 });
                                 value2.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent2 -> {
                                     if (key2.equals("deleteUnitButton")) {
-//                                        removeUnit();///give me a task
+                                        removeUnit(unitView);
                                     }
                                 });
                             });
@@ -122,9 +122,9 @@ public class UnitClickAction {
                         }
                     }
 
-//                    case "fortifyButton" -> {
-//
-//                    }
+                    case "fortifyButton" -> {
+
+                    }
                     case "doNothingButton" -> {
                         unit.setOrdered(true);
                         isUnitOrderedClicked = true;
@@ -138,10 +138,8 @@ public class UnitClickAction {
                         //TODO : -GRAPHIC- SHOW SOMETHING ON UNIT TO SHOW THIS
                         //TODO : -LOGIC- WHAT HAPPENED WHEN WE CLICK THIS
                         if (value.getId().equals("alertMode")) {
-                            System.out.println("##");
                             initialiseWake(wakeView);
                         } else {
-                            System.out.println("@@");
                             initialiseAlert(alertView);
                         }
                     }
@@ -239,10 +237,11 @@ public class UnitClickAction {
         }
     }
 
-    private void initialiseUnitSameButtons(ImageView moreActionView, ImageView alertView, ImageView movingView,
-                                           ImageView doNothingView) {
+    private void initialiseUnitSameButtons(ImageView moreActionView, ImageView alertView, ImageView wakeView,
+                                           ImageView movingView, ImageView doNothingView) {
         initialiseMoreAction(moreActionView);
-        initialiseAlert(alertView);
+        if (unit.isAlert()) initialiseAlert(alertView);
+        else initialiseWake(wakeView);
         buttons.put("alertAndWakeButton", alertAndWakeButton);
         unitPanel.getChildren().add(alertAndWakeButton);
         initialiseDoNothing(doNothingView);
@@ -264,6 +263,8 @@ public class UnitClickAction {
     }
 
     private void initialiseAlert(ImageView alertView) {
+        unit.setSleep(false);
+        unit.setAlert(true);
         alertAndWakeButton.setId("alertMode");
         alertAndWakeButton.getStyleClass().add("unit-action-buttons");
         alertAndWakeButton.setGraphic(alertView);
@@ -275,6 +276,8 @@ public class UnitClickAction {
     }
 
     private void initialiseWake(ImageView WakeView) {
+        unit.setAlert(false);
+        unit.setSleep(true);
         alertAndWakeButton.setId("wakeMode");
         alertAndWakeButton.getStyleClass().add("unit-action-buttons");
         alertAndWakeButton.setGraphic(WakeView);

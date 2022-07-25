@@ -816,8 +816,29 @@ public class GameController {
                 if (user.getUsername().equals(playerUsername)) players.add(user);
             }
         });
+        ArrayList<User> truePlayers = new ArrayList<>(players);
+        players.clear();
+        for (int i = truePlayers.size() - 1; i >= 0; i--) {
+            players.add(truePlayers.get(i));
+        }
+        for (User player : GameController.getInstance().getPlayers()) {
+            System.out.println(player.getUsername());
+        }
         MapController.getInstance().firstSetOfSettlers(GameController.getInstance().getPlayers(), map);
         response.setMessage("start the game");
+        return response;
+    }
+
+    public Response searchFriend(Request request) {
+        Response response = new Response();
+        String username = (String) request.getParameters().get("username");
+        for (User user : UsersController.getInstance().getUsers()) {
+            if (user.getUsername().equals(username)) {
+                response.setMessage(username);
+                return response;
+            }
+        }
+        response.setMessage("there is no player with this username!");
         return response;
     }
 

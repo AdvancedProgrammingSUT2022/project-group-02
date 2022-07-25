@@ -62,7 +62,7 @@ public class City extends PhysicalObject {
         this.cityLocation = cityLocation;
         this.possibleBuildings = new ArrayList<>();
         this.possibleUnits = new ArrayList<>();
-        productionPerTurn = 1;
+        productionPerTurn = 0;
         goldPerTurn = 0;
         foodPerTurn = 0;
     }

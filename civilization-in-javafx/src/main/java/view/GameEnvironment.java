@@ -64,6 +64,9 @@ public class GameEnvironment {
         root.getStylesheets().add(String.valueOf(getClass().getResource("/CSS/Style.css")));
         stage.setMaximized(true);
         stage.setFullScreen(true);
+        for (User player : players) {
+            System.out.println(player.getUsername());
+        }
         mapController.firstSetOfSettlers(players);
         gameController.assignNeighbor(mapController);
         showAllInfo();
@@ -457,7 +460,9 @@ public class GameEnvironment {
             for (int i = 0; i < imageViews.size(); i++) {
                 int finalI = i;
                 imageViews.get(i).addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-                    if (imageViews.get(finalI).getId().equals("settler") && hashMap.get(1)) {
+
+                    if (imageViews.get(finalI).getId().equals("settler") && hashMap.get(1) &&
+                            ((Settler) imageViewObjects.get(imageViews.get(finalI))).getOwner().equals(user)) {
                         hashMap.replace(1, false);
                         hashMap.forEach((key1, value2) -> {
                             if (key1 != 1) hashMap.replace(key1, true);

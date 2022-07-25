@@ -1,7 +1,6 @@
 package view;
 
 import controller.MapController;
-import controller.SettlerController;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -24,8 +23,11 @@ public class CityClickAction {
     private final AnchorPane finalRoot;
     private final ArrayList<Node> cityPagePanes = new ArrayList<>();
     private final ArrayList<Button> buttons = new ArrayList<>();
+    private final ArrayList<Button> productButtons = new ArrayList<>();
     private final HashMap<Button, Boolean> clickButtons = new HashMap();
     private final MapController mapController;
+    private final HashMap<Button, Building> buyBuildingButtons = new HashMap<>();
+    private final HashMap<Button, Unit> buyUnitButtons = new HashMap<>();
 
     public CityClickAction(AnchorPane finalRoot, MapController mapController) {
         this.finalRoot = finalRoot;
@@ -34,15 +36,13 @@ public class CityClickAction {
 
     public void setCity(City city) {
         this.city = city;
-        Product product = new Product("worker", 10);
-        this.city.setCurrentProduction(product);
-        this.city.setProductTurnLeft(product.getTurnCost());
     }
 
     public void cityClickHandler(){
         cityInfo();
         if (city.getProductTurnLeft() == 0) {
             initialiseBuyingProductPane();
+            buyProduct();
         } else if (city.getProductTurnLeft() > 0){
             cityHasProduct();
         } else {
@@ -358,6 +358,9 @@ public class CityClickAction {
         buildingButton.setLayoutY(numberOfProducts * 50 + 105);
         buildingButton.setPrefSize(185, 40);
         buildingButton.getStyleClass().add("buy-product-button");
+        productButtons.add(buildingButton);
+        buyBuildingButtons.put(buildingButton, building);
+        buildingButton.setId("buy building");
         productionView.setLayoutX(255);
         productionView.setLayoutY(numberOfProducts * 50 + 115);
         productionView.setFitHeight(20);
@@ -405,6 +408,9 @@ public class CityClickAction {
         unitButton.setLayoutY(numberOfProducts * 50 + 50);
         unitButton.setPrefSize(185, 40);
         unitButton.getStyleClass().add("buy-product-button");
+        productButtons.add(unitButton);
+        buyUnitButtons.put(unitButton, unit);
+        unitButton.setId("buy product");
         productionView.setLayoutX(255);
         productionView.setLayoutY(numberOfProducts * 50 + 60);
         productionView.setFitHeight(20);
@@ -453,19 +459,51 @@ public class CityClickAction {
     }
 
     private void buttonsAction() {
-        for (Button button : buttons) {
-            button.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-                if (button.getId().equals("changeProduct") && !clickButtons.get(button)) {
+        for (int i = 0; i < buttons.size(); i++) {
+            int finalI = i;
+            buttons.get(i).addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+                if (buttons.get(finalI).getId().equals("changeProduct") && !clickButtons.get(buttons.get(finalI))) {
                     initialiseBuyingProductPane();
-                    clickButtons.put(button, true);
-                } else if (button.getId().equals("exit panel")) {
+                    clickButtons.put(buttons.get(finalI), true);
+                    buyProduct();
+                } else if (buttons.get(finalI).getId().equals("exit panel")) {
                     for (Node cityPagePane : cityPagePanes) {
                         finalRoot.getChildren().remove(cityPagePane);
-                        GameEnvironment.hashMap.replace(3, true);
                     }
-                } else if (button.getId().equals("buy tile") && !clickButtons.get(button)) {
-                    ArrayList<Tile> neighborOfCity = mapController.neighborOfCity(city);
+                    GameEnvironment.hashMap.replace(3, true);
+                } else if (buttons.get(finalI).getId().equals("buy tile") && !clickButtons.get(buttons.get(finalI))) {
+                    
                 }
+            });
+        }
+    }
+
+    private void buyProduct() {
+        for (Button productButton : productButtons) {
+            productButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                if (buyUnitButtons.containsKey(productButton)) {
+                    Unit unit = buyUnitButtons.get(productButton);
+                    int number = city.getProductionPerTurn();
+                    if (number == 0) number = 1;
+                    Product product = new Product(unit.getName(), unit.getProductionPrice()/number);
+                    city.setCurrentProduction(product);
+                    city.setProductTurnLeft(product.getTurnCost());
+                } else {
+                    Building building = buyBuildingButtons.get(productButton);
+                    int number = city.getProductionPerTurn();
+                    if (number == 0) number = 1;
+                    Product product = new Product(building.getName(), building.getCost()/number);
+                    city.setCurrentProduction(product);
+                    city.setProductTurnLeft(product.getTurnCost());
+                }
+                for (Node cityPagePane : cityPagePanes) {
+                    finalRoot.getChildren().remove(cityPagePane);
+                }
+                buttons.clear();
+                productButtons.clear();
+                buyUnitButtons.clear();
+                buyBuildingButtons.clear();
+                GameEnvironment.hashMap.replace(3, true);
             });
         }
     }

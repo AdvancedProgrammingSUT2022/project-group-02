@@ -310,15 +310,11 @@ public class RegisterMenu {
         }
         */
     }
-
     private void graphicLoginController(String username, String password, Label label) throws IOException {
         label.setLayoutX(650);
         label.setLayoutY(140);
         label.getStyleClass().add("register-signup-and-login-error");
         label.setEffect(new DropShadow());
-        //TODO : enter MainMenu
-
-
         Request request = new Request();
         request.setAction("login");
         request.setMenu("register menu");

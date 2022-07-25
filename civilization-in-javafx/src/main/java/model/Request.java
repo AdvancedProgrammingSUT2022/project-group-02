@@ -55,4 +55,8 @@ public class Request {
     public String toJson() {
         return new Gson().toJson(this);
     }
+
+    public void addParameters(String key, Object value) {
+     parameters.put(key, value);
+    }
 }
