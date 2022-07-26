@@ -302,6 +302,17 @@ public class MapController {
         map.getSpecificTile(18, 32).setCivilianUnitExists(true);
     }
 
+    public void firstRuin() {
+        map.getSpecificTile(8, 38).setRuinBool(true);
+        map.getSpecificTile(11, 41).setRuinBool(true);
+        map.getSpecificTile(13, 46).setRuinBool(true);
+        map.getSpecificTile(7, 60).setRuinBool(true);
+        map.getSpecificTile(2, 15).setRuinBool(true);
+        map.getSpecificTile(17, 22).setRuinBool(true);
+        map.getSpecificTile(20, 60).setRuinBool(true);
+        map.getSpecificTile(21, 44).setRuinBool(true);
+    }
+
     private Tile getTileInNewIndex(int x, int y) {
         if (x % 2 == 0) {
             return map.getTileBoard()[x][y / 2];

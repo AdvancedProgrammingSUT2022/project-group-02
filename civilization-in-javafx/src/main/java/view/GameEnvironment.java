@@ -4,8 +4,10 @@ import controller.GameController;
 import controller.MapController;
 import controller.TechController;
 import controller.UsersController;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBoxTreeItem;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -45,6 +47,7 @@ public class GameEnvironment {
     public static final HashMap<Integer, Boolean> hashMap = new HashMap<>();
     private int playerNumber;
     private ImageView nextTurnView;
+    private AnchorPane settingPane;
 
     private ClickRunnable clickRunnable;
     private TurnRunnable turnRunnable;
@@ -80,13 +83,185 @@ public class GameEnvironment {
         stage.setMaximized(true);
         stage.setFullScreen(true);
         mapController.firstSetOfSettlers(players);
+        mapController.firstRuin();
         gameController.assignNeighbor(mapController);
         MapMaker.setPrice(map);
         showAllInfo();
+        showSetting();
         createMap();
         clickRunnable = new ClickRunnable(this);
         clickThread = new Thread(clickRunnable);
         clickThread.start();
+    }
+
+    private void showSetting() {
+        ImageView imageView = new ImageView(images.setting);
+        Button button = new Button();
+        button.setGraphic(imageView);
+        button.setLayoutX(1468);
+        button.setLayoutY(50);
+        button.setPrefSize(60, 60);
+        imageView.setFitWidth(60);
+        imageView.setFitHeight(60);
+        button.getStyleClass().add("setting-button");
+        finalRoot.getChildren().add(button);
+        button.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            if (mouseEvent.isControlDown()) {
+                finalRoot.getChildren().remove(settingPane);
+            }
+            if (!finalRoot.getChildren().contains(settingPane))showSettingButtons();
+        });
+    }
+
+    private void showSettingButtons() {
+        settingPane = new AnchorPane();
+        Button exit = new Button("Exit");
+        exit.setAlignment(Pos.CENTER);
+        exit.setLayoutX(1390);
+        exit.setLayoutY(122);
+        exit.getStyleClass().add("setting-button");
+        exit.setPrefSize(148, 40);
+        settingPane.getChildren().add(exit);
+
+        Button unitPanel = new Button("Unit Panel");
+        unitPanel.setAlignment(Pos.CENTER);
+        unitPanel.setLayoutX(1390);
+        unitPanel.setLayoutY(167);
+        unitPanel.getStyleClass().add("setting-button");
+        unitPanel.setPrefSize(148, 40);
+        settingPane.getChildren().add(unitPanel);
+
+        Button citiesPanel = new Button("City panel");
+        citiesPanel.setAlignment(Pos.CENTER);
+        citiesPanel.setLayoutX(1390);
+        citiesPanel.setLayoutY(212);
+        citiesPanel.getStyleClass().add("setting-button");
+        citiesPanel.setPrefSize(148, 40);
+        settingPane.getChildren().add(citiesPanel);
+
+        Button economicPanel = new Button("Economic OverView");
+        economicPanel.setAlignment(Pos.CENTER);
+        economicPanel.setLayoutX(1390);
+        economicPanel.setLayoutY(257);
+        economicPanel.getStyleClass().add("setting-button");
+        economicPanel.setPrefSize(148, 40);
+        settingPane.getChildren().add(economicPanel);
+
+        finalRoot.getChildren().add(settingPane);
+        settingAction(exit, unitPanel, citiesPanel, economicPanel);
+    }
+
+    private void settingAction(Button exit, Button unitPanel, Button citiesPanel, Button economicPanel) {
+        AnchorPane unitPane = new AnchorPane();
+        AnchorPane citiesPane = new AnchorPane();
+        AnchorPane economicPane = new AnchorPane();
+        exit.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            clickThread.stop();
+            nextTurnThread.stop();
+            new RegisterMenu(mediaPlayer, stage, Main.scene).run();
+        });
+
+        unitPanel.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            if (settingPane.getChildren().contains(unitPane)) {
+                settingPane.getChildren().remove(unitPane);
+            } else {
+                settingPane.getChildren().add(unitPane);
+                Rectangle backGround = new Rectangle(600, 100, 400, 483);
+                backGround.setFill(new Color(0, 0, 0, 0.88));
+                unitPane.getChildren().add(backGround);
+                int numberOfUnit = 0;
+                for (Unit unit : user.getUnits()) {
+                    ImageView unitView = ResearchMenu.findUnitIcon(unit.getName());
+                    if (unitView == null) unitView = fineUnitView(unit.getName());
+                    unitView.setLayoutX(610);
+                    unitView.setLayoutY(110 + numberOfUnit * 65);
+                    unitView.setFitHeight(55);
+                    unitView.setFitWidth(55);
+
+                    Label name = new Label(unit.getName() + " -> unit MP : " + unit.getMP() + " -> unit CS : " + unit.getCombatStrength());
+                    name.setLayoutX(670);
+                    name.setLayoutY(125 + numberOfUnit * 65);
+                    name.setAlignment(Pos.CENTER);
+                    name.setStyle("-fx-text-fill: #ff0090");
+                    unitPane.getChildren().add(name);
+                    unitPane.getChildren().add(unitView);
+                    numberOfUnit++;
+                }
+            }
+        });
+
+        economicPanel.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            if (settingPane.getChildren().contains(economicPane)) {
+                settingPane.getChildren().remove(economicPane);
+            } else {
+                settingPane.getChildren().add(economicPane);
+                Rectangle backGround = new Rectangle(600, 100, 400, 483);
+                backGround.setFill(new Color(0, 0, 0, 0.88));
+                economicPane.getChildren().add(backGround);
+
+                Label gold = new Label("User Gold : " + user.getGold() + " --------- " + "User Gold Pur Turn : " + user.getGoldPerTurn()
+                        + "\n..............\n..............\n..............\n");
+                gold.setLayoutX(652);
+                gold.setLayoutY(110);
+                gold.setAlignment(Pos.CENTER);
+                gold.setStyle("-fx-text-fill: #ff0090");
+                economicPane.getChildren().add(gold);
+                Label technology = new Label("User technology number : " + user.getTechnologies().size()
+                        + "\n..............\n..............\n..............");
+                technology.setLayoutX(652);
+                technology.setLayoutY(210);
+                technology.setAlignment(Pos.CENTER);
+                technology.setStyle("-fx-text-fill: #ff0090");
+                economicPane.getChildren().add(technology);
+
+                Label science = new Label("User technology number : " + user.getTechnologies().size()
+                        + "\n..............\n..............\n..............");
+                science.setLayoutX(652);
+                science.setLayoutY(310);
+                science.setAlignment(Pos.CENTER);
+                science.setStyle("-fx-text-fill: #ff0090");
+                economicPane.getChildren().add(science);
+            }
+        });
+
+        citiesPanel.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            if (settingPane.getChildren().contains(citiesPane)) {
+                settingPane.getChildren().remove(citiesPane);
+            } else {
+                settingPane.getChildren().add(citiesPane);
+                Rectangle backGround = new Rectangle(600, 100, 400, 483);
+                backGround.setFill(new Color(0, 0, 0, 0.88));
+                citiesPane.getChildren().add(backGround);
+                int numberOfCity = 0;
+                for (City city : user.getCities()) {
+                    ImageView cityView = new ImageView(images.city);
+                    cityView.setLayoutX(610);
+                    cityView.setLayoutY(110 + numberOfCity * 65);
+                    cityView.setFitHeight(55);
+                    cityView.setFitWidth(55);
+
+                    Label name = new Label( city.getName() + " -> city HP : " + city.getHP() + " -> city strength : " + city.getDefence());
+                    name.setLayoutX(670);
+                    name.setLayoutY(125 + numberOfCity * 65);
+                    name.setAlignment(Pos.CENTER);
+                    name.setStyle("-fx-text-fill: #ff0090");
+                    citiesPane.getChildren().add(name);
+                    citiesPane.getChildren().add(cityView);
+                    numberOfCity++;
+                }
+            }
+        });
+    }
+
+    private ImageView fineUnitView(String unitName){
+        return switch (unitName) {
+            case "warrior" -> new ImageView(images.warriorIcon);
+            case "worker" -> new ImageView(images.workerIcon);
+            case "settler" -> new ImageView(images.settlerIcon);
+            case "scout" -> new ImageView(images.scoutIcon);
+            case "Monument" -> new ImageView(images.Monument);
+            default -> null;
+        };
     }
 
     private void showAllInfo() {
@@ -268,9 +443,9 @@ public class GameEnvironment {
                     canPopup.put(imageView, true);
                     root.getChildren().add(imageView);
                     resourceHandler(tile, imageView);
+                    ruinChecker(tile, imageView);
                     showUnits(tile, imageView);
                     tileMouseClickHandle(tile, imageView, canPopup);
-
                 } else {
                     System.out.println( i + " : An error happened! -> GameEnvironment -> createMap : " + tile.getTerrain().getName());
                     i++;
@@ -278,6 +453,26 @@ public class GameEnvironment {
             }
         }
         scrollHandler();
+    }
+
+    private void ruinChecker(Tile tile, ImageView tileView) {
+        if (tile.isRuinBool() && tile.isRuinShow()) {
+
+            ImageView ruinView = new ImageView(images.ruin);
+            ruinView.setLayoutX(tileView.getLayoutX() + 170);
+            ruinView.setLayoutY(tileView.getLayoutY() + 60);
+            ruinView.setFitWidth(90);
+            ruinView.setFitHeight(90);
+
+            ImageView gold = new ImageView(images.gold);
+            gold.setLayoutX(tileView.getLayoutX() + 140);
+            gold.setLayoutY(tileView.getLayoutY() + 75);
+            gold.setFitHeight(30);
+            gold.setFitWidth(30);
+
+            root.getChildren().add(gold);
+            root.getChildren().add(ruinView);
+        }
     }
 
     private Image findCell(Tile tile) {
@@ -521,6 +716,7 @@ public class GameEnvironment {
         hashMap.put(1, true);
         hashMap.put(2, true);
         hashMap.put(3, true);
+        hashMap.put(4, true);
         while (true) {
             for (int i = 0; i < imageViews.size(); i++) {
                 int finalI = i;
@@ -550,7 +746,8 @@ public class GameEnvironment {
                         });
                         researchMenu.setUser(user);
                         researchMenu.showGraphicTree(finalRoot);
-                    } else if (imageViews.get(finalI).getId().equals("city") && hashMap.get(3)) {
+                    } else if (imageViews.get(finalI).getId().equals("city") && hashMap.get(3) &&
+                            ((City) imageViewObjects.get(imageViews.get(finalI))).getOwner().equals(user)) {
                         for (ImageView topBarImageView : topBarImageViews)
                             finalRoot.getChildren().remove(topBarImageView);
                         for (Label topBarLabel : topBarLabels) finalRoot.getChildren().remove(topBarLabel);
@@ -561,6 +758,12 @@ public class GameEnvironment {
                         });
                         cityClickAction.setCity((City) imageViewObjects.get(imageViews.get(finalI)));
                         cityClickAction.cityClickHandler();
+                    } else if (mouseEvent.isControlDown() && imageViews.get(finalI).getId().equals("Tile") && hashMap.get(4)) {
+                        hashMap.replace(4, false);
+                        hashMap.forEach((key1, value2) -> {
+                            if (key1 != 4) hashMap.replace(key1, true);
+                        });
+                        ((Tile) imageViewObjects.get(imageViews.get(finalI))).setRuinShow(true);
                     }
                 });
             }

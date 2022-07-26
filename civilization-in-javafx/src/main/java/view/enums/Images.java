@@ -229,6 +229,8 @@ public class Images {
     public Image TradingPost;
     public Image cantNextTurn;
     public Image nextTurn;
+    public Image setting;
+    public Image ruin;
 
     public Images(){
         normalMenuButton = new Image(String.valueOf(getClass().getResource("/Media/buttons/Button_Down.png")));
@@ -450,5 +452,7 @@ public class Images {
         TradingPost = new Image(String.valueOf(getClass().getResource("/Media/Improvements/Trading_Post.png")));
         cantNextTurn = new Image(String.valueOf(getClass().getResource("/Media/icons/X_button.png")));
         nextTurn = new Image(String.valueOf(getClass().getResource("/Media/icons/V_button.png")));
+        setting = new Image(String.valueOf(getClass().getResource("/Media/icons/setting.png")));
+        ruin = new Image(String.valueOf(getClass().getResource("/Media/resource/ruinIcon.png")));
     }
 }

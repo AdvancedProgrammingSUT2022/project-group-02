@@ -51,7 +51,6 @@ public class UnitClickAction {
     }
 
     public void settlerClickAction() {
-        System.out.println(user.getNickname() + "unitClickAction");
         unitPanel = new AnchorPane();
         ImageView unitIconView = new ImageView(images.settlerIcon);
         ImageView infoView = new ImageView(images.unitInfoBackground);

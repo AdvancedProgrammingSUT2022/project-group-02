@@ -178,7 +178,6 @@ public class GameMenu {
         submit.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             if (players.size() > 1) {
                 GameEnvironment gameEnvironment = new GameEnvironment(mediaPlayer, stage, users, user, players);
-                GameController.setPlayers(players);
                 gameEnvironment.run();
             } else {
                 errorLabel.setText("you need more player to start the game!");

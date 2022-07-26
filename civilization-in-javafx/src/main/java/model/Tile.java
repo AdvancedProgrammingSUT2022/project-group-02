@@ -30,6 +30,8 @@ public class Tile {
     private boolean citizenExist;
     private Ruin ruin;
     private Building building;
+    private boolean ruinBool;
+    private boolean ruinShow;
 
     public Tile (int x, int y, User owner, Terrain terrain, int fogOfWarLevel, boolean isNearRiver,
                  boolean[] riverBorder, Resource resource, Feature feature) {
@@ -57,6 +59,7 @@ public class Tile {
         price = 100;
         citizenExist = false;
         this.road = false;
+        this.ruinShow = false;
     }
 
     public boolean isNearRiver() {
@@ -275,5 +278,21 @@ public class Tile {
 
     public int getIndexY() {
         return indexY;
+    }
+
+    public boolean isRuinBool() {
+        return ruinBool;
+    }
+
+    public void setRuinBool(boolean ruinBool) {
+        this.ruinBool = ruinBool;
+    }
+
+    public boolean isRuinShow() {
+        return ruinShow;
+    }
+
+    public void setRuinShow(boolean ruinShow) {
+        this.ruinShow = ruinShow;
     }
 }

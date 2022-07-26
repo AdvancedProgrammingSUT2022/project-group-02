@@ -4,7 +4,6 @@ package controller;
 import model.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class CityController {
     private static CityController cityController;
@@ -15,24 +14,24 @@ public class CityController {
         return cityController;
     }
 
-    public Response createCity(Tile origin, User user, Unit unit) {
-        Request request = new Request();
-        int xDestination = origin.getX();
-        int yDestination = origin.getY();
-        request.setMenu("tile menu");
-        request.setAction("place city");
-        HashMap<String, Object> parameters = new HashMap<>();
-        parameters.put("xDestination", xDestination);
-        parameters.put("yDestination", yDestination);
-        parameters.put("username", user.getUsername());
-        request.setParameters(parameters);
-        Response response = NetworkController.getInstance().sendRequest(request);
-        System.out.println(response.getMessage());
-        if (response.getMessage().equals("city created successfully")) {
-            SettlerController.getInstance().createNewCity(unit, user, unit.getTile(), "name");
-        }
-        return response;
-    }
+//    public Response createCity(Tile origin, User user, Unit unit) {
+//        Request request = new Request();
+//        int xDestination = origin.getX();
+//        int yDestination = origin.getY();
+//        request.setMenu("tile menu");
+//        request.setAction("place city");
+//        HashMap<String, Object> parameters = new HashMap<>();
+//        parameters.put("xDestination", xDestination);
+//        parameters.put("yDestination", yDestination);
+//        parameters.put("username", user.getUsername());
+//        request.setParameters(parameters);
+//        Response response = NetworkController.getInstance().sendRequest(request);
+//        System.out.println(response.getMessage());
+//        if (response.getMessage().equals("city created successfully")) {
+//            SettlerController.getInstance().createNewCity(unit, user, unit.getTile(), "name");
+//        }
+//        return response;
+//    }
 
     public static boolean buyTile(Tile tile, City city, User user) {
         System.out.println(user.getGold());

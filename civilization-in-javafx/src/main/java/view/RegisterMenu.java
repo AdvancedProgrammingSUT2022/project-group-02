@@ -33,11 +33,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class RegisterMenu {
 
     private String whichMenu;
-    private UsersController users = UsersController.getInstance();
+    private final UsersController users = UsersController.getInstance();
     private MediaPlayer mediaPlayer;
     private Stage stage;
     private Scene scene;
-    private Images images = Images.getInstance();
+    private final Images images = Images.getInstance();
     private final HashMap<String , Boolean> availableColors = new HashMap<>();
     private boolean readFromGson = false;
 
@@ -72,7 +72,7 @@ public class RegisterMenu {
         System.out.println(Color + "press \"menu show-current\" to see the menu you are in");
         System.out.println("press \"menu exit\" to exit the menu" + Colors.RESET);
     }
-    public void run(Scanner scanner) {
+    public void run() {
         /* graphic part */
         //TODO : user Color
         //TODO : user Avatar
@@ -89,6 +89,9 @@ public class RegisterMenu {
             readFromGson = true;
             ArrayList<User> usersFromJson = users.readFromJson();
             if (usersFromJson != null) users.setUsers(usersFromJson);
+        }
+        for (User user : users.getUsers()) {
+            System.out.println(user.getNickname());
         }
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         scene.setRoot(root);
@@ -274,21 +277,6 @@ public class RegisterMenu {
         label.setLayoutY(140);
         label.getStyleClass().add("register-signup-and-login-error");
         label.setEffect(new DropShadow());
-
-        // send signup information to server and get response;
-        Request request = new Request();
-        request.setAction("signup");
-        request.setMenu("register menu");
-        HashMap<String, Object> parameters = new HashMap<>();
-        parameters.put("username", username);
-        parameters.put("nickname", nickname);
-        parameters.put("password", password);
-        request.setParameters(parameters);
-        Response response = NetworkController.getInstance().sendRequest(request);
-
-        label.setText(response.getMessage());
-
-        /*
 //      check if there is a same username
         if (!users.sameUsernameExists(username)) {
 //          check if there is a same nickname
@@ -308,29 +296,12 @@ public class RegisterMenu {
             label.setLayoutX(555 - username.length());
             label.setText("user with this username " + username + " already exists");
         }
-        */
     }
     private void graphicLoginController(String username, String password, Label label) throws IOException {
         label.setLayoutX(650);
         label.setLayoutY(140);
         label.getStyleClass().add("register-signup-and-login-error");
         label.setEffect(new DropShadow());
-        Request request = new Request();
-        request.setAction("login");
-        request.setMenu("register menu");
-        HashMap<String, Object> parameters = new HashMap<>();
-        parameters.put("username", username);
-        parameters.put("password", password);
-        request.setParameters(parameters);
-        Response response = NetworkController.getInstance().sendRequest(request);
-        label.setText(response.getMessage());
-        if (response.getStatusCode().equals("200")) {
-            User user = response.getUser();
-            new MainMenu(mediaPlayer, stage, scene, images, users).run(user, new Scanner(System.in));
-        }
-        else
-            label.setLayoutX(588);
-        /*
         User user;
         //check if username exists and the password is correct
         if (users.sameUsernameExists(username) && (user = users.getUserByUsername(username)).getPassword().equals(password)) {
@@ -341,8 +312,6 @@ public class RegisterMenu {
             label.setLayoutX(588);
             label.setText("Username and password didn't match!");
         }
-        */
-
 
     }
 
@@ -585,7 +554,7 @@ public class RegisterMenu {
             back.setEffect(null);
             AudioClip clickSound = new AudioClip(Objects.requireNonNull(getClass().getResource("/Media/sounds/click.mp3")).toExternalForm());
             clickSound.play();
-            run(new Scanner(System.in));
+            run();
         });
     }
 

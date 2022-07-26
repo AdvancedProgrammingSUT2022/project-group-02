@@ -292,6 +292,11 @@
 .exit-city-panel:hover {
     -fx-background-color: linear-gradient(to right, rgba(227, 195, 59, 0.8) 1%, rgba(246, 139, 15, 0.78) 50%, rgba(227, 195, 59, 0.8) 99%);;
 }
+
+.setting-button {
+    -fx-background-color: linear-gradient(to right, rgba(151, 59, 227, 0.25) 1%, rgba(15, 184, 246, 0.25) 50%, rgba(146, 59, 227, 0.28) 99%);
+    -fx-text-fill: #ff0059;
+}
 /* end of buttons style */
 
 /* scroll pane style */

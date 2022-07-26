@@ -154,14 +154,13 @@ public class UsersController {
     }
 
     public static String findPlayers(String username, ArrayList<User> players, ArrayList<User> users) {
-        Request request = new Request();
-        request.setAction("search friend");
-        request.addParameters("username", username);
-        request.setMenu("play game");
         for (User player : players) if (username.equals(player.getUsername())) return "   This user is already a player now!";
         for (User user : users) {
-            if (user.getUsername().equals(username))players.add(user);
+            if (user.getUsername().equals(username)){
+                players.add(user);
+                return username;
+            }
         }
-        return NetworkController.getInstance().sendRequest(request).getMessage();
+        return "there is no player with this username!";
     }
 }

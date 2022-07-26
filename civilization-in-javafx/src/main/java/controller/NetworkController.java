@@ -22,13 +22,13 @@ public class NetworkController {
     }
 
     public void initialize() {
-        try {
-            socket = new Socket("localhost", 3333);
-            dataInputStream = new DataInputStream(socket.getInputStream());
-            dataOutputStream = new DataOutputStream(socket.getOutputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            socket = new Socket("localhost", 3333);
+//            dataInputStream = new DataInputStream(socket.getInputStream());
+//            dataOutputStream = new DataOutputStream(socket.getOutputStream());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public Response sendRequest(Request request) {

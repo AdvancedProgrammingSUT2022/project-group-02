@@ -10,7 +10,6 @@ public class ClickRunnable implements Runnable {
 
     @Override
     public void run() {
-        System.out.println(gameEnvironment.getUser().getNickname() + "clickRunnable");
         gameEnvironment.mouseClickHandler();
     }
 }

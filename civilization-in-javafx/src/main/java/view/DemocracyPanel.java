@@ -17,7 +17,7 @@ public class DemocracyPanel {
         String input;
         UserPanel.everyInformationAboutUser(user);
         System.out.println("**********");
-        System.out.println("all of the users are as follows :");
+        System.out.println("all of the users are as follows : ");
         for (User user1 : UsersController.getInstance().getUsers()) {
             UserPanel.everyInformationAboutUser(user1);
             System.out.println("**********");

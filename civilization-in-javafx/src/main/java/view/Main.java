@@ -21,6 +21,7 @@ public class Main extends Application {
     private MediaPlayer mediaPlayer;
     private MediaView mediaView;
     private static Images images;
+    public static Scene scene;
 
     @Override
     public void start(Stage stage){
@@ -30,6 +31,7 @@ public class Main extends Application {
         playOpeningVideo();
         root.getChildren().add(mediaView);
         Scene scene = new Scene(root);
+        Main.scene = scene;
         stage.setScene(scene);
         mediaPlayer.setAutoPlay(true);
         stage.setTitle("Civilization V");
@@ -40,9 +42,8 @@ public class Main extends Application {
             if (!startGame.get()) {
                 startGame.set(true);
                 mediaPlayer.stop();
-                Scanner scanner = new Scanner(System.in);
                 graphicPlayRegisterBackgroundMusic();
-                new RegisterMenu(mediaPlayer, stage, scene).run(scanner);
+                new RegisterMenu(mediaPlayer, stage, scene).run();
             }
         });
         stage.show();
