@@ -608,5 +608,27 @@ public class GameController {
         }
         return true;
     }
-
+    public static void NextTurn(User user) {
+        if (user.getUnits() != null) {
+            for (Unit unit : user.getUnits()) {
+                if (!unit.isSleep())unit.setOrdered(false);
+            }
+        }
+        if (user.getCities() != null) {
+            for (City city : user.getCities()) {
+                city.setProductTurnLeft(city.getProductionPerTurn() - 1);
+                if (city.getProductTurnLeft() == 0) {
+                    if (city.isBuilding()){
+                        city.addBuildings(city.getPBuildings().get(city.getCurrentProduction()));
+                    } else {
+                        Unit unit = city.getPUnits().get(city.getCurrentProduction());
+                        System.out.println(unit.getName());
+                        user.addUnit(unit);
+                        if (!unit.getName().equals("worker")) city.getTile().setMilitaryUnit(unit);
+                        else city.getTile().setCivilianUnit(unit);
+                    }
+                }
+            }
+        }
+    }
 }

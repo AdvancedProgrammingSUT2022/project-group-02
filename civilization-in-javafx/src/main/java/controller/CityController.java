@@ -2,6 +2,7 @@ package controller;
 
 
 import model.*;
+import view.GameEnvironment;
 
 import java.util.ArrayList;
 
@@ -60,6 +61,9 @@ public class CityController {
         if (user.getCapital() == null)
             user.setCapital(city);
         user.addCity(city);
+        tile.setCivilianUnit(null);
+        tile.setCivilianUnitExists(false);
+        GameEnvironment.map.setTileBoard(tile);
         removeUnit(true, unit, user);
         SettlerController.addBasicProducts(city);
         SettlerController.addBasicUnits(city);

@@ -37,7 +37,7 @@ public class GameEnvironment {
     public User getUser(){
         return user;
     }
-    private Maps map;
+    public static Maps map;
     private ArrayList<User> players;
     public static final HashMap<ImageView, Object> imageViewObjects = new HashMap<>();
     public static final ArrayList<ImageView> imageViews =  new ArrayList<>();
@@ -361,6 +361,8 @@ public class GameEnvironment {
         if (cheatField.getText().equals("increase gold")) {
             user.setGold(user.getGold() + 50);
             topBarInfoUpdate();
+        } else if (cheatField.getText().equals("resource Gold")) {
+            user.getFoundResources().add(new Resource("Gold", "Luxury", "Mine", 2, 0, 0, 4));
         }
     }
 
@@ -755,10 +757,10 @@ public class GameEnvironment {
         if (GameController.CanNextTurn(user)){
             clickThread.stop();
             nextTurnThread.stop();
+            GameController.NextTurn(user);
             playerNumber++;
             if (playerNumber == players.size())playerNumber = 0;
             user = players.get(playerNumber);
-            System.out.println(this.user);
             clickRunnable = new ClickRunnable(this);
             clickThread = new Thread(clickRunnable);
             clickThread.start();
@@ -769,7 +771,9 @@ public class GameEnvironment {
                 finalRoot.getChildren().remove(topBarImageView);
             for (Label topBarLabel : topBarLabels) finalRoot.getChildren().remove(topBarLabel);
             finalRoot.getChildren().remove(topBarBackground);
+            root.getChildren().clear();
             showAllInfo();
+            createMap();
             finalRoot.getChildren().remove(nextTurn);
         }
         });
@@ -905,6 +909,7 @@ public class GameEnvironment {
                     canPopup.put(imageView, true);
                     root.getChildren().add(imageView);
                     resourceHandler(tile, imageView);
+                    showCities(tile, imageView);
                     ruinChecker(tile, imageView);
                     showUnits(tile, imageView);
                     tileMouseClickHandle(tile, imageView, canPopup);
@@ -915,6 +920,17 @@ public class GameEnvironment {
             }
         }
         scrollHandler();
+    }
+
+    private void showCities(Tile tile, ImageView imageView) {
+        if (tile.getCity() != null && tile.getCity().getTile().equals(tile)) {
+            ImageView cityView = new ImageView(images.city);
+            cityView.setLayoutX(imageView.getLayoutX() + 47);
+            cityView.setLayoutY(imageView.getLayoutY() + 62);
+            cityView.setFitWidth(200);
+            cityView.setFitHeight(200);
+            root.getChildren().add(cityView);
+        }
     }
 
     private void ruinChecker(Tile tile, ImageView tileView) {
@@ -1108,6 +1124,8 @@ public class GameEnvironment {
         }
 
         if (tile.getCivilianUnit() != null) {
+            System.out.println(user.getNickname());
+            System.out.println(tile.getCivilianUnit().getName());
             Image CUnit = findCUnit(tile);
             ImageView CUnitView = new ImageView(CUnit);
             CUnitView.setLayoutX(imageView.getLayoutX() + 180);

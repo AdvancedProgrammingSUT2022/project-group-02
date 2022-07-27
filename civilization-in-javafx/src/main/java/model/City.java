@@ -29,6 +29,9 @@ public class City extends PhysicalObject {
     private Product currentProduction;
     private ArrayList<Unit> possibleUnits;
     private ArrayList<Building> possibleBuildings;
+    private boolean isBuilding;
+    private HashMap<Product, Unit> PUnits;
+    private HashMap<Product, Building> PBuildings;
 
     private int productionPerTurn;
     private int goldPerTurn;
@@ -65,6 +68,8 @@ public class City extends PhysicalObject {
         productionPerTurn = 0;
         goldPerTurn = 0;
         foodPerTurn = 0;
+        PUnits = new HashMap<>();
+        PBuildings = new HashMap<>();
     }
 
     public void setDefence(int amount) {
@@ -305,5 +310,29 @@ public class City extends PhysicalObject {
 
     public void setFoodPerTurn(int foodPerTurn) {
         this.foodPerTurn = foodPerTurn;
+    }
+
+    public boolean isBuilding() {
+        return isBuilding;
+    }
+
+    public void setBuilding(boolean building) {
+        isBuilding = building;
+    }
+
+    public HashMap<Product, Unit> getPUnits() {
+        return PUnits;
+    }
+
+    public HashMap<Product, Building> getPBuildings() {
+        return PBuildings;
+    }
+
+    public void addPBuilding(Product product, Building building) {
+        PBuildings.put(product, building);
+    }
+
+    public void addPUnit(Product product, Unit unit) {
+        PUnits.put(product, unit);
     }
 }

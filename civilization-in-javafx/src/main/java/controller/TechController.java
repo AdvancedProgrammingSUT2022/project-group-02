@@ -40,7 +40,7 @@ public class TechController {
     public boolean isTechAvailable(User user, Technology technology) {
         ArrayList<Technology> prerequisitesTechs = getPrerequisitesTech(technology);
         for (Technology prerequisitesTech : prerequisitesTechs)
-            if (!user.getTechnologies().contains(prerequisitesTech)) return false;
+            if (!user.getTechnologiesName().contains(prerequisitesTech.getName())) return false;
         return true;
     }
 

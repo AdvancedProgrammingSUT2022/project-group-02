@@ -31,6 +31,7 @@ public class User {
     private ArrayList<City> annexedCities;
     private City capital;
     private ArrayList<Technology> technologies;
+    private ArrayList<String> technologiesName;
     private ArrayList<Improvement> improvements;
     private int turnNumber;
     private int winsCount;
@@ -76,6 +77,7 @@ public class User {
         historyOfNotification = new ArrayList<>();
         improvements = new ArrayList<>();
         technologies = new ArrayList<>();
+        technologiesName = new ArrayList<>();
         availableResources = new ArrayList<>();
         specialWorking = new ArrayList<>();
         foundCities = new ArrayList<>();
@@ -279,6 +281,10 @@ public class User {
         return technologies;
     }
 
+    public ArrayList<String> getTechnologiesName() {
+        return technologiesName;
+    }
+
     public void setTechnologies(ArrayList<Technology> technologies) {
         this.technologies = technologies;
     }
@@ -321,6 +327,10 @@ public class User {
 
     public void addTechnology(Technology technology) {
         technologies.add(technology);
+    }
+
+    public void addTechnology(String technology) {
+        technologiesName.add(technology);
     }
 
     public void addCity(City city) {

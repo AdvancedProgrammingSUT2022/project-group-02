@@ -495,17 +495,21 @@ public class CityClickAction {
         for (Button productButton : productButtons) {
             productButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                 if (buyUnitButtons.containsKey(productButton)) {
+                    city.setBuilding(false);
                     Unit unit = buyUnitButtons.get(productButton);
                     int number = city.getProductionPerTurn();
                     if (number == 0) number = 1;
                     Product product = new Product(unit.getName(), unit.getProductionPrice()/number);
+                    city.addPUnit(product, unit);
                     city.setCurrentProduction(product);
                     city.setProductTurnLeft(product.getTurnCost());
                 } else {
+                    city.setBuilding(true);
                     Building building = buyBuildingButtons.get(productButton);
                     int number = city.getProductionPerTurn();
                     if (number == 0) number = 1;
                     Product product = new Product(building.getName(), building.getCost()/number);
+                    city.addPBuilding(product, building);
                     city.setCurrentProduction(product);
                     city.setProductTurnLeft(product.getTurnCost());
                 }

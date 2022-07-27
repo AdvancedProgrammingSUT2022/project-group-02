@@ -235,6 +235,10 @@ public class MapController {
         users.get(0).addUnit(settler);
         map.getSpecificTile(3, 5).setCivilianUnit(settler);
         map.getSpecificTile(3, 5).setCivilianUnitExists(true);
+        Worker worker = new Worker("worker", map.getSpecificTile(10, 10), 150, 1, 1, 1, 2, 10, 0, false, users.get(0), 0, 0);
+        users.get(0).addUnit(worker);
+        map.getSpecificTile(10, 10).setCivilianUnit(worker);
+        map.getSpecificTile(10, 10).setCivilianUnitExists(true);
         //user1
         settler = new Settler("settler", map.getSpecificTile(17, 13), 100, 1, 1, 1, 2, 0, 0, null, users.get(1), 0, 0);
         users.get(1).addUnit(settler);
