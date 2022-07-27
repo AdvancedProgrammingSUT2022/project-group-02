@@ -135,10 +135,13 @@ public class Receiver {
             case "chat menu":
                 switch (request.getAction()) {
                     case "send message":
-
+                        return ChatController.getInstance().addMessageToHistory(request);
                     case "delete message":
-
+                        return ChatController.getInstance().removeMessageFromHistory(request);
+                    case "get messages":
+                        return ChatController.getInstance().getMessagesOfThisChat(request);
                     case "edit message":
+                        return ChatController.getInstance().editAMessage(request);
                 }
         }
         return null;

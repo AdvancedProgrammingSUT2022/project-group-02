@@ -11,9 +11,11 @@ public class ChatController {
 
     private ArrayList<PrivateChat> privateChats;
     private ArrayList<Room> rooms;
+    private ArrayList<Message> messages;
     private ChatController() {
         privateChats = new ArrayList<>();
         rooms = new ArrayList<>();
+        messages = new ArrayList<>();
     }
 
     public static ChatController getInstance() {
@@ -71,9 +73,65 @@ public class ChatController {
         return userRooms;
     }
 
-    public Response addMessageToHistory(Request request){
+    public Response addMessageToHistory(Request request) {
         Response response = new Response();
-
+        User sender = request.getMessageObject().getSender();
+        User receiver = request.getMessageObject().getReceivers().get(0);
+        Message message = request.getMessageObject();
+        sender.addSentMessages(message);
+        receiver.addMessage(message);
+        response.setMessage("message added to chat");
         return response;
     }
+
+    public Response getMessagesOfThisChat(Request request) {
+        Response response = new Response();
+        User sender = request.getMessageObject().getSender();
+        User receiver = request.getMessageObject().getReceivers().get(0);
+        ArrayList<Message> messageArrayList = new ArrayList<>();
+        if (sender.getSentMessages() != null) {
+            for (Message message : sender.getSentMessages()) {
+                if (message.getReceivers().contains(receiver)) {
+                    messageArrayList.add(message);
+                }
+            }
+        }
+        if (receiver.getSentMessages() != null) {
+            for (Message message : receiver.getSentMessages()) {
+                if (message.getReceivers().contains(sender)) {
+                    messageArrayList.add(message);
+                }
+            }
+        }
+        //return messageArrayList;
+        response.setMessage("chat messages: ");
+        response.setMessageArrayList(messageArrayList);
+        return response;
+    }
+
+    public Response removeMessageFromHistory(Request request) {
+        Response response = new Response();
+        Message message = request.getMessageObject();
+        messages.remove(message);
+        ArrayList<Message> newMessages;
+        newMessages = message.getSender().getSentMessages();
+        newMessages.remove(message);
+        message.getSender().setSentMessages(newMessages);
+        ArrayList<Message> newMessagesReceiver;
+        newMessagesReceiver = message.getReceivers().get(0).getSeenMessages();
+        newMessagesReceiver.remove(message);
+        message.getReceivers().get(0).setSeenMessages(newMessagesReceiver);
+        response.setMessage("message removed from this chat");
+        return response;
+    }
+
+    public Response editAMessage(Request request){
+        Response response = new Response();
+        ArrayList<Message> messageArrayList = request.getMessageArrayList();
+        messages.remove(messageArrayList.get(0));
+        messages.add(messageArrayList.get(1));
+        response.setMessage("message edited");
+        return response;
+    }
+
 }

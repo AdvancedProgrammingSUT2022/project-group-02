@@ -12,9 +12,32 @@ public class Response {
     private String statusCode;
     private String message;
     private HashMap<String, Object> parameters = new HashMap<>();
+    private Message messageObject;
     private User user;
-    private Tile tile;
-    private Maps maps;
+    private ArrayList<Message> messageArrayList = new ArrayList<>();
+
+    public ArrayList<Message> getMessageArrayList() {
+        return messageArrayList;
+    }
+
+    public void setMessageArrayList(ArrayList<Message> messageArrayList) {
+        this.messageArrayList = messageArrayList;
+    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Message getMessageObject() {
+        return messageObject;
+    }
+
+    public void setMessageObject(Message messageObject) {
+        this.messageObject = messageObject;
+    }
 
     public Response(){
 
@@ -65,13 +88,6 @@ public class Response {
         return new Gson().fromJson(json, Response.class);
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public ArrayList<String> getNotifications() {
         return notifications;
@@ -79,21 +95,5 @@ public class Response {
 
     public void setNotifications(ArrayList<String> notifications) {
         this.notifications = notifications;
-    }
-
-    public void setTile(Tile tile){
-        this.tile = tile;
-    }
-
-    public Tile getTile() {
-        return tile;
-    }
-
-    public Maps getMaps() {
-        return maps;
-    }
-
-    public void setMaps(Maps maps) {
-        this.maps = maps;
     }
 }

@@ -1,5 +1,6 @@
 package controller;
 
+import model.Message;
 import model.Request;
 import model.Response;
 
@@ -30,6 +31,20 @@ public class NetworkController {
             e.printStackTrace();
         }
     }
+
+//    public void  lkdsjfklsd() {
+//        Request request = new Request();
+//        request.setMenu("chatMenu");
+//        request.setAction("getMessage");
+//        request.setMessageObject();
+//        lksdjklfjsddfkjs(request);
+//    }
+//
+//    public void lksdjklfjsddfkjs(Request request) {
+//        Response response = NetworkController.getInstance().sendRequest(request);
+//    }
+
+
 
     public Response sendRequest(Request request) {
         try {

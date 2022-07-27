@@ -19,9 +19,27 @@ public class Response {
     private Tile tile;
     private Maps maps;
     private Object object;
+    private Message messageObject;
+    private ArrayList<Message> messageArrayList = new ArrayList<>();
 
     public HashMap<String, Object> getParameters() {
         return parameters;
+    }
+
+    public ArrayList<Message> getMessageArrayList() {
+        return messageArrayList;
+    }
+
+    public void setMessageArrayList(ArrayList<Message> messageArrayList) {
+        this.messageArrayList = messageArrayList;
+    }
+
+    public Message getMessageObject() {
+        return messageObject;
+    }
+
+    public void setMessageObject(Message messageObject) {
+        this.messageObject = messageObject;
     }
 
     public void setParameters(HashMap<String, Object> parameters) {

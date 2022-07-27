@@ -2,6 +2,7 @@ package model;
 
 import com.google.gson.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Request {
@@ -9,6 +10,23 @@ public class Request {
     private String action;
     private String message;
     private String menu;
+    private Message messageObject;
+    private ArrayList<Message> messageArrayList = new ArrayList<>();
+
+    public ArrayList<Message> getMessageArrayList() {
+        return messageArrayList;
+    }
+
+    public void setMessageArrayList(ArrayList<Message> messageArrayList) {
+        this.messageArrayList = messageArrayList;
+    }
+    public Message getMessageObject() {
+        return messageObject;
+    }
+
+    public void setMessageObject(Message messageObject) {
+        this.messageObject = messageObject;
+    }
 
     private HashMap<String, Object> parameters = new HashMap<>();
 
@@ -59,4 +77,5 @@ public class Request {
     public void addParameters(String key, Object value) {
      parameters.put(key, value);
     }
+
 }

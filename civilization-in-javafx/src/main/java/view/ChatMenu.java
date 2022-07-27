@@ -136,6 +136,7 @@ public class ChatMenu {
     private User user;
     private ArrayList<Message> messages;
     private ArrayList<User> friends;
+    private static int lsatLabelY = 220;
 
 
     public ChatMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene, Images images, UsersController users, User user) {
@@ -196,7 +197,7 @@ public class ChatMenu {
         user.addFriend(new User("mohammad", "shayan", "0"));
         user.addFriend(new User("mohammad", "hossein", "0"));
         user.addFriend(new User("mohammad", "hassan", "0"));
-        user.addFriend(new User("mohammad", "ali", "0"));
+        user.addFriend(user);
         friends = user.getFriends();
         int i = 0;
         HashMap<Button, User> buttons = new HashMap<>();
@@ -297,12 +298,16 @@ public class ChatMenu {
     }
 
     public void sendMessage(User friend, String message, AnchorPane root, TextField textField) {
-        ArrayList<User> receivers = new ArrayList<>();
-        receivers.add(friend);
+        ArrayList<String> receivers = new ArrayList<>();
+        receivers.add(friend.getUsername());
+        ArrayList<User> receiverUsers = new ArrayList<>();
+        receiverUsers.add(friend);
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String time = dateTimeFormatter.format(now);
-        Message message1 = new Message(message, user, receivers, time, true, true);
+        Message message1 = new Message(message, user.getUsername(), receivers, time, true, true, false);
+        message1.setSenderUser(user);
+        message1.setReceiverUsers(receiverUsers);
         addMessageToHistory(user, friend, message1);
         showMessages(friend, root, textField);
     }
@@ -310,54 +315,111 @@ public class ChatMenu {
     //todo : **** SERVER ****
     //todo : move this methods to server
     public void addMessageToHistory(User sender, User receiver, Message message) {
-        sender.addMessage(message);
+        sender.addSentMessages(message);
         receiver.addMessage(message);
+//        Request request = new Request();
+//        request.setMenu("chat menu");
+//        request.setAction("send message");
+//        request.setMessageObject(message);
+//        Response response = NetworkController.getInstance().sendRequest(request);
     }
 
     public ArrayList<Message> getMessagesOfThisChat(User sender, User receiver) {
         ArrayList<Message> messageArrayList = new ArrayList<>();
-        for (Message message : sender.getSeenMessages()) {
-            if (message.getReceivers().contains(receiver)) {
-                messageArrayList.add(message);
+        if (sender.getSentMessages() != null) {
+            for (Message message : sender.getSentMessages()) {
+                if (message.getReceiverUsers().contains(receiver)) {
+                    messageArrayList.add(message);
+                }
             }
         }
+        if (receiver.getSentMessages() != null) {
+            for (Message message : receiver.getSentMessages()) {
+                if (message.getReceiverUsers().contains(sender)) {
+                    messageArrayList.add(message);
+                }
+            }
+        }
+//        Request request = new Request();
+//        request.setMenu("chat menu");
+//        request.setAction("get messages");
+//        ArrayList<String> receivers = new ArrayList<>();
+//        receivers.add(receiver.getUsername());
+//        request.setMessageObject(new Message("",sender.getUsername(),receivers,"",true,true,false));
+//        Response response = NetworkController.getInstance().sendRequest(request);
+//        messageArrayList = response.getMessageArrayList();
         return messageArrayList;
     }
 
-    public void removeMessageFromHistory(Message message){
+    public void removeMessageFromHistory(Message message) {
         messages.remove(message);
-        ArrayList<Message> newMessages = new ArrayList<>();
-        newMessages = message.getSender().getSeenMessages();
+        ArrayList<Message> newMessages;
+        newMessages = message.getSenderUser().getSentMessages();
         newMessages.remove(message);
-        message.getSender().setSeenMessages(newMessages);
-        ArrayList<Message> newMessagesReceiver = new ArrayList<>();
+        message.getSenderUser().setSentMessages(newMessages);
+        ArrayList<Message> newMessagesReceiver;
         newMessagesReceiver = message.getReceivers().get(0).getSeenMessages();
         newMessagesReceiver.remove(message);
         message.getReceivers().get(0).setSeenMessages(newMessagesReceiver);
+//        Request request = new Request();
+//        request.setMenu("chat menu");
+//        request.setAction("delete message");
+//        request.setMessageObject(message);
+//        Response response = NetworkController.getInstance().sendRequest(request);
+    }
+
+    public void handleEdit(TextField textField, Label label, Message message, AnchorPane root, User friend) {
+        Button edit = new Button("->");
+        edit.setLayoutX(900);
+        edit.setLayoutY(665);
+        edit.setPrefSize(50, 50);
+        edit.getStyleClass().add("main-menu-buttons");
+        edit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                label.setText("");
+                Message olderMessage = message;
+                message.setContent(textField.getText());
+                root.getChildren().remove(edit);
+                message.isShown = false;
+//                Request request = new Request();
+//                request.setMenu("chat menu");
+//                request.setAction("edit message");
+//                ArrayList<Message> messageArrayList = new ArrayList<>();
+//                messageArrayList.add(olderMessage);
+//                messageArrayList.add(message);
+//                request.setMessageArrayList(messageArrayList);
+//                Response response = NetworkController.getInstance().sendRequest(request);
+                showMessages(friend, root, textField);
+            }
+        });
+        root.getChildren().add(edit);
     }
     //todo : finish server part
 
     public void showMessages(User friend, AnchorPane root, TextField textField) {
         messages = getMessagesOfThisChat(user, friend);
-        int i = 0;
         if (messages != null) {
             for (Message message : messages) {
-                Label label = new Label(message.getSender().getUsername() + " : " + message.getContent() + " : " + message.getTime());
-                label.setLayoutX(550);
-                label.setLayoutY(220 + (i * 15));
-                label.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
-                        addDeleteAndEditAbility(message, root, label, textField);
-                    }
-                });
-                root.getChildren().add(label);
-                i++;
+                if (message.isShown == false) {
+                    Label label = new Label(message.getSenderUser().getUsername() + " : " + message.getContent() + " : " + message.getTime() + "         ! ");
+                    label.setLayoutX(550);
+                    label.setLayoutY(lsatLabelY + 20);
+                    label.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent mouseEvent) {
+                            addDeleteAndEditAbility(message, root, label, textField, friend);
+                        }
+                    });
+                    root.getChildren().add(label);
+                    lsatLabelY += 20;
+                    message.isShown = true;
+                }
             }
         }
     }
 
-    public void addDeleteAndEditAbility(Message message, AnchorPane root, Label label, TextField textField) {
+    public void addDeleteAndEditAbility(Message message, AnchorPane root, Label label, TextField textField, User friend) {
         Button delete = new Button("d");
         delete.setLayoutX(label.getLayoutX() + label.getWidth() + 2);
         delete.setLayoutY(label.getLayoutY());
@@ -383,15 +445,13 @@ public class ChatMenu {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 textField.setText("Type your new edited message !");
-                label.setText(textField.getText());
-                message.setContent(textField.getText());
+                handleEdit(textField, label, message, root, friend);
                 root.getChildren().remove(delete);
                 root.getChildren().remove(edit);
             }
         });
         root.getChildren().add(edit);
     }
-
 
 
 //    public VBox usersList;
