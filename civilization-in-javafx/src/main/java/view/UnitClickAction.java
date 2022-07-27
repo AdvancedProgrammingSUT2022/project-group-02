@@ -85,6 +85,54 @@ public class UnitClickAction {
         exitPanel();
     }
 
+    public void horseManClickAction() {
+        unitPanel = new AnchorPane();
+        ImageView unitIconView = new ImageView(images.horsemanIcon);
+        ImageView infoView = new ImageView(images.unitInfoBackground);
+        ImageView moreActionView = new ImageView(images.otherActionIcon);
+        ImageView alertView = new ImageView(images.alertIcon);
+        ImageView wakeView = new ImageView(images.wakeIcon);
+        ImageView movingView = new ImageView(images.movingIcon);
+        ImageView doNothingView = new ImageView(images.doNothingIcon);
+        initialiseUnitInfo(infoView);
+        initialiseUnitSameButtons(moreActionView, alertView, wakeView, movingView, doNothingView);
+        initialiseUnitSameInfo(unitIconView);
+        mouseClickHandler(alertView, wakeView);
+        exitPanel();
+    }
+
+    public void tankClickAction() {
+        unitPanel = new AnchorPane();
+        ImageView unitIconView = new ImageView(images.tankIcon);
+        ImageView infoView = new ImageView(images.unitInfoBackground);
+        ImageView moreActionView = new ImageView(images.otherActionIcon);
+        ImageView alertView = new ImageView(images.alertIcon);
+        ImageView wakeView = new ImageView(images.wakeIcon);
+        ImageView movingView = new ImageView(images.movingIcon);
+        ImageView doNothingView = new ImageView(images.doNothingIcon);
+        initialiseUnitInfo(infoView);
+        initialiseUnitSameButtons(moreActionView, alertView, wakeView, movingView, doNothingView);
+        initialiseUnitSameInfo(unitIconView);
+        mouseClickHandler(alertView, wakeView);
+        exitPanel();
+    }
+
+    public void knightClickAction() {
+        unitPanel = new AnchorPane();
+        ImageView unitIconView = new ImageView(images.knightIcon);
+        ImageView infoView = new ImageView(images.unitInfoBackground);
+        ImageView moreActionView = new ImageView(images.otherActionIcon);
+        ImageView alertView = new ImageView(images.alertIcon);
+        ImageView wakeView = new ImageView(images.wakeIcon);
+        ImageView movingView = new ImageView(images.movingIcon);
+        ImageView doNothingView = new ImageView(images.doNothingIcon);
+        initialiseUnitInfo(infoView);
+        initialiseUnitSameButtons(moreActionView, alertView, wakeView, movingView, doNothingView);
+        initialiseUnitSameInfo(unitIconView);
+        mouseClickHandler(alertView, wakeView);
+        exitPanel();
+    }
+
     private void exitPanel() {
         Button exitPanel = new Button("Exit from Unit Panel");
         exitPanel.setId("exit panel");
@@ -97,7 +145,9 @@ public class UnitClickAction {
 //        unitPanel.getChildren().removeAll();
         exitPanel.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             finalRoot.getChildren().remove(unitPanel);
-            GameEnvironment.hashMap.replace(1, true);
+            GameEnvironment.hashMap.forEach((key, value) -> {
+                GameEnvironment.hashMap.replace(key, true);
+            });
                 if (!finalRoot.getChildren().contains(GameEnvironment.topBarBackground))
                     finalRoot.getChildren().add(GameEnvironment.topBarBackground);
             for (ImageView topBarImageView : GameEnvironment.topBarImageViews)
@@ -407,5 +457,10 @@ public class UnitClickAction {
         label1.setLayoutY(740);
         label1.getStyleClass().add("unit-info-movement");
         unitPanel.getChildren().add(label1);
+        Label label2 = new Label("HP : " + unit.getHP());
+        label2.setLayoutX(185);
+        label2.setLayoutY(780);
+        label2.getStyleClass().add("unit-info-movement");
+        unitPanel.getChildren().add(label2);
     }
 }

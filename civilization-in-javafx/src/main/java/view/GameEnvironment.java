@@ -934,7 +934,7 @@ public class GameEnvironment {
     }
 
     private void ruinChecker(Tile tile, ImageView tileView) {
-        if (tile.isRuinBool() && tile.isRuinShow()) {
+        if (tile.isRuinBool() && true) {
 
             ImageView ruinView = new ImageView(images.ruin);
             ruinView.setLayoutX(tileView.getLayoutX() + 170);
@@ -1113,8 +1113,8 @@ public class GameEnvironment {
         if (tile.getMilitaryUnit() != null) {
             Image MUnit = findMUnit(tile);
             ImageView MUitView = new ImageView(MUnit);
-            MUitView.setLayoutX(imageView.getLayoutX() + 25);
-            MUitView.setLayoutY(imageView.getLayoutY() + 300);
+            MUitView.setLayoutX(imageView.getLayoutX() + 35);
+            MUitView.setLayoutY(imageView.getLayoutY() + 255);
             MUitView.setFitHeight(90);
             MUitView.setFitWidth(90);
             MUitView.setId(tile.getMilitaryUnit().getName());
@@ -1198,6 +1198,9 @@ public class GameEnvironment {
         hashMap.put(3, true);
         hashMap.put(4, true);
         hashMap.put(5, true);
+        hashMap.put(6, true);
+        hashMap.put(7, true);
+        hashMap.put(8, true);
         while (true) {
             for (int i = 0; i < imageViews.size(); i++) {
                 int finalI = i;
@@ -1229,6 +1232,9 @@ public class GameEnvironment {
                         researchMenu.showGraphicTree(finalRoot);
                     } else if (imageViews.get(finalI).getId().equals("city") && hashMap.get(3) && !stop &&
                             ((City) imageViewObjects.get(imageViews.get(finalI))).getOwner().equals(user)) {
+                        if (mouseEvent.isControlDown()){
+                            ((City) imageViewObjects.get(imageViews.get(finalI))).setHP(((City) imageViewObjects.get(imageViews.get(finalI))).getHP() - 7);
+                        }
                         for (ImageView topBarImageView : topBarImageViews)
                             finalRoot.getChildren().remove(topBarImageView);
                         for (Label topBarLabel : topBarLabels) finalRoot.getChildren().remove(topBarLabel);
@@ -1258,6 +1264,57 @@ public class GameEnvironment {
                         unitClickAction.setUnitView(imageViews.get(finalI));
                         unitClickAction.setUser(user);
                         unitClickAction.workerClickAction();
+                    } else if (imageViews.get(finalI).getId().equals("Horseman") && hashMap.get(6) && !stop &&
+                            ((MilitaryUnit) imageViewObjects.get(imageViews.get(finalI))).getOwner().equals(user)){
+                        if (mouseEvent.isControlDown()){
+                            ((MilitaryUnit) imageViewObjects.get(imageViews.get(finalI))).setHP(((MilitaryUnit) imageViewObjects.get(imageViews.get(finalI))).getHP() - 15);
+                        }
+                        hashMap.replace(6, false);
+                        hashMap.forEach((key1, value2) -> {
+                            if (key1 != 6) hashMap.replace(key1, true);
+                        });
+                        for (ImageView topBarImageView : topBarImageViews)
+                            finalRoot.getChildren().remove(topBarImageView);
+                        for (Label topBarLabel : topBarLabels) finalRoot.getChildren().remove(topBarLabel);
+                        finalRoot.getChildren().remove(topBarBackground);
+                        unitClickAction.setUnit((MilitaryUnit) imageViewObjects.get(imageViews.get(finalI)));
+                        unitClickAction.setUnitView(imageViews.get(finalI));
+                        unitClickAction.setUser(user);
+                        unitClickAction.horseManClickAction();
+                    } else if (imageViews.get(finalI).getId().equals("Tank") && hashMap.get(7) && !stop &&
+                            ((MilitaryUnit) imageViewObjects.get(imageViews.get(finalI))).getOwner().equals(user)){
+                        if (mouseEvent.isControlDown()){
+                            ((MilitaryUnit) imageViewObjects.get(imageViews.get(finalI))).setHP(((MilitaryUnit) imageViewObjects.get(imageViews.get(finalI))).getHP() - 20);
+                        }
+                        hashMap.replace(7, false);
+                        hashMap.forEach((key1, value2) -> {
+                            if (key1 != 7) hashMap.replace(key1, true);
+                        });
+                        for (ImageView topBarImageView : topBarImageViews)
+                            finalRoot.getChildren().remove(topBarImageView);
+                        for (Label topBarLabel : topBarLabels) finalRoot.getChildren().remove(topBarLabel);
+                        finalRoot.getChildren().remove(topBarBackground);
+                        unitClickAction.setUnit((MilitaryUnit) imageViewObjects.get(imageViews.get(finalI)));
+                        unitClickAction.setUnitView(imageViews.get(finalI));
+                        unitClickAction.setUser(user);
+                        unitClickAction.tankClickAction();
+                    } else if (imageViews.get(finalI).getId().equals("Tank") && hashMap.get(8) && !stop &&
+                            ((MilitaryUnit) imageViewObjects.get(imageViews.get(finalI))).getOwner().equals(user)){
+                        if (mouseEvent.isControlDown()){
+                            ((MilitaryUnit) imageViewObjects.get(imageViews.get(finalI))).setHP(((MilitaryUnit) imageViewObjects.get(imageViews.get(finalI))).getHP() - 25);
+                        }
+                        hashMap.replace(8, false);
+                        hashMap.forEach((key1, value2) -> {
+                            if (key1 != 8) hashMap.replace(key1, true);
+                        });
+                        for (ImageView topBarImageView : topBarImageViews)
+                            finalRoot.getChildren().remove(topBarImageView);
+                        for (Label topBarLabel : topBarLabels) finalRoot.getChildren().remove(topBarLabel);
+                        finalRoot.getChildren().remove(topBarBackground);
+                        unitClickAction.setUnit((MilitaryUnit) imageViewObjects.get(imageViews.get(finalI)));
+                        unitClickAction.setUnitView(imageViews.get(finalI));
+                        unitClickAction.setUser(user);
+                        unitClickAction.knightClickAction();
                     }
                 });
             }

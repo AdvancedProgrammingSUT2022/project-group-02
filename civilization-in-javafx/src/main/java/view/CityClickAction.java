@@ -85,7 +85,27 @@ public class CityClickAction {
     }
 
     private void cityInfo() {
+        Rectangle rectangle = new Rectangle(670, 25, 250, 160);
+        rectangle.setFill(new Color(0, 0, 0, 0.8));
+        Label label = new Label();
+        if (city.getGarrison() != null) label.setText("Garrison is on!");
+        else label.setText("Garrison is off!");
+        Label label1 = new Label("strength : " + city.getDefence());
+        Label label2 = new Label("HP : " + city.getHP());
         AnchorPane cityInfo = new AnchorPane();
+        cityInfo.getChildren().add(rectangle);
+        label.setLayoutX(675);
+        label.setLayoutY(27);
+        label1.setLayoutX(675);
+        label1.setLayoutY(65);
+        label2.setLayoutX(675);
+        label2.setLayoutY(105);
+        label.getStyleClass().add("unit-info-name");
+        label1.getStyleClass().add("unit-info-name");
+        label2.getStyleClass().add("unit-info-name");
+        cityInfo.getChildren().add(label);
+        cityInfo.getChildren().add(label1);
+        cityInfo.getChildren().add(label2);
         cityInfo.getStylesheets().add(String.valueOf(getClass().getResource("/CSS/Style.css")));
         cityInfo.relocate(0, 0);
         cityPagePanes.add(cityInfo);

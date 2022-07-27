@@ -67,10 +67,6 @@ public class Main extends Application {
     }
 
     public void graphicPlayRegisterBackgroundMusic(){
-        String path = String.valueOf(this.getClass().getResource("/Media/background themes/background-music.mp3"));
-        Media media = new Media(path);
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
-        mediaPlayer.setCycleCount(100);
+//         
     }
 }
