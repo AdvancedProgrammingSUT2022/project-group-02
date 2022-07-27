@@ -67,7 +67,7 @@ public class UsersController {
     // read the information of users from .json file
     public ArrayList<User> readFromJson() {
         try {
-            String usersJson = new String(Files.readAllBytes(Paths.get("../network/usersInformation.json")));
+            String usersJson = new String(Files.readAllBytes(Paths.get("usersInformation.json")));
             ArrayList<User> usersFromJson = new Gson().fromJson(usersJson, new TypeToken<List<User>>(){}.getType());
             if (usersFromJson != null)
                 return usersFromJson;

@@ -74,12 +74,10 @@ public class Leaderboard {
     }
 
     private void tableInitialise(TableView<User> table, VBox vBox){
-        TableColumn<User, String> avatarColumn = new TableColumn<>("avatar");
         TableColumn<User, String> nameColumn = new TableColumn<>("nickname");
         TableColumn<User, Integer> scoreColumn = new TableColumn<>("Score");
         TableColumn<User, String> lastWinTimeColumn = new TableColumn<>("lastWinTime");
         TableColumn<User, String> lastOnline = new TableColumn<>("lastOnline");
-        table.getColumns().add(avatarColumn);
         table.getColumns().add(nameColumn);
         table.getColumns().add(scoreColumn);
         table.getColumns().add(lastWinTimeColumn);
@@ -90,12 +88,10 @@ public class Leaderboard {
         for (User user : leaderboardUsers) {
             table.getItems().add(user);
         }
-        avatarColumn.setPrefWidth(100);
         scoreColumn.setPrefWidth(100);
         nameColumn.setPrefWidth(200);
         lastWinTimeColumn.setPrefWidth(150);
         lastOnline.setPrefWidth(150);
-        avatarColumn.setCellValueFactory(new PropertyValueFactory<>("avatarUrl"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("nickname"));
         scoreColumn.setCellValueFactory(new PropertyValueFactory<>("winsCount"));
         lastWinTimeColumn.setCellValueFactory(new PropertyValueFactory<>("lastWinTime"));

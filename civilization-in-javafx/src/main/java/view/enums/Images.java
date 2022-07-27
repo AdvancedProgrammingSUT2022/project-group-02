@@ -231,6 +231,11 @@ public class Images {
     public Image nextTurn;
     public Image setting;
     public Image ruin;
+    public Image peace;
+    public Image noPeace;
+    public Image nothingInPeace;
+    public Image resourceIcon;
+    public Image chatBox;
 
     public Images(){
         normalMenuButton = new Image(String.valueOf(getClass().getResource("/Media/buttons/Button_Down.png")));
@@ -454,5 +459,10 @@ public class Images {
         nextTurn = new Image(String.valueOf(getClass().getResource("/Media/icons/V_button.png")));
         setting = new Image(String.valueOf(getClass().getResource("/Media/icons/setting.png")));
         ruin = new Image(String.valueOf(getClass().getResource("/Media/resource/ruinIcon.png")));
+        peace = new Image(String.valueOf(getClass().getResource("/Media/icons/Peace.png")));
+        noPeace = new Image(String.valueOf(getClass().getResource("/Media/icons/No peace.png")));
+        nothingInPeace = new Image(String.valueOf(getClass().getResource("/Media/icons/nothing in peace.png")));
+        resourceIcon = new Image(String.valueOf(getClass().getResource("/Media/icons/resourceIcon.png")));
+        chatBox = new Image(String.valueOf(getClass().getResource("/Media/icons/chatBox.png")));
     }
 }

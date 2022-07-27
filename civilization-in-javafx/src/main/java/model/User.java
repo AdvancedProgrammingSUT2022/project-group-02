@@ -51,6 +51,7 @@ public class User {
     private ArrayList<Ruin> foundRuins;
 
     private ArrayList<User> enemies;
+    private ArrayList<User> friends;
     private ArrayList<Message> seenMessages;
 
     public User(String username, String nickname, String password) {
@@ -82,6 +83,8 @@ public class User {
         foundRuins = new ArrayList<>();
         enemies = new ArrayList<>();
         seenMessages = new ArrayList<>();
+        friends = new ArrayList<>();
+        avatarUrl = "/Media/avatars/avatar10.png";
     }
 
     public void setColor(String color) {
@@ -545,5 +548,13 @@ public class User {
 
     public void setSeenMessages(ArrayList<Message> seenMessages) {
         this.seenMessages = seenMessages;
+    }
+
+    public void addFriend(User friend) {
+        friends.add(friend);
+    }
+
+    public ArrayList<User> getFriends() {
+        return friends;
     }
 }

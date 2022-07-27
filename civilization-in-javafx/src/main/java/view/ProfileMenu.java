@@ -189,13 +189,13 @@ public class ProfileMenu {
         currentPassword.setPromptText("CurrentPassword");
         currentPassword.setLayoutX(614);
         currentPassword.setLayoutY(215.7);
-        currentPassword.getStyleClass().add("profile-text-field");
+        currentPassword.getStyleClass().add("search-friend-text-field");
         currentPassword.setPrefSize(312, 38);
 
         newPassword.setPromptText("NewPassword");
         newPassword.setLayoutX(614);
         newPassword.setLayoutY(275);
-        newPassword.getStyleClass().add("profile-text-field");
+        newPassword.getStyleClass().add("search-friend-text-field");
         newPassword.setPrefSize(312, 38);
 
         changePassword.setLayoutX(614);
@@ -206,7 +206,7 @@ public class ProfileMenu {
         newNickName.setPromptText("NewNickname");
         newNickName.setLayoutX(614);
         newNickName.setLayoutY(389.5);
-        newNickName.getStyleClass().add("profile-text-field");
+        newNickName.getStyleClass().add("search-friend-text-field");
         newNickName.setPrefSize(312, 38);
 
         changeNickname.setLayoutX(614);
@@ -266,102 +266,70 @@ public class ProfileMenu {
         ImagePattern avatar1Image = new ImagePattern(images.avatar1);
         avatar1.setFill(avatar1Image);
         avatar1.setCursor(Cursor.HAND);
-        avatar1.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        avatar1.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
                 user.setAvatarUrl("/Media/avatars/avatar1.png");
-            }
         });
         Rectangle avatar2 = new Rectangle(680,220,118,124);
         ImagePattern avatar2Image = new ImagePattern(images.avatar2);
         avatar2.setFill(avatar2Image);
         avatar2.setCursor(Cursor.HAND);
-        avatar2.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        avatar2.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
                 user.setAvatarUrl("/Media/avatars/avatar2.png");
-            }
         });
         Rectangle avatar3 = new Rectangle(800,220,118,124);
         ImagePattern avatar3Image = new ImagePattern(images.avatar3);
         avatar3.setFill(avatar3Image);
         avatar3.setCursor(Cursor.HAND);
-        avatar3.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        avatar3.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
                 user.setAvatarUrl("/Media/avatars/avatar3.png");
-            }
         });
         Rectangle avatar4 = new Rectangle(920,220,118,124);
         ImagePattern avatar4Image = new ImagePattern(images.avatar4);
         avatar4.setFill(avatar4Image);
         avatar4.setCursor(Cursor.HAND);
-        avatar4.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        avatar4.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
                 user.setAvatarUrl("/Media/avatars/avatar4.png");
-            }
         });
         Rectangle avatar5 = new Rectangle(560,350,118,124);
         ImagePattern avatar5Image = new ImagePattern(images.avatar5);
         avatar5.setFill(avatar5Image);
         avatar5.setCursor(Cursor.HAND);
-        avatar5.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        avatar5.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
                 user.setAvatarUrl("/Media/avatars/avatar5.png");
-            }
         });
         Rectangle avatar6 = new Rectangle(680,350,118,124);
         ImagePattern avatar6Image = new ImagePattern(images.avatar6);
         avatar6.setFill(avatar6Image);
         avatar6.setCursor(Cursor.HAND);
-        avatar6.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        avatar6.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
                 user.setAvatarUrl("/Media/avatars/avatar6.png");
-            }
         });
         Rectangle avatar7 = new Rectangle(800,350,118,124);
         ImagePattern avatar7Image = new ImagePattern(images.avatar7);
         avatar7.setFill(avatar7Image);
         avatar7.setCursor(Cursor.HAND);
-        avatar7.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        avatar7.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
                 user.setAvatarUrl("/Media/avatars/avatar7.png");
-            }
         });
         Rectangle avatar8 = new Rectangle(920,350,118,124);
         ImagePattern avatar8Image = new ImagePattern(images.avatar8);
         avatar8.setFill(avatar8Image);
         avatar8.setCursor(Cursor.HAND);
-        avatar8.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        avatar8.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
                 user.setAvatarUrl("/Media/avatars/avatar8.png");
-            }
         });
         Rectangle avatar9 = new Rectangle(680,480,118,124);
         ImagePattern avatar9Image = new ImagePattern(images.avatar9);
         avatar9.setFill(avatar9Image);
         avatar9.setCursor(Cursor.HAND);
-        avatar9.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        avatar9.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
                 user.setAvatarUrl("/Media/avatars/avatar9.png");
-            }
         });
         Rectangle avatar10 = new Rectangle(800,480,118,124);
         ImagePattern avatar10Image = new ImagePattern(images.avatar10);
         avatar10.setFill(avatar10Image);
         avatar10.setCursor(Cursor.HAND);
-        avatar10.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                user.setAvatarUrl("/Media/avatars/avatar10.png");
-            }
-        });
+        avatar10.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> user.setAvatarUrl("/Media/avatars/avatar10.png"));
         Button back = new Button("BACK");
         back.setLayoutX(614);
         back.setLayoutY(800);

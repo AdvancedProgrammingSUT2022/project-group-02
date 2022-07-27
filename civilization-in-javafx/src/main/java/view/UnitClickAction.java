@@ -69,6 +69,22 @@ public class UnitClickAction {
         exitPanel();
     }
 
+    public void workerClickAction() {
+        unitPanel = new AnchorPane();
+        ImageView unitIconView = new ImageView(images.workerIcon);
+        ImageView infoView = new ImageView(images.workerInfoBackground);
+        ImageView moreActionView = new ImageView(images.otherActionIcon);
+        ImageView alertView = new ImageView(images.alertIcon);
+        ImageView wakeView = new ImageView(images.wakeIcon);
+        ImageView movingView = new ImageView(images.movingIcon);
+        ImageView doNothingView = new ImageView(images.doNothingIcon);
+        initialiseUnitInfo(infoView);
+        initialiseUnitSameButtons(moreActionView, alertView, wakeView, movingView, doNothingView);
+        initialiseUnitSameInfo(unitIconView);
+        mouseClickHandler(alertView, wakeView);
+        exitPanel();
+    }
+
     private void exitPanel() {
         Button exitPanel = new Button("Exit from Unit Panel");
         exitPanel.setId("exit panel");
@@ -345,7 +361,8 @@ public class UnitClickAction {
 
     private void initialiseUnitInfo(ImageView imageView) {
         imageView.setLayoutX(0);
-        imageView.setLayoutY(335);
+        if (unit.getName().equals("worker"))imageView.setLayoutY(345);
+        else imageView.setLayoutY(335);
         imageView.setFitHeight(530);
         imageView.setFitWidth(530);
         unitPanel.getChildren().add(imageView);
@@ -385,5 +402,10 @@ public class UnitClickAction {
         label.setLayoutY(700);
         label.getStyleClass().add("unit-info-movement");
         unitPanel.getChildren().add(label);
+        Label label1 = new Label("Combat Strength : " + unit.getCombatStrength());
+        label1.setLayoutX(185);
+        label1.setLayoutY(740);
+        label1.getStyleClass().add("unit-info-movement");
+        unitPanel.getChildren().add(label1);
     }
 }

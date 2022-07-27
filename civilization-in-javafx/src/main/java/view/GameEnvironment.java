@@ -5,10 +5,11 @@ import controller.MapController;
 import controller.TechController;
 import controller.UsersController;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBoxTreeItem;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import model.*;
@@ -48,9 +50,24 @@ public class GameEnvironment {
     private int playerNumber;
     private ImageView nextTurnView;
     private AnchorPane settingPane;
+    private final AnchorPane diplomacyPane = new AnchorPane();
+    private User tradeUser;
+    public boolean stop = false;
+    String unhappinessValueString;
+    String happinessValueString;
+    String goldValueString;
+    String scienceValueString;
+    String foodValueString;
+
+    Label goldValue = new Label();
+    Label scienceValue = new Label();
+    Label foodValue = new Label();
+    Label unhappinessValue = new Label();
+    Label happinessValue = new Label();
 
     private ClickRunnable clickRunnable;
     private TurnRunnable turnRunnable;
+
     private Thread clickThread;
     private Thread nextTurnThread;
 
@@ -106,10 +123,11 @@ public class GameEnvironment {
         button.getStyleClass().add("setting-button");
         finalRoot.getChildren().add(button);
         button.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-            if (mouseEvent.isControlDown()) {
+            if (finalRoot.getChildren().contains(settingPane)) {
                 finalRoot.getChildren().remove(settingPane);
+                settingPane.getChildren().clear();
             }
-            if (!finalRoot.getChildren().contains(settingPane))showSettingButtons();
+            else showSettingButtons();
         });
     }
 
@@ -147,14 +165,48 @@ public class GameEnvironment {
         economicPanel.setPrefSize(148, 40);
         settingPane.getChildren().add(economicPanel);
 
+        Button diplomacyPanel = new Button("Diplomacy");
+        diplomacyPanel.setAlignment(Pos.CENTER);
+        diplomacyPanel.setLayoutX(1390);
+        diplomacyPanel.setLayoutY(302);
+        diplomacyPanel.getStyleClass().add("diplomacy-button");
+        diplomacyPanel.setPrefSize(148, 40);
+        settingPane.getChildren().add(diplomacyPanel);
+
+        Button stopGame = new Button("Stop");
+        stopGame.setAlignment(Pos.CENTER);
+        stopGame.setLayoutX(1390);
+        stopGame.setLayoutY(347);
+        stopGame.getStyleClass().add("setting-button");
+        stopGame.setPrefSize(148, 40);
+        settingPane.getChildren().add(stopGame);
+
+        Button continueGame = new Button("Continue");
+        continueGame.setAlignment(Pos.CENTER);
+        continueGame.setLayoutX(1390);
+        continueGame.setLayoutY(392);
+        continueGame.getStyleClass().add("setting-button");
+        continueGame.setPrefSize(148, 40);
+        settingPane.getChildren().add(continueGame);
+
+        Button cheat = new Button("Cheat Panel");
+        cheat.setAlignment(Pos.CENTER);
+        cheat.setLayoutX(1390);
+        cheat.setLayoutY(437);
+        cheat.getStyleClass().add("setting-button");
+        cheat.setPrefSize(148, 40);
+        settingPane.getChildren().add(cheat);
+
         finalRoot.getChildren().add(settingPane);
-        settingAction(exit, unitPanel, citiesPanel, economicPanel);
+        settingAction(exit, unitPanel, citiesPanel, economicPanel, diplomacyPanel, stopGame, continueGame, cheat);
     }
 
-    private void settingAction(Button exit, Button unitPanel, Button citiesPanel, Button economicPanel) {
+    private void settingAction(Button exit, Button unitPanel, Button citiesPanel, Button economicPanel,
+                               Button diplomacyPanel, Button stopGame, Button continueGame, Button cheat) {
         AnchorPane unitPane = new AnchorPane();
         AnchorPane citiesPane = new AnchorPane();
         AnchorPane economicPane = new AnchorPane();
+        AnchorPane cheatPane = new AnchorPane();
         exit.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             clickThread.stop();
             nextTurnThread.stop();
@@ -164,6 +216,7 @@ public class GameEnvironment {
         unitPanel.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             if (settingPane.getChildren().contains(unitPane)) {
                 settingPane.getChildren().remove(unitPane);
+                unitPane.getChildren().clear();
             } else {
                 settingPane.getChildren().add(unitPane);
                 Rectangle backGround = new Rectangle(600, 100, 400, 483);
@@ -193,6 +246,7 @@ public class GameEnvironment {
         economicPanel.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             if (settingPane.getChildren().contains(economicPane)) {
                 settingPane.getChildren().remove(economicPane);
+                economicPane.getChildren().clear();
             } else {
                 settingPane.getChildren().add(economicPane);
                 Rectangle backGround = new Rectangle(600, 100, 400, 483);
@@ -214,7 +268,7 @@ public class GameEnvironment {
                 technology.setStyle("-fx-text-fill: #ff0090");
                 economicPane.getChildren().add(technology);
 
-                Label science = new Label("User technology number : " + user.getTechnologies().size()
+                Label science = new Label("User City number : " + user.getCities().size()
                         + "\n..............\n..............\n..............");
                 science.setLayoutX(652);
                 science.setLayoutY(310);
@@ -226,6 +280,7 @@ public class GameEnvironment {
 
         citiesPanel.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             if (settingPane.getChildren().contains(citiesPane)) {
+                citiesPane.getChildren().clear();
                 settingPane.getChildren().remove(citiesPane);
             } else {
                 settingPane.getChildren().add(citiesPane);
@@ -251,6 +306,409 @@ public class GameEnvironment {
                 }
             }
         });
+
+        diplomacyPanel.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            if (settingPane.getChildren().contains(diplomacyPane)) {
+                diplomacyPane.getChildren().clear();
+                settingPane.getChildren().remove(diplomacyPane);
+            }
+            else diplomacyPanel();
+        });
+
+        stopGame.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            stop = true;
+            clickRunnable.stop(true);
+            clickThread.resume();
+        });
+        continueGame.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            stop = false;
+            clickRunnable.stop(false);
+            clickThread.resume();
+        });
+
+        cheat.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            if (settingPane.getChildren().contains(cheatPane)) {
+                cheatPane.getChildren().clear();
+                settingPane.getChildren().remove(cheatPane);
+            }
+            else {
+                settingPane.getChildren().add(cheatPane);
+                Rectangle background = new Rectangle(1100, 80, 250, 110);
+                background.setFill(new Color(0.2, 0.63, 0.59, 1));
+                cheatPane.getChildren().add(background);
+                TextField cheatField = new TextField();
+                cheatField.setLayoutX(1110);
+                cheatField.setLayoutY(150);
+                cheatField.setPrefHeight(32);
+                cheatField.setPrefWidth(230);
+                cheatField.getStyleClass().add("search-friend-text-field");
+                cheatPane.getChildren().add(cheatField);
+                Button cheatButton = new Button("Enter");
+                cheatButton.setLayoutX(1165);
+                cheatButton.setLayoutY(100);
+                cheatButton.setAlignment(Pos.CENTER);
+                cheatButton.getStyleClass().add("cheat-text");
+                cheatButton.setPrefSize(125, 30);
+                cheatPane.getChildren().add(cheatButton);
+                cheatButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+                    cheatHandler(cheatField);
+                });
+            }
+        });
+    }
+
+    private void cheatHandler(TextField cheatField) {
+        if (cheatField.getText().equals("increase gold")) {
+            user.setGold(user.getGold() + 50);
+            topBarInfoUpdate();
+        }
+    }
+
+    private void diplomacyPanel(){
+        Rectangle backGround = new Rectangle(600, 100, 400, 483);
+        backGround.setFill(new Color(0, 0, 0, 0.88));
+        diplomacyPane.getChildren().add(backGround);
+        initialiseUsersForDiplomacy();
+        settingPane.getChildren().add(diplomacyPane);
+    }
+
+    private void initialiseUsersForDiplomacy(){
+        int numberOfPlayers = 0;
+        for (User player : players) {
+            if (player != user) {
+                ImageView imageView = new ImageView(new Image(String.valueOf(getClass().getResource(player.getAvatarUrl()))));
+                imageView.setLayoutX(620);
+                imageView.setLayoutY(120 + numberOfPlayers * 100);
+                imageView.setFitWidth(80);
+                imageView.setFitHeight(80);
+                diplomacyPane.getChildren().add(imageView);
+                Button name = new Button("user name : " + player.getUsername());
+                name.setLayoutX(623);
+                name.setLayoutY(120 + numberOfPlayers * 100);
+                name.setPrefSize(360, 80);
+                name.setAlignment(Pos.CENTER);
+                name.getStyleClass().add("diplomacy-user-name");
+                diplomacyPane.getChildren().add(name);
+                Line line1 = new Line(635, 205 + numberOfPlayers * 100, 965, 205 + numberOfPlayers * 100);
+                line1.setStyle("-fx-stroke: white");
+                diplomacyPane.getChildren().add(line1);
+                Line line2 = new Line(635, 210 + numberOfPlayers * 100, 965, 210 + numberOfPlayers * 100);
+                line2.setStyle("-fx-stroke: white");
+                diplomacyPane.getChildren().add(line2);
+                name.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+                    tradeUser = player;
+                    diplomacyPane.getChildren().clear();
+                    tradePanel();
+                });
+                numberOfPlayers++;
+            }
+        }
+    }
+
+    private void initialisePeace() {
+        ImageView peace = new ImageView(peaceFinder());
+        Button peaceButton = new Button();
+        peaceButton.setGraphic(peace);
+        peaceButton.setLayoutX(585);
+        peaceButton.setLayoutY(125);
+        peaceButton.setPrefSize(100, 100);
+        peace.setFitWidth(100);
+        peace.setFitHeight(100);
+        diplomacyPane.getChildren().add(peaceButton);
+
+        peaceButton.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseEvent -> {
+            peaceButton.setEffect(new DropShadow());
+        });
+        peaceButton.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> {
+            peaceButton.setEffect(null);
+        });
+        peaceButton.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            ImageView peace1 = new ImageView(images.peace);
+            ImageView peace2 = new ImageView(images.noPeace);
+            Button peace1Button = new Button();
+            Button peace2Button = new Button();
+
+            peace1Button.setGraphic(peace1);
+            peace1Button.setLayoutX(1062);
+            peace1Button.setLayoutY(128);
+            peace1Button.setPrefSize(70, 70);
+            peace1.setFitHeight(70);
+            peace1.setFitWidth(70);
+
+            peace2Button.setGraphic(peace2);
+            peace2Button.setLayoutX(985);
+            peace2Button.setLayoutY(120);
+            peace2Button.setPrefSize(80, 90);
+            peace2.setFitHeight(80);
+            peace2.setFitWidth(90);
+
+            peace1Button.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+                if (!user.getFriends().contains(tradeUser))user.addFriend(tradeUser);
+                if (!tradeUser.getFriends().contains(user))tradeUser.addFriend(user);
+                user.getEnemies().remove(tradeUser);
+                tradeUser.getEnemies().remove(user);
+                peace.setImage(peaceFinder());
+                diplomacyPane.getChildren().remove(peaceButton);
+                diplomacyPane.getChildren().remove(peace1Button);
+                diplomacyPane.getChildren().remove(peace2Button);
+                diplomacyPane.getChildren().add(peaceButton);
+            });
+            peace2Button.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+                if (!user.getEnemies().contains(tradeUser))user.addEnemy(tradeUser);
+                if (!tradeUser.getEnemies().contains(user))tradeUser.addEnemy(user);
+                user.getFriends().remove(tradeUser);
+                tradeUser.getFriends().remove(user);
+                peace.setImage(peaceFinder());
+                diplomacyPane.getChildren().remove(peaceButton);
+                diplomacyPane.getChildren().remove(peace1Button);
+                diplomacyPane.getChildren().remove(peace2Button);
+                diplomacyPane.getChildren().add(peaceButton);
+            });
+
+            diplomacyPane.getChildren().add(peace1Button);
+            diplomacyPane.getChildren().add(peace2Button);
+        });
+    }
+
+    private void tradePanel() {
+        showAvatar();
+        Label label = new Label("choose what you want to get from " + tradeUser.getUsername() + " : ");
+        label.setAlignment(Pos.CENTER);
+        label.setLayoutX(305);
+        label.setLayoutY(250);
+        label.getStyleClass().add("trade-notes");
+        diplomacyPane.getChildren().add(label);
+        Label label2 = new Label("choose what you want to give to " + tradeUser.getUsername() + " : ");
+        label2.setAlignment(Pos.CENTER);
+        label2.setLayoutX(745);
+        label2.setLayoutY(250);
+        label2.getStyleClass().add("trade-notes");
+        diplomacyPane.getChildren().add(label2);
+        goldTrade();
+        resourceTrade();
+        borderTrade();
+        chatBox();
+        tradeButton();
+    }
+
+    public void tradeButton() {
+        Button button = new Button("Confirm");
+        button.setLayoutX(680);
+        button.setLayoutY(680);
+        button.setPrefSize(80, 30);
+        button.setAlignment(Pos.CENTER);
+        button.getStyleClass().add("trade-button");
+        Label label = new Label();
+        label.setLayoutX(760);
+        label.setLayoutY(500);
+        label.setAlignment(Pos.CENTER);
+        label.getStyleClass().add("register-menu-notice-Style");
+        diplomacyPane.getChildren().add(label);
+        button.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            for (Node child : diplomacyPane.getChildren()) {
+                if (child.getId() == null)continue;
+                if (child.getId().equals("goldTextField")) {
+                    if (Integer.parseInt(((TextField) child).getText()) > user.getGold()) {
+                        label.setText("Not enough money! you are poor HaHaHa!");
+                        break;
+                    }
+
+                }
+                boolean isValid = false;
+                if (child.getId().equals("resourceTextField")) {
+                    for (Resource foundResource : user.getFoundResources()) {
+                        if (foundResource.getName().equals(((TextField) child).getText())) {
+                            isValid = true;
+                            break;
+                        }
+                    }
+                    if (!isValid) label.setText("you don't have that resource! go and die!\n\t\t    HaHaHa!");
+                }
+                if (isValid) label.setText("ok! we sent your demand.....");
+            }
+        });
+        diplomacyPane.getChildren().add(button);
+    }
+
+    private void goldTrade() {
+        ImageView gold1 = new ImageView(images.gold);
+        gold1.setLayoutX(305);
+        gold1.setLayoutY(290);
+        gold1.setFitWidth(45);
+        gold1.setFitHeight(45);
+        diplomacyPane.getChildren().add(gold1);
+        TextField goldTextField1 = new TextField();
+        goldTextField1.setLayoutX(360);
+        goldTextField1.setLayoutY(295);
+        goldTextField1.setPrefWidth(175);
+        goldTextField1.setPrefHeight(30);
+        goldTextField1.setAlignment(Pos.CENTER);
+        goldTextField1.getStyleClass().add("trade-text-field");
+        diplomacyPane.getChildren().add(goldTextField1);
+
+        ImageView gold2 = new ImageView(images.gold);
+        gold2.setLayoutX(745);
+        gold2.setLayoutY(290);
+        gold2.setFitWidth(45);
+        gold2.setFitHeight(45);
+        diplomacyPane.getChildren().add(gold2);
+        TextField goldTextField2 = new TextField();
+        goldTextField2.setLayoutX(800);
+        goldTextField2.setLayoutY(295);
+        goldTextField2.setPrefWidth(175);
+        goldTextField2.setPrefHeight(30);
+        goldTextField2.setAlignment(Pos.CENTER);
+        goldTextField2.getStyleClass().add("trade-text-field");
+        goldTextField2.setId("goldTextField");
+        diplomacyPane.getChildren().add(goldTextField2);
+    }
+
+    private void resourceTrade() {
+        ImageView resource = new ImageView(images.resourceIcon);
+        resource.setLayoutX(305);
+        resource.setLayoutY(350);
+        resource.setFitHeight(45);
+        resource.setFitWidth(45);
+        diplomacyPane.getChildren().add(resource);
+        TextField resourceTextField = new TextField();
+        resourceTextField.setLayoutX(360);
+        resourceTextField.setLayoutY(355);
+        resourceTextField.setPrefWidth(175);
+        resourceTextField.setPrefHeight(30);
+        resourceTextField.setAlignment(Pos.CENTER);
+        resourceTextField.getStyleClass().add("trade-text-field");
+        diplomacyPane.getChildren().add(resourceTextField);
+
+        ImageView resource2 = new ImageView(images.resourceIcon);
+        resource2.setLayoutX(745);
+        resource2.setLayoutY(350);
+        resource2.setFitHeight(45);
+        resource2.setFitWidth(45);
+        diplomacyPane.getChildren().add(resource2);
+        TextField resourceTextField2 = new TextField();
+        resourceTextField2.setLayoutX(800);
+        resourceTextField2.setLayoutY(355);
+        resourceTextField2.setPrefWidth(175);
+        resourceTextField2.setPrefHeight(30);
+        resourceTextField2.setAlignment(Pos.CENTER);
+        resourceTextField2.getStyleClass().add("trade-text-field");
+        resourceTextField2.setId("resourceTextField");
+        diplomacyPane.getChildren().add(resourceTextField2);
+    }
+
+    private void borderTrade(){
+        Label label1 = new Label("Open the border ?");
+        label1.setLayoutX(360);
+        label1.setLayoutY(405);
+        label1.getStyleClass().add("trade-border");
+        diplomacyPane.getChildren().add(label1);
+        Button yes1 = new Button("YES");
+        yes1.setLayoutX(550);
+        yes1.setLayoutY(405);
+        yes1.setPrefSize(55, 30);
+        yes1.getStyleClass().add("trade-text-field");
+        diplomacyPane.getChildren().add(yes1);
+        Button no1 = new Button("NO");
+        no1.setLayoutX(610);
+        no1.setLayoutY(405);
+        no1.setPrefSize(55, 30);
+        no1.getStyleClass().add("trade-text-field");
+        diplomacyPane.getChildren().add(no1);
+        yes1.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseEvent -> {
+            yes1.setPrefSize(48, 23);
+            yes1.setEffect(new DropShadow());
+        });
+        yes1.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> {
+            yes1.setPrefSize(55, 30);
+            yes1.setEffect(null);
+        });
+        no1.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseEvent -> {
+            no1.setPrefSize(48, 23);
+            no1.setEffect(new DropShadow());
+        });
+        no1.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> {
+            no1.setPrefSize(55, 30);
+            no1.setEffect(null);
+        });
+
+        Label label2 = new Label("Open the border ?");
+        label2.setLayoutX(800);
+        label2.setLayoutY(405);
+        label2.getStyleClass().add("trade-border");
+        diplomacyPane.getChildren().add(label2);
+        Button yes2 = new Button("YES");
+        yes2.setLayoutX(990);
+        yes2.setLayoutY(405);
+        yes2.setPrefSize(55, 30);
+        yes2.getStyleClass().add("trade-text-field");
+        diplomacyPane.getChildren().add(yes2);
+        Button no2 = new Button("NO");
+        no2.setLayoutX(1050);
+        no2.setLayoutY(405);
+        no2.setPrefSize(55, 30);
+        no2.getStyleClass().add("trade-text-field");
+        diplomacyPane.getChildren().add(no2);
+        yes2.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseEvent -> {
+            yes2.setPrefSize(48, 23);
+            yes2.setEffect(new DropShadow());
+        });
+        yes2.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> {
+            yes2.setPrefSize(55, 30);
+            yes2.setEffect(null);
+        });
+        no2.addEventHandler(MouseEvent.MOUSE_ENTERED, mouseEvent -> {
+            no2.setPrefSize(48, 23);
+            no2.setEffect(new DropShadow());
+        });
+        no2.addEventHandler(MouseEvent.MOUSE_EXITED, mouseEvent -> {
+            no2.setPrefSize(55, 30);
+            no2.setEffect(null);
+        });
+
+    }
+
+    private void chatBox() {
+        TextField chatField1 = new TextField();
+        ImageView chatBox1 = new ImageView(images.chatBox);
+        chatBox1.setLayoutX(251);
+        chatBox1.setLayoutY(420);
+        chatBox1.setFitWidth(480);
+        chatBox1.setFitHeight(310);
+        diplomacyPane.getChildren().add(chatBox1);
+        chatField1.setLayoutX(360);
+        chatField1.setLayoutY(497);
+        chatField1.setPrefWidth(260);
+        chatField1.setPrefHeight(120);
+        chatField1.getStyleClass().add("trade-chat");
+        diplomacyPane.getChildren().add(chatField1);
+    }
+
+    private void showAvatar() {
+        Rectangle background1 = new Rectangle(300, 120, 400, 550);
+        background1.setFill(new Color(0.14, 0.53, 0.87, 0.88));
+        Rectangle background2 = new Rectangle(740, 120, 400, 550);
+        background2.setFill(new Color(0.14, 0.53, 0.87, 0.88));
+        diplomacyPane.getChildren().add(background1);
+        diplomacyPane.getChildren().add(background2);
+        ImageView opponentView = new ImageView(new Image(String.valueOf(getClass().getResource(tradeUser.getAvatarUrl()))));
+        opponentView.setLayoutX(310);
+        opponentView.setLayoutY(130);
+        opponentView.setFitHeight(65);
+        opponentView.setFitWidth(65);
+        ImageView yourView = new ImageView(new Image(String.valueOf(getClass().getResource(user.getAvatarUrl()))));
+        yourView.setLayoutX(750);
+        yourView.setLayoutY(130);
+        yourView.setFitHeight(65);
+        yourView.setFitWidth(65);
+        initialisePeace();
+        diplomacyPane.getChildren().add(opponentView);
+        diplomacyPane.getChildren().add(yourView);
+    }
+
+    private Image peaceFinder() {
+        if (user.getFriends().contains(tradeUser)) return images.peace;
+        else if (user.getEnemies().contains(tradeUser)) return images.noPeace;
+        else return images.nothingInPeace;
     }
 
     private ImageView fineUnitView(String unitName){
@@ -327,6 +785,7 @@ public class GameEnvironment {
     }
 
     private void initialiseIcons(ImageView science, ImageView gold, ImageView food, ImageView happiness, ImageView unhappiness) {
+        topBarInfoUpdate();
         topBarImageViews = new ArrayList<>();
         topBarLabels = new ArrayList<>();
         science.setLayoutX(5);
@@ -338,8 +797,6 @@ public class GameEnvironment {
         topBarImageViews.add(science);
         imageViewObjects.put(science, null);
         imageViews.add(science);
-        String scienceValueString = positiveOrNegative(user.getSciencePerTurn()) + user.getSciencePerTurn();
-        Label scienceValue = new Label(scienceValueString);
         scienceValue.setLayoutX(45);
         scienceValue.setLayoutY(5);
         scienceValue.setTextFill(new Color(0.027, 0.66, 0.93, 1));
@@ -355,8 +812,6 @@ public class GameEnvironment {
         gold.getStyleClass().add("top-bar-info-icon");
         gold.setId("goldTopBarInfo");
         topBarImageViews.add(gold);
-        String goldValueString = user.getGold() + "(" + positiveOrNegative(user.getGoldPerTurn()) + user.getGoldPerTurn() + ")";
-        Label goldValue = new Label(goldValueString);
         goldValue.setLayoutX(125);
         goldValue.setLayoutY(5);
         goldValue.setTextFill(new Color(0.97, 0.87, 0.23, 1));
@@ -372,8 +827,6 @@ public class GameEnvironment {
         food.getStyleClass().add("top-bar-info-icon");
         food.setId("foodTopBarInfo");
         topBarImageViews.add(food);
-        String foodValueString = user.getFood() + "(" + positiveOrNegative(user.getFoodPerTurn()) + user.getFoodPerTurn() + ")";
-        Label foodValue = new Label(foodValueString);
         foodValue.setLayoutX(223);
         foodValue.setLayoutY(5);
         foodValue.setTextFill(new Color(0.66, 0.835, 0.125, 1));
@@ -389,8 +842,6 @@ public class GameEnvironment {
         happiness.getStyleClass().add("top-bar-info-icon");
         happiness.setId("happinessTopBarInfo");
         topBarImageViews.add(happiness);
-        String happinessValueString = positiveOrNegative(user.getHappiness()) + user.getHappiness();
-        Label happinessValue = new Label(happinessValueString);
         happinessValue.setLayoutX(325);
         happinessValue.setLayoutY(5);
         happinessValue.setTextFill(new Color(0.96, 0.95, .043, 1  ));
@@ -406,8 +857,6 @@ public class GameEnvironment {
         unhappiness.getStyleClass().add("top-bar-info-icon");
         unhappiness.setId("unhappinessTopBarInfo");
         topBarImageViews.add(unhappiness);
-        String unhappinessValueString = positiveOrNegative(user.getUnhappiness()) + user.getUnhappiness();
-        Label unhappinessValue = new Label(unhappinessValueString);
         unhappinessValue.setLayoutX(425);
         unhappinessValue.setLayoutY(5);
         unhappinessValue.setTextFill(new Color(0.97, 0.38, 0, 1));
@@ -416,6 +865,19 @@ public class GameEnvironment {
         topBarLabels.add(unhappinessValue);
         finalRoot.getChildren().add(unhappiness);
         finalRoot.getChildren().add(unhappinessValue);
+    }
+
+    public void topBarInfoUpdate(){
+        unhappinessValueString = positiveOrNegative(user.getUnhappiness()) + user.getUnhappiness();
+        happinessValueString = positiveOrNegative(user.getHappiness()) + user.getHappiness();
+        goldValueString = user.getGold() + "(" + positiveOrNegative(user.getGoldPerTurn()) + user.getGoldPerTurn() + ")";
+        scienceValueString = positiveOrNegative(user.getSciencePerTurn()) + user.getSciencePerTurn();
+        foodValueString = user.getFood() + "(" + positiveOrNegative(user.getFoodPerTurn()) + user.getFoodPerTurn() + ")";
+        goldValue.setText(goldValueString);
+        scienceValue.setText(scienceValueString);
+        foodValue.setText(foodValueString);
+        unhappinessValue.setText(unhappinessValueString);
+        happinessValue.setText(happinessValueString);
     }
 
     private String positiveOrNegative(int value) {
@@ -717,11 +1179,12 @@ public class GameEnvironment {
         hashMap.put(2, true);
         hashMap.put(3, true);
         hashMap.put(4, true);
+        hashMap.put(5, true);
         while (true) {
             for (int i = 0; i < imageViews.size(); i++) {
                 int finalI = i;
                 imageViews.get(i).addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-                    if (imageViews.get(finalI).getId().equals("settler") && hashMap.get(1) &&
+                    if (imageViews.get(finalI).getId().equals("settler") && hashMap.get(1) && !stop &&
                             ((Settler) imageViewObjects.get(imageViews.get(finalI))).getOwner().equals(user)) {
                         hashMap.replace(1, false);
                         hashMap.forEach((key1, value2) -> {
@@ -735,7 +1198,7 @@ public class GameEnvironment {
                         unitClickAction.setUnitView(imageViews.get(finalI));
                         unitClickAction.setUser(user);
                         unitClickAction.settlerClickAction();
-                    } else if (imageViews.get(finalI).getId().equals("scienceTopBarInfo") && hashMap.get(2)) {
+                    } else if (imageViews.get(finalI).getId().equals("scienceTopBarInfo") && hashMap.get(2) && !stop) {
                         for (ImageView topBarImageView : topBarImageViews)
                             finalRoot.getChildren().remove(topBarImageView);
                         for (Label topBarLabel : topBarLabels) finalRoot.getChildren().remove(topBarLabel);
@@ -746,7 +1209,7 @@ public class GameEnvironment {
                         });
                         researchMenu.setUser(user);
                         researchMenu.showGraphicTree(finalRoot);
-                    } else if (imageViews.get(finalI).getId().equals("city") && hashMap.get(3) &&
+                    } else if (imageViews.get(finalI).getId().equals("city") && hashMap.get(3) && !stop &&
                             ((City) imageViewObjects.get(imageViews.get(finalI))).getOwner().equals(user)) {
                         for (ImageView topBarImageView : topBarImageViews)
                             finalRoot.getChildren().remove(topBarImageView);
@@ -758,15 +1221,29 @@ public class GameEnvironment {
                         });
                         cityClickAction.setCity((City) imageViewObjects.get(imageViews.get(finalI)));
                         cityClickAction.cityClickHandler();
-                    } else if (mouseEvent.isControlDown() && imageViews.get(finalI).getId().equals("Tile") && hashMap.get(4)) {
+                    } else if (mouseEvent.isControlDown() && imageViews.get(finalI).getId().equals("Tile") && hashMap.get(4) && !stop) {
                         hashMap.replace(4, false);
                         hashMap.forEach((key1, value2) -> {
                             if (key1 != 4) hashMap.replace(key1, true);
                         });
                         ((Tile) imageViewObjects.get(imageViews.get(finalI))).setRuinShow(true);
+                    } else if (imageViews.get(finalI).getId().equals("worker") && hashMap.get(5) && !stop) {
+                        hashMap.replace(5, false);
+                        hashMap.forEach((key1, value2) -> {
+                            if (key1 != 5) hashMap.replace(key1, true);
+                        });
+                        for (ImageView topBarImageView : topBarImageViews)
+                            finalRoot.getChildren().remove(topBarImageView);
+                        for (Label topBarLabel : topBarLabels) finalRoot.getChildren().remove(topBarLabel);
+                        finalRoot.getChildren().remove(topBarBackground);
+                        unitClickAction.setUnit((Worker) imageViewObjects.get(imageViews.get(finalI)));
+                        unitClickAction.setUnitView(imageViews.get(finalI));
+                        unitClickAction.setUser(user);
+                        unitClickAction.workerClickAction();
                     }
                 });
             }
+            topBarInfoUpdate();
         }
     }
 }

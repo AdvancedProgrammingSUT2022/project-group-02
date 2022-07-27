@@ -39,12 +39,13 @@ public class RegisterMenu {
     private Scene scene;
     private final Images images = Images.getInstance();
     private final HashMap<String , Boolean> availableColors = new HashMap<>();
-    private boolean readFromGson = false;
+    private boolean readFromGson;
 
     public RegisterMenu(MediaPlayer mediaPlayer, Stage stage, Scene scene){
         this.scene = scene;
         this.mediaPlayer = mediaPlayer;
         this.stage = stage;
+        readFromGson = false;
     }
     public RegisterMenu(){
         availableColors.put("white" , true);
@@ -89,9 +90,6 @@ public class RegisterMenu {
             readFromGson = true;
             ArrayList<User> usersFromJson = users.readFromJson();
             if (usersFromJson != null) users.setUsers(usersFromJson);
-        }
-        for (User user : users.getUsers()) {
-            System.out.println(user.getNickname());
         }
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         scene.setRoot(root);

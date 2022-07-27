@@ -192,6 +192,26 @@
     -fx-text-fill: #ff3c00;
     -fx-font-weight: bold;
 }
+
+.trade-notes {
+    -fx-text-fill: #07ee8d;
+    -fx-font-size: 16px;
+}
+
+.trade-border {
+    -fx-text-fill: linear-gradient(to right, rgba(227, 59, 109, 0.58) 1%, rgba(243, 110, 0, 0.42) 50%, rgba(227, 59, 109, 0.58) 99%);
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+}
+
+.cheat-text {
+    -fx-text-fill: red;
+    -fx-font-size: 18px;
+}
+
+.cheat-text:hover {
+    -fx-text-fill: blue;
+}
 /* end of text styles */
 
 /* text field styles */
@@ -215,12 +235,17 @@
     -fx-border-radius: 3px;
 }
 
-.profile-text-field{
-    -fx-background-color: #b85b29;
-    -fx-text-fill: #3f3a3a;
+.trade-text-field {
+    -fx-background-color: linear-gradient(to right, rgba(227, 59, 109, 0.58) 1%, rgba(243, 110, 0, 0.42) 50%, rgba(227, 59, 109, 0.58) 99%);
+    -fx-text-fill: #ff3c00;
     -fx-font-size: 15px;
 }
 
+.trade-chat {
+    -fx-background-color: transparent;
+    -fx-text-fill: #d234e3;
+    -fx-font-size: 12px;
+}
 /* end of text field styles */
 
 
@@ -296,6 +321,32 @@
 .setting-button {
     -fx-background-color: linear-gradient(to right, rgba(151, 59, 227, 0.25) 1%, rgba(15, 184, 246, 0.25) 50%, rgba(146, 59, 227, 0.28) 99%);
     -fx-text-fill: #ff0059;
+}
+
+.diplomacy-button {
+    -fx-background-color: linear-gradient(to right, rgba(59, 227, 118, 0.28) 1%, rgba(65, 187, 232, 0.25) 50%, rgba(59, 227, 118, 0.28) 99%);
+    -fx-text-fill: #ff0059;
+}
+
+.diplomacy-user-name {
+    -fx-font-size: 25px;
+    -fx-text-fill: #0059ff;
+    -fx-background-color: linear-gradient(to right, rgba(227, 143, 59, 0.28) 1%, rgba(222, 55, 27, 0.25) 50%, rgba(227, 143, 59, 0.28) 99%);
+}
+.diplomacy-user-name:hover {
+    -fx-background-color: linear-gradient(to right, rgba(227, 59, 109, 0.28) 1%, rgba(243, 110, 0, 0.25) 50%, rgba(227, 59, 109, 0.28) 99%);
+}
+
+.trade-button {
+    -fx-background-color: linear-gradient(to right, rgba(222, 47, 12, 0.68) 1%, rgba(215, 55, 135, 0.66) 50%, rgba(222, 47, 12, 0.68) 99%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+}
+
+.trade-button:hover {
+    -fx-background-color: linear-gradient(to right, rgba(59, 227, 118, 0.8) 1%, rgba(65, 187, 232, 0.76) 50%, rgba(59, 227, 118, 0.8) 99%);
+    -fx-background-radius: 8px;
 }
 /* end of buttons style */
 
